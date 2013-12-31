@@ -46,7 +46,7 @@ public class CovedGlass extends BlockBreakable{
 		setCreativeTab(UltraTech.techTab);
 		setHardness(0.2f);
 		setStepSound(soundGlassFootstep);
-		setResistance(500);
+		setResistance(200);
 		setUnlocalizedName("CovedGlass");
 		
 	}

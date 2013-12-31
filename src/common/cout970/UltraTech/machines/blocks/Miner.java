@@ -107,5 +107,48 @@ public class Miner extends BlockContainer{
 				 item.stackSize = 0;
 			 }
 		 }
+		 if (!(tileEntity instanceof MinerEntity)) {
+			 return;
+		 }
+		 MinerEntity me = (MinerEntity) tileEntity;
+		 if(me.eject){
+			 float rx = rand.nextFloat() * 0.8F + 0.1F;
+			 float ry = rand.nextFloat() * 0.8F + 0.1F;
+			 float rz = rand.nextFloat() * 0.8F + 0.1F;
+			 EntityItem entityItem = new EntityItem(world,
+                   x + rx, y + ry, z + rz,
+                   new ItemStack(UltraTech.ItemName.get("AutoEjectUpgrade").itemID, 1, 0));
+			 float factor = 0.05F;
+			 entityItem.motionX = rand.nextGaussian() * factor;
+			 entityItem.motionY = rand.nextGaussian() * factor + 0.2F;
+			 entityItem.motionZ = rand.nextGaussian() * factor;
+			 world.spawnEntityInWorld(entityItem);
+		 }
+		 if(me.hasSpeedUpgrades){
+			 for(int d = me.speedUpgrades;d > 0;d--){
+				 float rx = rand.nextFloat() * 0.8F + 0.1F;
+				 float ry = rand.nextFloat() * 0.8F + 0.1F;
+				 float rz = rand.nextFloat() * 0.8F + 0.1F;
+				 EntityItem entityItem = new EntityItem(world, x + rx, y + ry, z + rz, new ItemStack(UltraTech.ItemName.get("MiningUpgrade").itemID, 1, 0));
+				 float factor = 0.05F;
+				 entityItem.motionX = rand.nextGaussian() * factor;
+				 entityItem.motionY = rand.nextGaussian() * factor + 0.2F;
+				 entityItem.motionZ = rand.nextGaussian() * factor;
+				 world.spawnEntityInWorld(entityItem);
+			 }
+		 }
+		 if(me.hasRangeUpgrades){
+			 for(int d = me.rangeUpgrades;d > 0;d--){
+			 float rx = rand.nextFloat() * 0.8F + 0.1F;
+			 float ry = rand.nextFloat() * 0.8F + 0.1F;
+			 float rz = rand.nextFloat() * 0.8F + 0.1F;
+			 EntityItem entityItem = new EntityItem(world, x + rx, y + ry, z + rz, new ItemStack(UltraTech.ItemName.get("RangeUpgrade").itemID, 1, 0));
+			 float factor = 0.05F;
+			 entityItem.motionX = rand.nextGaussian() * factor;
+			 entityItem.motionY = rand.nextGaussian() * factor + 0.2F;
+			 entityItem.motionZ = rand.nextGaussian() * factor;
+			 world.spawnEntityInWorld(entityItem);
+			 }
+		 }
 	 }
 }

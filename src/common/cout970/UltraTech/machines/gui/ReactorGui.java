@@ -2,6 +2,7 @@ package common.cout970.UltraTech.machines.gui;
 
 import org.lwjgl.opengl.GL11;
 
+import common.cout970.UltraTech.lib.RenderUtil;
 import common.cout970.UltraTech.machines.tileEntities.ReactorEntity;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -37,11 +38,24 @@ public class ReactorGui extends GuiContainer{
 			int s = tileEntity.steam*54/tileEntity.MaxSteam;
 			this.drawTexturedModalRect(xStart+39, yStart+15+(54-s), 0, 0, 25, s);
 		}
+		
 		//WATER VAR
 		if(tileEntity.MaxWater != 0){
 			this.mc.renderEngine.bindTexture(new ResourceLocation("ultratech:textures/misc/water.png"));
 			int w = tileEntity.water*54/tileEntity.MaxWater;
 			this.drawTexturedModalRect(xStart+77, yStart+15+(54-w), 0, 0, 25, w);
+		}
+		if(i > xStart+77 && i < xStart+77+25 && j > yStart+15 && j < yStart+15+54){
+				this.drawString(fontRenderer, "Water", i, j-19, RenderUtil.RGBtoInt(255, 255, 255));
+				this.drawString(fontRenderer, tileEntity.water+"/"+tileEntity.MaxWater, i, j-19+9, RenderUtil.RGBtoInt(255, 255, 255));
+		}
+		if(i > xStart+39 && i < xStart+39+25 && j > yStart+15 && j < yStart+15+54){
+			this.drawString(fontRenderer, "Steam", i, j-19, RenderUtil.RGBtoInt(255, 255, 255));
+			this.drawString(fontRenderer, ((tileEntity.steam <= 0) ? 0+"/"+tileEntity.MaxSteam : tileEntity.steam+"/"+tileEntity.MaxSteam), i, j-19+9, RenderUtil.RGBtoInt(255, 255, 255));
+		}
+		if(i > xStart+13 && i < xStart+14+13 && j > yStart+12 && j < yStart+12+58){
+			this.drawString(fontRenderer, "Heat", i, j-19, RenderUtil.RGBtoInt(255, 255, 255));
+			this.drawString(fontRenderer, tileEntity.heat*100/tileEntity.maxHeat+"%", i, j-19+9, RenderUtil.RGBtoInt(255, 255, 255));
 		}
 	}
 

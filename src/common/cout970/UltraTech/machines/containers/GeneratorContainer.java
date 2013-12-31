@@ -6,6 +6,7 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public class GeneratorContainer extends Container{
@@ -15,8 +16,8 @@ public class GeneratorContainer extends Container{
 	public GeneratorContainer(InventoryPlayer inventoryPlayer, GeneratorEntity tileEntity2){
 		super();
 		tileEntity = tileEntity2;
-		bindPlayerInventory(inventoryPlayer);
 		addSlotToContainer(new Slot(tileEntity, 0, 81, 25));
+		bindPlayerInventory(inventoryPlayer);
 	}
 	
 	public void addCraftingToCrafters(ICrafting par1ICrafting)
@@ -53,33 +54,55 @@ public class GeneratorContainer extends Container{
 	}
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer player, int slot) {
-		ItemStack stack = null;
-		Slot slotObject =(Slot) inventorySlots.get(slot);
-		if (slotObject != null && slotObject.getHasStack()) {
-			ItemStack stackInSlot = slotObject.getStack();
-			stack = stackInSlot.copy();
-			if (slot < 9) {
-				 if (!this.mergeItemStack(stackInSlot, 0, 35, true)) {
-					 return null;
-				 	}
-			 	}
-				 else if(!this.mergeItemStack(stackInSlot, 0, 9, false)) {
-					 return null;
-				 }
-				 
-				 if(stackInSlot.stackSize == 0){
-					 slotObject.putStack(null);
-				 }else{
-					 slotObject.onSlotChanged();
-				 }
-				 
-				 if(stackInSlot.stackSize == stack.stackSize) {
-					 return null;			 
-				 }
-			 slotObject.onPickupFromSlot(player, stackInSlot);
-		 }
-		 return stack;
-	 }
+		ItemStack aux = null;
+		Slot current = (Slot)this.inventorySlots.get(slot);
+		
+		if (current != null && current.getHasStack())
+		{
+			ItemStack itemstack = current.getStack();
+			aux = itemstack.copy();
+			
+			if(slot == 0){//slot 0 smelt
+				if(!mergeItemStack(itemstack, 1, 37, false)){
+					return null;
+				}
+				current.onSlotChange(itemstack, aux);
+				
+			}else{
+				if (itemstack.itemID == Item.coal.itemID)
+                {
+                    if (!this.mergeItemStack(itemstack, 0, 1, true))
+                    {
+                        return null;
+                    }
+                }else if (slot >= 1 && slot < 28)
+                {
+                    if (!this.mergeItemStack(itemstack, 28, 37, false))
+                    {
+                        return null;
+                    }
+                }
+                else if (slot >= 28 && slot < 37){
+                	if(!this.mergeItemStack(itemstack, 1, 28, false))
+                	{
+                		return null;
+                	}
+                }
+
+				current.onSlotChanged();
+			}
+			if (itemstack.stackSize == 0)
+			{
+				current.putStack((ItemStack)null);
+			}
+			if (itemstack.stackSize == aux.stackSize)
+			{
+				return null;
+			}
+			current.onPickupFromSlot(player, itemstack);
+		}
+		return null;
+	}
 
 	
 	@Override

@@ -19,11 +19,13 @@ public class RenderUtil {
 		GL11.glPushMatrix();
 		GL11.glTranslated(x, y, z);
 		GL11.glEnable(GL11.GL_BLEND);
-		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
+		GL11.glDepthMask(false);
+		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		GL11.glDisable(GL11.GL_CULL_FACE);
-//		GL11.glDisable(GL11.GL_LIGHTING);
+		GL11.glDisable(GL11.GL_LIGHTING);
 
-		t.setColorRGBA_F(1, 1, 1, 0.9f);
+		GL11.glColor4f(1.0f, 1.0f, 1.0f, 1f);
+		
 		GL11.glTranslated(0.01, 0.01, 0.01);
 		tick += 0.09;
 		if(tick > 1){
@@ -44,7 +46,8 @@ public class RenderUtil {
 
 		GL11.glEnable(GL11.GL_CULL_FACE);
 		GL11.glDisable(GL11.GL_BLEND);
-//		GL11.glEnable(GL11.GL_LIGHTING);
+		GL11.glEnable(GL11.GL_LIGHTING);
+		GL11.glDepthMask(true);
 		GL11.glPopMatrix();
 	}
 
@@ -93,7 +96,20 @@ public class RenderUtil {
 		t.addVertexWithUV(x, y, 0, u, v1);
 		t.draw();
 	}
-
+	public static int RGBtoInt(int r,int g,int b){
+		int color = 0;
+		color += r*65536;
+		color += g * 256;
+		color += b;
+		return color;
+	}
+	
+	public static void setGLColorFromInt(int color) {
+		float red = (float) (color >> 16 & 255) / 255.0F;
+		float green = (float) (color >> 8 & 255) / 255.0F;
+		float blue = (float) (color & 255) / 255.0F;
+		GL11.glColor4f(red, green, blue, 1.0F);
+	}
 	
 	
 }

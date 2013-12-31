@@ -35,6 +35,13 @@ public class Reference {
 	public static int RadioniteOre;
 	public static int MolecularAssembly;
 	public static int Deco;
+	public static int Deco2;
+	public static int Deco3;
+	public static int Deco4;
+	public static int Deco5;
+	public static int StoneBlock;
+	public static int StoneBlockBricks;
+	public static int ChargeStation;
 	
 	
 	

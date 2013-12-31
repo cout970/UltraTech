@@ -47,7 +47,16 @@ public class Cuter_Recipes{
 		if(a.getInput().stackSize == 0)a.input.stackSize = 1;
 		if(a.getOutput().stackSize == 0)a.output.stackSize = 1;
 		if(!recipes.contains(a))
-		recipes.add(a);
+			recipes.add(a);
+	}
+
+	public static ItemStack getResult(ItemStack itemstack) {
+		if(itemstack == null)return null;
+		for(Cuter_Recipes a:recipes){
+			if(a.getInput().itemID == itemstack.itemID)
+				return a.getOutput();
+		}
+		return null;
 	}
 
 }

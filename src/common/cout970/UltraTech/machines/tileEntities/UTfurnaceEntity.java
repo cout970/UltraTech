@@ -1,5 +1,6 @@
 package common.cout970.UltraTech.machines.tileEntities;
 
+import common.cout970.UltraTech.core.UltraTech;
 import common.cout970.UltraTech.misc.ISpeedUpgradeabel;
 import common.cout970.UltraTech.misc.SyncObject;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,6 +18,7 @@ public class UTfurnaceEntity extends Machine implements IInventory,ISpeedUpgrade
 	private ItemStack[] inventory;
 	public int proces = 0;
 	public int speed = 10;
+	private int speedUpgrades;
 	public static final int INVENTORY_SIZE = 2;
 	
 	
@@ -108,7 +110,6 @@ public class UTfurnaceEntity extends Machine implements IInventory,ISpeedUpgrade
 	public void readFromNBT(NBTTagCompound nbtTagCompound) {
 
         super.readFromNBT(nbtTagCompound);
-        this.speed = nbtTagCompound.getInteger("speed");
         NBTTagList tagList = nbtTagCompound.getTagList("Inventory");
         inventory = new ItemStack[this.getSizeInventory()];
         for (int i = 0; i < tagList.tagCount(); ++i) {
@@ -117,15 +118,18 @@ public class UTfurnaceEntity extends Machine implements IInventory,ISpeedUpgrade
         	if (slot >= 0 && slot < inventory.length) {
         		inventory[slot] = ItemStack.loadItemStackFromNBT(tagCompound);
         	}
-        	
         }
+        NBTTagList tagList2 = nbtTagCompound.getTagList("Upgrades");
+		NBTTagCompound tagCompound2 = (NBTTagCompound) tagList2.tagAt(0);
+		speed = tagCompound2.getInteger("Speed");
+		NBTTagCompound tagCompound3 = (NBTTagCompound) tagList2.tagAt(1);
+		speedUpgrades = tagCompound3.getInteger("Speedupgrades");
 	}
 	
 	  @Override
 	    public void writeToNBT(NBTTagCompound nbtTagCompound) {
 
 	        super.writeToNBT(nbtTagCompound);
-	        nbtTagCompound.setInteger("speed", speed);
 	        NBTTagList tagList = new NBTTagList();
 	        for (int currentIndex = 0; currentIndex < inventory.length; ++currentIndex) {
 	        	if (inventory[currentIndex] != null) {
@@ -135,8 +139,16 @@ public class UTfurnaceEntity extends Machine implements IInventory,ISpeedUpgrade
 	        		tagList.appendTag(tagCompound);
 	        	}
 	        }
-	        
 	        nbtTagCompound.setTag("Inventory", tagList);
+	        
+	        NBTTagList tagList2 = new NBTTagList();
+			NBTTagCompound tagCompound = new NBTTagCompound();
+			tagCompound.setInteger("Speed", this.speed);
+			tagList2.appendTag(tagCompound);
+			NBTTagCompound tagCompound2 = new NBTTagCompound();
+			tagCompound2.setInteger("Speedupgrades", this.speedUpgrades);
+			tagList2.appendTag(tagCompound2);
+			nbtTagCompound.setTag("Upgrades", tagList2);
 	  }
 	  
 	  
@@ -265,9 +277,18 @@ public class UTfurnaceEntity extends Machine implements IInventory,ISpeedUpgrade
 			
 			if(this.speed < 100){	
 				this.speed += 20;
+				speedUpgrades += 1;
 				return true;
 			}
 			return false;
+		}
+		
+		@Override
+		public ItemStack getDrop() {
+			if(speedUpgrades !=0){
+				return new ItemStack(UltraTech.ItemName.get("SpeedUpgrade"),speedUpgrades);
+			}
+			return null;
 		}
 
 }

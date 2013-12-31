@@ -1,6 +1,11 @@
 package common.cout970.UltraTech.machines.tileEntities;
 
+
+import common.cout970.UltraTech.lib.recipes.Assembly_Recipes;
+
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.Container;
+import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -9,12 +14,46 @@ import net.minecraft.nbt.NBTTagList;
 public class MolecularAssemblyEntity extends Machine implements IInventory{
 
 	private ItemStack[] inventory;
-	public static final int INVENTORY_SIZE = 9*2;
+	public static final int INVENTORY_SIZE = 11;
+	public int Progres = 0;
+	public boolean hasrecipe= false;
+	private int speed = 10;
 	
 	public MolecularAssemblyEntity(){
 		inventory = new ItemStack[INVENTORY_SIZE];
 	}
-	
+
+	public void updateEntity(){
+
+		if(!hasrecipe){
+			if(Assembly_Recipes.matches(this)){
+				ItemStack a = Assembly_Recipes.getCraftingResult(this);
+				setInventorySlotContents(10, a);
+				hasrecipe = true;
+			}else if(this.getStackInSlot(10) != null){
+				setInventorySlotContents(10, null);
+			}
+		}else if(this.getEnergy() > 50){
+			Progres+=speed ;
+			this.loseEnergy(5);
+			if(Progres >= 1000){
+				Progres = 0;
+				if(this.getStackInSlot(9) == null){
+					setInventorySlotContents(9, Assembly_Recipes.getCraftingResult(this));
+				}else{
+					ItemStack d = Assembly_Recipes.getCraftingResult(this);
+					d.stackSize +=getStackInSlot(9).stackSize;
+					setInventorySlotContents(9,d);
+				}
+				for(int x=0;x<9;x++){
+					this.decrStackSize(x, 1);
+				}
+			}
+		}
+		
+	}
+
+
 	@Override
 	public int getSizeInventory() {
 		return inventory.length;
@@ -27,6 +66,7 @@ public class MolecularAssemblyEntity extends Machine implements IInventory{
 
 	@Override
 	public ItemStack decrStackSize(int slot, int amount) {
+		hasrecipe = false;
 		ItemStack itemStack = getStackInSlot(slot);
         if (itemStack != null) {
             if (itemStack.stackSize <= amount) {
@@ -126,5 +166,24 @@ public class MolecularAssemblyEntity extends Machine implements IInventory{
 	        
 	        nbtTagCompound.setTag("Inventory", tagList);
 	  }
+
+	  public void sendGUINetworkData(Container container, ICrafting iCrafting) {
+  		iCrafting.sendProgressBarUpdate(container, 1, Energy);
+  		iCrafting.sendProgressBarUpdate(container, 2, Progres);
+  	}
+
+  	public void getGUINetworkData(int id, int value) {
+  		switch(id){
+  		
+  		case 1:{
+  			Energy = value;
+  			break;
+  		}
+  	case 2:{
+  		Progres = value;
+  		break;
+  	}
+  	}
+	}
 
 }

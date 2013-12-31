@@ -4,6 +4,7 @@ import java.util.Random;
 
 import common.cout970.UltraTech.core.UltraTech;
 import common.cout970.UltraTech.machines.tileEntities.UTfurnaceEntity;
+import common.cout970.UltraTech.misc.ISpeedUpgradeabel;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.BlockContainer;
@@ -106,6 +107,22 @@ public class UTfurnace extends BlockContainer{
 				 entityItem.motionZ = rand.nextGaussian() * factor;
 				 world.spawnEntityInWorld(entityItem);
 				 item.stackSize = 0;
+			 }
+		 }
+		 if(tileEntity instanceof ISpeedUpgradeabel){
+			 float rx = rand.nextFloat() * 0.8F + 0.1F;
+			 float ry = rand.nextFloat() * 0.8F + 0.1F;
+			 float rz = rand.nextFloat() * 0.8F + 0.1F;
+			 ItemStack upgrades = ((ISpeedUpgradeabel)tileEntity).getDrop();
+			 if(upgrades != null){
+			 EntityItem entityItem = new EntityItem(world,
+                    x + rx, y + ry, z + rz, upgrades);
+
+			 float factor = 0.05F;
+			 entityItem.motionX = rand.nextGaussian() * factor;
+			 entityItem.motionY = rand.nextGaussian() * factor + 0.2F;
+			 entityItem.motionZ = rand.nextGaussian() * factor;
+			 world.spawnEntityInWorld(entityItem);
 			 }
 		 }
 	 }

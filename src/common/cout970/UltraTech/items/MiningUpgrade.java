@@ -21,6 +21,8 @@ public class MiningUpgrade extends UT_Item{
 			MinerEntity te = (MinerEntity) par3World.getBlockTileEntity(x, y, z);
 			if(te.speed < 50){	
 				te.speed += 10;
+				te.hasSpeedUpgrades = true;
+				te.speedUpgrades += 1;
 				if(par1ItemStack.stackSize > 1){
 					par1ItemStack.stackSize -= 1;
 				}else{

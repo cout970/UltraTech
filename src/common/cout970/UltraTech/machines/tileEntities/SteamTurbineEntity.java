@@ -1,5 +1,8 @@
 package common.cout970.UltraTech.machines.tileEntities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import common.cout970.UltraTech.core.UltraTech;
 import common.cout970.UltraTech.misc.Energy;
 
@@ -36,6 +39,13 @@ public class SteamTurbineEntity extends ReactorWallEntity implements IFluidTank,
 			if(machines == null){
 				onNeiChange();
 			}
+			
+			List<IFluidHandler> a = getTanks();
+			for(IFluidHandler b : a){
+				if(this.getFluidAmount() > 500)
+				this.drain(b.fill(ForgeDirection.UNKNOWN , new FluidStack(UltraTech.Steam,500), true),true);
+			}
+			
 			refill();
 			if(!check)check();
 			if(reactor){
@@ -80,6 +90,23 @@ public class SteamTurbineEntity extends ReactorWallEntity implements IFluidTank,
 				}
 			}
 		}
+	}
+	
+	private List<IFluidHandler> getTanks() {
+		List<IFluidHandler> tanks = new ArrayList<IFluidHandler>();
+		TileEntity[] t = new TileEntity[6];
+		t[0] = this.worldObj.getBlockTileEntity(xCoord, yCoord-1, zCoord);
+		t[1] = this.worldObj.getBlockTileEntity(xCoord, yCoord+1, zCoord);
+		t[2] = this.worldObj.getBlockTileEntity(xCoord, yCoord, zCoord+1);
+		t[3] = this.worldObj.getBlockTileEntity(xCoord+1, yCoord, zCoord);
+		t[4] = this.worldObj.getBlockTileEntity(xCoord, yCoord, zCoord-1);
+		t[5] = this.worldObj.getBlockTileEntity(xCoord-1, yCoord, zCoord);
+		for(TileEntity te : t){
+			if(te instanceof IFluidHandler){
+				tanks.add((IFluidHandler) te);
+			}
+		}
+		return tanks;
 	}
 
 	public void check()

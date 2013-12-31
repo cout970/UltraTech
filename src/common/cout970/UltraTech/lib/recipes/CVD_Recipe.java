@@ -68,8 +68,30 @@ public class CVD_Recipe{
 		recipes.add(a);
 		
 		CVD_Recipe b = new CVD_Recipe(a.getImput2(), a.getImput1(), a.getOutput());
-		if(!recipes.contains(b))
-			recipes.add(b);
+		boolean flag = true;
+		for(CVD_Recipe c :recipes){
+			if(isEqual(c,b))flag = false;
+		}
+		if(flag)recipes.add(b);
+	}
+
+	private static boolean isEqual(CVD_Recipe c, CVD_Recipe b) {
+		if(c.getImput1().itemID == b.getImput1().itemID){
+			if(c.getImput2().itemID == b.getImput2().itemID){
+				if(c.getOutput().itemID == b.getOutput().itemID)
+					return true;
+			}
+		}
+		return false;
+	}
+
+	public static ItemStack getResult(ItemStack itemstack) {
+		if(itemstack == null)return null;
+		for(CVD_Recipe a:recipes){
+			if(a.getImput1().itemID == itemstack.itemID || a.getImput2().itemID == itemstack.itemID)
+				return a.getOutput();
+		}
+		return null;
 	}
 
 }

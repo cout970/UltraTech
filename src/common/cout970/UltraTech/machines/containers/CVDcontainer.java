@@ -1,7 +1,6 @@
 package common.cout970.UltraTech.machines.containers;
 
-
-
+import common.cout970.UltraTech.lib.recipes.CVD_Recipe;
 import common.cout970.UltraTech.machines.tileEntities.CVDentity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -18,7 +17,7 @@ public class CVDcontainer extends Container{
 	public CVDcontainer(InventoryPlayer inventoryPlayer, CVDentity tileEntity2){
 		super();
 		tileEntity = tileEntity2;
-		bindPlayerInventory(inventoryPlayer);
+		
 		addSlotToContainer(new Slot(tileEntity, 0, 53, 33));
 		addSlotToContainer(new Slot(tileEntity, 1, 89, 33));
 		addSlotToContainer(new Slot(tileEntity, 2, 143, 33){
@@ -27,6 +26,7 @@ public class CVDcontainer extends Container{
 				return false;
 			}
 		});
+		bindPlayerInventory(inventoryPlayer);
 	}
 	
 	private void bindPlayerInventory(InventoryPlayer inventoryPlayer) {
@@ -68,33 +68,55 @@ public class CVDcontainer extends Container{
 	public boolean canInteractWith(EntityPlayer entityplayer) {
 		return true;
 	}
-	 @Override
-	 public ItemStack transferStackInSlot(EntityPlayer player, int slot) {
-		 ItemStack stack = null;
-		 Slot slotObject =(Slot) inventorySlots.get(slot);
-		 if (slotObject != null && slotObject.getHasStack()) {
-			 ItemStack stackInSlot = slotObject.getStack();
-			 stack = stackInSlot.copy();
-			 	if (slot < 9) {
-				 if (!this.mergeItemStack(stackInSlot, 0, 35, true)) {
-					 return null;
-				 	}
-			 	}
-				 else if(!this.mergeItemStack(stackInSlot, 0, 9, false)) {
-					 return null;
-				 }
-				 
-				 if(stackInSlot.stackSize == 0){
-					 slotObject.putStack(null);
-				 }else{
-					 slotObject.onSlotChanged();
-				 }
-				 
-				 if(stackInSlot.stackSize == stack.stackSize) {
-					 return null;			 
-				 }
-			 slotObject.onPickupFromSlot(player, stackInSlot);
-		 }
-		 return stack;
-	 }
+	@Override
+	public ItemStack transferStackInSlot(EntityPlayer player, int slot) {
+		return transfer(player, slot, 3);
+	}
+	
+	public ItemStack transfer(EntityPlayer player, int slot,int inv) {
+		ItemStack aux = null;
+		Slot current = (Slot)this.inventorySlots.get(slot);
+		
+		if (current != null && current.getHasStack())
+		{
+			ItemStack itemstack = current.getStack();
+			aux = itemstack.copy();
+			if(slot < inv){
+				if(!mergeItemStack(itemstack, inv, 36+inv, true)){
+					return null;
+				}
+				current.onSlotChange(itemstack, aux);
+			}else{
+				if(CVD_Recipe.getResult(itemstack) != null){
+					if(!mergeItemStack(itemstack, 0, inv-1, false)){
+						return null;
+					}
+				}else if (slot >= inv && slot < 27+inv)
+                {
+                    if (!this.mergeItemStack(itemstack, 27+inv, 36+inv, false))
+                    {
+                        return null;
+                    }
+                }
+                else if (slot >= 27+inv && slot < 36+inv){
+                	if(!this.mergeItemStack(itemstack, inv, 27+inv, false))
+                	{
+                		return null;
+                	}
+                }
+				
+				current.onSlotChanged();
+			}
+			if (itemstack.stackSize == 0)
+			{
+				current.putStack((ItemStack)null);
+			}
+			if (itemstack.stackSize == aux.stackSize)
+			{
+				return null;
+			}
+			current.onPickupFromSlot(player, itemstack);
+		}
+		return null;
+	}
 }

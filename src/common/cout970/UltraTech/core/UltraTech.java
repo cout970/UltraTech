@@ -24,6 +24,7 @@ import common.cout970.UltraTech.items.*;
 import common.cout970.UltraTech.lib.Reference;
 import common.cout970.UltraTech.machines.blocks.*;
 import common.cout970.UltraTech.machines.tileEntities.CVDentity;
+import common.cout970.UltraTech.machines.tileEntities.ChargeStationEntity;
 import common.cout970.UltraTech.machines.tileEntities.CuterEntity;
 import common.cout970.UltraTech.machines.tileEntities.EnergyIOentity;
 import common.cout970.UltraTech.machines.tileEntities.GeneratorEntity;
@@ -60,7 +61,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 
 
-@Mod(modid = "UltraTech", name = "UltraTech",version = "0.5.1")
+@Mod(modid = "UltraTech", name = "UltraTech",version = "0.6.1")
 
 @NetworkMod(clientSideRequired=true, serverSideRequired=true, channels={"UltraTech","UltraTech2"}, packetHandler = PacketHandler.class)
 
@@ -69,25 +70,25 @@ public class UltraTech {
 	//Mod instances
 	@Instance("UltraTech")
 	public static UltraTech instance;
-	
+
 	//Proxy
 	@SidedProxy(clientSide="common.cout970.UltraTech.proxy.ClientProxy",serverSide="common.cout970.UltraTech.proxy.CommonProxy")
 	public static CommonProxy proxy;
-	
+
 	//creative tabs
 	public static final CreativeTabs techTab = new CreativeTabs("UltraTech"){
-		
+
 		public ItemStack getIconItemStack() {
-			return new ItemStack(ItemName.get("LapisPearl"), 1, 0);
+			return new ItemStack(IDS, 1, 0);
 		}
-		
+
 		@SideOnly(Side.CLIENT)
 		@Override
 		public String getTranslatedTabLabel()
-	    {
-	        return "UltraTech";
-	    }
-		
+		{
+			return "UltraTech";
+		}
+
 		@SideOnly(Side.CLIENT)
 		@Override
 		public String getTabLabel()
@@ -95,20 +96,20 @@ public class UltraTech {
 			return "UltraTech";
 		}
 	};
-	
-public static final CreativeTabs DecoTab = new CreativeTabs("UltraTech"){
-		
+
+	public static final CreativeTabs DecoTab = new CreativeTabs("UltraTech"){
+
 		public ItemStack getIconItemStack() {
-			return new ItemStack(GrafenoBlock, 1, 0);
+			return new ItemStack(BlockManager.d.get(1), 1, 4);
 		}
-		
+
 		@SideOnly(Side.CLIENT)
 		@Override
 		public String getTranslatedTabLabel()
-	    {
-	        return "UltraTech Decoration";
-	    }
-		
+		{
+			return "UltraTech Decoration";
+		}
+
 		@SideOnly(Side.CLIENT)
 		@Override
 		public String getTabLabel()
@@ -116,21 +117,21 @@ public static final CreativeTabs DecoTab = new CreativeTabs("UltraTech"){
 			return "UltraTech Decoration";
 		}
 	};
-	
+
 	public static List<UT_Item> items = new ArrayList<UT_Item>();
 	public static Map<String,UT_Item> ItemName = new HashMap<String,UT_Item>();
 	public static Map<UT_Item,String> LangNames = new HashMap<UT_Item,String>();
 	Map<String,ID> itemsID = new HashMap<String,ID>();
 	//code name
 	String[] item ={"Circuit","Grafeno","SiliconPlate","DiamondPlate","GoldPlate","IronPlate","Trinitramida","RedstonePlate","AlloyPlate","RadionitePlate","GrafenoPlate",
-			"RedstoneCable","EnergyTransmiter","HeatCoil","RawSilicon","LasserSword","Radionite","RawMeal","IronDust","GoldDust","LapisPearl","Filter","SolarPanel",
+			"RedstoneCable","EnergyTransmiter","HeatCoil","RawSilicon","Radionite","RawMeal","IronDust","GoldDust","LapisPearl","Filter","SolarPanel",
 			"GrafenoCable","OpticFiber","AlloyCable","Coil","UpgradeBase","CarbonPlate","CarbonFiber","AdvCircuit","DiamondDust","Motor","Alloyingot","Fan"};
 	//game name
 	String[] lang ={"Circuit","Grafeno","Silicon Plate","Diamond Plate","Gold Plate","Iron Plate","Trinitramida","Redstone Plate","Alloy Plate","Radionite Plate","Grafeno Plate",
-			"Redstone Cable","Energy Transmiter","Heat Coil","Raw Silicon","Lasser Sword","Radionite","Raw Meal","Iron Dust","Gold Dust","Lapis Pearl","Filter","Solar Panel",
+			"Redstone Cable","Energy Transmiter","Heat Coil","Raw Silicon","Radionite","Raw Meal","Iron Dust","Gold Dust","Lapis Pearl","Filter","Solar Panel",
 			"Grafeno Cable","Optic Fiber","Alloy Cable","Coil","Upgrade Base","Carbon Plate","Carbon Fiber","Advanced Circuit","Diamond Dust","Motor","Alloy ingot","Fan",
-			"Speed Upgrade","Mining Upgrade","Range Upgrade","AutoEject Upgrade","Linker","Radionite Cell"};
-	
+			"Speed Upgrade","Mining Upgrade","Range Upgrade","AutoEject Upgrade","Linker","Radionite Cell","Hidrogen Battery","Lasser Sword"};
+
 	//Blocks
 	public static Block CVDmachine;
 	public static  Block UTfurnace;
@@ -159,18 +160,22 @@ public static final CreativeTabs DecoTab = new CreativeTabs("UltraTech"){
 	public static Block RadioniteOre;
 	public static Block MolecularAssembly;
 	public static  Item ProcesedFood;
+	public static Block StoneBlock;
+	public static Block StoneBlockBricks;
+	public static Block ChargeStation;
 
-	
-	
-	
-	
+
+
+
+
 	//init
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event){
 
+
 		Configuration config = new Configuration(event.getSuggestedConfigurationFile());
 		config.load();
-		
+
 		//blocks
 		Reference.CVDmachine = config.getBlock("CVDmachine", 2049).getInt();
 		Reference.UTfurnace = config.getBlock("UTfurnace", 2051).getInt();
@@ -198,31 +203,43 @@ public static final CreativeTabs DecoTab = new CreativeTabs("UltraTech"){
 		Reference.WaterBlock = config.getBlock("WaterBlock",2073).getInt();
 		Reference.RadioniteOre = config.getBlock("RadioniteOre",2074).getInt();
 		Reference.MolecularAssembly = config.getBlock("MolecularAssembly", 2075).getInt();
-		Reference.Deco = config.getBlock("Deco", 2076).getInt();
+		Reference.ChargeStation = config.getBlock("ChargeStation", 2076).getInt();
+		//deco
+		Reference.StoneBlock = config.getBlock("StoneBlock", 2098).getInt();
+		Reference.StoneBlockBricks = config.getBlock("StoneBlockBricks", 2099).getInt();
+		Reference.Deco = config.getBlock("Deco", 2100).getInt();
+		Reference.Deco2 = config.getBlock("Deco2", 2101).getInt();
+		Reference.Deco3 = config.getBlock("Deco3", 2102).getInt();
+		Reference.Deco4 = config.getBlock("Deco4", 2103).getInt();
+		Reference.Deco5 = config.getBlock("Deco5", 2104).getInt();
+
+
 		//items
 
 		Reference.ProcesedFood = config.getItem("ProcesedFood", 5020).getInt();
 		initIDs(config);
-		
+
 		config.save();
 	}
-	
+
 	//items
-		public void initIDs(Configuration c){
-			int def = 5021;
-			for(String i : item){
+	public void initIDs(Configuration c){
+		int def = 5021;
+		for(String i : item){
 			itemsID.put(i, new ID(c.getItem(i, def).getInt()));
 			def++;
-			}
-			itemsID.put("SpeedUpgrade", new ID(c.getItem("SpeedUpgrade", def).getInt()));def++;
-			itemsID.put("MiningUpgrade", new ID(c.getItem("MiningUpgrade", def).getInt()));def++;
-			itemsID.put("RangeUpgrade", new ID(c.getItem("RangeUpgrade", def).getInt()));def++;
-			itemsID.put("AutoEjectUpgrade", new ID(c.getItem("AutoEjectUpgrade", def).getInt()));def++;
-			itemsID.put("Linker", new ID(c.getItem("Linker", def).getInt()));def++;
-			itemsID.put("RadioniteCell", new ID(c.getItem("RadioniteCell", def).getInt()));def++;
-
 		}
-	
+		itemsID.put("SpeedUpgrade", new ID(c.getItem("SpeedUpgrade", def).getInt()));def++;
+		itemsID.put("MiningUpgrade", new ID(c.getItem("MiningUpgrade", def).getInt()));def++;
+		itemsID.put("RangeUpgrade", new ID(c.getItem("RangeUpgrade", def).getInt()));def++;
+		itemsID.put("AutoEjectUpgrade", new ID(c.getItem("AutoEjectUpgrade", def).getInt()));def++;
+		itemsID.put("Linker", new ID(c.getItem("Linker", def).getInt()));def++;
+		itemsID.put("RadioniteCell", new ID(c.getItem("RadioniteCell", def).getInt()));def++;
+		itemsID.put("HidrogenBattery", new ID(c.getItem("HidrogenBattery", def).getInt()));def++;
+		itemsID.put("LasserSword", new ID(c.getItem("LasserSword", def).getInt()));def++;
+
+	}
+
 	private void registerBlocks(){
 		CVDmachine = new CVDmachine(Reference.CVDmachine,Material.iron);
 		UTfurnace = new UTfurnace(Reference.UTfurnace,Material.iron);
@@ -250,13 +267,16 @@ public static final CreativeTabs DecoTab = new CreativeTabs("UltraTech"){
 		WaterBlock = new WaterBlock(Reference.WaterBlock, Material.iron);
 		RadioniteOre = new RadioniteOre(Reference.RadioniteOre, Material.iron);
 		MolecularAssembly = new MolecularAssembly(Reference.MolecularAssembly, Material.iron);
+		StoneBlock = new common.cout970.UltraTech.blocks.StoneBlock(Reference.StoneBlock,Material.rock);
+		StoneBlockBricks = new common.cout970.UltraTech.blocks.StoneBlockBricks(Reference.StoneBlockBricks,Material.rock);
+		ChargeStation = new ChargeStation(Reference.ChargeStation, Material.iron);
 		
-		FluidRegistry.registerFluid(Steam);
-		
+		if(!FluidRegistry.isFluidRegistered("steam"))FluidRegistry.registerFluid(Steam);
+
 	}
-	
+
 	private void registerItems(){
-		
+
 		ProcesedFood = new ProcesedFood(Reference.ProcesedFood);
 		GameRegistry.registerItem(ProcesedFood, ProcesedFood.getUnlocalizedName()+"_UT");
 		LanguageRegistry.addName(ProcesedFood, "Procesed Food");
@@ -264,13 +284,15 @@ public static final CreativeTabs DecoTab = new CreativeTabs("UltraTech"){
 		for(String i : item){
 			items.add(new UT_Item(itemsID.get(i).id,i));
 		}
-		
+
 		items.add(new SpeedUpgrade(itemsID.get("SpeedUpgrade").id,"SpeedUpgrade"));
 		items.add(new MiningUpgrade(itemsID.get("MiningUpgrade").id,"MiningUpgrade"));
 		items.add(new RangeUpgrade(itemsID.get("RangeUpgrade").id,"RangeUpgrade"));
 		items.add(new AutoEjectUpgrade(itemsID.get("AutoEjectUpgrade").id,"AutoEjectUpgrade"));
 		items.add(new Linker(itemsID.get("Linker").id,"Linker"));
 		items.add(new RadioniteCell(itemsID.get("RadioniteCell").id,"RadioniteCell"));
+		items.add(new HidrogenBattery(itemsID.get("HidrogenBattery").id,"HidrogenBattery"));
+		items.add(new LasserSword(itemsID.get("LasserSword").id,"LasserSword"));
 
 		int d = 0;
 		for(UT_Item i : items){
@@ -278,23 +300,23 @@ public static final CreativeTabs DecoTab = new CreativeTabs("UltraTech"){
 			LangNames.put(i, lang[d]);
 			d++;
 		}
-		
+
 		for(UT_Item i : items){
 			GameRegistry.registerItem(i, i.getName()+"_UT");
 			LanguageRegistry.addName(i, LangNames.get(i));
 		}
 	}
 
-	
+
 
 	@EventHandler
 	public void load(FMLInitializationEvent event){
-		
-		
+
+
 		registerBlocks();
 		registerItems();
 		BlockManager.initBlocks();
-		
+
 		proxy.registerRenders();
 
 		NetworkRegistry.instance().registerGuiHandler(instance, new GuiHandler());
@@ -368,6 +390,10 @@ public static final CreativeTabs DecoTab = new CreativeTabs("UltraTech"){
 		GameRegistry.registerTileEntity(MolecularAssemblyEntity.class, "MolecularAssembly_UT");
 		GameRegistry.registerBlock(MolecularAssembly, "MolecularAssembly");
 		LanguageRegistry.addName(MolecularAssembly, "Molecular Assembly");
+		//ChargeStation
+		GameRegistry.registerTileEntity(ChargeStationEntity.class, "ChargeStation_UT");
+		GameRegistry.registerBlock(ChargeStation, "ChargeStation");
+		LanguageRegistry.addName(ChargeStation, "Charge Station");
 		
 		//DiamondGlass
 		GameRegistry.registerBlock(DiamondGlass, "Diamond Glass");
@@ -390,9 +416,13 @@ public static final CreativeTabs DecoTab = new CreativeTabs("UltraTech"){
 		//RadioniteOre
 		GameRegistry.registerBlock(RadioniteOre, "RadioniteOre");
 		LanguageRegistry.addName(RadioniteOre, "Radionite Ore");
+		//StoneBlock
+		GameRegistry.registerBlock(StoneBlock, "StoneBlock");
+		LanguageRegistry.addName(StoneBlock, "Stone Block");
+		//StoneBlockBricks
+		GameRegistry.registerBlock(StoneBlockBricks, "StoneBlockBricks");
+		LanguageRegistry.addName(StoneBlockBricks, "Stone Block Bricks");
 
-
-		
 		CraftManager.registerCraft();
 		GameRegistry.registerWorldGenerator(new WorldGen());
 	}
@@ -403,7 +433,7 @@ public static final CreativeTabs DecoTab = new CreativeTabs("UltraTech"){
 	public void postInit(FMLPostInitializationEvent event){
 
 	}
-	
+
 
 
 }

@@ -3,18 +3,16 @@
   "modid": "UltraTech",
   "name": "UltraTech",
   "description": "Ultra technology for minecraft",
-  "version": "0.0",
-  "url": "null",
+  "version": "0.6",
+  "url": "",
   "updateUrl": "",
   "authorList": [
     "cout970"
   ],
   "credits": "By cout970 with help of tomasargen to test ",
-  "logoFile": "\assets\ultratech\textures\logo",
-  "screenshots": [
-  ],
+  "logoFile": "assets/ultratech/textures/logo/logo.png",
+  "screenshots": [],
   "parent":"",
-  "dependencies": [
-  ]
+  "dependencies": []
 }
 ]

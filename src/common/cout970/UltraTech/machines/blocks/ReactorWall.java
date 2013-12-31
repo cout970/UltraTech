@@ -20,7 +20,7 @@ public class ReactorWall extends BlockContainer{
 	public ReactorWall(int par1, Material par2Material) {
 		super(par1, par2Material);
 		setHardness(2.0f);
-		setStepSound(soundGlassFootstep);
+		setStepSound(soundMetalFootstep);
 		setCreativeTab(UltraTech.techTab);
 		setResistance(30);
 		setUnlocalizedName("UTReactorWall");
@@ -69,17 +69,33 @@ public class ReactorWall extends BlockContainer{
 	{
 		if(par5EntityPlayer.isSneaking()){
 			return false;
-		}else{
-			if(!par1World.isRemote){
-				ReactorWallEntity tile = (ReactorWallEntity)par1World.getBlockTileEntity(x, y, z);
-				if(tile != null){ 
-					if(tile.multi){
-						par5EntityPlayer.openGui(UltraTech.instance, 13, par1World, tile.x, tile.y, tile.z);
-					}else{
-						tile.work();
+		}else if(par5EntityPlayer.getCurrentEquippedItem() != null){
+			if(par5EntityPlayer.getCurrentEquippedItem().itemID == this.blockID)
+			{
+				return false;
+			}else{
+				if(!par1World.isRemote){
+					ReactorWallEntity tile = (ReactorWallEntity)par1World.getBlockTileEntity(x, y, z);
+					if(tile != null){ 
+						if(tile.multi){
+							par5EntityPlayer.openGui(UltraTech.instance, 13, par1World, tile.x, tile.y, tile.z);
+						}else{
+							tile.work();
+						}
+						return true;
 					}
-					return true;
 				}
+			}
+
+		}else if(!par1World.isRemote){
+			ReactorWallEntity tile = (ReactorWallEntity)par1World.getBlockTileEntity(x, y, z);
+			if(tile != null){ 
+				if(tile.multi){
+					par5EntityPlayer.openGui(UltraTech.instance, 13, par1World, tile.x, tile.y, tile.z);
+				}else{
+					tile.work();
+				}
+				return true;
 			}
 		}
 		return true;
@@ -90,6 +106,5 @@ public class ReactorWall extends BlockContainer{
 	public TileEntity createNewTileEntity(World world) {
 		return new ReactorWallEntity();
 	}
-
 
 }

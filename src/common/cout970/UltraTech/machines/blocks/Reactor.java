@@ -21,8 +21,8 @@ public class Reactor extends BlockContainer{
 		super(par1, par2Material);
 		setCreativeTab(UltraTech.techTab);
 		setHardness(2.0f);
-		setStepSound(soundGlassFootstep);
-		setResistance(500);
+		setStepSound(soundMetalFootstep);
+		setResistance(50);
 		setUnlocalizedName("UTReactor");
 	}
 

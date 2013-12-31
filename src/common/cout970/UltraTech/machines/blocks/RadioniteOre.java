@@ -12,7 +12,7 @@ public class RadioniteOre extends Block{
 		super(par1, par2Material);
 		setCreativeTab(UltraTech.techTab);
 		setHardness(1.5f);
-		setStepSound(soundMetalFootstep);
+		setStepSound(soundStoneFootstep);
 		setResistance(30);
 		setUnlocalizedName("RadioniteOre");	
 		}

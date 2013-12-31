@@ -2,6 +2,7 @@ package common.cout970.UltraTech.handlers;
 
 
 import common.cout970.UltraTech.machines.containers.CVDcontainer;
+import common.cout970.UltraTech.machines.containers.ChargeStationContainer;
 import common.cout970.UltraTech.machines.containers.GeneratorContainer;
 import common.cout970.UltraTech.machines.containers.IDScontainer;
 import common.cout970.UltraTech.machines.containers.MAssemblyContainer;
@@ -12,6 +13,7 @@ import common.cout970.UltraTech.machines.containers.PurifierContainer;
 import common.cout970.UltraTech.machines.containers.ReactorContainer;
 import common.cout970.UltraTech.machines.containers.UTfurnaceContainer;
 import common.cout970.UltraTech.machines.gui.CVDgui;
+import common.cout970.UltraTech.machines.gui.ChargeStationGui;
 import common.cout970.UltraTech.machines.gui.CuterGui;
 import common.cout970.UltraTech.machines.gui.GeneratorGui;
 import common.cout970.UltraTech.machines.gui.IDSgui;
@@ -22,6 +24,7 @@ import common.cout970.UltraTech.machines.gui.PurifierGui;
 import common.cout970.UltraTech.machines.gui.ReactorGui;
 import common.cout970.UltraTech.machines.gui.UTfurnaceGui;
 import common.cout970.UltraTech.machines.tileEntities.CVDentity;
+import common.cout970.UltraTech.machines.tileEntities.ChargeStationEntity;
 import common.cout970.UltraTech.machines.tileEntities.CuterEntity;
 import common.cout970.UltraTech.machines.tileEntities.GeneratorEntity;
 import common.cout970.UltraTech.machines.tileEntities.IDSentity;
@@ -83,6 +86,10 @@ public class GuiHandler implements IGuiHandler{
 		if(tileEntity instanceof MolecularAssemblyEntity){
 			return new MAssemblyContainer(player.inventory, (MolecularAssemblyEntity) tileEntity);
 		}
+		//ChargeStation
+		if(tileEntity instanceof ChargeStationEntity){
+			return new ChargeStationContainer(player.inventory, (ChargeStationEntity) tileEntity);
+		}
 
 		return null;
 	}
@@ -131,6 +138,10 @@ public class GuiHandler implements IGuiHandler{
 		//MAssembly
 		if(tileEntity instanceof MolecularAssemblyEntity){
 			return new MAssemblyGui(new MAssemblyContainer(player.inventory, (MolecularAssemblyEntity) tileEntity), player.inventory, (MolecularAssemblyEntity) tileEntity);
+		}
+		//ChargeStation
+		if(tileEntity instanceof ChargeStationEntity){
+			return new ChargeStationGui(new ChargeStationContainer(player.inventory, (ChargeStationEntity) tileEntity), player.inventory, (ChargeStationEntity) tileEntity);
 		}
 		
 		return null;

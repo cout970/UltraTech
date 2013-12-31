@@ -8,6 +8,7 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.FurnaceRecipes;
 
 public class UTfurnaceContainer extends Container {
 
@@ -17,7 +18,7 @@ public class UTfurnaceContainer extends Container {
 	public UTfurnaceContainer(InventoryPlayer inventoryPlayer, UTfurnaceEntity te){
 		super();
 		tileEntity = te;
-		bindPlayerInventory(inventoryPlayer);
+		
 		addSlotToContainer(new Slot(te, 0, 61, 32));
 		addSlotToContainer(new Slot(te, 1, 117, 32){
 			@Override
@@ -26,6 +27,7 @@ public class UTfurnaceContainer extends Container {
 		        return false;
 		    }
 		});
+		bindPlayerInventory(inventoryPlayer);
 	}
 	public void addCraftingToCrafters(ICrafting par1ICrafting)
     {
@@ -52,8 +54,8 @@ public class UTfurnaceContainer extends Container {
 	private void bindPlayerInventory(InventoryPlayer inventoryPlayer) {
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 9; j++) {
-				addSlotToContainer(new Slot(inventoryPlayer, j + i * 9 + 9,
-						8 + j * 18, 84 + i * 18));
+				 addSlotToContainer(new Slot(inventoryPlayer, j + i * 9 + 9,
+                         8 + j * 18, 84 + i * 18));
 			}
 		}
 		for (int i = 0; i < 9; i++) {
@@ -65,34 +67,62 @@ public class UTfurnaceContainer extends Container {
 	public boolean canInteractWith(EntityPlayer entityplayer) {
 		return true;
 	}
+	
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer player, int slot) {
-		ItemStack stack = null;
-		Slot slotObject =(Slot) inventorySlots.get(slot);
-		if (slotObject != null && slotObject.getHasStack()) {
-			ItemStack stackInSlot = slotObject.getStack();
-			stack = stackInSlot.copy();
-			if (slot < 9) {
-				 if (!this.mergeItemStack(stackInSlot, 0, 35, true)) {
-					 return null;
-				 	}
-			 	}
-				 else if(!this.mergeItemStack(stackInSlot, 0, 9, false)) {
-					 return null;
-				 }
-				 
-				 if(stackInSlot.stackSize == 0){
-					 slotObject.putStack(null);
-				 }else{
-					 slotObject.onSlotChanged();
-				 }
-				 
-				 if(stackInSlot.stackSize == stack.stackSize) {
-					 return null;			 
-				 }
-			 slotObject.onPickupFromSlot(player, stackInSlot);
-		 }
-		 return stack;
-	 }
+		ItemStack aux = null;
+		Slot current = (Slot)this.inventorySlots.get(slot);
+		
+		if (current != null && current.getHasStack())
+		{
+			ItemStack itemstack = current.getStack();
+			aux = itemstack.copy();
+			
+			if(slot == 0){//slot 0 smelt
+				if(!mergeItemStack(itemstack, 2, 38, false)){
+					return null;
+				}
+				current.onSlotChange(itemstack, aux);
+				
+			}else if(slot == 1){//slot 1 result
+				if(!mergeItemStack(itemstack, 2, 38, false)){
+					return null;
+				}
+				current.onSlotChange(itemstack, aux);
+			}else{
+				if (FurnaceRecipes.smelting().getSmeltingResult(itemstack) != null)
+                {
+                    if (!this.mergeItemStack(itemstack, 0, 1, false))
+                    {
+                        return null;
+                    }
+                }else if (slot >= 2 && slot < 29)
+                {
+                    if (!this.mergeItemStack(itemstack, 29, 38, false))
+                    {
+                        return null;
+                    }
+                }
+                else if (slot >= 29 && slot < 38){
+                	if(!this.mergeItemStack(itemstack, 2, 29, false))
+                	{
+                		return null;
+                	}
+                }
+
+				current.onSlotChanged();
+			}
+			if (itemstack.stackSize == 0)
+			{
+				current.putStack((ItemStack)null);
+			}
+			if (itemstack.stackSize == aux.stackSize)
+			{
+				return null;
+			}
+			current.onPickupFromSlot(player, itemstack);
+		}
+		return null;
+	}
 
 }

@@ -51,4 +51,13 @@ public class Purifier_Recipe{
 		if(!recipes.contains(a))
 		recipes.add(a);
 	}
+
+	public static ItemStack getResult(ItemStack itemstack) {
+		if(itemstack == null)return null;
+		for(Purifier_Recipe a:recipes){
+			if(a.getInput().itemID == itemstack.itemID)
+				return a.getOutput();
+		}
+		return null;
+	}
 }

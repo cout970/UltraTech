@@ -1,5 +1,6 @@
 package common.cout970.UltraTech.machines.containers;
 
+import common.cout970.UltraTech.core.UltraTech;
 import common.cout970.UltraTech.machines.tileEntities.ReactorEntity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -16,14 +17,14 @@ public class ReactorContainer extends Container{
 			ReactorEntity tileEntity) {
 		super();
 		this.tileEntity = tileEntity;
-		bindPlayerInventory(inventory);
+		
 		addSlotToContainer(new Slot(tileEntity, 0, 118, 16));
 		addSlotToContainer(new Slot(tileEntity, 1, 118, 34));
 		addSlotToContainer(new Slot(tileEntity, 2, 118, 52));
-		
 		addSlotToContainer(new Slot(tileEntity, 3, 141, 16));
 		addSlotToContainer(new Slot(tileEntity, 4, 141, 34));
 		addSlotToContainer(new Slot(tileEntity, 5, 141, 52));
+		bindPlayerInventory(inventory);
 	}
 
 	public void addCraftingToCrafters(ICrafting par1ICrafting)
@@ -64,34 +65,58 @@ public class ReactorContainer extends Container{
 	}
 
 	@Override
-	public ItemStack transferStackInSlot(EntityPlayer player, int slot) {
-		ItemStack stack = null;
-		Slot slotObject =(Slot) inventorySlots.get(slot);
-		if (slotObject != null && slotObject.getHasStack()) {
-			ItemStack stackInSlot = slotObject.getStack();
-			stack = stackInSlot.copy();
-			if (slot < 9) {
-				if (!this.mergeItemStack(stackInSlot, 0, 35, true)) {
+	public ItemStack transferStackInSlot(EntityPlayer entityPlayer, int slotIndex) {
+		return transfer(entityPlayer, slotIndex, 6);
+	}
+
+	 public ItemStack transfer(EntityPlayer player, int slot,int inv) {
+			ItemStack aux = null;
+			Slot current = (Slot)this.inventorySlots.get(slot);
+			
+			if (current != null && current.getHasStack())
+			{
+				ItemStack itemstack = current.getStack();
+				aux = itemstack.copy();
+				
+				if(slot < inv){//slot 0 smelt
+					if(!mergeItemStack(itemstack, inv, 36+inv, false)){
+						return null;
+					}
+					current.onSlotChange(itemstack, aux);
+					
+				}else{
+					if(itemstack.itemID == UltraTech.ItemName.get("RadioniteCell").itemID){
+						if(!mergeItemStack(itemstack, 0, inv, false)){
+							return null;
+						}
+					}else if (slot >= inv && slot < 26+inv)
+	                {
+	                    if (!this.mergeItemStack(itemstack, 27+inv, 36+inv, false))
+	                    {
+	                        return null;
+	                    }
+	                }
+	                else if (slot >= 27+inv && slot < 36+inv){
+	                	if(!this.mergeItemStack(itemstack, inv, 26+inv, false))
+	                	{
+	                		return null;
+	                	}
+	                }
+
+					current.onSlotChanged();
+				}
+				if (itemstack.stackSize == 0)
+				{
+					current.putStack((ItemStack)null);
+				}
+				if (itemstack.stackSize == aux.stackSize)
+				{
 					return null;
 				}
+				current.onPickupFromSlot(player, itemstack);
 			}
-			else if(!this.mergeItemStack(stackInSlot, 0, 9, false)) {
-				return null;
-			}
-
-			if(stackInSlot.stackSize == 0){
-				slotObject.putStack(null);
-			}else{
-				slotObject.onSlotChanged();
-			}
-
-			if(stackInSlot.stackSize == stack.stackSize) {
-				return null;			 
-			}
-			slotObject.onPickupFromSlot(player, stackInSlot);
+			return null;
 		}
-		return stack;
-	}	
 
 	@Override
 	public boolean canInteractWith(EntityPlayer entityplayer) {

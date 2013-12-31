@@ -11,8 +11,11 @@ import net.minecraft.util.ResourceLocation;
 
 public class MAssemblyGui extends GuiContainer{
 
+	public MolecularAssemblyEntity tile;
+	
 	public MAssemblyGui(Container par1Container,InventoryPlayer ip ,MolecularAssemblyEntity entity) {
 		super(par1Container);
+		tile = entity;
 	}
 
 	@Override
@@ -24,6 +27,15 @@ public class MAssemblyGui extends GuiContainer{
 		int yStart = (height - ySize) / 2;
 		this.drawTexturedModalRect(xStart, yStart, 0, 0, xSize, ySize);
 		
+		//progres bar
+		int i1 = (int) this.tile.Progres*24/1000;
+		this.drawTexturedModalRect(xStart + 118, yStart + 33, 176, 14, i1, 16);
+
+		
+		//energy
+		this.mc.renderEngine.bindTexture(new ResourceLocation("ultratech:textures/misc/energy.png"));
+		int p = (int) tile.Energy*50/tile.EnergyMax;
+		this.drawTexturedModalRect(xStart+14, yStart+15+(50-p), 0, 0, 25, p);
 	}
 
 }

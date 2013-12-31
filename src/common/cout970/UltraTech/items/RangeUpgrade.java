@@ -23,6 +23,8 @@ public class RangeUpgrade extends UT_Item{
 				te.widht += 1;
 				te.hasMine = false;
 				te.current = 0;
+				te.hasRangeUpgrades = true;
+				te.rangeUpgrades += 1;
 				if(par1ItemStack.stackSize > 1){
 					par1ItemStack.stackSize -= 1;
 				}else{
