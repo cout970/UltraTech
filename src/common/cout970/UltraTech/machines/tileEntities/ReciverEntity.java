@@ -1,6 +1,5 @@
 package common.cout970.UltraTech.machines.tileEntities;
 
-import java.util.Random;
 
 import net.minecraft.tileentity.TileEntity;
 
@@ -21,8 +20,6 @@ public class ReciverEntity extends Machine{
 			check();
 		}
 		refill();
-		Random r = new Random();
-		if(r.nextInt(10)==5)check();
 	}
 
 
@@ -30,7 +27,7 @@ public class ReciverEntity extends Machine{
 	public void refill(){
 		for(Machine a : machines){
 			if(a != null){
-				if(a instanceof ReciverEntity){
+				if(a instanceof ReciverEntity || a instanceof SateliteEntity){
 				}else{
 					if(a.Energy+speed <= a.EnergyMax && this.Energy >= speed){
 						float e = a.gainEnergy(speed);

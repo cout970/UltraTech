@@ -20,11 +20,7 @@ public class AutoEjectUpgrade extends UT_Item{
 			MinerEntity te = (MinerEntity) par3World.getBlockTileEntity(x, y, z);
 			if(!te.eject){	
 				te.eject = true;
-				if(par1ItemStack.stackSize > 1){
-					par1ItemStack.stackSize -= 1;
-				}else{
-					par1ItemStack = null;
-				}
+				par1ItemStack.splitStack(1);
 				return true;
 			}
 		}

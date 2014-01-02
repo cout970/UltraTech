@@ -1,58 +1,68 @@
 package common.cout970.UltraTech.machines.tileEntities;
 
-import java.util.Random;
-import common.cout970.UltraTech.lib.Reference;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.Minecraft;
+import common.cout970.UltraTech.core.UltraTech;
+
 public class SateliteEntity extends Machine{
 	
 	public Machine receptor;
 	private boolean hasBase = false;
+	public int SolarPanels=0;
+	public int tick=1000;
+	public float power= 0;
 
 	public SateliteEntity(){
 		super();
+		this.EnergyMax = 5000;
 	}
 
-	@SideOnly(Side.SERVER)
 	@Override
 	public void updateEntity(){
-		if(Minecraft.getMinecraft().theWorld != null){
-			Random r = new Random();
-			if(r.nextInt(10)==5)checkBase();
+		tick++;
+		if(tick >= 1000){
+			SolarPanels = this.getSolarPanels();
+		}
+		if(!this.worldObj.isRemote){			
+			power += (SolarPanels/10f)*(yCoord/50f);
+			while(power > 1){
+				this.gainEnergy(1);
+				power--;
+			}
+			
 			if(hasBase){
 				passEnergy();
-			}
-			if(Minecraft.getMinecraft().theWorld.isDaytime()){
-				int e = this.yCoord/100;
-				Energy += e;
 			}
 		}
 	}
 
 	private void passEnergy() {
-		if(receptor != null){
-			Energy = receptor.gainEnergy(Energy);
-			
+		
+		if(receptor != null && this.getEnergy() >= 64){
+			receptor.gainEnergy(64);
+			loseEnergy(64);
 		}
 	}
 
-
 	public void checkBase(){
-		int b;
-		for(int a = this.yCoord; a>0 ;a--){
-			b = this.worldObj.getBlockId(xCoord, a, zCoord);
-			if(b == Reference.IDS || b == Reference.Reciver){
-				if(this.worldObj.getBlockTileEntity(xCoord, a, zCoord) instanceof IDSentity){
-					receptor = (IDSentity) this.worldObj.getBlockTileEntity(xCoord, a, zCoord);
-				}else if(this.worldObj.getBlockTileEntity(xCoord, a, zCoord) instanceof ReciverEntity){
-					receptor = (ReciverEntity) this.worldObj.getBlockTileEntity(xCoord, a, zCoord);
-				}
-				hasBase  = true;
+		for(int y=this.yCoord-1;y>1;y--){
+			int id = this.worldObj.getBlockId(xCoord, y, zCoord);
+			if(id == UltraTech.Reciver.blockID){
+				receptor = (Machine) this.worldObj.getBlockTileEntity(xCoord, y, zCoord);
+				this.hasBase = true;
 				return;
 			}
 		}
 		hasBase = false;
 	}
 
+	public int getSolarPanels(){
+		int s = 0;
+		for(int x= -5;x<5;x++){
+			for(int z= -5;z<5;z++){
+				if(this.worldObj.getBlockId(xCoord+x, yCoord, zCoord+z)== UltraTech.SolarPanel.blockID){
+					s++;
+				}
+			}
+		}
+		return s;
+	}
 }

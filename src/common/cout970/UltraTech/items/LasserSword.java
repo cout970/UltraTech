@@ -8,6 +8,7 @@ import common.cout970.UltraTech.misc.IItemEnergyEstorage;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -35,6 +36,11 @@ public class LasserSword extends UT_Item implements IItemEnergyEstorage{
 		this.itemIcon = iconRegister.registerIcon("ultratech:lassersword");
 	}
 
+	@SuppressWarnings("unchecked")
+	public void getSubBlocks(int unknown, CreativeTabs tab, @SuppressWarnings("rawtypes") List subItems){
+			subItems.add(new ItemStack(this, 1, this.MaxEnergy));
+	}
+	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public Multimap getItemAttributeModifiers()

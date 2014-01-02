@@ -23,11 +23,7 @@ public class MiningUpgrade extends UT_Item{
 				te.speed += 10;
 				te.hasSpeedUpgrades = true;
 				te.speedUpgrades += 1;
-				if(par1ItemStack.stackSize > 1){
-					par1ItemStack.stackSize -= 1;
-				}else{
-					par1ItemStack = null;
-				}
+				par1ItemStack.splitStack(1);
 				return true;
 			}
 		}

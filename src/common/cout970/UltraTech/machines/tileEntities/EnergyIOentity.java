@@ -1,6 +1,5 @@
 package common.cout970.UltraTech.machines.tileEntities;
 
-import java.util.Random;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -25,8 +24,6 @@ public class EnergyIOentity extends Machine{
 		}
 		refill();
 		getE();
-		Random r = new Random();
-		if(r.nextInt(10)==5)check();
 	}
 
 	private void getE() {

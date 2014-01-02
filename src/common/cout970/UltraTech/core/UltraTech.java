@@ -38,6 +38,7 @@ import common.cout970.UltraTech.machines.tileEntities.ReactorTankEntity;
 import common.cout970.UltraTech.machines.tileEntities.ReactorWallEntity;
 import common.cout970.UltraTech.machines.tileEntities.ReciverEntity;
 import common.cout970.UltraTech.machines.tileEntities.SateliteEntity;
+import common.cout970.UltraTech.machines.tileEntities.SolarPanelEntity;
 import common.cout970.UltraTech.machines.tileEntities.SteamTurbineEntity;
 import common.cout970.UltraTech.machines.tileEntities.UTfurnaceEntity;
 import common.cout970.UltraTech.machines.tileEntities.WaterBlockEntity;
@@ -61,7 +62,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 
 
-@Mod(modid = "UltraTech", name = "UltraTech",version = "0.6.1")
+@Mod(modid = "UltraTech", name = "UltraTech",version = "0.6.2")
 
 @NetworkMod(clientSideRequired=true, serverSideRequired=true, channels={"UltraTech","UltraTech2"}, packetHandler = PacketHandler.class)
 
@@ -130,7 +131,10 @@ public class UltraTech {
 	String[] lang ={"Circuit","Grafeno","Silicon Plate","Diamond Plate","Gold Plate","Iron Plate","Trinitramida","Redstone Plate","Alloy Plate","Radionite Plate","Grafeno Plate",
 			"Redstone Cable","Energy Transmiter","Heat Coil","Raw Silicon","Radionite","Raw Meal","Iron Dust","Gold Dust","Lapis Pearl","Filter","Solar Panel",
 			"Grafeno Cable","Optic Fiber","Alloy Cable","Coil","Upgrade Base","Carbon Plate","Carbon Fiber","Advanced Circuit","Diamond Dust","Motor","Alloy ingot","Fan",
-			"Speed Upgrade","Mining Upgrade","Range Upgrade","AutoEject Upgrade","Linker","Radionite Cell","Hidrogen Battery","Lasser Sword"};
+			
+			"Speed Upgrade","Mining Upgrade","Range Upgrade","AutoEject Upgrade","Linker","Radionite Cell","Hidrogen Battery","Lasser Sword","Fortune Upgrade"};
+
+	
 
 	//Blocks
 	public static Block CVDmachine;
@@ -163,7 +167,7 @@ public class UltraTech {
 	public static Block StoneBlock;
 	public static Block StoneBlockBricks;
 	public static Block ChargeStation;
-
+	public static Block SolarPanel;
 
 
 
@@ -204,6 +208,7 @@ public class UltraTech {
 		Reference.RadioniteOre = config.getBlock("RadioniteOre",2074).getInt();
 		Reference.MolecularAssembly = config.getBlock("MolecularAssembly", 2075).getInt();
 		Reference.ChargeStation = config.getBlock("ChargeStation", 2076).getInt();
+		Reference.SolarPanel = config.getBlock("SolarPanel", 2077).getInt();
 		//deco
 		Reference.StoneBlock = config.getBlock("StoneBlock", 2098).getInt();
 		Reference.StoneBlockBricks = config.getBlock("StoneBlockBricks", 2099).getInt();
@@ -237,6 +242,7 @@ public class UltraTech {
 		itemsID.put("RadioniteCell", new ID(c.getItem("RadioniteCell", def).getInt()));def++;
 		itemsID.put("HidrogenBattery", new ID(c.getItem("HidrogenBattery", def).getInt()));def++;
 		itemsID.put("LasserSword", new ID(c.getItem("LasserSword", def).getInt()));def++;
+		itemsID.put("FortuneUpgrade", new ID(c.getItem("FortuneUpgrade", def).getInt()));def++;
 
 	}
 
@@ -270,7 +276,7 @@ public class UltraTech {
 		StoneBlock = new common.cout970.UltraTech.blocks.StoneBlock(Reference.StoneBlock,Material.rock);
 		StoneBlockBricks = new common.cout970.UltraTech.blocks.StoneBlockBricks(Reference.StoneBlockBricks,Material.rock);
 		ChargeStation = new ChargeStation(Reference.ChargeStation, Material.iron);
-		
+		SolarPanel = new SolarPanel(Reference.SolarPanel, Material.iron);
 		if(!FluidRegistry.isFluidRegistered("steam"))FluidRegistry.registerFluid(Steam);
 
 	}
@@ -293,6 +299,7 @@ public class UltraTech {
 		items.add(new RadioniteCell(itemsID.get("RadioniteCell").id,"RadioniteCell"));
 		items.add(new HidrogenBattery(itemsID.get("HidrogenBattery").id,"HidrogenBattery"));
 		items.add(new LasserSword(itemsID.get("LasserSword").id,"LasserSword"));
+		items.add(new FortuneUpgrade(itemsID.get("FortuneUpgrade").id,"FortuneUpgrade"));
 
 		int d = 0;
 		for(UT_Item i : items){
@@ -394,7 +401,11 @@ public class UltraTech {
 		GameRegistry.registerTileEntity(ChargeStationEntity.class, "ChargeStation_UT");
 		GameRegistry.registerBlock(ChargeStation, "ChargeStation");
 		LanguageRegistry.addName(ChargeStation, "Charge Station");
-		
+		//SolarPanel
+		GameRegistry.registerTileEntity(SolarPanelEntity.class, "SolarPanel_UT");
+		GameRegistry.registerBlock(SolarPanel, "SolarPanel");
+		LanguageRegistry.addName(SolarPanel, "Solar Panel");
+
 		//DiamondGlass
 		GameRegistry.registerBlock(DiamondGlass, "Diamond Glass");
 		LanguageRegistry.addName(DiamondGlass, "Diamond Glass");

@@ -18,6 +18,7 @@ public class MolecularAssemblyEntity extends Machine implements IInventory{
 	public int Progres = 0;
 	public boolean hasrecipe= false;
 	private int speed = 10;
+	private boolean flag= false;
 	
 	public MolecularAssemblyEntity(){
 		inventory = new ItemStack[INVENTORY_SIZE];
@@ -33,26 +34,48 @@ public class MolecularAssemblyEntity extends Machine implements IInventory{
 			}else if(this.getStackInSlot(10) != null){
 				setInventorySlotContents(10, null);
 			}
-		}else if(this.getEnergy() > 50){
-			Progres+=speed ;
+		}else{
+			if(!flag){
+				flag = this.Energy >= (1000f/speed)*5f;
+			}
+		}
+
+		if(flag){
+			Progres+=speed;
 			this.loseEnergy(5);
 			if(Progres >= 1000){
 				Progres = 0;
-				if(this.getStackInSlot(9) == null){
-					setInventorySlotContents(9, Assembly_Recipes.getCraftingResult(this));
-				}else{
-					ItemStack d = Assembly_Recipes.getCraftingResult(this);
-					d.stackSize +=getStackInSlot(9).stackSize;
-					setInventorySlotContents(9,d);
-				}
-				for(int x=0;x<9;x++){
-					this.decrStackSize(x, 1);
+				craft();
+				flag = false;
+			}
+		}
+
+	}
+
+
+	private void craft() {
+		if(Assembly_Recipes.matches(this)){
+			ItemStack itemstack = Assembly_Recipes.getCraftingResult(this);
+
+			if (this.inventory[9] == null)
+			{
+				this.inventory[9] = itemstack.copy();
+			}
+			else if (this.inventory[9].isItemEqual(itemstack))
+			{
+				inventory[9].stackSize += itemstack.stackSize;
+			}
+			for(int x=0;x<9;x++){
+				if(this.inventory[x] != null){
+					--this.inventory[x].stackSize;
+					if (this.inventory[x].stackSize <= 0)
+					{
+						this.inventory[x] = null;
+					}
 				}
 			}
 		}
-		
 	}
-
 
 	@Override
 	public int getSizeInventory() {

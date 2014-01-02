@@ -42,6 +42,7 @@ public class Reference {
 	public static int StoneBlock;
 	public static int StoneBlockBricks;
 	public static int ChargeStation;
+	public static int SolarPanel;
 	
 	
 	

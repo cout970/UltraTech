@@ -20,6 +20,7 @@ public class UTfurnaceEntity extends Machine implements IInventory,ISpeedUpgrade
 	public int speed = 10;
 	private int speedUpgrades;
 	public static final int INVENTORY_SIZE = 2;
+	public boolean flag1 = false;
 	
 	
 	public UTfurnaceEntity(){
@@ -198,8 +199,11 @@ public class UTfurnaceEntity extends Machine implements IInventory,ISpeedUpgrade
 	    @Override
 	    public void updateEntity()
 	    {
-	    	boolean flag = this.getEnergy() > 100;
-	    	boolean flag1 = false;
+	    	
+	    	boolean flag = false;
+	    	if(!flag1){
+				flag1 = this.Energy >= 1000f/5f;
+			}
 
 	    	if (flag && this.proces > 0)
 	    	{
@@ -218,7 +222,7 @@ public class UTfurnaceEntity extends Machine implements IInventory,ISpeedUpgrade
 	    				this.worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
 	    			}
 	    		}
-	    		if (flag && this.canSmelt())
+	    		if (flag1 && this.canSmelt())
 	    		{
 	    			this.proces += speed;
 	    			if (this.proces >= 1000 )
@@ -226,7 +230,8 @@ public class UTfurnaceEntity extends Machine implements IInventory,ISpeedUpgrade
 	    				if(speed <= 0)speed=10;
 	    				this.proces = 0;
 	    				this.smeltItem();
-	    				flag1 = true;
+	    				flag = true;
+	    				flag1 = false;
 	    			}
 	    		}
 	    		else
@@ -235,7 +240,7 @@ public class UTfurnaceEntity extends Machine implements IInventory,ISpeedUpgrade
 	    		}
 
 	    	}
-	    	if (flag1)
+	    	if (flag)
 	    	{
 	    			this.onInventoryChanged();		
 	    		}

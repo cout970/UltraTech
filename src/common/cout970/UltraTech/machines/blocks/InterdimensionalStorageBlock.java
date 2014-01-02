@@ -48,5 +48,14 @@ public class InterdimensionalStorageBlock extends BlockContainer{
 		this.blockIcon = iconRegister.registerIcon("ultratech:ids");
 	}
 	
+	 public void onNeighborBlockChange(World w, int x, int y, int z, int side){
+			TileEntity te = w.getBlockTileEntity(x, y, z);
+			if(te != null && !w.isRemote){
+				if(te instanceof IDSentity){
+					IDSentity r = (IDSentity)te;
+					r.check();
+				}
+			}
+		}
 	
 }

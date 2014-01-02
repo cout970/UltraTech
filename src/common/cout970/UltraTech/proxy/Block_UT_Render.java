@@ -168,7 +168,7 @@ public class Block_UT_Render implements ISimpleBlockRenderingHandler {
 		else if(meta  == 2)GL11.glColor3f(1, 0, 0);
 		else if(meta  == 3)GL11.glColor3f(0, 1, 0);
 		else if(meta  == 4)GL11.glColor3f(0, 0, 1);
-		else if(meta  == 5)GL11.glColor3f(1f, 1f, 0);
+		else if(meta  == 5)GL11.glColor3f(1f, 1f, 0f);
 		else if(meta  == 6)GL11.glColor3f(0, 0.5f, 1f);
 		else if(meta  == 7)GL11.glColor3f(0.0f,0.5f, 0.0f);
 		else if(meta  == 8)GL11.glColor3f(1f, 0.0f, 1f);

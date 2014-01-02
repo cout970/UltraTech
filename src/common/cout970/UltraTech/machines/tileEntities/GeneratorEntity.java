@@ -1,6 +1,5 @@
 package common.cout970.UltraTech.machines.tileEntities;
 
-import java.util.Random;
 
 import common.cout970.UltraTech.misc.SyncObject;
 import net.minecraft.entity.player.EntityPlayer;
@@ -150,8 +149,6 @@ public class GeneratorEntity extends Machine implements IInventory{
 			check();
 		}
 		refill();
-		Random r = new Random();
-		if(r.nextInt(20)==5)check();
 		if(inventory[0] != null){
 			boolean flag = inventory[0].itemID == Item.coal.itemID;
 			if(flag && progres <= 0 && this.Energy < EnergyMax-64){
@@ -175,7 +172,7 @@ public class GeneratorEntity extends Machine implements IInventory{
 		}
 		if(progres > 0){
 			progres--;
-			this.gainEnergy(2);
+			this.gainEnergy(3);
 		}
 	}
 

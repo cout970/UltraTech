@@ -1,5 +1,6 @@
 package common.cout970.UltraTech.machines.blocks;
 
+
 import java.util.Random;
 
 import common.cout970.UltraTech.core.UltraTech;
@@ -98,6 +99,16 @@ public class Generator extends BlockContainer{
 				 entityItem.motionZ = rand.nextGaussian() * factor;
 				 world.spawnEntityInWorld(entityItem);
 				 item.stackSize = 0;
+			 }
+		 }
+	 }
+
+	 public void onNeighborBlockChange(World w, int x, int y, int z, int side){
+		 TileEntity te = w.getBlockTileEntity(x, y, z);
+		 if(te != null && !w.isRemote){
+			 if(te instanceof GeneratorEntity){
+				 GeneratorEntity r = (GeneratorEntity)te;
+				 r.check();
 			 }
 		 }
 	 }

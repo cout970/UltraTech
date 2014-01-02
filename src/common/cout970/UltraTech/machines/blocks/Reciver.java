@@ -2,6 +2,7 @@ package common.cout970.UltraTech.machines.blocks;
 
 import common.cout970.UltraTech.core.UltraTech;
 import common.cout970.UltraTech.machines.tileEntities.ReciverEntity;
+import common.cout970.UltraTech.machines.tileEntities.SateliteEntity;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -37,4 +38,39 @@ public class Reciver extends BlockContainer{
     {
 		return side != 1 ? this.blockIcon : this.blockIcon2;
     }
+	
+	public void onNeighborBlockChange(World w, int x, int y, int z, int side){
+		TileEntity t = w.getBlockTileEntity(x, y, z);
+		if(t != null && t instanceof ReciverEntity){
+			((ReciverEntity)t).check();
+		}
+		for(int yCoord=y;yCoord<256;yCoord++){
+			if(w.getBlockId(x, yCoord, z)==UltraTech.Satelite.blockID){
+				TileEntity te = w.getBlockTileEntity(x, yCoord, z);
+				if(te != null && !w.isRemote){
+					if(te instanceof SateliteEntity){
+						SateliteEntity r = (SateliteEntity)te;
+						r.checkBase();
+					}
+				}
+			}
+		}
+	}
+	
+	@Override
+	public void onBlockAdded(World w, int x, int y, int z)
+	{
+		super.onBlockAdded(w, x, y, z);
+		for(int yCoord=y;yCoord<256;yCoord++){
+			if(w.getBlockId(x, yCoord, z)==UltraTech.Satelite.blockID){
+				TileEntity te = w.getBlockTileEntity(x, yCoord, z);
+				if(te != null && !w.isRemote){
+					if(te instanceof SateliteEntity){
+						SateliteEntity r = (SateliteEntity)te;
+						r.checkBase();
+					}
+				}
+			}
+		}
+	}
 }

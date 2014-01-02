@@ -19,6 +19,7 @@ public class CVDentity extends Machine implements IInventory,ISpeedUpgradeabel{
 	public int speed = 10;
 	private int speedUpgrades;
 	public static final int INVENTORY_SIZE = 3;
+	public boolean flag1 = false;
 
 	public CVDentity(){
 		super();		
@@ -29,9 +30,10 @@ public class CVDentity extends Machine implements IInventory,ISpeedUpgradeabel{
 	public void updateEntity(){
 
 		boolean flag = progres > 0;
-		boolean flag1 = this.getEnergy() > 0;
 		boolean flag2=false;
-
+		if(!flag1){
+			flag1 = this.Energy >= 1000f/5f;
+		}
 		if(flag){
 			this.loseEnergy(speed/5);//spend energy when ir runing
 		}
@@ -43,6 +45,7 @@ public class CVDentity extends Machine implements IInventory,ISpeedUpgradeabel{
 					progres = 0;
 					craft();
 					flag2 = true;
+					flag1 = false;
 				}
 			}else{
 				progres=0;

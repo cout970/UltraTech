@@ -19,6 +19,7 @@ public class PurifierEntity extends Machine implements IInventory,ISpeedUpgradea
 	public int progres = 0;
 	public int speed = 10;
 	private int speedUpgrades;
+	public boolean flag1 = false;
 
 	public PurifierEntity(){
 		super();
@@ -158,8 +159,10 @@ public class PurifierEntity extends Machine implements IInventory,ISpeedUpgradea
 	@Override
 	public void updateEntity(){
 		boolean flag = progres > 0;
-		boolean flag1 = this.getEnergy() > 50;
 		boolean flag2=false;
+		if(!flag1){
+			flag1 = this.Energy >= 1000f/5f;
+		}
 		if(flag){
 			this.loseEnergy(speed/5);//spend energy when ir runing
 		}
@@ -171,6 +174,7 @@ public class PurifierEntity extends Machine implements IInventory,ISpeedUpgradea
 				progres = 0;
 				craft();
 				flag2 = true;
+				flag1 = false;
 			}
 		}else{
 			progres=0;

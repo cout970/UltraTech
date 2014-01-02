@@ -1,7 +1,6 @@
 package common.cout970.UltraTech.machines.tileEntities;
 
 
-import java.util.Random;
 import common.cout970.UltraTech.misc.SyncObject;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
@@ -23,8 +22,6 @@ public class IDSentity extends Machine{
 			check();
 		}
 		refill();
-		Random r = new Random();
-		if(r.nextInt(10)==5)check();
 	}
 
 	public Machine[] machines;

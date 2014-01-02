@@ -31,8 +31,11 @@ public class MinerEntity extends Machine implements IInventory{
 	public boolean eject = false;
 	public boolean hasSpeedUpgrades;
 	public boolean hasRangeUpgrades;
+	public boolean hasFortuneUpgrades;
 	public int speedUpgrades=0;
 	public int rangeUpgrades=0;
+	public int fortuneUpgrades=0;
+	
 	
  	
 	public MinerEntity(){
@@ -187,9 +190,12 @@ public class MinerEntity extends Machine implements IInventory{
 		NBTTagCompound tagCompound6 = (NBTTagCompound) tagList2.tagAt(5);
 		speedUpgrades = tagCompound6.getInteger("speedUpgrades");
 		
+		NBTTagCompound tagCompound7 = (NBTTagCompound) tagList2.tagAt(6);
+		fortuneUpgrades = tagCompound7.getInteger("fortuneUpgrades");
 		
 		if(speedUpgrades > 0)hasSpeedUpgrades = true;
 		if(rangeUpgrades > 0)hasRangeUpgrades = true;
+		if(fortuneUpgrades > 0)hasFortuneUpgrades = true;
 	}
 
 	@Override
@@ -243,6 +249,9 @@ public class MinerEntity extends Machine implements IInventory{
 		NBTTagCompound tagCompound6 = new NBTTagCompound();
 		tagCompound6.setInteger("speedUpgrades", speedUpgrades);
 		tagList2.appendTag(tagCompound6);
+		NBTTagCompound tagCompound7 = new NBTTagCompound();
+		tagCompound7.setInteger("fortuneUpgrades", fortuneUpgrades);
+		tagList2.appendTag(tagCompound7);
 		nbtTagCompound.setTag("Upgrades", tagList2);
 	}
 	
@@ -314,7 +323,7 @@ public class MinerEntity extends Machine implements IInventory{
 			int y = mining.get(current).y;
 			int z = mining.get(current).z;
 			if(this.worldObj.getBlockId(x, y, z) > 0 && (this.worldObj.getBlockId(x, y, z) < 7 || this.worldObj.getBlockId(x, y, z) > 11)){
-				ItemStack[] a = getItemStackFromId(worldObj, x, y, z, worldObj.getBlockMetadata(x, y, z), 0);
+				ItemStack[] a = getItemStackFromId(worldObj, x, y, z, worldObj.getBlockMetadata(x, y, z), this.fortuneUpgrades);
 				addItemStackArray(a);
 				this.worldObj.setBlockToAir(x, y, z);//less lag
 //				this.worldObj.destroyBlock(x, y, z, false);
