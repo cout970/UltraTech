@@ -14,4 +14,11 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>my</name>
+			<type>2</type>
+			<location>I:/Development/Minecraft mod development/my</location>
+		</link>
+	</linkedResources>
 </projectDescription>
