@@ -2,8 +2,11 @@ package common.cout970.UltraTech.lib;
 
 public class Reference {
 
-
-	//blocks
+	//Item
+	public static int ProcesedFood;
+	//fluid
+	public static int Steam;
+	//Blocks
 	public static int AdvMachineChasis;	
 	public static int CVDmachine;
 	public static int UTfurnace;
@@ -14,7 +17,6 @@ public class Reference {
 	public static int PresureChamber;
 	public static int DiamondGlass;
 	public static int CovedGlass;
-	public static int SateliteBox;
 	public static int Generator;
 	public static int MachineChasis;
 	public static int Miner;
@@ -25,11 +27,6 @@ public class Reference {
 	public static int Reciver;
 	public static int RadioniteBlock;
 	public static int ReactorTank;
-
-	public static int ProcesedFood;
-
-	public static int Steam;
-
 	public static int SteamTurbine;
 	public static int WaterBlock;
 	public static int RadioniteOre;
@@ -43,12 +40,7 @@ public class Reference {
 	public static int StoneBlockBricks;
 	public static int ChargeStation;
 	public static int SolarPanel;
-	
-	
-	
-	
+	public static int WindMill;
+	public static int hitBox;
 
-	
-	
-	
 }

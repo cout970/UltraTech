@@ -42,6 +42,7 @@ import common.cout970.UltraTech.machines.tileEntities.SolarPanelEntity;
 import common.cout970.UltraTech.machines.tileEntities.SteamTurbineEntity;
 import common.cout970.UltraTech.machines.tileEntities.UTfurnaceEntity;
 import common.cout970.UltraTech.machines.tileEntities.WaterBlockEntity;
+import common.cout970.UltraTech.machines.tileEntities.WindMillEntity;
 import common.cout970.UltraTech.misc.ID;
 import common.cout970.UltraTech.proxy.CommonProxy;
 
@@ -62,7 +63,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 
 
-@Mod(modid = "UltraTech", name = "UltraTech",version = "0.6.2")
+@Mod(modid = "UltraTech", name = "UltraTech",version = "0.7")
 
 @NetworkMod(clientSideRequired=true, serverSideRequired=true, channels={"UltraTech","UltraTech2"}, packetHandler = PacketHandler.class)
 
@@ -146,7 +147,7 @@ public class UltraTech {
 	public static  Block PresureChamber;
 	public static  Block DiamondGlass;
 	public static  Block CovedGlass;
-	public static  Block SateliteBox;
+	public static  Block hitBox;
 	public static  Block Generator;
 	public static  Block MachineChasis;
 	public static  Block Miner;
@@ -168,6 +169,7 @@ public class UltraTech {
 	public static Block StoneBlockBricks;
 	public static Block ChargeStation;
 	public static Block SolarPanel;
+	public static Block WindMill;
 
 
 
@@ -190,7 +192,7 @@ public class UltraTech {
 		Reference.PresureChamber = config.getBlock("PresureChamber", 2056).getInt();
 		Reference.DiamondGlass = config.getBlock("DiamondGlass", 2057).getInt();
 		Reference.CovedGlass = config.getBlock("CovedGlass", 2058).getInt();
-		Reference.SateliteBox = config.getBlock("SateliteBox", 2059).getInt();
+		Reference.hitBox = config.getBlock("SateliteBox", 2059).getInt();
 		Reference.Generator = config.getBlock("Generator", 2060).getInt();
 		Reference.MachineChasis = config.getBlock("MachineChasis", 2061).getInt();
 		Reference.Miner = config.getBlock("Miner", 2062).getInt();
@@ -209,6 +211,8 @@ public class UltraTech {
 		Reference.MolecularAssembly = config.getBlock("MolecularAssembly", 2075).getInt();
 		Reference.ChargeStation = config.getBlock("ChargeStation", 2076).getInt();
 		Reference.SolarPanel = config.getBlock("SolarPanel", 2077).getInt();
+		Reference.WindMill = config.getBlock("WindMill", 2078).getInt();
+		
 		//deco
 		Reference.StoneBlock = config.getBlock("StoneBlock", 2098).getInt();
 		Reference.StoneBlockBricks = config.getBlock("StoneBlockBricks", 2099).getInt();
@@ -256,7 +260,7 @@ public class UltraTech {
 		PresureChamber = new PresureChamber(Reference.PresureChamber,Material.iron);	
 		DiamondGlass = new DiamondGlass(Reference.DiamondGlass,Material.glass,false);	
 		CovedGlass = new CovedGlass(Reference.CovedGlass,Material.glass,false);
-		SateliteBox = new SateliteBox(Reference.SateliteBox,Material.iron);	
+		hitBox = new hitBox(Reference.hitBox,Material.iron);	
 		Generator = new Generator(Reference.Generator,Material.iron);
 		MachineChasis = new MachineChasis(Reference.MachineChasis,Material.iron);
 		Miner = new Miner(Reference.Miner,Material.iron);
@@ -277,6 +281,7 @@ public class UltraTech {
 		StoneBlockBricks = new common.cout970.UltraTech.blocks.StoneBlockBricks(Reference.StoneBlockBricks,Material.rock);
 		ChargeStation = new ChargeStation(Reference.ChargeStation, Material.iron);
 		SolarPanel = new SolarPanel(Reference.SolarPanel, Material.iron);
+		WindMill = new WindMill(Reference.WindMill, Material.iron);
 		if(!FluidRegistry.isFluidRegistered("steam"))FluidRegistry.registerFluid(Steam);
 
 	}
@@ -344,7 +349,8 @@ public class UltraTech {
 		GameRegistry.registerTileEntity(SateliteEntity.class, "sat_UT");
 		GameRegistry.registerBlock(Satelite, "sat");
 		LanguageRegistry.addName(Satelite, "Satelite solar");
-		GameRegistry.registerBlock(SateliteBox, "SateliteBox");
+		//
+		GameRegistry.registerBlock(hitBox, "hitBox");
 		//cuter
 		GameRegistry.registerTileEntity(CuterEntity.class, "cuter_UT");
 		GameRegistry.registerBlock(Cuter, "cuter");
@@ -405,7 +411,12 @@ public class UltraTech {
 		GameRegistry.registerTileEntity(SolarPanelEntity.class, "SolarPanel_UT");
 		GameRegistry.registerBlock(SolarPanel, "SolarPanel");
 		LanguageRegistry.addName(SolarPanel, "Solar Panel");
-
+		//WindMill
+		GameRegistry.registerTileEntity(WindMillEntity.class, "WindMill_UT");
+		GameRegistry.registerBlock(WindMill, "WindMill");
+		LanguageRegistry.addName(WindMill, "Wind Mill");
+		
+		
 		//DiamondGlass
 		GameRegistry.registerBlock(DiamondGlass, "Diamond Glass");
 		LanguageRegistry.addName(DiamondGlass, "Diamond Glass");

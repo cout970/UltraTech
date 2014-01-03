@@ -1,9 +1,11 @@
 package common.cout970.UltraTech.proxy;
 
-import common.cout970.UltraTech.machines.models.ReactorTankRender;
-import common.cout970.UltraTech.machines.models.RenderSolarPanel;
+import common.cout970.UltraTech.machines.renders.ReactorTankRender;
+import common.cout970.UltraTech.machines.renders.RenderSolarPanel;
+import common.cout970.UltraTech.machines.renders.RenderWindMill;
 import common.cout970.UltraTech.machines.tileEntities.ReactorTankEntity;
 import common.cout970.UltraTech.machines.tileEntities.SolarPanelEntity;
+import common.cout970.UltraTech.machines.tileEntities.WindMillEntity;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 
@@ -16,6 +18,7 @@ public class ClientProxy extends CommonProxy{
 	public void registerRenders() {
 		ClientRegistry.bindTileEntitySpecialRenderer(SolarPanelEntity.class, new RenderSolarPanel());
 		ClientRegistry.bindTileEntitySpecialRenderer(ReactorTankEntity.class, new ReactorTankRender());
+		ClientRegistry.bindTileEntitySpecialRenderer(WindMillEntity.class, new RenderWindMill());
 		setCustomRenderers();
 	}
 	
