@@ -9,7 +9,7 @@ public class Machine extends TileEntity implements Energy{
 
 	
 	public int Energy;
-	public int EnergyMax = 2000;
+	public int EnergyMax = 4000;
 	public boolean update = false;
 
 	
