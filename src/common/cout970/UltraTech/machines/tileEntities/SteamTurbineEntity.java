@@ -5,6 +5,7 @@ import java.util.List;
 
 import common.cout970.UltraTech.core.UltraTech;
 import common.cout970.UltraTech.misc.Energy;
+import common.cout970.UltraTech.misc.IReactorPart;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
@@ -16,19 +17,15 @@ import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 import net.minecraftforge.fluids.IFluidTank;
 
-public class SteamTurbineEntity extends ReactorWallEntity implements IFluidTank,IFluidHandler,Energy{
+public class SteamTurbineEntity extends Machine implements IFluidTank,IFluidHandler,Energy,IReactorPart{
 
 	public FluidStack liquid;
 	public int capacity = 5000;
-	private boolean reactor;
-	public ReactorEntity Reactor;
-	private int x,y,z;
-	public int Energy;
-	public int EnergyMax = 5000;
 	public boolean update = false;
 	
 	public SteamTurbineEntity(){
 		super();
+		this.tipe = MachineTipe.Output;
 	}
 
 	public void updateEntity(){
@@ -38,12 +35,9 @@ public class SteamTurbineEntity extends ReactorWallEntity implements IFluidTank,
 				if(this.getFluidAmount() > 500)
 				this.drain(b.fill(ForgeDirection.UNKNOWN , new FluidStack(UltraTech.Steam,500), true),true);
 			}
-			
-			if(reactor){
-				if(Reactor != null){
-					if(Reactor.steam > 0){
-						Reactor.steam -= this.fill(new FluidStack(UltraTech.Steam,500), true);
-					}
+			if(Reactor != null){
+				if(Reactor.steam > 0){
+					Reactor.steam -= this.fill(new FluidStack(UltraTech.Steam,500), true);
 				}
 			}
 			for(int j=0;j < 5 ; j++){
@@ -60,6 +54,7 @@ public class SteamTurbineEntity extends ReactorWallEntity implements IFluidTank,
 	}
 	
 	public void onNeiChange(){
+		setUp();
 	}
 
 	
@@ -80,21 +75,6 @@ public class SteamTurbineEntity extends ReactorWallEntity implements IFluidTank,
 		return tanks;
 	}
 
-	public void SearchReactor(){
-        TileEntity[] t = new TileEntity[6];
-        t[0] = this.worldObj.getBlockTileEntity(xCoord, yCoord-1, zCoord);
-        t[1] = this.worldObj.getBlockTileEntity(xCoord, yCoord+1, zCoord);
-        t[2] = this.worldObj.getBlockTileEntity(xCoord, yCoord, zCoord+1);
-        t[3] = this.worldObj.getBlockTileEntity(xCoord, yCoord, zCoord-1);
-        t[4] = this.worldObj.getBlockTileEntity(xCoord+1, yCoord, zCoord);
-        t[5] = this.worldObj.getBlockTileEntity(xCoord-1, yCoord, zCoord);
-
-        for(TileEntity y : t){
-                if(y instanceof ReactorEntity){
-                       this.Reactor = (ReactorEntity) y;
-                }
-        }
-}
 
 	//fluid
 	@Override
@@ -278,5 +258,125 @@ public class SteamTurbineEntity extends ReactorWallEntity implements IFluidTank,
 		tagList.appendTag(tagCompound2);
 		nbtTagCompound.setTag("Energy_UT", tagList);
 		
+	}
+	
+	//Reactor Part
+	
+	public boolean found = false;
+	public ReactorEntity Reactor;
+	public boolean Structure = false;
+	
+	public void setUp() {
+		SearchReactor();
+		if(found){
+			checkStructure();
+			if(Structure){
+				activateBlocks();
+			}
+		}
+	}
+
+	@Override
+	public void SearchReactor() {
+		int[] ids = new int[27];
+		int current = 0;
+		for(int j = -1;j<2;j++){
+			for(int i = -1;i<2;i++){
+				for(int k = -1;k<2;k++){
+					ids[current] = worldObj.getBlockId(xCoord+i, yCoord+j, zCoord+k);
+					if(ids[current] == UltraTech.Reactor.blockID){
+						Reactor = (ReactorEntity) worldObj.getBlockTileEntity(xCoord+i,yCoord+j,zCoord+k);
+						found = true;
+						return;
+					}
+					current++;
+				}
+			}
+		}
+		found = false;
+	}
+
+	@Override
+	public ReactorEntity getReactor() {
+		return this.Reactor;
+	}
+
+	@Override
+	public void onNeighChange() {
+		setUp();	
+	}
+
+	@Override
+	public void checkStructure() {
+		TileEntity[] ids = new TileEntity[27];
+		int current = 0;
+		for(int j = -1;j<2;j++){
+			for(int i = -1;i<2;i++){
+				for(int k = -1;k<2;k++){
+					ids[current] = worldObj.getBlockTileEntity(xCoord+i, yCoord+j, zCoord+k);
+					current++;
+				}
+			}
+		}
+		this.Structure = false;
+
+		for(TileEntity t : ids) {
+			if(!(t instanceof IReactorPart))return;
+		}
+		this.Structure = true;
+	}
+
+	@Override
+	public void activateBlocks() {
+		Reactor.setStructure(true);
+		int x,y,z;
+		x = Reactor.xCoord;
+		y = Reactor.yCoord;
+		z = Reactor.zCoord;
+		for(int j = -1;j<2;j++){
+			for(int i = -1;i<2;i++){
+				for(int k = -1;k<2;k++){
+					if(this.worldObj.getBlockTileEntity(x+i, y+j, z+k) instanceof IReactorPart){
+						((IReactorPart)worldObj.getBlockTileEntity(x+i, y+j, z+k)).setStructure(true);
+						((IReactorPart)worldObj.getBlockTileEntity(x+i, y+j, z+k)).setReactor(Reactor);
+					}
+				}
+			}
+		}
+	}
+
+	@Override
+	public void desactivateBlocks() {
+		if(Structure){
+			Structure = false;
+			int x,y,z;
+			x = Reactor.xCoord;
+			y = Reactor.yCoord;
+			z = Reactor.zCoord;
+			for(int j = -1;j<2;j++){
+				for(int i = -1;i<2;i++){
+					for(int k = -1;k<2;k++){
+						if(this.worldObj.getBlockTileEntity(x+i, y+j, z+k) instanceof IReactorPart){
+							((IReactorPart)worldObj.getBlockTileEntity(x+i, y+j, z+k)).setStructure(false);
+						}
+					}
+				}
+			}
+		}		
+	}
+
+	@Override
+	public void setStructure(boolean structure) {
+		Structure = structure;		
+	}
+
+	@Override
+	public void setReactor(ReactorEntity e) {
+		Reactor = e;
+	}
+
+	@Override
+	public boolean isStructure() {
+		return this.Structure;
 	}
 }

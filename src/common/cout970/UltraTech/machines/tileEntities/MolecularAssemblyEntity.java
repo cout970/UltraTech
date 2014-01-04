@@ -65,6 +65,7 @@ public class MolecularAssemblyEntity extends Machine implements IInventory{
 			{
 				inventory[9].stackSize += itemstack.stackSize;
 			}
+			hasrecipe = false;
 			for(int x=0;x<9;x++){
 				if(this.inventory[x] != null){
 					--this.inventory[x].stackSize;

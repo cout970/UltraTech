@@ -2,6 +2,7 @@ package common.cout970.UltraTech.machines.blocks;
 
 import common.cout970.UltraTech.core.UltraTech;
 import common.cout970.UltraTech.machines.tileEntities.ReactorTankEntity;
+import common.cout970.UltraTech.misc.IReactorPart;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -38,18 +39,29 @@ public class ReactorTank extends BlockContainer{
 		return false;
 	}
 
+	public void onNeighborBlockChange(World w, int x, int y, int z, int side){
+		TileEntity te = w.getBlockTileEntity(x, y, z);
+		if(te != null && !w.isRemote){
+			if(te instanceof IReactorPart){
+				IReactorPart r = (IReactorPart)te;
+				r.onNeighChange();
+			}
+		}
+	}
 	
 	@Override
 	public void breakBlock(World world, int x, int y, int z, int par5, int par6)
 	{
-		((ReactorTankEntity)world.getBlockTileEntity(x, y, z)).dell();
+		TileEntity t = world.getBlockTileEntity(x, y, z);
+		((IReactorPart)t).desactivateBlocks();
 		super.breakBlock(world, x, y, z, par5, par6);
 	}
 
 	@Override
 	public void onBlockAdded(World worldObj, int xCoord, int yCoord, int zCoord)
 	{
-		((ReactorTankEntity)worldObj.getBlockTileEntity(xCoord, yCoord, zCoord)).work();
+		TileEntity t = worldObj.getBlockTileEntity(xCoord, yCoord, zCoord);
+		((IReactorPart)t).onNeighChange();
 		super.onBlockAdded(worldObj, xCoord, yCoord, zCoord);
 	}
 
@@ -60,12 +72,13 @@ public class ReactorTank extends BlockContainer{
 			return true;
 		}else{
 			if(!par1World.isRemote){
-				ReactorTankEntity tile = (ReactorTankEntity)par1World.getBlockTileEntity(x, y, z);
+				TileEntity tile = par1World.getBlockTileEntity(x, y, z);
 				if(tile != null){ 
-					if(tile.multi){
-						par5EntityPlayer.openGui(UltraTech.instance, 13, par1World, tile.x, tile.y, tile.z);
+					IReactorPart p = (IReactorPart) tile;
+					if(p.isStructure()){
+						par5EntityPlayer.openGui(UltraTech.instance, 13, par1World, p.getReactor().xCoord, p.getReactor().yCoord, p.getReactor().zCoord);
 					}else{
-						tile.work();
+						p.onNeighChange();
 					}
 					return true;
 				}

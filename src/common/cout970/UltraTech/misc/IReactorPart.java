@@ -6,7 +6,21 @@ public interface IReactorPart {
 
 	public void checkStructure();
 	
+	public void SearchReactor();
+	
 	public ReactorEntity getReactor();
 	
 	public void onNeighChange();
+	
+	public void setUp();
+	
+	public void activateBlocks();
+	
+	public void desactivateBlocks();
+	
+	public void setStructure(boolean structure);
+	
+	public void setReactor(ReactorEntity e);
+
+	public boolean isStructure();
 }

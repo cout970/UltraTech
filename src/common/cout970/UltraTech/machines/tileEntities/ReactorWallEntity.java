@@ -1,118 +1,153 @@
 package common.cout970.UltraTech.machines.tileEntities;
 
 import common.cout970.UltraTech.core.UltraTech;
-import common.cout970.UltraTech.lib.Reference;
-import net.minecraft.nbt.NBTTagCompound;
+import common.cout970.UltraTech.misc.IReactorPart;
 import net.minecraft.tileentity.TileEntity;
 
-public class ReactorWallEntity extends TileEntity{
+public class ReactorWallEntity extends TileEntity implements IReactorPart{
 
-	public boolean reactor = false;
-	public int x,y,z;
-	public boolean multi = false;
+	public boolean found = false;
+	public ReactorEntity Reactor;
+	public boolean Structure = false;
 
 	public ReactorWallEntity(){
 		super();
 	}
-	
-	public boolean checkMulti() {
-			int[] ids = new int[27];
-			int current = 0;
-			for(int j = -1;j<2;j++){
-				for(int i = -1;i<2;i++){
-					for(int k = -1;k<2;k++){
-						ids[current] = worldObj.getBlockId(x+i, y+j, z+k);
-						current++;
-					}
-				}
-			}for(int id : ids) {
-				if(id != UltraTech.ReactorWall.blockID && id != UltraTech.Reactor.blockID && id != UltraTech.IDS.blockID && id != UltraTech.ReactorTank.blockID && id != UltraTech.SteamTurbine.blockID && id != UltraTech.WaterBlock.blockID){
-					return false;
+
+	public void setUp(){
+		
+			SearchReactor();
+			if(found){
+				checkStructure();
+				if(Structure){
+					activateBlocks();
 				}
 			}
-			return true;
 	}
-
-	public void check()
-	{
+	
+	@Override
+	public void SearchReactor() {
 		int[] ids = new int[27];
 		int current = 0;
 		for(int j = -1;j<2;j++){
 			for(int i = -1;i<2;i++){
 				for(int k = -1;k<2;k++){
 					ids[current] = worldObj.getBlockId(xCoord+i, yCoord+j, zCoord+k);
-					if(ids[current] == Reference.Reactor){
-						x = xCoord+i;
-						y = yCoord+j;
-						z = zCoord+k;
-						reactor = true;
+					if(ids[current] == UltraTech.Reactor.blockID){
+						Reactor = (ReactorEntity) worldObj.getBlockTileEntity(xCoord+i,yCoord+j,zCoord+k);
+						found = true;
 						return;
 					}
 					current++;
 				}
 			}
-		}reactor = false;
+		}
+		found = false;
 	}
 
-	public void work() {
-			check();
-			if(reactor){
-				multi = checkMulti();
-				if(multi){
-					setCoords();
-				}
-			}
+	@Override
+	public ReactorEntity getReactor() {
+		return this.Reactor;
 	}
 
-	private void setCoords() {
-		((ReactorEntity)this.worldObj.getBlockTileEntity(x, y, z)).multi = true;
+	@Override
+	public void onNeighChange() {
+		setUp();	
+	}
+
+	@Override
+	public void checkStructure() {
+		TileEntity[] ids = new TileEntity[27];
+		int current = 0;
 		for(int j = -1;j<2;j++){
 			for(int i = -1;i<2;i++){
 				for(int k = -1;k<2;k++){
-					if(this.worldObj.getBlockTileEntity(x+i, y+j, z+k) instanceof ReactorWallEntity){
-						((ReactorWallEntity)this.worldObj.getBlockTileEntity(x+i, y+j, z+k)).x = x;
-						((ReactorWallEntity)this.worldObj.getBlockTileEntity(x+i, y+j, z+k)).y = y;
-						((ReactorWallEntity)this.worldObj.getBlockTileEntity(x+i, y+j, z+k)).z = z;
-						((ReactorWallEntity)this.worldObj.getBlockTileEntity(x+i, y+j, z+k)).multi = true;
-						this.worldObj.markBlockForRenderUpdate(x+i, y+j, z+k);
+					ids[current] = worldObj.getBlockTileEntity(Reactor.xCoord+i, Reactor.yCoord+j, Reactor.zCoord+k);
+					current++;
+				}
+			}
+		}
+		
+		this.Structure = false;
+
+		for(TileEntity t : ids) {
+			if(!(t instanceof IReactorPart))return;
+		}
+		this.Structure = true;
+	}
+
+	@Override
+	public void activateBlocks() {
+		Reactor.setStructure(true);
+		int x,y,z;
+		x = Reactor.xCoord;
+		y = Reactor.yCoord;
+		z = Reactor.zCoord;
+		for(int j = -1;j<2;j++){
+			for(int i = -1;i<2;i++){
+				for(int k = -1;k<2;k++){
+					if(this.worldObj.getBlockTileEntity(x+i, y+j, z+k) instanceof IReactorPart){
+						((IReactorPart)worldObj.getBlockTileEntity(x+i, y+j, z+k)).setStructure(true);
+						((IReactorPart)worldObj.getBlockTileEntity(x+i, y+j, z+k)).setReactor(Reactor);
 					}
 				}
 			}
 		}
 	}
 
-	public void dell() {
-		if(multi){
-			if(((ReactorEntity)this.worldObj.getBlockTileEntity(x, y, z)) != null)
-			((ReactorEntity)this.worldObj.getBlockTileEntity(x, y, z)).multi = false;
+	@Override
+	public void desactivateBlocks() {
+		if(Structure){
+			Structure = false;
+			int x,y,z;
+			x = Reactor.xCoord;
+			y = Reactor.yCoord;
+			z = Reactor.zCoord;
 			for(int j = -1;j<2;j++){
 				for(int i = -1;i<2;i++){
 					for(int k = -1;k<2;k++){
-						if(this.worldObj.getBlockTileEntity(x+i, y+j, z+k) instanceof ReactorWallEntity){
-							((ReactorWallEntity)this.worldObj.getBlockTileEntity(x+i, y+j, z+k)).multi = false;
+						if(this.worldObj.getBlockTileEntity(x+i, y+j, z+k) instanceof IReactorPart){
+							((IReactorPart)worldObj.getBlockTileEntity(x+i, y+j, z+k)).setStructure(false);
 						}
 					}
 				}
 			}
-		}
+		}		
+	}
+
+	@Override
+	public void setStructure(boolean structure) {
+		Structure = structure;		
+	}
+
+	@Override
+	public void setReactor(ReactorEntity e) {
+		Reactor = e;
 	}
 	
 	@Override
-	public void readFromNBT(NBTTagCompound nbtTagCompound) {
-        super.readFromNBT(nbtTagCompound);
-        multi = nbtTagCompound.getBoolean("multi");
-        x = nbtTagCompound.getInteger("xR");
-        y = nbtTagCompound.getInteger("yR");
-        z = nbtTagCompound.getInteger("zR");
+	public boolean isStructure() {
+		return this.Structure;
 	}
 	
-	  @Override
-	    public void writeToNBT(NBTTagCompound nbtTagCompound) {
-
-	        super.writeToNBT(nbtTagCompound);
-	        nbtTagCompound.setBoolean("multi", multi);
-	        nbtTagCompound.setInteger("xR", x);
-	        nbtTagCompound.setInteger("yR", y);
-	        nbtTagCompound.setInteger("zR", z);
-	  }
+//	@Override
+//	public void readFromNBT(NBTTagCompound nbtTagCompound) {
+//        super.readFromNBT(nbtTagCompound);
+//        multi = nbtTagCompound.getBoolean("multi");
+//        x = nbtTagCompound.getInteger("xR");
+//        y = nbtTagCompound.getInteger("yR");
+//        z = nbtTagCompound.getInteger("zR");
+//	}
+//	
+//	  @Override
+//	    public void writeToNBT(NBTTagCompound nbtTagCompound) {
+//
+//	        super.writeToNBT(nbtTagCompound);
+//	        nbtTagCompound.setBoolean("multi", multi);
+//	        if(Reactor != null){
+//	        nbtTagCompound.setInteger("xR", x);
+//	        nbtTagCompound.setInteger("yR", y);
+//	        nbtTagCompound.setInteger("zR", z);
+//	        }
+//	  }
 }

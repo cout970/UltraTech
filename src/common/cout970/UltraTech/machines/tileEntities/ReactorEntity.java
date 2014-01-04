@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import common.cout970.UltraTech.core.UltraTech;
-
+import common.cout970.UltraTech.misc.IReactorPart;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
@@ -17,14 +17,14 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 
 
-public class ReactorEntity extends TileEntity implements IInventory{
-
+public class ReactorEntity extends TileEntity implements IInventory,IReactorPart{
+	
+	
 	public boolean isDone = false;
 	public Machine[] machines;
 	public int speed = 64;
 	public static final int INVENTORY_SIZE = 6;
 	private ItemStack[] inventory;
-	public boolean multi = false;
 	private int time=0;
 	public float heat;
 	public int maxHeat = 1000;
@@ -114,7 +114,7 @@ public class ReactorEntity extends TileEntity implements IInventory{
 	}
 
 	private void afect(int i, int e, int c) {
-		if(multi){
+		if(isStructure()){
 		heat+=0.05;
 		if(time >= c){
 			if(inventory[i].getItemDamage() > 1000){
@@ -210,7 +210,7 @@ public class ReactorEntity extends TileEntity implements IInventory{
 	public void readFromNBT(NBTTagCompound nbtTagCompound) {
 
 		super.readFromNBT(nbtTagCompound);
-		multi = nbtTagCompound.getBoolean("multi");
+		setStructure(nbtTagCompound.getBoolean("multi"));
 		NBTTagList tagList = nbtTagCompound.getTagList("Inventory");
 		inventory = new ItemStack[this.getSizeInventory()];
 		for (int i = 0; i < tagList.tagCount(); ++i) {
@@ -233,7 +233,7 @@ public class ReactorEntity extends TileEntity implements IInventory{
 	public void writeToNBT(NBTTagCompound nbtTagCompound) {
 
 		super.writeToNBT(nbtTagCompound);
-		nbtTagCompound.setBoolean("multi", multi);
+		nbtTagCompound.setBoolean("multi", isStructure());
 		NBTTagList tagList = new NBTTagList();
 		for (int currentIndex = 0; currentIndex < inventory.length; ++currentIndex) {
 			if (inventory[currentIndex] != null) {
@@ -295,6 +295,127 @@ public class ReactorEntity extends TileEntity implements IInventory{
 	    		break;
 	    	}
 	    	}
+		}
+
+	    //Reactor Part
+	    
+
+		public boolean found = false;
+		public ReactorEntity Reactor;
+		public boolean Structure = false;
+
+
+		public void setUp() {
+				SearchReactor();
+				if(found){
+					checkStructure();
+					if(Structure){
+						activateBlocks();
+					}
+				}
+		}
+		
+		@Override
+		public void SearchReactor() {
+			int[] ids = new int[27];
+			int current = 0;
+			for(int j = -1;j<2;j++){
+				for(int i = -1;i<2;i++){
+					for(int k = -1;k<2;k++){
+						ids[current] = worldObj.getBlockId(xCoord+i, yCoord+j, zCoord+k);
+						if(ids[current] == UltraTech.Reactor.blockID){
+							Reactor = (ReactorEntity) worldObj.getBlockTileEntity(xCoord+i,yCoord+j,zCoord+k);
+							found = true;
+							return;
+						}
+						current++;
+					}
+				}
+			}
+			found = false;
+		}
+
+		@Override
+		public ReactorEntity getReactor() {
+			return this.Reactor;
+		}
+
+		@Override
+		public void onNeighChange() {
+			setUp();		
+		}
+
+		@Override
+		public void checkStructure() {
+			TileEntity[] ids = new TileEntity[27];
+			int current = 0;
+			for(int j = -1;j<2;j++){
+				for(int i = -1;i<2;i++){
+					for(int k = -1;k<2;k++){
+						ids[current] = worldObj.getBlockTileEntity(xCoord+i, yCoord+j, zCoord+k);
+						current++;
+					}
+				}
+			}
+			this.Structure = false;
+
+			for(TileEntity t : ids) {
+				if(!(t instanceof IReactorPart))return;
+			}
+			this.Structure = true;
+		}
+
+		@Override
+		public void activateBlocks() {
+			Reactor.setStructure(true);
+			int x,y,z;
+			x = Reactor.xCoord;
+			y = Reactor.yCoord;
+			z = Reactor.zCoord;
+			for(int j = -1;j<2;j++){
+				for(int i = -1;i<2;i++){
+					for(int k = -1;k<2;k++){
+						if(this.worldObj.getBlockTileEntity(x+i, y+j, z+k) instanceof IReactorPart){
+							((IReactorPart)worldObj.getBlockTileEntity(x+i, y+j, z+k)).setStructure(true);
+							((IReactorPart)worldObj.getBlockTileEntity(x+i, y+j, z+k)).setReactor(Reactor);
+						}
+					}
+				}
+			}
+		}
+
+		@Override
+		public void desactivateBlocks() {
+			if(Structure){
+				Structure = false;
+				int x,y,z;
+				x = Reactor.xCoord;
+				y = Reactor.yCoord;
+				z = Reactor.zCoord;
+				for(int j = -1;j<2;j++){
+					for(int i = -1;i<2;i++){
+						for(int k = -1;k<2;k++){
+							if(this.worldObj.getBlockTileEntity(x+i, y+j, z+k) instanceof IReactorPart){
+								((IReactorPart)worldObj.getBlockTileEntity(x+i, y+j, z+k)).setStructure(false);
+							}
+						}
+					}
+				}
+			}		
+		}
+
+		@Override
+		public void setStructure(boolean structure) {
+			Structure = structure;
+		}
+
+		@Override
+		public void setReactor(ReactorEntity e) {
+		}
+		
+		@Override
+		public boolean isStructure() {
+			return this.Structure;
 		}
 
 }
