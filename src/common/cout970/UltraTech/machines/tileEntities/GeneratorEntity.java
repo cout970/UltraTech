@@ -179,7 +179,7 @@ public class GeneratorEntity extends Machine implements IInventory{
 	public void refill(){
 		for(Machine a : machines){
 			if(a != null){
-				if(a instanceof EnergyIOentity || a instanceof GeneratorEntity || a instanceof ReactorEntity || a instanceof SateliteEntity || a instanceof ReciverEntity){
+				if(a instanceof GeneratorEntity || a instanceof SolarPanelEntity || a instanceof SateliteEntity || a instanceof ReciverEntity){
 
 				}else{
 					if(a.Energy+speed <= a.EnergyMax && this.Energy >= speed){

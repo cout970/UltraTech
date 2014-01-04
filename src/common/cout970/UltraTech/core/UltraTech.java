@@ -26,7 +26,6 @@ import common.cout970.UltraTech.machines.blocks.*;
 import common.cout970.UltraTech.machines.tileEntities.CVDentity;
 import common.cout970.UltraTech.machines.tileEntities.ChargeStationEntity;
 import common.cout970.UltraTech.machines.tileEntities.CuterEntity;
-import common.cout970.UltraTech.machines.tileEntities.EnergyIOentity;
 import common.cout970.UltraTech.machines.tileEntities.GeneratorEntity;
 import common.cout970.UltraTech.machines.tileEntities.IDSentity;
 import common.cout970.UltraTech.machines.tileEntities.MinerEntity;
@@ -38,6 +37,7 @@ import common.cout970.UltraTech.machines.tileEntities.ReactorTankEntity;
 import common.cout970.UltraTech.machines.tileEntities.ReactorWallEntity;
 import common.cout970.UltraTech.machines.tileEntities.ReciverEntity;
 import common.cout970.UltraTech.machines.tileEntities.SateliteEntity;
+import common.cout970.UltraTech.machines.tileEntities.SenderEntity;
 import common.cout970.UltraTech.machines.tileEntities.SolarPanelEntity;
 import common.cout970.UltraTech.machines.tileEntities.SteamTurbineEntity;
 import common.cout970.UltraTech.machines.tileEntities.UTfurnaceEntity;
@@ -155,7 +155,7 @@ public class UltraTech {
 	public static  Block AdvMachineChasis;
 	public static  Block Reactor;
 	public static  Block ReactorWall;
-	public static  Block EnergyIO;
+	public static  Block Sender;
 	public static  Block Reciver;
 	public static  Block RadioniteBlock;
 	public static  Block ReactorTank;
@@ -200,7 +200,7 @@ public class UltraTech {
 		Reference.AdvMachineChasis = config.getBlock("AdvMachineChasis", 2064).getInt();
 		Reference.Reactor = config.getBlock("Reactor", 2065).getInt();
 		Reference.ReactorWall = config.getBlock("ReactorWall", 2066).getInt();
-		Reference.EnergyIO = config.getBlock("EnergyIO", 2067).getInt();
+		Reference.Sender = config.getBlock("Sender", 2067).getInt();
 		Reference.Reciver = config.getBlock("Reciver", 2068).getInt();
 		Reference.RadioniteBlock = config.getBlock("RadioniteBlock", 2069).getInt();
 		Reference.ReactorTank = config.getBlock("ReactorTank", 2070).getInt();
@@ -268,7 +268,7 @@ public class UltraTech {
 		AdvMachineChasis = new AdvancedMachineChasis(Reference.AdvMachineChasis,Material.iron);
 		Reactor = new Reactor(Reference.Reactor,Material.iron);
 		ReactorWall = new ReactorWall(Reference.ReactorWall,Material.iron);
-		EnergyIO  = new EnergyIO(Reference.EnergyIO,Material.iron);
+		Sender  = new Sender(Reference.Sender,Material.iron);
 		Reciver = new Reciver(Reference.Reciver,Material.iron);
 		RadioniteBlock = new RadioniteBlock(Reference.RadioniteBlock,Material.iron);
 		ReactorTank = new ReactorTank(Reference.ReactorTank,Material.iron);
@@ -380,9 +380,9 @@ public class UltraTech {
 		GameRegistry.registerBlock(ReactorWall, "ReactorWall");
 		LanguageRegistry.addName(ReactorWall, "ReactorWall");
 		//EnergyIO
-		GameRegistry.registerTileEntity(EnergyIOentity.class, "EnergyIO_UT");
-		GameRegistry.registerBlock(EnergyIO, "EnergyIO");
-		LanguageRegistry.addName(EnergyIO, "EnergyIO");
+		GameRegistry.registerTileEntity(SenderEntity.class, "EnergyIO_UT");
+		GameRegistry.registerBlock(Sender, "EnergyIO");
+		LanguageRegistry.addName(Sender, "EnergyIO");
 		//Reciver
 		GameRegistry.registerTileEntity(ReciverEntity.class, "Reciver_UT");
 		GameRegistry.registerBlock(Reciver, "Reciver");

@@ -30,7 +30,7 @@ public class IDSentity extends Machine{
 	public void refill(){
 		for(Machine a : machines){
 			if(a != null){
-				if(a instanceof IDSentity || a instanceof EnergyIOentity || a instanceof GeneratorEntity || a instanceof ReactorEntity || a instanceof SateliteEntity || a instanceof ReciverEntity){
+				if(a instanceof IDSentity || a instanceof GeneratorEntity || a instanceof SolarPanelEntity || a instanceof SateliteEntity || a instanceof ReciverEntity){
 
 				}else{
 					if(a.Energy+speed <= a.EnergyMax && this.Energy >= speed){

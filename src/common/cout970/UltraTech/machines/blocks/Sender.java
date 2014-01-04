@@ -1,45 +1,39 @@
 package common.cout970.UltraTech.machines.blocks;
 
+
 import common.cout970.UltraTech.core.UltraTech;
-import common.cout970.UltraTech.machines.tileEntities.ReciverEntity;
+import common.cout970.UltraTech.machines.tileEntities.SenderEntity;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 
-public class Reciver extends BlockContainer{
+public class Sender extends BlockContainer{
 
-
-	public Reciver(int par1, Material par2Material) {
+	public Sender(int par1, Material par2Material) {
 		super(par1, par2Material);
 		setCreativeTab(UltraTech.techTab);
 		setHardness(1.5f);
 		setStepSound(soundMetalFootstep);
 		setResistance(30);
-		setUnlocalizedName("Reciver");
+		setUnlocalizedName("Sender");
 	}
 
 	@Override
 	public TileEntity createNewTileEntity(World world) {
-		return new ReciverEntity();
+		return new SenderEntity();
 	}
 
 	public void registerIcons(IconRegister iconRegister){
-		this.blockIcon = iconRegister.registerIcon("ultratech:reciver");
+		this.blockIcon = iconRegister.registerIcon("ultratech:sender");
 	}
-	
-	@Override
-	public Icon getIcon(int side,int a)
-    {
-		return this.blockIcon;
-    }
+
 	public void onNeighborBlockChange(World w, int x, int y, int z, int side){
 		TileEntity te = w.getBlockTileEntity(x, y, z);
 		if(te != null && !w.isRemote){
-			if(te instanceof ReciverEntity){
-				ReciverEntity r = (ReciverEntity)te;
+			if(te instanceof SenderEntity){
+				SenderEntity r = (SenderEntity)te;
 				r.onNeighChange();
 			}
 		}

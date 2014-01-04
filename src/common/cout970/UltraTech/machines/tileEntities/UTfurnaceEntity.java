@@ -199,13 +199,12 @@ public class UTfurnaceEntity extends Machine implements IInventory,ISpeedUpgrade
 	    @Override
 	    public void updateEntity()
 	    {
-	    	
 	    	boolean flag = false;
 	    	if(!flag1){
 				flag1 = this.Energy >= 1000f/5f;
 			}
 
-	    	if (flag && this.proces > 0)
+	    	if (this.proces > 0)
 	    	{
 	    		this.loseEnergy((int)((float)speed/5));
 	    	}

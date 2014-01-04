@@ -3,12 +3,11 @@ package common.cout970.UltraTech.machines.tileEntities;
 
 import net.minecraft.tileentity.TileEntity;
 
-public class ReciverEntity extends Machine{
-		
+public class SenderEntity extends Machine{
+
 	public Machine[] machines;
-	public SenderEntity from;
-	
-	public ReciverEntity(){
+
+	public SenderEntity(){
 		super();
 		this.EnergyMax = 1000;
 	}
@@ -19,38 +18,24 @@ public class ReciverEntity extends Machine{
 			machines = new Machine[6];
 			check();
 		}
-		if(EnergyMax-Energy > 64)
-		this.gainEnergy(getEnergyFromSender());
-		refill();
-	}
-	
-	public int getEnergyFromSender(){
-		if(from != null){
-			int e = from.getEnergy();
-			if(e >0){
-				if(e <= 64){
-					from.loseEnergy(e);
-					return e;
-				}else{
-					from.loseEnergy(64);
-					return 64;
-				}
-			}
-		}
-		return 0;
-	}
-
-
-	public void refill(){
+		if(!worldObj.isRemote)
 		for(Machine m :machines){
-			if(m != null && !(m instanceof ReciverEntity)){
-				if(m.EnergyMax-m.Energy > 64 && Energy >= 64){
-					m.gainEnergy(64);
-					loseEnergy(64);
+			if(m != null && !(m instanceof SenderEntity) && !worldObj.isRemote){
+				int e = m.getEnergy();
+				if(e > 0 && (EnergyMax-Energy)>64){
+					if(e <= 64){
+						m.loseEnergy(e);
+						this.gainEnergy(e);
+					}else{
+						m.loseEnergy(64);
+						gainEnergy(64);
+					}
 				}
 			}
 		}
 	}
+
+	
 
 	public void check(){
 		TileEntity[] t = new TileEntity[6];
@@ -72,15 +57,10 @@ public class ReciverEntity extends Machine{
 		}
 	}
 
+
+
 	public void onNeighChange() {
-		check();
+	this.check();	
 	}
 
-	public void setFrom(int[] i) {
-
-		TileEntity t = worldObj.getBlockTileEntity(i[0], i[1], i[2]);
-		if(t != null){
-			from = (SenderEntity) t;
-		}
-	}
 }

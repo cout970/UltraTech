@@ -1,10 +1,10 @@
-package common.cout970.UltraTech.lib.nei;
+package common.cout970.UltraTech.nei;
 
 import common.cout970.UltraTech.lib.Reference;
 import codechicken.nei.api.API;
 import codechicken.nei.api.IConfigureNEI;
 
-public class UltraTechNeiConfig implements IConfigureNEI{
+public class NEIUltraTechConfig implements IConfigureNEI{
 
 	@Override
 	public void loadConfig() {

@@ -42,36 +42,4 @@ public class Satelite extends BlockContainer{
 		return side != 0 ? ((side == 1) ? this.blockIcon : this.blockIcon3) : this.blockIcon2;
     }
 	
-	public void onNeighborBlockChange(World w, int x, int y, int z, int side){
-		TileEntity te = w.getBlockTileEntity(x, y, z);
-		if(te != null && !w.isRemote){
-			if(te instanceof SateliteEntity){
-				SateliteEntity r = (SateliteEntity)te;
-				r.checkBase();
-			}
-		}
-	}
-	
-	@Override
-	public void onBlockAdded(World worldObj, int xCoord, int yCoord, int zCoord)
-	{
-		super.onBlockAdded(worldObj, xCoord, yCoord, zCoord);
-		TileEntity te = worldObj.getBlockTileEntity(xCoord,yCoord,zCoord);
-		if(te != null && !worldObj.isRemote){
-			if(te instanceof SateliteEntity){
-				SateliteEntity r = (SateliteEntity)te;
-				r.checkBase();
-			}
-		}
-	}
-	
-	public void randomDisplayTick(World worldObj, int xCoord, int yCoord, int zCoord, Random par5Random) {
-		TileEntity te = worldObj.getBlockTileEntity(xCoord,yCoord,zCoord);
-		if(te != null && !worldObj.isRemote){
-			if(te instanceof SateliteEntity){
-				SateliteEntity r = (SateliteEntity)te;
-				r.checkBase();
-			}
-		}
-	}
 }

@@ -24,8 +24,8 @@ public class Reference {
 	public static int Miner;
 	public static int GrafenoBlock;
 	public static int Reactor;
-	public static int ReactorWall;	
-	public static int EnergyIO;
+	public static int ReactorWall;
+	public static int Sender;
 	public static int Reciver;
 	public static int RadioniteBlock;
 	public static int ReactorTank;
@@ -44,6 +44,7 @@ public class Reference {
 	public static int SolarPanel;
 	public static int WindMill;
 	public static int hitBox;
+	
 	
 
 }

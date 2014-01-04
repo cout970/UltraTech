@@ -231,7 +231,7 @@ public class Block_UT_Render implements ISimpleBlockRenderingHandler {
 		else if(meta  == 9)tessellator.setColorOpaque_F(1f, 0.5f, 1f);
 		else if(meta  == 10)tessellator.setColorOpaque_F(1f, 0.5f, 0f);
 		else tessellator.setColorOpaque_F(1,1,1);
-		tessellator.setBrightness(200000);
+		tessellator.setBrightness(1600);
 	}
 
 }

@@ -44,14 +44,14 @@ public static void registerCraft(){
 		GameRegistry.addShapedRecipe(new ItemStack(UltraTech.ItemName.get("LapisPearl"),1),new Object[]{" r ","rar"," r ",'r',UltraTech.ItemName.get("Alloyingot"),'a',Item.redstone});
 		GameRegistry.addShapedRecipe(new ItemStack(UltraTech.ItemName.get("LapisPearl"),1),new Object[]{"iri","rar","iri",'r',Item.ingotIron,'a',Item.redstone,'i',new ItemStack(Item.dyePowder,1,4)});
 		GameRegistry.addShapedRecipe(new ItemStack(UltraTech.ItemName.get("Linker"),1),new Object[]{"ppa","ppa","aar",'r',UltraTech.ItemName.get("RedstonePlate"),'p',UltraTech.ItemName.get("IronPlate")});
-		GameRegistry.addShapedRecipe(new ItemStack(UltraTech.Reciver,1),new Object[]{"ppp","gmg"," e ",'p',UltraTech.ItemName.get("SiliconPlate"),'m',UltraTech.MachineChasis,'g',UltraTech.ItemName.get("CarbonFiber"),'e',UltraTech.ItemName.get("EnergyTransmiter")});
+//		GameRegistry.addShapedRecipe(new ItemStack(UltraTech.Reciver,1),new Object[]{"ppp","gmg"," e ",'p',UltraTech.ItemName.get("SiliconPlate"),'m',UltraTech.MachineChasis,'g',UltraTech.ItemName.get("CarbonFiber"),'e',UltraTech.ItemName.get("EnergyTransmiter")});
 		GameRegistry.addShapedRecipe(new ItemStack(UltraTech.GrafenoBlock,9), new Object[]{"dd","dd",'d',UltraTech.ItemName.get("Grafeno")});
 		GameRegistry.addShapedRecipe(new ItemStack(UltraTech.ItemName.get("Radionite"),9), new Object[]{"d",'d',UltraTech.RadioniteBlock});
 		GameRegistry.addShapedRecipe(new ItemStack(UltraTech.ItemName.get("RadioniteCell"),1), new Object[]{"idi","idi","idi",'d',UltraTech.ItemName.get("RadionitePlate"),'i',UltraTech.ItemName.get("IronPlate")});
 		GameRegistry.addShapedRecipe(new ItemStack(UltraTech.ItemName.get("SolarPanel"),1), new Object[]{"iii","ddd","rrr",'d',UltraTech.ItemName.get("SiliconPlate"),'r',UltraTech.ItemName.get("Grafeno"),'i',Block.glass});
 		GameRegistry.addShapedRecipe(new ItemStack(UltraTech.SolarPanel,4), new Object[]{"iii","ddd","rrr",'d',UltraTech.ItemName.get("CarbonFiber"),'i',UltraTech.ItemName.get("SolarPanel")});
 		GameRegistry.addShapedRecipe(new ItemStack(UltraTech.ItemName.get("Coil"),1), new Object[]{"ici","cmc","ici",'i',UltraTech.ItemName.get("Grafeno"),'m',UltraTech.ItemName.get("IronPlate"),'c',UltraTech.ItemName.get("RedstoneCable")});
-		GameRegistry.addShapedRecipe(new ItemStack(UltraTech.EnergyIO,1), new Object[]{"ici","cmc","ici",'i',UltraTech.ItemName.get("CarbonFiber"),'m',UltraTech.ItemName.get("EnergyTransmiter"),'c',new ItemStack(Item.dyePowder,1,4)});
+//		GameRegistry.addShapedRecipe(new ItemStack(UltraTech.EnergyIO,1), new Object[]{"ici","cmc","ici",'i',UltraTech.ItemName.get("CarbonFiber"),'m',UltraTech.ItemName.get("EnergyTransmiter"),'c',new ItemStack(Item.dyePowder,1,4)});
 		GameRegistry.addShapedRecipe(new ItemStack(UltraTech.ItemName.get("HeatCoil"),1), new Object[]{"ii ","ii ","   ",'i',UltraTech.ItemName.get("AlloyCable")});
 		GameRegistry.addShapedRecipe(new ItemStack(UltraTech.ItemName.get("Grafeno"),4), new Object[]{"iii","iii","iii",'i',UltraTech.GrafenoBlock});
 		GameRegistry.addShapedRecipe(new ItemStack(UltraTech.ItemName.get("GrafenoPlate"),1), new Object[]{"iii","iii","iii",'i',UltraTech.ItemName.get("Grafeno")});
