@@ -1,8 +1,11 @@
 package common.cout970.UltraTech.machines.blocks;
 
+import common.cout970.UltraTech.machines.tileEntities.hitBoxEntity;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.world.World;
 
 public class hitBox extends Block{
 
@@ -24,5 +27,13 @@ public class hitBox extends Block{
 	{
 		return false;
 	}
-
+	@Override
+    public void breakBlock(World world, int x, int y, int z, int par5, int par6)
+    {
+		hitBoxEntity h = (hitBoxEntity) world.getBlockTileEntity(x, y, z);
+		if(h != null){
+			world.destroyBlock(h.x, h.y, h.z, true);
+		}
+		super.breakBlock(world, x, y, z, par5, par6);
+    }
 }

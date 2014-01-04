@@ -2,6 +2,7 @@ package common.cout970.UltraTech.machines.blocks;
 
 import common.cout970.UltraTech.core.UltraTech;
 import common.cout970.UltraTech.machines.tileEntities.WindMillEntity;
+import common.cout970.UltraTech.machines.tileEntities.hitBoxEntity;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -48,6 +49,17 @@ public class WindMill extends BlockContainer{
     	super.onBlockAdded(par1World, par2, par3, par4);
     	for(int d=1;d<5;d++){
     		par1World.setBlock(par2, par3+d, par4, UltraTech.hitBox.blockID);
+
+    	}
+
+    	for(int d=1;d<5;d++){
+    		hitBoxEntity h =((hitBoxEntity)par1World.getBlockTileEntity(par2, par3+d, par4));
+    		if(h != null){
+    			h.x = par2;
+    			h.y = par3;
+    			h.z = par4;
+    		}else
+    		System.out.println("null  ");
     	}
     }
 

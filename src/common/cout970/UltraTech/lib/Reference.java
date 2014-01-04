@@ -2,6 +2,8 @@ package common.cout970.UltraTech.lib;
 
 public class Reference {
 
+	
+	public static String NeiPluginVersion = "0.4";
 	//Item
 	public static int ProcesedFood;
 	//fluid
@@ -42,5 +44,6 @@ public class Reference {
 	public static int SolarPanel;
 	public static int WindMill;
 	public static int hitBox;
+	
 
 }
