@@ -4,7 +4,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import common.cout970.UltraTech.misc.SyncObject;
 import cpw.mods.fml.common.network.PacketDispatcher;
 
 import net.minecraft.block.Block;
@@ -166,13 +165,13 @@ public class ReactorTankEntity extends ReactorWallEntity implements IFluidHandle
 		return capacity;
 	}
 
-	public SyncObject getAmount() {
-		if(liquid == null)return null;
-		SyncObject obj = new SyncObject();
-		obj.setVar1((int)(((float)liquid.amount)*100/((float)capacity)));
-		obj.setVar2(liquid.getFluid().getBlockID());
-		return obj;
-	}
+//	public SyncObject getAmount() {
+//		if(liquid == null)return null;
+//		SyncObject obj = new SyncObject();
+//		obj.setVar1((int)(((float)liquid.amount)*100/((float)capacity)));
+//		obj.setVar2(liquid.getFluid().getBlockID());
+//		return obj;
+//	}
 
 	@Override
 	public int getFluidAmount() {

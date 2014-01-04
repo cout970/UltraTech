@@ -3,7 +3,6 @@ package common.cout970.UltraTech.machines.tileEntities;
 import common.cout970.UltraTech.core.UltraTech;
 import common.cout970.UltraTech.lib.recipes.CVD_Recipe;
 import common.cout970.UltraTech.misc.ISpeedUpgradeabel;
-import common.cout970.UltraTech.misc.SyncObject;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
@@ -82,12 +81,12 @@ public class CVDentity extends Machine implements IInventory,ISpeedUpgradeabel{
 		}
 	}
 
-	public SyncObject getSinc(){
-		SyncObject a = new SyncObject();
-		a.setVar1(progres*24/1000);
-		a.setVar2(Energy);
-		return a;
-	}
+//	public SyncObject getSinc(){
+//		SyncObject a = new SyncObject();
+//		a.setVar1(progres*24/1000);
+//		a.setVar2(Energy);
+//		return a;
+//	}
 
 	@Override
 	public int getSizeInventory() {

@@ -1,7 +1,6 @@
 package common.cout970.UltraTech.machines.tileEntities;
 
 
-import common.cout970.UltraTech.misc.SyncObject;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
@@ -10,21 +9,18 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.tileentity.TileEntity;
 
 public class GeneratorEntity extends Machine implements IInventory{
 
 	private ItemStack[] inventory;
 	private int size = 1;
 	public int progres = 0;
-	public Machine[] machines;
-	public int speed = 64;
-	private int maxpro = 800;
 
 	public GeneratorEntity(){
 		super();
 		inventory = new ItemStack[size];
 		this.EnergyMax = 2500;
+		this.tipe = MachineTipe.Output;
 	}
 
 	@Override
@@ -144,11 +140,7 @@ public class GeneratorEntity extends Machine implements IInventory{
 
 	@Override
 	public void updateEntity(){
-		if(machines == null){
-			machines = new Machine[6];
-			check();
-		}
-		refill();
+		super.updateEntity();
 		if(inventory[0] != null){
 			boolean flag = inventory[0].itemID == Item.coal.itemID;
 			if(flag && progres <= 0 && this.Energy < EnergyMax-64){
@@ -176,47 +168,13 @@ public class GeneratorEntity extends Machine implements IInventory{
 		}
 	}
 
-	public void refill(){
-		for(Machine a : machines){
-			if(a != null){
-				if(a instanceof GeneratorEntity || a instanceof SolarPanelEntity || a instanceof SateliteEntity || a instanceof ReciverEntity){
-
-				}else{
-					if(a.Energy+speed <= a.EnergyMax && this.Energy >= speed){
-						float e = a.gainEnergy(speed);
-						this.Energy -= speed-e;
-					}
-				}
-			}
-		}
-	}
-
-	public void check(){
-		TileEntity[] t = new TileEntity[6];
-		t[0] = this.worldObj.getBlockTileEntity(xCoord, yCoord-1, zCoord);
-		t[1] = this.worldObj.getBlockTileEntity(xCoord, yCoord+1, zCoord);
-		t[2] = this.worldObj.getBlockTileEntity(xCoord, yCoord, zCoord+1);
-		t[3] = this.worldObj.getBlockTileEntity(xCoord+1, yCoord, zCoord);
-		t[4] = this.worldObj.getBlockTileEntity(xCoord, yCoord, zCoord-1);
-		t[5] = this.worldObj.getBlockTileEntity(xCoord-1, yCoord, zCoord);
-
-		int i= 0;
-		for(TileEntity y : t){
-			if(y instanceof Machine){
-				machines[i] = (Machine) y;
-			}else{
-				machines[i] = null;
-			}
-			i++;
-		}
-	}
 	
-	public SyncObject getSync(){
-		SyncObject a = new SyncObject();
-		a.setVar1(progres*12/maxpro);
-		a.setVar2(Energy);
-		return a;
-	}
+//	public SyncObject getSync(){
+//		SyncObject a = new SyncObject();
+//		a.setVar1(progres*12/maxpro);
+//		a.setVar2(Energy);
+//		return a;
+//	}
 	
 	public void sendGUINetworkData(Container container, ICrafting iCrafting) {
     	iCrafting.sendProgressBarUpdate(container, 1, Energy);

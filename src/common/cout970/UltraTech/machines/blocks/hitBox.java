@@ -1,18 +1,20 @@
 package common.cout970.UltraTech.machines.blocks;
 
 import common.cout970.UltraTech.machines.tileEntities.hitBoxEntity;
-
-import net.minecraft.block.Block;
+import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-public class hitBox extends Block{
+public class hitBox extends BlockContainer{
 
 	public hitBox(int par1, Material par2Material) {
 		super(par1, par2Material);
 		setUnlocalizedName("satelite2");
-		setBlockUnbreakable();
+		setHardness(1.5f);
+		setStepSound(soundMetalFootstep);
+		setResistance(30);
 	}
 	public void registerIcons(IconRegister iconRegister){
 		this.blockIcon = iconRegister.registerIcon("ultratech:void");
@@ -36,4 +38,8 @@ public class hitBox extends Block{
 		}
 		super.breakBlock(world, x, y, z, par5, par6);
     }
+	@Override
+	public TileEntity createNewTileEntity(World world) {
+		return new hitBoxEntity();
+	}
 }

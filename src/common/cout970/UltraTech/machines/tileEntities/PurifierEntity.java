@@ -3,7 +3,6 @@ package common.cout970.UltraTech.machines.tileEntities;
 import common.cout970.UltraTech.core.UltraTech;
 import common.cout970.UltraTech.lib.recipes.Purifier_Recipe;
 import common.cout970.UltraTech.misc.ISpeedUpgradeabel;
-import common.cout970.UltraTech.misc.SyncObject;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
@@ -207,12 +206,12 @@ public class PurifierEntity extends Machine implements IInventory,ISpeedUpgradea
 	}
 
 
-	public SyncObject getSinc() {
-		SyncObject a = new SyncObject();
-		a.setVar1(progres*24/1000);
-		a.setVar2(Energy);
-		return a;
-	}
+//	public SyncObject getSinc() {
+//		SyncObject a = new SyncObject();
+//		a.setVar1(progres*24/1000);
+//		a.setVar2(Energy);
+//		return a;
+//	}
 	
 	public void sendGUINetworkData(Container container, ICrafting iCrafting) {
     	iCrafting.sendProgressBarUpdate(container, 0, progres);

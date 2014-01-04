@@ -11,6 +11,7 @@ public class SateliteEntity extends Machine{
 	public SateliteEntity(){
 		super();
 		this.EnergyMax = 5000;
+		this.tipe = MachineTipe.Output;
 	}
 
 	@Override
@@ -27,7 +28,7 @@ public class SateliteEntity extends Machine{
 				}
 			}
 		}
-		
+		super.updateEntity();
 	}
 
 	public List<SolarPanelEntity> getSolarPanels(){

@@ -5,8 +5,14 @@ public class SolarPanelEntity extends Machine{
 
 	private float power;
 
+	public SolarPanelEntity(){
+		super();
+		this.tipe = MachineTipe.Output;
+	}
+	
 	@Override
 	public void updateEntity(){
+		super.updateEntity();
 		if(worldObj.provider.hasNoSky)return;
 		if(worldObj.isDaytime() && !(worldObj.getWorldChunkManager().getBiomeGenAt(xCoord, zCoord).getIntRainfall() > 0 && (worldObj.isRaining() || worldObj.isThundering())) && worldObj.canBlockSeeTheSky(xCoord, yCoord + 1, zCoord)){
 			if(!this.worldObj.isRemote){			

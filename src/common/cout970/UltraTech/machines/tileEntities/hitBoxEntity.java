@@ -5,4 +5,10 @@ import net.minecraft.tileentity.TileEntity;
 public class hitBoxEntity extends TileEntity{
 
 	public int x,y,z;
+	
+	public hitBoxEntity(){
+		super();
+	}
+	
+	
 }

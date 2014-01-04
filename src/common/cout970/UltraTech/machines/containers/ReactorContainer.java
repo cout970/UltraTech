@@ -31,7 +31,6 @@ public class ReactorContainer extends Container{
     {
         super.addCraftingToCrafters(par1ICrafting);
         par1ICrafting.sendProgressBarUpdate(this, 0, (int)tileEntity.heat);
-        par1ICrafting.sendProgressBarUpdate(this, 1, tileEntity.Energy);
         par1ICrafting.sendProgressBarUpdate(this, 2, tileEntity.steam);
         par1ICrafting.sendProgressBarUpdate(this, 3, tileEntity.water);  
         par1ICrafting.sendProgressBarUpdate(this, 4, tileEntity.MaxWater);

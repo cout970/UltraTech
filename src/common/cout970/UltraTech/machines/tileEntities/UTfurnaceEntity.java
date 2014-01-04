@@ -2,7 +2,6 @@ package common.cout970.UltraTech.machines.tileEntities;
 
 import common.cout970.UltraTech.core.UltraTech;
 import common.cout970.UltraTech.misc.ISpeedUpgradeabel;
-import common.cout970.UltraTech.misc.SyncObject;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
@@ -16,7 +15,7 @@ public class UTfurnaceEntity extends Machine implements IInventory,ISpeedUpgrade
 
 	
 	private ItemStack[] inventory;
-	public int proces = 0;
+	public int progres = 0;
 	public int speed = 10;
 	private int speedUpgrades;
 	public static final int INVENTORY_SIZE = 2;
@@ -204,13 +203,13 @@ public class UTfurnaceEntity extends Machine implements IInventory,ISpeedUpgrade
 				flag1 = this.Energy >= 1000f/5f;
 			}
 
-	    	if (this.proces > 0)
+	    	if (this.progres > 0)
 	    	{
 	    		this.loseEnergy((int)((float)speed/5));
 	    	}
 	    	
 	    	if(!this.worldObj.isRemote){
-	    	if(proces > 0){
+	    	if(progres > 0){
 	    			if(this.worldObj.getBlockMetadata(xCoord, yCoord, zCoord) == 0){
 	    				this.worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 1, 0);
 	    				this.worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
@@ -223,11 +222,11 @@ public class UTfurnaceEntity extends Machine implements IInventory,ISpeedUpgrade
 	    		}
 	    		if (flag1 && this.canSmelt())
 	    		{
-	    			this.proces += speed;
-	    			if (this.proces >= 1000 )
+	    			this.progres += speed;
+	    			if (this.progres >= 1000 )
 	    			{
 	    				if(speed <= 0)speed=10;
-	    				this.proces = 0;
+	    				this.progres = 0;
 	    				this.smeltItem();
 	    				flag = true;
 	    				flag1 = false;
@@ -235,7 +234,7 @@ public class UTfurnaceEntity extends Machine implements IInventory,ISpeedUpgrade
 	    		}
 	    		else
 	    		{
-	    			this.proces = 0;
+	    			this.progres = 0;
 	    		}
 
 	    	}
@@ -246,7 +245,7 @@ public class UTfurnaceEntity extends Machine implements IInventory,ISpeedUpgrade
 	    	}
 
 	    	public void sendGUINetworkData(Container container, ICrafting iCrafting) {
-	    		iCrafting.sendProgressBarUpdate(container, 0, proces);
+	    		iCrafting.sendProgressBarUpdate(container, 0, progres);
 	    		iCrafting.sendProgressBarUpdate(container, 1, Energy);
 	    		iCrafting.sendProgressBarUpdate(container, 2, speed);
 	    	}
@@ -254,7 +253,7 @@ public class UTfurnaceEntity extends Machine implements IInventory,ISpeedUpgrade
 	    	public void getGUINetworkData(int id, int value) {
 	    		switch(id){
 	    		case 0:{
-	    			proces = value;
+	    			progres = value;
 	    			break;
 	    		}
 	    		case 1:{
@@ -269,12 +268,12 @@ public class UTfurnaceEntity extends Machine implements IInventory,ISpeedUpgrade
 		}
 
 
-		public SyncObject getSinc() {
-			SyncObject a = new SyncObject();
-			a.setVar1(proces* 24 / 1000);
-			a.setVar2(Energy);
-			 return a;
-		}
+//		public SyncObject getSinc() {
+//			SyncObject a = new SyncObject();
+//			a.setVar1(proces* 24 / 1000);
+//			a.setVar2(Energy);
+//			 return a;
+//		}
 
 		@Override
 		public boolean upgrade() {

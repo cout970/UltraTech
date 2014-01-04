@@ -5,7 +5,6 @@ import java.util.List;
 
 import common.cout970.UltraTech.core.UltraTech;
 import common.cout970.UltraTech.misc.Energy;
-
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
@@ -21,11 +20,9 @@ public class SteamTurbineEntity extends ReactorWallEntity implements IFluidTank,
 
 	public FluidStack liquid;
 	public int capacity = 5000;
-	private boolean check;
 	private boolean reactor;
+	public ReactorEntity Reactor;
 	private int x,y,z;
-	private int speed = 64;
-	private Machine[] machines;
 	public int Energy;
 	public int EnergyMax = 5000;
 	public boolean update = false;
@@ -35,24 +32,17 @@ public class SteamTurbineEntity extends ReactorWallEntity implements IFluidTank,
 	}
 
 	public void updateEntity(){
-		if(!this.worldObj.isRemote){
-			if(machines == null){
-				onNeiChange();
-			}
-			
+		if(!this.worldObj.isRemote){			
 			List<IFluidHandler> a = getTanks();
 			for(IFluidHandler b : a){
 				if(this.getFluidAmount() > 500)
 				this.drain(b.fill(ForgeDirection.UNKNOWN , new FluidStack(UltraTech.Steam,500), true),true);
 			}
 			
-			refill();
-			if(!check)check();
 			if(reactor){
-				TileEntity e = this.worldObj.getBlockTileEntity(x, y, z);
-				if(e instanceof ReactorEntity){
-					if(((ReactorEntity)e).steam > 0){
-						((ReactorEntity)e).steam -= this.fill(new FluidStack(UltraTech.Steam,500), true);
+				if(Reactor != null){
+					if(Reactor.steam > 0){
+						Reactor.steam -= this.fill(new FluidStack(UltraTech.Steam,500), true);
 					}
 				}
 			}
@@ -66,31 +56,12 @@ public class SteamTurbineEntity extends ReactorWallEntity implements IFluidTank,
 				}else break;
 			}
 		}
+		super.updateEntity();
 	}
 	
 	public void onNeiChange(){
-			machines = new Machine[6];
-			check2();
 	}
 
-	public void refill(){
-		for(Machine a : machines){
-			if(a != null){
-				if(a.Energy+speed  <= a.EnergyMax && this.Energy >= speed){
-					float e = a.gainEnergy(speed);
-					this.Energy -= speed-e;
-				}
-				if(a.Energy+speed  <= a.EnergyMax && this.Energy >= speed){
-					float e = a.gainEnergy(speed);
-					this.Energy -= speed-e;
-				}
-				if(a.Energy+speed  <= a.EnergyMax && this.Energy >= speed){
-					float e = a.gainEnergy(speed);
-					this.Energy -= speed-e;
-				}
-			}
-		}
-	}
 	
 	private List<IFluidHandler> getTanks() {
 		List<IFluidHandler> tanks = new ArrayList<IFluidHandler>();
@@ -109,26 +80,21 @@ public class SteamTurbineEntity extends ReactorWallEntity implements IFluidTank,
 		return tanks;
 	}
 
-	public void check()
-	{
-		int[] ids = new int[27];
-		int current = 0;
-		for(int j = -1;j<2;j++){
-			for(int i = -1;i<2;i++){
-				for(int k = -1;k<2;k++){
-					ids[current] = worldObj.getBlockId(xCoord+i, yCoord+j, zCoord+k);
-					if(ids[current] == UltraTech.Reactor.blockID){
-						x = xCoord+i;
-						y = yCoord+j;
-						z = zCoord+k;
-						reactor = true;
-						return;
-					}
-					current++;
-				}
-			}
-		}reactor = false;
-	}
+	public void SearchReactor(){
+        TileEntity[] t = new TileEntity[6];
+        t[0] = this.worldObj.getBlockTileEntity(xCoord, yCoord-1, zCoord);
+        t[1] = this.worldObj.getBlockTileEntity(xCoord, yCoord+1, zCoord);
+        t[2] = this.worldObj.getBlockTileEntity(xCoord, yCoord, zCoord+1);
+        t[3] = this.worldObj.getBlockTileEntity(xCoord, yCoord, zCoord-1);
+        t[4] = this.worldObj.getBlockTileEntity(xCoord+1, yCoord, zCoord);
+        t[5] = this.worldObj.getBlockTileEntity(xCoord-1, yCoord, zCoord);
+
+        for(TileEntity y : t){
+                if(y instanceof ReactorEntity){
+                       this.Reactor = (ReactorEntity) y;
+                }
+        }
+}
 
 	//fluid
 	@Override
@@ -221,26 +187,7 @@ public class SteamTurbineEntity extends ReactorWallEntity implements IFluidTank,
         }
         return stack;
 	}
-	
-	public void check2(){
-		TileEntity[] t = new TileEntity[6];
-		t[0] = this.worldObj.getBlockTileEntity(xCoord, yCoord-1, zCoord);
-		t[1] = this.worldObj.getBlockTileEntity(xCoord, yCoord+1, zCoord);
-		t[2] = this.worldObj.getBlockTileEntity(xCoord, yCoord, zCoord+1);
-		t[3] = this.worldObj.getBlockTileEntity(xCoord, yCoord, zCoord-1);
-		t[4] = this.worldObj.getBlockTileEntity(xCoord+1, yCoord, zCoord);
-		t[5] = this.worldObj.getBlockTileEntity(xCoord-1, yCoord, zCoord);
 
-		int i= 0;
-		for(TileEntity y : t){
-			if(y instanceof Machine){
-				machines[i] = (Machine) y;
-			}else{
-				machines[i] = null;
-			}
-			i++;
-		}
-	}
 
 	@Override
 	public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {

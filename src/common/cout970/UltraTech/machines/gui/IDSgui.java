@@ -2,7 +2,6 @@ package common.cout970.UltraTech.machines.gui;
 
 import org.lwjgl.opengl.GL11;
 import common.cout970.UltraTech.machines.tileEntities.IDSentity;
-import common.cout970.UltraTech.misc.SyncObject;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -26,25 +25,25 @@ public class IDSgui extends GuiContainer{
 		int xStart = (width - xSize) / 2;
 		int yStart = (height - ySize) / 2;
 		this.drawTexturedModalRect(xStart, yStart, 0, 0, xSize, ySize);
-		
+
 		if(entity != null){
 			this.mc.renderEngine.bindTexture(new ResourceLocation("ultratech:textures/misc/energy.png"));
-			SyncObject s = entity.getSync();
-			int p = (int) ((((float)s.getVar2())*50/(float)(s.getVar1())));
+			int p = (int) entity.getEnergy()*50/entity.EnergyMax;
 			this.drawTexturedModalRect(xStart+14, yStart+15+(50-p), 0, 0, 25, p);
-		}}
-	
+		}
+	}
+
 	@Override
-    protected void drawGuiContainerForegroundLayer(int x, int y) {
-		SyncObject s = entity.getSync();
-		String e = s.getVar2()+"";
-        this.fontRenderer.drawString(e, this.xSize - 121+(-e.length()*5+35), 36, 4210752);
-        this.fontRenderer.drawString(" / ", this.xSize - 80, 36, 4210752);
-    	String m = s.getVar1()+"";
-        this.fontRenderer.drawString(m, this.xSize - 68+(-m.length()*5+35), 36, 4210752);
-        
-        String f = "Interdimensional Storage";
-        this.fontRenderer.drawString(f, this.xSize - 150, 4, 4210752);
+	protected void drawGuiContainerForegroundLayer(int x, int y) {
+
+		String e = entity.getEnergy()+"";
+		this.fontRenderer.drawString(e, this.xSize - 121+(-e.length()*5+35), 36, 4210752);
+		this.fontRenderer.drawString(" / ", this.xSize - 80, 36, 4210752);
+		String m = entity.EnergyMax+"";
+		this.fontRenderer.drawString(m, this.xSize - 68+(-m.length()*5+35), 36, 4210752);
+
+		String f = "Interdimensional Storage";
+		this.fontRenderer.drawString(f, this.xSize - 150, 4, 4210752);
 	}
 
 }

@@ -17,7 +17,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 
 
-public class ReactorEntity extends Machine implements IInventory{
+public class ReactorEntity extends TileEntity implements IInventory{
 
 	public boolean isDone = false;
 	public Machine[] machines;
@@ -37,7 +37,6 @@ public class ReactorEntity extends Machine implements IInventory{
 	
 	public ReactorEntity(){
 		super();
-		this.EnergyMax = 100;
 		inventory = new ItemStack[INVENTORY_SIZE];
 	}
 	
@@ -272,7 +271,6 @@ public class ReactorEntity extends Machine implements IInventory{
 
 		public void sendGUINetworkData(Container container, ICrafting iCrafting) {
 	    	iCrafting.sendProgressBarUpdate(container, 0, (int)heat);
-	    	iCrafting.sendProgressBarUpdate(container, 1, Energy);
 	    	iCrafting.sendProgressBarUpdate(container, 2, steam);
 	    	iCrafting.sendProgressBarUpdate(container, 3, water);
 	    	iCrafting.sendProgressBarUpdate(container, 4, MaxWater);
@@ -282,10 +280,6 @@ public class ReactorEntity extends Machine implements IInventory{
 	    	switch(id){
 	    	case 0:{
 	    		heat = value;
-	    		break;
-	    	}
-	    	case 1:{
-	    		Energy = value;
 	    		break;
 	    	}
 	    	case 2:{

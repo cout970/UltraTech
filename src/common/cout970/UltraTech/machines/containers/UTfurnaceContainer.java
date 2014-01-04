@@ -32,7 +32,7 @@ public class UTfurnaceContainer extends Container {
 	public void addCraftingToCrafters(ICrafting par1ICrafting)
     {
         super.addCraftingToCrafters(par1ICrafting);
-        par1ICrafting.sendProgressBarUpdate(this, 0, tileEntity.proces);
+        par1ICrafting.sendProgressBarUpdate(this, 0, tileEntity.progres);
         par1ICrafting.sendProgressBarUpdate(this, 1, tileEntity.Energy);
         par1ICrafting.sendProgressBarUpdate(this, 2, tileEntity.speed);
     }

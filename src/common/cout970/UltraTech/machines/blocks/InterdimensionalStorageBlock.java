@@ -11,7 +11,6 @@ import net.minecraft.world.World;
 
 public class InterdimensionalStorageBlock extends BlockContainer{
 
-	public IDSentity entity; 
 	
 	public InterdimensionalStorageBlock(int par1, Material par2Material) {
 		super(par1, par2Material);
@@ -47,15 +46,5 @@ public class InterdimensionalStorageBlock extends BlockContainer{
 	public void registerIcons(IconRegister iconRegister){
 		this.blockIcon = iconRegister.registerIcon("ultratech:ids");
 	}
-	
-	 public void onNeighborBlockChange(World w, int x, int y, int z, int side){
-			TileEntity te = w.getBlockTileEntity(x, y, z);
-			if(te != null && !w.isRemote){
-				if(te instanceof IDSentity){
-					IDSentity r = (IDSentity)te;
-					r.check();
-				}
-			}
-		}
-	
+
 }

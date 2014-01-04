@@ -5,10 +5,16 @@ public class WindMillEntity extends Machine{
 	public float fan;
 	public float speed = 0;
 	public float wind = 1;
+	public boolean tower = true;
 
+	public WindMillEntity(){
+		super();
+		this.tipe = MachineTipe.Output;
+	}
 	
 	public void updateEntity()
 	{
+		
 		float time = 0;
 		float bioma = 0.5f;
 		time = worldObj.getSunBrightness(1);
@@ -25,6 +31,7 @@ public class WindMillEntity extends Machine{
 			speed += 0.01f;
 		}
 		gainEnergy((int)speed);
+		super.updateEntity();
 	}
 
 }

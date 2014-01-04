@@ -43,6 +43,7 @@ import common.cout970.UltraTech.machines.tileEntities.SteamTurbineEntity;
 import common.cout970.UltraTech.machines.tileEntities.UTfurnaceEntity;
 import common.cout970.UltraTech.machines.tileEntities.WaterBlockEntity;
 import common.cout970.UltraTech.machines.tileEntities.WindMillEntity;
+import common.cout970.UltraTech.machines.tileEntities.hitBoxEntity;
 import common.cout970.UltraTech.misc.ID;
 import common.cout970.UltraTech.proxy.CommonProxy;
 
@@ -349,7 +350,8 @@ public class UltraTech {
 		GameRegistry.registerTileEntity(SateliteEntity.class, "sat_UT");
 		GameRegistry.registerBlock(Satelite, "sat");
 		LanguageRegistry.addName(Satelite, "Satelite solar");
-		//
+		//hitBox
+		GameRegistry.registerTileEntity(hitBoxEntity.class, "hitBox_UT");
 		GameRegistry.registerBlock(hitBox, "hitBox");
 		//cuter
 		GameRegistry.registerTileEntity(CuterEntity.class, "cuter_UT");
@@ -379,10 +381,10 @@ public class UltraTech {
 		GameRegistry.registerTileEntity(ReactorWallEntity.class, "ReactorWall_UT");
 		GameRegistry.registerBlock(ReactorWall, "ReactorWall");
 		LanguageRegistry.addName(ReactorWall, "ReactorWall");
-		//EnergyIO
-		GameRegistry.registerTileEntity(SenderEntity.class, "EnergyIO_UT");
-		GameRegistry.registerBlock(Sender, "EnergyIO");
-		LanguageRegistry.addName(Sender, "EnergyIO");
+		//Sender
+		GameRegistry.registerTileEntity(SenderEntity.class, "Sender_UT");
+		GameRegistry.registerBlock(Sender, "Sender");
+		LanguageRegistry.addName(Sender, "Sender");
 		//Reciver
 		GameRegistry.registerTileEntity(ReciverEntity.class, "Reciver_UT");
 		GameRegistry.registerBlock(Reciver, "Reciver");

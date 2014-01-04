@@ -3,6 +3,7 @@ package common.cout970.UltraTech.machines.blocks;
 import common.cout970.UltraTech.core.UltraTech;
 import common.cout970.UltraTech.machines.tileEntities.WindMillEntity;
 import common.cout970.UltraTech.machines.tileEntities.hitBoxEntity;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -17,7 +18,7 @@ public class WindMill extends BlockContainer{
 		setHardness(1.5f);
 		setStepSound(soundMetalFootstep);
 		setResistance(30);
-		setUnlocalizedName("MachineChasis");
+		setUnlocalizedName("WindMill");
 		this.setBlockBounds(0, 0, 0, 1, 5, 1);
 	}
 
@@ -44,23 +45,35 @@ public class WindMill extends BlockContainer{
     }
 
     @Override
-    public void onBlockAdded(World par1World, int par2, int par3, int par4)
+    public void onBlockAdded(World par1World, int xCoord, int yCoord, int zCoord)
     {
-    	super.onBlockAdded(par1World, par2, par3, par4);
+    	super.onBlockAdded(par1World, xCoord, yCoord, zCoord);
     	for(int d=1;d<5;d++){
-    		par1World.setBlock(par2, par3+d, par4, UltraTech.hitBox.blockID);
+    		par1World.setBlock(xCoord, yCoord+d, zCoord, UltraTech.hitBox.blockID);
 
     	}
-
     	for(int d=1;d<5;d++){
-    		hitBoxEntity h =((hitBoxEntity)par1World.getBlockTileEntity(par2, par3+d, par4));
+    		hitBoxEntity h =((hitBoxEntity)par1World.getBlockTileEntity(xCoord, yCoord+d, zCoord));
     		if(h != null){
-    			h.x = par2;
-    			h.y = par3;
-    			h.z = par4;
-    		}else
-    		System.out.println("null  ");
+    			h.x = xCoord;
+    			h.y = yCoord;
+    			h.z = zCoord;
+    		}
     	}
+    }
+    
+    public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4)
+    {
+    	for(int d=1;d<5;d++){
+    		int id = par1World.getBlockId(par2, par3+d, par4);
+    		Block block = Block.blocksList[id];
+    		if(block != null && !block.isBlockReplaceable(par1World, par2, par3+d, par4)){
+    			return false;
+    		}
+    	}
+    	int l = par1World.getBlockId(par2, par3, par4);
+        Block block = Block.blocksList[l];
+        return block == null || block.isBlockReplaceable(par1World, par2, par3, par4);
     }
 
 

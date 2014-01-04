@@ -60,7 +60,7 @@ public class SteamTurbine extends BlockContainer{
 		if(a == r || b == r || c == r || d == r || e == r || f == r){
 			return this.blockIcon;
 		}
-		return this.IconFront;
+		return (side == 0 || side ==1)? this.blockIcon : this.IconFront;
 		
     }
 	
