@@ -26,6 +26,7 @@ import common.cout970.UltraTech.machines.blocks.*;
 import common.cout970.UltraTech.machines.tileEntities.CVDentity;
 import common.cout970.UltraTech.machines.tileEntities.ChargeStationEntity;
 import common.cout970.UltraTech.machines.tileEntities.CuterEntity;
+import common.cout970.UltraTech.machines.tileEntities.EnergyColectorEntity;
 import common.cout970.UltraTech.machines.tileEntities.GeneratorEntity;
 import common.cout970.UltraTech.machines.tileEntities.IDSentity;
 import common.cout970.UltraTech.machines.tileEntities.MinerEntity;
@@ -36,7 +37,6 @@ import common.cout970.UltraTech.machines.tileEntities.ReactorEntity;
 import common.cout970.UltraTech.machines.tileEntities.ReactorTankEntity;
 import common.cout970.UltraTech.machines.tileEntities.ReactorWallEntity;
 import common.cout970.UltraTech.machines.tileEntities.ReciverEntity;
-import common.cout970.UltraTech.machines.tileEntities.SateliteEntity;
 import common.cout970.UltraTech.machines.tileEntities.SenderEntity;
 import common.cout970.UltraTech.machines.tileEntities.SolarPanelEntity;
 import common.cout970.UltraTech.machines.tileEntities.SteamTurbineEntity;
@@ -142,7 +142,7 @@ public class UltraTech {
 	public static Block CVDmachine;
 	public static  Block UTfurnace;
 	public static  Block IDS;
-	public static  Block Satelite;
+	public static  Block EnergyColector;
 	public static  Block Cuter;
 	public static  Block Purifier;
 	public static  Block PresureChamber;
@@ -187,7 +187,7 @@ public class UltraTech {
 		Reference.CVDmachine = config.getBlock("CVDmachine", 2049).getInt();
 		Reference.UTfurnace = config.getBlock("UTfurnace", 2051).getInt();
 		Reference.IDS = config.getBlock("IDS", 2052).getInt();
-		Reference.Satelite = config.getBlock("Satelite", 2053).getInt();
+		Reference.EnergyColector = config.getBlock("EnergyColector", 2053).getInt();
 		Reference.Cuter = config.getBlock("Cuter", 2054).getInt();
 		Reference.Purifier = config.getBlock("Purifier", 2055).getInt();
 		Reference.PresureChamber = config.getBlock("PresureChamber", 2056).getInt();
@@ -228,8 +228,7 @@ public class UltraTech {
 
 		Reference.ProcesedFood = config.getItem("ProcesedFood", 5020).getInt();
 		initIDs(config);
-
-		config.save();
+		if(config.hasChanged())config.save();
 	}
 
 	//items
@@ -255,7 +254,7 @@ public class UltraTech {
 		CVDmachine = new CVDmachine(Reference.CVDmachine,Material.iron);
 		UTfurnace = new UTfurnace(Reference.UTfurnace,Material.iron);
 		IDS = new InterdimensionalStorageBlock(Reference.IDS,Material.iron);
-		Satelite = new Satelite(Reference.Satelite,Material.iron);
+		EnergyColector = new EnergyColector(Reference.EnergyColector,Material.iron);
 		Cuter = new PrecisionCuter(Reference.Cuter,Material.iron);
 		Purifier = new Purifier(Reference.Purifier,Material.iron);
 		PresureChamber = new PresureChamber(Reference.PresureChamber,Material.iron);	
@@ -347,9 +346,9 @@ public class UltraTech {
 		GameRegistry.registerBlock(IDS, "ids");
 		LanguageRegistry.addName(IDS, "Interdimensional Storage");
 		//satelite
-		GameRegistry.registerTileEntity(SateliteEntity.class, "sat_UT");
-		GameRegistry.registerBlock(Satelite, "sat");
-		LanguageRegistry.addName(Satelite, "Satelite solar");
+		GameRegistry.registerTileEntity(EnergyColectorEntity.class, "Colector_UT");
+		GameRegistry.registerBlock(EnergyColector, "EnergyColector");
+		LanguageRegistry.addName(EnergyColector, "Energy Colector");
 		//hitBox
 		GameRegistry.registerTileEntity(hitBoxEntity.class, "hitBox_UT");
 		GameRegistry.registerBlock(hitBox, "hitBox");

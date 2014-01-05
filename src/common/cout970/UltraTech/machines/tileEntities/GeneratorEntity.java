@@ -151,16 +151,19 @@ public class GeneratorEntity extends Machine implements IInventory{
 				}
 			}
 		}
+		
+		if(!worldObj.isRemote){
 		if(progres > 0){
-			if(this.worldObj.getBlockMetadata(xCoord, yCoord, zCoord) == 0){
+			if(this.worldObj.getBlockMetadata(xCoord, yCoord, zCoord) != 1){
 				this.worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 1, 0);
 				this.worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
 			}
 		}else{
-			if(this.worldObj.getBlockMetadata(xCoord, yCoord, zCoord) == 1){
+			if(this.worldObj.getBlockMetadata(xCoord, yCoord, zCoord) != 0){
 				this.worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 0, 0);
 				this.worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
 			}
+		}
 		}
 		if(progres > 0){
 			progres--;

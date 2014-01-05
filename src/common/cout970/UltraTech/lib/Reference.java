@@ -13,7 +13,7 @@ public class Reference {
 	public static int CVDmachine;
 	public static int UTfurnace;
 	public static int IDS;
-	public static int Satelite;
+	public static int EnergyColector;
 	public static int Cuter;
 	public static int Purifier;
 	public static int PresureChamber;
@@ -44,6 +44,7 @@ public class Reference {
 	public static int SolarPanel;
 	public static int WindMill;
 	public static int hitBox;
+	
 	
 	
 

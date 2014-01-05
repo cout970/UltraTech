@@ -195,12 +195,12 @@ public class ReactorTankEntity extends TileEntity implements IFluidHandler,IFlui
 	public FluidStack drain(int maxDrain, boolean doDrain) {
 		return this.drain(null, maxDrain, doDrain);
 	}
-	
+
 	@Override
 	public void readFromNBT(NBTTagCompound nbtTagCompound) {
-		
+
 		super.readFromNBT(nbtTagCompound);
-		
+
 		NBTTagList tagList = nbtTagCompound.getTagList("Fuid_UT");
 		NBTTagCompound tagCompound = (NBTTagCompound) tagList.tagAt(0);
 		int amount = tagCompound.getInteger("Water");
@@ -208,8 +208,16 @@ public class ReactorTankEntity extends TileEntity implements IFluidHandler,IFlui
 			liquid = new FluidStack(tagCompound.getInteger("ID"),amount);
 		}
 		sendNetworkUpdate();
+		Structure = nbtTagCompound.getBoolean("Structure");
+		int x,y,z;
+		x = nbtTagCompound.getInteger("xR");
+		y = nbtTagCompound.getInteger("yR");
+		z = nbtTagCompound.getInteger("zR");
+		if(worldObj != null){
+			Reactor = (ReactorEntity) worldObj.getBlockTileEntity(x,y,z);
+		}
 	}
-	
+
 
 	@Override
 	public void writeToNBT(NBTTagCompound nbtTagCompound) {
@@ -227,6 +235,13 @@ public class ReactorTankEntity extends TileEntity implements IFluidHandler,IFlui
 			tagList.appendTag(tagCompound);
 		}
 		nbtTagCompound.setTag("Fuid_UT", tagList);
+		
+		nbtTagCompound.setBoolean("Structure", Structure);
+        if(Reactor != null){
+        nbtTagCompound.setInteger("xR", Reactor.xCoord);
+        nbtTagCompound.setInteger("yR", Reactor.yCoord);
+        nbtTagCompound.setInteger("zR", Reactor.zCoord);
+        }
 	}
 	
 	

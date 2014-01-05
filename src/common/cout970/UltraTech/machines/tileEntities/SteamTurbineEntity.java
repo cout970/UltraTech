@@ -21,7 +21,7 @@ public class SteamTurbineEntity extends Machine implements IFluidTank,IFluidHand
 
 	public FluidStack liquid;
 	public int capacity = 5000;
-	public boolean update = false;
+	public boolean update2 = false;
 	
 	public SteamTurbineEntity(){
 		super();
@@ -39,6 +39,9 @@ public class SteamTurbineEntity extends Machine implements IFluidTank,IFluidHand
 				if(Reactor.steam > 0){
 					Reactor.steam -= this.fill(new FluidStack(UltraTech.Steam,500), true);
 				}
+			}else if(!update2){
+				update = true;
+				this.setUp();
 			}
 			for(int j=0;j < 5 ; j++){
 				if(liquid != null && this.Energy <= this.EnergyMax-10){

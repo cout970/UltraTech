@@ -134,9 +134,15 @@ public class Machine extends TileEntity implements Energy{
 				l.add((Machine) h);
 			}
 		}
+		boolean flag;
 		for(Machine b:l){
-			if(b.tipe != MachineTipe.Output || b instanceof IDSentity)
-			passEnergy(a, b);
+			flag = b instanceof IDSentity;
+			if(b.tipe != MachineTipe.Output || flag)
+			if(a instanceof IDSentity && flag){
+				if(a.EnergyMax-a.getEnergy()< 1000){
+					passEnergy(a, b);
+				}
+			}else passEnergy(a, b);
 		}
 	}
 	

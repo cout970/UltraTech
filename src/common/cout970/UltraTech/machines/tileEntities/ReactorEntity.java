@@ -20,7 +20,7 @@ import net.minecraft.tileentity.TileEntity;
 public class ReactorEntity extends TileEntity implements IInventory,IReactorPart{
 	
 	
-	public boolean isDone = false;
+	public boolean check = true;
 	public Machine[] machines;
 	public int speed = 64;
 	public static final int INVENTORY_SIZE = 6;
@@ -42,6 +42,10 @@ public class ReactorEntity extends TileEntity implements IInventory,IReactorPart
 	
 	@Override
 	public void updateEntity(){
+		if(check){
+			check = false;
+			this.checkStructure();
+		}
 		//produce steam
 		if(!this.worldObj.isRemote){
 		int e = 6;
@@ -114,7 +118,6 @@ public class ReactorEntity extends TileEntity implements IInventory,IReactorPart
 	}
 
 	private void afect(int i, int e, int c) {
-		if(isStructure()){
 		heat+=0.05;
 		if(time >= c){
 			if(inventory[i].getItemDamage() > 1000){
@@ -122,7 +125,6 @@ public class ReactorEntity extends TileEntity implements IInventory,IReactorPart
 			}else{
 				inventory[i].setItemDamage(inventory[i].getItemDamage()+1);
 			}
-		}
 		}
 	}
 
@@ -201,10 +203,10 @@ public class ReactorEntity extends TileEntity implements IInventory,IReactorPart
 
 	@Override
 	public void closeChest() {}
-
+ 
 	@Override
 	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-		return i == 1 ? false : true;
+		return false;
 	}
 	@Override
 	public void readFromNBT(NBTTagCompound nbtTagCompound) {
@@ -256,11 +258,6 @@ public class ReactorEntity extends TileEntity implements IInventory,IReactorPart
 		tagList2.appendTag(tagCompound3);
 		nbtTagCompound.setTag("Properties", tagList2);
 	}
-
-
-
-
-
 
 		private void blownUp(){
 			float f = 114.0f;

@@ -2,6 +2,7 @@ package common.cout970.UltraTech.machines.tileEntities;
 
 import common.cout970.UltraTech.core.UltraTech;
 import common.cout970.UltraTech.misc.IReactorPart;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
 public class ReactorWallEntity extends TileEntity implements IReactorPart{
@@ -130,24 +131,28 @@ public class ReactorWallEntity extends TileEntity implements IReactorPart{
 		return this.Structure;
 	}
 	
-//	@Override
-//	public void readFromNBT(NBTTagCompound nbtTagCompound) {
-//        super.readFromNBT(nbtTagCompound);
-//        multi = nbtTagCompound.getBoolean("multi");
-//        x = nbtTagCompound.getInteger("xR");
-//        y = nbtTagCompound.getInteger("yR");
-//        z = nbtTagCompound.getInteger("zR");
-//	}
-//	
-//	  @Override
-//	    public void writeToNBT(NBTTagCompound nbtTagCompound) {
-//
-//	        super.writeToNBT(nbtTagCompound);
-//	        nbtTagCompound.setBoolean("multi", multi);
-//	        if(Reactor != null){
-//	        nbtTagCompound.setInteger("xR", x);
-//	        nbtTagCompound.setInteger("yR", y);
-//	        nbtTagCompound.setInteger("zR", z);
-//	        }
-//	  }
+	@Override
+	public void readFromNBT(NBTTagCompound nbtTagCompound) {
+		super.readFromNBT(nbtTagCompound);
+		Structure = nbtTagCompound.getBoolean("Structure");
+		int x,y,z;
+			x = nbtTagCompound.getInteger("xR");
+			y = nbtTagCompound.getInteger("yR");
+			z = nbtTagCompound.getInteger("zR");
+			if(worldObj != null){
+				Reactor = (ReactorEntity) worldObj.getBlockTileEntity(x,y,z);
+			}
+	}
+	
+	  @Override
+	    public void writeToNBT(NBTTagCompound nbtTagCompound) {
+
+	        super.writeToNBT(nbtTagCompound);
+	        nbtTagCompound.setBoolean("Structure", Structure);
+	        if(Reactor != null){
+	        nbtTagCompound.setInteger("xR", Reactor.xCoord);
+	        nbtTagCompound.setInteger("yR", Reactor.yCoord);
+	        nbtTagCompound.setInteger("zR", Reactor.zCoord);
+	        }
+	  }
 }

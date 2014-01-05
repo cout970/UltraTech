@@ -75,7 +75,7 @@ public class ReactorTank extends BlockContainer{
 				TileEntity tile = par1World.getBlockTileEntity(x, y, z);
 				if(tile != null){ 
 					IReactorPart p = (IReactorPart) tile;
-					if(p.isStructure()){
+					if(p.isStructure() && p.getReactor() != null){
 						par5EntityPlayer.openGui(UltraTech.instance, 13, par1World, p.getReactor().xCoord, p.getReactor().yCoord, p.getReactor().zCoord);
 					}else{
 						p.onNeighChange();
