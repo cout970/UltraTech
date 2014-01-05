@@ -63,7 +63,10 @@ public static void registerCraft(){
 		GameRegistry.addShapedRecipe(new ItemStack(UltraTech.WaterBlock,1), new Object[]{"fbf","jmj","fbf",'f',UltraTech.ItemName.get("CarbonFiber"),'m',UltraTech.MachineChasis,'b',Item.bucketEmpty,'j',UltraTech.ItemName.get("Circuit")});
 		GameRegistry.addShapedRecipe(new ItemStack(UltraTech.StoneBlockBricks,4), new Object[]{"ff","ff",'f',UltraTech.StoneBlock});
 		GameRegistry.addShapedRecipe(new ItemStack(UltraTech.EnergyColector,1), new Object[]{"fff","cmc","fpf",'f',UltraTech.ItemName.get("CarbonFiber"),'m',UltraTech.MachineChasis,'p',UltraTech.ItemName.get("EnergyTransmiter"),'c',UltraTech.ItemName.get("OpticFiber")});
-
+		GameRegistry.addShapedRecipe(new ItemStack(UltraTech.WindMill,1), new Object[]{"fp "," p "," m ",'f',UltraTech.ItemName.get("Fan"),'m',UltraTech.MachineChasis,'p',UltraTech.ItemName.get("CarbonFiber")});
+		GameRegistry.addShapedRecipe(new ItemStack(UltraTech.ChargeStation,1), new Object[]{" f ","fmf"," f ",'f',UltraTech.ItemName.get("IronPlate"),'m',UltraTech.MachineChasis});
+		GameRegistry.addShapedRecipe(new ItemStack(UltraTech.MolecularAssembly, 1), new Object[]{"bcb","omo","bcb",'m',UltraTech.AdvMachineChasis,'c',UltraTech.ItemName.get("AdvCircuit"),'o',UltraTech.ItemName.get("OpticFiber"),'b',UltraTech.ItemName.get("Circuit")});
+		
 		//furnace recipes
 		GameRegistry.addSmelting(UltraTech.ItemName.get("GoldPlate").itemID, new ItemStack(Item.ingotGold), 0.35f);
 		GameRegistry.addSmelting(UltraTech.ItemName.get("IronPlate").itemID, new ItemStack(Item.ingotIron), 0.35f);
@@ -115,5 +118,6 @@ public static void registerCraft(){
 
 		//assembly recipes
 		Assembly_Recipes.addRecipe(new Assembly_Recipes(new ItemStack(UltraTech.ItemName.get("Motor"),1), new Object[]{"rc ","iii","rc ",'c',UltraTech.ItemName.get("Coil"),'r',UltraTech.ItemName.get("RedstoneCable"),'i',UltraTech.ItemName.get("IronPlate")}));
+		Assembly_Recipes.addRecipe(new Assembly_Recipes(new ItemStack(UltraTech.ItemName.get("HidrogenBattery"),1), new Object[]{"hhh","aia","hhh",'h',UltraTech.ItemName.get("IronPlate"),'a',UltraTech.ItemName.get("AlloyPlate"),'i',UltraTech.ItemName.get("Filter")}));
 	}
 }

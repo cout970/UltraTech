@@ -132,7 +132,7 @@ public class UltraTech {
 	//game name
 	String[] lang ={"Circuit","Grafeno","Silicon Plate","Diamond Plate","Gold Plate","Iron Plate","Trinitramida","Redstone Plate","Alloy Plate","Radionite Plate","Grafeno Plate",
 			"Redstone Cable","Energy Transmiter","Heat Coil","Raw Silicon","Radionite","Raw Meal","Iron Dust","Gold Dust","Lapis Pearl","Filter","Solar Panel",
-			"Grafeno Cable","Optic Fiber","Alloy Cable","Coil","Upgrade Base","Carbon Plate","Carbon Fiber","Advanced Circuit","Diamond Dust","Motor","Alloy ingot","Fan",
+			"Grafeno Cable","Optic Fiber","Alloy Cable","Coil","Upgrade Base","Carbon Plate","Carbon Fiber","Advanced Circuit","Diamond Dust","Nano Engine","Alloy ingot","Fan",
 			
 			"Speed Upgrade","Mining Upgrade","Range Upgrade","AutoEject Upgrade","Linker","Radionite Cell","Hidrogen Battery","Lasser Sword","Fortune Upgrade"};
 

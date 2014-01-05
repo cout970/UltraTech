@@ -156,7 +156,7 @@ public class MolecularAssemblyEntity extends Machine implements IInventory{
 
 	@Override
 	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-		return i == 1 ? false : true;
+		return i == 10 || i == 11 ? false : true;
 	}
 	@Override
 	public void readFromNBT(NBTTagCompound nbtTagCompound) {

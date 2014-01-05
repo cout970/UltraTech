@@ -22,7 +22,7 @@ public class BlockManager {
 		 d.add(new UT_Block(Reference.Deco3,"deco3"));
 		 d.add(new UT_Block(Reference.Deco4,"deco4"));
 		 d.add(new UT_Block(Reference.Deco5,"deco5"));
-	
+		 
 		 for(UT_Block b : d){
 		 GameRegistry.registerBlock(b, UT_itemBlock.class, b.texture);
 		 LanguageRegistry.addName(b, "Decorative Block");

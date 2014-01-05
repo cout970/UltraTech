@@ -13,6 +13,8 @@ import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
 public class Block_UT_Render implements ISimpleBlockRenderingHandler {
 
+	public int tick = 0;
+	
 	@Override
 	public void renderInventoryBlock(Block par1Block, int metadata, int modelID,
 			RenderBlocks renderer) {
@@ -29,7 +31,6 @@ public class Block_UT_Render implements ISimpleBlockRenderingHandler {
 		//bug free
 		
 		//texture
-		
 		Icon c = UT_Block.blockIconIn;
 	
 		float u = c.getInterpolatedU(0);
@@ -39,7 +40,6 @@ public class Block_UT_Render implements ISimpleBlockRenderingHandler {
 
 		int meta = world.getBlockMetadata(x, y, z);
 		this.setColor(meta, t,true);
-
 		//z-
 		t.addVertexWithUV(x, y, z+0.001, u, v);
 		t.addVertexWithUV(x, y+1, z+0.001, u, v1);
@@ -176,7 +176,7 @@ public class Block_UT_Render implements ISimpleBlockRenderingHandler {
 		else if(meta  == 10)GL11.glColor3f(1f, 0.5f, 0f);
 		else GL11.glColor3f(1,1,1);
 		
-		tessellator.setBrightness(200000);
+		tessellator.setBrightness(15728640);
 		//draw
 		par1Block.setBlockBoundsForItemRender();
         GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
@@ -231,7 +231,7 @@ public class Block_UT_Render implements ISimpleBlockRenderingHandler {
 		else if(meta  == 9)tessellator.setColorOpaque_F(1f, 0.5f, 1f);
 		else if(meta  == 10)tessellator.setColorOpaque_F(1f, 0.5f, 0f);
 		else tessellator.setColorOpaque_F(1,1,1);
-		tessellator.setBrightness(1600);
+		tessellator.setBrightness(1600);//16777 night day 15728640
 	}
 
 }

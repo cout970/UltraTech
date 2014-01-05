@@ -24,7 +24,13 @@ public class MAssemblyContainer extends Container{
 				i++;
 			}
 		}
-		addSlotToContainer(new Slot((IInventory)tileEntity2, i, 146,34));i++;
+		addSlotToContainer(new Slot((IInventory)tileEntity2, i, 146,34){
+			@Override
+			public boolean isItemValid(ItemStack par1ItemStack)
+		    {
+		        return false;
+		    }
+		});i++;
 		addSlotToContainer(new Slot((IInventory)tileEntity2, i, 122,10){
 			@Override
 			public boolean isItemValid(ItemStack par1ItemStack)
@@ -87,7 +93,7 @@ public class MAssemblyContainer extends Container{
 			ItemStack stackInSlot = slotObject.getStack();
 			stack = stackInSlot.copy();
 			if (slot < 9) {
-				if (!this.mergeItemStack(stackInSlot, 0, 35, true)) {
+				if (!this.mergeItemStack(stackInSlot, 11, 35, true)) {
 					return null;
 				}
 			}
