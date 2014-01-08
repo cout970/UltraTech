@@ -25,11 +25,8 @@ public class Block_UT_Render implements ISimpleBlockRenderingHandler {
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z,
 			Block block, int modelId, RenderBlocks renderer) {
-		if(ClientProxy.renderPass == 0){
 		Tessellator t = Tessellator.instance;
-//		Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("ultratech:textures/blocks/deco/deco2.png"));
-		//bug free
-		
+
 		//texture
 		Icon c = UT_Block.blockIconIn;
 	
@@ -90,11 +87,7 @@ public class Block_UT_Render implements ISimpleBlockRenderingHandler {
 		t.addVertex(x+1, y+0.999, z+1);
 		t.setTextureUV(u1, v);
 		t.addVertex(x+1, y+0.999, z);
-		return true;
-		}else{
-			return renderer.renderStandardBlock(block, x, y, z);	
-		}
-		
+		return renderer.renderStandardBlock(block, x, y, z);
 	}
 
 	@Override
@@ -163,20 +156,23 @@ public class Block_UT_Render implements ISimpleBlockRenderingHandler {
 		
 		GL11.glPushMatrix();
 		//color
-		if(meta == 0)tessellator.setColorOpaque_F(1, 1, 1);
-		else if(meta  == 1)GL11.glColor3f(0, 0, 0);
-		else if(meta  == 2)GL11.glColor3f(1, 0, 0);
-		else if(meta  == 3)GL11.glColor3f(0, 1, 0);
-		else if(meta  == 4)GL11.glColor3f(0, 0, 1);
-		else if(meta  == 5)GL11.glColor3f(1f, 1f, 0f);
-		else if(meta  == 6)GL11.glColor3f(0, 0.5f, 1f);
-		else if(meta  == 7)GL11.glColor3f(0.0f,0.5f, 0.0f);
-		else if(meta  == 8)GL11.glColor3f(1f, 0.0f, 1f);
-		else if(meta  == 9)GL11.glColor3f(1f, 0.5f, 1f);
-		else if(meta  == 10)GL11.glColor3f(1f, 0.5f, 0f);
+		if(meta == 0)tessellator.setColorOpaque_F(1, 1, 1);//white
+		else if(meta  == 1)GL11.glColor3f(0, 0, 0);//black
+		else if(meta  == 2)GL11.glColor3f(1, 0, 0);//red
+		else if(meta  == 3)GL11.glColor3f(0, 1, 0);//green
+		else if(meta  == 4)GL11.glColor3f(0, 0, 1);//blue
+		else if(meta  == 5)GL11.glColor3f(1f, 1f, 0.0f);//yellow
+		else if(meta  == 6)GL11.glColor3f(0.0f, 1f, 1f);//light blue
+		else if(meta  == 7)GL11.glColor3f(1f, 0.0f, 1f);//purple
+		else if(meta  == 8)GL11.glColor3f(0.5f, 1f, 0.0f);//light green
+		else if(meta  == 9)GL11.glColor3f(0.0f, 0.5f, 1f);//blue 2
+		else if(meta  == 10)GL11.glColor3f(1f, 0.0f, 0.5f);//pink
+		else if(meta  == 11)GL11.glColor3f(1f, 0.5f, 0.0f);//orange
+		else if(meta  == 12)GL11.glColor3f(0.5f, 0.0f, 1f);//violet
+		else if(meta  == 13)GL11.glColor3f(0.0f, 1f, 0.5f);//marine water blue(azul agua marina)
 		else GL11.glColor3f(1,1,1);
 		
-		tessellator.setBrightness(15728640);
+		tessellator.setBrightness(15728640);//15728640
 		//draw
 		par1Block.setBlockBoundsForItemRender();
         GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
@@ -218,20 +214,36 @@ public class Block_UT_Render implements ISimpleBlockRenderingHandler {
         GL11.glScalef(1, 1f, 1);
 	}
 	
-	public void setColor(int meta,Tessellator tessellator,boolean bri){
-		if(meta == 0)tessellator.setColorOpaque_F(1, 1, 1);
-		else if(meta  == 1)tessellator.setColorOpaque_F(0, 0, 0);
-		else if(meta  == 2)tessellator.setColorOpaque_F(1, 0, 0);
-		else if(meta  == 3)tessellator.setColorOpaque_F(0, 1, 0);
-		else if(meta  == 4)tessellator.setColorOpaque_F(0, 0, 1);
-		else if(meta  == 5)tessellator.setColorOpaque_F(1f, 1f, 0);
-		else if(meta  == 6)tessellator.setColorOpaque_F(0, 0.5f, 1f);
-		else if(meta  == 7)tessellator.setColorOpaque_F(0.0f,0.5f, 0.0f);
-		else if(meta  == 8)tessellator.setColorOpaque_F(1f, 0.0f, 1f);
-		else if(meta  == 9)tessellator.setColorOpaque_F(1f, 0.5f, 1f);
-		else if(meta  == 10)tessellator.setColorOpaque_F(1f, 0.5f, 0f);
-		else tessellator.setColorOpaque_F(1,1,1);
-		tessellator.setBrightness(1600);//16777 night day 15728640
+	public void setColor(int meta,Tessellator t,boolean bri){
+//		if(meta == 0)tessellator.setColorOpaque_F(1, 1, 1);
+//		else if(meta  == 1)tessellator.setColorOpaque_F(0, 0, 0);
+//		else if(meta  == 2)tessellator.setColorOpaque_F(1, 0, 0);
+//		else if(meta  == 3)tessellator.setColorOpaque_F(0, 1, 0);
+//		else if(meta  == 4)tessellator.setColorOpaque_F(0, 0, 1);
+//		else if(meta  == 5)tessellator.setColorOpaque_F(1f, 1f, 0);
+//		else if(meta  == 6)tessellator.setColorOpaque_F(0, 0.5f, 1f);
+//		else if(meta  == 7)tessellator.setColorOpaque_F(0.0f,0.5f, 0.0f);
+//		else if(meta  == 8)tessellator.setColorOpaque_F(1f, 0.0f, 1f);
+//		else if(meta  == 9)tessellator.setColorOpaque_F(1f, 0.5f, 1f);
+//		else if(meta  == 10)tessellator.setColorOpaque_F(1f, 0.5f, 0f);
+//		else tessellator.setColorOpaque_F(1,1,1);
+		
+		if(meta == 0)t.setColorOpaque_F(1, 1, 1);//white
+		else if(meta  == 1)t.setColorOpaque_F(0, 0, 0);//black
+		else if(meta  == 2)t.setColorOpaque_F(1, 0, 0);//red
+		else if(meta  == 3)t.setColorOpaque_F(0, 1, 0);//green
+		else if(meta  == 4)t.setColorOpaque_F(0, 0, 1);//blue
+		else if(meta  == 5)t.setColorOpaque_F(1f, 1f, 0.0f);//yellow
+		else if(meta  == 6)t.setColorOpaque_F(0.0f, 1f, 1f);//light blue
+		else if(meta  == 7)t.setColorOpaque_F(1f, 0.0f, 1f);//purple
+		else if(meta  == 8)t.setColorOpaque_F(0.5f, 1f, 0.0f);//light green
+		else if(meta  == 9)t.setColorOpaque_F(0.0f, 0.5f, 1f);//blue 2
+		else if(meta  == 10)t.setColorOpaque_F(1f, 0.0f, 0.5f);//pink
+		else if(meta  == 11)t.setColorOpaque_F(1f, 0.5f, 0.0f);//orange
+		else if(meta  == 12)t.setColorOpaque_F(0.5f, 0.0f, 1f);//violet
+		else if(meta  == 13)t.setColorOpaque_F(0.0f, 1f, 0.5f);//marine water blue(azul agua marina)
+		else t.setColorOpaque_F(1,1,1);
+		t.setBrightness(1600);//16777 night day 15728640
 	}
 
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import common.cout970.UltraTech.core.UltraTech;
 import common.cout970.UltraTech.misc.IReactorPart;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidHandler;
@@ -19,7 +20,7 @@ public class WaterBlockEntity extends TileEntity implements IReactorPart{
 	public void updateEntity(){
 		List<IFluidHandler> a = getTanks();
 		for(IFluidHandler b : a){
-			b.fill(null , new FluidStack(FluidRegistry.WATER,100), true);
+			b.fill(ForgeDirection.UP , new FluidStack(FluidRegistry.WATER,100), true);
 		}
 	}
 	

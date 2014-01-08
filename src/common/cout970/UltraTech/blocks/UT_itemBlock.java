@@ -10,9 +10,10 @@ public class UT_itemBlock extends ItemBlock{
 		setHasSubtypes(true);
 	}
 
-	private final static String[] subNames = {
+	public final static String[] subNames = {
 		"White", "Black",  "Red", "Green", "Blue", "Yellow",
-		"Light Blue","Dark Green","Purple", "Pink","Orange"
+		"Cyan","Purple","Light Green","Steal Blue","Pink",
+		"Orange","Blue Violet","Sea Green"
 	};
 	
 	@Override
@@ -29,6 +30,7 @@ public class UT_itemBlock extends ItemBlock{
 	@Override
 	public String getItemDisplayName(ItemStack is) {
 		return "Decorative Block "+subNames[is.getItemDamage()];
+//		return "debug";
 	}
 	
 	@Override

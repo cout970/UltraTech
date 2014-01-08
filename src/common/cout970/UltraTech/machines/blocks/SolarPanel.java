@@ -21,7 +21,7 @@ public class SolarPanel extends BlockContainer{
 	}
 
 	public void registerIcons(IconRegister iconRegister){
-		this.blockIcon = iconRegister.registerIcon("ultratech:SolarPanel");
+		this.blockIcon = iconRegister.registerIcon("ultratech:solarpanel");
 	}
 	@Override
 	public TileEntity createNewTileEntity(World world) {

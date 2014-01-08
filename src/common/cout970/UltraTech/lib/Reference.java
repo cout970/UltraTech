@@ -38,12 +38,18 @@ public class Reference {
 	public static int Deco3;
 	public static int Deco4;
 	public static int Deco5;
+	public static int Deco6;
+	public static int Deco7;
+	
+	
 	public static int StoneBlock;
 	public static int StoneBlockBricks;
 	public static int ChargeStation;
 	public static int SolarPanel;
 	public static int WindMill;
 	public static int hitBox;
+	public static int Printer3D;
+	
 	
 	
 	

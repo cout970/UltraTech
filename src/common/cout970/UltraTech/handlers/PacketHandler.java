@@ -4,11 +4,13 @@ import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
 
+import common.cout970.UltraTech.machines.tileEntities.Printer3DEntity;
 import common.cout970.UltraTech.machines.tileEntities.ReactorTankEntity;
-
 import net.minecraft.client.entity.EntityPlayerSP;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet250CustomPayload;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fluids.FluidStack;
 import cpw.mods.fml.common.network.IPacketHandler;
 import cpw.mods.fml.common.network.Player;
@@ -18,7 +20,25 @@ public class PacketHandler implements IPacketHandler{
 	@Override
 	public void onPacketData(INetworkManager manager,
 			Packet250CustomPayload packet, Player player) {
-		if(packet.channel == "UltraTech"){
+		if(packet.channel == "UltraTech" && player instanceof EntityPlayerMP){
+			DataInputStream inputStream = new DataInputStream(new ByteArrayInputStream(packet.data));
+			int x,y,z;
+			int color;
+			boolean update;
+			try{
+				x = inputStream.readInt();
+				y = inputStream.readInt();
+				z = inputStream.readInt();
+				color = inputStream.readInt();
+				update = inputStream.readBoolean();
+				
+				EntityPlayerMP playerSP = (EntityPlayerMP)player;
+				TileEntity te = playerSP.worldObj.getBlockTileEntity(x, y, z);
+				((Printer3DEntity)te).color = color;
+				((Printer3DEntity)te).update = update;
+				
+			}catch(Exception e){
+				e.printStackTrace();}			
 		}else if(packet.channel == "UltraTech2"){
 			DataInputStream inputStream = new DataInputStream(new ByteArrayInputStream(packet.data));
 

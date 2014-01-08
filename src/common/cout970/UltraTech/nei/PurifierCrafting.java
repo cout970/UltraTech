@@ -44,38 +44,38 @@ public class PurifierCrafting extends TemplateRecipeHandler {
 			}
 		}
 	}
-
+	@Override
 	public PositionedStack getResultStack(int recipe)
 	{
 		return new PositionedStack(recipes.get(recipe).getOutput(),112,21);
 	}
-
+	@Override
 	public List<PositionedStack> getOtherStacks(int recipe)
 	{
 		return new ArrayList<PositionedStack>();
 	}
-	
+	@Override
 	public List<PositionedStack> getIngredientStacks(int recipe)
-    {
-	 List<PositionedStack> need = new ArrayList<PositionedStack>();
-	 need.add(new PositionedStack(recipes.get(recipe).getInput(), 56,21));
-        return need;
-    }
-	
-	
+	{
+		List<PositionedStack> need = new ArrayList<PositionedStack>();
+		need.add(new PositionedStack(recipes.get(recipe).getInput(), 56,21));
+		return need;
+	}
+
+	@Override
 	public int numRecipes()
-    {
-        return recipes.size();
-    }
-	
+	{
+		return recipes.size();
+	}
+	@Override
 	public void drawExtras(int recipe)
-    {
+	{
 		int ticks = 100;
 		int ticks2 = 500;
 		Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("ultratech:textures/misc/energy.png"));
 		this.drawProgressBar(9, 4, 0, 0, 25, 50, 1f-(cycleticks % ticks2 / (float)ticks2), 3);
 		Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("nei:textures/gui/purifier.png"));
 		this.drawProgressBar(80, 20, 176, 14, 24, 16, 1f-(cycleticks % ticks / (float)ticks), 4);
-    }
+	}
 
 }

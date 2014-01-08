@@ -6,7 +6,6 @@ import common.cout970.UltraTech.core.UltraTech;
 import common.cout970.UltraTech.proxy.ClientProxy;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -64,7 +63,7 @@ public class UT_Block extends Block{
 	
 	@SuppressWarnings("unchecked")
 	public void getSubBlocks(int unknown, CreativeTabs tab, @SuppressWarnings("rawtypes") List subItems){
-		for (int ix = 0; ix < 11; ix++) {
+		for (int ix = 0; ix < 14; ix++) {
 			subItems.add(new ItemStack(this, 1, ix));
 		}
 	}

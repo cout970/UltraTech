@@ -3,12 +3,11 @@ package common.cout970.UltraTech.core;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-
+import net.minecraftforge.oredict.OreDictionary;
 import common.cout970.UltraTech.lib.recipes.Assembly_Recipes;
 import common.cout970.UltraTech.lib.recipes.CVD_Recipe;
 import common.cout970.UltraTech.lib.recipes.Cuter_Recipes;
 import common.cout970.UltraTech.lib.recipes.Purifier_Recipe;
-
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class CraftManager {
@@ -22,9 +21,9 @@ public static void registerCraft(){
 		GameRegistry.addShapedRecipe(new ItemStack(UltraTech.ItemName.get("EnergyTransmiter"),1),new Object[]{"rrr","rer","rrr",'r',Block.stone,'s',Item.redstone,'e',UltraTech.ItemName.get("LapisPearl")});//revisar
 		GameRegistry.addShapedRecipe(new ItemStack(UltraTech.MachineChasis,1),new Object[]{"aaa","a a","aaa",'a',UltraTech.ItemName.get("CarbonFiber")});
 		GameRegistry.addShapedRecipe(new ItemStack(UltraTech.ItemName.get("CarbonFiber"),8),new Object[]{"a",'a',UltraTech.MachineChasis});
-		GameRegistry.addShapedRecipe(new ItemStack(UltraTech.ReactorWall,2),new Object[]{"aaa","aba","aaa",'a',UltraTech.ItemName.get("CarbonFiber"),'b',UltraTech.ItemName.get("AlloyPlate")});
+		GameRegistry.addShapedRecipe(new ItemStack(UltraTech.ReactorWall,4),new Object[]{"aaa","aba","aaa",'a',UltraTech.ItemName.get("CarbonFiber"),'b',UltraTech.ItemName.get("AlloyPlate")});
 		GameRegistry.addShapedRecipe(new ItemStack(UltraTech.Reactor, 1), new Object[]{"apa","pcp","apa",'p',UltraTech.ItemName.get("AlloyPlate"),'c',UltraTech.AdvMachineChasis,'a',UltraTech.ReactorTank});
-		GameRegistry.addShapedRecipe(new ItemStack(UltraTech.ReactorTank, 2), new Object[]{"aga","gpg","aga",'p',UltraTech.ItemName.get("AlloyPlate"),'a',UltraTech.ItemName.get("CarbonFiber"),'g',UltraTech.ItemName.get("SiliconPlate")});
+		GameRegistry.addShapedRecipe(new ItemStack(UltraTech.ReactorTank, 4), new Object[]{"aga","gpg","aga",'p',UltraTech.ItemName.get("AlloyPlate"),'a',UltraTech.ItemName.get("CarbonFiber"),'g',UltraTech.ItemName.get("SiliconPlate")});
 		GameRegistry.addShapedRecipe(new ItemStack(UltraTech.ItemName.get("Circuit"),1),new Object[]{"rrr","sds","rrr",'r',UltraTech.ItemName.get("RedstoneCable"),'s',UltraTech.ItemName.get("Grafeno"),'d',UltraTech.ItemName.get("SiliconPlate")});
 		GameRegistry.addShapedRecipe(new ItemStack(UltraTech.Generator,1),new Object[]{"rrr","rcr","rer",'c',UltraTech.MachineChasis,'r',Item.ingotIron,'e',UltraTech.ItemName.get("EnergyTransmiter")});
 		GameRegistry.addShapedRecipe(new ItemStack(UltraTech.DiamondGlass,16),new Object[]{"rr","rr",'r',UltraTech.ItemName.get("DiamondPlate")});
@@ -34,7 +33,7 @@ public static void registerCraft(){
 		GameRegistry.addShapedRecipe(new ItemStack(UltraTech.Miner,1),new Object[]{"rfr","dcd","rfr",'r',UltraTech.ItemName.get("DiamondPlate"),'d',Item.pickaxeDiamond,'c',UltraTech.MachineChasis,'f',UltraTech.ItemName.get("AdvCircuit")});
 		GameRegistry.addShapedRecipe(new ItemStack(UltraTech.ItemName.get("AdvCircuit"),1),new Object[]{"rfr","rcr","rfr",'r',UltraTech.ItemName.get("GrafenoCable"),'f',UltraTech.ItemName.get("DiamondPlate"),'c',UltraTech.ItemName.get("SiliconPlate")});
 		GameRegistry.addShapedRecipe(new ItemStack(UltraTech.ItemName.get("UpgradeBase"),2),new Object[]{"rrr","rir","rrr",'r',UltraTech.ItemName.get("IronPlate"),'i',UltraTech.ItemName.get("Circuit")});
-		GameRegistry.addShapedRecipe(new ItemStack(UltraTech.ItemName.get("SpeedUpgrade"),1),new Object[]{"rhr","cic","rhr",'r',UltraTech.ItemName.get("GoldPlate"),'i',UltraTech.ItemName.get("UpgradeBase"),'c',UltraTech.ItemName.get("Circuit"),'h',UltraTech.ItemName.get("HeatCoil")});
+		GameRegistry.addShapedRecipe(new ItemStack(UltraTech.ItemName.get("SpeedUpgrade"),2),new Object[]{"rhr","cic","rhr",'r',UltraTech.ItemName.get("GoldPlate"),'i',UltraTech.ItemName.get("UpgradeBase"),'c',UltraTech.ItemName.get("Circuit"),'h',UltraTech.ItemName.get("HeatCoil")});
 		GameRegistry.addShapedRecipe(new ItemStack(UltraTech.ItemName.get("MiningUpgrade"),1),new Object[]{"rgr","gig","rgr",'r',UltraTech.ItemName.get("DiamondPlate"),'i',UltraTech.ItemName.get("UpgradeBase"),'g',UltraTech.ItemName.get("GoldPlate")});
 		GameRegistry.addShapedRecipe(new ItemStack(UltraTech.ItemName.get("RangeUpgrade"),2),new Object[]{"rrr","rir","rrr",'r',UltraTech.ItemName.get("SiliconPlate"),'i',UltraTech.ItemName.get("UpgradeBase")});
 		GameRegistry.addShapedRecipe(new ItemStack(UltraTech.ItemName.get("AutoEjectUpgrade"),1),new Object[]{"rrr","cic","rrr",'r',UltraTech.ItemName.get("RedstonePlate"),'i',UltraTech.ItemName.get("UpgradeBase"),'c',UltraTech.ItemName.get("Circuit")});
@@ -48,15 +47,15 @@ public static void registerCraft(){
 		GameRegistry.addShapedRecipe(new ItemStack(UltraTech.ItemName.get("Radionite"),9), new Object[]{"d",'d',UltraTech.RadioniteBlock});
 		GameRegistry.addShapedRecipe(new ItemStack(UltraTech.ItemName.get("RadioniteCell"),1), new Object[]{"idi","idi","idi",'d',UltraTech.ItemName.get("RadionitePlate"),'i',UltraTech.ItemName.get("IronPlate")});
 		GameRegistry.addShapedRecipe(new ItemStack(UltraTech.ItemName.get("SolarPanel"),3), new Object[]{"iii","ddd","rrr",'d',UltraTech.ItemName.get("SiliconPlate"),'r',UltraTech.ItemName.get("Grafeno"),'i',Block.glass});
-		GameRegistry.addShapedRecipe(new ItemStack(UltraTech.SolarPanel,4), new Object[]{"iii","ddd","rrr",'d',UltraTech.ItemName.get("CarbonFiber"),'i',UltraTech.ItemName.get("SolarPanel")});	
+		GameRegistry.addShapedRecipe(new ItemStack(UltraTech.SolarPanel,4), new Object[]{"iii","ddd",'d',UltraTech.ItemName.get("CarbonFiber"),'i',UltraTech.ItemName.get("SolarPanel")});	
 		GameRegistry.addShapedRecipe(new ItemStack(UltraTech.ItemName.get("Coil"),1), new Object[]{"ici","cmc","ici",'i',UltraTech.ItemName.get("Grafeno"),'m',UltraTech.ItemName.get("IronPlate"),'c',UltraTech.ItemName.get("RedstoneCable")});
 		GameRegistry.addShapedRecipe(new ItemStack(UltraTech.Sender,2), new Object[]{"fcf","cmc","fcf",'f',UltraTech.ItemName.get("CarbonFiber"),'m',UltraTech.ItemName.get("LapisPearl"),'c',UltraTech.ItemName.get("RedstonePlate")});
 		GameRegistry.addShapedRecipe(new ItemStack(UltraTech.Reciver,2),new Object[]{"fpf","pmp","fpf",'f',UltraTech.ItemName.get("CarbonFiber"),'m',UltraTech.ItemName.get("LapisPearl"),'p',UltraTech.ItemName.get("IronPlate")});
 		GameRegistry.addShapedRecipe(new ItemStack(UltraTech.ItemName.get("HeatCoil"),1), new Object[]{"ii ","ii ","   ",'i',UltraTech.ItemName.get("AlloyCable")});
 		GameRegistry.addShapedRecipe(new ItemStack(UltraTech.ItemName.get("Grafeno"),4), new Object[]{"iii","iii","iii",'i',UltraTech.GrafenoBlock});
 		GameRegistry.addShapedRecipe(new ItemStack(UltraTech.ItemName.get("GrafenoPlate"),1), new Object[]{"iii","iii","iii",'i',UltraTech.ItemName.get("Grafeno")});
-		GameRegistry.addShapedRecipe(new ItemStack(UltraTech.ItemName.get("CarbonPlate"),2), new Object[]{"ii","ii",'i',Item.coal});
-		GameRegistry.addShapedRecipe(new ItemStack(UltraTech.ItemName.get("CarbonPlate"),2), new Object[]{"ii","ii",'i',new ItemStack(Item.coal,1,1)});
+		GameRegistry.addShapedRecipe(new ItemStack(UltraTech.ItemName.get("CarbonPlate"),4), new Object[]{"ii","ii",'i',Item.coal});
+		GameRegistry.addShapedRecipe(new ItemStack(UltraTech.ItemName.get("CarbonPlate"),4), new Object[]{"ii","ii",'i',new ItemStack(Item.coal,1,1)});
 		GameRegistry.addShapedRecipe(new ItemStack(UltraTech.ItemName.get("Filter"),1), new Object[]{"ii","ii",'i',UltraTech.ItemName.get("IronPlate")});
 		GameRegistry.addShapedRecipe(new ItemStack(UltraTech.SteamTurbine,1), new Object[]{"fff","bmb","fff",'f',UltraTech.ItemName.get("CarbonFiber"),'m',UltraTech.MachineChasis,'b',UltraTech.ItemName.get("Fan")});
 		GameRegistry.addShapedRecipe(new ItemStack(UltraTech.ItemName.get("Fan"),1), new Object[]{"fjf","jfj","fjf",'f',UltraTech.ItemName.get("CarbonFiber")});
@@ -66,8 +65,11 @@ public static void registerCraft(){
 		GameRegistry.addShapedRecipe(new ItemStack(UltraTech.WindMill,1), new Object[]{"fp "," p "," m ",'f',UltraTech.ItemName.get("Fan"),'m',UltraTech.MachineChasis,'p',UltraTech.ItemName.get("CarbonFiber")});
 		GameRegistry.addShapedRecipe(new ItemStack(UltraTech.ChargeStation,1), new Object[]{" f ","fmf"," f ",'f',UltraTech.ItemName.get("IronPlate"),'m',UltraTech.MachineChasis});
 		GameRegistry.addShapedRecipe(new ItemStack(UltraTech.MolecularAssembly, 1), new Object[]{"bcb","omo","bcb",'m',UltraTech.AdvMachineChasis,'c',UltraTech.ItemName.get("AdvCircuit"),'o',UltraTech.ItemName.get("OpticFiber"),'b',UltraTech.ItemName.get("Circuit")});
-		
+		GameRegistry.addShapedRecipe(new ItemStack(UltraTech.Printer3D, 1), new Object[]{"abc","pmp",'m',UltraTech.MachineChasis,'p',Item.paper,'a',new ItemStack(Item.dyePowder,1,1),'b',new ItemStack(Item.dyePowder,1,2),'c',new ItemStack(Item.dyePowder,1,4)});
+
 		//furnace recipes
+		GameRegistry.addSmelting(UltraTech.ItemName.get("GoldDust").itemID, new ItemStack(Item.ingotGold), 0.35f);
+		GameRegistry.addSmelting(UltraTech.ItemName.get("IronDust").itemID, new ItemStack(Item.ingotIron), 0.35f);
 		GameRegistry.addSmelting(UltraTech.ItemName.get("GoldPlate").itemID, new ItemStack(Item.ingotGold), 0.35f);
 		GameRegistry.addSmelting(UltraTech.ItemName.get("IronPlate").itemID, new ItemStack(Item.ingotIron), 0.35f);
 		GameRegistry.addSmelting(UltraTech.ItemName.get("RawMeal").itemID, new ItemStack(UltraTech.ProcesedFood), 0.35f);
@@ -119,5 +121,9 @@ public static void registerCraft(){
 		//assembly recipes
 		Assembly_Recipes.addRecipe(new Assembly_Recipes(new ItemStack(UltraTech.ItemName.get("Motor"),1), new Object[]{"rc ","iii","rc ",'c',UltraTech.ItemName.get("Coil"),'r',UltraTech.ItemName.get("RedstoneCable"),'i',UltraTech.ItemName.get("IronPlate")}));
 		Assembly_Recipes.addRecipe(new Assembly_Recipes(new ItemStack(UltraTech.ItemName.get("HidrogenBattery"),1), new Object[]{"hhh","aia","hhh",'h',UltraTech.ItemName.get("IronPlate"),'a',UltraTech.ItemName.get("AlloyPlate"),'i',UltraTech.ItemName.get("Filter")}));
+		
+		//oredict
+		OreDictionary.registerOre("dustIron", UltraTech.ItemName.get("IronDust"));
+		OreDictionary.registerOre("dustGold", UltraTech.ItemName.get("GoldDust"));
 	}
 }

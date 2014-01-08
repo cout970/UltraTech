@@ -32,6 +32,7 @@ import common.cout970.UltraTech.machines.tileEntities.IDSentity;
 import common.cout970.UltraTech.machines.tileEntities.MinerEntity;
 import common.cout970.UltraTech.machines.tileEntities.MolecularAssemblyEntity;
 import common.cout970.UltraTech.machines.tileEntities.PCentity;
+import common.cout970.UltraTech.machines.tileEntities.Printer3DEntity;
 import common.cout970.UltraTech.machines.tileEntities.PurifierEntity;
 import common.cout970.UltraTech.machines.tileEntities.ReactorEntity;
 import common.cout970.UltraTech.machines.tileEntities.ReactorTankEntity;
@@ -171,6 +172,7 @@ public class UltraTech {
 	public static Block ChargeStation;
 	public static Block SolarPanel;
 	public static Block WindMill;
+	public static Block Printer3D;
 
 
 
@@ -213,6 +215,7 @@ public class UltraTech {
 		Reference.ChargeStation = config.getBlock("ChargeStation", 2076).getInt();
 		Reference.SolarPanel = config.getBlock("SolarPanel", 2077).getInt();
 		Reference.WindMill = config.getBlock("WindMill", 2078).getInt();
+		Reference.Printer3D = config.getBlock("Printer3D", 2079).getInt();
 		
 		//deco
 		Reference.StoneBlock = config.getBlock("StoneBlock", 2098).getInt();
@@ -222,6 +225,8 @@ public class UltraTech {
 		Reference.Deco3 = config.getBlock("Deco3", 2102).getInt();
 		Reference.Deco4 = config.getBlock("Deco4", 2103).getInt();
 		Reference.Deco5 = config.getBlock("Deco5", 2104).getInt();
+		Reference.Deco6 = config.getBlock("Deco6", 2105).getInt();
+		Reference.Deco7 = config.getBlock("Deco7", 2106).getInt();
 
 
 		//items
@@ -282,6 +287,7 @@ public class UltraTech {
 		ChargeStation = new ChargeStation(Reference.ChargeStation, Material.iron);
 		SolarPanel = new SolarPanel(Reference.SolarPanel, Material.iron);
 		WindMill = new WindMill(Reference.WindMill, Material.iron);
+		Printer3D = new Printer3D(Reference.Printer3D, Material.iron);
 		if(!FluidRegistry.isFluidRegistered("steam"))FluidRegistry.registerFluid(Steam);
 
 	}
@@ -416,7 +422,11 @@ public class UltraTech {
 		GameRegistry.registerTileEntity(WindMillEntity.class, "WindMill_UT");
 		GameRegistry.registerBlock(WindMill, "WindMill");
 		LanguageRegistry.addName(WindMill, "Wind Mill");
-		
+		//Printer3D
+		GameRegistry.registerTileEntity(Printer3DEntity.class, "Printer3D_UT");
+		GameRegistry.registerBlock(Printer3D, "Printer3D");
+		LanguageRegistry.addName(Printer3D, "3D Printer");
+				
 		
 		//DiamondGlass
 		GameRegistry.registerBlock(DiamondGlass, "Diamond Glass");

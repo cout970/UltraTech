@@ -9,6 +9,7 @@ import common.cout970.UltraTech.machines.containers.MAssemblyContainer;
 import common.cout970.UltraTech.machines.containers.MinerContainer;
 import common.cout970.UltraTech.machines.containers.PrecisionCuterContainer;
 import common.cout970.UltraTech.machines.containers.PresureChamberContaner;
+import common.cout970.UltraTech.machines.containers.Printer3DContainer;
 import common.cout970.UltraTech.machines.containers.PurifierContainer;
 import common.cout970.UltraTech.machines.containers.ReactorContainer;
 import common.cout970.UltraTech.machines.containers.UTfurnaceContainer;
@@ -20,6 +21,7 @@ import common.cout970.UltraTech.machines.gui.IDSgui;
 import common.cout970.UltraTech.machines.gui.MAssemblyGui;
 import common.cout970.UltraTech.machines.gui.MinerGui;
 import common.cout970.UltraTech.machines.gui.PresureChamberGui;
+import common.cout970.UltraTech.machines.gui.Printer3DGui;
 import common.cout970.UltraTech.machines.gui.PurifierGui;
 import common.cout970.UltraTech.machines.gui.ReactorGui;
 import common.cout970.UltraTech.machines.gui.UTfurnaceGui;
@@ -31,6 +33,7 @@ import common.cout970.UltraTech.machines.tileEntities.IDSentity;
 import common.cout970.UltraTech.machines.tileEntities.MinerEntity;
 import common.cout970.UltraTech.machines.tileEntities.MolecularAssemblyEntity;
 import common.cout970.UltraTech.machines.tileEntities.PCentity;
+import common.cout970.UltraTech.machines.tileEntities.Printer3DEntity;
 import common.cout970.UltraTech.machines.tileEntities.PurifierEntity;
 import common.cout970.UltraTech.machines.tileEntities.ReactorEntity;
 import common.cout970.UltraTech.machines.tileEntities.UTfurnaceEntity;
@@ -90,6 +93,10 @@ public class GuiHandler implements IGuiHandler{
 		if(tileEntity instanceof ChargeStationEntity){
 			return new ChargeStationContainer(player.inventory, (ChargeStationEntity) tileEntity);
 		}
+		//Printer3D
+		if(tileEntity instanceof Printer3DEntity){
+			return new Printer3DContainer(player.inventory, (Printer3DEntity) tileEntity);
+		}
 
 		return null;
 	}
@@ -142,6 +149,10 @@ public class GuiHandler implements IGuiHandler{
 		//ChargeStation
 		if(tileEntity instanceof ChargeStationEntity){
 			return new ChargeStationGui(new ChargeStationContainer(player.inventory, (ChargeStationEntity) tileEntity), player.inventory, (ChargeStationEntity) tileEntity);
+		}
+		//Printer3D
+		if(tileEntity instanceof Printer3DEntity){
+			return new Printer3DGui(new Printer3DContainer(player.inventory, (Printer3DEntity) tileEntity), player.inventory, (Printer3DEntity) tileEntity);
 		}
 		
 		return null;

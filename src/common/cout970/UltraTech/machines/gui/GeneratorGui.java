@@ -30,7 +30,7 @@ public class GeneratorGui extends GuiContainer{
 
 		//progres bar
 		int i1 = (int) entity.progres*12/600;
-		this.drawTexturedModalRect(xStart + 82, yStart + 42 + 12 - i1, 176, 13 - i1, 14, i1 + 2);
+		this.drawTexturedModalRect(xStart + 81, yStart + 42 + 12 - i1, 176, 13 - i1, 14, i1 + 2);
 
 
 		//energy

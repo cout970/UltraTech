@@ -12,6 +12,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidEvent;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
@@ -33,7 +34,7 @@ public class SteamTurbineEntity extends Machine implements IFluidTank,IFluidHand
 			List<IFluidHandler> a = getTanks();
 			for(IFluidHandler b : a){
 				if(this.getFluidAmount() > 500)
-				this.drain(b.fill(ForgeDirection.UNKNOWN , new FluidStack(UltraTech.Steam,500), true),true);
+				this.drain(b.fill(ForgeDirection.UP , new FluidStack(FluidRegistry.getFluid("steam"),500), true),true);
 			}
 			if(Reactor != null){
 				if(Reactor.steam > 0){
