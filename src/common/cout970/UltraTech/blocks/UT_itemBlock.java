@@ -1,5 +1,10 @@
 package common.cout970.UltraTech.blocks;
 
+import java.util.List;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
@@ -11,9 +16,7 @@ public class UT_itemBlock extends ItemBlock{
 	}
 
 	public final static String[] subNames = {
-		"White", "Black",  "Red", "Green", "Blue", "Yellow",
-		"Cyan","Purple","Light Green","Steal Blue","Pink",
-		"Orange","Blue Violet","Sea Green"
+		"White","Black","Blue","Steal Blue","Cyan","Sea Green","Green","Light Green","Yellow","Orange","Red","Purple","Pink","Blue Violet"
 	};
 	
 	@Override
@@ -30,7 +33,16 @@ public class UT_itemBlock extends ItemBlock{
 	@Override
 	public String getItemDisplayName(ItemStack is) {
 		return "Decorative Block "+subNames[is.getItemDamage()];
-//		return "debug";
+	}
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void addInformation(ItemStack is, EntityPlayer par2EntityPlayer, List l, boolean par4) {
+		super.addInformation(is, par2EntityPlayer, l, par4);
+		try{
+			l.add("Colored in a 3D printer");
+		}catch(Exception e){}
 	}
 	
 	@Override

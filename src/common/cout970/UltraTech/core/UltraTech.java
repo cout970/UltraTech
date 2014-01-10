@@ -104,7 +104,7 @@ public class UltraTech {
 	public static final CreativeTabs DecoTab = new CreativeTabs("UltraTech"){
 
 		public ItemStack getIconItemStack() {
-			return new ItemStack(BlockManager.d.get(1), 1, 4);
+			return new ItemStack(BlockManager.d.get(5), 1, 0);
 		}
 
 		@SideOnly(Side.CLIENT)
