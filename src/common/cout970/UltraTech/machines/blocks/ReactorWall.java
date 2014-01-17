@@ -99,9 +99,6 @@ public class ReactorWall extends BlockContainer{
 		return true;
 	}
 
-	
-
-
 	@Override
 	public TileEntity createNewTileEntity(World world) {
 		return new ReactorWallEntity();

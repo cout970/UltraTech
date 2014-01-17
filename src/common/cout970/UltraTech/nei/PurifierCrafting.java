@@ -29,7 +29,7 @@ public class PurifierCrafting extends TemplateRecipeHandler {
 	public void loadCraftingRecipes(ItemStack result)
 	{
 		for(int x = 0; x < Purifier_Recipe.recipes.size();x++ ){
-			if(result.itemID == Purifier_Recipe.recipes.get(x).getOutput().itemID){
+			if(result.itemID == Purifier_Recipe.recipes.get(x).getOutput().itemID && result.getItemDamage() == Purifier_Recipe.recipes.get(x).getOutput().getItemDamage()){
 				recipes.add(Purifier_Recipe.recipes.get(x));
 			}
 		}
@@ -39,7 +39,7 @@ public class PurifierCrafting extends TemplateRecipeHandler {
 	@Override
 	public void loadUsageRecipes(ItemStack ingredient){
 		for(int x = 0; x < Purifier_Recipe.recipes.size();x++ ){
-			if(ingredient.itemID == Purifier_Recipe.recipes.get(x).getInput().itemID){
+			if(ingredient.itemID == Purifier_Recipe.recipes.get(x).getInput().itemID && ingredient.getItemDamage() == Purifier_Recipe.recipes.get(x).getInput().getItemDamage()){
 				recipes.add(Purifier_Recipe.recipes.get(x));
 			}
 		}

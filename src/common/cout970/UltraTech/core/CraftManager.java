@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
+import common.cout970.UltraTech.blocks.BlockManager;
 import common.cout970.UltraTech.lib.recipes.Assembly_Recipes;
 import common.cout970.UltraTech.lib.recipes.CVD_Recipe;
 import common.cout970.UltraTech.lib.recipes.Cuter_Recipes;
@@ -57,10 +58,11 @@ public static void registerCraft(){
 		GameRegistry.addShapedRecipe(new ItemStack(UltraTech.ItemName.get("CarbonPlate"),4), new Object[]{"ii","ii",'i',Item.coal});
 		GameRegistry.addShapedRecipe(new ItemStack(UltraTech.ItemName.get("CarbonPlate"),4), new Object[]{"ii","ii",'i',new ItemStack(Item.coal,1,1)});
 		GameRegistry.addShapedRecipe(new ItemStack(UltraTech.ItemName.get("Filter"),1), new Object[]{"ii","ii",'i',UltraTech.ItemName.get("IronPlate")});
-		GameRegistry.addShapedRecipe(new ItemStack(UltraTech.SteamTurbine,1), new Object[]{"fff","bmb","fff",'f',UltraTech.ItemName.get("CarbonFiber"),'m',UltraTech.MachineChasis,'b',UltraTech.ItemName.get("Fan")});
+		GameRegistry.addShapedRecipe(new ItemStack(UltraTech.SteamTurbine,1), new Object[]{"fff","bmb","fff",'f',UltraTech.ItemName.get("CarbonFiber"),'m',UltraTech.ReactorWall,'b',UltraTech.ItemName.get("Fan")});
 		GameRegistry.addShapedRecipe(new ItemStack(UltraTech.ItemName.get("Fan"),1), new Object[]{"fjf","jfj","fjf",'f',UltraTech.ItemName.get("CarbonFiber")});
-		GameRegistry.addShapedRecipe(new ItemStack(UltraTech.WaterBlock,1), new Object[]{"fbf","jmj","fbf",'f',UltraTech.ItemName.get("CarbonFiber"),'m',UltraTech.MachineChasis,'b',Item.bucketEmpty,'j',UltraTech.ItemName.get("Circuit")});
-		GameRegistry.addShapedRecipe(new ItemStack(UltraTech.StoneBlockBricks,4), new Object[]{"ff","ff",'f',UltraTech.StoneBlock});
+		GameRegistry.addShapedRecipe(new ItemStack(UltraTech.WaterBlock,1), new Object[]{"fbf","jmj","fbf",'f',UltraTech.ItemName.get("CarbonFiber"),'m',UltraTech.ReactorWall,'b',Item.bucketEmpty,'j',UltraTech.ItemName.get("Circuit")});
+		GameRegistry.addShapedRecipe(new ItemStack(BlockManager.stoneblock,4,1), new Object[]{"ff","ff",'f',new ItemStack(BlockManager.stoneblock,1,0)});
+		GameRegistry.addShapedRecipe(new ItemStack(BlockManager.stoneblock,4,3), new Object[]{"ff","ff",'f',new ItemStack(BlockManager.stoneblock,1,2)});
 		GameRegistry.addShapedRecipe(new ItemStack(UltraTech.EnergyColector,1), new Object[]{"fff","cmc","fpf",'f',UltraTech.ItemName.get("CarbonFiber"),'m',UltraTech.MachineChasis,'p',UltraTech.ItemName.get("EnergyTransmiter"),'c',UltraTech.ItemName.get("OpticFiber")});
 		GameRegistry.addShapedRecipe(new ItemStack(UltraTech.WindMill,1), new Object[]{"fp "," p "," m ",'f',UltraTech.ItemName.get("Fan"),'m',UltraTech.MachineChasis,'p',UltraTech.ItemName.get("CarbonFiber")});
 		GameRegistry.addShapedRecipe(new ItemStack(UltraTech.ChargeStation,1), new Object[]{" f ","fmf"," f ",'f',UltraTech.ItemName.get("IronPlate"),'m',UltraTech.MachineChasis});
@@ -96,8 +98,8 @@ public static void registerCraft(){
 		Purifier_Recipe.addRecipe(new Purifier_Recipe(new ItemStack(Block.sandStone), new ItemStack(Block.sand,4)));
 		Purifier_Recipe.addRecipe(new Purifier_Recipe(new ItemStack(UltraTech.RadioniteOre), new ItemStack(UltraTech.ItemName.get("Radionite"),2)));
 		Purifier_Recipe.addRecipe(new Purifier_Recipe(new ItemStack(Block.obsidian), new ItemStack(UltraTech.ItemName.get("IronDust"),1)));//ilogic
-		Purifier_Recipe.addRecipe(new Purifier_Recipe(new ItemStack(Block.stone), new ItemStack(UltraTech.StoneBlock,1)));
-		Purifier_Recipe.addRecipe(new Purifier_Recipe(new ItemStack(Block.cobblestone), new ItemStack(UltraTech.StoneBlock,1)));
+		Purifier_Recipe.addRecipe(new Purifier_Recipe(new ItemStack(Block.stone), new ItemStack(BlockManager.stoneblock,1,0)));
+		Purifier_Recipe.addRecipe(new Purifier_Recipe(new ItemStack(Block.cobblestone), new ItemStack(BlockManager.stoneblock,1,0)));
 		
 		//cuter recipes
 		Cuter_Recipes.addRecipe(new Cuter_Recipes(new ItemStack(Item.diamond), new ItemStack(UltraTech.ItemName.get("DiamondPlate"), 8)));

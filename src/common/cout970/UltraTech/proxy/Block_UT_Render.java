@@ -3,8 +3,8 @@ package common.cout970.UltraTech.proxy;
 import org.lwjgl.opengl.GL11;
 
 import common.cout970.UltraTech.blocks.UT_Block;
-
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.Icon;
@@ -26,7 +26,7 @@ public class Block_UT_Render implements ISimpleBlockRenderingHandler {
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z,
 			Block block, int modelId, RenderBlocks renderer) {
 		Tessellator t = Tessellator.instance;
-
+		
 		//texture
 		Icon c = UT_Block.blockIconIn;
 
@@ -37,56 +37,57 @@ public class Block_UT_Render implements ISimpleBlockRenderingHandler {
 
 		int meta = world.getBlockMetadata(x, y, z);
 		this.setColor(meta, t,true);
+		float i = 0.002f;
 		//z-
-		t.addVertexWithUV(x, y, z+0.001, u, v);
-		t.addVertexWithUV(x, y+1, z+0.001, u, v1);
-		t.addVertexWithUV(x+1, y+1, z+0.001, u1, v1);
-		t.addVertexWithUV(x+1, y, z+0.001, u1, v);
+		t.addVertexWithUV(x, y, z+i, u, v);
+		t.addVertexWithUV(x, y+1, z+i, u, v1);
+		t.addVertexWithUV(x+1, y+1, z+i, u1, v1);
+		t.addVertexWithUV(x+1, y, z+i, u1, v);
 		//z+
 		t.setTextureUV(u, v);
-		t.addVertex(x+1, y, z+0.999);
+		t.addVertex(x+1, y, z+1-i);
 		t.setTextureUV(u, v1);
-		t.addVertex(x+1, y+1, z+0.999);
+		t.addVertex(x+1, y+1, z+1-i);
 		t.setTextureUV(u1, v1);
-		t.addVertex(x, y+1, z+0.999);
+		t.addVertex(x, y+1, z+1-i);
 		t.setTextureUV(u1, v);
-		t.addVertex(x, y, z+0.999);
+		t.addVertex(x, y, z+1-i);
 		//x-
 		t.setTextureUV(u, v);
-		t.addVertex(x+0.001, y, z+1);
+		t.addVertex(x+i, y, z+1);
 		t.setTextureUV(u, v1);
-		t.addVertex(x+0.001, y+1, z+1);
+		t.addVertex(x+i, y+1, z+1);
 		t.setTextureUV(u1, v1);
-		t.addVertex(x+0.001, y+1, z);
+		t.addVertex(x+i, y+1, z);
 		t.setTextureUV(u1, v);
-		t.addVertex(x+0.001, y, z);
+		t.addVertex(x+i, y, z);
 		//x+
 		t.setTextureUV(u, v);
-		t.addVertex(x+0.999, y, z);
+		t.addVertex(x+1-i, y, z);
 		t.setTextureUV(u, v1);
-		t.addVertex(x+0.999, y+1, z);
+		t.addVertex(x+1-i, y+1, z);
 		t.setTextureUV(u1, v1);
-		t.addVertex(x+0.999, y+1, z+1);
+		t.addVertex(x+1-i, y+1, z+1);
 		t.setTextureUV(u1, v);
-		t.addVertex(x+0.999, y, z+1);
+		t.addVertex(x+1-i, y, z+1);
 		//y-
 		t.setTextureUV(u, v);
-		t.addVertex(x+1, y+0.001, z);
+		t.addVertex(x+1, y+i, z);
 		t.setTextureUV(u, v1);
-		t.addVertex(x+1, y+0.001, z+1);
+		t.addVertex(x+1, y+i, z+1);
 		t.setTextureUV(u1, v1);
-		t.addVertex(x, y+0.001, z+1);
+		t.addVertex(x, y+i, z+1);
 		t.setTextureUV(u1, v);
-		t.addVertex(x, y+0.001, z);
+		t.addVertex(x, y+i, z);
 		//y+
 		t.setTextureUV(u, v);
-		t.addVertex(x, y+0.999, z);
+		t.addVertex(x, y+1-i, z);
 		t.setTextureUV(u, v1);
-		t.addVertex(x, y+0.999, z+1);
+		t.addVertex(x, y+1-i, z+1);
 		t.setTextureUV(u1, v1);
-		t.addVertex(x+1, y+0.999, z+1);
+		t.addVertex(x+1, y+1-i, z+1);
 		t.setTextureUV(u1, v);
-		t.addVertex(x+1, y+0.999, z);
+		t.addVertex(x+1, y+1-i, z);
 		return renderer.renderStandardBlock(block, x, y, z);
 	}
 
@@ -156,7 +157,7 @@ public class Block_UT_Render implements ISimpleBlockRenderingHandler {
 		
 		GL11.glPushMatrix();
 		//color
-		if(meta == 0)tessellator.setColorOpaque_F(1, 1, 1);//white
+		if(meta == 0)GL11.glColor3f(0.7f, 0.7f, 0.7f);//white
 		else if(meta  == 1)GL11.glColor3f(0, 0, 0);//black
 		else if(meta  == 10)GL11.glColor3f(1, 0, 0);//red
 		else if(meta  == 6)GL11.glColor3f(0, 1, 0);//green
@@ -171,7 +172,6 @@ public class Block_UT_Render implements ISimpleBlockRenderingHandler {
 		else if(meta  == 13)GL11.glColor3f(0.5f, 0.0f, 1f);//violet
 		else if(meta  == 5)GL11.glColor3f(0.0f, 1f, 0.5f);//marine water blue(azul agua marina)
 		else GL11.glColor3f(1,1,1);
-		
 		tessellator.setBrightness(15728640);//15728640
 		//draw
 		par1Block.setBlockBoundsForItemRender();
@@ -231,10 +231,14 @@ public class Block_UT_Render implements ISimpleBlockRenderingHandler {
 		else if(meta  == 13)t.setColorOpaque_F(0.5f, 0.0f, 1f);//violet
 		else if(meta  == 5)t.setColorOpaque_F(0.0f, 1f, 0.5f);//marine water blue(azul agua marina)
 		else t.setColorOpaque_F(1,1,1);
-		if(meta  == 1 || meta == 0){
-			t.setBrightness(15728640);
+		if(Minecraft.getMinecraft() != null && Minecraft.getMinecraft().theWorld != null){
+			if(Minecraft.getMinecraft().theWorld.getWorldTime()%24000 > 6000){
+			t.setBrightness((int) (Minecraft.getMinecraft().theWorld.getWorldTime()%24000));
+			}else{
+				t.setBrightness(6000);
+			}
 		}else{
-			t.setBrightness(16777);//16777 night day 15728640
+			t.setBrightness(23999);//18000 night day 15728640 /time set 18000
 		}
 	}
 

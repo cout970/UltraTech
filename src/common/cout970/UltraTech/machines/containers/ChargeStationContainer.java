@@ -69,7 +69,7 @@ public class ChargeStationContainer extends Container{
 			ItemStack itemstack = current.getStack();
 			aux = itemstack.copy();
 			
-			if(slot <= inv){//slot 0 smelt
+			if(slot < inv){//slot 0 smelt
 				if(!mergeItemStack(itemstack, inv, 36+inv, true)){
 					return null;
 				}

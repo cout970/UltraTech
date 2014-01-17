@@ -19,7 +19,8 @@ public class WaterBlockEntity extends TileEntity implements IReactorPart{
 	
 	public void updateEntity(){
 		List<IFluidHandler> a = getTanks();
-		for(IFluidHandler b : a){
+		if(FluidRegistry.WATER != null)
+			for(IFluidHandler b : a){
 			b.fill(ForgeDirection.UP , new FluidStack(FluidRegistry.WATER,100), true);
 		}
 	}

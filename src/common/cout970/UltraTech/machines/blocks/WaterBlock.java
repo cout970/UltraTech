@@ -28,7 +28,7 @@ public class WaterBlock extends BlockContainer{
 
 	public void registerIcons(IconRegister iconRegister){
 		this.blockIcon = iconRegister.registerIcon("ultratech:waterblock");
-		this.blockIconTop = iconRegister.registerIcon("ultratech:machinechasis");
+		this.blockIconTop = iconRegister.registerIcon("ultratech:reactorwallmulti");
 	}
 	
 	@SideOnly(Side.CLIENT)

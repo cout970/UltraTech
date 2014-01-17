@@ -167,14 +167,6 @@ public class ReactorTankEntity extends TileEntity implements IFluidHandler,IFlui
 		return capacity;
 	}
 
-//	public SyncObject getAmount() {
-//		if(liquid == null)return null;
-//		SyncObject obj = new SyncObject();
-//		obj.setVar1((int)(((float)liquid.amount)*100/((float)capacity)));
-//		obj.setVar2(liquid.getFluid().getBlockID());
-//		return obj;
-//	}
-
 	@Override
 	public int getFluidAmount() {
 		if(liquid == null)return 0;

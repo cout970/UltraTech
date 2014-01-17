@@ -33,6 +33,7 @@ public class ReactorEntity extends TileEntity implements IInventory,IReactorPart
 	public int MaxSteam = 64000;
 	public int MaxWater;
 	public List<ReactorTankEntity> tanks;
+	public boolean work = true;
 
 	
 	public ReactorEntity(){
@@ -48,41 +49,43 @@ public class ReactorEntity extends TileEntity implements IInventory,IReactorPart
 		}
 		//produce steam
 		if(!this.worldObj.isRemote){
-		int e = 6;
-		int c = 100;
-		this.time++;
-		int id = UltraTech.ItemName.get("RadioniteCell").itemID;
-		if(inventory[0] != null && inventory[0].itemID == id)afect(0,e,c);
-		if(inventory[1] != null && inventory[1].itemID == id)afect(1,e,c);
-		if(inventory[2] != null && inventory[2].itemID == id)afect(2,e,c);
-		if(inventory[3] != null && inventory[3].itemID == id)afect(3,e,c);
-		if(inventory[4] != null && inventory[4].itemID == id)afect(4,e,c);
-		if(inventory[5] != null && inventory[5].itemID == id)afect(5,e,c);
-		if(time >= c){
-			time = 0;
-		}
-		if(tanks == null)tanks = this.getTanks();
-		
-		MaxWater = 0;
-		water = 0;
-		for(ReactorTankEntity t : tanks){
-			if(t.getFluidAmount() == 0){
-				MaxWater += t.getCapacity();
-			}else if(t.getFluid().getFluid().getBlockID() == Block.waterStill.blockID){
-				MaxWater += t.getCapacity();
-				water += t.getFluidAmount();
+			if(work){
+				int e = 6;
+				int c = 100;
+				this.time++;
+				int id = UltraTech.ItemName.get("RadioniteCell").itemID;
+				if(inventory[0] != null && inventory[0].itemID == id)afect(0,e,c);
+				if(inventory[1] != null && inventory[1].itemID == id)afect(1,e,c);
+				if(inventory[2] != null && inventory[2].itemID == id)afect(2,e,c);
+				if(inventory[3] != null && inventory[3].itemID == id)afect(3,e,c);
+				if(inventory[4] != null && inventory[4].itemID == id)afect(4,e,c);
+				if(inventory[5] != null && inventory[5].itemID == id)afect(5,e,c);
+				if(time >= c){
+					time = 0;
+				}
 			}
-		}
-		if(steam < MaxSteam)vaporice();
-		
-		if(heat > 1000){
-			this.blownUp();
-		}
+			if(tanks == null)tanks = this.getTanks();
+
+			MaxWater = 0;
+			water = 0;
+			for(ReactorTankEntity t : tanks){
+				if(t.getFluidAmount() == 0){
+					MaxWater += t.getCapacity();
+				}else if(t.getFluid().getFluid().getBlockID() == Block.waterStill.blockID){
+					MaxWater += t.getCapacity();
+					water += t.getFluidAmount();
+				}
+			}
+			if(steam < MaxSteam)vaporice();
+
+			if(heat > 1000){
+				this.blownUp();
+			}
 		}
 	}
 	
 	public boolean vaporice(){
-		if(heat > 500)
+		if(heat > 501)
 		for(ReactorTankEntity t : tanks){
 			if(t.getFluidAmount() != 0){
 			t.drain(10, true);
@@ -260,7 +263,7 @@ public class ReactorEntity extends TileEntity implements IInventory,IReactorPart
 	}
 
 		private void blownUp(){
-			float f = 114.0f;
+			float f = 20.0f;
 			this.worldObj.createExplosion(null, this.xCoord, this.yCoord, this.zCoord, f, true);
 			this.worldObj.createExplosion(null, this.xCoord, this.yCoord+1, this.zCoord, f, true);
 			this.worldObj.createExplosion(null, this.xCoord, this.yCoord-1, this.zCoord, f, true);

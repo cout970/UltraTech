@@ -34,6 +34,7 @@ import common.cout970.UltraTech.machines.tileEntities.MolecularAssemblyEntity;
 import common.cout970.UltraTech.machines.tileEntities.PCentity;
 import common.cout970.UltraTech.machines.tileEntities.Printer3DEntity;
 import common.cout970.UltraTech.machines.tileEntities.PurifierEntity;
+import common.cout970.UltraTech.machines.tileEntities.ReactorControllerEntity;
 import common.cout970.UltraTech.machines.tileEntities.ReactorEntity;
 import common.cout970.UltraTech.machines.tileEntities.ReactorTankEntity;
 import common.cout970.UltraTech.machines.tileEntities.ReactorWallEntity;
@@ -167,13 +168,11 @@ public class UltraTech {
 	public static Block RadioniteOre;
 	public static Block MolecularAssembly;
 	public static  Item ProcesedFood;
-	public static Block StoneBlock;
-	public static Block StoneBlockBricks;
 	public static Block ChargeStation;
 	public static Block SolarPanel;
 	public static Block WindMill;
 	public static Block Printer3D;
-
+	public static Block ReactorController;
 
 
 
@@ -216,10 +215,10 @@ public class UltraTech {
 		Reference.SolarPanel = config.getBlock("SolarPanel", 2077).getInt();
 		Reference.WindMill = config.getBlock("WindMill", 2078).getInt();
 		Reference.Printer3D = config.getBlock("Printer3D", 2079).getInt();
+		Reference.ReactorController = config.getBlock("ReactorController", 2080).getInt();
 		
 		//deco
-		Reference.StoneBlock = config.getBlock("StoneBlock", 2098).getInt();
-		Reference.StoneBlockBricks = config.getBlock("StoneBlockBricks", 2099).getInt();
+		Reference.StoneBlock = config.getBlock("StoneBlock", 2099).getInt();
 		Reference.Deco = config.getBlock("Deco", 2100).getInt();
 		Reference.Deco2 = config.getBlock("Deco2", 2101).getInt();
 		Reference.Deco3 = config.getBlock("Deco3", 2102).getInt();
@@ -227,7 +226,16 @@ public class UltraTech {
 		Reference.Deco5 = config.getBlock("Deco5", 2104).getInt();
 		Reference.Deco6 = config.getBlock("Deco6", 2105).getInt();
 		Reference.Deco7 = config.getBlock("Deco7", 2106).getInt();
+		Reference.Deco8 = config.getBlock("Deco8", 2107).getInt();
 
+		Reference.Decow = config.getBlock("Decow", 2200).getInt();
+		Reference.Deco2w = config.getBlock("Deco2w", 2201).getInt();
+		Reference.Deco3w = config.getBlock("Deco3w", 2202).getInt();
+		Reference.Deco4w = config.getBlock("Deco4w", 2203).getInt();
+		Reference.Deco5w = config.getBlock("Deco5w", 2204).getInt();
+		Reference.Deco6w = config.getBlock("Deco6w", 2205).getInt();
+		Reference.Deco7w = config.getBlock("Deco7w", 2206).getInt();
+		Reference.Deco8w = config.getBlock("Deco8w", 2207).getInt();
 
 		//items
 
@@ -282,12 +290,11 @@ public class UltraTech {
 		WaterBlock = new WaterBlock(Reference.WaterBlock, Material.iron);
 		RadioniteOre = new RadioniteOre(Reference.RadioniteOre, Material.iron);
 		MolecularAssembly = new MolecularAssembly(Reference.MolecularAssembly, Material.iron);
-		StoneBlock = new common.cout970.UltraTech.blocks.StoneBlock(Reference.StoneBlock,Material.rock);
-		StoneBlockBricks = new common.cout970.UltraTech.blocks.StoneBlockBricks(Reference.StoneBlockBricks,Material.rock);
 		ChargeStation = new ChargeStation(Reference.ChargeStation, Material.iron);
 		SolarPanel = new SolarPanel(Reference.SolarPanel, Material.iron);
 		WindMill = new WindMill(Reference.WindMill, Material.iron);
 		Printer3D = new Printer3D(Reference.Printer3D, Material.iron);
+		ReactorController = new ReactorController(Reference.ReactorController,Material.iron);
 		if(!FluidRegistry.isFluidRegistered("steam"))FluidRegistry.registerFluid(Steam);
 
 	}
@@ -426,7 +433,10 @@ public class UltraTech {
 		GameRegistry.registerTileEntity(Printer3DEntity.class, "Printer3D_UT");
 		GameRegistry.registerBlock(Printer3D, "Printer3D");
 		LanguageRegistry.addName(Printer3D, "3D Printer");
-				
+		//ReactorController	
+		GameRegistry.registerTileEntity(ReactorControllerEntity.class, "ReactorController_UT");
+		GameRegistry.registerBlock(ReactorController, "ReactorController");
+		LanguageRegistry.addName(ReactorController, "Reactor Controller");
 		
 		//DiamondGlass
 		GameRegistry.registerBlock(DiamondGlass, "Diamond Glass");
@@ -449,12 +459,6 @@ public class UltraTech {
 		//RadioniteOre
 		GameRegistry.registerBlock(RadioniteOre, "RadioniteOre");
 		LanguageRegistry.addName(RadioniteOre, "Radionite Ore");
-		//StoneBlock
-		GameRegistry.registerBlock(StoneBlock, "StoneBlock");
-		LanguageRegistry.addName(StoneBlock, "Stone Block");
-		//StoneBlockBricks
-		GameRegistry.registerBlock(StoneBlockBricks, "StoneBlockBricks");
-		LanguageRegistry.addName(StoneBlockBricks, "Stone Block Bricks");
 
 		CraftManager.registerCraft();
 		GameRegistry.registerWorldGenerator(new WorldGen());

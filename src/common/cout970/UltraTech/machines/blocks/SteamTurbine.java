@@ -41,7 +41,7 @@ public class SteamTurbine extends BlockContainer{
 	
 	public void registerIcons(IconRegister iconRegister){
 		this.blockIcon = iconRegister.registerIcon("ultratech:turbine");
-		this.IconFront = iconRegister.registerIcon("ultratech:machinechasis");
+		this.IconFront = iconRegister.registerIcon("ultratech:reactorwallmulti");
 	}
 	
 	@Override

@@ -1,6 +1,6 @@
 package common.cout970.UltraTech.machines.tileEntities;
 
-import common.cout970.UltraTech.blocks.UT_itemBlock;
+import common.cout970.UltraTech.blocks.UT_ItemBlockDeco;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -23,7 +23,7 @@ public class Printer3DEntity extends TileEntity implements IInventory{
 	public void updateEntity(){
 		if(update){
 			update = false;
-			if(inventory[0] != null && inventory[0].getItem() instanceof UT_itemBlock)
+			if(inventory[0] != null && inventory[0].getItem() instanceof UT_ItemBlockDeco)
 			inventory[0].setItemDamage(color);
 		}
 	}

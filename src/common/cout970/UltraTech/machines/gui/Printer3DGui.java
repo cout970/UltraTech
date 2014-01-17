@@ -2,7 +2,7 @@ package common.cout970.UltraTech.machines.gui;
 
 import org.lwjgl.opengl.GL11;
 
-import common.cout970.UltraTech.blocks.UT_itemBlock;
+import common.cout970.UltraTech.blocks.UT_ItemBlockDeco;
 import common.cout970.UltraTech.machines.containers.Printer3DContainer;
 import common.cout970.UltraTech.machines.tileEntities.Printer3DEntity;
 import net.minecraft.client.gui.GuiButton;
@@ -39,10 +39,10 @@ public class Printer3DGui extends GuiContainer{
 		int yStart = (height - ySize) / 2;
 		//id, x, y, width, height, text
 		for(int i=0;i<7;i++){
-			buttonList.add(new GuiButton(i, 35+xStart, 8+yStart+i*10, 62, 10, UT_itemBlock.subNames[i]));
+			buttonList.add(new GuiButton(i, 35+xStart, 8+yStart+i*10, 62, 10, UT_ItemBlockDeco.subNames[i]));
 		}
 		for(int i=7;i<14;i++){
-			buttonList.add(new GuiButton(i, 102+xStart, 8+yStart+(i-7)*10, 62, 10, UT_itemBlock.subNames[i]));
+			buttonList.add(new GuiButton(i, 102+xStart, 8+yStart+(i-7)*10, 62, 10, UT_ItemBlockDeco.subNames[i]));
 		}
 	}
 

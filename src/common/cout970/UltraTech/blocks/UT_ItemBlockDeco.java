@@ -8,9 +8,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
-public class UT_itemBlock extends ItemBlock{
+public class UT_ItemBlockDeco extends ItemBlock{
 
-	public UT_itemBlock(int par1) {
+	public UT_ItemBlockDeco(int par1) {
 		super(par1);
 		setHasSubtypes(true);
 	}

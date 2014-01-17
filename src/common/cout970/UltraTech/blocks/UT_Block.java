@@ -17,10 +17,12 @@ import net.minecraft.world.World;
 public class UT_Block extends Block{
 
 	public String texture;
+	public boolean black = true;
 	public static Icon blockIconIn;
 	
-	public UT_Block(int par1, String name) {
+	public UT_Block(int par1, String name,boolean black) {
 		super(par1, Material.rock);
+		this.black = black;
 		setCreativeTab(UltraTech.DecoTab);
 		setHardness(0.4f);
 		setStepSound(soundStoneFootstep);
@@ -31,8 +33,8 @@ public class UT_Block extends Block{
 	
 	@SuppressWarnings("static-access")
 	public void registerIcons(IconRegister iconRegister){
-		this.blockIcon = iconRegister.registerIcon("ultratech:deco/"+texture);
-		this.blockIconIn = iconRegister.registerIcon("ultratech:deco/base");
+		this.blockIcon = iconRegister.registerIcon("ultratech:deco_"+((!black) ? "white" : "black")+"/"+texture);
+		this.blockIconIn = iconRegister.registerIcon("ultratech:deco_white/base");
 	}
 	
 	@SideOnly(Side.CLIENT)
@@ -67,8 +69,6 @@ public class UT_Block extends Block{
 			subItems.add(new ItemStack(this, 1, ix));
 		}
 	}
-
-
 
 	@Override
 	public boolean canRenderInPass(int pass)
