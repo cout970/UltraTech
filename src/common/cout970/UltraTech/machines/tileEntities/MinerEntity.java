@@ -18,6 +18,7 @@ public class MinerEntity extends Machine implements IInventory{
 	private int size = 13 * 4;;
 	private int proces = 0;
 	public int speed = 10;
+	boolean flag = false ;
 	public int current = 0;
 	private ArrayList<Mining> mining;
 	public boolean hasMine = false;
@@ -40,6 +41,7 @@ public class MinerEntity extends Machine implements IInventory{
  	
 	public MinerEntity(){
 		super();
+		this.EnergyMax = 10000;
 		inventory = new ItemStack[size];
 	}
 	
@@ -276,15 +278,18 @@ public class MinerEntity extends Machine implements IInventory{
 				CreateMining();
 				hasMine = true;
 			}
-			boolean flag = this.getEnergy() > 64;
+			if(!flag){
+				flag = this.Energy >= 56;
+			}
 			boolean flag1 = false;
 			boolean workdo = current >= mining.size(); 
 			if(flag && !workdo){
 				proces += speed;
-				this.loseEnergy(speed/2);
 				if(proces >= 100){
+					this.loseEnergy(56);
 					proces = 0;
 					flag1 = true;
+					flag = false;
 					if(current < mining.size())	BreakNextBlock();
 				}
 			}

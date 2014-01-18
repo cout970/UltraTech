@@ -88,6 +88,7 @@ public static void registerCraft(){
 		CVD_Recipe.addRecipe(new CVD_Recipe(new ItemStack(Item.ingotGold), new ItemStack(Item.ingotGold),new ItemStack(UltraTech.ItemName.get("GoldPlate"),2)));
 		CVD_Recipe.addRecipe(new CVD_Recipe(new ItemStack(Item.ingotIron), new ItemStack(Item.ingotIron),new ItemStack(UltraTech.ItemName.get("IronPlate"),2)));
 		CVD_Recipe.addRecipe(new CVD_Recipe(new ItemStack(UltraTech.ItemName.get("CarbonFiber")), new ItemStack(UltraTech.ItemName.get("Grafeno")),new ItemStack(UltraTech.ItemName.get("DiamondDust"),1)));
+		CVD_Recipe.addRecipe(new CVD_Recipe(new ItemStack(BlockManager.stoneblock,1,0), new ItemStack(Item.dyePowder,1,15),new ItemStack(BlockManager.stoneblock,1,2)));
 
 		
 		//purifier recipes

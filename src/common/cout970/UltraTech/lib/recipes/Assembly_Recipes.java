@@ -145,7 +145,7 @@ public class Assembly_Recipes {
 	public static boolean equals(ItemStack a,ItemStack b){
 		if(a == null && b == null)return true;
 		if(a != null && b != null){
-			if(a.itemID == b.itemID)return true;
+			if(a.itemID == b.itemID && a.getItemDamage() == b.getItemDamage())return true;
 		}
 		return false;
 	}
@@ -161,10 +161,14 @@ public class Assembly_Recipes {
 			for(Assembly_Recipes a:recipes){
 				for(int x=0; x<9; x++){
 					if(a.imput[x] != null){
-						if(itemstack.itemID == a.imput[x].itemID);
+						if(itemstack.itemID == a.imput[x].itemID){
+							return a.getOutput();
+						}
 					}
 				}
 		}
 		return null;
 	}
+
+
 }

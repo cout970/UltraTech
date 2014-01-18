@@ -16,7 +16,7 @@ public class CVD_Crafting extends TemplateRecipeHandler {
 
 	@Override
 	public String getRecipeName() {
-		return "Chemical Vapor Descomposition";
+		return "CVD";
 	}
 
 	@Override
@@ -29,7 +29,7 @@ public class CVD_Crafting extends TemplateRecipeHandler {
 	public void loadCraftingRecipes(ItemStack result)
 	{
 		for(int x = 0; x < CVD_Recipe.recipes.size();x++ ){
-			if(result.itemID == CVD_Recipe.recipes.get(x).getOutput().itemID){
+			if(result.itemID == CVD_Recipe.recipes.get(x).getOutput().itemID && result.getItemDamage() == CVD_Recipe.recipes.get(x).getOutput().getItemDamage()){
 				recipes.add(CVD_Recipe.recipes.get(x));
 			}
 		}

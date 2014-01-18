@@ -36,7 +36,7 @@ public class Block_UT_Render implements ISimpleBlockRenderingHandler {
 		float v1 = c.getInterpolatedV(16);
 
 		int meta = world.getBlockMetadata(x, y, z);
-		this.setColor(meta, t,true);
+		this.setColor(meta, t, false);
 		float i = 0.002f;
 		//z-
 		t.addVertexWithUV(x, y, z+i, u, v);
@@ -88,6 +88,7 @@ public class Block_UT_Render implements ISimpleBlockRenderingHandler {
 		t.addVertex(x+1, y+1-i, z+1);
 		t.setTextureUV(u1, v);
 		t.addVertex(x+1, y+1-i, z);
+		
 		return renderer.renderStandardBlock(block, x, y, z);
 	}
 

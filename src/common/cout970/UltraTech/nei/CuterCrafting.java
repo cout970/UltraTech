@@ -78,6 +78,4 @@ public class CuterCrafting extends TemplateRecipeHandler {
 		this.drawProgressBar(80, 20, 178, 14, 24, 16, 1f-(cycleticks % ticks / (float)ticks), 4);
     }
 
-
-
 }

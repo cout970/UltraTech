@@ -54,7 +54,7 @@ public class UT_Block extends Block{
 	@Override
 	public int getRenderBlockPass()
 	{
-		return 1;
+		return 0;
 	}
 	
 	//meta

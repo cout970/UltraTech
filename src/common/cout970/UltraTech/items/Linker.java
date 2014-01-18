@@ -13,6 +13,7 @@ public class Linker extends UT_Item{
 
 	public Linker(int id,String name) {
 		super(id, name);
+		this.setMaxStackSize(1);
 	}
 
 	@Override

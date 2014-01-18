@@ -11,9 +11,11 @@ public class NEIUltraTechConfig implements IConfigureNEI{
 		API.registerRecipeHandler(new PurifierCrafting());
 		API.registerRecipeHandler(new CuterCrafting());
 		API.registerRecipeHandler(new CVD_Crafting());
+		API.registerRecipeHandler(new AssemblyCrafting());
 		API.registerUsageHandler(new PurifierCrafting());
 		API.registerUsageHandler(new CuterCrafting());
 		API.registerUsageHandler(new CVD_Crafting());
+		API.registerUsageHandler(new AssemblyCrafting());
 	}
 
 	@Override
