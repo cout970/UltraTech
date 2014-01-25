@@ -20,22 +20,27 @@ public class PacketHandler implements IPacketHandler{
 	@Override
 	public void onPacketData(INetworkManager manager,
 			Packet250CustomPayload packet, Player player) {
-		if(packet.channel == "UltraTech" && player instanceof EntityPlayerMP){
+		
+		if(packet.channel.equals("UltraTech")){
 			DataInputStream inputStream = new DataInputStream(new ByteArrayInputStream(packet.data));
 			int x,y,z;
 			int color;
-			boolean update;
 			try{
 				x = inputStream.readInt();
 				y = inputStream.readInt();
 				z = inputStream.readInt();
 				color = inputStream.readInt();
-				update = inputStream.readBoolean();
+				TileEntity te;
 				
+				if(player instanceof EntityPlayerMP){
 				EntityPlayerMP playerSP = (EntityPlayerMP)player;
-				TileEntity te = playerSP.worldObj.getBlockTileEntity(x, y, z);
+				te = playerSP.worldObj.getBlockTileEntity(x, y, z);
+				}else{
+				EntityPlayerSP playerSP = (EntityPlayerSP)player;
+				te = playerSP.worldObj.getBlockTileEntity(x, y, z);
+				}
 				((Printer3DEntity)te).color = color;
-				((Printer3DEntity)te).update = update;
+				((Printer3DEntity)te).update = true;
 				
 			}catch(Exception e){
 				e.printStackTrace();}			

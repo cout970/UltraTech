@@ -160,16 +160,16 @@ public class PurifierEntity extends Machine implements IInventory,ISpeedUpgradea
 		boolean flag = progres > 0;
 		boolean flag2=false;
 		if(!flag1){
-			flag1 = this.Energy >= 1000f/5f;
+			flag1 = this.Energy >= 1000f;
 		}
 		if(flag){
-			this.loseEnergy(speed/5);//spend energy when ir runing
+			this.loseEnergy(speed);
 		}
 		if(!this.worldObj.isRemote){
 		if(flag1 && Purifier_Recipe.matches(this)){
 
 			progres+=speed;
-			if(progres >= 1000){
+			if(progres > 1000){
 				progres = 0;
 				craft();
 				flag2 = true;

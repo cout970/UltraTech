@@ -5,7 +5,7 @@ public class SenderEntity extends Machine{
 
 	public SenderEntity(){
 		super();
-		this.EnergyMax = 1000;
+		this.EnergyMax = 10000;
 		this.tipe = MachineTipe.Input;
 	}
 	public void onNeighChange(){}

@@ -35,13 +35,14 @@ public class Reference {
 	public static int RadioniteOre;
 	public static int MolecularAssembly;
 
-	
+
 	public static int ChargeStation;
 	public static int SolarPanel;
 	public static int WindMill;
 	public static int hitBox;
 	public static int Printer3D;
 	public static int ReactorController;
+	public static int Engine;
 
 	public static int StoneBlock;
 	public static int Deco;
@@ -61,5 +62,6 @@ public class Reference {
 	public static int Deco6w;
 	public static int Deco7w;
 	public static int Deco8w;
+	
 
 }

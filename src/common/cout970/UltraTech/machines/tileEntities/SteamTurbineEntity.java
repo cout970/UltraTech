@@ -3,7 +3,7 @@ package common.cout970.UltraTech.machines.tileEntities;
 import java.util.ArrayList;
 import java.util.List;
 
-import common.cout970.UltraTech.core.UltraTech;
+import common.cout970.UltraTech.blocks.BlockManager;
 import common.cout970.UltraTech.misc.Energy;
 import common.cout970.UltraTech.misc.IReactorPart;
 import net.minecraft.nbt.NBTTagCompound;
@@ -27,6 +27,7 @@ public class SteamTurbineEntity extends Machine implements IFluidTank,IFluidHand
 	public SteamTurbineEntity(){
 		super();
 		this.tipe = MachineTipe.Output;
+		this.EnergyMax = 10000;
 	}
 
 	public void updateEntity(){
@@ -38,18 +39,18 @@ public class SteamTurbineEntity extends Machine implements IFluidTank,IFluidHand
 			}
 			if(Reactor != null){
 				if(Reactor.steam > 0){
-					Reactor.steam -= this.fill(new FluidStack(UltraTech.Steam,500), true);
+					Reactor.steam -= this.fill(new FluidStack(BlockManager.Steam,500), true);
 				}
 			}else if(!update2){
 				update = true;
 				this.setUp();
 			}
 			for(int j=0;j < 5 ; j++){
-				if(liquid != null && this.Energy <= this.EnergyMax-10){
+				if(liquid != null && this.Energy <= this.EnergyMax-150){
 
 					if(liquid.amount >= 100){
 						this.drain(100, true);
-						this.gainEnergy(10);
+						this.gainEnergy(150);
 					}else break;
 				}else break;
 			}
@@ -110,7 +111,7 @@ public class SteamTurbineEntity extends Machine implements IFluidTank,IFluidHand
 		if (resource == null) {
 			return 0;
 		}
-		if(resource.getFluid().getID() != UltraTech.Steam.getID())return 0;
+		if(resource.getFluid().getID() != BlockManager.Steam.getID())return 0;
 		if (!doFill)
 		{
 			if (liquid == null)
@@ -288,7 +289,7 @@ public class SteamTurbineEntity extends Machine implements IFluidTank,IFluidHand
 			for(int i = -1;i<2;i++){
 				for(int k = -1;k<2;k++){
 					ids[current] = worldObj.getBlockId(xCoord+i, yCoord+j, zCoord+k);
-					if(ids[current] == UltraTech.Reactor.blockID){
+					if(ids[current] == BlockManager.Reactor.blockID){
 						Reactor = (ReactorEntity) worldObj.getBlockTileEntity(xCoord+i,yCoord+j,zCoord+k);
 						found = true;
 						return;

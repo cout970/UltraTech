@@ -4,7 +4,6 @@ import org.lwjgl.opengl.GL11;
 
 import common.cout970.UltraTech.machines.models.ModelWindMill;
 import common.cout970.UltraTech.machines.tileEntities.WindMillEntity;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.Entity;
@@ -24,8 +23,7 @@ public class RenderWindMill extends TileEntitySpecialRenderer{
 			double z, float scale) {
 		GL11.glPushMatrix();
 		GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
-		Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("ultratech:textures/misc/windmill.png"));
-		GL11.glPushMatrix();
+		bindTexture(new ResourceLocation("ultratech:textures/misc/windmill.png"));
 		GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
 		((WindMillEntity)te).fan += ((WindMillEntity)te).speed;
 		if(((WindMillEntity)te).fan >=360){
@@ -38,7 +36,6 @@ public class RenderWindMill extends TileEntitySpecialRenderer{
 		((ModelRenderer)model.boxList.get(4)).rotateAngleZ = (float) Math.toRadians(0+d);
 		((ModelRenderer)model.boxList.get(3)).rotateAngleZ = (float) Math.toRadians(0+d);
 		this.model.render((Entity)null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
-		GL11.glPopMatrix();
 		GL11.glPopMatrix();
 	}
 

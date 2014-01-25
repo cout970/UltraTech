@@ -44,13 +44,14 @@ public class UT_Block extends Block{
         return this.blockIcon;
     }
 	
-	
+	@SideOnly(Side.CLIENT)
 	@Override
 	public int getRenderType()
 	{
 		return ClientProxy.BlockRenderTipe;
 	}
 
+	@SideOnly(Side.CLIENT)
 	@Override
 	public int getRenderBlockPass()
 	{

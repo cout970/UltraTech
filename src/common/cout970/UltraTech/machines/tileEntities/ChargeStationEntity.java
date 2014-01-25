@@ -17,7 +17,6 @@ public class ChargeStationEntity extends Machine implements IInventory{
 	public ChargeStationEntity(){
 		super();
 		inventory = new ItemStack[9];
-		this.EnergyMax = 10000;
 	}
 	
 	public void updateEntity(){
@@ -25,13 +24,13 @@ public class ChargeStationEntity extends Machine implements IInventory{
 			if(i != null){
 				if(i.getItem() instanceof IItemEnergyEstorage){
 					IItemEnergyEstorage b = ((IItemEnergyEstorage)i.getItem());
-					if(this.Energy > 64){
+					if(this.Energy > 640){
 						if(b.getEnergy(i)+64 <= b.getMaxEnergy()){
 							b.gainEnergy(i, 64);
-							this.loseEnergy(64);
+							this.loseEnergy(640);
 						}else if(b.getEnergy(i)+1 <= b.getMaxEnergy()){
 							b.gainEnergy(i, 1);
-							this.loseEnergy(1);
+							this.loseEnergy(10);
 						}
 					}
 				}

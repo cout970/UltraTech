@@ -1,7 +1,6 @@
 package common.cout970.UltraTech.machines.tileEntities;
 
-import common.cout970.UltraTech.blocks.UT_ItemBlockDeco;
-
+import common.cout970.UltraTech.itemBlock.UT_ItemBlockDeco;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;

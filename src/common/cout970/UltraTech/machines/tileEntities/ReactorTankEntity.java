@@ -4,7 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import common.cout970.UltraTech.core.UltraTech;
+import common.cout970.UltraTech.blocks.BlockManager;
 import common.cout970.UltraTech.misc.IReactorPart;
 import cpw.mods.fml.common.network.PacketDispatcher;
 import net.minecraft.block.Block;
@@ -292,7 +292,7 @@ public class ReactorTankEntity extends TileEntity implements IFluidHandler,IFlui
 			for(int i = -1;i<2;i++){
 				for(int k = -1;k<2;k++){
 					ids[current] = worldObj.getBlockId(xCoord+i, yCoord+j, zCoord+k);
-					if(ids[current] == UltraTech.Reactor.blockID){
+					if(ids[current] == BlockManager.Reactor.blockID){
 						Reactor = (ReactorEntity) worldObj.getBlockTileEntity(xCoord+i,yCoord+j,zCoord+k);
 						found = true;
 						return;

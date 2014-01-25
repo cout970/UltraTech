@@ -5,6 +5,7 @@ import common.cout970.UltraTech.machines.tileEntities.MinerEntity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
+import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
@@ -40,6 +41,28 @@ public class MinerContainer extends Container{
 		for (int i = 0; i < 9; i++) {
 			addSlotToContainer(new Slot(inventoryPlayer, i, 8 + i * 18+x, 142+y));
 		}
+	}
+	
+	public void addCraftingToCrafters(ICrafting par1ICrafting)
+    {
+        super.addCraftingToCrafters(par1ICrafting);
+        par1ICrafting.sendProgressBarUpdate(this, 0, entity.widht);
+        par1ICrafting.sendProgressBarUpdate(this, 1, entity.Energy);
+        par1ICrafting.sendProgressBarUpdate(this, 2, entity.speedUpgrades);
+    }
+	
+	@Override
+	public void detectAndSendChanges() {
+		super.detectAndSendChanges();
+
+		for (int i = 0; i < crafters.size(); i++) {
+			entity.sendGUINetworkData(this, (ICrafting) crafters.get(i));
+		}
+	}
+
+	@Override
+	public void updateProgressBar(int i, int j) {
+		entity.getGUINetworkData(i, j);
 	}
 	
 	@Override

@@ -13,7 +13,7 @@ public class Machine extends TileEntity implements Energy{
 
 	
 	public int Energy;
-	public int EnergyMax = 4000;
+	public int EnergyMax = 20000;
 	public boolean update = false;
 	public MachineTipe tipe = MachineTipe.Nothing;
 
@@ -97,9 +97,9 @@ public class Machine extends TileEntity implements Energy{
 		if(a.getEnergy() > 0){
 			int space = b.EnergyMax-b.getEnergy();
 			if(space > 0){
-				if(a.getEnergy() > 64 && space > 64){
-					a.loseEnergy(64);
-					b.gainEnergy(64);
+				if(a.getEnergy() > 200 && space > 200){
+					a.loseEnergy(200);
+					b.gainEnergy(200);
 				}else if(a.getEnergy() >= space){
 					a.loseEnergy(space);
 					b.gainEnergy(space);

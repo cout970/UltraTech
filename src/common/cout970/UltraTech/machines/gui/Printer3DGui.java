@@ -2,7 +2,7 @@ package common.cout970.UltraTech.machines.gui;
 
 import org.lwjgl.opengl.GL11;
 
-import common.cout970.UltraTech.blocks.UT_ItemBlockDeco;
+import common.cout970.UltraTech.itemBlock.UT_ItemBlockDeco;
 import common.cout970.UltraTech.machines.containers.Printer3DContainer;
 import common.cout970.UltraTech.machines.tileEntities.Printer3DEntity;
 import net.minecraft.client.gui.GuiButton;

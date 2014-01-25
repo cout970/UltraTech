@@ -1,6 +1,6 @@
 package common.cout970.UltraTech.machines.tileEntities;
 
-import common.cout970.UltraTech.core.UltraTech;
+import common.cout970.UltraTech.blocks.BlockManager;
 import common.cout970.UltraTech.misc.IReactorPart;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -34,7 +34,7 @@ public class ReactorWallEntity extends TileEntity implements IReactorPart{
 			for(int i = -1;i<2;i++){
 				for(int k = -1;k<2;k++){
 					ids[current] = worldObj.getBlockId(xCoord+i, yCoord+j, zCoord+k);
-					if(ids[current] == UltraTech.Reactor.blockID){
+					if(ids[current] == BlockManager.Reactor.blockID){
 						Reactor = (ReactorEntity) worldObj.getBlockTileEntity(xCoord+i,yCoord+j,zCoord+k);
 						found = true;
 						return;
@@ -98,7 +98,7 @@ public class ReactorWallEntity extends TileEntity implements IReactorPart{
 
 	@Override
 	public void desactivateBlocks() {
-		if(Structure){
+		if(Structure && Reactor != null){
 			Structure = false;
 			int x,y,z;
 			x = Reactor.xCoord;

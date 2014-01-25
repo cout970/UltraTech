@@ -160,16 +160,16 @@ public class CuterEntity extends Machine implements IInventory,ISpeedUpgradeabel
 		boolean flag = progres > 0;
 		boolean flag2=false;
 		if(!flag1){
-			flag1 = this.Energy >= 1000f/5f;
+			flag1 = this.Energy >= 1000;
 		}
 		if(flag){
-			this.loseEnergy(speed/5);//spend energy when ir runing
+			this.loseEnergy(speed);//spend energy when ir runing
 		}
 		if(!this.worldObj.isRemote){
 			if(flag1 && Cuter_Recipes.matches(this)){
 
 				progres+=speed;
-				if(progres >= 1000){
+				if(progres > 1000){
 					progres = 0;
 					craft();
 					flag2 = true;

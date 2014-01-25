@@ -25,7 +25,7 @@ public class WindMillEntity extends Machine{
 		if(b == "Jungle")bioma = 0.2f;
 		if(b == "Forest")bioma = 0.3f;
 		if(b == "ExtremeHills")bioma = 1f;
-		wind = (this.yCoord/128)+time+bioma;
+		wind = (this.yCoord/128)+(time+bioma)/2;
 		if(timer++ > 100){
 			timer = 0;
 			if(isObstruido()){obs = true;}else{obs = false;}
@@ -36,7 +36,7 @@ public class WindMillEntity extends Machine{
 		}else if(speed < wind){
 			speed += 0.01f;
 		}
-		gainEnergy((int)speed);
+		gainEnergy((int)(speed*10));
 		super.updateEntity();
 	}
 

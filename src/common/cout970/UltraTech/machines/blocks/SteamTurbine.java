@@ -1,6 +1,7 @@
 package common.cout970.UltraTech.machines.blocks;
 
 
+import common.cout970.UltraTech.blocks.BlockManager;
 import common.cout970.UltraTech.core.UltraTech;
 import common.cout970.UltraTech.machines.tileEntities.SteamTurbineEntity;
 import common.cout970.UltraTech.misc.IReactorPart;
@@ -55,7 +56,7 @@ public class SteamTurbine extends BlockContainer{
 		d = BA.getBlockId(x, y, z-1);
 		e = BA.getBlockId(x+1, y, z);
 		f = BA.getBlockId(x-1, y, z);
-		int r = UltraTech.Reactor.blockID;
+		int r = BlockManager.Reactor.blockID;
 		if(a == r || b == r || c == r || d == r || e == r || f == r){
 			return this.blockIcon;
 		}

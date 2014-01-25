@@ -7,25 +7,36 @@ import net.minecraft.tileentity.TileEntity;
 
 public class EnergyColectorEntity extends Machine{
 	
+	public List<Machine> s;
+	private int timer;
 
 	public EnergyColectorEntity(){
 		super();
-		this.EnergyMax = 5000;
+		this.EnergyMax = 1000;
 		this.tipe = MachineTipe.Output;
+		s = getMachines();
 	}
 
 	@Override
 	public void updateEntity(){
 		if(!this.worldObj.isRemote){			
-			List<Machine> s = getMachines();
+			if(s != null)
 			for(Machine p : s){
 				Machine.passEnergy(p, this);
+			}
+			else{
+			s = getMachines();	
+			}
+			if(timer++ >=200){
+				timer = 0;
+				s = getMachines();
 			}
 		}
 		super.updateEntity();
 	}
 
 	public List<Machine> getMachines(){
+		if(worldObj == null)return null;
 		List<Machine> s = new ArrayList<Machine>();
 		for(int x= -5;x<=5;x++){
 			for(int z= -5;z<=5;z++){

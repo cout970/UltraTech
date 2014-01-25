@@ -37,13 +37,13 @@ public class IDSgui extends GuiContainer{
 	protected void drawGuiContainerForegroundLayer(int x, int y) {
 
 		String e = entity.getEnergy()+"";
-		this.fontRenderer.drawString(e, this.xSize - 121+(-e.length()*5+35), 36, 4210752);
+		this.fontRenderer.drawString(e, this.xSize - 120+(-e.length()*5+35), 36, 4210752);
 		this.fontRenderer.drawString(" / ", this.xSize - 80, 36, 4210752);
 		String m = entity.EnergyMax+"";
-		this.fontRenderer.drawString(m, this.xSize - 68+(-m.length()*5+35), 36, 4210752);
+		this.fontRenderer.drawString(m, this.xSize - 67+(-m.length()*5+35), 36, 4210752);
 
 		String f = "Interdimensional Storage";
-		this.fontRenderer.drawString(f, this.xSize - 150, 4, 4210752);
+		this.fontRenderer.drawString(f, this.xSize - 130, 8, 4210752);
 	}
 
 }

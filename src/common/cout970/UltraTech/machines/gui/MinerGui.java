@@ -38,7 +38,7 @@ public class MinerGui extends GuiContainer{
 		this.drawString(fontRenderer, (entity.speed/10)+"x", xStart+15, yStart+166, RenderUtil.RGBtoInt(255, 255, 255));
 		
 		//range
-		this.drawString(fontRenderer, (entity.height)+"x"+(entity.widht), xStart+210, yStart+166, RenderUtil.RGBtoInt(255, 255, 255));
+		this.drawString(fontRenderer, (entity.height*2+1)+"x"+(entity.widht*2+1), (entity.widht*2+1 < 10) ? xStart+216 : xStart+210, yStart+166, RenderUtil.RGBtoInt(255, 255, 255));
 	}
 
 }

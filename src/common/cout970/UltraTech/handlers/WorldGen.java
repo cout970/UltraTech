@@ -2,8 +2,7 @@ package common.cout970.UltraTech.handlers;
 
 import java.util.Random;
 
-import common.cout970.UltraTech.core.UltraTech;
-
+import common.cout970.UltraTech.blocks.BlockManager;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
@@ -36,7 +35,7 @@ public class WorldGen implements IWorldGenerator{
 			int firstBlockYCoord = random.nextInt(100);
 			int firstBlockZCoord = j + random.nextInt(16);
 	
-			(new WorldGenMinable(UltraTech.RadioniteOre.blockID,4,Block.netherrack.blockID)).generate(world, random, firstBlockXCoord, firstBlockYCoord, firstBlockZCoord);
+			(new WorldGenMinable(BlockManager.RadioniteOre.blockID,4,Block.netherrack.blockID)).generate(world, random, firstBlockXCoord, firstBlockYCoord, firstBlockZCoord);
 		}
 	}
 

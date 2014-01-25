@@ -8,7 +8,7 @@ import common.cout970.UltraTech.machines.containers.IDScontainer;
 import common.cout970.UltraTech.machines.containers.MAssemblyContainer;
 import common.cout970.UltraTech.machines.containers.MinerContainer;
 import common.cout970.UltraTech.machines.containers.PrecisionCuterContainer;
-import common.cout970.UltraTech.machines.containers.PresureChamberContaner;
+import common.cout970.UltraTech.machines.containers.PresuricerContaner;
 import common.cout970.UltraTech.machines.containers.Printer3DContainer;
 import common.cout970.UltraTech.machines.containers.PurifierContainer;
 import common.cout970.UltraTech.machines.containers.ReactorContainer;
@@ -20,7 +20,7 @@ import common.cout970.UltraTech.machines.gui.GeneratorGui;
 import common.cout970.UltraTech.machines.gui.IDSgui;
 import common.cout970.UltraTech.machines.gui.MAssemblyGui;
 import common.cout970.UltraTech.machines.gui.MinerGui;
-import common.cout970.UltraTech.machines.gui.PresureChamberGui;
+import common.cout970.UltraTech.machines.gui.PresuricerGui;
 import common.cout970.UltraTech.machines.gui.Printer3DGui;
 import common.cout970.UltraTech.machines.gui.PurifierGui;
 import common.cout970.UltraTech.machines.gui.ReactorGui;
@@ -32,7 +32,7 @@ import common.cout970.UltraTech.machines.tileEntities.GeneratorEntity;
 import common.cout970.UltraTech.machines.tileEntities.IDSentity;
 import common.cout970.UltraTech.machines.tileEntities.MinerEntity;
 import common.cout970.UltraTech.machines.tileEntities.MolecularAssemblyEntity;
-import common.cout970.UltraTech.machines.tileEntities.PCentity;
+import common.cout970.UltraTech.machines.tileEntities.PresuricerEntity;
 import common.cout970.UltraTech.machines.tileEntities.Printer3DEntity;
 import common.cout970.UltraTech.machines.tileEntities.PurifierEntity;
 import common.cout970.UltraTech.machines.tileEntities.ReactorEntity;
@@ -66,8 +66,8 @@ public class GuiHandler implements IGuiHandler{
 			return new PrecisionCuterContainer(player.inventory, (CuterEntity) tileEntity);
 		}
 		//presurechamber
-		if(tileEntity instanceof PCentity){
-			return new PresureChamberContaner(player.inventory, (PCentity) tileEntity);
+		if(tileEntity instanceof PresuricerEntity){
+			return new PresuricerContaner(player.inventory, (PresuricerEntity) tileEntity);
 		}
 		//purifier
 		if(tileEntity instanceof PurifierEntity){
@@ -123,8 +123,8 @@ public class GuiHandler implements IGuiHandler{
 			return new CuterGui(new PrecisionCuterContainer(player.inventory, (CuterEntity) tileEntity),player.inventory, (CuterEntity) tileEntity);
 		}
 		//presurechamber
-		if(tileEntity instanceof PCentity){
-			return new PresureChamberGui(new PresureChamberContaner(player.inventory, (PCentity) tileEntity),player.inventory, (PCentity) tileEntity);
+		if(tileEntity instanceof PresuricerEntity){
+			return new PresuricerGui(new PresuricerContaner(player.inventory, (PresuricerEntity) tileEntity),player.inventory, (PresuricerEntity) tileEntity);
 		}
 		//purifier
 		if(tileEntity instanceof PurifierEntity){

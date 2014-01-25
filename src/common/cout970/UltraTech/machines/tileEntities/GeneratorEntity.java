@@ -19,7 +19,7 @@ public class GeneratorEntity extends Machine implements IInventory{
 	public GeneratorEntity(){
 		super();
 		inventory = new ItemStack[size];
-		this.EnergyMax = 2500;
+		this.EnergyMax = 24000;
 		this.tipe = MachineTipe.Output;
 	}
 
@@ -143,8 +143,8 @@ public class GeneratorEntity extends Machine implements IInventory{
 		super.updateEntity();
 		if(inventory[0] != null){
 			boolean flag = inventory[0].itemID == Item.coal.itemID;
-			if(flag && progres <= 0 && this.Energy < EnergyMax-64){
-				progres = 600;
+			if(flag && progres <= 0 && this.Energy < EnergyMax){
+				progres = 800;
 				--inventory[0].stackSize;
 				if(inventory[0].stackSize <= 0){
 					inventory[0] = null;
@@ -167,7 +167,7 @@ public class GeneratorEntity extends Machine implements IInventory{
 		}
 		if(progres > 0){
 			progres--;
-			this.gainEnergy(3);
+			this.gainEnergy(10);
 		}
 	}
 

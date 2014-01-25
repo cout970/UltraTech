@@ -8,14 +8,10 @@ public class IDSentity extends Machine{
 	
 	public IDSentity(){
 		super();
-		this.EnergyMax = 100000;
+		this.EnergyMax = 1000000;
 		this.tipe = MachineTipe.Output;
 	}
 
-	
-
-
-	
 	public void sendGUINetworkData(Container container, ICrafting iCrafting) {
     	iCrafting.sendProgressBarUpdate(container, 1, Energy);
     }

@@ -200,12 +200,12 @@ public class UTfurnaceEntity extends Machine implements IInventory,ISpeedUpgrade
 	    {
 	    	boolean flag = false;
 	    	if(!flag1){
-				flag1 = this.Energy >= 1000f/5f;
+				flag1 = this.Energy >= 1000;
 			}
 
 	    	if (this.progres > 0)
 	    	{
-	    		this.loseEnergy((int)((float)speed/5));
+	    		this.loseEnergy((int)speed);
 	    	}
 	    	
 	    	if(!this.worldObj.isRemote){
@@ -223,7 +223,7 @@ public class UTfurnaceEntity extends Machine implements IInventory,ISpeedUpgrade
 	    		if (flag1 && this.canSmelt())
 	    		{
 	    			this.progres += speed;
-	    			if (this.progres >= 1000 )
+	    			if (this.progres > 1000)
 	    			{
 	    				if(speed <= 0)speed=10;
 	    				this.progres = 0;
@@ -260,20 +260,13 @@ public class UTfurnaceEntity extends Machine implements IInventory,ISpeedUpgrade
 	    			Energy = value;
 	    			break;
 	    		}
-	    	case 2:{
-	    		speed = value;
-	    		break;
-	    	}
+	    		case 2:{
+	    			speed = value;
+	    			break;
+	    		}
 	    	}
 		}
 
-
-//		public SyncObject getSinc() {
-//			SyncObject a = new SyncObject();
-//			a.setVar1(proces* 24 / 1000);
-//			a.setVar2(Energy);
-//			 return a;
-//		}
 
 		@Override
 		public boolean upgrade() {

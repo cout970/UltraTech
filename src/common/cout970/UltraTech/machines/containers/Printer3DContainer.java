@@ -99,6 +99,7 @@ public class Printer3DContainer extends Container{
 
 	public void sendUpdate() {
 		PacketDispatcher.sendPacketToServer(getPacket());
+		PacketDispatcher.sendPacketToAllPlayers(getPacket());
 	}
 	private Packet getPacket() {
 
@@ -109,7 +110,6 @@ public class Printer3DContainer extends Container{
 			data.writeInt(tile.yCoord);
 			data.writeInt(tile.zCoord);
 			data.writeInt(color);
-			data.writeBoolean(true);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

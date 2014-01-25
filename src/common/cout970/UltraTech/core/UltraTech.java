@@ -1,51 +1,22 @@
 package common.cout970.UltraTech.core;
 
 
-//minecraft
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidRegistry;
+import common.cout970.UltraTech.blocks.DecoBlocks;
 import common.cout970.UltraTech.blocks.BlockManager;
-//my
 import common.cout970.UltraTech.handlers.GuiHandler;
 import common.cout970.UltraTech.handlers.PacketHandler;
 import common.cout970.UltraTech.handlers.WorldGen;
 import common.cout970.UltraTech.items.*;
 import common.cout970.UltraTech.lib.Reference;
-import common.cout970.UltraTech.machines.blocks.*;
-import common.cout970.UltraTech.machines.tileEntities.CVDentity;
-import common.cout970.UltraTech.machines.tileEntities.ChargeStationEntity;
-import common.cout970.UltraTech.machines.tileEntities.CuterEntity;
-import common.cout970.UltraTech.machines.tileEntities.EnergyColectorEntity;
-import common.cout970.UltraTech.machines.tileEntities.GeneratorEntity;
-import common.cout970.UltraTech.machines.tileEntities.IDSentity;
-import common.cout970.UltraTech.machines.tileEntities.MinerEntity;
-import common.cout970.UltraTech.machines.tileEntities.MolecularAssemblyEntity;
-import common.cout970.UltraTech.machines.tileEntities.PCentity;
-import common.cout970.UltraTech.machines.tileEntities.Printer3DEntity;
-import common.cout970.UltraTech.machines.tileEntities.PurifierEntity;
-import common.cout970.UltraTech.machines.tileEntities.ReactorControllerEntity;
-import common.cout970.UltraTech.machines.tileEntities.ReactorEntity;
-import common.cout970.UltraTech.machines.tileEntities.ReactorTankEntity;
-import common.cout970.UltraTech.machines.tileEntities.ReactorWallEntity;
-import common.cout970.UltraTech.machines.tileEntities.ReciverEntity;
-import common.cout970.UltraTech.machines.tileEntities.SenderEntity;
-import common.cout970.UltraTech.machines.tileEntities.SolarPanelEntity;
-import common.cout970.UltraTech.machines.tileEntities.SteamTurbineEntity;
-import common.cout970.UltraTech.machines.tileEntities.UTfurnaceEntity;
-import common.cout970.UltraTech.machines.tileEntities.WaterBlockEntity;
-import common.cout970.UltraTech.machines.tileEntities.WindMillEntity;
-import common.cout970.UltraTech.machines.tileEntities.hitBoxEntity;
 import common.cout970.UltraTech.misc.ID;
 import common.cout970.UltraTech.proxy.CommonProxy;
 
@@ -84,7 +55,7 @@ public class UltraTech {
 	public static final CreativeTabs techTab = new CreativeTabs("UltraTech"){
 
 		public ItemStack getIconItemStack() {
-			return new ItemStack(IDS, 1, 0);
+			return new ItemStack(BlockManager.IDS, 1, 0);
 		}
 
 		@SideOnly(Side.CLIENT)
@@ -105,7 +76,7 @@ public class UltraTech {
 	public static final CreativeTabs DecoTab = new CreativeTabs("UltraTech"){
 
 		public ItemStack getIconItemStack() {
-			return new ItemStack(BlockManager.d.get(5), 1, 0);
+			return new ItemStack(DecoBlocks.d.get(5), 1, 0);
 		}
 
 		@SideOnly(Side.CLIENT)
@@ -138,43 +109,8 @@ public class UltraTech {
 			
 			"Speed Upgrade","Mining Upgrade","Range Upgrade","AutoEject Upgrade","Linker","Radionite Cell","Hidrogen Battery","Lasser Sword","Fortune Upgrade"};
 
-	
 
-	//Blocks
-	public static Block CVDmachine;
-	public static  Block UTfurnace;
-	public static  Block IDS;
-	public static  Block EnergyColector;
-	public static  Block Cuter;
-	public static  Block Purifier;
-	public static  Block PresureChamber;
-	public static  Block DiamondGlass;
-	public static  Block CovedGlass;
-	public static  Block hitBox;
-	public static  Block Generator;
-	public static  Block MachineChasis;
-	public static  Block Miner;
-	public static  Block GrafenoBlock;
-	public static  Block AdvMachineChasis;
-	public static  Block Reactor;
-	public static  Block ReactorWall;
-	public static  Block Sender;
-	public static  Block Reciver;
-	public static  Block RadioniteBlock;
-	public static  Block ReactorTank;
-	public static Fluid Steam;
-	public static  Block SteamTurbine;
-	public static  Block WaterBlock;
-	public static Block RadioniteOre;
-	public static Block MolecularAssembly;
 	public static  Item ProcesedFood;
-	public static Block ChargeStation;
-	public static Block SolarPanel;
-	public static Block WindMill;
-	public static Block Printer3D;
-	public static Block ReactorController;
-
-
 
 	//init
 	@EventHandler
@@ -216,6 +152,8 @@ public class UltraTech {
 		Reference.WindMill = config.getBlock("WindMill", 2078).getInt();
 		Reference.Printer3D = config.getBlock("Printer3D", 2079).getInt();
 		Reference.ReactorController = config.getBlock("ReactorController", 2080).getInt();
+		Reference.Engine = config.getBlock("Engine", 2081).getInt();
+		
 		
 		//deco
 		Reference.StoneBlock = config.getBlock("StoneBlock", 2099).getInt();
@@ -263,41 +201,7 @@ public class UltraTech {
 
 	}
 
-	private void registerBlocks(){
-		CVDmachine = new CVDmachine(Reference.CVDmachine,Material.iron);
-		UTfurnace = new UTfurnace(Reference.UTfurnace,Material.iron);
-		IDS = new InterdimensionalStorageBlock(Reference.IDS,Material.iron);
-		EnergyColector = new EnergyColector(Reference.EnergyColector,Material.iron);
-		Cuter = new PrecisionCuter(Reference.Cuter,Material.iron);
-		Purifier = new Purifier(Reference.Purifier,Material.iron);
-		PresureChamber = new PresureChamber(Reference.PresureChamber,Material.iron);	
-		DiamondGlass = new DiamondGlass(Reference.DiamondGlass,Material.glass,false);	
-		CovedGlass = new CovedGlass(Reference.CovedGlass,Material.glass,false);
-		hitBox = new hitBox(Reference.hitBox,Material.iron);	
-		Generator = new Generator(Reference.Generator,Material.iron);
-		MachineChasis = new MachineChasis(Reference.MachineChasis,Material.iron);
-		Miner = new Miner(Reference.Miner,Material.iron);
-		GrafenoBlock = new GrafenoBlock(Reference.GrafenoBlock,Material.iron);
-		AdvMachineChasis = new AdvancedMachineChasis(Reference.AdvMachineChasis,Material.iron);
-		Reactor = new Reactor(Reference.Reactor,Material.iron);
-		ReactorWall = new ReactorWall(Reference.ReactorWall,Material.iron);
-		Sender  = new Sender(Reference.Sender,Material.iron);
-		Reciver = new Reciver(Reference.Reciver,Material.iron);
-		RadioniteBlock = new RadioniteBlock(Reference.RadioniteBlock,Material.iron);
-		ReactorTank = new ReactorTank(Reference.ReactorTank,Material.iron);
-		Steam = new Steam("steam");
-		SteamTurbine = new SteamTurbine(Reference.SteamTurbine,Material.iron);
-		WaterBlock = new WaterBlock(Reference.WaterBlock, Material.iron);
-		RadioniteOre = new RadioniteOre(Reference.RadioniteOre, Material.iron);
-		MolecularAssembly = new MolecularAssembly(Reference.MolecularAssembly, Material.iron);
-		ChargeStation = new ChargeStation(Reference.ChargeStation, Material.iron);
-		SolarPanel = new SolarPanel(Reference.SolarPanel, Material.iron);
-		WindMill = new WindMill(Reference.WindMill, Material.iron);
-		Printer3D = new Printer3D(Reference.Printer3D, Material.iron);
-		ReactorController = new ReactorController(Reference.ReactorController,Material.iron);
-		if(!FluidRegistry.isFluidRegistered("steam"))FluidRegistry.registerFluid(Steam);
 
-	}
 
 	private void registerItems(){
 
@@ -338,128 +242,16 @@ public class UltraTech {
 	public void load(FMLInitializationEvent event){
 
 
-		registerBlocks();
 		registerItems();
-		BlockManager.initBlocks();
+		DecoBlocks.initBlocks();
 
 		proxy.registerRenders();
 
 		NetworkRegistry.instance().registerGuiHandler(instance, new GuiHandler());
 
-		//CVD
-		GameRegistry.registerTileEntity(CVDentity.class, "cvd_UT");
-		GameRegistry.registerBlock(CVDmachine, "cvd");
-		LanguageRegistry.addName(CVDmachine, "CVD Machine");
-		//UTfurnace
-		GameRegistry.registerTileEntity(UTfurnaceEntity.class, "utf_UT");
-		GameRegistry.registerBlock(UTfurnace, "utf");
-		LanguageRegistry.addName(UTfurnace, "Ultra Tech Furnace");
-		//IDS
-		GameRegistry.registerTileEntity(IDSentity.class, "ids_UT");
-		GameRegistry.registerBlock(IDS, "ids");
-		LanguageRegistry.addName(IDS, "Interdimensional Storage");
-		//satelite
-		GameRegistry.registerTileEntity(EnergyColectorEntity.class, "Colector_UT");
-		GameRegistry.registerBlock(EnergyColector, "EnergyColector");
-		LanguageRegistry.addName(EnergyColector, "Energy Colector");
-		//hitBox
-		GameRegistry.registerTileEntity(hitBoxEntity.class, "hitBox_UT");
-		GameRegistry.registerBlock(hitBox, "hitBox");
-		//cuter
-		GameRegistry.registerTileEntity(CuterEntity.class, "cuter_UT");
-		GameRegistry.registerBlock(Cuter, "cuter");
-		LanguageRegistry.addName(Cuter, "Precision Cuter");
-		//purifier
-		GameRegistry.registerTileEntity(PurifierEntity.class, "purifier_UT");
-		GameRegistry.registerBlock(Purifier, "purifier");
-		LanguageRegistry.addName(Purifier, "Purifier");
-		//cuter
-		GameRegistry.registerTileEntity(PCentity.class, "PC_UT");
-		GameRegistry.registerBlock(PresureChamber, "PC");
-		LanguageRegistry.addName(PresureChamber, "Presure Chamber");
-		//Generator
-		GameRegistry.registerTileEntity(GeneratorEntity.class, "Generator_UT");
-		GameRegistry.registerBlock(Generator, "Generator");
-		LanguageRegistry.addName(Generator, "Coal Generator");
-		//Miner
-		GameRegistry.registerTileEntity(MinerEntity.class, "Miner_UT");
-		GameRegistry.registerBlock(Miner, "Miner");
-		LanguageRegistry.addName(Miner, "Miner");
-		//Reactor
-		GameRegistry.registerTileEntity(ReactorEntity.class, "Reactor_UT");
-		GameRegistry.registerBlock(Reactor, "Reactor");
-		LanguageRegistry.addName(Reactor, "Reactor");
-		//reactorwall
-		GameRegistry.registerTileEntity(ReactorWallEntity.class, "ReactorWall_UT");
-		GameRegistry.registerBlock(ReactorWall, "ReactorWall");
-		LanguageRegistry.addName(ReactorWall, "ReactorWall");
-		//Sender
-		GameRegistry.registerTileEntity(SenderEntity.class, "Sender_UT");
-		GameRegistry.registerBlock(Sender, "Sender");
-		LanguageRegistry.addName(Sender, "Sender");
-		//Reciver
-		GameRegistry.registerTileEntity(ReciverEntity.class, "Reciver_UT");
-		GameRegistry.registerBlock(Reciver, "Reciver");
-		LanguageRegistry.addName(Reciver, "Reciver");
-		//ReactorTank
-		GameRegistry.registerTileEntity(ReactorTankEntity.class, "ReactorTank_UT");
-		GameRegistry.registerBlock(ReactorTank, "ReactorTank");
-		LanguageRegistry.addName(ReactorTank, "Reactor Tank");
-		//SteamTurbine
-		GameRegistry.registerTileEntity(SteamTurbineEntity.class, "SteamTurbine_UT");
-		GameRegistry.registerBlock(SteamTurbine, "SteamTurbine");
-		LanguageRegistry.addName(SteamTurbine, "Steam Turbine");
-		//WaterBlock
-		GameRegistry.registerTileEntity(WaterBlockEntity.class, "WaterBlock_UT");
-		GameRegistry.registerBlock(WaterBlock, "WaterBlock");
-		LanguageRegistry.addName(WaterBlock, "Water Block");
-		//MolecularAssembly
-		GameRegistry.registerTileEntity(MolecularAssemblyEntity.class, "MolecularAssembly_UT");
-		GameRegistry.registerBlock(MolecularAssembly, "MolecularAssembly");
-		LanguageRegistry.addName(MolecularAssembly, "Molecular Assembly");
-		//ChargeStation
-		GameRegistry.registerTileEntity(ChargeStationEntity.class, "ChargeStation_UT");
-		GameRegistry.registerBlock(ChargeStation, "ChargeStation");
-		LanguageRegistry.addName(ChargeStation, "Charge Station");
-		//SolarPanel
-		GameRegistry.registerTileEntity(SolarPanelEntity.class, "SolarPanel_UT");
-		GameRegistry.registerBlock(SolarPanel, "SolarPanel");
-		LanguageRegistry.addName(SolarPanel, "Solar Panel");
-		//WindMill
-		GameRegistry.registerTileEntity(WindMillEntity.class, "WindMill_UT");
-		GameRegistry.registerBlock(WindMill, "WindMill");
-		LanguageRegistry.addName(WindMill, "Wind Mill");
-		//Printer3D
-		GameRegistry.registerTileEntity(Printer3DEntity.class, "Printer3D_UT");
-		GameRegistry.registerBlock(Printer3D, "Printer3D");
-		LanguageRegistry.addName(Printer3D, "3D Printer");
-		//ReactorController	
-		GameRegistry.registerTileEntity(ReactorControllerEntity.class, "ReactorController_UT");
-		GameRegistry.registerBlock(ReactorController, "ReactorController");
-		LanguageRegistry.addName(ReactorController, "Reactor Controller");
+		BlockManager.InitBlocks();
+		BlockManager.RegisterBlocks();
 		
-		//DiamondGlass
-		GameRegistry.registerBlock(DiamondGlass, "Diamond Glass");
-		LanguageRegistry.addName(DiamondGlass, "Diamond Glass");
-		//CovedGlass
-		GameRegistry.registerBlock(CovedGlass, "Coved Glass");
-		LanguageRegistry.addName(CovedGlass, "Coved Glass");
-		//MachineChasis
-		GameRegistry.registerBlock(MachineChasis, "MachineChasis");
-		LanguageRegistry.addName(MachineChasis, "Machine Chasis");
-		//GrafenoBlock
-		GameRegistry.registerBlock(GrafenoBlock, "GrafenoBlock");
-		LanguageRegistry.addName(GrafenoBlock, "Grafeno Block");
-		//AdvMachineChasis
-		GameRegistry.registerBlock(AdvMachineChasis, "AdvMachineChasis");
-		LanguageRegistry.addName(AdvMachineChasis, "Advanced MachineChasis");
-		//RadioniteBlock
-		GameRegistry.registerBlock(RadioniteBlock, "RadioniteBlock");
-		LanguageRegistry.addName(RadioniteBlock, "Radionite Block");
-		//RadioniteOre
-		GameRegistry.registerBlock(RadioniteOre, "RadioniteOre");
-		LanguageRegistry.addName(RadioniteOre, "Radionite Ore");
-
 		CraftManager.registerCraft();
 		GameRegistry.registerWorldGenerator(new WorldGen());
 	}

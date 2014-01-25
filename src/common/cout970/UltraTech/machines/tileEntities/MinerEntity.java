@@ -2,9 +2,11 @@ package common.cout970.UltraTech.machines.tileEntities;
 
 import java.util.ArrayList;
 
+import common.cout970.UltraTech.machines.containers.MinerContainer;
 import common.cout970.UltraTech.misc.Mining;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -41,7 +43,7 @@ public class MinerEntity extends Machine implements IInventory{
  	
 	public MinerEntity(){
 		super();
-		this.EnergyMax = 10000;
+		this.EnergyMax = 50000;
 		inventory = new ItemStack[size];
 	}
 	
@@ -279,18 +281,17 @@ public class MinerEntity extends Machine implements IInventory{
 				hasMine = true;
 			}
 			if(!flag){
-				flag = this.Energy >= 56;
+				flag = this.Energy >= 100;
 			}
 			boolean flag1 = false;
 			boolean workdo = current >= mining.size(); 
 			if(flag && !workdo){
 				proces += speed;
 				if(proces >= 100){
-					this.loseEnergy(56);
 					proces = 0;
 					flag1 = true;
 					flag = false;
-					if(current < mining.size())	BreakNextBlock();
+					BreakNextBlock();
 				}
 			}
 
@@ -324,6 +325,7 @@ public class MinerEntity extends Machine implements IInventory{
 
 	private void BreakNextBlock() {
 		if(mining.get(current) != null){
+			this.loseEnergy(500);
 			int x = mining.get(current).x;
 			int y = mining.get(current).y;
 			int z = mining.get(current).z;
@@ -331,7 +333,6 @@ public class MinerEntity extends Machine implements IInventory{
 				ItemStack[] a = getItemStackFromId(worldObj, x, y, z, worldObj.getBlockMetadata(x, y, z), this.fortuneUpgrades);
 				addItemStackArray(a);
 				this.worldObj.setBlockToAir(x, y, z);//less lag
-//				this.worldObj.destroyBlock(x, y, z, false);
 			}
 		}
 		current++;
@@ -434,6 +435,33 @@ public class MinerEntity extends Machine implements IInventory{
 				machines[i] = null;
 			}
 			i++;
+		}
+	}
+
+	//Sync
+
+	public void sendGUINetworkData(MinerContainer minerContainer,
+			ICrafting iCrafting) {
+		iCrafting.sendProgressBarUpdate(minerContainer, 0, widht);
+		iCrafting.sendProgressBarUpdate(minerContainer, 1, Energy);
+		iCrafting.sendProgressBarUpdate(minerContainer, 2, speedUpgrades);
+	}
+
+	public void getGUINetworkData(int id, int value) {
+		switch(id){
+		case 0:{
+			widht = value;
+			height = value;
+			break;
+		}
+		case 1:{
+			Energy = value;
+			break;
+		}
+		case 2:{
+			speedUpgrades = value;
+			break;
+		}
 		}
 	}
 }

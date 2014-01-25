@@ -1,5 +1,6 @@
 package common.cout970.UltraTech.machines.blocks;
 
+import common.cout970.UltraTech.blocks.BlockManager;
 import common.cout970.UltraTech.core.UltraTech;
 import common.cout970.UltraTech.machines.tileEntities.WindMillEntity;
 import common.cout970.UltraTech.machines.tileEntities.hitBoxEntity;
@@ -49,7 +50,7 @@ public class WindMill extends BlockContainer{
     {
     	super.onBlockAdded(par1World, xCoord, yCoord, zCoord);
     	for(int d=1;d<5;d++){
-    		par1World.setBlock(xCoord, yCoord+d, zCoord, UltraTech.hitBox.blockID);
+    		par1World.setBlock(xCoord, yCoord+d, zCoord, BlockManager.hitBox.blockID);
 
     	}
     	for(int d=1;d<5;d++){

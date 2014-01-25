@@ -3,7 +3,7 @@ package common.cout970.UltraTech.machines.tileEntities;
 import java.util.ArrayList;
 import java.util.List;
 
-import common.cout970.UltraTech.core.UltraTech;
+import common.cout970.UltraTech.blocks.BlockManager;
 import common.cout970.UltraTech.misc.IReactorPart;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
@@ -66,7 +66,7 @@ public class WaterBlockEntity extends TileEntity implements IReactorPart{
 			for(int i = -1;i<2;i++){
 				for(int k = -1;k<2;k++){
 					ids[current] = worldObj.getBlockId(xCoord+i, yCoord+j, zCoord+k);
-					if(ids[current] == UltraTech.Reactor.blockID){
+					if(ids[current] == BlockManager.Reactor.blockID){
 						Reactor = (ReactorEntity) worldObj.getBlockTileEntity(xCoord+i,yCoord+j,zCoord+k);
 						found = true;
 						return;
