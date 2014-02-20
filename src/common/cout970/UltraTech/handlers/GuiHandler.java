@@ -3,6 +3,8 @@ package common.cout970.UltraTech.handlers;
 
 import common.cout970.UltraTech.machines.containers.CVDcontainer;
 import common.cout970.UltraTech.machines.containers.ChargeStationContainer;
+import common.cout970.UltraTech.machines.containers.CrafterContainer;
+import common.cout970.UltraTech.machines.containers.EngineContainer;
 import common.cout970.UltraTech.machines.containers.GeneratorContainer;
 import common.cout970.UltraTech.machines.containers.IDScontainer;
 import common.cout970.UltraTech.machines.containers.MAssemblyContainer;
@@ -15,7 +17,9 @@ import common.cout970.UltraTech.machines.containers.ReactorContainer;
 import common.cout970.UltraTech.machines.containers.UTfurnaceContainer;
 import common.cout970.UltraTech.machines.gui.CVDgui;
 import common.cout970.UltraTech.machines.gui.ChargeStationGui;
+import common.cout970.UltraTech.machines.gui.CrafterGui;
 import common.cout970.UltraTech.machines.gui.CuterGui;
+import common.cout970.UltraTech.machines.gui.EngineGui;
 import common.cout970.UltraTech.machines.gui.GeneratorGui;
 import common.cout970.UltraTech.machines.gui.IDSgui;
 import common.cout970.UltraTech.machines.gui.MAssemblyGui;
@@ -27,7 +31,9 @@ import common.cout970.UltraTech.machines.gui.ReactorGui;
 import common.cout970.UltraTech.machines.gui.UTfurnaceGui;
 import common.cout970.UltraTech.machines.tileEntities.CVDentity;
 import common.cout970.UltraTech.machines.tileEntities.ChargeStationEntity;
+import common.cout970.UltraTech.machines.tileEntities.CrafterEntity;
 import common.cout970.UltraTech.machines.tileEntities.CuterEntity;
+import common.cout970.UltraTech.machines.tileEntities.EngineEntity;
 import common.cout970.UltraTech.machines.tileEntities.GeneratorEntity;
 import common.cout970.UltraTech.machines.tileEntities.IDSentity;
 import common.cout970.UltraTech.machines.tileEntities.MinerEntity;
@@ -97,7 +103,14 @@ public class GuiHandler implements IGuiHandler{
 		if(tileEntity instanceof Printer3DEntity){
 			return new Printer3DContainer(player.inventory, (Printer3DEntity) tileEntity);
 		}
-
+		//Engine
+		if(tileEntity instanceof EngineEntity){
+			return new EngineContainer(player.inventory, (EngineEntity) tileEntity);
+		}
+		//Crafter
+		if(tileEntity instanceof CrafterEntity){
+			return new CrafterContainer(player.inventory, (CrafterEntity) tileEntity);
+		}
 		return null;
 	}
 
@@ -154,7 +167,14 @@ public class GuiHandler implements IGuiHandler{
 		if(tileEntity instanceof Printer3DEntity){
 			return new Printer3DGui(new Printer3DContainer(player.inventory, (Printer3DEntity) tileEntity), player.inventory, (Printer3DEntity) tileEntity);
 		}
-		
+		//Engine
+		if(tileEntity instanceof EngineEntity){
+			return new EngineGui(new EngineContainer(player.inventory, (EngineEntity) tileEntity), player.inventory, (EngineEntity) tileEntity);
+		}
+		//Crafter
+		if(tileEntity instanceof CrafterEntity){
+			return new CrafterGui(new CrafterContainer(player.inventory, (CrafterEntity) tileEntity), player.inventory, (CrafterEntity) tileEntity);
+		}
 		return null;
 	}
 

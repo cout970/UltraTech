@@ -126,6 +126,7 @@ public class Block_UT_Render implements ISimpleBlockRenderingHandler {
 		float v = c.getInterpolatedV(0);
 		float v1 = c.getInterpolatedV(16);
 		
+		
 		//y-
 		if(block.isBlockSolid(world, x, y, z, 0)){
 			t.setBrightness(block.getMixedBrightnessForBlock(world, x, y-1, z));

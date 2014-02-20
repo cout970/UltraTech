@@ -10,6 +10,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
@@ -30,6 +31,11 @@ public class UT_Block extends Block{
 		setUnlocalizedName(name);
 		texture = name.toLowerCase();
 	}
+	
+	@Override
+    public boolean canCreatureSpawn(EnumCreatureType type, World world, int x, int y, int z) {
+    	return false;
+    }
 	
 	@SuppressWarnings("static-access")
 	public void registerIcons(IconRegister iconRegister){

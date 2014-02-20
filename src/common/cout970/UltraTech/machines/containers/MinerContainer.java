@@ -48,7 +48,7 @@ public class MinerContainer extends Container{
         super.addCraftingToCrafters(par1ICrafting);
         par1ICrafting.sendProgressBarUpdate(this, 0, entity.widht);
         par1ICrafting.sendProgressBarUpdate(this, 1, entity.Energy);
-        par1ICrafting.sendProgressBarUpdate(this, 2, entity.speedUpgrades);
+        par1ICrafting.sendProgressBarUpdate(this, 2, entity.speed);
     }
 	
 	@Override

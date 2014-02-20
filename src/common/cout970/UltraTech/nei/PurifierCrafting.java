@@ -29,7 +29,7 @@ public class PurifierCrafting extends TemplateRecipeHandler {
 	public void loadCraftingRecipes(ItemStack result)
 	{
 		for(int x = 0; x < Purifier_Recipe.recipes.size();x++ ){
-			if(result.itemID == Purifier_Recipe.recipes.get(x).getOutput().itemID && result.getItemDamage() == Purifier_Recipe.recipes.get(x).getOutput().getItemDamage()){
+			if(NEIUltraTechConfig.matches(result, Purifier_Recipe.recipes.get(x).getOutput())){
 				recipes.add(Purifier_Recipe.recipes.get(x));
 			}
 		}
@@ -39,7 +39,7 @@ public class PurifierCrafting extends TemplateRecipeHandler {
 	@Override
 	public void loadUsageRecipes(ItemStack ingredient){
 		for(int x = 0; x < Purifier_Recipe.recipes.size();x++ ){
-			if(ingredient.itemID == Purifier_Recipe.recipes.get(x).getInput().itemID && ingredient.getItemDamage() == Purifier_Recipe.recipes.get(x).getInput().getItemDamage()){
+			if(NEIUltraTechConfig.matches(ingredient, Purifier_Recipe.recipes.get(x).getInput())){
 				recipes.add(Purifier_Recipe.recipes.get(x));
 			}
 		}

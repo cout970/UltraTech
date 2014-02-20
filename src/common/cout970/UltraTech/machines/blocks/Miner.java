@@ -4,6 +4,7 @@ import java.util.Random;
 
 import common.cout970.UltraTech.core.UltraTech;
 import common.cout970.UltraTech.machines.tileEntities.MinerEntity;
+import common.cout970.UltraTech.managers.ItemManager;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.BlockContainer;
@@ -63,7 +64,7 @@ public class Miner extends BlockContainer{
 	}
 	
 	public void registerIcons(IconRegister iconRegister){
-		this.IconFront = iconRegister.registerIcon("ultratech:machinechasis");
+		this.IconFront = iconRegister.registerIcon("ultratech:chasis2");
 		this.blockIcon = iconRegister.registerIcon("ultratech:miner");
 	}
 	
@@ -117,7 +118,7 @@ public class Miner extends BlockContainer{
 			 float rz = rand.nextFloat() * 0.8F + 0.1F;
 			 EntityItem entityItem = new EntityItem(world,
                    x + rx, y + ry, z + rz,
-                   new ItemStack(UltraTech.ItemName.get("AutoEjectUpgrade").itemID, 1, 0));
+                   new ItemStack(ItemManager.ItemName.get("AutoEjectUpgrade").itemID, 1, 0));
 			 float factor = 0.05F;
 			 entityItem.motionX = rand.nextGaussian() * factor;
 			 entityItem.motionY = rand.nextGaussian() * factor + 0.2F;
@@ -129,7 +130,7 @@ public class Miner extends BlockContainer{
 				 float rx = rand.nextFloat() * 0.8F + 0.1F;
 				 float ry = rand.nextFloat() * 0.8F + 0.1F;
 				 float rz = rand.nextFloat() * 0.8F + 0.1F;
-				 EntityItem entityItem = new EntityItem(world, x + rx, y + ry, z + rz, new ItemStack(UltraTech.ItemName.get("MiningUpgrade").itemID, 1, 0));
+				 EntityItem entityItem = new EntityItem(world, x + rx, y + ry, z + rz, new ItemStack(ItemManager.ItemName.get("MiningUpgrade").itemID, 1, 0));
 				 float factor = 0.05F;
 				 entityItem.motionX = rand.nextGaussian() * factor;
 				 entityItem.motionY = rand.nextGaussian() * factor + 0.2F;
@@ -142,7 +143,7 @@ public class Miner extends BlockContainer{
 			 float rx = rand.nextFloat() * 0.8F + 0.1F;
 			 float ry = rand.nextFloat() * 0.8F + 0.1F;
 			 float rz = rand.nextFloat() * 0.8F + 0.1F;
-			 EntityItem entityItem = new EntityItem(world, x + rx, y + ry, z + rz, new ItemStack(UltraTech.ItemName.get("RangeUpgrade").itemID, 1, 0));
+			 EntityItem entityItem = new EntityItem(world, x + rx, y + ry, z + rz, new ItemStack(ItemManager.ItemName.get("RangeUpgrade").itemID, 1, 0));
 			 float factor = 0.05F;
 			 entityItem.motionX = rand.nextGaussian() * factor;
 			 entityItem.motionY = rand.nextGaussian() * factor + 0.2F;
@@ -155,7 +156,7 @@ public class Miner extends BlockContainer{
 			 float rx = rand.nextFloat() * 0.8F + 0.1F;
 			 float ry = rand.nextFloat() * 0.8F + 0.1F;
 			 float rz = rand.nextFloat() * 0.8F + 0.1F;
-			 EntityItem entityItem = new EntityItem(world, x + rx, y + ry, z + rz, new ItemStack(UltraTech.ItemName.get("FortuneUpgrade").itemID, 1, 0));
+			 EntityItem entityItem = new EntityItem(world, x + rx, y + ry, z + rz, new ItemStack(ItemManager.ItemName.get("FortuneUpgrade").itemID, 1, 0));
 			 float factor = 0.05F;
 			 entityItem.motionX = rand.nextGaussian() * factor;
 			 entityItem.motionY = rand.nextGaussian() * factor + 0.2F;

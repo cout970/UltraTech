@@ -89,7 +89,7 @@ public class ChargeStationEntity extends Machine implements IInventory{
 
 	@Override
 	public String getInvName() {
-		return "Ultra Tech Furnace";
+		return "Charge station";
 	}
 
 	@Override

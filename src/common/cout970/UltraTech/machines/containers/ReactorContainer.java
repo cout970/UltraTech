@@ -1,7 +1,7 @@
 package common.cout970.UltraTech.machines.containers;
 
-import common.cout970.UltraTech.core.UltraTech;
 import common.cout970.UltraTech.machines.tileEntities.ReactorEntity;
+import common.cout970.UltraTech.managers.ItemManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -84,7 +84,7 @@ public class ReactorContainer extends Container{
 					current.onSlotChange(itemstack, aux);
 					
 				}else{
-					if(itemstack.itemID == UltraTech.ItemName.get("RadioniteCell").itemID){
+					if(itemstack.itemID == ItemManager.ItemName.get("RadioniteCell").itemID){
 						if(!mergeItemStack(itemstack, 0, inv, false)){
 							return null;
 						}

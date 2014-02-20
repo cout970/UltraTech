@@ -7,6 +7,8 @@ public class ReciverEntity extends Machine{
 		
 	public Machine[] machines;
 	public SenderEntity from;
+	public boolean update = false;
+	private int[] FCoords = {0,0,0}; 
 	
 	public ReciverEntity(){
 		super();
@@ -17,12 +19,20 @@ public class ReciverEntity extends Machine{
 	@Override
 	public void updateEntity(){
 		super.updateEntity();
+		if(!update){
+			update = true;
+			setFrom(FCoords );
+		}
 		Machine.passEnergy(from, this);
+		
 	}
 	
-	public void onNeighChange(){}
+	public void onNeighChange(){
+		this.updateMachine(worldObj, xCoord, yCoord, zCoord);
+		}
 
 	public void setFrom(int[] i) {
+		if(i != null && i.length == 3)
 		if(worldObj.getBlockTileEntity(i[0], i[1], i[2]) != null && worldObj.getBlockTileEntity(i[0], i[1], i[2]) instanceof SenderEntity)
 			from = (SenderEntity) worldObj.getBlockTileEntity(i[0], i[1], i[2]);	
 	}
@@ -37,8 +47,7 @@ public class ReciverEntity extends Machine{
 	public void readFromNBT(NBTTagCompound nbt) {
 
 		super.readFromNBT(nbt);
-		int[] a = nbt.getIntArray("From");
-		if(a != null)
-		from = (SenderEntity) worldObj.getBlockTileEntity(a[0], a[1], a[2]);
+		FCoords = nbt.getIntArray("From");
+		
 	}
 }

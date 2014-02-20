@@ -59,4 +59,9 @@ public class StoneBlock extends Block{
 	public int getDamageValue(World par1World, int par2, int par3, int par4) {
 		return par1World.getBlockMetadata(par2, par3, par4);
 	}
+	
+	@Override
+	public int damageDropped (int metadata) {
+		return metadata;
+	}
 }

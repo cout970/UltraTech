@@ -63,7 +63,7 @@ public class PrecisionCuter extends BlockContainer{
 	
 	public void registerIcons(IconRegister iconRegister){
 		this.blockIcon = iconRegister.registerIcon("ultratech:cuter");
-		this.IconTop = iconRegister.registerIcon("ultratech:machinechasis");
+		this.IconTop = iconRegister.registerIcon("ultratech:chasis1");
 	}
 	
 	@Override

@@ -16,13 +16,15 @@ public class Machine extends TileEntity implements Energy{
 	public int EnergyMax = 20000;
 	public boolean update = false;
 	public MachineTipe tipe = MachineTipe.Nothing;
+	public List<Machine> Machines;
 
 	@Override
 	public void updateEntity(){
+		if(Machines == null)updateMachine(worldObj, xCoord, yCoord, zCoord);
 		if(tipe == MachineTipe.Output){
-			Machine.emptyMachine(this, worldObj, xCoord, yCoord, zCoord);
+			this.emptyMachine(worldObj, xCoord, yCoord, zCoord);
 		}else if(tipe == MachineTipe.Input){
-			Machine.fillMachine(this, worldObj, xCoord, yCoord, zCoord);
+			this.fillMachine(worldObj, xCoord, yCoord, zCoord);
 		}
 	}
 	
@@ -97,9 +99,9 @@ public class Machine extends TileEntity implements Energy{
 		if(a.getEnergy() > 0){
 			int space = b.EnergyMax-b.getEnergy();
 			if(space > 0){
-				if(a.getEnergy() > 200 && space > 200){
-					a.loseEnergy(200);
-					b.gainEnergy(200);
+				if(a.getEnergy() > 500 && space > 500){
+					a.loseEnergy(500);
+					b.gainEnergy(500);
 				}else if(a.getEnergy() >= space){
 					a.loseEnergy(space);
 					b.gainEnergy(space);
@@ -118,9 +120,30 @@ public class Machine extends TileEntity implements Energy{
 	 * @param y
 	 * @param z
 	 */
-	public static void emptyMachine(Machine a, World w,int x,int y,int z){
+	public void emptyMachine(World w,int x,int y,int z){
 
-		if(a == null)return;
+		if(Machines == null)this.updateMachine(w, x, y, z);
+		boolean flag;
+		for(Machine b:Machines){
+			flag = b instanceof IDSentity;
+			if(b.tipe != MachineTipe.Output || flag)
+			if(this instanceof IDSentity && flag){
+				if(this.EnergyMax-this.getEnergy()< 1000){
+					passEnergy(this, b);
+				}
+			}else passEnergy(this, b);
+		}
+	}
+	
+	/**
+	 * this update machines list
+	 * @param w
+	 * @param x
+	 * @param y
+	 * @param z
+	 */
+	public void updateMachine(World w,int x,int y,int z){
+		Machines = new ArrayList<Machine>();
 		TileEntity[] t = new TileEntity[6];
 		t[0] = w.getBlockTileEntity(x, y-1, z);
 		t[1] = w.getBlockTileEntity(x, y+1, z);
@@ -128,21 +151,10 @@ public class Machine extends TileEntity implements Energy{
 		t[3] = w.getBlockTileEntity(x+1, y, z);
 		t[4] = w.getBlockTileEntity(x, y, z-1);
 		t[5] = w.getBlockTileEntity(x-1, y, z);
-		List<Machine> l = new ArrayList<Machine>();
 		for(TileEntity h : t){
 			if(h != null && h instanceof Machine){
-				l.add((Machine) h);
+				Machines.add((Machine) h);
 			}
-		}
-		boolean flag;
-		for(Machine b:l){
-			flag = b instanceof IDSentity;
-			if(b.tipe != MachineTipe.Output || flag)
-			if(a instanceof IDSentity && flag){
-				if(a.EnergyMax-a.getEnergy()< 1000){
-					passEnergy(a, b);
-				}
-			}else passEnergy(a, b);
 		}
 	}
 	
@@ -154,24 +166,11 @@ public class Machine extends TileEntity implements Energy{
 	 * @param y
 	 * @param z
 	 */
-	public static void fillMachine(Machine a, World w,int x,int y,int z){
-		if(a == null)return;
-		TileEntity[] t = new TileEntity[6];
-		t[0] = w.getBlockTileEntity(x, y-1, z);
-		t[1] = w.getBlockTileEntity(x, y+1, z);
-		t[2] = w.getBlockTileEntity(x, y, z+1);
-		t[3] = w.getBlockTileEntity(x+1, y, z);
-		t[4] = w.getBlockTileEntity(x, y, z-1);
-		t[5] = w.getBlockTileEntity(x-1, y, z);
-		List<Machine> l = new ArrayList<Machine>();
-		for(TileEntity h : t){
-			if(h != null && h instanceof Machine){
-				l.add((Machine) h);
-			}
-		}
-		for(Machine b:l){
+	public void fillMachine(World w,int x,int y,int z){
+		if(Machines == null)this.updateMachine(w, x, y, z);
+		for(Machine b:Machines){
 			if(b.tipe != MachineTipe.Input)
-			passEnergy(b, a);
+			passEnergy(b, this);
 		}
 	}
 	

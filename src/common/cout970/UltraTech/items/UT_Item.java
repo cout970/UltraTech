@@ -12,7 +12,7 @@ public class UT_Item extends Item{
 	public UT_Item(int id,String name){
 		super(id);
 		setUnlocalizedName(name);
-		setCreativeTab(UltraTech.techTab);
+		setCreativeTab(UltraTech.ResourceTab);
 		setMaxStackSize(64);
 		this.name = name;
 	}

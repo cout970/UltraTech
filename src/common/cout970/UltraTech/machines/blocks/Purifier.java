@@ -51,7 +51,7 @@ public class Purifier extends BlockContainer{
 	
 	public void registerIcons(IconRegister iconRegister){
 		this.blockIcon = iconRegister.registerIcon("ultratech:purifier");
-		this.IconTop = iconRegister.registerIcon("ultratech:machinechasis");
+		this.IconTop = iconRegister.registerIcon("ultratech:chasis1");
 	}
 	
 	@SideOnly(Side.CLIENT)

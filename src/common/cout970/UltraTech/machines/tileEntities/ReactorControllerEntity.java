@@ -1,7 +1,12 @@
 package common.cout970.UltraTech.machines.tileEntities;
 
-import common.cout970.UltraTech.blocks.BlockManager;
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+
+import common.cout970.UltraTech.managers.BlockManager;
 import common.cout970.UltraTech.misc.IReactorPart;
+import cpw.mods.fml.common.network.PacketDispatcher;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
@@ -10,10 +15,23 @@ public class ReactorControllerEntity extends TileEntity implements IReactorPart{
 	public boolean found = false;
 	public ReactorEntity Reactor;
 	public boolean Structure = false;
-	public int meta;
 	public boolean update = false;
+	public int meta;
+	
+	public void updateEntity(){
+		if(!update){
+			setUp();
+			update = true;
+		}
+		if(!Structure && meta == 1){
+			meta = 0;
+		}else if(Structure && meta == 0){
+			meta = 1;
+		}
+	}
 
 	public void setUp(){
+
 		SearchReactor();
 		if(Reactor != null){
 			Reactor.work = !worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord);
@@ -22,23 +40,12 @@ public class ReactorControllerEntity extends TileEntity implements IReactorPart{
 			checkStructure();
 			if(Structure){
 				activateBlocks();
-				worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 1, 2);
 				meta = 1;
+			}else{
+				meta = 0;
 			}
-		}
-	}
-	
-	public void updateEntity(){
-		if(!update){
-			setUp();
-			update = true;
-		}
-		if(!Structure && meta == 1){
-			worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 0, 2);
-			meta = 0;
-		}else if(Structure && meta == 0){
-			worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 1, 2);
-			meta = 1;
+		}else{
+			Structure = false;
 		}
 	}
 
@@ -50,7 +57,7 @@ public class ReactorControllerEntity extends TileEntity implements IReactorPart{
 			for(int i = -1;i<2;i++){
 				for(int k = -1;k<2;k++){
 					ids[current] = worldObj.getBlockId(xCoord+i, yCoord+j, zCoord+k);
-					if(ids[current] == BlockManager.Reactor.blockID){
+					if(ids[current] == BlockManager.Reactor.blockID && worldObj.getBlockMetadata(xCoord+i, yCoord+j, zCoord+k) == 0){
 						Reactor = (ReactorEntity) worldObj.getBlockTileEntity(xCoord+i,yCoord+j,zCoord+k);
 						found = true;
 						return;
@@ -69,7 +76,7 @@ public class ReactorControllerEntity extends TileEntity implements IReactorPart{
 
 	@Override
 	public void onNeighChange() {
-		setUp();
+		setUp();	
 	}
 
 	@Override
@@ -106,6 +113,7 @@ public class ReactorControllerEntity extends TileEntity implements IReactorPart{
 					if(this.worldObj.getBlockTileEntity(x+i, y+j, z+k) instanceof IReactorPart){
 						((IReactorPart)worldObj.getBlockTileEntity(x+i, y+j, z+k)).setStructure(true);
 						((IReactorPart)worldObj.getBlockTileEntity(x+i, y+j, z+k)).setReactor(Reactor);
+						worldObj.markBlockForRenderUpdate(x+i, y+j, z+k);
 					}
 				}
 			}
@@ -114,9 +122,8 @@ public class ReactorControllerEntity extends TileEntity implements IReactorPart{
 
 	@Override
 	public void desactivateBlocks() {
-		if(Structure){
+		if(Reactor != null){
 			Structure = false;
-			if(getReactor() == null)return;
 			int x,y,z;
 			x = Reactor.xCoord;
 			y = Reactor.yCoord;
@@ -126,6 +133,20 @@ public class ReactorControllerEntity extends TileEntity implements IReactorPart{
 					for(int k = -1;k<2;k++){
 						if(this.worldObj.getBlockTileEntity(x+i, y+j, z+k) instanceof IReactorPart){
 							((IReactorPart)worldObj.getBlockTileEntity(x+i, y+j, z+k)).setStructure(false);
+							worldObj.markBlockForUpdate(x+i, y+j, z+k);
+							ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+							DataOutputStream data = new DataOutputStream(bytes);
+							try {
+								data.writeInt(x+i);
+								data.writeInt(y+j);
+								data.writeInt(z+k);
+								data.writeInt(0);
+								data.writeInt(this.isStructure() ? 1 : 0);
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+							PacketDispatcher.sendPacketToAllPlayers(PacketDispatcher.getPacket("UltraTech1", bytes.toByteArray()));
+							
 						}
 					}
 				}

@@ -1,11 +1,15 @@
 package common.cout970.UltraTech.machines.tileEntities;
 
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import common.cout970.UltraTech.blocks.BlockManager;
+import common.cout970.UltraTech.managers.BlockManager;
 import common.cout970.UltraTech.misc.Energy;
 import common.cout970.UltraTech.misc.IReactorPart;
+import cpw.mods.fml.common.network.PacketDispatcher;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
@@ -23,7 +27,7 @@ public class SteamTurbineEntity extends Machine implements IFluidTank,IFluidHand
 	public FluidStack liquid;
 	public int capacity = 5000;
 	public boolean update2 = false;
-	
+
 	public SteamTurbineEntity(){
 		super();
 		this.tipe = MachineTipe.Output;
@@ -35,7 +39,7 @@ public class SteamTurbineEntity extends Machine implements IFluidTank,IFluidHand
 			List<IFluidHandler> a = getTanks();
 			for(IFluidHandler b : a){
 				if(this.getFluidAmount() > 500)
-				this.drain(b.fill(ForgeDirection.UP , new FluidStack(FluidRegistry.getFluid("steam"),500), true),true);
+					this.drain(b.fill(ForgeDirection.UP , new FluidStack(FluidRegistry.getFluid("steam"),500), true),true);
 			}
 			if(Reactor != null){
 				if(Reactor.steam > 0){
@@ -57,12 +61,7 @@ public class SteamTurbineEntity extends Machine implements IFluidTank,IFluidHand
 		}
 		super.updateEntity();
 	}
-	
-	public void onNeiChange(){
-		setUp();
-	}
 
-	
 	private List<IFluidHandler> getTanks() {
 		List<IFluidHandler> tanks = new ArrayList<IFluidHandler>();
 		TileEntity[] t = new TileEntity[6];
@@ -101,13 +100,13 @@ public class SteamTurbineEntity extends Machine implements IFluidTank,IFluidHand
 	@Override
 	public FluidTankInfo getInfo() {
 		if(liquid != null)
-		return new FluidTankInfo(liquid, liquid.amount);
+			return new FluidTankInfo(liquid, liquid.amount);
 		return new FluidTankInfo(this);
 	}
 
 	@Override
 	public int fill(FluidStack resource, boolean doFill) {
-		
+
 		if (resource == null) {
 			return 0;
 		}
@@ -152,25 +151,25 @@ public class SteamTurbineEntity extends Machine implements IFluidTank,IFluidHand
 	@Override
 	public FluidStack drain(int maxDrain, boolean doDrain) {
 		if (liquid == null)
-        {
-            return null;
-        }
-        int drained = maxDrain;
-        if (liquid.amount < drained)
-        {
-            drained = liquid.amount;
-        }
-        FluidStack stack = new FluidStack(liquid, drained);
-        if (doDrain)
-        {
-            liquid.amount -= drained;
-            if (liquid.amount <= 0)
-            {
-                liquid = null;
-            }
-                FluidEvent.fireEvent(new FluidEvent.FluidDrainingEvent(liquid, this.worldObj, this.xCoord, this.yCoord, this.zCoord, (IFluidTank) this));
-        }
-        return stack;
+		{
+			return null;
+		}
+		int drained = maxDrain;
+		if (liquid.amount < drained)
+		{
+			drained = liquid.amount;
+		}
+		FluidStack stack = new FluidStack(liquid, drained);
+		if (doDrain)
+		{
+			liquid.amount -= drained;
+			if (liquid.amount <= 0)
+			{
+				liquid = null;
+			}
+			FluidEvent.fireEvent(new FluidEvent.FluidDrainingEvent(liquid, this.worldObj, this.xCoord, this.yCoord, this.zCoord, (IFluidTank) this));
+		}
+		return stack;
 	}
 
 
@@ -183,8 +182,8 @@ public class SteamTurbineEntity extends Machine implements IFluidTank,IFluidHand
 	public FluidStack drain(ForgeDirection from, FluidStack resource,
 			boolean doDrain) {
 		if(resource == null || liquid == null)return null;
-			if(resource.fluidID == liquid.fluidID)return this.drain(resource.amount, doDrain);
-			return null;
+		if(resource.fluidID == liquid.fluidID)return this.drain(resource.amount, doDrain);
+		return null;
 	}
 
 	@Override
@@ -206,7 +205,7 @@ public class SteamTurbineEntity extends Machine implements IFluidTank,IFluidHand
 	public FluidTankInfo[] getTankInfo(ForgeDirection from) {
 		return new FluidTankInfo[]{this.getInfo()};
 	}
-	
+
 	//energy
 	@Override
 	public int gainEnergy(int energy2) {
@@ -225,7 +224,7 @@ public class SteamTurbineEntity extends Machine implements IFluidTank,IFluidHand
 	@Override
 	public void loseEnergy(int amount) {
 		if(Energy-amount >= 0){
-		Energy -= amount;	
+			Energy -= amount;	
 		}
 	}
 
@@ -234,13 +233,13 @@ public class SteamTurbineEntity extends Machine implements IFluidTank,IFluidHand
 	public int getEnergy() {
 		return Energy;
 	}
-	
+
 
 	@Override
 	public void readFromNBT(NBTTagCompound nbtTagCompound) {
-		
+
 		super.readFromNBT(nbtTagCompound);
-		
+
 		NBTTagList tagList = nbtTagCompound.getTagList("Energy_UT");
 		NBTTagCompound tagCompound = (NBTTagCompound) tagList.tagAt(0);
 		Energy = tagCompound.getInteger("Energy");
@@ -248,12 +247,12 @@ public class SteamTurbineEntity extends Machine implements IFluidTank,IFluidHand
 		EnergyMax = tagCompound2.getInteger("EnergyMax");
 
 	}
-	
+
 
 	@Override
 	public void writeToNBT(NBTTagCompound nbtTagCompound) {
 		super.writeToNBT(nbtTagCompound);
-		
+
 		NBTTagList tagList = new NBTTagList();
 		NBTTagCompound tagCompound = new NBTTagCompound();
 		tagCompound.setInteger("Energy", this.Energy);
@@ -262,22 +261,25 @@ public class SteamTurbineEntity extends Machine implements IFluidTank,IFluidHand
 		tagCompound2.setInteger("EnergyMax", this.EnergyMax);
 		tagList.appendTag(tagCompound2);
 		nbtTagCompound.setTag("Energy_UT", tagList);
-		
+
 	}
-	
+
 	//Reactor Part
-	
+
 	public boolean found = false;
 	public ReactorEntity Reactor;
 	public boolean Structure = false;
-	
-	public void setUp() {
+
+	public void setUp(){
+
 		SearchReactor();
 		if(found){
 			checkStructure();
 			if(Structure){
 				activateBlocks();
 			}
+		}else{
+			Structure = false;
 		}
 	}
 
@@ -289,7 +291,7 @@ public class SteamTurbineEntity extends Machine implements IFluidTank,IFluidHand
 			for(int i = -1;i<2;i++){
 				for(int k = -1;k<2;k++){
 					ids[current] = worldObj.getBlockId(xCoord+i, yCoord+j, zCoord+k);
-					if(ids[current] == BlockManager.Reactor.blockID){
+					if(ids[current] == BlockManager.Reactor.blockID && worldObj.getBlockMetadata(xCoord+i, yCoord+j, zCoord+k) == 0){
 						Reactor = (ReactorEntity) worldObj.getBlockTileEntity(xCoord+i,yCoord+j,zCoord+k);
 						found = true;
 						return;
@@ -318,11 +320,12 @@ public class SteamTurbineEntity extends Machine implements IFluidTank,IFluidHand
 		for(int j = -1;j<2;j++){
 			for(int i = -1;i<2;i++){
 				for(int k = -1;k<2;k++){
-					ids[current] = worldObj.getBlockTileEntity(xCoord+i, yCoord+j, zCoord+k);
+					ids[current] = worldObj.getBlockTileEntity(Reactor.xCoord+i, Reactor.yCoord+j, Reactor.zCoord+k);
 					current++;
 				}
 			}
 		}
+
 		this.Structure = false;
 
 		for(TileEntity t : ids) {
@@ -344,6 +347,7 @@ public class SteamTurbineEntity extends Machine implements IFluidTank,IFluidHand
 					if(this.worldObj.getBlockTileEntity(x+i, y+j, z+k) instanceof IReactorPart){
 						((IReactorPart)worldObj.getBlockTileEntity(x+i, y+j, z+k)).setStructure(true);
 						((IReactorPart)worldObj.getBlockTileEntity(x+i, y+j, z+k)).setReactor(Reactor);
+						worldObj.markBlockForRenderUpdate(x+i, y+j, z+k);
 					}
 				}
 			}
@@ -352,7 +356,7 @@ public class SteamTurbineEntity extends Machine implements IFluidTank,IFluidHand
 
 	@Override
 	public void desactivateBlocks() {
-		if(Structure){
+		if(Reactor != null){
 			Structure = false;
 			int x,y,z;
 			x = Reactor.xCoord;
@@ -363,6 +367,20 @@ public class SteamTurbineEntity extends Machine implements IFluidTank,IFluidHand
 					for(int k = -1;k<2;k++){
 						if(this.worldObj.getBlockTileEntity(x+i, y+j, z+k) instanceof IReactorPart){
 							((IReactorPart)worldObj.getBlockTileEntity(x+i, y+j, z+k)).setStructure(false);
+							worldObj.markBlockForUpdate(x+i, y+j, z+k);
+							ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+							DataOutputStream data = new DataOutputStream(bytes);
+							try {
+								data.writeInt(x+i);
+								data.writeInt(y+j);
+								data.writeInt(z+k);
+								data.writeInt(0);
+								data.writeInt(this.isStructure() ? 1 : 0);
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+							PacketDispatcher.sendPacketToAllPlayers(PacketDispatcher.getPacket("UltraTech1", bytes.toByteArray()));
+
 						}
 					}
 				}

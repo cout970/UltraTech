@@ -29,7 +29,7 @@ public class CVD_Crafting extends TemplateRecipeHandler {
 	public void loadCraftingRecipes(ItemStack result)
 	{
 		for(int x = 0; x < CVD_Recipe.recipes.size();x++ ){
-			if(result.itemID == CVD_Recipe.recipes.get(x).getOutput().itemID && result.getItemDamage() == CVD_Recipe.recipes.get(x).getOutput().getItemDamage()){
+			if(NEIUltraTechConfig.matches(result, CVD_Recipe.recipes.get(x).getOutput())){
 				recipes.add(CVD_Recipe.recipes.get(x));
 			}
 		}
@@ -39,7 +39,7 @@ public class CVD_Crafting extends TemplateRecipeHandler {
 	@Override
 	public void loadUsageRecipes(ItemStack ingredient){
 		for(int x = 0; x < CVD_Recipe.recipes.size();x++ ){
-			if(ingredient.itemID == CVD_Recipe.recipes.get(x).getImput1().itemID && ingredient.itemID == CVD_Recipe.recipes.get(x).getImput2().itemID){
+			if(NEIUltraTechConfig.matches(ingredient, CVD_Recipe.recipes.get(x).getImput1()) || NEIUltraTechConfig.matches(ingredient, CVD_Recipe.recipes.get(x).getImput2())){
 				recipes.add(CVD_Recipe.recipes.get(x));
 			}
 		}

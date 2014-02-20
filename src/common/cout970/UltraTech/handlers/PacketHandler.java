@@ -4,10 +4,12 @@ import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
 
+import common.cout970.UltraTech.machines.tileEntities.CrafterEntity;
 import common.cout970.UltraTech.machines.tileEntities.Printer3DEntity;
 import common.cout970.UltraTech.machines.tileEntities.ReactorTankEntity;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.ItemStack;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.tileentity.TileEntity;
@@ -43,7 +45,35 @@ public class PacketHandler implements IPacketHandler{
 				((Printer3DEntity)te).update = true;
 				
 			}catch(Exception e){
-				e.printStackTrace();}			
+				e.printStackTrace();}	
+		}else if(packet.channel == "UltraTech1"){
+			DataInputStream inputStream = new DataInputStream(new ByteArrayInputStream(packet.data));
+
+			int x;int y;int z;
+			int value;
+			int id;
+			try {
+				x = inputStream.readInt();
+				y = inputStream.readInt();
+				z = inputStream.readInt();
+				id = inputStream.readInt();
+				value = inputStream.readInt();
+				TileEntity te = null;
+				
+				if(player instanceof EntityPlayerMP){
+					EntityPlayerMP playerMP = (EntityPlayerMP)player;
+					te = playerMP.worldObj.getBlockTileEntity(x, y, z);
+				
+				}else if(player instanceof EntityPlayerSP){
+					EntityPlayerSP playerSP = (EntityPlayerSP)player;
+					te = playerSP.worldObj.getBlockTileEntity(x, y, z);
+				}
+				
+				if(te != null)te.receiveClientEvent(id, value);
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}else if(packet.channel == "UltraTech2"){
 			DataInputStream inputStream = new DataInputStream(new ByteArrayInputStream(packet.data));
 
@@ -68,6 +98,42 @@ public class PacketHandler implements IPacketHandler{
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+		}else if(packet.channel.equals("UltraTech3")){
+			DataInputStream inputStream = new DataInputStream(new ByteArrayInputStream(packet.data));
+			int x,y,z;
+			int slot;
+			int id;
+			int meta;
+			try{
+				x = inputStream.readInt();
+				y = inputStream.readInt();
+				z = inputStream.readInt();
+				slot = inputStream.readInt();
+				id = inputStream.readInt();
+				meta = inputStream.readInt();
+				
+				TileEntity te = null;
+
+				if(player instanceof EntityPlayerMP){
+					
+					EntityPlayerMP playerMP = (EntityPlayerMP)player;
+					te = playerMP.worldObj.getBlockTileEntity(x, y, z);
+
+				}else if(player instanceof EntityPlayerSP){
+
+					EntityPlayerSP playerSP = (EntityPlayerSP)player;
+					te = playerSP.worldObj.getBlockTileEntity(x, y, z);
+				}
+
+				CrafterEntity crafter = (CrafterEntity) te;
+				if(id == 0){
+					crafter.craft.setInventorySlotContents(slot, null);
+				}else{
+					crafter.craft.setInventorySlotContents(slot, new ItemStack(id, 0, meta));
+				}
+				crafter.onInventoryChanged();
+			}catch(Exception e){
+				e.printStackTrace();}			
 		}
 	}
 

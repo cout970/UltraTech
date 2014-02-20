@@ -1,7 +1,7 @@
 package common.cout970.UltraTech.machines.tileEntities;
 
-import common.cout970.UltraTech.core.UltraTech;
 import common.cout970.UltraTech.lib.recipes.Cuter_Recipes;
+import common.cout970.UltraTech.managers.ItemManager;
 import common.cout970.UltraTech.misc.ISpeedUpgradeabel;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
@@ -252,7 +252,7 @@ public class CuterEntity extends Machine implements IInventory,ISpeedUpgradeabel
 	@Override
 	public ItemStack getDrop() {
 		if(speedUpgrades !=0){
-			return new ItemStack(UltraTech.ItemName.get("SpeedUpgrade"),speedUpgrades);
+			return new ItemStack(ItemManager.ItemName.get("SpeedUpgrade"),speedUpgrades);
 		}
 		return null;
 	}

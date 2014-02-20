@@ -4,8 +4,8 @@ package common.cout970.UltraTech.machines.tileEntities;
 import java.util.ArrayList;
 import java.util.List;
 
-import common.cout970.UltraTech.blocks.BlockManager;
-import common.cout970.UltraTech.core.UltraTech;
+import common.cout970.UltraTech.managers.BlockManager;
+import common.cout970.UltraTech.managers.ItemManager;
 import common.cout970.UltraTech.misc.IReactorPart;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
@@ -50,11 +50,12 @@ public class ReactorEntity extends TileEntity implements IInventory,IReactorPart
 		}
 		//produce steam
 		if(!this.worldObj.isRemote){
+			if(heat > 0)heat-=0.01;
 			if(work){
 				int e = 6;
 				int c = 100;
 				this.time++;
-				int id = UltraTech.ItemName.get("RadioniteCell").itemID;
+				int id = ItemManager.ItemName.get("RadioniteCell").itemID;
 				if(inventory[0] != null && inventory[0].itemID == id)afect(0,e,c);
 				if(inventory[1] != null && inventory[1].itemID == id)afect(1,e,c);
 				if(inventory[2] != null && inventory[2].itemID == id)afect(2,e,c);
@@ -324,7 +325,7 @@ public class ReactorEntity extends TileEntity implements IInventory,IReactorPart
 				for(int i = -1;i<2;i++){
 					for(int k = -1;k<2;k++){
 						ids[current] = worldObj.getBlockId(xCoord+i, yCoord+j, zCoord+k);
-						if(ids[current] == BlockManager.Reactor.blockID){
+						if(ids[current] == BlockManager.Reactor.blockID && worldObj.getBlockMetadata(xCoord+i, yCoord+j, zCoord+k) == 0){
 							Reactor = (ReactorEntity) worldObj.getBlockTileEntity(xCoord+i,yCoord+j,zCoord+k);
 							found = true;
 							return;

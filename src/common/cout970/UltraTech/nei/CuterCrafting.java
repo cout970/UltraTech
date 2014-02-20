@@ -28,7 +28,7 @@ public class CuterCrafting extends TemplateRecipeHandler {
 	public void loadCraftingRecipes(ItemStack result)
 	{
 		for(int x = 0; x < Cuter_Recipes.recipes.size();x++ ){
-			if(result.itemID == Cuter_Recipes.recipes.get(x).getOutput().itemID){
+			if(NEIUltraTechConfig.matches(result, Cuter_Recipes.recipes.get(x).getOutput())){
 				recipes.add(Cuter_Recipes.recipes.get(x));
 			}
 		}
@@ -38,7 +38,7 @@ public class CuterCrafting extends TemplateRecipeHandler {
 	@Override
 	public void loadUsageRecipes(ItemStack ingredient){
 		for(int x = 0; x < Cuter_Recipes.recipes.size();x++ ){
-			if(ingredient.itemID == Cuter_Recipes.recipes.get(x).getInput().itemID){
+			if(NEIUltraTechConfig.matches(ingredient, Cuter_Recipes.recipes.get(x).getInput())){
 				recipes.add(Cuter_Recipes.recipes.get(x));
 			}
 		}

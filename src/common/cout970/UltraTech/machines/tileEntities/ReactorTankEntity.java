@@ -4,7 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import common.cout970.UltraTech.blocks.BlockManager;
+import common.cout970.UltraTech.managers.BlockManager;
 import common.cout970.UltraTech.misc.IReactorPart;
 import cpw.mods.fml.common.network.PacketDispatcher;
 import net.minecraft.block.Block;
@@ -27,7 +27,7 @@ public class ReactorTankEntity extends TileEntity implements IFluidHandler,IFlui
 		super();
 		this.capacity = 16000;
 	}
-	
+
 	@Override
 	public void updateEntity(){
 		if(update){
@@ -41,17 +41,17 @@ public class ReactorTankEntity extends TileEntity implements IFluidHandler,IFlui
 			}
 		}
 	}
-	
-//	//FLUIDS
+
+	//	//FLUIDS
 	public FluidStack liquid;
 	private final int capacity;
 	private int last = 69;
 	private boolean update = true;
-	
-	
+
+
 	@Override
 	public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
-		
+
 		if (resource == null) {
 			return 0;
 		}
@@ -73,7 +73,7 @@ public class ReactorTankEntity extends TileEntity implements IFluidHandler,IFlui
 
 		if (liquid == null)
 		{
-			
+
 			liquid = new FluidStack(resource, Math.min(capacity, resource.amount));
 
 
@@ -106,27 +106,27 @@ public class ReactorTankEntity extends TileEntity implements IFluidHandler,IFlui
 	@Override
 	public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain) {
 		if (liquid == null)
-        {
-            return null;
-        }
+		{
+			return null;
+		}
 
-        int drained = maxDrain;
-        if (liquid.amount < drained)
-        {
-            drained = liquid.amount;
-        }
+		int drained = maxDrain;
+		if (liquid.amount < drained)
+		{
+			drained = liquid.amount;
+		}
 
-        FluidStack stack = new FluidStack(liquid, drained);
-        if (doDrain)
-        {
-            liquid.amount -= drained;
-            if (liquid.amount <= 0)
-            {
-                liquid = null;
-            }
-                FluidEvent.fireEvent(new FluidEvent.FluidDrainingEvent(liquid, this.worldObj, this.xCoord, this.yCoord, this.zCoord, (IFluidTank) this));
-        }
-        return stack;
+		FluidStack stack = new FluidStack(liquid, drained);
+		if (doDrain)
+		{
+			liquid.amount -= drained;
+			if (liquid.amount <= 0)
+			{
+				liquid = null;
+			}
+			FluidEvent.fireEvent(new FluidEvent.FluidDrainingEvent(liquid, this.worldObj, this.xCoord, this.yCoord, this.zCoord, (IFluidTank) this));
+		}
+		return stack;
 	}
 
 	@Override
@@ -140,7 +140,7 @@ public class ReactorTankEntity extends TileEntity implements IFluidHandler,IFlui
 
 	@Override
 	public FluidTankInfo[] getTankInfo(ForgeDirection direction) {
-		
+
 		return new FluidTankInfo[]{new FluidTankInfo(liquid, capacity)};
 	}
 
@@ -214,36 +214,36 @@ public class ReactorTankEntity extends TileEntity implements IFluidHandler,IFlui
 	@Override
 	public void writeToNBT(NBTTagCompound nbtTagCompound) {
 		super.writeToNBT(nbtTagCompound);
-		
+
 		NBTTagList tagList = new NBTTagList();
 		NBTTagCompound tagCompound = new NBTTagCompound();
 		if(liquid == null){
 			tagCompound.setInteger("Water", 0);
 			tagCompound.setInteger("ID", 0);
-		tagList.appendTag(tagCompound);
+			tagList.appendTag(tagCompound);
 		}else{
 			tagCompound.setInteger("Water", liquid.amount);
 			tagCompound.setInteger("ID", liquid.fluidID);
 			tagList.appendTag(tagCompound);
 		}
 		nbtTagCompound.setTag("Fuid_UT", tagList);
-		
+
 		nbtTagCompound.setBoolean("Structure", Structure);
-        if(Reactor != null){
-        nbtTagCompound.setInteger("xR", Reactor.xCoord);
-        nbtTagCompound.setInteger("yR", Reactor.yCoord);
-        nbtTagCompound.setInteger("zR", Reactor.zCoord);
-        }
+		if(Reactor != null){
+			nbtTagCompound.setInteger("xR", Reactor.xCoord);
+			nbtTagCompound.setInteger("yR", Reactor.yCoord);
+			nbtTagCompound.setInteger("zR", Reactor.zCoord);
+		}
 	}
-	
-	
-	
+
+
+
 	public void sendNetworkUpdate(){
 		PacketDispatcher.sendPacketToAllPlayers(getPacket());
 	}
 
 	private Packet getPacket() {
-		
+
 		ByteArrayOutputStream bytes = new ByteArrayOutputStream();
 		DataOutputStream data = new DataOutputStream(bytes);
 		try {
@@ -260,27 +260,30 @@ public class ReactorTankEntity extends TileEntity implements IFluidHandler,IFlui
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		Packet250CustomPayload packet = new Packet250CustomPayload();
 		packet.channel = "UltraTech2";
 		packet.data = bytes.toByteArray();
 		packet.length = packet.data.length;
 		return packet;
 	}
-	
+
 	//Reactor Part
 
 	public boolean found = false;
 	public ReactorEntity Reactor;
 	public boolean Structure = false;
-	
-	public void setUp() {
+
+	public void setUp(){
+
 		SearchReactor();
 		if(found){
 			checkStructure();
 			if(Structure){
 				activateBlocks();
 			}
+		}else{
+			Structure = false;
 		}
 	}
 
@@ -292,7 +295,7 @@ public class ReactorTankEntity extends TileEntity implements IFluidHandler,IFlui
 			for(int i = -1;i<2;i++){
 				for(int k = -1;k<2;k++){
 					ids[current] = worldObj.getBlockId(xCoord+i, yCoord+j, zCoord+k);
-					if(ids[current] == BlockManager.Reactor.blockID){
+					if(ids[current] == BlockManager.Reactor.blockID && worldObj.getBlockMetadata(xCoord+i, yCoord+j, zCoord+k) == 0){
 						Reactor = (ReactorEntity) worldObj.getBlockTileEntity(xCoord+i,yCoord+j,zCoord+k);
 						found = true;
 						return;
@@ -311,7 +314,7 @@ public class ReactorTankEntity extends TileEntity implements IFluidHandler,IFlui
 
 	@Override
 	public void onNeighChange() {
-		setUp();		
+		setUp();	
 	}
 
 	@Override
@@ -321,11 +324,12 @@ public class ReactorTankEntity extends TileEntity implements IFluidHandler,IFlui
 		for(int j = -1;j<2;j++){
 			for(int i = -1;i<2;i++){
 				for(int k = -1;k<2;k++){
-					ids[current] = worldObj.getBlockTileEntity(xCoord+i, yCoord+j, zCoord+k);
+					ids[current] = worldObj.getBlockTileEntity(Reactor.xCoord+i, Reactor.yCoord+j, Reactor.zCoord+k);
 					current++;
 				}
 			}
 		}
+
 		this.Structure = false;
 
 		for(TileEntity t : ids) {
@@ -347,6 +351,7 @@ public class ReactorTankEntity extends TileEntity implements IFluidHandler,IFlui
 					if(this.worldObj.getBlockTileEntity(x+i, y+j, z+k) instanceof IReactorPart){
 						((IReactorPart)worldObj.getBlockTileEntity(x+i, y+j, z+k)).setStructure(true);
 						((IReactorPart)worldObj.getBlockTileEntity(x+i, y+j, z+k)).setReactor(Reactor);
+						worldObj.markBlockForRenderUpdate(x+i, y+j, z+k);
 					}
 				}
 			}
@@ -355,7 +360,7 @@ public class ReactorTankEntity extends TileEntity implements IFluidHandler,IFlui
 
 	@Override
 	public void desactivateBlocks() {
-		if(Structure){
+		if(Reactor != null){
 			Structure = false;
 			int x,y,z;
 			x = Reactor.xCoord;
@@ -366,6 +371,20 @@ public class ReactorTankEntity extends TileEntity implements IFluidHandler,IFlui
 					for(int k = -1;k<2;k++){
 						if(this.worldObj.getBlockTileEntity(x+i, y+j, z+k) instanceof IReactorPart){
 							((IReactorPart)worldObj.getBlockTileEntity(x+i, y+j, z+k)).setStructure(false);
+							worldObj.markBlockForUpdate(x+i, y+j, z+k);
+							ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+							DataOutputStream data = new DataOutputStream(bytes);
+							try {
+								data.writeInt(x+i);
+								data.writeInt(y+j);
+								data.writeInt(z+k);
+								data.writeInt(0);
+								data.writeInt(this.isStructure() ? 1 : 0);
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+							PacketDispatcher.sendPacketToAllPlayers(PacketDispatcher.getPacket("UltraTech1", bytes.toByteArray()));
+							
 						}
 					}
 				}
@@ -382,7 +401,7 @@ public class ReactorTankEntity extends TileEntity implements IFluidHandler,IFlui
 	public void setReactor(ReactorEntity e) {
 		Reactor = e;
 	}
-	
+
 	@Override
 	public boolean isStructure() {
 		return this.Structure;

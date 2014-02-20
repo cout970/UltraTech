@@ -18,7 +18,7 @@ public class RangeUpgrade extends UT_Item{
 		if(par3World.getBlockTileEntity(x, y, z) instanceof MinerEntity){
 
 			MinerEntity te = (MinerEntity) par3World.getBlockTileEntity(x, y, z);
-			if(te.height < 10 && te.widht < 10){	
+			if(te.height < 31 && te.widht < 31){	
 				te.height += 1;
 				te.widht += 1;
 				te.hasMine = false;

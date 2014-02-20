@@ -5,6 +5,7 @@ import java.util.Random;
 
 import common.cout970.UltraTech.core.UltraTech;
 import common.cout970.UltraTech.machines.tileEntities.GeneratorEntity;
+import common.cout970.UltraTech.machines.tileEntities.Machine;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.BlockContainer;
@@ -52,7 +53,7 @@ public class Generator extends BlockContainer{
 	
 	public void registerIcons(IconRegister iconRegister){
 		this.blockIcon = iconRegister.registerIcon("ultratech:generator");
-		this.IconFront = iconRegister.registerIcon("ultratech:machinechasis");
+		this.IconFront = iconRegister.registerIcon("ultratech:chasis");
 		this.IconOn = iconRegister.registerIcon("ultratech:generatoron");
 	}
 	
@@ -102,5 +103,9 @@ public class Generator extends BlockContainer{
 			 }
 		 }
 	 }
+	 public void onNeighborBlockChange(World w, int x, int y, int z, int side){
+			Machine m = (Machine) w.getBlockTileEntity(x, y, z);
+			m.updateMachine(w, x, y, z);
+		}
 
 }

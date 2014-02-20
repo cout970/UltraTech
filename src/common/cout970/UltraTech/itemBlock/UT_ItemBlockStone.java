@@ -1,9 +1,8 @@
 package common.cout970.UltraTech.itemBlock;
 
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
-public class UT_ItemBlockStone extends ItemBlock{
+public class UT_ItemBlockStone extends UT_ItemBlock{
 	
 	public UT_ItemBlockStone(int par1) {
 		super(par1);
@@ -29,9 +28,5 @@ public class UT_ItemBlockStone extends ItemBlock{
 	public String getItemDisplayName(ItemStack is) {
 		return "Purified Stone Block "+subNames[is.getItemDamage()];
 	}
-	
-	@Override
-	public int getMetadata (int damageValue) {
-		return damageValue;
-	}
+
 }

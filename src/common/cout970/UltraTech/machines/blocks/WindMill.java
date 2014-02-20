@@ -1,9 +1,10 @@
 package common.cout970.UltraTech.machines.blocks;
 
-import common.cout970.UltraTech.blocks.BlockManager;
 import common.cout970.UltraTech.core.UltraTech;
+import common.cout970.UltraTech.machines.tileEntities.Machine;
 import common.cout970.UltraTech.machines.tileEntities.WindMillEntity;
 import common.cout970.UltraTech.machines.tileEntities.hitBoxEntity;
+import common.cout970.UltraTech.managers.BlockManager;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -86,4 +87,9 @@ public class WindMill extends BlockContainer{
     		world.setBlockToAir(x, y+d, z);
     	}
     }
+    
+    public void onNeighborBlockChange(World w, int x, int y, int z, int side){
+		Machine m = (Machine) w.getBlockTileEntity(x, y, z);
+		m.updateMachine(w, x, y, z);
+	}
 }

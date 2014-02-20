@@ -1,10 +1,14 @@
 package common.cout970.UltraTech.machines.tileEntities;
 
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import common.cout970.UltraTech.blocks.BlockManager;
+import common.cout970.UltraTech.managers.BlockManager;
 import common.cout970.UltraTech.misc.IReactorPart;
+import cpw.mods.fml.common.network.PacketDispatcher;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -13,20 +17,22 @@ import net.minecraftforge.fluids.IFluidHandler;
 
 public class WaterBlockEntity extends TileEntity implements IReactorPart{
 
+	List<IFluidHandler> tanks;
+
 	public WaterBlockEntity(){
 		super();
 	}
-	
+
 	public void updateEntity(){
-		List<IFluidHandler> a = getTanks();
+		if(tanks == null)updateTanks();
 		if(FluidRegistry.WATER != null)
-			for(IFluidHandler b : a){
-			b.fill(ForgeDirection.UP , new FluidStack(FluidRegistry.WATER,100), true);
-		}
+			for(IFluidHandler b : tanks){
+				b.fill(ForgeDirection.UP , new FluidStack(FluidRegistry.WATER,50), true);
+			}
 	}
-	
-	private List<IFluidHandler> getTanks() {
-		List<IFluidHandler> tanks = new ArrayList<IFluidHandler>();
+
+	private void updateTanks() {
+		tanks = new ArrayList<IFluidHandler>();
 		TileEntity[] t = new TileEntity[6];
 		t[0] = this.worldObj.getBlockTileEntity(xCoord, yCoord-1, zCoord);
 		t[1] = this.worldObj.getBlockTileEntity(xCoord, yCoord+1, zCoord);
@@ -39,25 +45,27 @@ public class WaterBlockEntity extends TileEntity implements IReactorPart{
 				tanks.add((IFluidHandler) te);
 			}
 		}
-		return tanks;
 	}
-	
+
 
 	public boolean found = false;
 	public ReactorEntity Reactor;
 	public boolean Structure = false;
 
 
-	public void setUp() {
-			SearchReactor();
-			if(found){
-				checkStructure();
-				if(Structure){
-					activateBlocks();
-				}
+	public void setUp(){
+
+		SearchReactor();
+		if(found){
+			checkStructure();
+			if(Structure){
+				activateBlocks();
 			}
+		}else{
+			Structure = false;
+		}
 	}
-	
+
 	@Override
 	public void SearchReactor() {
 		int[] ids = new int[27];
@@ -66,7 +74,7 @@ public class WaterBlockEntity extends TileEntity implements IReactorPart{
 			for(int i = -1;i<2;i++){
 				for(int k = -1;k<2;k++){
 					ids[current] = worldObj.getBlockId(xCoord+i, yCoord+j, zCoord+k);
-					if(ids[current] == BlockManager.Reactor.blockID){
+					if(ids[current] == BlockManager.Reactor.blockID && worldObj.getBlockMetadata(xCoord+i, yCoord+j, zCoord+k) == 0){
 						Reactor = (ReactorEntity) worldObj.getBlockTileEntity(xCoord+i,yCoord+j,zCoord+k);
 						found = true;
 						return;
@@ -95,11 +103,12 @@ public class WaterBlockEntity extends TileEntity implements IReactorPart{
 		for(int j = -1;j<2;j++){
 			for(int i = -1;i<2;i++){
 				for(int k = -1;k<2;k++){
-					ids[current] = worldObj.getBlockTileEntity(xCoord+i, yCoord+j, zCoord+k);
+					ids[current] = worldObj.getBlockTileEntity(Reactor.xCoord+i, Reactor.yCoord+j, Reactor.zCoord+k);
 					current++;
 				}
 			}
 		}
+
 		this.Structure = false;
 
 		for(TileEntity t : ids) {
@@ -121,6 +130,7 @@ public class WaterBlockEntity extends TileEntity implements IReactorPart{
 					if(this.worldObj.getBlockTileEntity(x+i, y+j, z+k) instanceof IReactorPart){
 						((IReactorPart)worldObj.getBlockTileEntity(x+i, y+j, z+k)).setStructure(true);
 						((IReactorPart)worldObj.getBlockTileEntity(x+i, y+j, z+k)).setReactor(Reactor);
+						worldObj.markBlockForRenderUpdate(x+i, y+j, z+k);
 					}
 				}
 			}
@@ -129,7 +139,7 @@ public class WaterBlockEntity extends TileEntity implements IReactorPart{
 
 	@Override
 	public void desactivateBlocks() {
-		if(Structure){
+		if(Reactor != null){
 			Structure = false;
 			int x,y,z;
 			x = Reactor.xCoord;
@@ -140,6 +150,20 @@ public class WaterBlockEntity extends TileEntity implements IReactorPart{
 					for(int k = -1;k<2;k++){
 						if(this.worldObj.getBlockTileEntity(x+i, y+j, z+k) instanceof IReactorPart){
 							((IReactorPart)worldObj.getBlockTileEntity(x+i, y+j, z+k)).setStructure(false);
+							worldObj.markBlockForUpdate(x+i, y+j, z+k);
+							ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+							DataOutputStream data = new DataOutputStream(bytes);
+							try {
+								data.writeInt(x+i);
+								data.writeInt(y+j);
+								data.writeInt(z+k);
+								data.writeInt(0);
+								data.writeInt(this.isStructure() ? 1 : 0);
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+							PacketDispatcher.sendPacketToAllPlayers(PacketDispatcher.getPacket("UltraTech1", bytes.toByteArray()));
+							
 						}
 					}
 				}
@@ -156,7 +180,7 @@ public class WaterBlockEntity extends TileEntity implements IReactorPart{
 	public void setReactor(ReactorEntity e) {
 		Reactor = e;
 	}
-	
+
 	@Override
 	public boolean isStructure() {
 		return this.Structure;

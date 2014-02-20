@@ -2,6 +2,7 @@ package common.cout970.UltraTech.machines.blocks;
 
 
 import common.cout970.UltraTech.core.UltraTech;
+import common.cout970.UltraTech.machines.tileEntities.Machine;
 import common.cout970.UltraTech.machines.tileEntities.SenderEntity;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -37,5 +38,8 @@ public class Sender extends BlockContainer{
 				r.onNeighChange();
 			}
 		}
-	}
+		Machine m = (Machine) w.getBlockTileEntity(x, y, z);
+		m.updateMachine(w, x, y, z);
+		}
+	
 }

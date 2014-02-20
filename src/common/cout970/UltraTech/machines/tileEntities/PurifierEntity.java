@@ -1,7 +1,7 @@
 package common.cout970.UltraTech.machines.tileEntities;
 
-import common.cout970.UltraTech.core.UltraTech;
 import common.cout970.UltraTech.lib.recipes.Purifier_Recipe;
+import common.cout970.UltraTech.managers.ItemManager;
 import common.cout970.UltraTech.misc.ISpeedUpgradeabel;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
@@ -250,7 +250,7 @@ public class PurifierEntity extends Machine implements IInventory,ISpeedUpgradea
 	@Override
 	public ItemStack getDrop() {
 		if(speedUpgrades !=0){
-			return new ItemStack(UltraTech.ItemName.get("SpeedUpgrade"),speedUpgrades);
+			return new ItemStack(ItemManager.ItemName.get("SpeedUpgrade"),speedUpgrades);
 		}
 		return null;
 	}

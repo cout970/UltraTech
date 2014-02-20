@@ -1,5 +1,8 @@
 package common.cout970.UltraTech.items;
 
+import buildcraft.api.tools.IToolWrench;
+import common.cout970.UltraTech.machines.tileEntities.MinerEntity;
+import common.cout970.UltraTech.machines.tileEntities.MinerEntity.Mode;
 import common.cout970.UltraTech.machines.tileEntities.ReciverEntity;
 import common.cout970.UltraTech.machines.tileEntities.SenderEntity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -8,7 +11,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-public class Linker extends UT_Item{
+public class Linker extends UT_Item implements IToolWrench{
 
 
 	public Linker(int id,String name) {
@@ -33,6 +36,24 @@ public class Linker extends UT_Item{
 			}else if(te instanceof SenderEntity){
 				i.stackTagCompound.setIntArray("Coords", new int[]{x,y,z});
 				return true;
+			}else if(te instanceof MinerEntity){
+				((MinerEntity)te).CreateMining();
+				((MinerEntity)te).current = 0;
+				switch(((MinerEntity)te).mode){
+				case Horizontal:{
+					((MinerEntity)te).mode = Mode.Vertical;
+					break;
+				}
+				case Vertical:{
+					((MinerEntity)te).mode = Mode.two;
+					break;
+				}
+				case two:{
+					((MinerEntity)te).mode = Mode.Horizontal;
+					break;
+				}
+				}
+				return true;
 			}
 		}
 
@@ -43,4 +64,12 @@ public class Linker extends UT_Item{
 			par1ItemStack.setTagCompound( new NBTTagCompound());
 		par1ItemStack.stackTagCompound.setIntArray("Coords", new int[]{0,0,0});
 	}
+
+	@Override
+	public boolean canWrench(EntityPlayer player, int x, int y, int z) {
+		return true;
+	}
+
+	@Override
+	public void wrenchUsed(EntityPlayer player, int x, int y, int z) {}
 }

@@ -57,7 +57,7 @@ public class UTfurnace extends BlockContainer{
 	}
 
 	public void registerIcons(IconRegister iconRegister){
-		this.blockIcon = iconRegister.registerIcon("ultratech:machinechasis");
+		this.blockIcon = iconRegister.registerIcon("ultratech:chasis1");
 		this.furnaceIconFront = iconRegister.registerIcon("ultratech:utfurnacefront");
 		this.furnaceIconOn = iconRegister.registerIcon("ultratech:utfurnaceon");
 	}

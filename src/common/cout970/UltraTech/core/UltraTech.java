@@ -1,26 +1,19 @@
 package common.cout970.UltraTech.core;
 
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
 import common.cout970.UltraTech.blocks.DecoBlocks;
-import common.cout970.UltraTech.blocks.BlockManager;
 import common.cout970.UltraTech.handlers.GuiHandler;
 import common.cout970.UltraTech.handlers.PacketHandler;
 import common.cout970.UltraTech.handlers.WorldGen;
-import common.cout970.UltraTech.items.*;
-import common.cout970.UltraTech.lib.Reference;
-import common.cout970.UltraTech.misc.ID;
+import common.cout970.UltraTech.managers.BlockManager;
+import common.cout970.UltraTech.managers.CompatibilityManager;
+import common.cout970.UltraTech.managers.ConfigManager;
+import common.cout970.UltraTech.managers.CraftManager;
+import common.cout970.UltraTech.managers.ItemManager;
 import common.cout970.UltraTech.proxy.CommonProxy;
-
-//forge
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -31,15 +24,14 @@ import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 
 
-@Mod(modid = "UltraTech", name = "UltraTech",version = "0.7")
+@Mod(modid = "UltraTech", name = "UltraTech",version = "0.8")
 
-@NetworkMod(clientSideRequired=true, serverSideRequired=true, channels={"UltraTech","UltraTech2"}, packetHandler = PacketHandler.class)
+@NetworkMod(clientSideRequired=true, serverSideRequired=true, channels={"UltraTech","UltraTech1","UltraTech2","UltraTech3"}, packetHandler = PacketHandler.class)
 
 public class UltraTech {
 
@@ -50,6 +42,20 @@ public class UltraTech {
 	//Proxy
 	@SidedProxy(clientSide="common.cout970.UltraTech.proxy.ClientProxy",serverSide="common.cout970.UltraTech.proxy.CommonProxy")
 	public static CommonProxy proxy;
+
+	public static final CreativeTabs ResourceTab = new CreativeTabs("UltraTech Resources"){
+
+		public ItemStack getIconItemStack() {
+			return new ItemStack(ItemManager.ItemName.get("Plate"), 1, 7);
+		}
+
+		@SideOnly(Side.CLIENT)
+		@Override
+		public String getTranslatedTabLabel()
+		{
+			return "UltraTech Resources";
+		};
+	};
 
 	//creative tabs
 	public static final CreativeTabs techTab = new CreativeTabs("UltraTech"){
@@ -94,164 +100,25 @@ public class UltraTech {
 		}
 	};
 
-	public static List<UT_Item> items = new ArrayList<UT_Item>();
-	public static Map<String,UT_Item> ItemName = new HashMap<String,UT_Item>();
-	public static Map<UT_Item,String> LangNames = new HashMap<UT_Item,String>();
-	Map<String,ID> itemsID = new HashMap<String,ID>();
-	//code name
-	String[] item ={"Circuit","Grafeno","SiliconPlate","DiamondPlate","GoldPlate","IronPlate","Trinitramida","RedstonePlate","AlloyPlate","RadionitePlate","GrafenoPlate",
-			"RedstoneCable","EnergyTransmiter","HeatCoil","RawSilicon","Radionite","RawMeal","IronDust","GoldDust","LapisPearl","Filter","SolarPanel",
-			"GrafenoCable","OpticFiber","AlloyCable","Coil","UpgradeBase","CarbonPlate","CarbonFiber","AdvCircuit","DiamondDust","Motor","Alloyingot","Fan"};
-	//game name
-	String[] lang ={"Circuit","Grafeno","Silicon Plate","Diamond Plate","Gold Plate","Iron Plate","Trinitramida","Redstone Plate","Alloy Plate","Radionite Plate","Grafeno Plate",
-			"Redstone Cable","Energy Transmiter","Heat Coil","Raw Silicon","Radionite","Raw Meal","Iron Dust","Gold Dust","Lapis Pearl","Filter","Solar Panel",
-			"Grafeno Cable","Optic Fiber","Alloy Cable","Coil","Upgrade Base","Carbon Plate","Carbon Fiber","Advanced Circuit","Diamond Dust","Nano Engine","Alloy ingot","Fan",
-			
-			"Speed Upgrade","Mining Upgrade","Range Upgrade","AutoEject Upgrade","Linker","Radionite Cell","Hidrogen Battery","Lasser Sword","Fortune Upgrade"};
-
-
-	public static  Item ProcesedFood;
 
 	//init
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event){
 
-
 		Configuration config = new Configuration(event.getSuggestedConfigurationFile());
-		config.load();
-
-		//blocks
-		Reference.CVDmachine = config.getBlock("CVDmachine", 2049).getInt();
-		Reference.UTfurnace = config.getBlock("UTfurnace", 2051).getInt();
-		Reference.IDS = config.getBlock("IDS", 2052).getInt();
-		Reference.EnergyColector = config.getBlock("EnergyColector", 2053).getInt();
-		Reference.Cuter = config.getBlock("Cuter", 2054).getInt();
-		Reference.Purifier = config.getBlock("Purifier", 2055).getInt();
-		Reference.PresureChamber = config.getBlock("PresureChamber", 2056).getInt();
-		Reference.DiamondGlass = config.getBlock("DiamondGlass", 2057).getInt();
-		Reference.CovedGlass = config.getBlock("CovedGlass", 2058).getInt();
-		Reference.hitBox = config.getBlock("SateliteBox", 2059).getInt();
-		Reference.Generator = config.getBlock("Generator", 2060).getInt();
-		Reference.MachineChasis = config.getBlock("MachineChasis", 2061).getInt();
-		Reference.Miner = config.getBlock("Miner", 2062).getInt();
-		Reference.GrafenoBlock = config.getBlock("GrafenoBlock", 2063).getInt();
-		Reference.AdvMachineChasis = config.getBlock("AdvMachineChasis", 2064).getInt();
-		Reference.Reactor = config.getBlock("Reactor", 2065).getInt();
-		Reference.ReactorWall = config.getBlock("ReactorWall", 2066).getInt();
-		Reference.Sender = config.getBlock("Sender", 2067).getInt();
-		Reference.Reciver = config.getBlock("Reciver", 2068).getInt();
-		Reference.RadioniteBlock = config.getBlock("RadioniteBlock", 2069).getInt();
-		Reference.ReactorTank = config.getBlock("ReactorTank", 2070).getInt();
-		Reference.Steam = config.getBlock("Steam", 2071).getInt();
-		Reference.SteamTurbine = config.getBlock("SteamTurbine",2072).getInt();
-		Reference.WaterBlock = config.getBlock("WaterBlock",2073).getInt();
-		Reference.RadioniteOre = config.getBlock("RadioniteOre",2074).getInt();
-		Reference.MolecularAssembly = config.getBlock("MolecularAssembly", 2075).getInt();
-		Reference.ChargeStation = config.getBlock("ChargeStation", 2076).getInt();
-		Reference.SolarPanel = config.getBlock("SolarPanel", 2077).getInt();
-		Reference.WindMill = config.getBlock("WindMill", 2078).getInt();
-		Reference.Printer3D = config.getBlock("Printer3D", 2079).getInt();
-		Reference.ReactorController = config.getBlock("ReactorController", 2080).getInt();
-		Reference.Engine = config.getBlock("Engine", 2081).getInt();
-		
-		
-		//deco
-		Reference.StoneBlock = config.getBlock("StoneBlock", 2099).getInt();
-		Reference.Deco = config.getBlock("Deco", 2100).getInt();
-		Reference.Deco2 = config.getBlock("Deco2", 2101).getInt();
-		Reference.Deco3 = config.getBlock("Deco3", 2102).getInt();
-		Reference.Deco4 = config.getBlock("Deco4", 2103).getInt();
-		Reference.Deco5 = config.getBlock("Deco5", 2104).getInt();
-		Reference.Deco6 = config.getBlock("Deco6", 2105).getInt();
-		Reference.Deco7 = config.getBlock("Deco7", 2106).getInt();
-		Reference.Deco8 = config.getBlock("Deco8", 2107).getInt();
-
-		Reference.Decow = config.getBlock("Decow", 2200).getInt();
-		Reference.Deco2w = config.getBlock("Deco2w", 2201).getInt();
-		Reference.Deco3w = config.getBlock("Deco3w", 2202).getInt();
-		Reference.Deco4w = config.getBlock("Deco4w", 2203).getInt();
-		Reference.Deco5w = config.getBlock("Deco5w", 2204).getInt();
-		Reference.Deco6w = config.getBlock("Deco6w", 2205).getInt();
-		Reference.Deco7w = config.getBlock("Deco7w", 2206).getInt();
-		Reference.Deco8w = config.getBlock("Deco8w", 2207).getInt();
-
-		//items
-
-		Reference.ProcesedFood = config.getItem("ProcesedFood", 5020).getInt();
-		initIDs(config);
-		if(config.hasChanged())config.save();
+		ConfigManager.LoadConfigs(config);
 	}
-
-	//items
-	public void initIDs(Configuration c){
-		int def = 5021;
-		for(String i : item){
-			itemsID.put(i, new ID(c.getItem(i, def).getInt()));
-			def++;
-		}
-		itemsID.put("SpeedUpgrade", new ID(c.getItem("SpeedUpgrade", def).getInt()));def++;
-		itemsID.put("MiningUpgrade", new ID(c.getItem("MiningUpgrade", def).getInt()));def++;
-		itemsID.put("RangeUpgrade", new ID(c.getItem("RangeUpgrade", def).getInt()));def++;
-		itemsID.put("AutoEjectUpgrade", new ID(c.getItem("AutoEjectUpgrade", def).getInt()));def++;
-		itemsID.put("Linker", new ID(c.getItem("Linker", def).getInt()));def++;
-		itemsID.put("RadioniteCell", new ID(c.getItem("RadioniteCell", def).getInt()));def++;
-		itemsID.put("HidrogenBattery", new ID(c.getItem("HidrogenBattery", def).getInt()));def++;
-		itemsID.put("LasserSword", new ID(c.getItem("LasserSword", def).getInt()));def++;
-		itemsID.put("FortuneUpgrade", new ID(c.getItem("FortuneUpgrade", def).getInt()));def++;
-
-	}
-
-
-
-	private void registerItems(){
-
-		ProcesedFood = new ProcesedFood(Reference.ProcesedFood);
-		GameRegistry.registerItem(ProcesedFood, ProcesedFood.getUnlocalizedName()+"_UT");
-		LanguageRegistry.addName(ProcesedFood, "Procesed Food");
-
-		for(String i : item){
-			items.add(new UT_Item(itemsID.get(i).id,i));
-		}
-
-		items.add(new SpeedUpgrade(itemsID.get("SpeedUpgrade").id,"SpeedUpgrade"));
-		items.add(new MiningUpgrade(itemsID.get("MiningUpgrade").id,"MiningUpgrade"));
-		items.add(new RangeUpgrade(itemsID.get("RangeUpgrade").id,"RangeUpgrade"));
-		items.add(new AutoEjectUpgrade(itemsID.get("AutoEjectUpgrade").id,"AutoEjectUpgrade"));
-		items.add(new Linker(itemsID.get("Linker").id,"Linker"));
-		items.add(new RadioniteCell(itemsID.get("RadioniteCell").id,"RadioniteCell"));
-		items.add(new HidrogenBattery(itemsID.get("HidrogenBattery").id,"HidrogenBattery"));
-		items.add(new LasserSword(itemsID.get("LasserSword").id,"LasserSword"));
-		items.add(new FortuneUpgrade(itemsID.get("FortuneUpgrade").id,"FortuneUpgrade"));
-
-		int d = 0;
-		for(UT_Item i : items){
-			ItemName.put(i.getName(), i);
-			LangNames.put(i, lang[d]);
-			d++;
-		}
-
-		for(UT_Item i : items){
-			GameRegistry.registerItem(i, i.getName()+"_UT");
-			LanguageRegistry.addName(i, LangNames.get(i));
-		}
-	}
-
-
 
 	@EventHandler
 	public void load(FMLInitializationEvent event){
 
-
-		registerItems();
-		DecoBlocks.initBlocks();
-
 		proxy.registerRenders();
-
 		NetworkRegistry.instance().registerGuiHandler(instance, new GuiHandler());
-
+		ItemManager.RegisterItems();
 		BlockManager.InitBlocks();
 		BlockManager.RegisterBlocks();
-		
+		DecoBlocks.initBlocks();
+		CompatibilityManager.initCompatibilitys();
 		CraftManager.registerCraft();
 		GameRegistry.registerWorldGenerator(new WorldGen());
 	}

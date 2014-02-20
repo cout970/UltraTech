@@ -2,6 +2,7 @@ package common.cout970.UltraTech.machines.blocks;
 
 import common.cout970.UltraTech.core.UltraTech;
 import common.cout970.UltraTech.machines.tileEntities.IDSentity;
+import common.cout970.UltraTech.machines.tileEntities.Machine;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -47,4 +48,8 @@ public class InterdimensionalStorageBlock extends BlockContainer{
 		this.blockIcon = iconRegister.registerIcon("ultratech:ids");
 	}
 
+	public void onNeighborBlockChange(World w, int x, int y, int z, int side){
+		Machine m = (Machine) w.getBlockTileEntity(x, y, z);
+		m.updateMachine(w, x, y, z);
+	}
 }

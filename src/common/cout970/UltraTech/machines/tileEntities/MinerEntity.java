@@ -2,8 +2,8 @@ package common.cout970.UltraTech.machines.tileEntities;
 
 import java.util.ArrayList;
 
+import common.cout970.UltraTech.lib.Reference;
 import common.cout970.UltraTech.machines.containers.MinerContainer;
-import common.cout970.UltraTech.misc.Mining;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ICrafting;
@@ -22,7 +22,7 @@ public class MinerEntity extends Machine implements IInventory{
 	public int speed = 10;
 	boolean flag = false ;
 	public int current = 0;
-	private ArrayList<Mining> mining;
+	private ArrayList<int[]> mining;
 	public boolean hasMine = false;
 	public int height = 2;
 	public int widht = 2;
@@ -281,13 +281,13 @@ public class MinerEntity extends Machine implements IInventory{
 				hasMine = true;
 			}
 			if(!flag){
-				flag = this.Energy >= 100;
+				flag = this.Energy >= 500;
 			}
 			boolean flag1 = false;
 			boolean workdo = current >= mining.size(); 
 			if(flag && !workdo){
 				proces += speed;
-				if(proces >= 100){
+				if(proces >= 100 || Reference.debug){
 					proces = 0;
 					flag1 = true;
 					flag = false;
@@ -324,18 +324,22 @@ public class MinerEntity extends Machine implements IInventory{
 	}
 
 	private void BreakNextBlock() {
-		if(mining.get(current) != null){
-			this.loseEnergy(500);
-			int x = mining.get(current).x;
-			int y = mining.get(current).y;
-			int z = mining.get(current).z;
+		for(int r = 0 ; r < 10;r++){
+		if(mining.size() > current)
+			if(mining.get(current) != null){
+			int x = mining.get(current)[0];
+			int y = mining.get(current)[1];
+			int z = mining.get(current)[2];
 			if(this.worldObj.getBlockId(x, y, z) > 0 && (this.worldObj.getBlockId(x, y, z) < 7 || this.worldObj.getBlockId(x, y, z) > 11)){
+				this.loseEnergy(500);
 				ItemStack[] a = getItemStackFromId(worldObj, x, y, z, worldObj.getBlockMetadata(x, y, z), this.fortuneUpgrades);
 				addItemStackArray(a);
 				this.worldObj.setBlockToAir(x, y, z);//less lag
+				break;
 			}
 		}
 		current++;
+	}
 	}
 	
 	private void addItemStackArray(ItemStack[] a) {
@@ -344,14 +348,14 @@ public class MinerEntity extends Machine implements IInventory{
 		}
 	}
 
-	private void CreateMining() {
-		mining = new ArrayList<Mining>();
+	public void CreateMining() {
+		mining = new ArrayList<int[]>();
 		if(mode == Mode.Horizontal){
 			for(int j = this.yCoord-1; j >= 1;j--){
 				for(int i = -height;i <= height; i++){
 					for(int k = -widht;k <= widht; k++){
 						if(worldObj.getBlockId(this.xCoord + i,j , this.zCoord + k) !=0){
-							mining.add(new Mining(this.xCoord + i,j , this.zCoord + k));
+							mining.add(new int[]{this.xCoord + i,j , this.zCoord + k});
 						}
 					}
 				}
@@ -361,7 +365,7 @@ public class MinerEntity extends Machine implements IInventory{
 				for(int k = -widht;k <= widht; k++){
 					for(int j = this.yCoord-1; j >= 1;j--){
 						if(worldObj.getBlockId(this.xCoord + i,j , this.zCoord + k) !=0){
-							mining.add(new Mining(this.xCoord + i,j , this.zCoord + k));
+							mining.add(new int[]{this.xCoord + i,j , this.zCoord + k});
 						}
 					}
 				}
@@ -372,7 +376,7 @@ public class MinerEntity extends Machine implements IInventory{
 					for(int k = -widht;k <= widht; k++){
 
 						if(worldObj.getBlockId(this.xCoord + i,j , this.zCoord + k) !=0){
-							mining.add(new Mining(this.xCoord + i,j , this.zCoord + k));
+							mining.add(new int[]{this.xCoord + i,j , this.zCoord + k});
 						}
 					}
 				}
@@ -444,7 +448,7 @@ public class MinerEntity extends Machine implements IInventory{
 			ICrafting iCrafting) {
 		iCrafting.sendProgressBarUpdate(minerContainer, 0, widht);
 		iCrafting.sendProgressBarUpdate(minerContainer, 1, Energy);
-		iCrafting.sendProgressBarUpdate(minerContainer, 2, speedUpgrades);
+		iCrafting.sendProgressBarUpdate(minerContainer, 2, speed);
 	}
 
 	public void getGUINetworkData(int id, int value) {
@@ -459,7 +463,7 @@ public class MinerEntity extends Machine implements IInventory{
 			break;
 		}
 		case 2:{
-			speedUpgrades = value;
+			speed = value;
 			break;
 		}
 		}

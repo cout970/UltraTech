@@ -3,6 +3,7 @@ package common.cout970.UltraTech.machines.blocks;
 
 import common.cout970.UltraTech.core.UltraTech;
 import common.cout970.UltraTech.machines.tileEntities.EnergyColectorEntity;
+import common.cout970.UltraTech.machines.tileEntities.Machine;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -38,5 +39,10 @@ public class EnergyColector extends BlockContainer{
     {
 		return side != 0 ?  this.blockIcon : this.blockIcon3;
     }
+	
+	public void onNeighborBlockChange(World w, int x, int y, int z, int side){
+		Machine m = (Machine) w.getBlockTileEntity(x, y, z);
+		m.updateMachine(w, x, y, z);
+	}
 	
 }
