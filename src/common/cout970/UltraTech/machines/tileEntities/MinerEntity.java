@@ -275,7 +275,7 @@ public class MinerEntity extends Machine implements IInventory{
 			refill();
 		}
 		
-		if(working){
+		if(working && !worldObj.isRemote){
 			if(!hasMine){
 				CreateMining();
 				hasMine = true;
@@ -299,7 +299,7 @@ public class MinerEntity extends Machine implements IInventory{
 			{
 				this.onInventoryChanged();
 			}
-		}else{
+		}else if(!worldObj.isRemote){
 			working = addItemStack(waiting);
 		}
 	}
@@ -331,7 +331,7 @@ public class MinerEntity extends Machine implements IInventory{
 			int y = mining.get(current)[1];
 			int z = mining.get(current)[2];
 			if(this.worldObj.getBlockId(x, y, z) > 0 && (this.worldObj.getBlockId(x, y, z) < 7 || this.worldObj.getBlockId(x, y, z) > 11)){
-				this.loseEnergy(500);
+				if(!Reference.debug)this.loseEnergy(500);
 				ItemStack[] a = getItemStackFromId(worldObj, x, y, z, worldObj.getBlockMetadata(x, y, z), this.fortuneUpgrades);
 				addItemStackArray(a);
 				this.worldObj.setBlockToAir(x, y, z);//less lag

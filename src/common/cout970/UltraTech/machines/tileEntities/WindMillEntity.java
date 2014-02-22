@@ -34,7 +34,7 @@ public class WindMillEntity extends Machine{
 		if(speed > wind){
 			speed -= 0.01;
 		}else if(speed < wind){
-			speed += 0.01f;
+			speed += 0.005f;
 		}
 		gainEnergy((int)(speed*10));
 		super.updateEntity();

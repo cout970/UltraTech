@@ -105,10 +105,8 @@ public class Block_UT_Render implements ISimpleBlockRenderingHandler {
 			t.setTextureUV(u1, v);
 			t.addVertex(x+1-i, y, z+1);
 		}
-
 		//out
 		renderBlockOut(world, x, y, z, block, modelId, renderer, t, meta);
-
 
 		return true;
 	}
