@@ -3,7 +3,7 @@ package common.cout970.UltraTech.machines.blocks;
 import java.util.Random;
 
 import common.cout970.UltraTech.core.UltraTech;
-import common.cout970.UltraTech.machines.tileEntities.UTfurnaceEntity;
+import common.cout970.UltraTech.machines.tileEntities.FurnaceEntity;
 import common.cout970.UltraTech.misc.ISpeedUpgradeabel;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -41,7 +41,7 @@ public class UTfurnace extends BlockContainer{
 			return true;
 		}else{
 			if(!par1World.isRemote){
-				UTfurnaceEntity tile = (UTfurnaceEntity)par1World.getBlockTileEntity(x, y, z);
+				FurnaceEntity tile = (FurnaceEntity)par1World.getBlockTileEntity(x, y, z);
 				if(tile != null){ 
 					par5EntityPlayer.openGui(UltraTech.instance, 8, par1World, x, y, z);
 					return true;
@@ -53,7 +53,7 @@ public class UTfurnace extends BlockContainer{
 	
 	@Override
 	public TileEntity createNewTileEntity(World world) {
-		return new UTfurnaceEntity();
+		return new FurnaceEntity();
 	}
 
 	public void registerIcons(IconRegister iconRegister){

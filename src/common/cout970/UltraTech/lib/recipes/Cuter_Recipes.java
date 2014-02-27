@@ -3,7 +3,7 @@ package common.cout970.UltraTech.lib.recipes;
 import java.util.ArrayList;
 import java.util.List;
 import net.minecraft.item.ItemStack;
-import common.cout970.UltraTech.machines.tileEntities.CuterEntity;
+import common.cout970.UltraTech.machines.tileEntities.CutterEntity;
 
 public class Cuter_Recipes{
 	
@@ -16,7 +16,7 @@ public class Cuter_Recipes{
 		this.output = output;
 	}
 	
-	public static boolean matches(CuterEntity cuterEntity){
+	public static boolean matches(CutterEntity cuterEntity){
 		if(cuterEntity == null)return false;
 		for(Cuter_Recipes a:recipes){
 			if(cuterEntity.getStackInSlot(0) != null)
@@ -26,7 +26,7 @@ public class Cuter_Recipes{
 		return false;
 	}
 	
-	public static ItemStack getCraftingResult(CuterEntity cuterEntity){
+	public static ItemStack getCraftingResult(CutterEntity cuterEntity){
 		if(cuterEntity != null)if(cuterEntity.getStackInSlot(0) != null)
 			for(Cuter_Recipes a:recipes){
 			if(a.getInput().itemID == cuterEntity.getStackInSlot(0).itemID)

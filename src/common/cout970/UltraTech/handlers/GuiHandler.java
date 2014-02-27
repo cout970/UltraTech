@@ -32,7 +32,7 @@ import common.cout970.UltraTech.machines.gui.UTfurnaceGui;
 import common.cout970.UltraTech.machines.tileEntities.CVDentity;
 import common.cout970.UltraTech.machines.tileEntities.ChargeStationEntity;
 import common.cout970.UltraTech.machines.tileEntities.CrafterEntity;
-import common.cout970.UltraTech.machines.tileEntities.CuterEntity;
+import common.cout970.UltraTech.machines.tileEntities.CutterEntity;
 import common.cout970.UltraTech.machines.tileEntities.EngineEntity;
 import common.cout970.UltraTech.machines.tileEntities.GeneratorEntity;
 import common.cout970.UltraTech.machines.tileEntities.IDSentity;
@@ -42,7 +42,7 @@ import common.cout970.UltraTech.machines.tileEntities.PresuricerEntity;
 import common.cout970.UltraTech.machines.tileEntities.Printer3DEntity;
 import common.cout970.UltraTech.machines.tileEntities.PurifierEntity;
 import common.cout970.UltraTech.machines.tileEntities.ReactorEntity;
-import common.cout970.UltraTech.machines.tileEntities.UTfurnaceEntity;
+import common.cout970.UltraTech.machines.tileEntities.FurnaceEntity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -60,16 +60,16 @@ public class GuiHandler implements IGuiHandler{
 			return new CVDcontainer(player.inventory, (CVDentity) tileEntity);
 		}
 		//furnace
-		if(tileEntity instanceof UTfurnaceEntity){
-			return new UTfurnaceContainer(player.inventory, (UTfurnaceEntity) tileEntity);
+		if(tileEntity instanceof FurnaceEntity){
+			return new UTfurnaceContainer(player.inventory, (FurnaceEntity) tileEntity);
 		}
 		//storage
 		if(tileEntity instanceof IDSentity){
 			return new IDScontainer(player.inventory, (IDSentity) tileEntity);
 		}
 		//cuter
-		if(tileEntity instanceof CuterEntity){
-			return new PrecisionCuterContainer(player.inventory, (CuterEntity) tileEntity);
+		if(tileEntity instanceof CutterEntity){
+			return new PrecisionCuterContainer(player.inventory, (CutterEntity) tileEntity);
 		}
 		//presurechamber
 		if(tileEntity instanceof PresuricerEntity){
@@ -124,16 +124,16 @@ public class GuiHandler implements IGuiHandler{
 			return new CVDgui(new CVDcontainer(player.inventory, (CVDentity) tileEntity),player.inventory, (CVDentity) tileEntity);
 		}
 		//furnace
-		if(tileEntity instanceof UTfurnaceEntity){
-			return new UTfurnaceGui(new UTfurnaceContainer(player.inventory, (UTfurnaceEntity) tileEntity),player.inventory, (UTfurnaceEntity) tileEntity);
+		if(tileEntity instanceof FurnaceEntity){
+			return new UTfurnaceGui(new UTfurnaceContainer(player.inventory, (FurnaceEntity) tileEntity),player.inventory, (FurnaceEntity) tileEntity);
 		}
 		//storage
 		if(tileEntity instanceof IDSentity){
 			return new IDSgui(new IDScontainer(player.inventory, (IDSentity) tileEntity),player.inventory, (IDSentity) tileEntity);
 		}
 		//cuter
-		if(tileEntity instanceof CuterEntity){
-			return new CuterGui(new PrecisionCuterContainer(player.inventory, (CuterEntity) tileEntity),player.inventory, (CuterEntity) tileEntity);
+		if(tileEntity instanceof CutterEntity){
+			return new CuterGui(new PrecisionCuterContainer(player.inventory, (CutterEntity) tileEntity),player.inventory, (CutterEntity) tileEntity);
 		}
 		//presurechamber
 		if(tileEntity instanceof PresuricerEntity){

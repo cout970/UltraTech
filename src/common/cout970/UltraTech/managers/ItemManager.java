@@ -113,47 +113,33 @@ public class ItemManager {
 	}
 
 	private static Item Exception(ItemInfo i) {
-		switch(i.name){
-		case "Ingot":{
+		String a = i.name;
+		if(a=="Ingot")
 			return new UT_Ingot(i.id);
-		}
-		case "Dust":{
+		if(a=="Dust")
 			return new UT_Dust(i.id);
-		}
-		case "Plate":{
+		if(a=="Plate")
 			return new UT_Plate(i.id);
-		}
-		case "SpeedUpgrade":{
+		if(a=="SpeedUpgrade")
 			return new SpeedUpgrade(i.id, i.name);
-		}
-		case "MiningUpgrade":{
+		if(a=="MiningUpgrade")
 			return new MiningUpgrade(i.id, i.name);
-		}
-		case "RangeUpgrade":{
+		if(a=="RangeUpgrade")
 			return new RangeUpgrade(i.id, i.name);
-		}
-		case "AutoEjectUpgrade":{
+		if(a=="AutoEjectUpgrade")
 			return new AutoEjectUpgrade(i.id, i.name);
-		}
-		case "Linker":{
+		if(a=="Linker")
 			return new Linker(i.id, i.name);
-		}
-		case "RadioniteCell":{
+		if(a=="RadioniteCell")
 			return new RadioniteCell(i.id, i.name);
-		}
-		case "HidrogenBattery":{
+		if(a=="HidrogenBattery")
 			return new HidrogenBattery(i.id, i.name);
-		}
-		case "LasserSword":{
+		if(a=="LasserSword")
 			return new LasserSword(i.id, i.name);
-		}
-		case "FortuneUpgrade":{
+		if(a=="FortuneUpgrade")
 			return new FortuneUpgrade(i.id, i.name);
-		}
-		case "ProcesedFood":{
+		if(a=="ProcesedFood")
 			return new ProcesedFood(i.id);
-		}
-		}
 		return null;
 	}
 

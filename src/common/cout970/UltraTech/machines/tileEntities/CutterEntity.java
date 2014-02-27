@@ -1,28 +1,30 @@
 package common.cout970.UltraTech.machines.tileEntities;
 
-
+import common.cout970.UltraTech.lib.recipes.Cuter_Recipes;
+import common.cout970.UltraTech.managers.ItemManager;
+import common.cout970.UltraTech.misc.ISpeedUpgradeabel;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 
-public class GeneratorEntity extends Machine implements IInventory{
+public class CutterEntity extends Machine implements IInventory,ISpeedUpgradeabel{
 
 	private ItemStack[] inventory;
-	private int size = 1;
+	private int size = 2;
 	public int progres = 0;
-	public boolean on;
+	public int speed = 10;
+	public int speedUpgrades = 0;
+	public boolean flag1 = false;
 
-	public GeneratorEntity(){
+	public CutterEntity(){
 		super();
 		inventory = new ItemStack[size];
-		this.EnergyMax = 24000;
-		this.tipe = MachineTipe.Output;
 	}
+
 
 	@Override
 	public int getSizeInventory() {
@@ -101,14 +103,12 @@ public class GeneratorEntity extends Machine implements IInventory{
 
 	@Override
 	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-		if(itemstack != null && itemstack.itemID == Item.coal.itemID)return true;
-		return false;
+		return true;
 	}
 	@Override
 	public void readFromNBT(NBTTagCompound nbtTagCompound) {
 
 		super.readFromNBT(nbtTagCompound);
-		progres = nbtTagCompound.getInteger("progres");
 		NBTTagList tagList = nbtTagCompound.getTagList("Inventory");
 		inventory = new ItemStack[this.getSizeInventory()];
 		for (int i = 0; i < tagList.tagCount(); ++i) {
@@ -117,15 +117,19 @@ public class GeneratorEntity extends Machine implements IInventory{
 			if (slot >= 0 && slot < inventory.length) {
 				inventory[slot] = ItemStack.loadItemStackFromNBT(tagCompound);
 			}
-
 		}
+		 NBTTagList tagList2 = nbtTagCompound.getTagList("Upgrades");
+			NBTTagCompound tagCompound2 = (NBTTagCompound) tagList2.tagAt(0);
+			speed = tagCompound2.getInteger("Speed");
+			NBTTagCompound tagCompound3 = (NBTTagCompound) tagList2.tagAt(1);
+			speedUpgrades = tagCompound3.getInteger("Speedupgrades");
 	}
 
 	@Override
 	public void writeToNBT(NBTTagCompound nbtTagCompound) {
 
 		super.writeToNBT(nbtTagCompound);
-		nbtTagCompound.setInteger("progres", progres);
+		nbtTagCompound.setInteger("speed", speed);
 		NBTTagList tagList = new NBTTagList();
 		for (int currentIndex = 0; currentIndex < inventory.length; ++currentIndex) {
 			if (inventory[currentIndex] != null) {
@@ -137,57 +141,120 @@ public class GeneratorEntity extends Machine implements IInventory{
 		}
 
 		nbtTagCompound.setTag("Inventory", tagList);
+		
+		NBTTagList tagList2 = new NBTTagList();
+		NBTTagCompound tagCompound = new NBTTagCompound();
+		tagCompound.setInteger("Speed", this.speed);
+		tagList2.appendTag(tagCompound);
+		NBTTagCompound tagCompound2 = new NBTTagCompound();
+		tagCompound2.setInteger("Speedupgrades", this.speedUpgrades);
+		tagList2.appendTag(tagCompound2);
+		nbtTagCompound.setTag("Upgrades", tagList2);
 	}
+	
+	///////////////////////////////////////////////////////////////////////////
+	//work
 
 	@Override
 	public void updateEntity(){
-		super.updateEntity();
-		if(inventory[0] != null){
-			boolean flag = inventory[0].itemID == Item.coal.itemID;
-			if(flag && progres <= 0 && this.Energy < EnergyMax){
-				progres = 800;
-				--inventory[0].stackSize;
-				if(inventory[0].stackSize <= 0){
-					inventory[0] = null;
+		boolean flag = progres > 0;
+		boolean flag2=false;
+		if(!flag1){
+			flag1 = this.Energy >= 1000;
+		}
+		if(flag){
+			this.loseEnergy(speed);//spend energy when ir runing
+		}
+		if(!this.worldObj.isRemote){
+			if(flag1 && Cuter_Recipes.matches(this)){
+
+				progres+=speed;
+				if(progres > 1000){
+					progres = 0;
+					craft();
+					flag2 = true;
+					flag1 = false;
 				}
+			}else{
+				progres=0;
 			}
 		}
-
-		if(!worldObj.isRemote){
-			if(progres > 0){
-				on = true;
-			}else{
-				on = false;
-			}
-			if(progres > 0){
-				progres--;
-				this.gainEnergy(10);
-			}
+		if(flag2){
+			onInventoryChanged();
 		}
 	}
 
-	
-//	public SyncObject getSync(){
+	private void craft() {
+		if(Cuter_Recipes.matches(this)){
+			ItemStack itemstack = Cuter_Recipes.getCraftingResult(this);
+
+			if (this.inventory[1] == null)
+			{
+				this.inventory[1] = itemstack.copy();
+			}
+			else if (this.inventory[1].isItemEqual(itemstack))
+			{
+				inventory[1].stackSize += itemstack.stackSize;
+			}
+			--this.inventory[0].stackSize;
+			if (this.inventory[0].stackSize <= 0)
+			{
+				this.inventory[0] = null;
+			}
+
+		}
+	}
+
+
+//	public SyncObject getSinc() {
 //		SyncObject a = new SyncObject();
-//		a.setVar1(progres*12/maxpro);
+//		a.setVar1(progres*24/1000);
 //		a.setVar2(Energy);
 //		return a;
 //	}
 	
 	public void sendGUINetworkData(Container container, ICrafting iCrafting) {
+    	iCrafting.sendProgressBarUpdate(container, 0, progres);
     	iCrafting.sendProgressBarUpdate(container, 1, Energy);
+    	iCrafting.sendProgressBarUpdate(container, 2, speed);
     }
     
     public void getGUINetworkData(int id, int value) {
     	switch(id){
+    	case 0:{
+    		progres = value;
+    		break;
+    	}
     	case 1:{
     		Energy = value;
     		break;
-    		}
+    	}
     	case 2:{
-    		progres = value;
+    		speed = value;
     		break;
-    		}
+    	}
     	}
 	}
+
+
+	@Override
+	public boolean upgrade() {
+		
+		if(this.speed < 100){	
+			this.speed += 20;
+			speedUpgrades +=1;
+			return true;
+		}
+		return false;
+	}
+
+
+	@Override
+	public ItemStack getDrop() {
+		if(speedUpgrades !=0){
+			return new ItemStack(ItemManager.ItemName.get("SpeedUpgrade"),speedUpgrades);
+		}
+		return null;
+	}
+	
 }

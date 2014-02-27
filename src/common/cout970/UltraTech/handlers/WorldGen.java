@@ -3,7 +3,7 @@ package common.cout970.UltraTech.handlers;
 import java.util.Random;
 
 import common.cout970.UltraTech.managers.BlockManager;
-import common.cout970.UltraTech.managers.ConfigManager;
+import common.cout970.UltraTech.managers.CompatibilityManager;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
@@ -41,16 +41,16 @@ public class WorldGen implements IWorldGenerator{
 	private void generateSurface(World world, Random random, int i, int j) {
 		int id = BlockManager.Ores.blockID;
 		
-		if(ConfigManager.gen.GenAluminum)
+		if(CompatibilityManager.gen.GenAluminum)
 		genOre(world, random, i, j, 20, id, 1, 8, 100);
-		if(ConfigManager.gen.GenCopper)
+		if(CompatibilityManager.gen.GenCopper)
 		genOre(world, random, i, j, 20, id, 2, 8, 100);
-		if(ConfigManager.gen.GenTin)
+		if(CompatibilityManager.gen.GenTin)
 		genOre(world, random, i, j, 20, id, 3, 6, 100);
 		
 		boolean lead = false,silver = false;
-		if(ConfigManager.gen.GenLead)lead = true;
-		if(ConfigManager.gen.GenSilver)silver = true;
+		if(CompatibilityManager.gen.GenLead)lead = true;
+		if(CompatibilityManager.gen.GenSilver)silver = true;
 		
 		for(int k = 0; k < 10; k++) {
 			int firstBlockXCoord = i + random.nextInt(16);

@@ -1,20 +1,22 @@
 package common.cout970.UltraTech.managers;
 
 import common.cout970.UltraTech.lib.Reference;
-import common.cout970.UltraTech.misc.OreGenInfo;
 import net.minecraftforge.common.Configuration;
 import static common.cout970.UltraTech.managers.BlockManager.*;
 
 public class ConfigManager {
 
-	public static OreGenInfo gen;
-	
 	public static void LoadConfigs(Configuration config) {
 		
 		config.load();
 		//blocks
 		int x = 2050;
 		ids.put("Chasis", config.getBlock("Chasis", x++).getInt());
+		ids.put("Ores",config.getBlock("Ores", x++).getInt());
+		ids.put("Models",config.getBlock("Models", x++).getInt());
+		ids.put("Tier1",config.getBlock("Tier1", x++).getInt());
+		ids.put("Tier2",config.getBlock("Tier2", x++).getInt());
+
 		ids.put("CVDmachine",config.getBlock("CVDmachine", x++).getInt());
 		ids.put("UTfurnace",config.getBlock("UTfurnace", x++).getInt());
 		ids.put("IDS",config.getBlock("IDS", x++).getInt());
@@ -43,7 +45,6 @@ public class ConfigManager {
 		ids.put("Printer3D",config.getBlock("Printer3D", x++).getInt());
 		ids.put("ReactorController",config.getBlock("ReactorController", x++).getInt());
 		ids.put("Engine",config.getBlock("Engine", x++).getInt());
-		ids.put("Ores",config.getBlock("Ores", x++).getInt());
 		ids.put("Hologram",config.getBlock("Hologram", x++).getInt());
 		ids.put("Crafter",config.getBlock("Crafter", x++).getInt());
 		
@@ -68,9 +69,6 @@ public class ConfigManager {
 		Reference.Deco8w = config.getBlock("Deco8w", 2207).getInt();
 
 		
-		//gen
-		gen = new OreGenInfo();
-		gen.checkOres();
 		
 		//items
 		ItemManager.LoadConfigItems(config);

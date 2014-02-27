@@ -127,7 +127,7 @@ public class UltraTech {
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event){
-
+		CompatibilityManager.OreGenOptions();
 	}
 
 

@@ -6,7 +6,6 @@ import common.cout970.UltraTech.machines.renders.RenderEngine;
 import common.cout970.UltraTech.machines.renders.RenderHologram;
 import common.cout970.UltraTech.machines.renders.RenderSolarPanel;
 import common.cout970.UltraTech.machines.renders.RenderWindMill;
-import common.cout970.UltraTech.machines.renders.holograms.HologramEntity;
 import common.cout970.UltraTech.machines.tileEntities.EngineEntity;
 import common.cout970.UltraTech.machines.tileEntities.HologramEmiterEntity;
 import common.cout970.UltraTech.machines.tileEntities.ReactorTankEntity;
@@ -26,7 +25,7 @@ public class ClientProxy extends CommonProxy{
 		ClientRegistry.bindTileEntitySpecialRenderer(ReactorTankEntity.class, new ReactorTankRender());
 		ClientRegistry.bindTileEntitySpecialRenderer(WindMillEntity.class, new RenderWindMill());
 		ClientRegistry.bindTileEntitySpecialRenderer(EngineEntity.class, new RenderEngine());
-		RenderingRegistry.registerEntityRenderingHandler(HologramEntity.class, new RenderHologram());
+		ClientRegistry.bindTileEntitySpecialRenderer(HologramEmiterEntity.class, new RenderHologram());
 
 		setCustomRenderers();
 	}

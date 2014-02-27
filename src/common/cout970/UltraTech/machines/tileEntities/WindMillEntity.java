@@ -1,5 +1,9 @@
 package common.cout970.UltraTech.machines.tileEntities;
 
+import net.minecraft.util.AxisAlignedBB;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 public class WindMillEntity extends Machine{
 
 	public float fan;
@@ -15,7 +19,6 @@ public class WindMillEntity extends Machine{
 	
 	public void updateEntity()
 	{
-		
 		float time = 0;
 		float bioma = 0.5f;
 		time = worldObj.getSunBrightness(1);
@@ -55,5 +58,15 @@ public class WindMillEntity extends Machine{
 		}
 		return false;
 	}
+	
+	
+	@SideOnly(Side.CLIENT)
+    public AxisAlignedBB getRenderBoundingBox()
+    {
+        AxisAlignedBB bb = INFINITE_EXTENT_AABB;
+            bb = AxisAlignedBB.getAABBPool().getAABB(xCoord - 1, yCoord, zCoord - 1, xCoord + 2, yCoord + 2+5, zCoord + 2);
+        
+        return bb;
+    }
 
 }

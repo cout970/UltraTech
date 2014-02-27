@@ -1,10 +1,14 @@
 package common.cout970.UltraTech.managers;
 
+import common.cout970.UltraTech.misc.OreGenInfo;
+
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class CompatibilityManager {
-
+	
+	public static OreGenInfo gen;
+	
 	public static void initCompatibilitys(){
 		OreDictionary();
 	}
@@ -49,4 +53,11 @@ public class CompatibilityManager {
 		OreDictionary.registerOre("plateRedstone", new ItemStack(ItemManager.ItemName.get("Plate"),1,11));
 		OreDictionary.registerOre("plateRadionite", new ItemStack(ItemManager.ItemName.get("Plate"),1,12));
 	}
+	
+	public static void OreGenOptions(){
+		CompatibilityManager.gen = new OreGenInfo();
+		CompatibilityManager.gen.checkOres();
+	}
+
+
 }

@@ -2,7 +2,7 @@ package common.cout970.UltraTech.machines.gui;
 
 import org.lwjgl.opengl.GL11;
 
-import common.cout970.UltraTech.machines.tileEntities.CuterEntity;
+import common.cout970.UltraTech.machines.tileEntities.CutterEntity;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -10,9 +10,9 @@ import net.minecraft.util.ResourceLocation;
 
 public class CuterGui extends GuiContainer{
 
-	public CuterEntity entity;
+	public CutterEntity entity;
 	
-	public CuterGui(Container par1Container, InventoryPlayer inventory, CuterEntity tileEntity) {
+	public CuterGui(Container par1Container, InventoryPlayer inventory, CutterEntity tileEntity) {
 		super(par1Container);
 		entity = tileEntity;
 	}

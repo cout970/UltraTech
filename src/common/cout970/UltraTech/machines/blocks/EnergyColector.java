@@ -2,7 +2,7 @@ package common.cout970.UltraTech.machines.blocks;
 
 
 import common.cout970.UltraTech.core.UltraTech;
-import common.cout970.UltraTech.machines.tileEntities.EnergyColectorEntity;
+import common.cout970.UltraTech.machines.tileEntities.EnergyCollectorEntity;
 import common.cout970.UltraTech.machines.tileEntities.Machine;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -26,7 +26,7 @@ public class EnergyColector extends BlockContainer{
 
 	@Override
 	public TileEntity createNewTileEntity(World world) {
-		return new EnergyColectorEntity();
+		return new EnergyCollectorEntity();
 	}
 
 	public void registerIcons(IconRegister iconRegister){

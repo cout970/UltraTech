@@ -1,7 +1,7 @@
 package common.cout970.UltraTech.machines.containers;
 
 import common.cout970.UltraTech.lib.recipes.Cuter_Recipes;
-import common.cout970.UltraTech.machines.tileEntities.CuterEntity;
+import common.cout970.UltraTech.machines.tileEntities.CutterEntity;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -13,9 +13,9 @@ import net.minecraft.item.ItemStack;
 public class PrecisionCuterContainer extends Container{
 
 	
-	private CuterEntity tileEntity;
+	private CutterEntity tileEntity;
 
-	public PrecisionCuterContainer(InventoryPlayer inventory, CuterEntity tileEntity){
+	public PrecisionCuterContainer(InventoryPlayer inventory, CutterEntity tileEntity){
 		super();
 		this.tileEntity = tileEntity;
 		addSlotToContainer(new Slot(tileEntity, 0, 61, 32));

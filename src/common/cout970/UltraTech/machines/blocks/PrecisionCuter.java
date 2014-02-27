@@ -3,7 +3,7 @@ package common.cout970.UltraTech.machines.blocks;
 import java.util.Random;
 
 import common.cout970.UltraTech.core.UltraTech;
-import common.cout970.UltraTech.machines.tileEntities.CuterEntity;
+import common.cout970.UltraTech.machines.tileEntities.CutterEntity;
 import common.cout970.UltraTech.misc.ISpeedUpgradeabel;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -34,7 +34,7 @@ public class PrecisionCuter extends BlockContainer{
 
 	@Override
 	public TileEntity createNewTileEntity(World world) {
-		return new CuterEntity();
+		return new CutterEntity();
 	}
 	
 	@Override
@@ -44,7 +44,7 @@ public class PrecisionCuter extends BlockContainer{
 			return true;
 		}else{
 			if(!par1World.isRemote){
-				CuterEntity tile = (CuterEntity)par1World.getBlockTileEntity(x, y, z);
+				CutterEntity tile = (CutterEntity)par1World.getBlockTileEntity(x, y, z);
 				if(tile != null){ 
 					par5EntityPlayer.openGui(UltraTech.instance, 9, par1World, x, y, z);
 					return true;

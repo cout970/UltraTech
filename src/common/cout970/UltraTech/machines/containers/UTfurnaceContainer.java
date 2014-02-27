@@ -1,7 +1,7 @@
 package common.cout970.UltraTech.machines.containers;
 
 
-import common.cout970.UltraTech.machines.tileEntities.UTfurnaceEntity;
+import common.cout970.UltraTech.machines.tileEntities.FurnaceEntity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -12,10 +12,10 @@ import net.minecraft.item.crafting.FurnaceRecipes;
 
 public class UTfurnaceContainer extends Container {
 
-	public UTfurnaceEntity tileEntity;
+	public FurnaceEntity tileEntity;
 	
 
-	public UTfurnaceContainer(InventoryPlayer inventoryPlayer, UTfurnaceEntity te){
+	public UTfurnaceContainer(InventoryPlayer inventoryPlayer, FurnaceEntity te){
 		super();
 		tileEntity = te;
 		
