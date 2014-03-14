@@ -3,12 +3,13 @@ package common.cout970.UltraTech.blocks;
 import java.util.List;
 import java.util.Random;
 
+import common.cout970.UltraTech.TileEntities.Tier1.CVD_Entity;
+import common.cout970.UltraTech.TileEntities.Tier1.ChargeStationEntity;
+import common.cout970.UltraTech.TileEntities.Tier1.GeneratorEntity;
 import common.cout970.UltraTech.core.UltraTech;
-import common.cout970.UltraTech.machines.tileEntities.CVDentity;
-import common.cout970.UltraTech.machines.tileEntities.ChargeStationEntity;
+import common.cout970.UltraTech.energy.api.EnergyUtils;
+import common.cout970.UltraTech.energy.api.Machine;
 import common.cout970.UltraTech.machines.tileEntities.CrafterEntity;
-import common.cout970.UltraTech.machines.tileEntities.GeneratorEntity;
-import common.cout970.UltraTech.machines.tileEntities.Machine;
 import common.cout970.UltraTech.machines.tileEntities.Printer3DEntity;
 import common.cout970.UltraTech.machines.tileEntities.ReciverEntity;
 import common.cout970.UltraTech.machines.tileEntities.SenderEntity;
@@ -61,7 +62,7 @@ public class Tier1Block extends BlockContainer{
 	public TileEntity createTileEntity(World world, int metadata) {
 		if(metadata == 0)return new CrafterEntity();
 		if(metadata == 1)return new GeneratorEntity();
-		if(metadata == 2)return new CVDentity();
+		if(metadata == 2)return new CVD_Entity();
 		if(metadata == 3)return new Printer3DEntity();
 		if(metadata == 4)return new ChargeStationEntity();
 		if(metadata == 5)return new ReciverEntity();
@@ -135,7 +136,7 @@ public class Tier1Block extends BlockContainer{
 					entityplayer.openGui(UltraTech.instance, 13, world, i, j, k);
 					return true;
 				}
-				if(tile instanceof CVDentity){
+				if(tile instanceof CVD_Entity){
 					entityplayer.openGui(UltraTech.instance, 13, world, i, j, k);
 					return true;
 				}
@@ -156,7 +157,7 @@ public class Tier1Block extends BlockContainer{
 	public void onNeighborBlockChange(World w, int x, int y, int z, int side){
 		TileEntity te = w.getBlockTileEntity(x, y, z);
 		if(te instanceof Machine){
-			((Machine)te).updateMachine(w, x, y, z);
+			if(((Machine)te).getNetwork() != null)((Machine)te).getNetwork().refresh();
 		}
 	}
 
@@ -216,6 +217,14 @@ public class Tier1Block extends BlockContainer{
 				item.stackSize = 0;
 			}
 		}
+	}
+	
+	@Override
+	public void onBlockAdded(World w, int x, int y, int z) {
+		EnergyUtils.onBlockAdded(w, x, y, z);
+	}
+	public void onBlockPreDestroy(World w, int x, int y, int z, int meta) {
+		EnergyUtils.onBlockPreDestroy(w, x, y, z, meta);
 	}
 
 }

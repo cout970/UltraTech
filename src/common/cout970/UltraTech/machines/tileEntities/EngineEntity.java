@@ -4,6 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
+import common.cout970.UltraTech.energy.api.Machine;
 import common.cout970.UltraTech.machines.containers.EngineContainer;
 import cpw.mods.fml.common.network.PacketDispatcher;
 import buildcraft.api.power.IPowerEmitter;
@@ -20,6 +21,8 @@ import net.minecraftforge.common.ForgeDirection;
 public class EngineEntity extends Machine implements IPowerReceptor, IPowerEmitter{
 
 	public ForgeDirection direction = ForgeDirection.UP;
+	public final int EnergyConsume = 15;
+	public final int MJ_Produced = 32;
 	public float speed = 0;
 	public float engPos = 0;
 	public boolean engOut;
@@ -33,11 +36,23 @@ public class EngineEntity extends Machine implements IPowerReceptor, IPowerEmitt
 	private boolean DirUpdate;
 	
 	public void updateEntity(){
+		
+		if(working)speedMax = 2.5f ;else speedMax = 0;
+		if(speed != speedMax){
+			if(speed < speedMax){
+				speed+=0.005f;
+			}else{
+				speed-=0.005f;
+				if(speed < 0)speed = 0;
+			}
+		}
 		if(power == null){
 			power = new PowerHandler(this, Type.ENGINE);
 			power.configure(1, 300, 1, 5000);
 			power.configurePowerPerdition(0, 0);
 		}
+		if(worldObj.isRemote)return;
+		
 		if(DirUpdate){
 			DirUpdate = false;
 			ByteArrayOutputStream bytes = new ByteArrayOutputStream();
@@ -57,69 +72,55 @@ public class EngineEntity extends Machine implements IPowerReceptor, IPowerEmitt
 		if (checkOrienation) {
 			checkOrienation = false;
 			if (!isOrientationValid()){
-				switchOrientation(true);
+				switchOrientation();
 			}
 		}
-		
-		if(!worldObj.isRemote){
-			
-			if(!sync){
-				sync = true;
-				ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-				DataOutputStream data = new DataOutputStream(bytes);
-				try {
-					data.writeInt(xCoord);
-					data.writeInt(yCoord);
-					data.writeInt(zCoord);
-					data.writeInt(0);
-					data.writeInt((working) ? 1 : 0);
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-				PacketDispatcher.sendPacketToAllPlayers(PacketDispatcher.getPacket("UltraTech1", bytes.toByteArray()));
-			}
-			if(this.Energy >= 24 && power.getEnergyStored() <= power.getMaxEnergyStored()-8){
-				this.loseEnergy(24);
-				power.addEnergy(8);
-				if(!working){
-					working = true;
-					sync = false;
-				}
-			}else{
-				if(working){
-					working = false;
-					sync = false;
-				}
-			}
-			if(c == null){
-				if(canFound ){
-					TileEntity a = getTileOpposite();
-					if(a != null && a instanceof IPowerReceptor){
-						IPowerReceptor b = (IPowerReceptor) a;
-						c = b.getPowerReceiver(direction.getOpposite());
-						if(c == null)canFound = false;
-					}
-				}
-			}else{
-				if(c.powerRequest() > 0)
-				c.receiveEnergy(Type.ENGINE, power.useEnergy(100, 1000, true), direction.getOpposite());
-			}
 
 
+		if(!sync){
+			sync = true;
+			ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+			DataOutputStream data = new DataOutputStream(bytes);
+			try {
+				data.writeInt(xCoord);
+				data.writeInt(yCoord);
+				data.writeInt(zCoord);
+				data.writeInt(0);
+				data.writeInt((working) ? 1 : 0);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			PacketDispatcher.sendPacketToAllPlayers(PacketDispatcher.getPacket("UltraTech1", bytes.toByteArray()));
+		}
+		if(getEnergy() >= EnergyConsume && power.getEnergyStored() <= power.getMaxEnergyStored()-MJ_Produced){
+			this.removeEnergy(EnergyConsume);
+			power.addEnergy(MJ_Produced);
+			if(!working){
+				working = true;
+				sync = false;
+			}
 		}else{
-			if(working)speedMax = 2.5f ;else speedMax = 0;
-			if(speed != speedMax){
-				if(speed < speedMax){
-					speed+=0.005f;
-				}else{
-					speed-=0.005f;
-					if(speed < 0)speed = 0;
+			if(working){
+				working = false;
+				sync = false;
+			}
+		}
+		if(c == null){
+			if(canFound ){
+				TileEntity a = getTileOpposite();
+				if(a != null && a instanceof IPowerReceptor){
+					IPowerReceptor b = (IPowerReceptor) a;
+					c = b.getPowerReceiver(direction.getOpposite());
+					if(c == null)canFound = false;
 				}
 			}
+		}else{
+			if(c.powerRequest() > 0)
+				c.receiveEnergy(Type.ENGINE, power.useEnergy(100, 1000, true), direction.getOpposite());
 		}
 	}
 
-	private void switchOrientation(boolean b) {
+	public void switchOrientation() {
 
 		if(worldObj.getBlockTileEntity(xCoord, yCoord-1, zCoord) instanceof IPowerReceptor){
 			direction = ForgeDirection.DOWN;
@@ -194,7 +195,7 @@ public class EngineEntity extends Machine implements IPowerReceptor, IPowerEmitt
 	public void sendGUINetworkData(EngineContainer engineContainer,
 			ICrafting iCrafting) {
 		iCrafting.sendProgressBarUpdate(engineContainer, 0, (working)? 1 : 0);
-		iCrafting.sendProgressBarUpdate(engineContainer, 1, Energy);
+//		iCrafting.sendProgressBarUpdate(engineContainer, 1, Energy);
 		iCrafting.sendProgressBarUpdate(engineContainer, 2, (int)power.getEnergyStored());
 		iCrafting.sendProgressBarUpdate(engineContainer, 3, direction.ordinal());
 	}
@@ -209,7 +210,7 @@ public class EngineEntity extends Machine implements IPowerReceptor, IPowerEmitt
 			}
 		}
 		case 1:{
-			Energy = j;
+//			Energy = j;
 			break;
 		}
 		case 2:{
@@ -247,7 +248,7 @@ public class EngineEntity extends Machine implements IPowerReceptor, IPowerEmitt
 		
 	}
     public boolean receiveClientEvent(int id, int value){
-    	
+    	super.receiveClientEvent(id, value);
     	if(id == 0){
     		if(value == 1)working=true;else working=false;
     	}else if(id == 1){

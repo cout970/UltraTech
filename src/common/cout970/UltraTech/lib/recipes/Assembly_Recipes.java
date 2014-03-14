@@ -5,10 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 
 import common.cout970.UltraTech.machines.tileEntities.MolecularAssemblyEntity;
-
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class Assembly_Recipes {
 
@@ -146,6 +146,9 @@ public class Assembly_Recipes {
 		if(a == null && b == null)return true;
 		if(a != null && b != null){
 			if(a.itemID == b.itemID && a.getItemDamage() == b.getItemDamage())return true;
+			if(OreDictionary.getOreID(a) != -1 && OreDictionary.getOreID(b) != -1){
+				if(OreDictionary.getOreID(a) == OreDictionary.getOreID(b))return true;
+			}
 		}
 		return false;
 	}

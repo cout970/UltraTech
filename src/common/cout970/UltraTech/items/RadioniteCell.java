@@ -8,8 +8,7 @@ public class RadioniteCell extends UT_Item{
 		super(id, name);
 		setMaxStackSize(1);
 		this.setHasSubtypes(true);
-        this.setMaxDamage(1000);
+        this.setMaxDamage(500);
         }
 		
-
 }

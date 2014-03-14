@@ -2,7 +2,9 @@ package common.cout970.UltraTech.lib.recipes;
 
 import java.util.ArrayList;
 import java.util.List;
-import common.cout970.UltraTech.machines.tileEntities.CVDentity;
+
+import common.cout970.UltraTech.TileEntities.Tier1.CVD_Entity;
+import common.cout970.UltraTech.lib.ItemsUtil;
 import net.minecraft.item.ItemStack;
 
 public class CVD_Recipe{
@@ -18,11 +20,11 @@ public class CVD_Recipe{
 		this.output = output;
 	}
 
-	public static boolean matches(CVDentity inv) {
+	public static boolean matches(CVD_Entity inv) {
 		if(inv == null)return false;
 		for(CVD_Recipe a :recipes){
 			if(inv.getStackInSlot(0) != null && inv.getStackInSlot(1) != null){
-				if(a.getImput1().itemID == inv.getStackInSlot(0).itemID && a.getImput2().itemID == inv.getStackInSlot(1).itemID){
+				if(ItemsUtil.areEcuals(a.getImput1(), inv.getStackInSlot(0),true) && ItemsUtil.areEcuals(a.getImput2(), inv.getStackInSlot(1), true)){
 					if(inv.getStackInSlot(2) == null)	
 					return true;
 					if(inv.getStackInSlot(2).itemID == a.getOutput().itemID && inv.getInventoryStackLimit() >= inv.getStackInSlot(2).stackSize + a.getOutput().stackSize)
@@ -34,11 +36,11 @@ public class CVD_Recipe{
 	}
 
 
-	public static ItemStack getCraftingResult(CVDentity inv) {
+	public static ItemStack getCraftingResult(CVD_Entity inv) {
 		if(inv == null)return null;
 		for(CVD_Recipe a :recipes){
 			if(inv.getStackInSlot(0) != null && inv.getStackInSlot(1) != null){
-				if(a.getImput1().itemID == inv.getStackInSlot(0).itemID && a.getImput2().itemID == inv.getStackInSlot(1).itemID){
+				if(ItemsUtil.areEcuals(a.getImput1(), inv.getStackInSlot(0),true) && ItemsUtil.areEcuals(a.getImput2(), inv.getStackInSlot(1), true)){
 					return a.getOutput();
 				}
 			}

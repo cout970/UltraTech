@@ -2,7 +2,7 @@ package common.cout970.UltraTech.machines.renders;
 
 import org.lwjgl.opengl.GL11;
 
-import common.cout970.UltraTech.machines.models.ModelEngine;
+import common.cout970.UltraTech.machines.models.NewEngine;
 import common.cout970.UltraTech.machines.tileEntities.EngineEntity;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -12,10 +12,10 @@ import net.minecraft.util.ResourceLocation;
 
 public class RenderEngine extends TileEntitySpecialRenderer{
 
-	private ModelEngine model;
+	private NewEngine model;
 
 	public RenderEngine() {
-		this.model = new ModelEngine();
+		this.model = new NewEngine();
 	}
 	
 	@Override
@@ -26,7 +26,7 @@ public class RenderEngine extends TileEntitySpecialRenderer{
 		
 		GL11.glPushMatrix();
 		GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
-		this.bindTexture(new ResourceLocation("ultratech:textures/misc/engine.png"));
+		this.bindTexture(new ResourceLocation("ultratech:textures/misc/NewEngine.png"));
 		GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
 		setRotation(e);
 		this.model.render((Entity)null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
@@ -35,15 +35,15 @@ public class RenderEngine extends TileEntitySpecialRenderer{
 
 	private void setRotation(EngineEntity e) {
 		//animation
-		if(e.engOut){
-			if(e.engPos < 40){
-				e.engPos+=e.speed;
-			}else e.engOut = false;
-		}else{
-			if(e.engPos > 0){
-				e.engPos-=e.speed;
-			}else e.engOut = true;
-		}
+//		if(e.engOut){
+//			if(e.engPos < 40){
+//				e.engPos+=e.speed;
+//			}else e.engOut = false;
+//		}else{
+//			if(e.engPos > 0){
+//				e.engPos-=e.speed;
+//			}else e.engOut = true;
+//		}
 		//rotation
 		switch(e.direction){
 		case NORTH:{
@@ -77,9 +77,7 @@ public class RenderEngine extends TileEntitySpecialRenderer{
 			GL11.glTranslated(0, -1, 1);
 		}
 		}
-		((ModelRenderer) this.model.boxList.get(2)).offsetZ = 0.4f-((float) e.engPos)/100f;
-
-		
+		if(e.working)((ModelRenderer) this.model.boxList.get(2)).rotateAngleZ +=0.05f;
 	}
 
 }

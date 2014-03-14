@@ -23,7 +23,7 @@ public class EngineContainer extends Container{
     {
         super.addCraftingToCrafters(par1ICrafting);
         par1ICrafting.sendProgressBarUpdate(this, 0, (tileEntity.working)? 1 : 0);
-        par1ICrafting.sendProgressBarUpdate(this, 1, tileEntity.Energy);
+        par1ICrafting.sendProgressBarUpdate(this, 1, tileEntity.getEnergy());
         par1ICrafting.sendProgressBarUpdate(this, 2, (int)tileEntity.power.getEnergyStored());
         par1ICrafting.sendProgressBarUpdate(this, 3, tileEntity.direction.ordinal());
 

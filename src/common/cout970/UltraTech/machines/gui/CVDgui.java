@@ -2,8 +2,7 @@ package common.cout970.UltraTech.machines.gui;
 
 import org.lwjgl.opengl.GL11;
 
-import common.cout970.UltraTech.machines.tileEntities.CVDentity;
-
+import common.cout970.UltraTech.TileEntities.Tier1.CVD_Entity;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -12,10 +11,10 @@ import net.minecraft.util.ResourceLocation;
 
 public class CVDgui extends GuiContainer{
 
-	private CVDentity entity;
+	private CVD_Entity entity;
 //	private InventoryPlayer InventoryPlayer; 
 	
-	public CVDgui(Container par1Container,InventoryPlayer ip ,CVDentity entity) {
+	public CVDgui(Container par1Container,InventoryPlayer ip ,CVD_Entity entity) {
 		super(par1Container);
 		this.entity = entity;
 //		this.InventoryPlayer = ip;
@@ -37,7 +36,7 @@ public class CVDgui extends GuiContainer{
 
 		//energy
 		this.mc.renderEngine.bindTexture(new ResourceLocation("ultratech:textures/misc/energy.png"));
-		int p = (int) entity.getEnergy()*50/entity.EnergyMax;
+		int p = (int) entity.getEnergy()*50/entity.maxEnergy();
 		this.drawTexturedModalRect(xStart+14, yStart+15+(50-p), 0, 0, 25, p);
 	}
 

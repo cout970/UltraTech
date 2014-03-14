@@ -1,8 +1,7 @@
 package common.cout970.UltraTech.machines.containers;
 
+import common.cout970.UltraTech.TileEntities.Tier2.CutterEntity;
 import common.cout970.UltraTech.lib.recipes.Cuter_Recipes;
-import common.cout970.UltraTech.machines.tileEntities.CutterEntity;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -45,7 +44,7 @@ public class PrecisionCuterContainer extends Container{
     {
         super.addCraftingToCrafters(par1ICrafting);
         par1ICrafting.sendProgressBarUpdate(this, 0, tileEntity.progres);
-        par1ICrafting.sendProgressBarUpdate(this, 1, tileEntity.Energy);
+        par1ICrafting.sendProgressBarUpdate(this, 1, tileEntity.getEnergy());
         par1ICrafting.sendProgressBarUpdate(this, 2, tileEntity.speed);
     }
 	

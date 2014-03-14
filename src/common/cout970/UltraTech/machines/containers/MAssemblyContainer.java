@@ -66,7 +66,7 @@ public class MAssemblyContainer extends Container{
 	public void addCraftingToCrafters(ICrafting par1ICrafting)
 	{
 		super.addCraftingToCrafters(par1ICrafting);
-		par1ICrafting.sendProgressBarUpdate(this, 1, tileEntity.Energy);
+		par1ICrafting.sendProgressBarUpdate(this, 1, tileEntity.getEnergy());
 		par1ICrafting.sendProgressBarUpdate(this, 2, tileEntity.Progres);
 	}
 

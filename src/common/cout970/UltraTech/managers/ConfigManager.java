@@ -7,47 +7,25 @@ import static common.cout970.UltraTech.managers.BlockManager.*;
 public class ConfigManager {
 
 	public static void LoadConfigs(Configuration config) {
-		
+
 		config.load();
 		//blocks
 		int x = 2050;
 		ids.put("Chasis", config.getBlock("Chasis", x++).getInt());
 		ids.put("Ores",config.getBlock("Ores", x++).getInt());
-		ids.put("Models",config.getBlock("Models", x++).getInt());
-		ids.put("Tier1",config.getBlock("Tier1", x++).getInt());
-		ids.put("Tier2",config.getBlock("Tier2", x++).getInt());
-
-		ids.put("CVDmachine",config.getBlock("CVDmachine", x++).getInt());
-		ids.put("UTfurnace",config.getBlock("UTfurnace", x++).getInt());
-		ids.put("IDS",config.getBlock("IDS", x++).getInt());
-		ids.put("EnergyCollector",config.getBlock("EnergyCollector", x++).getInt());
-		ids.put("Cutter",config.getBlock("Cutter", x++).getInt());
-		ids.put("Purifier",config.getBlock("Purifier", x++).getInt());
-		ids.put("PresureChamber",config.getBlock("PresureChamber", x++).getInt());
-		ids.put("DiamondGlass",config.getBlock("DiamondGlass", x++).getInt());
-		ids.put("CovedGlass",config.getBlock("CovedGlass", x++).getInt());
-		ids.put("HitBox",config.getBlock("HitBox", x++).getInt());
-		ids.put("Generator",config.getBlock("Generator", x++).getInt());
-		ids.put("Miner",config.getBlock("Miner", x++).getInt());
-		ids.put("GrafenoBlock",config.getBlock("GrafenoBlock", x++).getInt());
 		ids.put("Reactor",config.getBlock("Reactor", x++).getInt());
-		ids.put("ReactorWall",config.getBlock("ReactorWall", x++).getInt());
-		ids.put("Sender",config.getBlock("Sender", x++).getInt());
-		ids.put("Reciver",config.getBlock("Reciver", x++).getInt());
-		ids.put("RadioniteBlock",config.getBlock("RadioniteBlock", x++).getInt());
-		ids.put("ReactorTank",config.getBlock("ReactorTank", x++).getInt());
-		ids.put("SteamTurbine",config.getBlock("SteamTurbine",x++).getInt());
-		ids.put("WaterBlock",config.getBlock("WaterBlock",x++).getInt());
-		ids.put("MolecularAssembly",config.getBlock("MolecularAssembly", x++).getInt());
-		ids.put("ChargeStation",config.getBlock("ChargeStation", x++).getInt());
 		ids.put("SolarPanel",config.getBlock("SolarPanel", x++).getInt());
 		ids.put("WindMill",config.getBlock("WindMill", x++).getInt());
-		ids.put("Printer3D",config.getBlock("Printer3D", x++).getInt());
-		ids.put("ReactorController",config.getBlock("ReactorController", x++).getInt());
-		ids.put("Engine",config.getBlock("Engine", x++).getInt());
-		ids.put("Hologram",config.getBlock("Hologram", x++).getInt());
-		ids.put("Crafter",config.getBlock("Crafter", x++).getInt());
-		
+		ids.put("Engine",config.getBlock("Engine", x++).getInt());		
+		ids.put("Tier1",config.getBlock("Tier1", x++).getInt());
+		ids.put("Tier2",config.getBlock("Tier2", x++).getInt());
+		ids.put("Tier3",config.getBlock("Tier3", x++).getInt());
+		ids.put("Misc",config.getBlock("Misc", x++).getInt());
+		ids.put("Storage",config.getBlock("Storage", x++).getInt());
+		ids.put("Cable",config.getBlock("Cable", x++).getInt());
+		ids.put("DiamondGlass",config.getBlock("DiamondGlass", x++).getInt());
+		ids.put("CovedGlass",config.getBlock("CovedGlass", x++).getInt());
+
 		//deco
 		Reference.StoneBlock = config.getBlock("StoneBlock", 2099).getInt();
 		Reference.Deco = config.getBlock("Deco", 2100).getInt();
@@ -68,8 +46,6 @@ public class ConfigManager {
 		Reference.Deco7w = config.getBlock("Deco7w", 2206).getInt();
 		Reference.Deco8w = config.getBlock("Deco8w", 2207).getInt();
 
-		
-		
 		//items
 		ItemManager.LoadConfigItems(config);
 		if(config.hasChanged())config.save();

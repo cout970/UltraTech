@@ -32,12 +32,12 @@ public class OreBlock extends Block{
 	}
 
 	public void registerIcons(IconRegister iconRegister){
-		this.blockIcon = iconRegister.registerIcon("ultratech:radionite");
-		this.blockIcon1 = iconRegister.registerIcon("ultratech:aluminum");
-		this.blockIcon2 = iconRegister.registerIcon("ultratech:copper");
-		this.blockIcon3 = iconRegister.registerIcon("ultratech:tin");
-		this.blockIcon4 = iconRegister.registerIcon("ultratech:lead");
-		this.blockIcon5 = iconRegister.registerIcon("ultratech:silver");
+		this.blockIcon = iconRegister.registerIcon("ultratech:metal/radionite");
+		this.blockIcon1 = iconRegister.registerIcon("ultratech:metal/aluminum");
+		this.blockIcon2 = iconRegister.registerIcon("ultratech:metal/copper");
+		this.blockIcon3 = iconRegister.registerIcon("ultratech:metal/tin");
+		this.blockIcon4 = iconRegister.registerIcon("ultratech:metal/lead");
+		this.blockIcon5 = iconRegister.registerIcon("ultratech:metal/silver");
 	}
 	
 	@SideOnly(Side.CLIENT)

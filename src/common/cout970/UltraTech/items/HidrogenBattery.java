@@ -2,23 +2,24 @@ package common.cout970.UltraTech.items;
 
 import java.util.List;
 
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-import common.cout970.UltraTech.misc.IItemEnergyEstorage;
+import common.cout970.UltraTech.energy.api.IItemEnergyEstorage;
 
 public class HidrogenBattery extends UT_Item implements IItemEnergyEstorage{
 
-	public int MaxEnergy = 10000;
+	public int MaxEnergy;
 	
 	public HidrogenBattery(int id, String name) {
 		super(id, name);
+		setMaxStackSize(1);
+		MaxEnergy = 100000;
 		this.setHasSubtypes(true);
 		this.setMaxDamage(MaxEnergy);
 	}
-
-
 
 	@Override
 	public int getEnergy(ItemStack i) {
@@ -62,13 +63,13 @@ public class HidrogenBattery extends UT_Item implements IItemEnergyEstorage{
 		if( par1ItemStack.stackTagCompound == null )
 			par1ItemStack.setTagCompound( new NBTTagCompound( ) );
 		if(par1ItemStack.stackTagCompound.hasKey("Energy")){
-		par3List.add( par1ItemStack.stackTagCompound.getInteger("Energy")+"/"+this.MaxEnergy);
+		par3List.add( par1ItemStack.stackTagCompound.getInteger("Energy")/10+"/"+this.MaxEnergy/10);
 		}else{
 			par3List.add( 0+"/"+this.MaxEnergy);
 		}
 	}
 	
-	public int gainEnergy(ItemStack stack, int energy){
+	public int addEnergy(ItemStack stack, int energy){
 		if(stack.getTagCompound() == null){
 			stack.stackTagCompound = new NBTTagCompound();
 			stack.getTagCompound().setInteger("Energy", 0);
@@ -85,7 +86,7 @@ public class HidrogenBattery extends UT_Item implements IItemEnergyEstorage{
 		return aux;
 	}
 	
-	public void loseEnergy(ItemStack stack, int energy){
+	public void removeEnergy(ItemStack stack, int energy){
 		if(stack.getTagCompound() == null){
 			stack.stackTagCompound = new NBTTagCompound();
 			stack.getTagCompound().setInteger("Energy", 0);
@@ -105,7 +106,13 @@ public class HidrogenBattery extends UT_Item implements IItemEnergyEstorage{
 		return false;
 	}
 
-
+	@SuppressWarnings("unchecked")
+	public void getSubItems(int unknown, CreativeTabs tab, @SuppressWarnings("rawtypes") List subItems){
+		ItemStack a = new ItemStack(this, 1, 0);	
+		((IItemEnergyEstorage)a.getItem()).addEnergy(a, MaxEnergy);
+		subItems.add(a);
+			subItems.add(new ItemStack(this, 1, this.getMaxDamage()));
+	}
 
 	@Override
 	public int getMaxEnergy() {

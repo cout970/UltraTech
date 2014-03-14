@@ -1,48 +1,22 @@
 package common.cout970.UltraTech.handlers;
 
 
-import common.cout970.UltraTech.machines.containers.CVDcontainer;
-import common.cout970.UltraTech.machines.containers.ChargeStationContainer;
-import common.cout970.UltraTech.machines.containers.CrafterContainer;
-import common.cout970.UltraTech.machines.containers.EngineContainer;
-import common.cout970.UltraTech.machines.containers.GeneratorContainer;
-import common.cout970.UltraTech.machines.containers.IDScontainer;
-import common.cout970.UltraTech.machines.containers.MAssemblyContainer;
-import common.cout970.UltraTech.machines.containers.MinerContainer;
-import common.cout970.UltraTech.machines.containers.PrecisionCuterContainer;
-import common.cout970.UltraTech.machines.containers.PresuricerContaner;
-import common.cout970.UltraTech.machines.containers.Printer3DContainer;
-import common.cout970.UltraTech.machines.containers.PurifierContainer;
-import common.cout970.UltraTech.machines.containers.ReactorContainer;
-import common.cout970.UltraTech.machines.containers.UTfurnaceContainer;
-import common.cout970.UltraTech.machines.gui.CVDgui;
-import common.cout970.UltraTech.machines.gui.ChargeStationGui;
-import common.cout970.UltraTech.machines.gui.CrafterGui;
-import common.cout970.UltraTech.machines.gui.CuterGui;
-import common.cout970.UltraTech.machines.gui.EngineGui;
-import common.cout970.UltraTech.machines.gui.GeneratorGui;
-import common.cout970.UltraTech.machines.gui.IDSgui;
-import common.cout970.UltraTech.machines.gui.MAssemblyGui;
-import common.cout970.UltraTech.machines.gui.MinerGui;
-import common.cout970.UltraTech.machines.gui.PresuricerGui;
-import common.cout970.UltraTech.machines.gui.Printer3DGui;
-import common.cout970.UltraTech.machines.gui.PurifierGui;
-import common.cout970.UltraTech.machines.gui.ReactorGui;
-import common.cout970.UltraTech.machines.gui.UTfurnaceGui;
-import common.cout970.UltraTech.machines.tileEntities.CVDentity;
-import common.cout970.UltraTech.machines.tileEntities.ChargeStationEntity;
-import common.cout970.UltraTech.machines.tileEntities.CrafterEntity;
-import common.cout970.UltraTech.machines.tileEntities.CutterEntity;
-import common.cout970.UltraTech.machines.tileEntities.EngineEntity;
-import common.cout970.UltraTech.machines.tileEntities.GeneratorEntity;
-import common.cout970.UltraTech.machines.tileEntities.IDSentity;
-import common.cout970.UltraTech.machines.tileEntities.MinerEntity;
-import common.cout970.UltraTech.machines.tileEntities.MolecularAssemblyEntity;
-import common.cout970.UltraTech.machines.tileEntities.PresuricerEntity;
-import common.cout970.UltraTech.machines.tileEntities.Printer3DEntity;
-import common.cout970.UltraTech.machines.tileEntities.PurifierEntity;
-import common.cout970.UltraTech.machines.tileEntities.ReactorEntity;
-import common.cout970.UltraTech.machines.tileEntities.FurnaceEntity;
+import common.cout970.UltraTech.TileEntities.Tier1.CVD_Entity;
+import common.cout970.UltraTech.TileEntities.Tier1.ChargeStationEntity;
+import common.cout970.UltraTech.TileEntities.Tier1.GeneratorEntity;
+import common.cout970.UltraTech.TileEntities.Tier1.StorageTier1;
+import common.cout970.UltraTech.TileEntities.Tier2.CutterEntity;
+import common.cout970.UltraTech.TileEntities.Tier2.FurnaceEntity;
+import common.cout970.UltraTech.TileEntities.Tier2.PurifierEntity;
+import common.cout970.UltraTech.TileEntities.Tier2.StorageTier2;
+import common.cout970.UltraTech.TileEntities.Tier3.MinerEntity;
+import common.cout970.UltraTech.TileEntities.Tier3.ReactorEntity;
+import common.cout970.UltraTech.TileEntities.Tier3.StorageTier3;
+import common.cout970.UltraTech.TileEntities.Tier3.TesseractEntity;
+import common.cout970.UltraTech.energy.api.Machine;
+import common.cout970.UltraTech.machines.containers.*;
+import common.cout970.UltraTech.machines.gui.*;
+import common.cout970.UltraTech.machines.tileEntities.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -56,16 +30,16 @@ public class GuiHandler implements IGuiHandler{
 		TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
 		
 		//CVDmachine
-		if(tileEntity instanceof CVDentity){
-			return new CVDcontainer(player.inventory, (CVDentity) tileEntity);
+		if(tileEntity instanceof CVD_Entity){
+			return new CVDcontainer(player.inventory, (CVD_Entity) tileEntity);
 		}
 		//furnace
 		if(tileEntity instanceof FurnaceEntity){
 			return new UTfurnaceContainer(player.inventory, (FurnaceEntity) tileEntity);
 		}
 		//storage
-		if(tileEntity instanceof IDSentity){
-			return new IDScontainer(player.inventory, (IDSentity) tileEntity);
+		if(tileEntity instanceof StorageTier1 || tileEntity instanceof StorageTier2 || tileEntity instanceof StorageTier3){
+			return new StorageContainer(player.inventory, (Machine) tileEntity);
 		}
 		//cuter
 		if(tileEntity instanceof CutterEntity){
@@ -111,6 +85,10 @@ public class GuiHandler implements IGuiHandler{
 		if(tileEntity instanceof CrafterEntity){
 			return new CrafterContainer(player.inventory, (CrafterEntity) tileEntity);
 		}
+		//Tesseract
+		if(tileEntity instanceof TesseractEntity){
+			return new TesseractContainer(player.inventory, (TesseractEntity) tileEntity);
+		}
 		return null;
 	}
 
@@ -120,16 +98,16 @@ public class GuiHandler implements IGuiHandler{
 		TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
 		
 		//CVDmachine
-		if(tileEntity instanceof CVDentity){
-			return new CVDgui(new CVDcontainer(player.inventory, (CVDentity) tileEntity),player.inventory, (CVDentity) tileEntity);
+		if(tileEntity instanceof CVD_Entity){
+			return new CVDgui(new CVDcontainer(player.inventory, (CVD_Entity) tileEntity),player.inventory, (CVD_Entity) tileEntity);
 		}
 		//furnace
 		if(tileEntity instanceof FurnaceEntity){
 			return new UTfurnaceGui(new UTfurnaceContainer(player.inventory, (FurnaceEntity) tileEntity),player.inventory, (FurnaceEntity) tileEntity);
 		}
 		//storage
-		if(tileEntity instanceof IDSentity){
-			return new IDSgui(new IDScontainer(player.inventory, (IDSentity) tileEntity),player.inventory, (IDSentity) tileEntity);
+		if(tileEntity instanceof StorageTier1 || tileEntity instanceof StorageTier2 || tileEntity instanceof StorageTier3){
+			return new StorageGui(new StorageContainer(player.inventory, (Machine) tileEntity), player.inventory, (Machine) tileEntity);
 		}
 		//cuter
 		if(tileEntity instanceof CutterEntity){
@@ -175,6 +153,11 @@ public class GuiHandler implements IGuiHandler{
 		if(tileEntity instanceof CrafterEntity){
 			return new CrafterGui(new CrafterContainer(player.inventory, (CrafterEntity) tileEntity), player.inventory, (CrafterEntity) tileEntity);
 		}
+		//Crafter
+		if(tileEntity instanceof TesseractEntity){
+			return new TesseractGui(new TesseractContainer(player.inventory, (TesseractEntity) tileEntity), player.inventory, (TesseractEntity) tileEntity);
+		}
+		
 		return null;
 	}
 

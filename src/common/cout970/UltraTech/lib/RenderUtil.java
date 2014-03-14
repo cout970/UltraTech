@@ -2,7 +2,9 @@ package common.cout970.UltraTech.lib;
 
 import org.lwjgl.opengl.GL11;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.util.ResourceLocation;
 
 public class RenderUtil {
 
@@ -109,6 +111,13 @@ public class RenderUtil {
 		float green = (float) (color >> 8 & 255) / 255.0F;
 		float blue = (float) (color & 255) / 255.0F;
 		GL11.glColor4f(red, green, blue, 1.0F);
+	}
+
+	public static void bindTexture(ResourceLocation resourceLocation) {
+		if(Minecraft.getMinecraft().renderEngine != null){
+			Minecraft.getMinecraft().renderEngine.bindTexture(resourceLocation);
+		}
+		
 	}
 	
 	

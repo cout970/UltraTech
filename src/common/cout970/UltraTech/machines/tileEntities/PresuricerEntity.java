@@ -1,7 +1,7 @@
 package common.cout970.UltraTech.machines.tileEntities;
 
+import common.cout970.UltraTech.energy.api.Machine;
 import common.cout970.UltraTech.machines.containers.PresuricerContaner;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.IInventory;
@@ -114,7 +114,7 @@ public class PresuricerEntity extends Machine implements IInventory{
 	public void sendGUINetworkData(PresuricerContaner container,
 			ICrafting iCrafting) {
 		iCrafting.sendProgressBarUpdate(container, 0, progres);
-		iCrafting.sendProgressBarUpdate(container, 1, Energy);
+//		iCrafting.sendProgressBarUpdate(container, 1, Energy);
 		iCrafting.sendProgressBarUpdate(container, 2, speed);
 	}
 
@@ -125,7 +125,7 @@ public class PresuricerEntity extends Machine implements IInventory{
 			break;
 		}
 		case 1:{
-			Energy = value;
+//			Energy = value;
 			break;
 		}
 		case 2:{

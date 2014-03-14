@@ -44,15 +44,15 @@ public class WorldGen implements IWorldGenerator{
 		if(CompatibilityManager.gen.GenAluminum)
 		genOre(world, random, i, j, 20, id, 1, 8, 100);
 		if(CompatibilityManager.gen.GenCopper)
-		genOre(world, random, i, j, 20, id, 2, 8, 100);
+		genOre(world, random, i, j, 15, id, 2, 6, 100);
 		if(CompatibilityManager.gen.GenTin)
-		genOre(world, random, i, j, 20, id, 3, 6, 100);
+		genOre(world, random, i, j, 10, id, 3, 4, 100);
 		
 		boolean lead = false,silver = false;
 		if(CompatibilityManager.gen.GenLead)lead = true;
 		if(CompatibilityManager.gen.GenSilver)silver = true;
 		
-		for(int k = 0; k < 10; k++) {
+		for(int k = 0; k < 6; k++) {
 			int firstBlockXCoord = i + random.nextInt(16);
 			int firstBlockYCoord = random.nextInt(20);
 			int firstBlockZCoord = j + random.nextInt(16);

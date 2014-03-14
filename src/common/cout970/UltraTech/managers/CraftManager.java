@@ -76,7 +76,7 @@ public class CraftManager {
 //		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChargeStation,1), new Object[]{" f ","fmf"," f ",'f',new ItemStack(ItemName.get("Plate"),1,6),'m',MachineChasis}));
 //		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(MolecularAssembly, 1), new Object[]{"bcb","omo","bcb",'m',AdvMachineChasis,'c',ItemName.get("AdvCircuit"),'o',ItemName.get("OpticFiber"),'b',ItemName.get("Circuit")}));
 //		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Printer3D, 1), new Object[]{"abc","pmp",'m',MachineChasis,'p',Item.paper,'a',new ItemStack(Item.dyePowder,1,1),'b',new ItemStack(Item.dyePowder,1,2),'c',new ItemStack(Item.dyePowder,1,4)}));
-
+//
 		//furnace recipes
 
 		//dust-to-ingots
@@ -95,36 +95,38 @@ public class CraftManager {
 		GameRegistry.addSmelting(ItemName.get("CarbonPlate").itemID, new ItemStack(ItemName.get("CarbonFiber")), 0.35f);
 
 		//cvd recipes
-		CVD_Recipe.addRecipe(new CVD_Recipe(new ItemStack(Item.coal), new ItemStack(Item.coal),new ItemStack(ItemName.get("Plate"),2,9)));
+		CVD_Recipe.addRecipe(new CVD_Recipe(new ItemStack(Item.coal), new ItemStack(Item.coal,1,0),new ItemStack(ItemName.get("Plate"),2,9)));
+		CVD_Recipe.addRecipe(new CVD_Recipe(new ItemStack(Item.coal), new ItemStack(Item.coal,1,1),new ItemStack(ItemName.get("Plate"),2,9)));
 		CVD_Recipe.addRecipe(new CVD_Recipe(new ItemStack(Item.ingotIron), new ItemStack(Item.redstone),new ItemStack(ItemName.get("Plate"),1,11)));
 		CVD_Recipe.addRecipe(new CVD_Recipe(new ItemStack(ItemName.get("Ingot"),1,3), new ItemStack(Item.dyePowder,1,4),new ItemStack(ItemName.get("Plate"),1,5)));
-
+		CVD_Recipe.addRecipe(new CVD_Recipe(new ItemStack(BlockManager.Misc,1,0), new ItemStack(ItemName.get("Ingot"),1,3),new ItemStack(ItemName.get("Plate"),1,12)));
+		CVD_Recipe.addRecipe(new CVD_Recipe(new ItemStack(ItemName.get("GrafenoPlate")), new ItemStack(ItemName.get("GrafenoPlate")),new ItemStack(ItemName.get("Dust"),1,8)));
+		CVD_Recipe.addRecipe(new CVD_Recipe(new ItemStack(DecoBlocks.stoneblock,1,0), new ItemStack(Item.dyePowder,1,15),new ItemStack(DecoBlocks.stoneblock,1,2)));
+		
 		//duplication
 		CVD_Recipe.addRecipe(new CVD_Recipe(new ItemStack(ItemName.get("Dust"),1,7), new ItemStack(ItemName.get("Dust"),1,7),new ItemStack(ItemName.get("Plate"),2,7)));
 		CVD_Recipe.addRecipe(new CVD_Recipe(new ItemStack(ItemName.get("Dust"),1,6), new ItemStack(ItemName.get("Dust"),1,6),new ItemStack(ItemName.get("Plate"),2,6)));
 		for(int r = 0;r < 6;r++)
 			CVD_Recipe.addRecipe(new CVD_Recipe(new ItemStack(ItemName.get("Dust"),1,r), new ItemStack(ItemName.get("Dust"),1,r),new ItemStack(ItemName.get("Plate"),2,r)));
 
-		CVD_Recipe.addRecipe(new CVD_Recipe(new ItemStack(RadioniteBlock), new ItemStack(ItemName.get("Ingot"),1,3),new ItemStack(ItemName.get("Plate"),1,12)));
 		for(int r = 0;r < 6;r++)
 			CVD_Recipe.addRecipe(new CVD_Recipe(new ItemStack(ItemName.get("Ingot"),1,r), new ItemStack(ItemName.get("Ingot"),1,r),new ItemStack(ItemName.get("Plate"),2,r)));
 
 		CVD_Recipe.addRecipe(new CVD_Recipe(new ItemStack(Item.ingotGold), new ItemStack(Item.ingotGold),new ItemStack(ItemName.get("Plate"),2,7)));
 		CVD_Recipe.addRecipe(new CVD_Recipe(new ItemStack(Item.ingotIron), new ItemStack(Item.ingotIron),new ItemStack(ItemName.get("Plate"),2,6)));
-		CVD_Recipe.addRecipe(new CVD_Recipe(new ItemStack(ItemName.get("GrafenoPlate")), new ItemStack(ItemName.get("GrafenoPlate")),new ItemStack(ItemName.get("Dust"),1,8)));
-		CVD_Recipe.addRecipe(new CVD_Recipe(new ItemStack(DecoBlocks.stoneblock,1,0), new ItemStack(Item.dyePowder,1,15),new ItemStack(DecoBlocks.stoneblock,1,2)));
 
-		//purifier recipes
-		Purifier_Recipe.addRecipe(new Purifier_Recipe(new ItemStack(Block.sand), new ItemStack(ItemName.get("RawSilicon"),1)));
-		Purifier_Recipe.addRecipe(new Purifier_Recipe(new ItemStack(Block.oreGold), new ItemStack(ItemName.get("Dust"),3,7)));
-		Purifier_Recipe.addRecipe(new Purifier_Recipe(new ItemStack(Block.oreIron), new ItemStack(ItemName.get("Dust"),3,6)));
-		Purifier_Recipe.addRecipe(new Purifier_Recipe(new ItemStack(Block.gravel), new ItemStack(Item.flint,1)));
-		Purifier_Recipe.addRecipe(new Purifier_Recipe(new ItemStack(Block.sandStone), new ItemStack(Block.sand,4)));
-		Purifier_Recipe.addRecipe(new Purifier_Recipe(new ItemStack(Ores,1,0), new ItemStack(ItemName.get("Radionite"),2)));
-		Purifier_Recipe.addRecipe(new Purifier_Recipe(new ItemStack(Block.obsidian), new ItemStack(ItemName.get("Dust"),1,6)));//ilogic
-		Purifier_Recipe.addRecipe(new Purifier_Recipe(new ItemStack(Block.stone), new ItemStack(DecoBlocks.stoneblock,1,0)));
-		Purifier_Recipe.addRecipe(new Purifier_Recipe(new ItemStack(Block.cobblestone), new ItemStack(DecoBlocks.stoneblock,1,0)));
-
+//
+//		//purifier recipes
+//		Purifier_Recipe.addRecipe(new Purifier_Recipe(new ItemStack(Block.sand), new ItemStack(ItemName.get("RawSilicon"),1)));
+//		Purifier_Recipe.addRecipe(new Purifier_Recipe(new ItemStack(Block.oreGold), new ItemStack(ItemName.get("Dust"),3,7)));
+//		Purifier_Recipe.addRecipe(new Purifier_Recipe(new ItemStack(Block.oreIron), new ItemStack(ItemName.get("Dust"),3,6)));
+//		Purifier_Recipe.addRecipe(new Purifier_Recipe(new ItemStack(Block.gravel), new ItemStack(Item.flint,1)));
+//		Purifier_Recipe.addRecipe(new Purifier_Recipe(new ItemStack(Block.sandStone), new ItemStack(Block.sand,4)));
+//		Purifier_Recipe.addRecipe(new Purifier_Recipe(new ItemStack(Ores,1,0), new ItemStack(ItemName.get("Radionite"),2)));
+//		Purifier_Recipe.addRecipe(new Purifier_Recipe(new ItemStack(Block.obsidian), new ItemStack(ItemName.get("Dust"),1,6)));//ilogic
+//		Purifier_Recipe.addRecipe(new Purifier_Recipe(new ItemStack(Block.stone), new ItemStack(DecoBlocks.stoneblock,1,0)));
+//		Purifier_Recipe.addRecipe(new Purifier_Recipe(new ItemStack(Block.cobblestone), new ItemStack(DecoBlocks.stoneblock,1,0)));
+//
 		//cuter recipes
 		Cuter_Recipes.addRecipe(new Cuter_Recipes(new ItemStack(Item.diamond), new ItemStack(ItemName.get("Plate"),8,8)));
 		Cuter_Recipes.addRecipe(new Cuter_Recipes(new ItemStack(Item.ingotIron), new ItemStack(ItemName.get("Filter"), 1)));
@@ -143,10 +145,10 @@ public class CraftManager {
 		Cuter_Recipes.addRecipe(new Cuter_Recipes(new ItemStack(Item.bone), new ItemStack(Item.bone,3,15)));
 		Cuter_Recipes.addRecipe(new Cuter_Recipes(new ItemStack(ItemName.get("Plate"),1,11), new ItemStack(ItemName.get("RedstoneCable"),3)));
 		Cuter_Recipes.addRecipe(new Cuter_Recipes(new ItemStack(ItemName.get("RawSilicon")),new ItemStack(ItemName.get("Plate"),1,10)));
-
-		//assembly recipes
-		Assembly_Recipes.addRecipe(new Assembly_Recipes(new ItemStack(ItemName.get("Motor"),1), new Object[]{"rc ","iii","rc ",'c',ItemName.get("Coil"),'r',ItemName.get("RedstoneCable"),'i',new ItemStack(ItemName.get("Plate"),1,6)}));
-		Assembly_Recipes.addRecipe(new Assembly_Recipes(new ItemStack(ItemName.get("HidrogenBattery"),1), new Object[]{"hhh","aia","hhh",'h',new ItemStack(ItemName.get("Plate"),1,6),'a',new ItemStack(ItemName.get("Plate"),1,5),'i',ItemName.get("Filter")}));
+//
+//		//assembly recipes
+//		Assembly_Recipes.addRecipe(new Assembly_Recipes(new ItemStack(ItemName.get("Motor"),1), new Object[]{"rc ","iii","rc ",'c',ItemName.get("Coil"),'r',ItemName.get("RedstoneCable"),'i',new ItemStack(ItemName.get("Plate"),1,6)}));
+//		Assembly_Recipes.addRecipe(new Assembly_Recipes(new ItemStack(ItemName.get("HidrogenBattery"),1), new Object[]{"hhh","aia","hhh",'h',new ItemStack(ItemName.get("Plate"),1,6),'a',new ItemStack(ItemName.get("Plate"),1,5),'i',ItemName.get("Filter")}));
 
 	}
 }

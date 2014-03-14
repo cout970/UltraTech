@@ -1,8 +1,8 @@
 package common.cout970.UltraTech.machines.tileEntities;
 
 
+import common.cout970.UltraTech.energy.api.Machine;
 import common.cout970.UltraTech.lib.recipes.Assembly_Recipes;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
@@ -36,13 +36,13 @@ public class MolecularAssemblyEntity extends Machine implements IInventory{
 			}
 		}else{
 			if(!flag){
-				flag = this.Energy >= (1000f/speed)*5f;
+//				flag = this.Energy >= (1000f/speed)*5f;
 			}
 		}
 
 		if(flag){
 			Progres+=speed;
-			this.loseEnergy(5);
+//			this.loseEnergy(5);
 			if(Progres >= 1000){
 				Progres = 0;
 				craft();
@@ -192,7 +192,7 @@ public class MolecularAssemblyEntity extends Machine implements IInventory{
 	  }
 
 	  public void sendGUINetworkData(Container container, ICrafting iCrafting) {
-  		iCrafting.sendProgressBarUpdate(container, 1, Energy);
+//  		iCrafting.sendProgressBarUpdate(container, 1, Energy);
   		iCrafting.sendProgressBarUpdate(container, 2, Progres);
   	}
 
@@ -200,7 +200,7 @@ public class MolecularAssemblyEntity extends Machine implements IInventory{
   		switch(id){
   		
   		case 1:{
-  			Energy = value;
+//  			Energy = value;
   			break;
   		}
   	case 2:{

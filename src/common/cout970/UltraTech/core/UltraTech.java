@@ -61,7 +61,7 @@ public class UltraTech {
 	public static final CreativeTabs techTab = new CreativeTabs("UltraTech"){
 
 		public ItemStack getIconItemStack() {
-			return new ItemStack(BlockManager.IDS, 1, 0);
+			return new ItemStack(BlockManager.Storage, 1, 2);
 		}
 
 		@SideOnly(Side.CLIENT)

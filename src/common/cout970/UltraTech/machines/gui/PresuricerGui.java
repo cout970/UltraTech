@@ -35,7 +35,7 @@ public class PresuricerGui extends GuiContainer{
 		
 		//energy bar  
 		this.mc.renderEngine.bindTexture(new ResourceLocation("ultratech:textures/misc/energy.png"));
-		int p = (int) entity.getEnergy()*50/entity.EnergyMax;
+		int p = (int) entity.getEnergy()*50/entity.maxEnergy();
 		this.drawTexturedModalRect(xStart+14, yStart+15+(50-p), 0, 0, 25, p);
 
 	}

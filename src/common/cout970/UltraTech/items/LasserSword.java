@@ -3,8 +3,9 @@ package common.cout970.UltraTech.items;
 import java.util.List;
 
 import com.google.common.collect.Multimap;
+
 import common.cout970.UltraTech.core.UltraTech;
-import common.cout970.UltraTech.misc.IItemEnergyEstorage;
+import common.cout970.UltraTech.energy.api.IItemEnergyEstorage;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -99,7 +100,7 @@ public class LasserSword extends UT_Item implements IItemEnergyEstorage{
 		}
 	}
 	
-	public int gainEnergy(ItemStack stack, int energy){
+	public int addEnergy(ItemStack stack, int energy){
 		if(stack.getTagCompound() == null){
 			stack.stackTagCompound = new NBTTagCompound();
 			stack.getTagCompound().setInteger("Energy", 0);
@@ -116,7 +117,7 @@ public class LasserSword extends UT_Item implements IItemEnergyEstorage{
 		return aux;
 	}
 	
-	public void loseEnergy(ItemStack stack, int energy){
+	public void removeEnergy(ItemStack stack, int energy){
 		if(stack.getTagCompound() == null){
 			stack.stackTagCompound = new NBTTagCompound();
 			stack.getTagCompound().setInteger("Energy", 0);
@@ -146,7 +147,7 @@ public class LasserSword extends UT_Item implements IItemEnergyEstorage{
 	public boolean hitEntity(ItemStack par1ItemStack, EntityLivingBase par2EntityLivingBase, EntityLivingBase par3EntityLivingBase)
 	{
 		if(((IItemEnergyEstorage)par1ItemStack.getItem()).getEnergy(par1ItemStack) >= 100){
-			((IItemEnergyEstorage)par1ItemStack.getItem()).gainEnergy(par1ItemStack, -100);
+			((IItemEnergyEstorage)par1ItemStack.getItem()).addEnergy(par1ItemStack, -100);
 		}else{
 			return false;
 		}
@@ -173,7 +174,7 @@ public class LasserSword extends UT_Item implements IItemEnergyEstorage{
 		if ((double)Block.blocksList[par3].getBlockHardness(par2World, par4, par5, par6) != 0.0D)
 		{
 			if(((IItemEnergyEstorage)par1ItemStack.getItem()).getEnergy(par1ItemStack) >= 100){
-				((IItemEnergyEstorage)par1ItemStack.getItem()).gainEnergy(par1ItemStack, -100);
+				((IItemEnergyEstorage)par1ItemStack.getItem()).addEnergy(par1ItemStack, -100);
 			}else{
 				return false;
 			}

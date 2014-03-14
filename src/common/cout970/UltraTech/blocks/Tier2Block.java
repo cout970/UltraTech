@@ -3,13 +3,14 @@ package common.cout970.UltraTech.blocks;
 import java.util.List;
 import java.util.Random;
 
+import common.cout970.UltraTech.TileEntities.Tier2.CutterEntity;
+import common.cout970.UltraTech.TileEntities.Tier2.FurnaceEntity;
+import common.cout970.UltraTech.TileEntities.Tier2.PurifierEntity;
 import common.cout970.UltraTech.core.UltraTech;
-import common.cout970.UltraTech.machines.tileEntities.CutterEntity;
-import common.cout970.UltraTech.machines.tileEntities.EnergyCollectorEntity;
-import common.cout970.UltraTech.machines.tileEntities.FurnaceEntity;
-import common.cout970.UltraTech.machines.tileEntities.Machine;
+import common.cout970.UltraTech.energy.api.EnergyUtils;
+import common.cout970.UltraTech.energy.api.Machine;
 import common.cout970.UltraTech.machines.tileEntities.PresuricerEntity;
-import common.cout970.UltraTech.machines.tileEntities.PurifierEntity;
+import common.cout970.UltraTech.misc.ISpeedUpgradeabel;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.BlockContainer;
@@ -28,7 +29,7 @@ import net.minecraft.world.World;
 public class Tier2Block extends BlockContainer{
 
 	public Icon icons[];
-	public int numBlocks = 5;
+	public int numBlocks = 4;
 	
 	public Tier2Block(int par1, Material par2Material) {
 		super(par1, par2Material);
@@ -49,7 +50,6 @@ public class Tier2Block extends BlockContainer{
 		icons[3] = IR.registerIcon("ultratech:purifier");
 		icons[4] = IR.registerIcon("ultratech:cutter");
 		icons[5] = IR.registerIcon("ultratech:presuricer");
-		icons[6] = IR.registerIcon("ultratech:collector");
 	}
 
 	@Override
@@ -58,7 +58,7 @@ public class Tier2Block extends BlockContainer{
 		if(metadata == 1)return new PurifierEntity();
 		if(metadata == 2)return new CutterEntity();
 		if(metadata == 3)return new PresuricerEntity();
-		if(metadata == 4)return new EnergyCollectorEntity();
+		if(metadata == 4)return null;
 		return null;
 	}
 
@@ -66,25 +66,22 @@ public class Tier2Block extends BlockContainer{
 	public Icon getIcon(int side, int meta) {
 		switch(meta){
 		case 0:{
-			return icons[0];
-		}
-		case 1:{
 			if(side != 1 && side != 0)return icons[1];
 			return icons[0];
 		}
-		case 2:{
+		case 1:{
 			if(side != 1 && side != 0)return icons[3];
 			return icons[0];
 		}
-		case 3:{
+		case 2:{
 			if(side != 1 && side != 0)return icons[4];
 			return icons[0];
 		}
-		case 4:{
+		case 3:{
 			if(side != 1 && side != 0)return icons[5];
 			return icons[0];
 		}
-		case 5:{
+		case 4:{
 			if(side != 1 && side != 0)return icons[6];
 			return icons[0];
 		}
@@ -100,15 +97,16 @@ public class Tier2Block extends BlockContainer{
 			TileEntity tile = world.getBlockTileEntity(i, j, k);
 			if(tile != null){ 
 				entityplayer.openGui(UltraTech.instance, 13, world, i, j, k);
+				return true;
 			}
 		}
-		return false;
+		return true;
 	}
 
 	public void onNeighborBlockChange(World w, int x, int y, int z, int side){
 		TileEntity te = w.getBlockTileEntity(x, y, z);
 		if(te instanceof Machine){
-			((Machine)te).updateMachine(w, x, y, z);
+			if(((Machine)te).getNetwork() != null)((Machine)te).getNetwork().refresh();
 		}
 	}
 
@@ -168,6 +166,29 @@ public class Tier2Block extends BlockContainer{
 				item.stackSize = 0;
 			}
 		}
+		if(tileEntity instanceof ISpeedUpgradeabel){
+			 float rx = rand.nextFloat() * 0.8F + 0.1F;
+			 float ry = rand.nextFloat() * 0.8F + 0.1F;
+			 float rz = rand.nextFloat() * 0.8F + 0.1F;
+			 ItemStack upgrades = ((ISpeedUpgradeabel)tileEntity).getDrop();
+			 if(upgrades != null){
+			 EntityItem entityItem = new EntityItem(world,
+                   x + rx, y + ry, z + rz, upgrades);
+
+			 float factor = 0.05F;
+			 entityItem.motionX = rand.nextGaussian() * factor;
+			 entityItem.motionY = rand.nextGaussian() * factor + 0.2F;
+			 entityItem.motionZ = rand.nextGaussian() * factor;
+			 world.spawnEntityInWorld(entityItem);
+			 }
+		 }
 	}
 
+	@Override
+	public void onBlockAdded(World w, int x, int y, int z) {
+		EnergyUtils.onBlockAdded(w, x, y, z);
+	}
+	public void onBlockPreDestroy(World w, int x, int y, int z, int meta) {
+		EnergyUtils.onBlockPreDestroy(w, x, y, z, meta);
+	}
 }

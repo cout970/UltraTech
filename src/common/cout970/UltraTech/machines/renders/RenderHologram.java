@@ -14,9 +14,9 @@ public class RenderHologram extends TileEntitySpecialRenderer{
 	@Override
 	public void renderTileEntityAt(TileEntity te, double x, double y,
 			double z, float f) {
-//		if(((HologramEmiterEntity)te).map == null){
-//			((HologramEmiterEntity)te).map = new Map("test", te.worldObj, te.xCoord, te.yCoord, te.zCoord);
-//		}
+		if(((HologramEmiterEntity)te).map == null){
+			((HologramEmiterEntity)te).map = new Map("test", te.worldObj, te.xCoord, te.yCoord, te.zCoord);
+		}
 		GL11.glPushMatrix();
 		GL11.glTranslatef((float) x, (float) y, (float) z);
 		GL11.glTranslatef(0, 2.0F, 0);
@@ -28,7 +28,7 @@ public class RenderHologram extends TileEntitySpecialRenderer{
 		GL11.glDisable(GL11.GL_LIGHTING);
 		
 		GL11.glColor4f(1.0f, 1.0f, 1.0f, 0.8f);
-//		if(((HologramEmiterEntity)te).map != null)((HologramEmiterEntity)te).map.Render();
+		if(((HologramEmiterEntity)te).map != null)((HologramEmiterEntity)te).map.Render();
 		
 		GL11.glEnable(GL11.GL_CULL_FACE);
 		GL11.glDisable(GL11.GL_BLEND);

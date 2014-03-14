@@ -4,9 +4,9 @@ import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
 
+import common.cout970.UltraTech.TileEntities.Tier3.ReactorTankEntity;
 import common.cout970.UltraTech.machines.tileEntities.CrafterEntity;
 import common.cout970.UltraTech.machines.tileEntities.Printer3DEntity;
-import common.cout970.UltraTech.machines.tileEntities.ReactorTankEntity;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;

@@ -1,8 +1,8 @@
 package common.cout970.UltraTech.machines.renders;
 
 
+import common.cout970.UltraTech.TileEntities.Tier3.ReactorTankEntity;
 import common.cout970.UltraTech.lib.RenderUtil;
-import common.cout970.UltraTech.machines.tileEntities.ReactorTankEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;

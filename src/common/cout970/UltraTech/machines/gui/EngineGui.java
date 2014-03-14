@@ -36,11 +36,11 @@ public class EngineGui extends GuiContainer{
 		//energy
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		this.mc.renderEngine.bindTexture(new ResourceLocation("ultratech:textures/misc/energy.png"));
-		int p = (int) entity.getEnergy()*50/entity.EnergyMax;
+		int p = (int) entity.getEnergy()*50/entity.maxEnergy();
 		this.drawTexturedModalRect(xStart+14, yStart+15+(50-p), 0, 0, 25, p);
 		
 		//info
-		this.drawCenteredString(fontRenderer, "Energy "+entity.Energy, xStart+85, yStart+25, 16777215);
+		this.drawCenteredString(fontRenderer, "Energy "+entity.getEnergy(), xStart+85, yStart+25, 16777215);
 		this.drawCenteredString(fontRenderer, "BC MJ "+(int)entity.power.getEnergyStored(), xStart+87, yStart+37, 16777215);
 		this.drawCenteredString(fontRenderer, "Gen. 8 MJ/t", xStart+87, yStart+50, 16777215);
 

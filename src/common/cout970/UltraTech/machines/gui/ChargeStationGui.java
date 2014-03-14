@@ -2,8 +2,7 @@ package common.cout970.UltraTech.machines.gui;
 
 import org.lwjgl.opengl.GL11;
 
-import common.cout970.UltraTech.machines.tileEntities.ChargeStationEntity;
-
+import common.cout970.UltraTech.TileEntities.Tier1.ChargeStationEntity;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -29,7 +28,7 @@ public class ChargeStationGui extends GuiContainer{
 		
 		//energy
 		this.mc.renderEngine.bindTexture(new ResourceLocation("ultratech:textures/misc/energy.png"));
-		int p = (int) ((((float)entity.Energy)*50/entity.EnergyMax));
+		int p = (int) ((((float)entity.getEnergy())*50/entity.maxEnergy()));
 		this.drawTexturedModalRect(xStart+14, yStart+15+(50-p), 0, 0, 25, p);
 	}
 

@@ -1,8 +1,6 @@
 package common.cout970.UltraTech.items;
 
 import buildcraft.api.tools.IToolWrench;
-import common.cout970.UltraTech.machines.tileEntities.MinerEntity;
-import common.cout970.UltraTech.machines.tileEntities.MinerEntity.Mode;
 import common.cout970.UltraTech.machines.tileEntities.ReciverEntity;
 import common.cout970.UltraTech.machines.tileEntities.SenderEntity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -35,24 +33,6 @@ public class Linker extends UT_Item implements IToolWrench{
 				return true;
 			}else if(te instanceof SenderEntity){
 				i.stackTagCompound.setIntArray("Coords", new int[]{x,y,z});
-				return true;
-			}else if(te instanceof MinerEntity){
-				((MinerEntity)te).CreateMining();
-				((MinerEntity)te).current = 0;
-				switch(((MinerEntity)te).mode){
-				case Horizontal:{
-					((MinerEntity)te).mode = Mode.Vertical;
-					break;
-				}
-				case Vertical:{
-					((MinerEntity)te).mode = Mode.two;
-					break;
-				}
-				case two:{
-					((MinerEntity)te).mode = Mode.Horizontal;
-					break;
-				}
-				}
 				return true;
 			}
 		}

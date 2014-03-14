@@ -1,6 +1,6 @@
 package common.cout970.UltraTech.misc;
 
-import common.cout970.UltraTech.machines.tileEntities.ReactorEntity;
+import common.cout970.UltraTech.TileEntities.Tier3.ReactorEntity;
 
 public interface IReactorPart {
 
@@ -11,9 +11,7 @@ public interface IReactorPart {
 	public ReactorEntity getReactor();
 	
 	public void onNeighChange();
-	
-	public void setUp();
-	
+		
 	public void activateBlocks();
 	
 	public void desactivateBlocks();

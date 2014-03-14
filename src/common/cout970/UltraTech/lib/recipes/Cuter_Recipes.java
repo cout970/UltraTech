@@ -2,8 +2,11 @@ package common.cout970.UltraTech.lib.recipes;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import net.minecraft.item.ItemStack;
-import common.cout970.UltraTech.machines.tileEntities.CutterEntity;
+import net.minecraftforge.oredict.OreDictionary;
+import common.cout970.UltraTech.TileEntities.Tier2.CutterEntity;
+import common.cout970.UltraTech.lib.ItemsUtil;
 
 public class Cuter_Recipes{
 	
@@ -19,9 +22,15 @@ public class Cuter_Recipes{
 	public static boolean matches(CutterEntity cuterEntity){
 		if(cuterEntity == null)return false;
 		for(Cuter_Recipes a:recipes){
-			if(cuterEntity.getStackInSlot(0) != null)
-			if(a.getInput().itemID == cuterEntity.getStackInSlot(0).itemID)if(cuterEntity.getStackInSlot(1)==null)return true;
-			else if(cuterEntity.getStackInSlot(1).itemID == a.getOutput().itemID && cuterEntity.getStackInSlot(1).stackSize + a.getInput().stackSize <= cuterEntity.getInventoryStackLimit())return true;
+			if(cuterEntity.getStackInSlot(0) != null){
+				if(ItemsUtil.areEcuals(a.getInput(), cuterEntity.getStackInSlot(0),true)){
+					if(cuterEntity.getStackInSlot(1)==null){
+						return true;
+					}else{
+						if(OreDictionary.itemMatches(cuterEntity.getStackInSlot(1), a.getOutput(), true) && cuterEntity.getStackInSlot(1).stackSize + a.getInput().stackSize <= cuterEntity.getInventoryStackLimit())return true;
+					}
+				}
+			}
 		}
 		return false;
 	}
@@ -29,7 +38,7 @@ public class Cuter_Recipes{
 	public static ItemStack getCraftingResult(CutterEntity cuterEntity){
 		if(cuterEntity != null)if(cuterEntity.getStackInSlot(0) != null)
 			for(Cuter_Recipes a:recipes){
-			if(a.getInput().itemID == cuterEntity.getStackInSlot(0).itemID)
+			if(ItemsUtil.areEcuals(a.getInput(), cuterEntity.getStackInSlot(0),true))
 			return a.getOutput();
 		}
 		return null;

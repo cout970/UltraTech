@@ -3,13 +3,15 @@ package common.cout970.UltraTech.blocks;
 import java.util.List;
 import java.util.Random;
 
+import common.cout970.UltraTech.TileEntities.Tier3.ReactorControllerEntity;
+import common.cout970.UltraTech.TileEntities.Tier3.ReactorEntity;
+import common.cout970.UltraTech.TileEntities.Tier3.ReactorTankEntity;
+import common.cout970.UltraTech.TileEntities.Tier3.ReactorWallEntity;
+import common.cout970.UltraTech.TileEntities.Tier3.SteamTurbineEntity;
+import common.cout970.UltraTech.TileEntities.Tier3.WaterBlockEntity;
 import common.cout970.UltraTech.core.UltraTech;
-import common.cout970.UltraTech.machines.tileEntities.ReactorControllerEntity;
-import common.cout970.UltraTech.machines.tileEntities.ReactorEntity;
-import common.cout970.UltraTech.machines.tileEntities.ReactorTankEntity;
-import common.cout970.UltraTech.machines.tileEntities.ReactorWallEntity;
-import common.cout970.UltraTech.machines.tileEntities.SteamTurbineEntity;
-import common.cout970.UltraTech.machines.tileEntities.WaterBlockEntity;
+import common.cout970.UltraTech.energy.api.EnergyUtils;
+import common.cout970.UltraTech.energy.api.Machine;
 import common.cout970.UltraTech.misc.IReactorPart;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -65,8 +67,6 @@ public class ReactorMultiblock extends BlockContainer{
 	public void onNeighborBlockChange(World w, int x, int y, int z, int side){
 		TileEntity te = w.getBlockTileEntity(x, y, z);
 		if(te != null){
-			if(te instanceof ReactorEntity)
-				((ReactorEntity) te).tanks = null;
 			if(te instanceof IReactorPart)
 				((IReactorPart)te).onNeighChange();
 		}
@@ -142,6 +142,15 @@ public class ReactorMultiblock extends BlockContainer{
 		if(t instanceof IReactorPart){
 			((IReactorPart)t).onNeighChange();
 		}
+		if(t instanceof Machine){
+			EnergyUtils.onBlockAdded(worldObj, xCoord, yCoord, zCoord);
+		}
+	}
+	
+	public void onBlockPreDestroy(World worldObj, int xCoord, int yCoord, int zCoord, int meta) {
+		TileEntity t = worldObj.getBlockTileEntity(xCoord, yCoord, zCoord);
+		if(t instanceof IReactorPart)((IReactorPart) t).onNeighChange();
+		if(t instanceof Machine)EnergyUtils.onBlockPreDestroy(worldObj, xCoord, yCoord, zCoord, meta);
 	}
 	
 	@Override

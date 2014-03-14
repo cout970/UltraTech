@@ -1,7 +1,7 @@
 package common.cout970.UltraTech.machines.containers;
 
 
-import common.cout970.UltraTech.machines.tileEntities.MinerEntity;
+import common.cout970.UltraTech.TileEntities.Tier3.MinerEntity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -23,7 +23,7 @@ public class MinerContainer extends Container{
 		int x = 0;
 		for (int chestRowIndex = 0; chestRowIndex < CHEST_INVENTORY_ROWS; ++chestRowIndex) {
             for (int chestColumnIndex = 0; chestColumnIndex < CHEST_INVENTORY_COLUMNS; ++chestColumnIndex) {
-                this.addSlotToContainer(new Slot(tileEntity2, x, 8 + chestColumnIndex * 18, 18 + chestRowIndex * 18));x++;
+                this.addSlotToContainer(new Slot(tileEntity2, x, 8 + chestColumnIndex * 18, 8 + chestRowIndex * 18));x++;
             }
         }
 		bindPlayerInventory(inventoryPlayer);
@@ -47,7 +47,7 @@ public class MinerContainer extends Container{
     {
         super.addCraftingToCrafters(par1ICrafting);
         par1ICrafting.sendProgressBarUpdate(this, 0, entity.widht);
-        par1ICrafting.sendProgressBarUpdate(this, 1, entity.Energy);
+        par1ICrafting.sendProgressBarUpdate(this, 1, entity.getEnergy());
         par1ICrafting.sendProgressBarUpdate(this, 2, entity.speed);
     }
 	

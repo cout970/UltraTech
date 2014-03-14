@@ -1,7 +1,7 @@
 package common.cout970.UltraTech.machines.containers;
 
+import common.cout970.UltraTech.TileEntities.Tier1.CVD_Entity;
 import common.cout970.UltraTech.lib.recipes.CVD_Recipe;
-import common.cout970.UltraTech.machines.tileEntities.CVDentity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -12,9 +12,9 @@ import net.minecraft.item.ItemStack;
 
 public class CVDcontainer extends Container{
 
-	public CVDentity tileEntity;
+	public CVD_Entity tileEntity;
 	
-	public CVDcontainer(InventoryPlayer inventoryPlayer, CVDentity tileEntity2){
+	public CVDcontainer(InventoryPlayer inventoryPlayer, CVD_Entity tileEntity2){
 		super();
 		tileEntity = tileEntity2;
 		
@@ -45,7 +45,7 @@ public class CVDcontainer extends Container{
     {
         super.addCraftingToCrafters(par1ICrafting);
         par1ICrafting.sendProgressBarUpdate(this, 0, tileEntity.progres);
-        par1ICrafting.sendProgressBarUpdate(this, 1, tileEntity.Energy);
+        par1ICrafting.sendProgressBarUpdate(this, 1, tileEntity.getEnergy());
         par1ICrafting.sendProgressBarUpdate(this, 2, tileEntity.speed);
     }
 	

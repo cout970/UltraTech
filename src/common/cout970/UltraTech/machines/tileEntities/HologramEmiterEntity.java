@@ -1,6 +1,7 @@
 package common.cout970.UltraTech.machines.tileEntities;
 
 import net.minecraft.util.AxisAlignedBB;
+import common.cout970.UltraTech.energy.api.Machine;
 import common.cout970.UltraTech.machines.renders.holograms.Map;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

@@ -284,12 +284,7 @@ public class CrafterEntity extends TileEntity implements IInventory{
 				if(craft.getStackInSlot(c)!= null){
 					for(int i = 0; i < this.getSizeInventory();i++){
 						if(equal(this.getStackInSlot(i),craft.getStackInSlot(c),c)){
-							getStackInSlot(i).splitStack(1);
-							if(getStackInSlot(i) != null){
-								if(getStackInSlot(i).stackSize <= 0){
-									this.setInventorySlotContents(i, null);
-								}
-							}
+							useItemToCraft(getStackInSlot(i), i);
 							break;
 						}
 					}
@@ -299,12 +294,7 @@ public class CrafterEntity extends TileEntity implements IInventory{
 						for(int i = 0; i < inv.getSizeInventory();i++){
 
 							if(equal(inv.getStackInSlot(i),craft.getStackInSlot(c),c)){
-								inv.getStackInSlot(i).splitStack(1);
-								if(inv.getStackInSlot(i) != null){
-									if(inv.getStackInSlot(i).stackSize <= 0){
-										inv.setInventorySlotContents(i, null);
-									}
-								}
+								useItemToCraft(inv.getStackInSlot(i), i);
 								break;
 							}
 						}
@@ -312,6 +302,50 @@ public class CrafterEntity extends TileEntity implements IInventory{
 				}
 			}
 		}
+	}
+	
+	public void useItemToCraft(ItemStack item, int slot){
+		this.decrStackSize(slot, 1);
+		if(item != null){
+			if (item.getItem().hasContainerItem())
+            {
+                ItemStack itemstack2 = item.getItem().getContainerItemStack(item);
+
+                if (itemstack2.isItemStackDamageable() && itemstack2.getItemDamage() > itemstack2.getMaxDamage())
+                {
+                    itemstack2 = null;
+                }
+
+                if (itemstack2 != null && (!item.getItem().doesContainerItemLeaveCraftingGrid(item) || !addItemStack(itemstack2)))
+                {
+                    if (getStackInSlot(slot) == null)
+                    {
+                        setInventorySlotContents(slot, itemstack2);
+                    }
+                    else
+                    {
+                    	addItemStack(itemstack2);//in case that cant put in inventory
+                    }
+                }
+            }
+		}
+	}
+	public boolean addItemStack(ItemStack i){
+		for(int s = 0;s < this.getSizeInventory();s++){	
+			if (this.inventory[s] == null)
+			{
+				this.inventory[s] = i.copy();
+				return true;
+			}
+			else if (this.inventory[s].isItemEqual(i))
+			{
+				if(inventory[s].stackSize + i.stackSize <= getInventoryStackLimit()){
+				inventory[s].stackSize += i.stackSize;
+				return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	public void sendGUINetworkData(CrafterContainer crafterContainer,

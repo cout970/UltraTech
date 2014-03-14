@@ -3,8 +3,8 @@ package common.cout970.UltraTech.lib.recipes;
 import java.util.ArrayList;
 import java.util.List;
 
+import common.cout970.UltraTech.TileEntities.Tier2.PurifierEntity;
 import common.cout970.UltraTech.lib.ItemsUtil;
-import common.cout970.UltraTech.machines.tileEntities.PurifierEntity;
 import net.minecraft.item.ItemStack;
 
 public class Purifier_Recipe{

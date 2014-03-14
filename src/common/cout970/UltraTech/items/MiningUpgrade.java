@@ -3,7 +3,7 @@ package common.cout970.UltraTech.items;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import common.cout970.UltraTech.machines.tileEntities.MinerEntity;
+import common.cout970.UltraTech.TileEntities.Tier3.MinerEntity;
 
 public class MiningUpgrade extends UT_Item{
 
