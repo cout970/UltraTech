@@ -14,6 +14,7 @@ public class GraficCost {
 	public static final int CutterCost = 2000;
 	public static final int CVD_Cost = 2000;
 	public static final int ChargeStationFlow = 100;
+	public static final int FermenterCost = 5;
 
 	
 	public static enum MachineTier{
@@ -33,6 +34,8 @@ public class GraficCost {
 			return level;
 		}
 	}
+
+
 
 	//200EU/tick = 320steam/tick
 	

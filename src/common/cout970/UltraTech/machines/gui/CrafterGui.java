@@ -2,20 +2,23 @@ package common.cout970.UltraTech.machines.gui;
 
 import org.lwjgl.opengl.GL11;
 
-import common.cout970.UltraTech.machines.tileEntities.CrafterEntity;
-
+import common.cout970.UltraTech.TileEntities.Tier1.CrafterEntity;
+import common.cout970.UltraTech.lib.UT_Utils;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 public class CrafterGui extends GuiContainer{
 
 	public CrafterEntity entity;
+	public InventoryPlayer p;
 	
 	public CrafterGui(Container par1Container, InventoryPlayer inventory, CrafterEntity tileEntity) {
 		super(par1Container);
 		entity = tileEntity;
+		p = inventory;
 	}
 
 	@Override
@@ -26,36 +29,68 @@ public class CrafterGui extends GuiContainer{
 		int xStart = (width - xSize) / 2;
 		int yStart = (height - ySize) / 2;
 		this.drawTexturedModalRect(xStart, yStart, 0, 0, xSize, ySize);
+		if(entity.getStackInSlot(0) != null)this.drawTexturedModalRect(xStart+85, yStart+67, 177, 0, 9, 9);
 		//draw needs not haves
 		GL11.glEnable(GL11.GL_BLEND);
-		this.mc.renderEngine.bindTexture(new ResourceLocation("ultratech:textures/misc/not.png"));
 		//craft grid
-		if(entity.found.containsKey(0) && entity.found.get(0))this.drawTexturedModalRect(xStart+13, yStart+16, 1, 1, 16, 16);
-		if(entity.found.containsKey(1) && entity.found.get(1))this.drawTexturedModalRect(xStart+31, yStart+16, 1, 1, 16, 16);
-		if(entity.found.containsKey(2) && entity.found.get(2))this.drawTexturedModalRect(xStart+49, yStart+16, 1, 1, 16, 16);
+		int h = 10;
+		if(entity.found.containsKey(0) && entity.found.get(0))this.drawTexturedModalRect(xStart+13, yStart+26, 177, h, 16, 16);
+		if(entity.found.containsKey(1) && entity.found.get(1))this.drawTexturedModalRect(xStart+31, yStart+26, 177, h, 16, 16);
+		if(entity.found.containsKey(2) && entity.found.get(2))this.drawTexturedModalRect(xStart+49, yStart+26, 177, h, 16, 16);
 		
-		if(entity.found.containsKey(3) && entity.found.get(3))this.drawTexturedModalRect(xStart+13, yStart+34, 1, 1, 16, 16);
-		if(entity.found.containsKey(4) && entity.found.get(4))this.drawTexturedModalRect(xStart+31, yStart+34, 1, 1, 16, 16);
-		if(entity.found.containsKey(5) && entity.found.get(5))this.drawTexturedModalRect(xStart+49, yStart+34, 1, 1, 16, 16);
+		if(entity.found.containsKey(3) && entity.found.get(3))this.drawTexturedModalRect(xStart+13, yStart+44, 177, h, 16, 16);
+		if(entity.found.containsKey(4) && entity.found.get(4))this.drawTexturedModalRect(xStart+31, yStart+44, 177, h, 16, 16);
+		if(entity.found.containsKey(5) && entity.found.get(5))this.drawTexturedModalRect(xStart+49, yStart+44, 177, h, 16, 16);
 		
-		if(entity.found.containsKey(6) && entity.found.get(6))this.drawTexturedModalRect(xStart+13, yStart+52, 1, 1, 16, 16);
-		if(entity.found.containsKey(7) && entity.found.get(7))this.drawTexturedModalRect(xStart+31, yStart+52, 1, 1, 16, 16);
-		if(entity.found.containsKey(8) && entity.found.get(8))this.drawTexturedModalRect(xStart+49, yStart+52, 1, 1, 16, 16);
+		if(entity.found.containsKey(6) && entity.found.get(6))this.drawTexturedModalRect(xStart+13, yStart+62, 177, h, 16, 16);
+		if(entity.found.containsKey(7) && entity.found.get(7))this.drawTexturedModalRect(xStart+31, yStart+62, 177, h, 16, 16);
+		if(entity.found.containsKey(8) && entity.found.get(8))this.drawTexturedModalRect(xStart+49, yStart+62, 177, h, 16, 16);
+		
 		//craft result
-		if(entity.getStackInSlot(-1) != null && !entity.allFound(-1))
-			this.drawTexturedModalRect(xStart+71, yStart+16, 1, 1, 16, 16);
-		if(entity.getStackInSlot(-2) != null)
-			this.drawTexturedModalRect(xStart+71, yStart+34, 1, 1, 16, 16);
-		if(entity.getStackInSlot(-3) != null)
-			this.drawTexturedModalRect(xStart+71, yStart+52, 1, 1, 16, 16);
-		if(entity.getStackInSlot(-4) != null)
-			this.drawTexturedModalRect(xStart+89, yStart+16, 1, 1, 16, 16);
-		if(entity.getStackInSlot(-5) != null)
-			this.drawTexturedModalRect(xStart+89, yStart+34, 1, 1, 16, 16);
-		if(entity.getStackInSlot(-6) != null)
-			this.drawTexturedModalRect(xStart+89, yStart+52, 1, 1, 16, 16);
-
+		if(entity.getStackInSlot(0) != null && !entity.allFound()){
+			this.drawTexturedModalRect(xStart+81, yStart+44, 177, h, 16, 16);
+		}
 		GL11.glDisable(GL11.GL_BLEND);
+	}
+	
+	@Override
+	protected void mouseClicked(int mx, int my, int b)
+	{
+		super.mouseClicked(mx, my, b);
+		int xStart = (width - xSize) / 2;
+		int yStart = (height - ySize) / 2;
+		entity.update();
+		if(isIn(mx,my,xStart+80, yStart+43,18,18)){
+			if(b == 0){
+				entity.craftItem();
+			}else if(b == 1){
+				entity.emptyCraft();
+			}
+		}
+		ItemStack i = null;
+		if(p.getItemStack() != null){
+		i = p.getItemStack().copy();
+		i .stackSize = 1;
+		}
+		for(int x=0;x<3;x++){
+			for(int y=0;y<3;y++){
+				if(isIn(mx,my,xStart+12+x*18, yStart+25+y*18,18,18)){
+					if(b == 0)entity.craft.setInventorySlotContents(x+y*3, i);
+					if(b == 1)entity.craft.setInventorySlotContents(x+y*3, null);
+					UT_Utils.sendPacket(entity, x+y*3, 0, 0);
+				}
+			}
+		}
+	}
+
+	
+	public boolean isIn(int mx, int my, int x, int y, int w, int h){
+		if(mx > x && mx < x+w){
+			if(my > y && my < y+h){
+				return true;
+			}
+		}
+		return false;
 	}
 
 }

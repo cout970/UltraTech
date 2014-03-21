@@ -31,7 +31,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 @Mod(modid = "UltraTech", name = "UltraTech",version = "0.8")
 
-@NetworkMod(clientSideRequired=true, serverSideRequired=true, channels={"UltraTech","UltraTech1","UltraTech2","UltraTech3"}, packetHandler = PacketHandler.class)
+@NetworkMod(clientSideRequired=true, serverSideRequired=true, channels={"UltraTech"}, packetHandler = PacketHandler.class)
 
 public class UltraTech {
 
@@ -123,13 +123,8 @@ public class UltraTech {
 		GameRegistry.registerWorldGenerator(new WorldGen());
 	}
 
-
-
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event){
 		CompatibilityManager.OreGenOptions();
 	}
-
-
-
 }

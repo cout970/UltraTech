@@ -30,6 +30,7 @@ public class BlockManager {
 	public static  Block SolarPanel;
 	public static  Block WindMill;
 	public static  Block Engine;
+	public static  Block Transformer;
 	public static  Block Tier1;
 	public static  Block Tier2;
 	public static  Block Tier3;
@@ -42,7 +43,7 @@ public class BlockManager {
 	
 	//fluid
 	public static Fluid Steam;
-	
+	public static Fluid Juice;
 
 
 	public static void InitBlocks(){
@@ -53,6 +54,7 @@ public class BlockManager {
 		SolarPanel = new common.cout970.UltraTech.blocks.models.SolarPanel(ids.get("SolarPanel"), Material.iron);
 		WindMill = new WindMill(ids.get("WindMill"), Material.iron);
 		Engine = new common.cout970.UltraTech.blocks.models.Engine(ids.get("Engine"), Material.iron);
+		Transformer = new common.cout970.UltraTech.blocks.models.Transformer(ids.get("Transformer"), Material.iron);
 		Tier1 = new Tier1Block(ids.get("Tier1"), Material.iron);
 		Tier2 = new Tier2Block(ids.get("Tier2"), Material.iron);
 		Tier3 = new Tier3Block(ids.get("Tier3"), Material.iron);
@@ -63,8 +65,10 @@ public class BlockManager {
 		CovedGlass = new CovedGlass(ids.get("CovedGlass"),Material.glass,false);
 
 		//fluid
-		Steam = new Steam("steam");
+		Steam = new Fluid("steam");
+		Juice = new Fluid("juice");
 		if(!FluidRegistry.isFluidRegistered("steam"))FluidRegistry.registerFluid(Steam);
+		if(!FluidRegistry.isFluidRegistered("juice"))FluidRegistry.registerFluid(Juice);
 	}
 
 
@@ -86,6 +90,7 @@ public class BlockManager {
 		GameRegistry.registerBlock(SolarPanel, "SolarPanel");
 		GameRegistry.registerBlock(WindMill, "WindMill");
 		GameRegistry.registerBlock(Engine, "Engine");
+		GameRegistry.registerBlock(Transformer, "Transformer");
 		GameRegistry.registerBlock(DiamondGlass, "Diamond_Glass");
 		GameRegistry.registerBlock(CovedGlass, "Coved_Glass");
 
@@ -121,6 +126,7 @@ public class BlockManager {
 		GameRegistry.registerTileEntity(CableEntity.class, "Cable_UT");
 		GameRegistry.registerTileEntity(EnergyTransformer.class, "TransFormer_UT");
 		GameRegistry.registerTileEntity(TesseractEntity.class, "Tesseract_UT");
+		GameRegistry.registerTileEntity(FermenterEntity.class, "Fermenter_UT");
 		
 		nameBlocks();
 	}

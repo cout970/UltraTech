@@ -17,6 +17,7 @@ public class ConfigManager {
 		ids.put("SolarPanel",config.getBlock("SolarPanel", x++).getInt());
 		ids.put("WindMill",config.getBlock("WindMill", x++).getInt());
 		ids.put("Engine",config.getBlock("Engine", x++).getInt());		
+		ids.put("Transformer",config.getBlock("Transformer", x++).getInt());		
 		ids.put("Tier1",config.getBlock("Tier1", x++).getInt());
 		ids.put("Tier2",config.getBlock("Tier2", x++).getInt());
 		ids.put("Tier3",config.getBlock("Tier3", x++).getInt());

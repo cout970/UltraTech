@@ -5,14 +5,14 @@ import java.util.Random;
 
 import common.cout970.UltraTech.TileEntities.Tier1.CVD_Entity;
 import common.cout970.UltraTech.TileEntities.Tier1.ChargeStationEntity;
+import common.cout970.UltraTech.TileEntities.Tier1.CrafterEntity;
+import common.cout970.UltraTech.TileEntities.Tier1.FermenterEntity;
 import common.cout970.UltraTech.TileEntities.Tier1.GeneratorEntity;
 import common.cout970.UltraTech.core.UltraTech;
 import common.cout970.UltraTech.energy.api.EnergyUtils;
 import common.cout970.UltraTech.energy.api.Machine;
-import common.cout970.UltraTech.machines.tileEntities.CrafterEntity;
 import common.cout970.UltraTech.machines.tileEntities.Printer3DEntity;
-import common.cout970.UltraTech.machines.tileEntities.ReciverEntity;
-import common.cout970.UltraTech.machines.tileEntities.SenderEntity;
+import common.cout970.UltraTech.managers.BlockManager;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.BlockContainer;
@@ -32,7 +32,7 @@ import net.minecraft.world.World;
 public class Tier1Block extends BlockContainer{
 
 	public Icon icons[];
-	public int numBlocks = 7;
+	public int numBlocks = 6;
 
 	public Tier1Block(int par1, Material par2Material) {
 		super(par1, par2Material);
@@ -46,6 +46,8 @@ public class Tier1Block extends BlockContainer{
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister IR){
+		BlockManager.Juice.setIcons(IR.registerIcon("ultratech:juice"));
+		BlockManager.Steam.setIcons(IR.registerIcon("ultratech:steam"));
 		icons = new Icon[9];
 		icons[0] = IR.registerIcon("ultratech:chasis");
 		icons[1] = IR.registerIcon("ultratech:crafter");
@@ -54,7 +56,7 @@ public class Tier1Block extends BlockContainer{
 		icons[4] = IR.registerIcon("ultratech:cvd");
 		icons[5] = IR.registerIcon("ultratech:printer");
 		icons[6] = IR.registerIcon("ultratech:chargestation");
-		icons[7] = IR.registerIcon("ultratech:reciver");
+		icons[7] = IR.registerIcon("ultratech:fermenter");
 		icons[8] = IR.registerIcon("ultratech:sender");
 	}
 
@@ -65,8 +67,7 @@ public class Tier1Block extends BlockContainer{
 		if(metadata == 2)return new CVD_Entity();
 		if(metadata == 3)return new Printer3DEntity();
 		if(metadata == 4)return new ChargeStationEntity();
-		if(metadata == 5)return new ReciverEntity();
-		if(metadata == 6)return new SenderEntity();
+		if(metadata == 5)return new FermenterEntity();
 		return null;
 	}
 
@@ -129,6 +130,7 @@ public class Tier1Block extends BlockContainer{
 			TileEntity tile = world.getBlockTileEntity(i, j, k);
 			if(tile != null){ 
 				if(tile instanceof CrafterEntity){
+					((CrafterEntity) tile).update();
 					entityplayer.openGui(UltraTech.instance, 13, world, i, j, k);
 					return true;
 				}
@@ -148,6 +150,10 @@ public class Tier1Block extends BlockContainer{
 					entityplayer.openGui(UltraTech.instance, 13, world, i, j, k);
 					return true;
 				}
+				if(tile instanceof FermenterEntity){
+					entityplayer.openGui(UltraTech.instance, 13, world, i, j, k);
+					return true;
+				}
 			}
 		}
 
@@ -158,6 +164,8 @@ public class Tier1Block extends BlockContainer{
 		TileEntity te = w.getBlockTileEntity(x, y, z);
 		if(te instanceof Machine){
 			if(((Machine)te).getNetwork() != null)((Machine)te).getNetwork().refresh();
+		}if(te instanceof CrafterEntity){
+			((CrafterEntity) te).update();
 		}
 	}
 

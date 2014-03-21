@@ -407,7 +407,7 @@ public class ReactorEntity extends TileEntity implements IInventory,IReactorPart
 						if(this.worldObj.getBlockTileEntity(xCoord+i, yCoord+j, zCoord+k) instanceof IReactorPart){
 							((IReactorPart)worldObj.getBlockTileEntity(xCoord+i, yCoord+j, zCoord+k)).setStructure(false);
 							((IReactorPart)worldObj.getBlockTileEntity(xCoord+i, yCoord+j, zCoord+k)).setReactor(null);
-							UT_Utils.sendPacket(worldObj.getBlockTileEntity(xCoord+i, yCoord+j, zCoord+k),false);
+							UT_Utils.sendPacket(worldObj.getBlockTileEntity(xCoord+i, yCoord+j, zCoord+k));
 							worldObj.markBlockForRenderUpdate(xCoord+i, yCoord+j, zCoord+k);
 						}
 					}

@@ -3,6 +3,8 @@ package common.cout970.UltraTech.handlers;
 
 import common.cout970.UltraTech.TileEntities.Tier1.CVD_Entity;
 import common.cout970.UltraTech.TileEntities.Tier1.ChargeStationEntity;
+import common.cout970.UltraTech.TileEntities.Tier1.CrafterEntity;
+import common.cout970.UltraTech.TileEntities.Tier1.FermenterEntity;
 import common.cout970.UltraTech.TileEntities.Tier1.GeneratorEntity;
 import common.cout970.UltraTech.TileEntities.Tier1.StorageTier1;
 import common.cout970.UltraTech.TileEntities.Tier2.CutterEntity;
@@ -26,9 +28,9 @@ public class GuiHandler implements IGuiHandler{
 
 	@Override
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-		
+
 		TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
-		
+
 		//CVDmachine
 		if(tileEntity instanceof CVD_Entity){
 			return new CVDcontainer(player.inventory, (CVD_Entity) tileEntity);
@@ -89,14 +91,18 @@ public class GuiHandler implements IGuiHandler{
 		if(tileEntity instanceof TesseractEntity){
 			return new TesseractContainer(player.inventory, (TesseractEntity) tileEntity);
 		}
+		//Fermenter
+		if(tileEntity instanceof FermenterEntity){
+			return new FermenterContainer(player.inventory, (FermenterEntity) tileEntity);
+		}
 		return null;
 	}
 
 	@Override
 	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-		
+
 		TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
-		
+
 		//CVDmachine
 		if(tileEntity instanceof CVD_Entity){
 			return new CVDgui(new CVDcontainer(player.inventory, (CVD_Entity) tileEntity),player.inventory, (CVD_Entity) tileEntity);
@@ -153,11 +159,15 @@ public class GuiHandler implements IGuiHandler{
 		if(tileEntity instanceof CrafterEntity){
 			return new CrafterGui(new CrafterContainer(player.inventory, (CrafterEntity) tileEntity), player.inventory, (CrafterEntity) tileEntity);
 		}
-		//Crafter
+		//Tesseract
 		if(tileEntity instanceof TesseractEntity){
 			return new TesseractGui(new TesseractContainer(player.inventory, (TesseractEntity) tileEntity), player.inventory, (TesseractEntity) tileEntity);
 		}
-		
+		//Fermenter
+		if(tileEntity instanceof FermenterEntity){
+			return new FermenterGui(new FermenterContainer(player.inventory, (FermenterEntity) tileEntity), (FermenterEntity) tileEntity);
+		}
+
 		return null;
 	}
 

@@ -19,6 +19,8 @@ public class Printer3DEntity extends TileEntity implements IInventory{
 		inventory = new ItemStack[1];
 	}
 	
+	//needs client - server sync
+	
 	public void updateEntity(){
 		if(update){
 			update = false;

@@ -34,7 +34,7 @@ public class ReactorTankEntity extends TileEntity implements IFluidHandler,IFlui
 	public void updateEntity(){
 		if(liquid != null){
 			if(liquid.amount != last){
-				UT_Utils.sendPacket(this, false);
+				UT_Utils.sendPacket(this);
 				last = liquid.amount;
 			}
 		}
