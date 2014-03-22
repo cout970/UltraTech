@@ -80,13 +80,11 @@ public class WindMill extends BlockContainer{
 	public void breakBlock(World world, int x, int y, int z, int par5, int par6)
 	{
 		super.breakBlock(world, x, y, z, par5, par6);
-		if(world.getBlockMetadata(x, y, z)==1){
-			for(int d=1;d<5;d++){
-				world.setBlockToAir(x, y+d, z);
-			}
+		for(int d=1;d<5;d++){
+			world.setBlockToAir(x, y+d, z);
 		}
 	}
-	
+
 	public boolean isOpaqueCube()
 	{
 		return false;

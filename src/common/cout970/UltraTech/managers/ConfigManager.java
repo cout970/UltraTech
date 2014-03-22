@@ -26,6 +26,9 @@ public class ConfigManager {
 		ids.put("Cable",config.getBlock("Cable", x++).getInt());
 		ids.put("DiamondGlass",config.getBlock("DiamondGlass", x++).getInt());
 		ids.put("CovedGlass",config.getBlock("CovedGlass", x++).getInt());
+		ids.put("AluminumPipe",config.getBlock("AluminumPipe", x++).getInt());
+		ids.put("CopperPipe",config.getBlock("CopperPipe", x++).getInt());
+		ids.put("LeadPipe",config.getBlock("LeadPipe", x++).getInt());
 
 		//deco
 		Reference.StoneBlock = config.getBlock("StoneBlock", 2099).getInt();

@@ -71,11 +71,12 @@ public class RenderEngine extends TileEntitySpecialRenderer{
 			e.pos += e.speed*getDelta(e);
 			e.speed += 0.0002;
 			if(e.speed > 0.01)e.speed= 0.01f;
-			((ModelRenderer) this.model.boxList.get(2)).rotateAngleZ = e.pos;
 		}else{
 			e.speed -= 0.0001;
 			if(e.speed < 0)e.speed=0;
 		}
+		((ModelRenderer) this.model.boxList.get(2)).rotateAngleZ = e.pos;
+
 	}
 
 	public long getDelta(EngineEntity te){

@@ -7,6 +7,7 @@ import common.cout970.UltraTech.TileEntities.Tier1.*;
 import common.cout970.UltraTech.TileEntities.Tier2.*;
 import common.cout970.UltraTech.TileEntities.Tier3.*;
 import common.cout970.UltraTech.blocks.*;
+import common.cout970.UltraTech.blocks.models.CableBlock;
 import common.cout970.UltraTech.blocks.models.WindMill;
 import common.cout970.UltraTech.energy.api.ElectricConductor;
 import common.cout970.UltraTech.itemBlock.*;
@@ -38,6 +39,9 @@ public class BlockManager {
 	public static  Block Cable;
 	public static  Block DiamondGlass;
 	public static  Block CovedGlass;
+	public static  Block AluminumPipe;
+	public static  Block CopperPipe;
+	public static  Block LeadPipe;
 
 	
 	//fluid
@@ -62,7 +66,10 @@ public class BlockManager {
 		Cable = new CableBlock(ids.get("Cable"),Material.iron);
 		DiamondGlass = new DiamondGlass(ids.get("DiamondGlass"),Material.glass,false);	
 		CovedGlass = new CovedGlass(ids.get("CovedGlass"),Material.glass,false);
-
+		AluminumPipe = new common.cout970.UltraTech.blocks.models.AluminumPipe(ids.get("AluminumPipe"),Material.iron);
+		CopperPipe = new common.cout970.UltraTech.blocks.models.CopperPipe(ids.get("CopperPipe"),Material.iron);
+		LeadPipe = new common.cout970.UltraTech.blocks.models.LeadPipe(ids.get("LeadPipe"),Material.iron);
+		
 		//fluid
 		Steam = new Fluid("steam");
 		Juice = new Fluid("juice");
@@ -92,6 +99,9 @@ public class BlockManager {
 		GameRegistry.registerBlock(Transformer, "Transformer");
 		GameRegistry.registerBlock(DiamondGlass, "Diamond_Glass");
 		GameRegistry.registerBlock(CovedGlass, "Coved_Glass");
+		GameRegistry.registerBlock(AluminumPipe, "AluminumPipe");
+		GameRegistry.registerBlock(CopperPipe, "CopperPipe");
+		GameRegistry.registerBlock(LeadPipe, "LeadPipe");
 
 		//TileEntities
 
@@ -125,6 +135,9 @@ public class BlockManager {
 		GameRegistry.registerTileEntity(TesseractEntity.class, "Tesseract_UT");
 		GameRegistry.registerTileEntity(FermenterEntity.class, "Fermenter_UT");
 		GameRegistry.registerTileEntity(ClimateEntity.class, "Climate_UT");
+		GameRegistry.registerTileEntity(AluminumPipeEntity.class, "AluminumPipeEntity_UT");
+		GameRegistry.registerTileEntity(CopperPipeEntity.class, "CopperPipeEntity_UT");
+		GameRegistry.registerTileEntity(LeadPipeEntity.class, "LeadPipeEntity_UT");
 		
 		nameBlocks();
 	}

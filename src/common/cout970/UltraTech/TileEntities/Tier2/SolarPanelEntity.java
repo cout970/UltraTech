@@ -4,6 +4,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.common.ForgeDirection;
 import common.cout970.UltraTech.energy.api.Machine;
 import common.cout970.UltraTech.lib.GraficCost;
+import common.cout970.UltraTech.lib.GraficCost.MachineTier;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -13,6 +14,7 @@ public class SolarPanelEntity extends Machine{
 	public SolarPanelEntity(){
 		super();
 		this.tipe = MachineTipe.Output;
+		this.tier = MachineTier.Tier2;
 		setMaxEnergy(1000);
 	}
 	

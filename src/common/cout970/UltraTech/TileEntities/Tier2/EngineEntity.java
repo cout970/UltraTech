@@ -3,6 +3,7 @@ package common.cout970.UltraTech.TileEntities.Tier2;
 import common.cout970.UltraTech.energy.api.Machine;
 import common.cout970.UltraTech.lib.GraficCost;
 import common.cout970.UltraTech.lib.UT_Utils;
+import common.cout970.UltraTech.lib.GraficCost.MachineTier;
 import buildcraft.api.power.IPowerEmitter;
 import buildcraft.api.power.IPowerReceptor;
 import buildcraft.api.power.PowerHandler;
@@ -26,6 +27,10 @@ public class EngineEntity extends Machine implements IPowerReceptor, IPowerEmitt
 	public boolean update;
 	public long oldTime;
 
+	public EngineEntity(){
+		super();
+		this.tier = MachineTier.Tier2;
+	}
 	public void updateEntity(){
 
 		if(power == null){

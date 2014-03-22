@@ -91,6 +91,12 @@ public class PacketHandler implements IPacketHandler{
 					c.loadRecipes(inputStream.readInt());
 					c.update();
 				}
+			}else if(tipe == 4){
+				if(te instanceof CrafterEntity){
+					CrafterEntity c = (CrafterEntity) te;
+					c.DellRecipe(inputStream.readInt());
+					c.update();
+				}
 			}
 			
 		}catch(Exception e){

@@ -2,6 +2,7 @@ package common.cout970.UltraTech.TileEntities.Tier2;
 
 import common.cout970.UltraTech.energy.api.Machine;
 import common.cout970.UltraTech.lib.GraficCost;
+import common.cout970.UltraTech.lib.GraficCost.MachineTier;
 import common.cout970.UltraTech.lib.recipes.Purifier_Recipe;
 import common.cout970.UltraTech.managers.ItemManager;
 import common.cout970.UltraTech.misc.ISpeedUpgradeabel;
@@ -24,6 +25,7 @@ public class PurifierEntity extends Machine implements IInventory,ISpeedUpgradea
 	public PurifierEntity(){
 		super();
 		inventory = new ItemStack[2];
+		this.tier = MachineTier.Tier2;
 	}
 
 	@Override

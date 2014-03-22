@@ -67,7 +67,10 @@ public class CrafterGui extends GuiContainer{
 		}
 		for(int d =0;d<9;d++){
 			if(isIn(mx, my, xStart+8 + d * 18, yStart+6, 18,18))if(entity.saves.getStackInSlot(d) != null){
-				UT_Utils.sendPacket(entity, d, 3);
+				if(b == 0)UT_Utils.sendPacket(entity, d, 3);
+				if(b == 1){
+					UT_Utils.sendPacket(entity, d, 4);
+				}
 			}
 		}
 		

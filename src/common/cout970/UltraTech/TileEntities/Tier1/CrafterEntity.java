@@ -194,11 +194,11 @@ public class CrafterEntity extends TileEntity implements IInventory{
 	public void useItemToCraft(IInventory inv, int slot){
 		ItemStack item = inv.getStackInSlot(slot);
 		if(item != null){
+			inv.decrStackSize(slot, 1);
 			if (item.getItem().hasContainerItem())
 			{
 				ItemStack itemContainer = item.getItem().getContainerItemStack(item);
 				if(itemContainer == null){
-					inv.decrStackSize(slot, 1);
 					return;
 				}else if(itemContainer.isItemStackDamageable() && itemContainer.getItemDamage() > itemContainer.getMaxDamage()){
 					itemContainer = null;
@@ -207,8 +207,6 @@ public class CrafterEntity extends TileEntity implements IInventory{
 				}else{
 					inv.setInventorySlotContents(slot, itemContainer);
 				}
-			}else{
-				inv.decrStackSize(slot, 1);
 			}
 		}
 	}
@@ -259,6 +257,11 @@ public class CrafterEntity extends TileEntity implements IInventory{
 	public void loadRecipes(int r){
 		craft = saves.recipes[r].getInventoryCrafter(this);
 		this.onInventoryChanged();
+	}
+	
+	public void DellRecipe(int slot) {
+		this.saves.setInventorySlotContents(slot, null);
+		saves.recipes[slot] = null;
 	}
 	
 	//Inventory
@@ -370,13 +373,24 @@ public class CrafterEntity extends TileEntity implements IInventory{
 			}
 		}
 		//inv 2
-		NBTTagList tagList2 = nbtTagCompound.getTagList("Inventory2");
+		NBTTagList tagList2 = nbtTagCompound.getTagList("Craft");
 		craft = new InventoryCrafter(this, 3, 3);
 		for (int i = 0; i < tagList2.tagCount(); ++i) {
 			NBTTagCompound tagCompound = (NBTTagCompound) tagList2.tagAt(i);
 			byte slot = tagCompound.getByte("Slot");
 			if (slot >= 0 && slot < craft.getSizeInventory()) {
 				craft.setInventorySlotContents(slot, ItemStack.loadItemStackFromNBT(tagCompound));
+			}
+		}
+		//saves
+		NBTTagList list = nbtTagCompound.getTagList("Saves");
+		saves = new CrafterRecipe();
+		for (int i = 0; i < list.tagCount(); ++i){
+			NBTTagCompound tagCompound = (NBTTagCompound) list.tagAt(i);
+			byte slot = tagCompound.getByte("Slot");
+			if (slot >= 0 && slot < craft.getSizeInventory()) {
+				saves.setInventorySlotContents(slot, ItemStack.loadItemStackFromNBT(tagCompound));
+				saves.recipes[slot] = new Craft(tagCompound);
 			}
 		}
 	}
@@ -406,9 +420,22 @@ public class CrafterEntity extends TileEntity implements IInventory{
 				tagList2.appendTag(tagCompound);
 			}
 		}
-		nbtTagCompound.setTag("Inventory2", tagList2);
+		nbtTagCompound.setTag("Craft", tagList2);
+		
+		//saves
+		NBTTagList list = new NBTTagList();
+		for (int currentIndex = 0; currentIndex < saves.getSizeInventory(); ++currentIndex) {
+			if (saves.getStackInSlot(currentIndex) != null) {
+				NBTTagCompound tagCompound = new NBTTagCompound();
+				tagCompound.setByte("Slot", (byte) currentIndex);
+				saves.getStackInSlot(currentIndex).writeToNBT(tagCompound);
+				saves.recipes[currentIndex].writeToNBT(tagCompound);
+				list.appendTag(tagCompound);
+			}
+		}
+		nbtTagCompound.setTag("Saves", list);
 	}
-	
+
 
 	//Synchronization
 
@@ -440,7 +467,4 @@ public class CrafterEntity extends TileEntity implements IInventory{
 		this.readFromNBT(pkt.data);
 		this.update();
 	}
-
-	
-
 }

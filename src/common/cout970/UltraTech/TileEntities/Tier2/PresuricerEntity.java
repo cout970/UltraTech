@@ -2,6 +2,7 @@ package common.cout970.UltraTech.TileEntities.Tier2;
 
 import common.cout970.UltraTech.energy.api.Machine;
 import common.cout970.UltraTech.lib.GraficCost;
+import common.cout970.UltraTech.lib.GraficCost.MachineTier;
 import common.cout970.UltraTech.lib.recipes.Pressurizer_Recipes;
 import common.cout970.UltraTech.machines.containers.PresuricerContaner;
 import common.cout970.UltraTech.managers.ItemManager;
@@ -22,6 +23,7 @@ public class PresuricerEntity extends Machine implements IInventory,ISpeedUpgrad
 	public PresuricerEntity(){
 		super();
 		inventory = new ItemStack[4];
+		this.tier = MachineTier.Tier2;
 	}
 	
 	public void updateEntity(){

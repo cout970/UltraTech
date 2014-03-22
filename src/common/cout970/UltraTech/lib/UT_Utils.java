@@ -45,6 +45,8 @@ public class UT_Utils {
 				}
 			}else if(tipe == 3){///send slot to get save
 				data.writeInt(slot);
+			}else if(tipe == 4){///send slot to get dell
+				data.writeInt(slot);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -87,4 +89,5 @@ public class UT_Utils {
 		color += b;
 		return color;
 	}
+
 }

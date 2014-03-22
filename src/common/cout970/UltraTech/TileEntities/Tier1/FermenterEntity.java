@@ -14,9 +14,9 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 import common.cout970.UltraTech.energy.api.Machine;
+import common.cout970.UltraTech.fluid.api.UT_Tank;
 import common.cout970.UltraTech.lib.GraficCost;
 import common.cout970.UltraTech.managers.BlockManager;
-import common.cout970.UltraTech.misc.UT_Tank;
 
 public class FermenterEntity extends Machine implements IInventory, IFluidHandler{
 

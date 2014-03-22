@@ -1,6 +1,9 @@
 package common.cout970.UltraTech.proxy;
 
+import common.cout970.UltraTech.TileEntities.Tier1.AluminumPipeEntity;
 import common.cout970.UltraTech.TileEntities.Tier1.CableEntity;
+import common.cout970.UltraTech.TileEntities.Tier1.CopperPipeEntity;
+import common.cout970.UltraTech.TileEntities.Tier1.LeadPipeEntity;
 import common.cout970.UltraTech.TileEntities.Tier2.EnergyTransformer;
 import common.cout970.UltraTech.TileEntities.Tier2.EngineEntity;
 import common.cout970.UltraTech.TileEntities.Tier2.SolarPanelEntity;
@@ -11,6 +14,7 @@ import common.cout970.UltraTech.machines.renders.Block_UT_Render;
 import common.cout970.UltraTech.machines.renders.ReactorTankRender;
 import common.cout970.UltraTech.machines.renders.RenderCable;
 import common.cout970.UltraTech.machines.renders.RenderEngine;
+import common.cout970.UltraTech.machines.renders.RenderFluidPipe;
 import common.cout970.UltraTech.machines.renders.RenderHologram;
 import common.cout970.UltraTech.machines.renders.RenderSolarPanel;
 import common.cout970.UltraTech.machines.renders.RenderTransformer;
@@ -32,6 +36,10 @@ public class ClientProxy extends CommonProxy{
 		ClientRegistry.bindTileEntitySpecialRenderer(HologramEmiterEntity.class, new RenderHologram());
 		ClientRegistry.bindTileEntitySpecialRenderer(CableEntity.class, new RenderCable());
 		ClientRegistry.bindTileEntitySpecialRenderer(EnergyTransformer.class, new RenderTransformer());
+		ClientRegistry.bindTileEntitySpecialRenderer(AluminumPipeEntity.class, new RenderFluidPipe());
+		ClientRegistry.bindTileEntitySpecialRenderer(CopperPipeEntity.class, new RenderFluidPipe());
+		ClientRegistry.bindTileEntitySpecialRenderer(LeadPipeEntity.class, new RenderFluidPipe());
+
 
 		setCustomRenderers();
 	}
