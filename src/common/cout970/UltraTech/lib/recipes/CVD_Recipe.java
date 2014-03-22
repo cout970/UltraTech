@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import common.cout970.UltraTech.TileEntities.Tier1.CVD_Entity;
-import common.cout970.UltraTech.lib.ItemsUtil;
+import common.cout970.UltraTech.lib.UT_Utils;
 import net.minecraft.item.ItemStack;
 
 public class CVD_Recipe{
@@ -24,7 +24,7 @@ public class CVD_Recipe{
 		if(inv == null)return false;
 		for(CVD_Recipe a :recipes){
 			if(inv.getStackInSlot(0) != null && inv.getStackInSlot(1) != null){
-				if(ItemsUtil.areEcuals(a.getImput1(), inv.getStackInSlot(0),true) && ItemsUtil.areEcuals(a.getImput2(), inv.getStackInSlot(1), true)){
+				if(UT_Utils.areEcuals(a.getImput1(), inv.getStackInSlot(0),true) && UT_Utils.areEcuals(a.getImput2(), inv.getStackInSlot(1), true)){
 					if(inv.getStackInSlot(2) == null)	
 					return true;
 					if(inv.getStackInSlot(2).itemID == a.getOutput().itemID && inv.getInventoryStackLimit() >= inv.getStackInSlot(2).stackSize + a.getOutput().stackSize)
@@ -40,7 +40,7 @@ public class CVD_Recipe{
 		if(inv == null)return null;
 		for(CVD_Recipe a :recipes){
 			if(inv.getStackInSlot(0) != null && inv.getStackInSlot(1) != null){
-				if(ItemsUtil.areEcuals(a.getImput1(), inv.getStackInSlot(0),true) && ItemsUtil.areEcuals(a.getImput2(), inv.getStackInSlot(1), true)){
+				if(UT_Utils.areEcuals(a.getImput1(), inv.getStackInSlot(0),true) && UT_Utils.areEcuals(a.getImput2(), inv.getStackInSlot(1), true)){
 					return a.getOutput();
 				}
 			}

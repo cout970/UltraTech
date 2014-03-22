@@ -1,9 +1,9 @@
 package common.cout970.UltraTech.blocks.models;
 
 import buildcraft.api.tools.IToolWrench;
+import common.cout970.UltraTech.TileEntities.Tier2.EngineEntity;
 import common.cout970.UltraTech.core.UltraTech;
 import common.cout970.UltraTech.energy.api.EnergyUtils;
-import common.cout970.UltraTech.machines.tileEntities.EngineEntity;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -48,8 +48,7 @@ public class Engine extends BlockContainer{
 	public void onNeighborBlockChange(World w, int x, int y, int z, int side){
 		EngineEntity m = (EngineEntity) w.getBlockTileEntity(x, y, z);
 		if(m.getNetwork() != null)m.getNetwork().refresh();
-		m.canFound = true;
-		m.c = null;
+		m.update = true;
 	}
 
 	public boolean isOpaqueCube()

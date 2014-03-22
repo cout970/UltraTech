@@ -22,7 +22,7 @@ public class CrafterOverlayHandler implements IOverlayHandler {
 			
 			for(int z = 0; z < 9; z++){
 				entity.craft.setInventorySlotContents(z, null);
-				UT_Utils.sendPacket(entity, z, 0,0);
+				UT_Utils.sendPacket(entity, z,0);
 			}
 			
 			for(int z = 0; z < recipe.getIngredientStacks(recipeIndex).size(); z++){
@@ -67,7 +67,7 @@ public class CrafterOverlayHandler implements IOverlayHandler {
 				}
 				ItemStack i = recipe.getIngredientStacks(recipeIndex).get(z).item;
 				entity.craft.setInventorySlotContents(slot, i);
-				UT_Utils.sendPacket(entity, slot, 0,0);
+				UT_Utils.sendPacket(entity, slot,0);
 			}
 			entity.update();
 		}

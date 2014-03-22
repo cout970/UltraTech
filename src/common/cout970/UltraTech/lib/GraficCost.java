@@ -15,7 +15,11 @@ public class GraficCost {
 	public static final int CVD_Cost = 2000;
 	public static final int ChargeStationFlow = 100;
 	public static final int FermenterCost = 5;
-
+	public final static int Engine_MJ_Produced = 8;
+	public final static int Engine_EnergyConsume = 64;
+	public static final int PresuricerCost = 2000;
+	public static final int ClimateEstationCost = 200000;
+	
 	
 	public static enum MachineTier{
 		Tier1(400,64000,1),Tier2(2000,128000,2),Tier3(10000,256000,3);
@@ -34,6 +38,11 @@ public class GraficCost {
 			return level;
 		}
 	}
+
+	
+
+
+
 
 
 

@@ -1,17 +1,23 @@
-package common.cout970.UltraTech.machines.tileEntities;
+package common.cout970.UltraTech.TileEntities.Tier2;
 
 import common.cout970.UltraTech.energy.api.Machine;
+import common.cout970.UltraTech.lib.GraficCost;
+import common.cout970.UltraTech.lib.recipes.Pressurizer_Recipes;
 import common.cout970.UltraTech.machines.containers.PresuricerContaner;
+import common.cout970.UltraTech.managers.ItemManager;
+import common.cout970.UltraTech.misc.ISpeedUpgradeabel;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 
-public class PresuricerEntity extends Machine implements IInventory{
+public class PresuricerEntity extends Machine implements IInventory,ISpeedUpgradeabel{
 
 	private ItemStack[] inventory;
 	public int progres;
 	public int speed = 10;
+	private int speedUpgrades;
+	public boolean hasEnergy = false;
 
 	public PresuricerEntity(){
 		super();
@@ -19,16 +25,55 @@ public class PresuricerEntity extends Machine implements IInventory{
 	}
 	
 	public void updateEntity(){
-		if(!worldObj.isRemote){
-			progres+=speed;
-			if(progres > 1000){
-				progres = 0;
+		if(worldObj.isRemote)return;
+		boolean flag = false;
+		if(!hasEnergy){
+			hasEnergy = getEnergy() >= GraficCost.PresuricerCost;
+		}
+		if(progres > 0){
+			removeEnergy(GraficCost.PresuricerCost*speed/1000);
+		}
+		if (hasEnergy && Pressurizer_Recipes.matches(this))
+		{
+			this.progres += speed;
+			if (this.progres >= 1000)
+			{
+				this.progres = 0;
+				this.craft();
+				flag = true;
+				hasEnergy = false;
+			}
+		}
+		else{
+			this.progres = 0;
+		}
+		if (flag){
+			this.onInventoryChanged();		
+		}
+	}
+	
+	private void craft() {
+		if (Pressurizer_Recipes.matches(this))
+		{
+			ItemStack itemstack = Pressurizer_Recipes.getCraftingResult(this);
+			if (this.inventory[1] == null)
+			{
+				this.inventory[1] = itemstack.copy();
+			}
+			else if (this.inventory[1].isItemEqual(itemstack))
+			{
+				inventory[1].stackSize += itemstack.stackSize;
+			}
+			--this.inventory[0].stackSize;
+			if (this.inventory[0].stackSize <= 0)
+			{
+				this.inventory[0] = null;
 			}
 		}
 	}
 	
-	////////////////Inventory
-	
+	//Inventory
+
 	@Override
 	public int getSizeInventory() {
 		return inventory.length;
@@ -109,29 +154,39 @@ public class PresuricerEntity extends Machine implements IInventory{
 		return i == 3 ? false : true;
 	}
 
-	//Sync
+	//Synchronization
 	
 	public void sendGUINetworkData(PresuricerContaner container,
 			ICrafting iCrafting) {
-		iCrafting.sendProgressBarUpdate(container, 0, progres);
-//		iCrafting.sendProgressBarUpdate(container, 1, Energy);
-		iCrafting.sendProgressBarUpdate(container, 2, speed);
+		super.sendGUINetworkData(container, iCrafting);
+		iCrafting.sendProgressBarUpdate(container, 2, progres);
+		iCrafting.sendProgressBarUpdate(container, 3, speed);
 	}
 
 	public void getGUINetworkData(int id, int value) {
-		switch(id){
-		case 0:{
-			progres = value;
-			break;
+		super.getGUINetworkData(id, value);
+		if(id == 2)progres = value;
+		if(id == 3)speed = value;
+	}
+
+	//Upgrades
+
+	@Override
+	public boolean upgrade() {
+
+		if(this.speed < 100){	
+			this.speed += 20;
+			speedUpgrades += 1;
+			return true;
 		}
-		case 1:{
-//			Energy = value;
-			break;
+		return false;
+	}
+
+	@Override
+	public ItemStack getDrop() {
+		if(speedUpgrades !=0){
+			return new ItemStack(ItemManager.ItemName.get("SpeedUpgrade"),speedUpgrades);
 		}
-		case 2:{
-			speed = value;
-			break;
-		}
-		}
+		return null;
 	}
 }

@@ -3,9 +3,6 @@ package common.cout970.UltraTech.machines.renders.holograms;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
-
 import org.lwjgl.opengl.GL11;
 
 import net.minecraft.block.material.MapColor;
@@ -14,18 +11,16 @@ import net.minecraft.world.World;
 
 public class Map{
 
-	public String name = "";
 	public List<int[]> p = new ArrayList<int[]>();
 	public int[][] terrain = new int[51][51];
 	public MapColor[][] colorRGB = new MapColor[51][51];
-	public boolean height = true;
 	public boolean colorHeight = true;
-	public int mode = GL11.GL_QUAD_STRIP;
+	public int mode = GL11.GL_POINTS;
+	public boolean height;
+	public int y;
 	
 	
-	public Map(String name, World w, double posX, double posY, double posZ){
-		this.name = name;
-		
+	public Map(World w, double posX, double posY, double posZ){
 		genTerrein(w, posX, posY, posZ);
 		for(int z=0;z<50;z++){
 			for(int x=0;x<50;x++){
@@ -78,9 +73,6 @@ public class Map{
 	private void setColorByHeight(Tessellator t, int[] a) {
 		float e;
 		int i = a[1];
-		height = true;
-		colorHeight = false;
-		mode = 0;
 		if(colorHeight){
 			if(i < 128){
 				e = i/128f;

@@ -1,6 +1,6 @@
 package common.cout970.UltraTech.machines.containers;
 
-import common.cout970.UltraTech.machines.tileEntities.PresuricerEntity;
+import common.cout970.UltraTech.TileEntities.Tier2.PresuricerEntity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;

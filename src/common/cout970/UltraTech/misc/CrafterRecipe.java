@@ -8,9 +8,11 @@ public class CrafterRecipe implements IInventory{
 
 	
 	private ItemStack[] inventory;
+	public Craft[] recipes;
+	public int slot;
 
 	public CrafterRecipe(){
-
+		recipes = new Craft[9];
 		inventory = new ItemStack[9];
 	}
 

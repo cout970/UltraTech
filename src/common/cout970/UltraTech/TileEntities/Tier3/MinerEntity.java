@@ -30,8 +30,8 @@ public class MinerEntity extends Machine implements IInventory{
 	public int current = 0;
 	private ArrayList<int[]> mining;
 	public boolean hasMine = false;
-	public int height = 2;
-	public int widht = 2;
+	public int height = 4;
+	public int widht = 4;
 	public boolean blocked = false;
 	
 	public Mode mode = Mode.Horizontal;

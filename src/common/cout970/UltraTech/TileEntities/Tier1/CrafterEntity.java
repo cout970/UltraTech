@@ -7,6 +7,7 @@ import java.util.Map;
 
 import common.cout970.UltraTech.lib.UT_Utils;
 import common.cout970.UltraTech.machines.containers.CrafterContainer;
+import common.cout970.UltraTech.misc.Craft;
 import common.cout970.UltraTech.misc.CrafterRecipe;
 import common.cout970.UltraTech.misc.InventoryCrafter;
 import net.minecraft.entity.player.EntityPlayer;
@@ -24,26 +25,25 @@ import net.minecraftforge.oredict.OreDictionary;
 
 public class CrafterEntity extends TileEntity implements IInventory{
 
-	public ItemStack[] inventory;//0 == result
+	public ItemStack[] inventory;
+	public ItemStack result;
 	public InventoryCrafter craft;
 	public CrafterRecipe saves;
 	public Map<Integer,Boolean> found = new HashMap<Integer,Boolean>();
+	private boolean loop;
 
 
 	public CrafterEntity(){
-		inventory = new ItemStack[10];
+		inventory = new ItemStack[9];
 		craft = new InventoryCrafter(this, 3, 3);
 		saves = new CrafterRecipe();
 	}
 
 	public void update() {
+		loop = false;
 		if(!worldObj.isRemote){}
-			inventory[0] = CraftingManager.getInstance().findMatchingRecipe(craft, worldObj);
+			result = CraftingManager.getInstance().findMatchingRecipe(craft, worldObj);
 			canCraft();
-	}
-
-	public void craftItem() {
-		UT_Utils.sendPacket(this, 0, 0, 1);
 	}
 	
 	public void canCraft(){
@@ -80,29 +80,7 @@ public class CrafterEntity extends TileEntity implements IInventory{
 					 for(TileEntity tile : t)if(tile instanceof IInventory)in.add((IInventory) tile);
 					 int aux2 = 9;
 					 for(IInventory inv : in){
-						 if(inv instanceof CrafterEntity){
-							 for(int i = 1; i < inv.getSizeInventory();i++){
-								 if(equal(inv.getStackInSlot(i),craft.getStackInSlot(c),c)){
-									 boolean cant = true;
-									 if(already.containsKey(i+aux2)){
-										 cant = false;
-										 int aux = already.get(i+aux2);
-										 if(aux < inv.getStackInSlot(i).stackSize){
-											 already.remove(i+aux2);
-											 already.put(i, aux+1);
-											 cant = true;
-										 }
-									 }else{
-										 already.put(i+aux2, 1);
-										 cant = true;
-									 }
-									 if(cant){
-										 found.put(c, false);
-										 break;
-									 }
-								 }
-							 }
-						 }else for(int i = 0; i < inv.getSizeInventory();i++){
+						 for(int i = 0; i < inv.getSizeInventory();i++){
 							 if(equal(inv.getStackInSlot(i),craft.getStackInSlot(c),c)){
 								 boolean cant = true;
 								 if(already.containsKey(i+aux2)){
@@ -125,6 +103,14 @@ public class CrafterEntity extends TileEntity implements IInventory{
 						 }
 						 aux2 += inv.getSizeInventory();
 						 if(found.containsKey(c))break;
+						 if(inv instanceof CrafterEntity && !loop){
+							 loop = true;
+							 if(equal(inv.getStackInSlot(-1),craft.getStackInSlot(c),c)){
+								 ((CrafterEntity) inv).canCraft();
+								 if(((CrafterEntity) inv).allFound())found.put(c, false);
+								 break;
+							 }
+						 }
 					 }
 				 }
 				 if(!found.containsKey(c)){
@@ -167,10 +153,10 @@ public class CrafterEntity extends TileEntity implements IInventory{
 
 	public void craft() {
 		if(allFound()){
-			addItemStack(inventory[0]);
+			addItemStack(result);
 			for(int c = 0; c < 9;c++){
 				if(craft.getStackInSlot(c)!= null){
-					for(int i = 1; i < this.getSizeInventory();i++){
+					for(int i = 0; i < this.getSizeInventory();i++){
 						if(equal(this.getStackInSlot(i),craft.getStackInSlot(c),c)){
 							useItemToCraft(this, i);
 							break;
@@ -180,17 +166,23 @@ public class CrafterEntity extends TileEntity implements IInventory{
 					List<IInventory> in = new ArrayList<IInventory>();
 					for(TileEntity tile : t)if(tile instanceof IInventory)in.add((IInventory) tile);
 					for(IInventory inv : in){
-						if(inv instanceof CrafterEntity){
-							for(int i = 1; i < inv.getSizeInventory();i++){
-								if(equal(inv.getStackInSlot(i),craft.getStackInSlot(c),c)){
-									useItemToCraft(inv, i);
-									break;
-								}
-							}
-						}else for(int i = 0; i < inv.getSizeInventory();i++){
+						for(int i = 0; i < inv.getSizeInventory();i++){
 							if(equal(inv.getStackInSlot(i),craft.getStackInSlot(c),c)){
 								useItemToCraft(inv, i);
 								break;
+							}
+							if(inv instanceof CrafterEntity){
+								if(equal(inv.getStackInSlot(-1),craft.getStackInSlot(c),c)){
+									((CrafterEntity) inv).canCraft();
+									((CrafterEntity) inv).craft();
+									for(int j = 0; j < inv.getSizeInventory();j++){
+										if(equal(inv.getStackInSlot(j),craft.getStackInSlot(c),c)){
+											useItemToCraft(inv, j);
+											break;
+										}
+									}
+									break;
+								}
 							}
 						}
 					}
@@ -200,7 +192,6 @@ public class CrafterEntity extends TileEntity implements IInventory{
 	}
 	
 	public void useItemToCraft(IInventory inv, int slot){
-		if(inv instanceof CrafterEntity && slot == 0)return;
 		ItemStack item = inv.getStackInSlot(slot);
 		if(item != null){
 			if (item.getItem().hasContainerItem())
@@ -224,7 +215,7 @@ public class CrafterEntity extends TileEntity implements IInventory{
 
 	public boolean addItemStack(ItemStack i){
 		if(i == null)return true;
-		for(int s = 1;s < this.getSizeInventory();s++){	
+		for(int s = 0;s < this.getSizeInventory();s++){	
 			if (this.inventory[s] == null)
 			{
 				this.inventory[s] = i.copy();
@@ -244,8 +235,30 @@ public class CrafterEntity extends TileEntity implements IInventory{
 	public void emptyCraft() {
 		for(int i = 0; i < 9;i++){
 			craft.setInventorySlotContents(i, null);
-			UT_Utils.sendPacket(this, i, 0 ,0);
+			UT_Utils.sendPacket(this, i, 0);
 		}
+	}
+	
+	public void saveRecipe(){
+		int slot = 0;
+		boolean f = false;
+		for(;slot < 9;slot++){
+			if(saves.getStackInSlot(slot) == null){
+				f = true;
+				break;
+			}
+		}
+		if(!f){
+			slot = saves.slot;
+			if(saves.slot++ > 9)saves.slot = 0;
+		}
+		saves.setInventorySlotContents(slot, result);
+		saves.recipes[slot] = new Craft(this.craft);
+	}
+	
+	public void loadRecipes(int r){
+		craft = saves.recipes[r].getInventoryCrafter(this);
+		this.onInventoryChanged();
 	}
 	
 	//Inventory
@@ -262,6 +275,7 @@ public class CrafterEntity extends TileEntity implements IInventory{
 
 	@Override
 	public ItemStack getStackInSlot(int i) {
+		if(i == -1)return result;
 		return inventory[i];
 	}
 
@@ -295,6 +309,10 @@ public class CrafterEntity extends TileEntity implements IInventory{
 
 	@Override
 	public void setInventorySlotContents(int slot, ItemStack itemStack) {
+		if(slot == -1){
+			result = itemStack;
+			return;
+		}
 		inventory[slot] = itemStack;
 
 		if (itemStack != null && itemStack.stackSize > this.getInventoryStackLimit()) {
@@ -422,5 +440,7 @@ public class CrafterEntity extends TileEntity implements IInventory{
 		this.readFromNBT(pkt.data);
 		this.update();
 	}
+
+	
 
 }

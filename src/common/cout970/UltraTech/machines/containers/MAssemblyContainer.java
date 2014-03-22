@@ -1,7 +1,6 @@
 package common.cout970.UltraTech.machines.containers;
 
-import common.cout970.UltraTech.machines.tileEntities.MolecularAssemblyEntity;
-
+import common.cout970.UltraTech.TileEntities.Tier3.MolecularAssemblyEntity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -67,7 +66,7 @@ public class MAssemblyContainer extends Container{
 	{
 		super.addCraftingToCrafters(par1ICrafting);
 		par1ICrafting.sendProgressBarUpdate(this, 1, tileEntity.getEnergy());
-		par1ICrafting.sendProgressBarUpdate(this, 2, tileEntity.Progres);
+		par1ICrafting.sendProgressBarUpdate(this, 2, tileEntity.progres);
 	}
 
 	@Override

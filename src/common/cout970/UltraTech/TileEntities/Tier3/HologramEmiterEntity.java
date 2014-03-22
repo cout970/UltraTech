@@ -1,4 +1,4 @@
-package common.cout970.UltraTech.machines.tileEntities;
+package common.cout970.UltraTech.TileEntities.Tier3;
 
 import net.minecraft.util.AxisAlignedBB;
 import common.cout970.UltraTech.energy.api.Machine;

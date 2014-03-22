@@ -39,8 +39,8 @@ public class SteamTurbineEntity extends Machine implements IFluidTank,IFluidHand
 					this.drain(b.fill(ForgeDirection.UP , new FluidStack(FluidRegistry.getFluid("steam"),500), true),true);
 			}
 			if(Reactor != null){
-				if(Reactor.steam > 0){
-					if(Reactor.steam > 33000)Reactor.steam -= this.fill(new FluidStack(FluidRegistry.getFluid("steam"),500), true);
+				if(Reactor.steam > 500){
+					Reactor.steam -= this.fill(new FluidStack(FluidRegistry.getFluid("steam"),500), true);
 				}
 			}
 

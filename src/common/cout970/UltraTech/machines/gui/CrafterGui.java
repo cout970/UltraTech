@@ -29,7 +29,7 @@ public class CrafterGui extends GuiContainer{
 		int xStart = (width - xSize) / 2;
 		int yStart = (height - ySize) / 2;
 		this.drawTexturedModalRect(xStart, yStart, 0, 0, xSize, ySize);
-		if(entity.getStackInSlot(0) != null)this.drawTexturedModalRect(xStart+85, yStart+67, 177, 0, 9, 9);
+		if(entity.getStackInSlot(-1) != null)this.drawTexturedModalRect(xStart+85, yStart+67, 177, 0, 9, 9);
 		//draw needs not haves
 		GL11.glEnable(GL11.GL_BLEND);
 		//craft grid
@@ -60,9 +60,20 @@ public class CrafterGui extends GuiContainer{
 		int xStart = (width - xSize) / 2;
 		int yStart = (height - ySize) / 2;
 		entity.update();
+		if(entity.getStackInSlot(-1) != null){
+			if(isIn(mx,my, xStart+85, yStart+67, 9, 9)){
+				UT_Utils.sendPacket(entity, 0, 2);
+			}
+		}
+		for(int d =0;d<9;d++){
+			if(isIn(mx, my, xStart+8 + d * 18, yStart+6, 18,18))if(entity.saves.getStackInSlot(d) != null){
+				UT_Utils.sendPacket(entity, d, 3);
+			}
+		}
+		
 		if(isIn(mx,my,xStart+80, yStart+43,18,18)){
 			if(b == 0){
-				entity.craftItem();
+				UT_Utils.sendPacket(entity, 0, 1);
 			}else if(b == 1){
 				entity.emptyCraft();
 			}
@@ -77,7 +88,7 @@ public class CrafterGui extends GuiContainer{
 				if(isIn(mx,my,xStart+12+x*18, yStart+25+y*18,18,18)){
 					if(b == 0)entity.craft.setInventorySlotContents(x+y*3, i);
 					if(b == 1)entity.craft.setInventorySlotContents(x+y*3, null);
-					UT_Utils.sendPacket(entity, x+y*3, 0, 0);
+					UT_Utils.sendPacket(entity, x+y*3, 0);
 				}
 			}
 		}

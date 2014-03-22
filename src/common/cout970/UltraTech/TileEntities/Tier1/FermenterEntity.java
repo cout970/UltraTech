@@ -49,23 +49,16 @@ public class FermenterEntity extends Machine implements IInventory, IFluidHandle
 
 	@Override
 	public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
-		if(resource == null || water == null || juice == null)return 0;
-		int dir = from.ordinal();
-		if(dir != 0 && dir != 1){
-			if(FluidRegistry.getFluidName(resource.fluidID) == "juice"){
-				return juice.fill(resource, doFill);
-			}
-		}else{
-			if(FluidRegistry.getFluidName(resource).equals(FluidRegistry.WATER.getName())){
-				return water.fill(resource, doFill);
-			}
+		if(resource == null || water == null)return 0;
+		if(FluidRegistry.getFluidName(resource).equals(FluidRegistry.WATER.getName())){
+			return water.fill(resource, doFill);
 		}
 		return 0;
 	}
 
 	@Override
 	public FluidStack drain(ForgeDirection from, FluidStack resource, boolean doDrain) {
-		if(resource == null || water == null || juice == null)return null;
+		if(resource == null || juice == null)return null;
 		if(FluidRegistry.getFluidName(resource.fluidID) == "juice"){
 			return juice.drain(resource.amount, doDrain);
 		}
@@ -74,18 +67,13 @@ public class FermenterEntity extends Machine implements IInventory, IFluidHandle
 
 	@Override
 	public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain) {
-		if(maxDrain == 0 || water == null || juice == null)return null;
+		if(maxDrain == 0 || juice == null)return null;
 		return juice.drain(maxDrain, doDrain);
 	}
 
 	@Override
 	public boolean canFill(ForgeDirection from, Fluid fluid) {
-		int dir = from.ordinal();
-		if(dir != 0 && dir != 1){
-			if(fluid.getName() == "juice")return true;
-		}else{
-			if(fluid.getName() == "water")return true;
-		}
+		if(fluid.getName() == "water")return true;
 		return false;
 	}
 

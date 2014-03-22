@@ -10,7 +10,6 @@ import common.cout970.UltraTech.blocks.*;
 import common.cout970.UltraTech.blocks.models.WindMill;
 import common.cout970.UltraTech.energy.api.ElectricConductor;
 import common.cout970.UltraTech.itemBlock.*;
-import common.cout970.UltraTech.machines.tileEntities.*;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraft.block.Block;
@@ -108,8 +107,6 @@ public class BlockManager {
 		GameRegistry.registerTileEntity(GeneratorEntity.class, "generator_UT");
 		GameRegistry.registerTileEntity(MinerEntity.class, "miner_UT");
 		GameRegistry.registerTileEntity(ReactorWallEntity.class, "reactorwall_UT");
-		GameRegistry.registerTileEntity(SenderEntity.class, "sender_UT");
-		GameRegistry.registerTileEntity(ReciverEntity.class, "reciver_UT");
 		GameRegistry.registerTileEntity(ReactorTankEntity.class, "ReactorTank_UT");
 		GameRegistry.registerTileEntity(SteamTurbineEntity.class, "SteamTurbine_UT");
 		GameRegistry.registerTileEntity(WaterBlockEntity.class, "WaterBlock_UT");
@@ -127,6 +124,7 @@ public class BlockManager {
 		GameRegistry.registerTileEntity(EnergyTransformer.class, "TransFormer_UT");
 		GameRegistry.registerTileEntity(TesseractEntity.class, "Tesseract_UT");
 		GameRegistry.registerTileEntity(FermenterEntity.class, "Fermenter_UT");
+		GameRegistry.registerTileEntity(ClimateEntity.class, "Climate_UT");
 		
 		nameBlocks();
 	}

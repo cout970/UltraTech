@@ -1,24 +1,12 @@
 package common.cout970.UltraTech.handlers;
 
 
-import common.cout970.UltraTech.TileEntities.Tier1.CVD_Entity;
-import common.cout970.UltraTech.TileEntities.Tier1.ChargeStationEntity;
-import common.cout970.UltraTech.TileEntities.Tier1.CrafterEntity;
-import common.cout970.UltraTech.TileEntities.Tier1.FermenterEntity;
-import common.cout970.UltraTech.TileEntities.Tier1.GeneratorEntity;
-import common.cout970.UltraTech.TileEntities.Tier1.StorageTier1;
-import common.cout970.UltraTech.TileEntities.Tier2.CutterEntity;
-import common.cout970.UltraTech.TileEntities.Tier2.FurnaceEntity;
-import common.cout970.UltraTech.TileEntities.Tier2.PurifierEntity;
-import common.cout970.UltraTech.TileEntities.Tier2.StorageTier2;
-import common.cout970.UltraTech.TileEntities.Tier3.MinerEntity;
-import common.cout970.UltraTech.TileEntities.Tier3.ReactorEntity;
-import common.cout970.UltraTech.TileEntities.Tier3.StorageTier3;
-import common.cout970.UltraTech.TileEntities.Tier3.TesseractEntity;
+import common.cout970.UltraTech.TileEntities.Tier1.*;
+import common.cout970.UltraTech.TileEntities.Tier2.*;
+import common.cout970.UltraTech.TileEntities.Tier3.*;
 import common.cout970.UltraTech.energy.api.Machine;
 import common.cout970.UltraTech.machines.containers.*;
 import common.cout970.UltraTech.machines.gui.*;
-import common.cout970.UltraTech.machines.tileEntities.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -95,6 +83,10 @@ public class GuiHandler implements IGuiHandler{
 		if(tileEntity instanceof FermenterEntity){
 			return new FermenterContainer(player.inventory, (FermenterEntity) tileEntity);
 		}
+		//HologramEmiter
+		if(tileEntity instanceof HologramEmiterEntity){
+			return new HologramEmiterContainer(player.inventory, (HologramEmiterEntity) tileEntity);
+		}
 		return null;
 	}
 
@@ -167,7 +159,10 @@ public class GuiHandler implements IGuiHandler{
 		if(tileEntity instanceof FermenterEntity){
 			return new FermenterGui(new FermenterContainer(player.inventory, (FermenterEntity) tileEntity), (FermenterEntity) tileEntity);
 		}
-
+		//HologramEmiter
+		if(tileEntity instanceof HologramEmiterEntity){
+			return new HologramEmiterGui(new HologramEmiterContainer(player.inventory, (HologramEmiterEntity) tileEntity), (HologramEmiterEntity) tileEntity);
+		}
 		return null;
 	}
 

@@ -4,6 +4,7 @@ import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 
 import common.cout970.UltraTech.TileEntities.Tier1.CrafterEntity;
+import common.cout970.UltraTech.TileEntities.Tier1.Printer3DEntity;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
@@ -23,7 +24,7 @@ public class PacketHandler implements IPacketHandler{
 		DataInputStream inputStream = new DataInputStream(new ByteArrayInputStream(packet.data));
 		int tipe = 0;
 		int x,y,z;
-		int slot,inventory;
+		int slot;
 		int id=0, amount=0, meta=0;
 		boolean null_Item = false;
 		try{
@@ -33,8 +34,24 @@ public class PacketHandler implements IPacketHandler{
 			x = inputStream.readInt();
 			y = inputStream.readInt();
 			z = inputStream.readInt();
-			if(tipe == 0){//setItemStackinSlot
-				inventory = inputStream.readInt();
+
+			//getTile
+			TileEntity te;
+			if(player instanceof EntityPlayerMP){
+				EntityPlayerMP playerSP = (EntityPlayerMP)player;
+				te = playerSP.worldObj.getBlockTileEntity(x, y, z);
+			}else{
+				EntityPlayerSP playerSP = (EntityPlayerSP)player;
+				te = playerSP.worldObj.getBlockTileEntity(x, y, z);
+			}
+
+			if(tipe == -1){
+				if(te instanceof Printer3DEntity){
+					((Printer3DEntity) te).color = inputStream.readInt();
+					((Printer3DEntity) te).update = true;
+				}
+			}else if(tipe == 0){
+				//setItemStackinSlot
 				slot = inputStream.readInt();
 				id = inputStream.readInt();
 				if(id == 0){
@@ -43,16 +60,6 @@ public class PacketHandler implements IPacketHandler{
 					amount = inputStream.readInt();
 					meta = inputStream.readInt();
 				}
-				//getTile
-				TileEntity te;
-				if(player instanceof EntityPlayerMP){
-					EntityPlayerMP playerSP = (EntityPlayerMP)player;
-					te = playerSP.worldObj.getBlockTileEntity(x, y, z);
-				}else{
-					EntityPlayerSP playerSP = (EntityPlayerSP)player;
-					te = playerSP.worldObj.getBlockTileEntity(x, y, z);
-				}
-				//proces info
 
 				if(te instanceof CrafterEntity){
 					CrafterEntity c = (CrafterEntity) te;
@@ -62,23 +69,26 @@ public class PacketHandler implements IPacketHandler{
 					}else{
 						item = new ItemStack(id, amount, meta);
 					}
-					if(inventory == 0)c.craft.setInventorySlotContents(slot, item);
-					if(inventory == 1)c.saves.setInventorySlotContents(slot, item);
+					c.craft.setInventorySlotContents(slot, item);
 					c.update();
 				}
 			}else if(tipe == 1){//craft()
-				//getTile
-				TileEntity te;
-				if(player instanceof EntityPlayerMP){
-					EntityPlayerMP playerSP = (EntityPlayerMP)player;
-					te = playerSP.worldObj.getBlockTileEntity(x, y, z);
-				}else{
-					EntityPlayerSP playerSP = (EntityPlayerSP)player;
-					te = playerSP.worldObj.getBlockTileEntity(x, y, z);
-				}
+				
 				if(te instanceof CrafterEntity){
 					CrafterEntity c = (CrafterEntity) te;
 					c.craft();
+					c.update();
+				}
+			}else if(tipe == 2){//save recipe
+				if(te instanceof CrafterEntity){
+					CrafterEntity c = (CrafterEntity) te;
+					c.saveRecipe();
+					c.update();
+				}
+			}else if(tipe == 3){
+				if(te instanceof CrafterEntity){
+					CrafterEntity c = (CrafterEntity) te;
+					c.loadRecipes(inputStream.readInt());
 					c.update();
 				}
 			}

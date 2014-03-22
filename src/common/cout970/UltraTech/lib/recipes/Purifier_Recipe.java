@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import common.cout970.UltraTech.TileEntities.Tier2.PurifierEntity;
-import common.cout970.UltraTech.lib.ItemsUtil;
+import common.cout970.UltraTech.lib.UT_Utils;
 import net.minecraft.item.ItemStack;
 
 public class Purifier_Recipe{
@@ -24,7 +24,7 @@ public class Purifier_Recipe{
 		if(inv == null)return false;
 		for(Purifier_Recipe a:recipes){
 			if(inv.getStackInSlot(0) != null)
-			if(ItemsUtil.areEcuals(a.getInput(), inv.getStackInSlot(0),true))if(inv.getStackInSlot(1)==null)return true;
+			if(UT_Utils.areEcuals(a.getInput(), inv.getStackInSlot(0),true))if(inv.getStackInSlot(1)==null)return true;
 			else if(inv.getStackInSlot(1).itemID == a.getOutput().itemID)return true;
 		}
 		return false;
@@ -33,7 +33,7 @@ public class Purifier_Recipe{
 	public static ItemStack getCraftingResult(PurifierEntity inv){
 		if(inv != null)if(inv.getStackInSlot(0) != null)
 			for(Purifier_Recipe a:recipes){
-			if(ItemsUtil.areEcuals(a.getInput(), inv.getStackInSlot(0),true))
+			if(UT_Utils.areEcuals(a.getInput(), inv.getStackInSlot(0),true))
 			return a.getOutput();
 		}
 		return null;
@@ -57,7 +57,7 @@ public class Purifier_Recipe{
 	public static ItemStack getResult(ItemStack itemstack) {
 		if(itemstack == null)return null;
 		for(Purifier_Recipe a:recipes){
-			if(ItemsUtil.areEcuals(a.getInput(), itemstack,true))
+			if(UT_Utils.areEcuals(a.getInput(), itemstack,true))
 				return a.getOutput();
 		}
 		return null;

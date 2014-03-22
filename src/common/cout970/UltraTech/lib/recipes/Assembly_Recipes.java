@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import common.cout970.UltraTech.machines.tileEntities.MolecularAssemblyEntity;
+import common.cout970.UltraTech.TileEntities.Tier3.MolecularAssemblyEntity;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

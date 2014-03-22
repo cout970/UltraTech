@@ -5,11 +5,11 @@ import java.util.Random;
 
 import common.cout970.UltraTech.TileEntities.Tier2.CutterEntity;
 import common.cout970.UltraTech.TileEntities.Tier2.FurnaceEntity;
+import common.cout970.UltraTech.TileEntities.Tier2.PresuricerEntity;
 import common.cout970.UltraTech.TileEntities.Tier2.PurifierEntity;
 import common.cout970.UltraTech.core.UltraTech;
 import common.cout970.UltraTech.energy.api.EnergyUtils;
 import common.cout970.UltraTech.energy.api.Machine;
-import common.cout970.UltraTech.machines.tileEntities.PresuricerEntity;
 import common.cout970.UltraTech.misc.ISpeedUpgradeabel;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

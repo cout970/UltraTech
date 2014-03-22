@@ -2,8 +2,8 @@ package common.cout970.UltraTech.machines.renders;
 
 import org.lwjgl.opengl.GL11;
 
+import common.cout970.UltraTech.TileEntities.Tier2.EngineEntity;
 import common.cout970.UltraTech.machines.models.NewEngine;
-import common.cout970.UltraTech.machines.tileEntities.EngineEntity;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.Entity;
@@ -34,20 +34,10 @@ public class RenderEngine extends TileEntitySpecialRenderer{
 	}
 
 	private void setRotation(EngineEntity e) {
-		//animation
-//		if(e.engOut){
-//			if(e.engPos < 40){
-//				e.engPos+=e.speed;
-//			}else e.engOut = false;
-//		}else{
-//			if(e.engPos > 0){
-//				e.engPos-=e.speed;
-//			}else e.engOut = true;
-//		}
 		//rotation
 		switch(e.direction){
 		case NORTH:{
-			GL11.glRotatef(0, 0, 1, 0);			((ModelRenderer) this.model.boxList.get(2)).offsetZ = 0.4f-((float) e.engPos)/100f;
+			GL11.glRotatef(0, 0, 1, 0);			//((ModelRenderer) this.model.boxList.get(2)).offsetZ = 0.4f-((float) e.engPos)/100f;
 			break;
 		}
 		case SOUTH:{
@@ -77,7 +67,22 @@ public class RenderEngine extends TileEntitySpecialRenderer{
 			GL11.glTranslated(0, -1, 1);
 		}
 		}
-		if(e.working)((ModelRenderer) this.model.boxList.get(2)).rotateAngleZ +=0.05f;
+		if(e.engOn){
+			e.pos += e.speed*getDelta(e);
+			e.speed += 0.0002;
+			if(e.speed > 0.01)e.speed= 0.01f;
+			((ModelRenderer) this.model.boxList.get(2)).rotateAngleZ = e.pos;
+		}else{
+			e.speed -= 0.0001;
+			if(e.speed < 0)e.speed=0;
+		}
+	}
+
+	public long getDelta(EngineEntity te){
+		long aux = System.currentTimeMillis();
+		long delta = System.currentTimeMillis()-te.oldTime;
+		te.oldTime = aux;
+		return delta;
 	}
 
 }

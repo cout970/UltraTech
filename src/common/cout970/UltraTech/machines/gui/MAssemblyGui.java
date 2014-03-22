@@ -2,8 +2,7 @@ package common.cout970.UltraTech.machines.gui;
 
 import org.lwjgl.opengl.GL11;
 
-import common.cout970.UltraTech.machines.tileEntities.MolecularAssemblyEntity;
-
+import common.cout970.UltraTech.TileEntities.Tier3.MolecularAssemblyEntity;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -28,7 +27,7 @@ public class MAssemblyGui extends GuiContainer{
 		this.drawTexturedModalRect(xStart, yStart, 0, 0, xSize, ySize);
 		
 		//progres bar
-		int i1 = (int) this.tile.Progres*24/1000;
+		int i1 = (int) this.tile.progres*24/1000;
 		this.drawTexturedModalRect(xStart + 118, yStart + 33, 176, 14, i1, 16);
 
 		

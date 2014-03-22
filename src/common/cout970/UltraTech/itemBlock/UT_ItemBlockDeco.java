@@ -39,17 +39,8 @@ public class UT_ItemBlockDeco extends UT_ItemBlock{
 	public void addInformation(ItemStack is, EntityPlayer par2EntityPlayer, List l, boolean par4) {
 		super.addInformation(is, par2EntityPlayer, l, par4);
 		try{
-			l.add("Colored in a 3D printer");
+			l.add("use a 3D printer to change the color");
 		}catch(Exception e){}
 	}
 	
-	@Override
-	public int getItemEnchantability() {
-		return 0;
-	}
-	
-	@Override
-	public boolean isRepairable() {
-		return false;
-	}
 }

@@ -4,7 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import common.cout970.UltraTech.machines.tileEntities.Printer3DEntity;
+import common.cout970.UltraTech.TileEntities.Tier1.Printer3DEntity;
 import cpw.mods.fml.common.network.PacketDispatcher;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -106,6 +106,7 @@ public class Printer3DContainer extends Container{
 		ByteArrayOutputStream bytes = new ByteArrayOutputStream();
 		DataOutputStream data = new DataOutputStream(bytes);
 		try {
+			data.writeInt(-1);
 			data.writeInt(tile.xCoord);
 			data.writeInt(tile.yCoord);
 			data.writeInt(tile.zCoord);
@@ -113,11 +114,7 @@ public class Printer3DContainer extends Container{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
-		Packet250CustomPayload packet = new Packet250CustomPayload();
-		packet.channel = "UltraTech";
-		packet.data = bytes.toByteArray();
-		packet.length = packet.data.length;
+		Packet250CustomPayload packet = new Packet250CustomPayload("UltraTech",bytes.toByteArray());
 		return packet;
 	}
 }

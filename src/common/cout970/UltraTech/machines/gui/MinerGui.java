@@ -3,7 +3,7 @@ package common.cout970.UltraTech.machines.gui;
 import org.lwjgl.opengl.GL11;
 
 import common.cout970.UltraTech.TileEntities.Tier3.MinerEntity;
-import common.cout970.UltraTech.lib.RenderUtil;
+import common.cout970.UltraTech.lib.UT_Utils;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -35,17 +35,17 @@ public class MinerGui extends GuiContainer{
 		this.drawTexturedModalRect(xStart+9, yStart+105+(50-p), 0, 0, 25, p);
 		
 		//speed
-		this.drawCenteredString(fontRenderer, (entity.speed/10)+"x", xStart+21, yStart+167, RenderUtil.RGBtoInt(255, 255, 255));
+		this.drawCenteredString(fontRenderer, (entity.speed/10)+"x", xStart+21, yStart+167, UT_Utils.RGBtoInt(255, 255, 255));
 		
 		//range
-		this.drawCenteredString(fontRenderer, (entity.height*2+1)+"x"+(entity.widht*2+1), xStart+225, yStart+167, RenderUtil.RGBtoInt(255, 255, 255));
+		this.drawCenteredString(fontRenderer, (entity.height*2+1)+"x"+(entity.widht*2+1), xStart+225, yStart+167, UT_Utils.RGBtoInt(255, 255, 255));
 		
 		//upgrades
 		String line1 = "Fortune Upgrades "+entity.fortuneUpgrades+"x"+"   "+"AutoEject "+entity.eject;
 		int to = (entity.MinigSize()-entity.current);
 		String line2 = "Blocks to Mine "+((to > 0)? to : 0)+" Mined "+entity.current;
-		this.drawCenteredString(fontRenderer, line1, xStart+124, yStart+82, RenderUtil.RGBtoInt(255, 255, 255));
-		this.drawCenteredString(fontRenderer, line2, xStart+124, yStart+92, RenderUtil.RGBtoInt(255, 255, 255));
+		this.drawCenteredString(fontRenderer, line1, xStart+124, yStart+82, UT_Utils.RGBtoInt(255, 255, 255));
+		this.drawCenteredString(fontRenderer, line2, xStart+124, yStart+92, UT_Utils.RGBtoInt(255, 255, 255));
 	}
 
 }

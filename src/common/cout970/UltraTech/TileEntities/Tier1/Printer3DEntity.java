@@ -1,4 +1,4 @@
-package common.cout970.UltraTech.machines.tileEntities;
+package common.cout970.UltraTech.TileEntities.Tier1;
 
 import common.cout970.UltraTech.itemBlock.UT_ItemBlockDeco;
 import net.minecraft.entity.player.EntityPlayer;
@@ -28,6 +28,8 @@ public class Printer3DEntity extends TileEntity implements IInventory{
 			inventory[0].setItemDamage(color);
 		}
 	}
+	
+	//inventory
 	
 	@Override
 	public int getSizeInventory() {
@@ -108,6 +110,8 @@ public class Printer3DEntity extends TileEntity implements IInventory{
 	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
 		return true;
 	}
+	
+	//save & load
 	
 	@Override
 	public void readFromNBT(NBTTagCompound nbtTagCompound) {

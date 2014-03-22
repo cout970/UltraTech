@@ -1,7 +1,8 @@
-package common.cout970.UltraTech.machines.tileEntities;
+package common.cout970.UltraTech.TileEntities.Tier3;
 
 
 import common.cout970.UltraTech.energy.api.Machine;
+import common.cout970.UltraTech.lib.GraficCost;
 import common.cout970.UltraTech.lib.recipes.Assembly_Recipes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
@@ -15,17 +16,41 @@ public class MolecularAssemblyEntity extends Machine implements IInventory{
 
 	private ItemStack[] inventory;
 	public static final int INVENTORY_SIZE = 11;
-	public int Progres = 0;
+	public int progres = 0;
 	public boolean hasrecipe= false;
 	private int speed = 10;
-	private boolean flag= false;
+	private boolean hasEnergy;
 	
 	public MolecularAssemblyEntity(){
 		inventory = new ItemStack[INVENTORY_SIZE];
 	}
 
 	public void updateEntity(){
+		if(worldObj.isRemote)return;
+		boolean flag = false;
 
+		if(!hasEnergy){
+			hasEnergy = getEnergy() >= GraficCost.FurnaceCost;
+		}
+
+		if(progres > 0){
+			removeEnergy(GraficCost.FurnaceCost*speed/1000);
+		}
+		if (hasEnergy && hasrecipe){
+			this.progres += speed;
+			if (this.progres >= 1000)
+			{
+				this.progres = 0;
+				craft();
+				flag = true;
+				hasEnergy = false;
+			}
+		}else{
+			this.progres = 0;
+		}
+		if (flag){
+			this.onInventoryChanged();		
+		}
 		if(!hasrecipe){
 			if(Assembly_Recipes.matches(this)){
 				ItemStack a = Assembly_Recipes.getCraftingResult(this);
@@ -34,22 +59,7 @@ public class MolecularAssemblyEntity extends Machine implements IInventory{
 			}else if(this.getStackInSlot(10) != null){
 				setInventorySlotContents(10, null);
 			}
-		}else{
-			if(!flag){
-//				flag = this.Energy >= (1000f/speed)*5f;
-			}
 		}
-
-		if(flag){
-			Progres+=speed;
-//			this.loseEnergy(5);
-			if(Progres >= 1000){
-				Progres = 0;
-				craft();
-				flag = false;
-			}
-		}
-
 	}
 
 
@@ -130,7 +140,7 @@ public class MolecularAssemblyEntity extends Machine implements IInventory{
 
 	@Override
 	public String getInvName() {
-		return "Ultra Tech Furnace";
+		return "Molecular Assembly";
 	}
 
 	@Override
@@ -158,56 +168,52 @@ public class MolecularAssemblyEntity extends Machine implements IInventory{
 	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
 		return i == 10 || i == 11 ? false : true;
 	}
+	
+	//Save & Load
+	
 	@Override
 	public void readFromNBT(NBTTagCompound nbtTagCompound) {
 
-        super.readFromNBT(nbtTagCompound);
-        NBTTagList tagList = nbtTagCompound.getTagList("Inventory");
-        inventory = new ItemStack[this.getSizeInventory()];
-        for (int i = 0; i < tagList.tagCount(); ++i) {
-        	NBTTagCompound tagCompound = (NBTTagCompound) tagList.tagAt(i);
-        	byte slot = tagCompound.getByte("Slot");
-        	if (slot >= 0 && slot < inventory.length) {
-        		inventory[slot] = ItemStack.loadItemStackFromNBT(tagCompound);
-        	}
-        	
-        }
+		super.readFromNBT(nbtTagCompound);
+		NBTTagList tagList = nbtTagCompound.getTagList("Inventory");
+		inventory = new ItemStack[this.getSizeInventory()];
+		for (int i = 0; i < tagList.tagCount(); ++i) {
+			NBTTagCompound tagCompound = (NBTTagCompound) tagList.tagAt(i);
+			byte slot = tagCompound.getByte("Slot");
+			if (slot >= 0 && slot < inventory.length) {
+				inventory[slot] = ItemStack.loadItemStackFromNBT(tagCompound);
+			}
+
+		}
 	}
+
+	@Override
+	public void writeToNBT(NBTTagCompound nbtTagCompound) {
+
+		super.writeToNBT(nbtTagCompound);
+		NBTTagList tagList = new NBTTagList();
+		for (int currentIndex = 0; currentIndex < inventory.length; ++currentIndex) {
+			if (inventory[currentIndex] != null) {
+				NBTTagCompound tagCompound = new NBTTagCompound();
+				tagCompound.setByte("Slot", (byte) currentIndex);
+				inventory[currentIndex].writeToNBT(tagCompound);
+				tagList.appendTag(tagCompound);
+			}
+		}
+
+		nbtTagCompound.setTag("Inventory", tagList);
+	}
+
+	//Synchronization
 	
-	  @Override
-	    public void writeToNBT(NBTTagCompound nbtTagCompound) {
+	public void sendGUINetworkData(Container container, ICrafting iCrafting) {
+		super.sendGUINetworkData(container, iCrafting);
+		iCrafting.sendProgressBarUpdate(container, 2, progres);
+	}
 
-	        super.writeToNBT(nbtTagCompound);
-	        NBTTagList tagList = new NBTTagList();
-	        for (int currentIndex = 0; currentIndex < inventory.length; ++currentIndex) {
-	        	if (inventory[currentIndex] != null) {
-	        		NBTTagCompound tagCompound = new NBTTagCompound();
-	        		tagCompound.setByte("Slot", (byte) currentIndex);
-	        		inventory[currentIndex].writeToNBT(tagCompound);
-	        		tagList.appendTag(tagCompound);
-	        	}
-	        }
-	        
-	        nbtTagCompound.setTag("Inventory", tagList);
-	  }
-
-	  public void sendGUINetworkData(Container container, ICrafting iCrafting) {
-//  		iCrafting.sendProgressBarUpdate(container, 1, Energy);
-  		iCrafting.sendProgressBarUpdate(container, 2, Progres);
-  	}
-
-  	public void getGUINetworkData(int id, int value) {
-  		switch(id){
-  		
-  		case 1:{
-//  			Energy = value;
-  			break;
-  		}
-  	case 2:{
-  		Progres = value;
-  		break;
-  	}
-  	}
+	public void getGUINetworkData(int id, int value) {
+		super.getGUINetworkData(id, value);
+		if(id == 2)progres = value;
 	}
 
 }

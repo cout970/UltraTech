@@ -98,14 +98,6 @@ public class RenderUtil {
 		t.addVertexWithUV(x, y, 0, u, v1);
 		t.draw();
 	}
-	public static int RGBtoInt(int r,int g,int b){
-		int color = 0;
-		color += r*65536;
-		color += g * 256;
-		color += b;
-		return color;
-	}
-	
 	public static void setGLColorFromInt(int color) {
 		float red = (float) (color >> 16 & 255) / 255.0F;
 		float green = (float) (color >> 8 & 255) / 255.0F;

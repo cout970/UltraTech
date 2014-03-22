@@ -6,7 +6,7 @@ import java.util.List;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 import common.cout970.UltraTech.TileEntities.Tier2.CutterEntity;
-import common.cout970.UltraTech.lib.ItemsUtil;
+import common.cout970.UltraTech.lib.UT_Utils;
 
 public class Cuter_Recipes{
 	
@@ -23,7 +23,7 @@ public class Cuter_Recipes{
 		if(cuterEntity == null)return false;
 		for(Cuter_Recipes a:recipes){
 			if(cuterEntity.getStackInSlot(0) != null){
-				if(ItemsUtil.areEcuals(a.getInput(), cuterEntity.getStackInSlot(0),true)){
+				if(UT_Utils.areEcuals(a.getInput(), cuterEntity.getStackInSlot(0),true)){
 					if(cuterEntity.getStackInSlot(1)==null){
 						return true;
 					}else{
@@ -38,7 +38,7 @@ public class Cuter_Recipes{
 	public static ItemStack getCraftingResult(CutterEntity cuterEntity){
 		if(cuterEntity != null)if(cuterEntity.getStackInSlot(0) != null)
 			for(Cuter_Recipes a:recipes){
-			if(ItemsUtil.areEcuals(a.getInput(), cuterEntity.getStackInSlot(0),true))
+			if(UT_Utils.areEcuals(a.getInput(), cuterEntity.getStackInSlot(0),true))
 			return a.getOutput();
 		}
 		return null;
