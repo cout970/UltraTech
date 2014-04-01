@@ -3,7 +3,7 @@ package common.cout970.UltraTech.handlers;
 import java.util.Random;
 
 import common.cout970.UltraTech.managers.BlockManager;
-import common.cout970.UltraTech.managers.CompatibilityManager;
+import common.cout970.UltraTech.managers.OreGeneration;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
@@ -41,25 +41,25 @@ public class WorldGen implements IWorldGenerator{
 	private void generateSurface(World world, Random random, int i, int j) {
 		int id = BlockManager.Ores.blockID;
 		
-		if(CompatibilityManager.gen.GenAluminum)
-		genOre(world, random, i, j, 20, id, 1, 8, 100);
-		if(CompatibilityManager.gen.GenCopper)
-		genOre(world, random, i, j, 15, id, 2, 6, 100);
-		if(CompatibilityManager.gen.GenTin)
-		genOre(world, random, i, j, 10, id, 3, 4, 100);
+		if(OreGeneration.Aluminum)
+		genOre(world, random, i, j, OreGeneration.unitsAluminum, id, 1, OreGeneration.amountAluminum, OreGeneration.heightAluminum);
+		if(OreGeneration.Copper)
+		genOre(world, random, i, j, OreGeneration.unitsCopper, id, 2, OreGeneration.amountCopper, OreGeneration.heightCopper);
+		if(OreGeneration.Tin)
+		genOre(world, random, i, j, OreGeneration.unitsTin, id, 3, OreGeneration.amountTin, OreGeneration.heightTin);
 		
 		boolean lead = false,silver = false;
-		if(CompatibilityManager.gen.GenLead)lead = true;
-		if(CompatibilityManager.gen.GenSilver)silver = true;
+		if(OreGeneration.Lead)lead = true;
+		if(OreGeneration.Silver)silver = true;
 		
-		for(int k = 0; k < 6; k++) {
+		for(int k = 0; k < OreGeneration.unitsLead; k++) {
 			int firstBlockXCoord = i + random.nextInt(16);
-			int firstBlockYCoord = random.nextInt(20);
+			int firstBlockYCoord = random.nextInt(OreGeneration.heightLead);
 			int firstBlockZCoord = j + random.nextInt(16);
 			if(lead)
-			(new WorldGenMinable(id,4,4,Block.stone.blockID)).generate(world, random, firstBlockXCoord, firstBlockYCoord, firstBlockZCoord);
+			(new WorldGenMinable(id,4,OreGeneration.amountSilver,Block.stone.blockID)).generate(world, random, firstBlockXCoord, firstBlockYCoord, firstBlockZCoord);
 			if(silver)
-			(new WorldGenMinable(id,5,4,Block.stone.blockID)).generate(world, random, firstBlockXCoord, firstBlockYCoord, firstBlockZCoord);
+			(new WorldGenMinable(id,5,OreGeneration.amountLead,Block.stone.blockID)).generate(world, random, firstBlockXCoord, firstBlockYCoord, firstBlockZCoord);
 		}
 	}
 	

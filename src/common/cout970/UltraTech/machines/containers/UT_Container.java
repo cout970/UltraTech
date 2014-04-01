@@ -1,12 +1,12 @@
 package common.cout970.UltraTech.machines.containers;
 
 import common.cout970.UltraTech.energy.api.Machine;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 
 public class UT_Container extends Container{
@@ -52,5 +52,41 @@ public class UT_Container extends Container{
 	@Override
 	public void updateProgressBar(int i, int j) {
 		if(tileEntity != null)tileEntity.getGUINetworkData(i, j);
+	}
+	
+	public ItemStack transfer(EntityPlayer player, int slot,int inv) {
+		ItemStack aux = null;
+		Slot current = (Slot)this.inventorySlots.get(slot);
+		
+		if (current != null && current.getHasStack()){
+			ItemStack itemstack = current.getStack();
+			aux = itemstack.copy();
+			
+			if(slot < inv){//in the machine slots
+				if(!mergeItemStack(itemstack, inv, 36+inv, false)){
+					return null;
+				}
+				current.onSlotChange(itemstack, aux);
+			}else{//in the inventoryplayer slots
+				if (slot >= inv && slot < 27+inv){
+                    if (!this.mergeItemStack(itemstack, 0, inv, false)){
+                        return null;
+                    }
+                }else if (slot >= 27+inv && slot < 36+inv){//in the player tiem bar
+                	if(!this.mergeItemStack(itemstack, 0, inv, false)){
+                		return null;
+                	}
+                }
+				current.onSlotChanged();
+			}
+			if (itemstack.stackSize == 0){
+				current.putStack((ItemStack)null);
+			}
+			if (itemstack.stackSize == aux.stackSize){
+				return null;
+			}
+			current.onPickupFromSlot(player, itemstack);
+		}
+		return null;
 	}
 }

@@ -44,24 +44,13 @@ public class ItemManager {
 		Reg("Plate", "Plate", false);
 		
 		Reg("GrafenoPlate", "Grafeno Plate", true);
-		Reg("CarbonPlate", "Carbon Plate", true);
-		Reg("CarbonFiber", "Carbon Fiber", true);
-		
-		//cables
-		Reg("RedstoneCable", "Redstone Cable", true);
-		Reg("GrafenoCable", "Grafeno Cable", true);
-		Reg("OpticFiber", "Optic Fiber", true);
-		Reg("AlloyCable", "Alloy Cable", true);
 		
 		//pieces
-		Reg("EnergyTransmiter", "Energy Transmiter", true);
 		Reg("HeatCoil", "Heat Coil", true);
 		Reg("RawSilicon", "Raw Silicon", true);
 		Reg("Radionite", "Radionite", true);
 		Reg("RawMeal", "Raw Meal", true);
-		Reg("LapisPearl", "Lapis Pearl", true);
-		Reg("Filter", "Filter", true);
-		Reg("SolarPanel", "SolarPanel", true);
+		Reg("SolarPanel", "Solar Panel", true);
 		Reg("Fan", "Fan", true);
 		Reg("Coil", "Coil", true);
 		Reg("AdvCircuit", "Advanced Circuit", true);
@@ -69,7 +58,7 @@ public class ItemManager {
 		Reg("Motor", "Motor", true);
 		
 		//upgrades
-		Reg("UpgradeBase", "UpgradeBase", true);
+		Reg("UpgradeBase", "Upgrade Base", true);
 		Reg("SpeedUpgrade", "Speed Upgrade", false);
 		Reg("MiningUpgrade", "Mining Upgrade", false);
 		Reg("RangeUpgrade", "Range Upgrade", false);

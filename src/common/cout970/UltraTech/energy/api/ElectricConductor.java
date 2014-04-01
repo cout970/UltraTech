@@ -2,7 +2,7 @@ package common.cout970.UltraTech.energy.api;
 
 import java.util.Arrays;
 
-import common.cout970.UltraTech.lib.GraficCost.MachineTier;
+import common.cout970.UltraTech.lib.EnergyCosts.MachineTier;
 
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;

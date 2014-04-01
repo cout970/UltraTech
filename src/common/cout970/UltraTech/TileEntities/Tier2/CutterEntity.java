@@ -1,8 +1,8 @@
 package common.cout970.UltraTech.TileEntities.Tier2;
 
 import common.cout970.UltraTech.energy.api.Machine;
-import common.cout970.UltraTech.lib.GraficCost;
-import common.cout970.UltraTech.lib.GraficCost.MachineTier;
+import common.cout970.UltraTech.lib.EnergyCosts;
+import common.cout970.UltraTech.lib.EnergyCosts.MachineTier;
 import common.cout970.UltraTech.lib.recipes.Cuter_Recipes;
 import common.cout970.UltraTech.managers.ItemManager;
 import common.cout970.UltraTech.misc.ISpeedUpgradeabel;
@@ -34,11 +34,11 @@ public class CutterEntity extends Machine implements IInventory,ISpeedUpgradeabe
 			boolean flag = false;
 
 			if(!hasEnergy){
-				hasEnergy = getEnergy() >= GraficCost.CutterCost;
+				hasEnergy = getEnergy() >= EnergyCosts.CutterCost;
 			}
 
 			if(progres > 0){
-				removeEnergy(GraficCost.CutterCost*speed/1000);
+				removeEnergy(EnergyCosts.CutterCost*speed/1000);
 			}
 			if (hasEnergy && Cuter_Recipes.matches(this))
 			{

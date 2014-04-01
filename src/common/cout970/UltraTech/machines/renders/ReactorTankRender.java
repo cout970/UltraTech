@@ -18,7 +18,7 @@ public class ReactorTankRender extends TileEntitySpecialRenderer{
 		if(tileentity != null && Minecraft.getMinecraft().renderEngine != null){
 			int a = ((ReactorTankEntity)tileentity).getFluidAmount();
 			int b =	((ReactorTankEntity)tileentity).getCapacity();
-			bindTexture(new ResourceLocation("ultratech:textures/misc/water2.png"));
+			bindTexture(new ResourceLocation("ultratech:textures/misc/fluids/water.png"));
 			float fill = (float)a/(float)b;
 			RenderUtil.cube(x, y, z,fill);
 		}

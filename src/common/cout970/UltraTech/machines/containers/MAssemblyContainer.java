@@ -92,7 +92,7 @@ public class MAssemblyContainer extends Container{
 			ItemStack stackInSlot = slotObject.getStack();
 			stack = stackInSlot.copy();
 			if (slot < 9) {
-				if (!this.mergeItemStack(stackInSlot, 11, 35, true)) {
+				if (!this.mergeItemStack(stackInSlot, 11, 38+9, true)) {
 					return null;
 				}
 			}

@@ -43,17 +43,18 @@ public class Machine extends ElectricConductor implements IEnergy{
 		if(a.getEnergy() > 0){
 			int space = b.maxEnergy()-b.getEnergy();
 			int flow = Math.min(a.maxFlow(), b.maxFlow());
-
 			if(space > 0){
-				if(a.getEnergy() > flow && space > flow){
-					a.removeEnergy(flow);
-					b.addEnergy(flow);
-				}else if(a.getEnergy() >= space){
-					a.removeEnergy(space);
-					b.addEnergy(space);
-				}else{
-					b.addEnergy(a.getEnergy());
-					a.removeEnergy(a.getEnergy());
+				if(new EnergyPathfinder(a,b).canEnergyGoToEnd()){
+					if(a.getEnergy() > flow && space > flow){
+						a.removeEnergy(flow);
+						b.addEnergy(flow);
+					}else if(a.getEnergy() >= space){
+						a.removeEnergy(space);
+						b.addEnergy(space);
+					}else{
+						b.addEnergy(a.getEnergy());
+						a.removeEnergy(a.getEnergy());
+					}
 				}
 			}
 		}
@@ -71,7 +72,7 @@ public class Machine extends ElectricConductor implements IEnergy{
 	public void fillMachine(){
 		if(getNetwork() == null)return;
 		for(Machine b: getNetwork().getMachines()){
-			if(b.tipe == MachineTipe.Output)
+			if(b.tipe == MachineTipe.Output || b.tipe == MachineTipe.Storage)
 			passEnergy(b, this);
 		}
 	}
@@ -131,10 +132,8 @@ public class Machine extends ElectricConductor implements IEnergy{
 		Energy = tagCompound.getInteger("Energy");
 		NBTTagCompound tagCompound2 = (NBTTagCompound) tagList.tagAt(1);
 		maxEnergy = tagCompound2.getInteger("EnergyMax");
-
 	}
 	
-
 	@Override
 	public void writeToNBT(NBTTagCompound nbtTagCompound) {
 		super.writeToNBT(nbtTagCompound);
@@ -147,7 +146,6 @@ public class Machine extends ElectricConductor implements IEnergy{
 		tagCompound2.setInteger("EnergyMax", this.maxEnergy);
 		tagList.appendTag(tagCompound2);
 		nbtTagCompound.setTag("Energy_UT", tagList);
-		
 	}
 
 	@Override

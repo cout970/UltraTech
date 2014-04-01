@@ -2,7 +2,7 @@ package common.cout970.UltraTech.TileEntities.Tier1;
 
 import common.cout970.UltraTech.energy.api.IItemEnergyEstorage;
 import common.cout970.UltraTech.energy.api.Machine;
-import common.cout970.UltraTech.lib.GraficCost;
+import common.cout970.UltraTech.lib.EnergyCosts;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -25,10 +25,10 @@ public class ChargeStationEntity extends Machine implements IInventory{
 			if(inventory[u] != null){
 				if(inventory[u].getItem() instanceof IItemEnergyEstorage){
 					IItemEnergyEstorage b = ((IItemEnergyEstorage)inventory[u].getItem());
-					if(this.getEnergy() > GraficCost.ChargeStationFlow){
-						if(b.getEnergy(inventory[u])+GraficCost.ChargeStationFlow <= b.getMaxEnergy()){
-							b.addEnergy(inventory[u], GraficCost.ChargeStationFlow);
-							this.removeEnergy(GraficCost.ChargeStationFlow);
+					if(this.getEnergy() > EnergyCosts.ChargeStationFlow){
+						if(b.getEnergy(inventory[u])+EnergyCosts.ChargeStationFlow <= b.getMaxEnergy()){
+							b.addEnergy(inventory[u], EnergyCosts.ChargeStationFlow);
+							this.removeEnergy(EnergyCosts.ChargeStationFlow);
 						}else if(b.getEnergy(inventory[u])+1 <= b.getMaxEnergy()){
 							b.addEnergy(inventory[u], 1);
 							this.removeEnergy(1);
@@ -42,10 +42,10 @@ public class ChargeStationEntity extends Machine implements IInventory{
 			if(inventory[u] != null){
 				if(inventory[u].getItem() instanceof IItemEnergyEstorage){
 					IItemEnergyEstorage b = ((IItemEnergyEstorage)inventory[u].getItem());
-					if(maxEnergy() - getEnergy() > GraficCost.ChargeStationFlow){
-						if(b.getEnergy(inventory[u]) > GraficCost.ChargeStationFlow){
-							addEnergy(GraficCost.ChargeStationFlow);
-							b.removeEnergy(inventory[u],GraficCost.ChargeStationFlow);
+					if(maxEnergy() - getEnergy() > EnergyCosts.ChargeStationFlow){
+						if(b.getEnergy(inventory[u]) > EnergyCosts.ChargeStationFlow){
+							addEnergy(EnergyCosts.ChargeStationFlow);
+							b.removeEnergy(inventory[u],EnergyCosts.ChargeStationFlow);
 						}else if(b.getEnergy(inventory[u]) > 1){
 							addEnergy(1);
 							b.removeEnergy(inventory[u],1);

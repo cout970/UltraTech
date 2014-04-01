@@ -26,7 +26,7 @@ public class RenderEngine extends TileEntitySpecialRenderer{
 		
 		GL11.glPushMatrix();
 		GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
-		this.bindTexture(new ResourceLocation("ultratech:textures/misc/NewEngine.png"));
+		this.bindTexture(new ResourceLocation("ultratech:textures/misc/engine.png"));
 		GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
 		setRotation(e);
 		this.model.render((Entity)null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
@@ -69,10 +69,10 @@ public class RenderEngine extends TileEntitySpecialRenderer{
 		}
 		if(e.engOn){
 			e.pos += e.speed*getDelta(e);
-			e.speed += 0.0002;
+			e.speed += 0.00002;
 			if(e.speed > 0.01)e.speed= 0.01f;
 		}else{
-			e.speed -= 0.0001;
+			e.speed -= 0.000001;
 			if(e.speed < 0)e.speed=0;
 		}
 		((ModelRenderer) this.model.boxList.get(2)).rotateAngleZ = e.pos;

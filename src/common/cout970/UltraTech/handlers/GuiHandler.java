@@ -87,6 +87,10 @@ public class GuiHandler implements IGuiHandler{
 		if(tileEntity instanceof HologramEmiterEntity){
 			return new HologramEmiterContainer(player.inventory, (HologramEmiterEntity) tileEntity);
 		}
+		//Boiler
+		if(tileEntity instanceof BoilerEntity){
+			return new BoilerContainer(player.inventory, (BoilerEntity) tileEntity);
+		}
 		return null;
 	}
 
@@ -162,6 +166,10 @@ public class GuiHandler implements IGuiHandler{
 		//HologramEmiter
 		if(tileEntity instanceof HologramEmiterEntity){
 			return new HologramEmiterGui(new HologramEmiterContainer(player.inventory, (HologramEmiterEntity) tileEntity), (HologramEmiterEntity) tileEntity);
+		}
+		//Boiler
+		if(tileEntity instanceof BoilerEntity){
+			return new BoilerGui(new BoilerContainer(player.inventory, (BoilerEntity) tileEntity), (BoilerEntity) tileEntity);
 		}
 		return null;
 	}

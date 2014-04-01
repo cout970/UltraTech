@@ -37,6 +37,9 @@ public class EnergyNetwork {
 			List<ElectricConductor> things = new ArrayList<ElectricConductor>();
 			things.addAll(new EnergyPathfinder(base, null).getComponents());
 			things.removeAll(excluded);
+			for(ElectricConductor c : excluded){
+				c.setNetwork(null);
+			}
 			components = things;
 		}
 		

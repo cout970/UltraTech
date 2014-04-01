@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidHandler;
 
 public class FluidNetwork {
@@ -12,8 +11,7 @@ public class FluidNetwork {
 	private List<IFluidTransport> pipes = new ArrayList<IFluidTransport>();
 	private List<IFluidTransport> pipesExcluded = new ArrayList<IFluidTransport>();
 	private List<IFluidHandler> tanks = new ArrayList<IFluidHandler>();
-	public FluidStack buffer;
-	public int capacity = 1000;
+
 	
 	private FluidNetwork(){}
 

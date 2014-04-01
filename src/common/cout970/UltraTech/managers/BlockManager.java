@@ -42,11 +42,15 @@ public class BlockManager {
 	public static  Block AluminumPipe;
 	public static  Block CopperPipe;
 	public static  Block LeadPipe;
+	public static  Block Boiler;
 
 	
 	//fluid
 	public static Fluid Steam;
 	public static Fluid Juice;
+	public static Fluid Gas_etanol;
+	public static Fluid Etanol;
+	public static Fluid Gas_Oil;
 
 
 	public static void InitBlocks(){
@@ -69,12 +73,18 @@ public class BlockManager {
 		AluminumPipe = new common.cout970.UltraTech.blocks.models.AluminumPipe(ids.get("AluminumPipe"),Material.iron);
 		CopperPipe = new common.cout970.UltraTech.blocks.models.CopperPipe(ids.get("CopperPipe"),Material.iron);
 		LeadPipe = new common.cout970.UltraTech.blocks.models.LeadPipe(ids.get("LeadPipe"),Material.iron);
-		
+		Boiler = new common.cout970.UltraTech.blocks.models.Boiler(ids.get("Boiler"),Material.iron);
 		//fluid
 		Steam = new Fluid("steam");
 		Juice = new Fluid("juice");
+		Gas_etanol = new Fluid("gas_ethanol");
+		Etanol = new Fluid("bioEthanol");
+		Gas_Oil = new Fluid("gas_oil");
 		if(!FluidRegistry.isFluidRegistered("steam"))FluidRegistry.registerFluid(Steam);
 		if(!FluidRegistry.isFluidRegistered("juice"))FluidRegistry.registerFluid(Juice);
+		if(!FluidRegistry.isFluidRegistered("gas_ethanol"))FluidRegistry.registerFluid(Gas_etanol);
+		if(!FluidRegistry.isFluidRegistered("bioethanol"))FluidRegistry.registerFluid(Etanol);
+		if(!FluidRegistry.isFluidRegistered("gas_oil"))FluidRegistry.registerFluid(Gas_Oil);
 	}
 
 
@@ -102,6 +112,7 @@ public class BlockManager {
 		GameRegistry.registerBlock(AluminumPipe, "AluminumPipe");
 		GameRegistry.registerBlock(CopperPipe, "CopperPipe");
 		GameRegistry.registerBlock(LeadPipe, "LeadPipe");
+		GameRegistry.registerBlock(Boiler, "Boiler");
 
 		//TileEntities
 
@@ -138,6 +149,8 @@ public class BlockManager {
 		GameRegistry.registerTileEntity(AluminumPipeEntity.class, "AluminumPipeEntity_UT");
 		GameRegistry.registerTileEntity(CopperPipeEntity.class, "CopperPipeEntity_UT");
 		GameRegistry.registerTileEntity(LeadPipeEntity.class, "LeadPipeEntity_UT");
+		GameRegistry.registerTileEntity(BoilerEntity.class, "Boiler_UT");
+		GameRegistry.registerTileEntity(CoolingEntity.class, "Cooler_UT");
 		
 		nameBlocks();
 	}
@@ -168,11 +181,13 @@ public class BlockManager {
 		LanguageRegistry.addName(new ItemStack(Tier1,1,2), "CVD");
 		LanguageRegistry.addName(new ItemStack(Tier1,1,3), "Painter");
 		LanguageRegistry.addName(new ItemStack(Tier1,1,4), "Charge Station");
+		LanguageRegistry.addName(new ItemStack(Tier1,1,5), "Fermenter");
+		LanguageRegistry.addName(new ItemStack(Tier1,1,6), "Cooling block");
 		
 		LanguageRegistry.addName(new ItemStack(Tier2,1,0), "Furnace");
 		LanguageRegistry.addName(new ItemStack(Tier2,1,1), "Purifier");
 		LanguageRegistry.addName(new ItemStack(Tier2,1,2), "Cutter");
-		LanguageRegistry.addName(new ItemStack(Tier2,1,3), "Presurizer");
+		LanguageRegistry.addName(new ItemStack(Tier2,1,3), "Pressurizer");
 
 		LanguageRegistry.addName(new ItemStack(Tier3,1,0), "Miner");
 		LanguageRegistry.addName(new ItemStack(Tier3,1,1), "Hologram Emiter");
@@ -191,6 +206,17 @@ public class BlockManager {
 
 		LanguageRegistry.addName(DiamondGlass, "Diamond Glass");
 		LanguageRegistry.addName(CovedGlass, "Coved Glass");
+		
+		LanguageRegistry.addName(AluminumPipe, "Aluminum Pipe");
+		LanguageRegistry.addName(CopperPipe, "Copper Pipe");
+		LanguageRegistry.addName(LeadPipe, "Lead Pipe");
+		
+		LanguageRegistry.addName(SolarPanel, "Solar Panel");
+		LanguageRegistry.addName(WindMill, "Wind Mill");
+		LanguageRegistry.addName(Engine, "Engine");
+		LanguageRegistry.addName(Transformer, "Transformer");
+		LanguageRegistry.addName(Boiler, "Boiler");
+
 	}
 
 }

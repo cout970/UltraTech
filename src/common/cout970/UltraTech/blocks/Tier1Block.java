@@ -5,6 +5,7 @@ import java.util.Random;
 
 import common.cout970.UltraTech.TileEntities.Tier1.CVD_Entity;
 import common.cout970.UltraTech.TileEntities.Tier1.ChargeStationEntity;
+import common.cout970.UltraTech.TileEntities.Tier1.CoolingEntity;
 import common.cout970.UltraTech.TileEntities.Tier1.CrafterEntity;
 import common.cout970.UltraTech.TileEntities.Tier1.FermenterEntity;
 import common.cout970.UltraTech.TileEntities.Tier1.GeneratorEntity;
@@ -32,7 +33,7 @@ import net.minecraft.world.World;
 public class Tier1Block extends BlockContainer{
 
 	public Icon icons[];
-	public int numBlocks = 6;
+	public int numBlocks = 7;
 
 	public Tier1Block(int par1, Material par2Material) {
 		super(par1, par2Material);
@@ -48,6 +49,9 @@ public class Tier1Block extends BlockContainer{
 	public void registerIcons(IconRegister IR){
 		BlockManager.Juice.setIcons(IR.registerIcon("ultratech:juice"));
 		BlockManager.Steam.setIcons(IR.registerIcon("ultratech:steam"));
+		BlockManager.Gas_etanol.setIcons(IR.registerIcon("ultratech:steam"));
+		BlockManager.Etanol.setIcons(IR.registerIcon("ultratech:etanol"));
+		BlockManager.Gas_Oil.setIcons(IR.registerIcon("ultratech:gasoil"));
 		icons = new Icon[9];
 		icons[0] = IR.registerIcon("ultratech:chasis");
 		icons[1] = IR.registerIcon("ultratech:crafter");
@@ -57,7 +61,7 @@ public class Tier1Block extends BlockContainer{
 		icons[5] = IR.registerIcon("ultratech:printer");
 		icons[6] = IR.registerIcon("ultratech:chargestation");
 		icons[7] = IR.registerIcon("ultratech:fermenter");
-		icons[8] = IR.registerIcon("ultratech:sender");
+		icons[8] = IR.registerIcon("ultratech:cooler");
 	}
 
 	@Override
@@ -68,6 +72,7 @@ public class Tier1Block extends BlockContainer{
 		if(metadata == 3)return new Printer3DEntity();
 		if(metadata == 4)return new ChargeStationEntity();
 		if(metadata == 5)return new FermenterEntity();
+		if(metadata == 6)return new CoolingEntity();
 		return null;
 	}
 

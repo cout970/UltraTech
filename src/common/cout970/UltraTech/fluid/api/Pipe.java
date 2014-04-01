@@ -2,7 +2,6 @@ package common.cout970.UltraTech.fluid.api;
 
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
-import net.minecraftforge.fluids.IFluidHandler;
 
 public class Pipe extends TileEntity implements IFluidTransport{
 
@@ -34,20 +33,8 @@ public class Pipe extends TileEntity implements IFluidTransport{
 			}
 			te.getNetwork().refresh();
 		}
-		//empty network
-		for(IFluidHandler f : net.getTanks()){
-			if(net.buffer != null)this.drainBad(f.fill(ForgeDirection.DOWN, net.buffer, true));
-		}
 	}
-	
-	private void drainBad(int fill) {
-		if(net.buffer.amount > fill){
-			net.buffer.amount -= fill;
-		}else{
-			net.buffer = null;
-		}
-		
-	}
+
 
 	@Override
 	public TileEntity getTileEntity() {
@@ -60,7 +47,7 @@ public class Pipe extends TileEntity implements IFluidTransport{
 	}
 
 	@Override
-	public void onNetworkUpdate() {	}
+	public void onNetworkUpdate() {}
 
 	@Override
 	public FluidNetwork getNetwork() {

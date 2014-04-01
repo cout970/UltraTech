@@ -15,7 +15,7 @@ import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 import common.cout970.UltraTech.energy.api.Machine;
 import common.cout970.UltraTech.fluid.api.UT_Tank;
-import common.cout970.UltraTech.lib.GraficCost;
+import common.cout970.UltraTech.lib.EnergyCosts;
 import common.cout970.UltraTech.managers.BlockManager;
 
 public class FermenterEntity extends Machine implements IInventory, IFluidHandler{
@@ -36,11 +36,11 @@ public class FermenterEntity extends Machine implements IInventory, IFluidHandle
 			}
 		}
 		if(progres > 0){
-			if(juice.getFluidAmount() + 10 <= juice.getCapacity() && water.getFluidAmount() > 10 && getEnergy() >= GraficCost.FermenterCost){
+			if(juice.getFluidAmount() + 10 <= juice.getCapacity() && water.getFluidAmount() > 10 && getEnergy() >= EnergyCosts.FermenterCost){
 				progres--;
 				juice.fill(new FluidStack(BlockManager.Juice, 10), true);
 				water.drain(10, true);
-				removeEnergy(GraficCost.FermenterCost);
+				removeEnergy(EnergyCosts.FermenterCost);
 			}
 		}
 	}
@@ -73,7 +73,11 @@ public class FermenterEntity extends Machine implements IInventory, IFluidHandle
 
 	@Override
 	public boolean canFill(ForgeDirection from, Fluid fluid) {
-		if(fluid.getName() == "water")return true;
+		if(fluid == null)return false;
+		if(fluid.getName() == "water"){
+			if(water.getFluidAmount() < water.getCapacity()) return true;
+		}
+		
 		return false;
 	}
 
@@ -175,6 +179,8 @@ public class FermenterEntity extends Machine implements IInventory, IFluidHandle
 		if(juice == null)juice = new UT_Tank(8000, worldObj, xCoord, yCoord, zCoord);
 		water.readFromNBT(nbtTagCompound, "water");
 		juice.readFromNBT(nbtTagCompound, "juice");
+		NBTTagCompound nbt = nbtTagCompound.getCompoundTag("Inv");
+		if(nbt != null)item = ItemStack.loadItemStackFromNBT(nbt);
 	}
 
 	@Override
@@ -184,6 +190,11 @@ public class FermenterEntity extends Machine implements IInventory, IFluidHandle
 		if(juice == null)juice = new UT_Tank(8000, worldObj, xCoord, yCoord, zCoord);
 		water.writeToNBT(nbtTagCompound, "water");
 		juice.writeToNBT(nbtTagCompound, "juice");
+		if(item != null){
+			NBTTagCompound nbt = new NBTTagCompound();
+			item.writeToNBT(nbt);
+			nbtTagCompound.setTag("Inv", nbt);
+		}
 	}
 	
 	//Synchronization

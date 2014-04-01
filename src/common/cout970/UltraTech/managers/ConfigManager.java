@@ -29,6 +29,7 @@ public class ConfigManager {
 		ids.put("AluminumPipe",config.getBlock("AluminumPipe", x++).getInt());
 		ids.put("CopperPipe",config.getBlock("CopperPipe", x++).getInt());
 		ids.put("LeadPipe",config.getBlock("LeadPipe", x++).getInt());
+		ids.put("Boiler",config.getBlock("Boiler", x++).getInt());
 
 		//deco
 		Reference.StoneBlock = config.getBlock("StoneBlock", 2099).getInt();
@@ -52,6 +53,7 @@ public class ConfigManager {
 
 		//items
 		ItemManager.LoadConfigItems(config);
+		OreGeneration.readConfigOre(config);
 		if(config.hasChanged())config.save();
 	}
 

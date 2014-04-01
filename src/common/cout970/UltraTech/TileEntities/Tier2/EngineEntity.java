@@ -1,9 +1,9 @@
 package common.cout970.UltraTech.TileEntities.Tier2;
 
 import common.cout970.UltraTech.energy.api.Machine;
-import common.cout970.UltraTech.lib.GraficCost;
+import common.cout970.UltraTech.lib.EnergyCosts;
 import common.cout970.UltraTech.lib.UT_Utils;
-import common.cout970.UltraTech.lib.GraficCost.MachineTier;
+import common.cout970.UltraTech.lib.EnergyCosts.MachineTier;
 import buildcraft.api.power.IPowerEmitter;
 import buildcraft.api.power.IPowerReceptor;
 import buildcraft.api.power.PowerHandler;
@@ -40,7 +40,7 @@ public class EngineEntity extends Machine implements IPowerReceptor, IPowerEmitt
 		}
 		if(worldObj.isRemote)return;
 
-		if(getEnergy() >= GraficCost.Engine_EnergyConsume && power.getEnergyStored()+GraficCost.Engine_MJ_Produced <= power.getMaxEnergyStored()){
+		if(getEnergy() >= EnergyCosts.Engine_EnergyConsume && power.getEnergyStored()+EnergyCosts.Engine_MJ_Produced <= power.getMaxEnergyStored()){
 			if(!engOn)UT_Utils.sendPacket(this);
 			engOn = true;
 		}else{
@@ -48,8 +48,8 @@ public class EngineEntity extends Machine implements IPowerReceptor, IPowerEmitt
 			engOn = false;
 		}
 		if(engOn){
-			this.removeEnergy(GraficCost.Engine_EnergyConsume);
-			power.addEnergy(GraficCost.Engine_MJ_Produced);
+			this.removeEnergy(EnergyCosts.Engine_EnergyConsume);
+			power.addEnergy(EnergyCosts.Engine_MJ_Produced);
 		}
 		if(!update){
 			update = true;
@@ -136,7 +136,6 @@ public class EngineEntity extends Machine implements IPowerReceptor, IPowerEmitt
 
 		super.readFromNBT(nbtTagCompound);
 		direction = ForgeDirection.getOrientation(nbtTagCompound.getInteger("Dir"));
-		update = true;
 		engOn = nbtTagCompound.getBoolean("On");
 	}
 	@Override

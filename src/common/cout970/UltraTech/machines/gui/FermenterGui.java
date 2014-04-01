@@ -35,7 +35,7 @@ public class FermenterGui extends GuiContainer{
 		FluidStack water = entity.getTankInfo(ForgeDirection.UP)[0].fluid;
 		boolean w = water == null;
 		if(!w){
-			this.mc.renderEngine.bindTexture(new ResourceLocation("ultratech:textures/misc/water.png"));
+			this.mc.renderEngine.bindTexture(new ResourceLocation("ultratech:textures/misc/fluids/water.png"));
 			int a = water.amount*40/entity.getTankInfo(ForgeDirection.UP)[0].capacity;
 			this.drawTexturedModalRect(xStart+46, yStart+60-a, 0, 0, 18, a);
 		}
@@ -43,7 +43,7 @@ public class FermenterGui extends GuiContainer{
 		FluidStack juice = entity.getTankInfo(ForgeDirection.UP)[1].fluid;
 		boolean ju = juice == null;
 		if(!ju){
-			this.mc.renderEngine.bindTexture(new ResourceLocation("ultratech:textures/misc/juice.png"));
+			this.mc.renderEngine.bindTexture(new ResourceLocation("ultratech:textures/misc/fluids/juice.png"));
 			int a = juice.amount*40/entity.getTankInfo(ForgeDirection.UP)[1].capacity;
 			this.drawTexturedModalRect(xStart+139, yStart+61-a, 0, 0, 18, a);
 		}

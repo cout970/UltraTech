@@ -25,51 +25,5 @@ public class ChargeStationContainer extends UT_Container{
 	public ItemStack transferStackInSlot(EntityPlayer player, int slot) {
 		return transfer(player, slot, 6);
 	}
-	
-	public ItemStack transfer(EntityPlayer player, int slot,int inv) {
-		ItemStack aux = null;
-		Slot current = (Slot)this.inventorySlots.get(slot);
-		
-		if (current != null && current.getHasStack())
-		{
-			ItemStack itemstack = current.getStack();
-			aux = itemstack.copy();
-			
-			if(slot < inv){
-				if(!mergeItemStack(itemstack, inv, 36+inv, true)){
-					return null;
-				}
-				current.onSlotChange(itemstack, aux);
-				
-			}else{
-				
-				if (slot >= inv && slot < 27+inv)
-                {
-                    if (!this.mergeItemStack(itemstack, 0, inv, false))
-                    {
-                        return null;
-                    }
-                }
-                else if (slot >= 27+inv && slot < 36+inv){
-                	if(!this.mergeItemStack(itemstack, 0, inv, false))
-                	{
-                		return null;
-                	}
-                }
-
-				current.onSlotChanged();
-			}
-			if (itemstack.stackSize == 0)
-			{
-				current.putStack((ItemStack)null);
-			}
-			if (itemstack.stackSize == aux.stackSize)
-			{
-				return null;
-			}
-			current.onPickupFromSlot(player, itemstack);
-		}
-		return null;
-	}
 
 }

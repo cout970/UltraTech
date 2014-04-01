@@ -10,6 +10,7 @@ public class CopperPipe extends FluidPipeBlock{
 
 	public CopperPipe(int par1, Material par2Material) {
 		super(par1, par2Material);
+		setUnlocalizedName("CopperPipe");
 	}
 
 	public void registerIcons(IconRegister iconRegister){

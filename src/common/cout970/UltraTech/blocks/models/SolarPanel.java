@@ -4,6 +4,7 @@ import common.cout970.UltraTech.TileEntities.Tier2.SolarPanelEntity;
 import common.cout970.UltraTech.core.UltraTech;
 import common.cout970.UltraTech.energy.api.EnergyUtils;
 import common.cout970.UltraTech.energy.api.Machine;
+import common.cout970.UltraTech.proxy.ClientProxy;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -15,7 +16,7 @@ public class SolarPanel extends BlockContainer{
 	public SolarPanel(int par1, Material par2Material) {
 		super(par1, par2Material);
 		setCreativeTab(UltraTech.techTab);
-		setHardness(1.5f);
+		setHardness(0.5f);
 		setStepSound(soundMetalFootstep);
 		setResistance(20);
 		setUnlocalizedName("SolarPanel");
@@ -59,6 +60,6 @@ public class SolarPanel extends BlockContainer{
 
 	@Override
 	public int getRenderType() {
-		return -1;
+		return ClientProxy.solarRenderPass;
 	}
 }

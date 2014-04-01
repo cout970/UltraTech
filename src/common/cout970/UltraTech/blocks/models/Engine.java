@@ -4,6 +4,7 @@ import buildcraft.api.tools.IToolWrench;
 import common.cout970.UltraTech.TileEntities.Tier2.EngineEntity;
 import common.cout970.UltraTech.core.UltraTech;
 import common.cout970.UltraTech.energy.api.EnergyUtils;
+import common.cout970.UltraTech.proxy.ClientProxy;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -16,7 +17,7 @@ public class Engine extends BlockContainer{
 	public Engine(int par1, Material par2Material) {
 		super(par1, par2Material);
 		setCreativeTab(UltraTech.techTab);
-		setHardness(1.5f);
+		setHardness(0.5f);
 		setStepSound(soundMetalFootstep);
 		setResistance(20);
 		setUnlocalizedName("Engine");
@@ -48,7 +49,7 @@ public class Engine extends BlockContainer{
 	public void onNeighborBlockChange(World w, int x, int y, int z, int side){
 		EngineEntity m = (EngineEntity) w.getBlockTileEntity(x, y, z);
 		if(m.getNetwork() != null)m.getNetwork().refresh();
-		m.update = true;
+		m.update = false;
 	}
 
 	public boolean isOpaqueCube()
@@ -63,7 +64,7 @@ public class Engine extends BlockContainer{
 
 	@Override
 	public int getRenderType() {
-		return -1;
+		return ClientProxy.engineRenderPass;
 	}
 
 	public void onBlockPreDestroy(World w, int x, int y, int z, int meta) {

@@ -10,6 +10,7 @@ public class AluminumPipe extends FluidPipeBlock{
 
 	public AluminumPipe(int par1, Material par2Material) {
 		super(par1, par2Material);
+		setUnlocalizedName("AluminumPipe");
 	}
 
 	public void registerIcons(IconRegister iconRegister){

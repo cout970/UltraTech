@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import common.cout970.UltraTech.energy.api.Machine;
-import common.cout970.UltraTech.lib.GraficCost;
+import common.cout970.UltraTech.lib.EnergyCosts;
 import common.cout970.UltraTech.lib.UT_Utils;
 import common.cout970.UltraTech.managers.ItemManager;
 import common.cout970.UltraTech.misc.IReactorPart;
@@ -101,8 +101,8 @@ public class ReactorEntity extends TileEntity implements IInventory,IReactorPart
 		if(heat > 101)
 			for(ReactorTankEntity t : tanks){
 				if(t.getFluidAmount() > 0){
-					t.drain((int) (GraficCost.ReactorWaterCost*heat/maxHeat), true);
-					this.steam += (GraficCost.ReactorSteamProduct*heat/maxHeat);//20steam/tick
+					t.drain((int) (EnergyCosts.ReactorWaterCost*heat/maxHeat), true);
+					this.steam += (EnergyCosts.ReactorSteamProduct*heat/maxHeat);//20steam/tick
 					heat -= (heat/maxHeat);
 					return true;
 				}

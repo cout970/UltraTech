@@ -82,14 +82,14 @@ public class ReactorMultiblock extends BlockContainer{
 		icons[3] = new Icon[2];
 		icons[4] = new Icon[1];
 		icons[5] = new Icon[1];
-		icons[0][0] = IR.registerIcon("ultratech:reactor");
-		icons[1][0] = IR.registerIcon("ultratech:reactorwall");
-		icons[1][1] = IR.registerIcon("ultratech:reactorwallmulti");
-		icons[2][0] = IR.registerIcon("ultratech:reactortank");
-		icons[3][0] = IR.registerIcon("ultratech:reactorcontrolleroff");
-		icons[3][1] = IR.registerIcon("ultratech:reactorcontrolleron");
-		icons[4][0] = IR.registerIcon("ultratech:waterblock");
-		icons[5][0] = IR.registerIcon("ultratech:turbine");
+		icons[0][0] = IR.registerIcon("ultratech:reactor/reactor");
+		icons[1][0] = IR.registerIcon("ultratech:reactor/reactorwall");
+		icons[1][1] = IR.registerIcon("ultratech:reactor/reactorwallmulti");
+		icons[2][0] = IR.registerIcon("ultratech:reactor/reactortank");
+		icons[3][0] = IR.registerIcon("ultratech:reactor/reactorcontrolleroff");
+		icons[3][1] = IR.registerIcon("ultratech:reactor/reactorcontrolleron");
+		icons[4][0] = IR.registerIcon("ultratech:reactor/waterblock");
+		icons[5][0] = IR.registerIcon("ultratech:reactor/turbine");
 	}
 	
 	@Override

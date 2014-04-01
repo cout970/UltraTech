@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import common.cout970.UltraTech.energy.api.Machine;
-import common.cout970.UltraTech.lib.GraficCost;
-import common.cout970.UltraTech.lib.GraficCost.MachineTier;
+import common.cout970.UltraTech.lib.EnergyCosts;
+import common.cout970.UltraTech.lib.EnergyCosts.MachineTier;
 import common.cout970.UltraTech.managers.BlockManager;
 import common.cout970.UltraTech.misc.IReactorPart;
 import net.minecraft.nbt.NBTTagCompound;
@@ -44,11 +44,11 @@ public class SteamTurbineEntity extends Machine implements IFluidTank,IFluidHand
 				}
 			}
 
-			for(int j=0;j < 4 ; j++){
-				if(liquid != null && this.getEnergy() <= this.maxEnergy()-GraficCost.SteamTurbineProduct){
+			for(int j=0;j < 6; j++){
+				if(liquid != null && this.getEnergy() <= this.maxEnergy()-EnergyCosts.SteamTurbineProduct){
 					if(liquid.amount >= 80){
 						this.drain(80, true);
-						this.addEnergy(GraficCost.SteamTurbineProduct);
+						this.addEnergy(EnergyCosts.SteamTurbineProduct);
 					}else break;
 				}else break;
 			}

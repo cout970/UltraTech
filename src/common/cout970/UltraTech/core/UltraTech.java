@@ -112,7 +112,6 @@ public class UltraTech {
 	@EventHandler
 	public void load(FMLInitializationEvent event){
 
-		proxy.registerRenders();
 		NetworkRegistry.instance().registerGuiHandler(instance, new GuiHandler());
 		ItemManager.RegisterItems();
 		BlockManager.InitBlocks();
@@ -121,10 +120,9 @@ public class UltraTech {
 		CompatibilityManager.initCompatibilitys();
 		CraftManager.registerCraft();
 		GameRegistry.registerWorldGenerator(new WorldGen());
+		proxy.registerRenders();
 	}
 
 	@EventHandler
-	public void postInit(FMLPostInitializationEvent event){
-		CompatibilityManager.OreGenOptions();
-	}
+	public void postInit(FMLPostInitializationEvent event){}
 }

@@ -1,8 +1,8 @@
 package common.cout970.UltraTech.TileEntities.Tier2;
 
 import common.cout970.UltraTech.energy.api.Machine;
-import common.cout970.UltraTech.lib.GraficCost;
-import common.cout970.UltraTech.lib.GraficCost.MachineTier;
+import common.cout970.UltraTech.lib.EnergyCosts;
+import common.cout970.UltraTech.lib.EnergyCosts.MachineTier;
 import common.cout970.UltraTech.lib.recipes.Pressurizer_Recipes;
 import common.cout970.UltraTech.machines.containers.PresuricerContaner;
 import common.cout970.UltraTech.managers.ItemManager;
@@ -30,10 +30,10 @@ public class PresuricerEntity extends Machine implements IInventory,ISpeedUpgrad
 		if(worldObj.isRemote)return;
 		boolean flag = false;
 		if(!hasEnergy){
-			hasEnergy = getEnergy() >= GraficCost.PresuricerCost;
+			hasEnergy = getEnergy() >= EnergyCosts.PresuricerCost;
 		}
 		if(progres > 0){
-			removeEnergy(GraficCost.PresuricerCost*speed/1000);
+			removeEnergy(EnergyCosts.PresuricerCost*speed/1000);
 		}
 		if (hasEnergy && Pressurizer_Recipes.matches(this))
 		{

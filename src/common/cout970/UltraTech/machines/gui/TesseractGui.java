@@ -41,13 +41,16 @@ public class TesseractGui extends GuiContainer{
 		drawTexturedModalRect(x, y, 176, v, 19, 19);
 		drawCenteredString(fontRenderer, ""+entity.frequency, xStart+65, yStart+24, UT_Utils.RGBtoInt(255, 255, 255));
 		drawCenteredString(fontRenderer, ""+entity.To, xStart+65, yStart+47, UT_Utils.RGBtoInt(255, 255, 255));
+		drawCenteredString(fontRenderer, ""+entity.getEnergy(), xStart+65, yStart+65, UT_Utils.RGBtoInt(255, 255, 255));
 	}
 	
 	protected void keyTyped(char letra, int num)
     {
+		System.out.println(num);
 		if(entity.writing){
-			if(num == 1){
+			if(num == 1 || num == 28){
 				super.keyTyped(letra, num);
+				entity.writing = false;
 				return;
 			}
 			if(num != 14 && letra != 0x0000){
@@ -65,7 +68,7 @@ public class TesseractGui extends GuiContainer{
 					text += a;
 				}
 				if(entity.up)entity.setFrequency(text);
-				else entity.To = text;
+				else entity.setDestine(text);
 			}
 		}else{
 			super.keyTyped(letra, num);
@@ -79,6 +82,7 @@ public class TesseractGui extends GuiContainer{
 		int yStart = (height - ySize) / 2;
 		if(isIn(par1, par2, xStart+138, yStart+29, 19, 19)){
 			entity.mode = T_Mode.getMode(T_Mode.change(entity.mode.ordinal()));
+			entity.changeMode(T_Mode.getMode(T_Mode.change(entity.mode.ordinal())));
 		}
 		if(isIn(par1, par2, xStart+18, yStart+20, 100, 14)){
 			entity.writing = true;

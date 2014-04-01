@@ -47,9 +47,9 @@ public class GeneratorGui extends GuiContainer{
     protected void drawGuiContainerForegroundLayer(int x, int y) {
 		String s = this.entity.isInvNameLocalized() ? this.entity.getInvName() : "Generator";
         this.fontRenderer.drawString(s, 65, 6, 4210752);
-        String h = ((int)this.entity.heat)+"ºC";
+        String h = ((int)this.entity.heat)+"C";
         this.fontRenderer.drawString(h, 137-fontRenderer.getStringWidth(h), 29, 4210752);
-        String p = (int)(80+(entity.heat*40)/1200)+"E/t";
+        String p = (int)(75+(entity.heat*25)/1200)+"E/t";
         this.fontRenderer.drawString(p, 120-fontRenderer.getStringWidth(h)/2, 55, 4210752);
 	}
 

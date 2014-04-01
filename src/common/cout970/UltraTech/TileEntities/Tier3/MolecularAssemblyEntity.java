@@ -2,7 +2,7 @@ package common.cout970.UltraTech.TileEntities.Tier3;
 
 
 import common.cout970.UltraTech.energy.api.Machine;
-import common.cout970.UltraTech.lib.GraficCost;
+import common.cout970.UltraTech.lib.EnergyCosts;
 import common.cout970.UltraTech.lib.recipes.Assembly_Recipes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
@@ -30,11 +30,11 @@ public class MolecularAssemblyEntity extends Machine implements IInventory{
 		boolean flag = false;
 
 		if(!hasEnergy){
-			hasEnergy = getEnergy() >= GraficCost.FurnaceCost;
+			hasEnergy = getEnergy() >= EnergyCosts.FurnaceCost;
 		}
 
 		if(progres > 0){
-			removeEnergy(GraficCost.FurnaceCost*speed/1000);
+			removeEnergy(EnergyCosts.FurnaceCost*speed/1000);
 		}
 		if (hasEnergy && hasrecipe){
 			this.progres += speed;

@@ -9,7 +9,7 @@ public class ProcesedFood extends ItemFood{
 
 	public ProcesedFood(int par1) {
 		super(par1, 4, true);
-		setCreativeTab(UltraTech.techTab);
+		setCreativeTab(UltraTech.ResourceTab);
 		setMaxStackSize(64);
 		setUnlocalizedName("ProcesedFood");
 		setTextureName("ProcesedFood");

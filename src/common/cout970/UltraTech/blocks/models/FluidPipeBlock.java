@@ -16,8 +16,8 @@ public abstract class FluidPipeBlock extends BlockContainer{
 		super(par1, par2Material);
 		setCreativeTab(UltraTech.techTab);
 		setStepSound(soundMetalFootstep);
-		setResistance(10);
-		setUnlocalizedName("FluidPipe");
+//		setResistance(10);
+		setHardness(0.5f);
 	}
 	
 	public boolean isOpaqueCube()

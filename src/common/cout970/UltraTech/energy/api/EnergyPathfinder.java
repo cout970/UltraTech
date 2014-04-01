@@ -23,6 +23,7 @@ public class EnergyPathfinder {
 	}
 	
 	private void list(ElectricConductor from){
+		
 		for(ForgeDirection dir : from.getConnectableSides()){
 			TileEntity tile = EnergyUtils.getRelative(from, dir);
 			if(tile != null){

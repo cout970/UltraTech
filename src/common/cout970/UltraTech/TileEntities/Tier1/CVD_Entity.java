@@ -1,7 +1,7 @@
 package common.cout970.UltraTech.TileEntities.Tier1;
 
 import common.cout970.UltraTech.energy.api.Machine;
-import common.cout970.UltraTech.lib.GraficCost;
+import common.cout970.UltraTech.lib.EnergyCosts;
 import common.cout970.UltraTech.lib.recipes.CVD_Recipe;
 import common.cout970.UltraTech.managers.ItemManager;
 import common.cout970.UltraTech.misc.ISpeedUpgradeabel;
@@ -34,11 +34,11 @@ public class CVD_Entity extends Machine implements IInventory,ISpeedUpgradeabel{
 			boolean flag = false;
 
 			if(progres > 0){
-				removeEnergy(GraficCost.CVD_Cost*speed/1000);
+				removeEnergy(EnergyCosts.CVD_Cost*speed/1000);
 			}
 
 			if(!hasEnergy){
-				hasEnergy = getEnergy() >= GraficCost.CVD_Cost;
+				hasEnergy = getEnergy() >= EnergyCosts.CVD_Cost;
 			}
 
 			if(hasEnergy && CVD_Recipe.matches(this)){

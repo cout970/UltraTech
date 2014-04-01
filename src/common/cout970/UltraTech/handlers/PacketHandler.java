@@ -5,6 +5,8 @@ import java.io.DataInputStream;
 
 import common.cout970.UltraTech.TileEntities.Tier1.CrafterEntity;
 import common.cout970.UltraTech.TileEntities.Tier1.Printer3DEntity;
+import common.cout970.UltraTech.TileEntities.Tier3.TesseractEntity;
+import common.cout970.UltraTech.TileEntities.Tier3.TesseractEntity.T_Mode;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
@@ -45,12 +47,24 @@ public class PacketHandler implements IPacketHandler{
 				te = playerSP.worldObj.getBlockTileEntity(x, y, z);
 			}
 
-			if(tipe == -1){
+			if(tipe == -2){////////tesseract
+				int mode;
+				String feq,to;
+				mode = inputStream.readInt();
+				feq = inputStream.readUTF();
+				to = inputStream.readUTF();
+				if(te instanceof TesseractEntity){
+					((TesseractEntity) te).setFrequency(feq);
+					((TesseractEntity) te).setDestine(to);
+					((TesseractEntity) te).changeMode(T_Mode.getMode(mode));
+				}
+				
+			}else if(tipe == -1){//////////////////printer
 				if(te instanceof Printer3DEntity){
 					((Printer3DEntity) te).color = inputStream.readInt();
 					((Printer3DEntity) te).update = true;
 				}
-			}else if(tipe == 0){
+			}else if(tipe == 0){//////////////////crafter
 				//setItemStackinSlot
 				slot = inputStream.readInt();
 				id = inputStream.readInt();

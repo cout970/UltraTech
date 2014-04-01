@@ -6,8 +6,8 @@ import java.util.List;
 import buildcraft.api.transport.IPipeTile;
 import buildcraft.api.transport.IPipeTile.PipeType;
 import common.cout970.UltraTech.energy.api.Machine;
-import common.cout970.UltraTech.lib.GraficCost;
-import common.cout970.UltraTech.lib.GraficCost.MachineTier;
+import common.cout970.UltraTech.lib.EnergyCosts;
+import common.cout970.UltraTech.lib.EnergyCosts.MachineTier;
 import common.cout970.UltraTech.machines.containers.MinerContainer;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
@@ -73,7 +73,7 @@ public class MinerEntity extends Machine implements IInventory{
 				hasMine = true;
 			}
 			if(!hasEnergy){
-				hasEnergy = this.getEnergy() >= GraficCost.MinerCost;
+				hasEnergy = this.getEnergy() >= EnergyCosts.MinerCost;
 			}
 			boolean changes = false;
 			
@@ -111,7 +111,7 @@ public class MinerEntity extends Machine implements IInventory{
 				int y = mining.get(current)[1];
 				int z = mining.get(current)[2];
 				if(canBreak(worldObj.getBlockId(x, y, z))){
-					removeEnergy(GraficCost.MinerCost);
+					removeEnergy(EnergyCosts.MinerCost);
 					ArrayList<ItemStack> items = Block.blocksList[worldObj.getBlockId(x, y, z)].getBlockDropped(worldObj, x, y, z, worldObj.getBlockMetadata(x, y, z), fortuneUpgrades);
 					for(int n = 0; n < items.size();n++){
 						blocked = !addItemStack(items.get(n));

@@ -16,9 +16,9 @@ public class PresuricerContaner extends Container{
 			PresuricerEntity tileEntity) {
 		super();
 		this.tileEntity = tileEntity;
-		addSlotToContainer(new Slot(tileEntity, 0, 74, 13));
-		addSlotToContainer(new Slot(tileEntity, 1, 96, 13));
-		addSlotToContainer(new Slot(tileEntity, 2, 118, 13));
+		addSlotToContainer(new Slot(tileEntity, 0, 76, 13));
+		addSlotToContainer(new Slot(tileEntity, 1, 98, 13));
+		addSlotToContainer(new Slot(tileEntity, 2, 120, 13));
 		addSlotToContainer(new Slot(tileEntity, 3, 98, 60){
 			@Override
 			public boolean isItemValid(ItemStack par1ItemStack)

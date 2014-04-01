@@ -1,8 +1,8 @@
 package common.cout970.UltraTech.TileEntities.Tier2;
 
 import common.cout970.UltraTech.energy.api.Machine;
-import common.cout970.UltraTech.lib.GraficCost;
-import common.cout970.UltraTech.lib.GraficCost.MachineTier;
+import common.cout970.UltraTech.lib.EnergyCosts;
+import common.cout970.UltraTech.lib.EnergyCosts.MachineTier;
 import common.cout970.UltraTech.lib.recipes.Purifier_Recipe;
 import common.cout970.UltraTech.managers.ItemManager;
 import common.cout970.UltraTech.misc.ISpeedUpgradeabel;
@@ -34,11 +34,11 @@ public class PurifierEntity extends Machine implements IInventory,ISpeedUpgradea
 			boolean flag = false;
 
 			if(!hasEnergy){
-				hasEnergy = getEnergy() >= GraficCost.PurifierCost;
+				hasEnergy = getEnergy() >= EnergyCosts.PurifierCost;
 			}
 
 			if(progres > 0){
-				removeEnergy(GraficCost.PurifierCost*speed/1000);
+				removeEnergy(EnergyCosts.PurifierCost*speed/1000);
 			}
 			if (hasEnergy && Purifier_Recipe.matches(this))
 			{

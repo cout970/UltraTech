@@ -24,7 +24,7 @@ public class LasserSword extends UT_Item implements IItemEnergyEstorage{
 
 	public LasserSword(int par1,String name){
 		super(par1,name);
-		setCreativeTab(UltraTech.techTab);
+		setCreativeTab(UltraTech.ResourceTab);
 		setMaxStackSize(1);
 		this.setHasSubtypes(true);
 		this.setMaxDamage(MaxEnergy);

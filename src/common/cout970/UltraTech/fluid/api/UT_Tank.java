@@ -1,5 +1,6 @@
 package common.cout970.UltraTech.fluid.api;
 
+
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
@@ -119,6 +120,10 @@ public class UT_Tank implements IFluidTank{
 
 	public void setFluid(FluidStack fluidStack) {
 		fluid = fluidStack;
+	}
+
+	public void setFluidAmount(int value) {
+		if(fluid != null)fluid.amount = value;
 	}
 
 }

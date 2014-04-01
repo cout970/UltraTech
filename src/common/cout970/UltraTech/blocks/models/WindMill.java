@@ -6,6 +6,7 @@ import common.cout970.UltraTech.core.UltraTech;
 import common.cout970.UltraTech.energy.api.EnergyUtils;
 import common.cout970.UltraTech.energy.api.Machine;
 import common.cout970.UltraTech.managers.BlockManager;
+import common.cout970.UltraTech.proxy.ClientProxy;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -18,7 +19,7 @@ public class WindMill extends BlockContainer{
 	public WindMill(int par1, Material par2Material) {
 		super(par1, par2Material);
 		setCreativeTab(UltraTech.techTab);
-		setHardness(1.5f);
+		setHardness(0.5f);
 		setStepSound(soundMetalFootstep);
 		setResistance(20);
 		setUnlocalizedName("WindMill");
@@ -97,6 +98,6 @@ public class WindMill extends BlockContainer{
 
 	@Override
 	public int getRenderType() {
-		return -1;
+		return ClientProxy.windmillRenderPass;
 	}
 }

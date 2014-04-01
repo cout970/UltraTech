@@ -60,7 +60,39 @@ public class CrafterContainer extends UT_Container{
 	}
 	
 	@Override
-	public ItemStack transferStackInSlot(EntityPlayer player, int slot) {
+	public ItemStack transferStackInSlot(EntityPlayer entityPlayer, int slot) {
+		ItemStack aux = null;
+		Slot current = (Slot)this.inventorySlots.get(slot);
+		int inv = 19;
+		if (current != null && current.getHasStack()){
+			ItemStack itemstack = current.getStack();
+			aux = itemstack.copy();
+			
+			if(slot < inv){//in the machine slots
+				if(!mergeItemStack(itemstack, inv+9, 36+inv, false)){
+					return null;
+				}
+				current.onSlotChange(itemstack, aux);
+			}else{//in the inventoryplayer slots
+				if (slot >= inv && slot < 27+inv){
+                    if (!this.mergeItemStack(itemstack, inv-9, inv, false)){
+                        return null;
+                    }
+                }else if (slot >= 27+inv && slot < 36+inv+9){//in the player tiem bar
+                	if(!this.mergeItemStack(itemstack, inv-9, inv, false)){
+                		return null;
+                	}
+                }
+				current.onSlotChanged();
+			}
+			if (itemstack.stackSize == 0){
+				current.putStack((ItemStack)null);
+			}
+			if (itemstack.stackSize == aux.stackSize){
+				return null;
+			}
+			current.onPickupFromSlot(entityPlayer, itemstack);
+		}
 		return null;
 	}
 	

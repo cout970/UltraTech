@@ -37,7 +37,7 @@ public class GeneratorEntity extends Machine implements IInventory{
 				}
 				Progres--;
 				if(heat < 1200)heat+=1.3-heat/1000;
-				this.addEnergy((int)(80+(heat*40)/1200));
+				this.addEnergy((int)(75+(heat*25)/1200));
 			}else if(heat > 25)heat-=0.1+heat/1000;
 			
 			if(Progres <= 0){

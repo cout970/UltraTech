@@ -2,11 +2,10 @@ package common.cout970.UltraTech.blocks.models;
 
 import common.cout970.UltraTech.TileEntities.Tier1.CableEntity;
 import common.cout970.UltraTech.core.UltraTech;
-import common.cout970.UltraTech.energy.api.ElectricConductor;
+import common.cout970.UltraTech.energy.api.ElectricBlock;
 import common.cout970.UltraTech.energy.api.EnergyUtils;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.tileentity.TileEntity;
@@ -15,14 +14,13 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class CableBlock extends BlockContainer{
-
+public class CableBlock extends ElectricBlock{
 
 	public CableBlock(int par1, Material par2Material) {
 		super(par1, par2Material);
 		setCreativeTab(UltraTech.techTab);
 		setStepSound(soundMetalFootstep);
-		setResistance(5);
+		setResistance(0.5f);
 		setUnlocalizedName("Cable");
 	}
 
@@ -38,11 +36,6 @@ public class CableBlock extends BlockContainer{
 		return this.blockIcon;
 	}
 	
-	public void onNeighborBlockChange(World w, int x, int y, int z, int side){
-		ElectricConductor m = (ElectricConductor) w.getBlockTileEntity(x, y, z);
-		if(m.getNetwork() != null)m.getNetwork().refresh();
-	}
-	
 	@Override
 	public TileEntity createNewTileEntity(World world) {
 		return new CableEntity();
@@ -56,16 +49,6 @@ public class CableBlock extends BlockContainer{
 	@Override
 	public int damageDropped (int metadata) {
 		return metadata;
-	}
-	
-	@Override
-	public void onBlockAdded(World w, int x, int y, int z) {
-		super.onBlockAdded(w, x, y, z);
-		EnergyUtils.onBlockAdded(w, x, y, z);
-	}
-	public void onBlockPreDestroy(World w, int x, int y, int z, int meta) {
-		super.onBlockPreDestroy(w, x, y, z, meta);
-		EnergyUtils.onBlockPreDestroy(w, x, y, z, meta);
 	}
 	
 	public boolean isOpaqueCube()

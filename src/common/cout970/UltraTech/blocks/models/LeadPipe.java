@@ -10,6 +10,7 @@ public class LeadPipe extends FluidPipeBlock{
 
 	public LeadPipe(int par1, Material par2Material) {
 		super(par1, par2Material);
+		setUnlocalizedName("LeadPipe");
 	}
 
 	public void registerIcons(IconRegister iconRegister){
