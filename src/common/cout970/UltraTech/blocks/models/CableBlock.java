@@ -61,6 +61,7 @@ public class CableBlock extends ElectricBlock{
 		return false;
 	}
 	
+	@SideOnly(Side.CLIENT)
 	@Override
 	public int getRenderType() {
 		return -1;

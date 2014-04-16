@@ -91,6 +91,19 @@ public class GuiHandler implements IGuiHandler{
 		if(tileEntity instanceof BoilerEntity){
 			return new BoilerContainer(player.inventory, (BoilerEntity) tileEntity);
 		}
+		//Controller
+		if(tileEntity instanceof ReactorControllerEntity){
+			return new ControllerContainer(player.inventory, (ReactorControllerEntity) tileEntity);
+		}
+		//climate
+		if(tileEntity instanceof ClimateEntity){
+			return new ClimateStationContainer(player.inventory, (ClimateEntity) tileEntity);
+		}
+		//FluidGenerator
+		if(tileEntity instanceof FluidGenerator){
+			return new FluidGenContainer(player.inventory, tileEntity);
+		}
+
 		return null;
 	}
 
@@ -170,6 +183,18 @@ public class GuiHandler implements IGuiHandler{
 		//Boiler
 		if(tileEntity instanceof BoilerEntity){
 			return new BoilerGui(new BoilerContainer(player.inventory, (BoilerEntity) tileEntity), (BoilerEntity) tileEntity);
+		}
+		//Controller
+		if(tileEntity instanceof ReactorControllerEntity){
+			return new ControllerGui(new ControllerContainer(player.inventory, (ReactorControllerEntity) tileEntity), player.inventory, (ReactorControllerEntity) tileEntity);
+		}
+		//Climate
+		if(tileEntity instanceof ClimateEntity){
+			return new ClimateStationGui(new ClimateStationContainer(player.inventory, (ClimateEntity) tileEntity), (ClimateEntity) tileEntity);
+		}
+		//FluidGenerator
+		if(tileEntity instanceof FluidGenerator){
+			return new FluidGenGui(new FluidGenContainer(player.inventory, tileEntity), (FluidGenerator) tileEntity);
 		}
 		return null;
 	}

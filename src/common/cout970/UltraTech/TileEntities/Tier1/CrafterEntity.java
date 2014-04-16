@@ -88,7 +88,7 @@ public class CrafterEntity extends TileEntity implements IInventory{
 									 int aux = already.get(i+aux2);
 									 if(aux < inv.getStackInSlot(i).stackSize){
 										 already.remove(i+aux2);
-										 already.put(i, aux+1);
+										 already.put(i+aux2, aux+1);
 										 cant = true;
 									 }
 								 }else{
@@ -126,6 +126,7 @@ public class CrafterEntity extends TileEntity implements IInventory{
 				if(found.get(x))return false;
 			}
 		}
+		if(result == null)return false;
 		return true;
 	}
 	
@@ -219,7 +220,7 @@ public class CrafterEntity extends TileEntity implements IInventory{
 				this.inventory[s] = i.copy();
 				return true;
 			}
-			else if (this.inventory[s].isItemEqual(i))
+			else if (this.inventory[s].isItemEqual(i) && i.getMaxStackSize() >= this.inventory[s].stackSize+i.stackSize)
 			{
 				if(inventory[s].stackSize + i.stackSize <= getInventoryStackLimit()){
 				inventory[s].stackSize += i.stackSize;
@@ -233,7 +234,6 @@ public class CrafterEntity extends TileEntity implements IInventory{
 	public void emptyCraft() {
 		for(int i = 0; i < 9;i++){
 			craft.setInventorySlotContents(i, null);
-			UT_Utils.sendPacket(this, i, 0);
 		}
 	}
 	
@@ -256,7 +256,8 @@ public class CrafterEntity extends TileEntity implements IInventory{
 	
 	public void loadRecipes(int r){
 		craft = saves.recipes[r].getInventoryCrafter(this);
-		this.onInventoryChanged();
+		onInventoryChanged();
+		UT_Utils.sendPacket(this);
 	}
 	
 	public void DellRecipe(int slot) {

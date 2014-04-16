@@ -52,6 +52,7 @@ public class ReactorEntity extends TileEntity implements IInventory,IReactorPart
 		
 		if(!this.worldObj.isRemote){
 			if(heat > 25)heat -= heat/maxHeat;
+			if(heat < 100)steam--;
 			if(control == null)work = getControl();
 			if(work){
 				float e = 0.25f;

@@ -36,6 +36,10 @@ public class RenderWindMill extends TileEntitySpecialRenderer{
 		((ModelRenderer)model.boxList.get(5)).rotateAngleZ = (float) Math.toRadians(-120+d);
 		((ModelRenderer)model.boxList.get(4)).rotateAngleZ = (float) Math.toRadians(0+d);
 		((ModelRenderer)model.boxList.get(3)).rotateAngleZ = (float) Math.toRadians(0+d);
+		//NEW
+		((ModelRenderer)model.boxList.get(8)).rotateAngleZ = (float) Math.toRadians(60+d);
+		((ModelRenderer)model.boxList.get(9)).rotateAngleZ = (float) Math.toRadians(180+d);
+		((ModelRenderer)model.boxList.get(10)).rotateAngleZ = (float) Math.toRadians(-60+d);
 		this.model.render((Entity)null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
 		GL11.glPopMatrix();
 	}

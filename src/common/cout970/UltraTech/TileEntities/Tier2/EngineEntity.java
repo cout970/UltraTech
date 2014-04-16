@@ -40,7 +40,8 @@ public class EngineEntity extends Machine implements IPowerReceptor, IPowerEmitt
 		}
 		if(worldObj.isRemote)return;
 
-		if(getEnergy() >= EnergyCosts.Engine_EnergyConsume && power.getEnergyStored()+EnergyCosts.Engine_MJ_Produced <= power.getMaxEnergyStored()){
+		for(int v = 0;v<EnergyCosts.Engine_MJ_Produced;v++){
+		if(getEnergy() >= EnergyCosts.Engine_EnergyConsume && power.getEnergyStored()+1 <= power.getMaxEnergyStored()){
 			if(!engOn)UT_Utils.sendPacket(this);
 			engOn = true;
 		}else{
@@ -49,7 +50,8 @@ public class EngineEntity extends Machine implements IPowerReceptor, IPowerEmitt
 		}
 		if(engOn){
 			this.removeEnergy(EnergyCosts.Engine_EnergyConsume);
-			power.addEnergy(EnergyCosts.Engine_MJ_Produced);
+			power.addEnergy(1);
+		}
 		}
 		if(!update){
 			update = true;

@@ -33,7 +33,7 @@ public class MAssemblyGui extends GuiContainer{
 		
 		//energy
 		this.mc.renderEngine.bindTexture(new ResourceLocation("ultratech:textures/misc/energy.png"));
-		int p = (int) tile.getEnergy()*50/tile.maxEnergy();
+		int p = (int) (tile.getEnergy()*50/tile.maxEnergy());
 		this.drawTexturedModalRect(xStart+14, yStart+15+(50-p), 0, 0, 25, p);
 	}
 

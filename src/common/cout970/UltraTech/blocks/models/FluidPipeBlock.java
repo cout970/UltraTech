@@ -30,6 +30,7 @@ public abstract class FluidPipeBlock extends BlockContainer{
 		return false;
 	}
 	
+	@SideOnly(Side.CLIENT)
 	@Override
 	public int getRenderType() {
 		return -1;

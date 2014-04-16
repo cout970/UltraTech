@@ -24,7 +24,8 @@ public class BoilerEntity extends Machine implements IFluidHandler{
 		if(result == null)result = new UT_Tank(16000, worldObj, xCoord, yCoord, zCoord);
 		if(storage == null)storage = new UT_Tank(8000, worldObj, xCoord, yCoord, zCoord);
 		if(worldObj.isRemote)return;
-		if(heat > 25)heat -= heat/1200;
+		
+		if(heat > 25)heat -= 0.1f*heat/150;
 		if(heat > 100 && storage != null){
 			if(storage.getFluid() != null && storage.getFluidAmount() > 10){
 				Fluid s = Boiler_Recipes.getResult(storage.getFluid());
@@ -38,12 +39,11 @@ public class BoilerEntity extends Machine implements IFluidHandler{
 		}
 		if(heat <= 150){
 			if(getEnergy() >= EnergyCosts.BoilerCost){
-				heat+= 0.3f;
+				heat+= 0.4f;
 				this.removeEnergy(EnergyCosts.BoilerCost);
 			}
 			
 		}
-		
 	}
 	
 	//Fluids

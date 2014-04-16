@@ -31,7 +31,7 @@ public class MinerGui extends GuiContainer{
 
 		//energy bar  
 		this.mc.renderEngine.bindTexture(new ResourceLocation("ultratech:textures/misc/energy.png"));
-		int p = (int) entity.getEnergy()*50/entity.maxEnergy();
+		int p = (int) (entity.getEnergy()*50/entity.maxEnergy());
 		this.drawTexturedModalRect(xStart+9, yStart+105+(50-p), 0, 0, 25, p);
 		
 		//speed

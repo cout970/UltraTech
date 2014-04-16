@@ -30,8 +30,7 @@ public class TesseractGui extends GuiContainer{
 		int yStart = (height - ySize) / 2;
 		this.drawTexturedModalRect(xStart, yStart, 0, 0, xSize, ySize);
 		if(entity.writing){
-			if(entity.up)drawTexturedModalRect(xStart+18, yStart+20, 0, ySize, 101, 15);
-			else drawTexturedModalRect(xStart+18, yStart+43, 0, ySize, 101, 15);
+			drawTexturedModalRect(xStart+18, yStart+20, 0, ySize, 101, 15);
 		}
 		int x,y;
 		x = xStart+138;
@@ -39,41 +38,31 @@ public class TesseractGui extends GuiContainer{
 		int v = 0;
 		v = entity.mode.ordinal()*19;
 		drawTexturedModalRect(x, y, 176, v, 19, 19);
-		drawCenteredString(fontRenderer, ""+entity.frequency, xStart+65, yStart+24, UT_Utils.RGBtoInt(255, 255, 255));
-		drawCenteredString(fontRenderer, ""+entity.To, xStart+65, yStart+47, UT_Utils.RGBtoInt(255, 255, 255));
-		drawCenteredString(fontRenderer, ""+entity.getEnergy(), xStart+65, yStart+65, UT_Utils.RGBtoInt(255, 255, 255));
+		drawCenteredString(fontRenderer, "Freq: "+entity.frequency, xStart+65, yStart+24, UT_Utils.RGBtoInt(255, 255, 255));
+		drawCenteredString(fontRenderer, ""+((int)entity.getEnergy())+"FT", xStart+65, yStart+47, UT_Utils.RGBtoInt(255, 255, 255));
 	}
 	
 	protected void keyTyped(char letra, int num)
-    {
-		System.out.println(num);
+	{
 		if(entity.writing){
 			if(num == 1 || num == 28){
 				super.keyTyped(letra, num);
 				entity.writing = false;
 				return;
 			}
-			if(num != 14 && letra != 0x0000){
-				if(entity.up)entity.frequency += ""+letra;
-				else entity.To += ""+letra;
-			}else if(num == 14){
-				String source;
-				if(entity.up)source = entity.frequency;
-				else source = entity.To;
-				int i = source.length()-1;
-				String text = "";
-				for(char a : source.toCharArray()){
-					if(i == 0)break;
-					i--;
-					text += a;
+			if(Character.isDigit(letra)){
+				if(entity.frequency/100000 < 1){
+				entity.frequency *= 10;
+				entity.frequency += Integer.valueOf(String.valueOf(letra));
 				}
-				if(entity.up)entity.setFrequency(text);
-				else entity.setDestine(text);
+			}else if(num == 14){
+				entity.frequency -= entity.frequency%10;
+				entity.frequency /=10;
 			}
-		}else{
-			super.keyTyped(letra, num);
-		}
-    }
+			entity.setFrequency(entity.frequency);
+		}else
+		super.keyTyped(letra, num);
+	}
 
     protected void mouseClicked(int par1, int par2, int par3)
 	{
@@ -86,10 +75,6 @@ public class TesseractGui extends GuiContainer{
 		}
 		if(isIn(par1, par2, xStart+18, yStart+20, 100, 14)){
 			entity.writing = true;
-			entity.up = true;
-		}else if(isIn(par1, par2, xStart+18, yStart+43, 100, 14)){
-			entity.writing = true;
-			entity.up = false;
 		}else{
 			entity.writing = false;
 		}

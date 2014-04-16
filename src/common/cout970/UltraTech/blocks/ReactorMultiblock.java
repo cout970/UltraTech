@@ -46,6 +46,7 @@ public class ReactorMultiblock extends BlockContainer{
 	public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int par6, float par7, float par8, float par9) {
 
 		if(entityplayer.isSneaking()){
+			if(world.getBlockTileEntity(i, j, k) instanceof ReactorControllerEntity)entityplayer.openGui(UltraTech.instance, 13, world, i, j, k);
 			return true;
 		}else{
 			TileEntity tile = world.getBlockTileEntity(i, j, k);

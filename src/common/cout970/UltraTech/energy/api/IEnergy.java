@@ -2,13 +2,13 @@ package common.cout970.UltraTech.energy.api;
 
 public interface IEnergy {
 	
-	int addEnergy(int amount);
+	float addEnergy(float amount);
 	
-	void removeEnergy(int amount);
+	void removeEnergy(float amount);
 	
-	int getEnergy();
+	float getEnergy();
 	
-	int maxEnergy();
+	float maxEnergy();
 	
-	int maxFlow();
+	float maxFlow();
 }

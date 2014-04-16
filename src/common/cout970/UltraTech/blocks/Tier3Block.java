@@ -123,6 +123,9 @@ public class Tier3Block extends BlockContainer{
 		if(te instanceof MinerEntity){
 			((MinerEntity)te).searchInventories();
 		}
+		if(te instanceof ClimateEntity){
+			((ClimateEntity) te).restoneUpdate(w.isBlockIndirectlyGettingPowered(x, y, z));
+		}
 	}
 
 	@Override
@@ -244,6 +247,7 @@ public class Tier3Block extends BlockContainer{
 		EnergyUtils.onBlockAdded(w, x, y, z);
 	}
 	public void onBlockPreDestroy(World w, int x, int y, int z, int meta) {
+		if(w.getBlockTileEntity(x, y, z) instanceof TesseractEntity)TesseractEntity.tes.clear();
 		EnergyUtils.onBlockPreDestroy(w, x, y, z, meta);
 	}
 }

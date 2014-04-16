@@ -31,12 +31,14 @@ public class LeadPipeEntity extends Pipe implements IFluidHandler{
 		if(getNetwork() != null)for(ForgeDirection f : ForgeDirection.VALID_DIRECTIONS){
 			if(tanks.containsKey(f) && tanks.get(f) != null){
 				for(IFluidHandler h : getNetwork().getTanks()){
-					if(tanks.get(f).getTankInfo(f.getOpposite()) != null && tanks.get(f).getTankInfo(f.getOpposite()).length > 0)if(tanks.get(f).getTankInfo(f.getOpposite())[0].fluid != null)
-					if(!tanks.containsValue(h) && h.canFill(f, tanks.get(f).getTankInfo(f.getOpposite())[0].fluid.getFluid())){
-						int toD = Math.min(tanks.get(f).getTankInfo(f.getOpposite())[0].fluid.amount, 100);
-						FluidStack drained = tanks.get(f).drain(f.getOpposite(), toD, true);
+					if(!tanks.containsValue(h)){
+						FluidStack drained = tanks.get(f).drain(f.getOpposite(), 100, false);
 						if(drained != null){
-							h.fill(null, drained, true);
+							int Do = 0;
+							if((Do=h.fill(null, drained, false)) > 0){
+								drained = tanks.get(f).drain(f.getOpposite(), Do, true);
+								h.fill(null, drained, true);
+							}
 						}
 					}
 				}

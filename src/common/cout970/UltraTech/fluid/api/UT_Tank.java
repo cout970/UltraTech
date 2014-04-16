@@ -3,6 +3,7 @@ package common.cout970.UltraTech.fluid.api;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidEvent;
 import net.minecraftforge.fluids.FluidStack;
@@ -24,6 +25,14 @@ public class UT_Tank implements IFluidTank{
 		this.z = z;
 	}
 	
+	public UT_Tank(int cap, TileEntity entity) {
+		capacity = cap;
+		this.w = entity.worldObj;
+		this.x = entity.xCoord;
+		this.y = entity.yCoord;
+		this.z = entity.zCoord;
+	}
+
 	@Override
 	public FluidStack getFluid() {
 		return fluid;
@@ -102,7 +111,10 @@ public class UT_Tank implements IFluidTank{
 	public void readFromNBT(NBTTagCompound nbt, String liq) {
 		NBTTagList tagList = nbt.getTagList("UT_Tank"+liq);
 		if(tagList == null)return;
-		if(tagList.tagCount() == 0)return;
+		if(tagList.tagCount() == 0){
+			fluid = null;
+			return;
+		}
 		NBTTagCompound tag = (NBTTagCompound) tagList.tagAt(0);
 		fluid = new FluidStack(tag.getInteger("Fluid"), tag.getInteger("Amount"));
 	}

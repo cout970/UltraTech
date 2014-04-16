@@ -12,8 +12,8 @@ import net.minecraft.network.packet.Packet132TileEntityData;
 public class Machine extends ElectricConductor implements IEnergy{
 
 	public MachineTipe tipe = MachineTipe.Nothing;
-	private int Energy = 0;
-	private int maxEnergy;
+	private float Energy = 0;
+	private float maxEnergy;
 
 	public Machine(){
 		super();
@@ -37,23 +37,25 @@ public class Machine extends ElectricConductor implements IEnergy{
 	 * @param a
 	 * @param b
 	 */
-	public static void passEnergy(Machine a, Machine b){
+	public static void passEnergy(Machine a, Machine b,boolean Pathfinder){
 		if(a == null || b == null)return;
 		if(a.equals(b))return;
 		if(a.getEnergy() > 0){
-			int space = b.maxEnergy()-b.getEnergy();
-			int flow = Math.min(a.maxFlow(), b.maxFlow());
+			float space = b.maxEnergy()-b.getEnergy();
+			float flow = Math.min(a.maxFlow(), b.maxFlow());
 			if(space > 0){
-				if(new EnergyPathfinder(a,b).canEnergyGoToEnd()){
-					if(a.getEnergy() > flow && space > flow){
-						a.removeEnergy(flow);
-						b.addEnergy(flow);
-					}else if(a.getEnergy() >= space){
-						a.removeEnergy(space);
-						b.addEnergy(space);
-					}else{
-						b.addEnergy(a.getEnergy());
-						a.removeEnergy(a.getEnergy());
+				if(new EnergyPathfinder(a,b).canEnergyGoToEnd() || !Pathfinder){
+					if(a.getEnergy() >= flow || a.getEnergy() >= space || a.worldObj.getWorldTime()%5 == 0){
+						if(a.getEnergy() > flow && space > flow){
+							a.removeEnergy(flow);
+							b.addEnergy(flow);
+						}else if(a.getEnergy() >= space){
+							a.removeEnergy(space);
+							b.addEnergy(space);
+						}else{
+							b.addEnergy(a.getEnergy());
+							a.removeEnergy(a.getEnergy());
+						}
 					}
 				}
 			}
@@ -65,7 +67,7 @@ public class Machine extends ElectricConductor implements IEnergy{
 		if(getNetwork() == null)return;
 		for(Machine b: getNetwork().getMachines()){
 			if(b.tipe != MachineTipe.Output)
-				passEnergy(this, b);
+				passEnergy(this, b, true);
 		}
 	}
 
@@ -73,7 +75,7 @@ public class Machine extends ElectricConductor implements IEnergy{
 		if(getNetwork() == null)return;
 		for(Machine b: getNetwork().getMachines()){
 			if(b.tipe == MachineTipe.Output || b.tipe == MachineTipe.Storage)
-			passEnergy(b, this);
+			passEnergy(b, this, true);
 		}
 	}
 	
@@ -82,40 +84,43 @@ public class Machine extends ElectricConductor implements IEnergy{
 	}
 	
 	@Override
-	public int addEnergy(int amount) {
+	public float addEnergy(float amount) {
 		Energy += amount;
 		if(Energy > maxEnergy()){
-			int aux = maxEnergy() - Energy;
+			float aux = maxEnergy() - Energy;
 			Energy = maxEnergy();
 			return aux;
 		}
+		if(Energy < 0)Energy = 0;
 		return 0;
 	}
 
 	@Override
-	public void removeEnergy(int amount) {
+	public void removeEnergy(float amount) {
 		if(Energy-amount >= 0){
 			Energy -= amount;	
 		}
+		if(Energy < 0)Energy = 0;
 	}
 
 	@Override
-	public int getEnergy() {
+	public float getEnergy() {
+		if(Energy < 0)Energy = 0;
 		return Energy;
 	}
 
 	@Override
-	public int maxEnergy() {
+	public float maxEnergy() {
 		return maxEnergy;
 	}
 	
 	@Override
-	public int maxFlow() {
+	public float maxFlow() {
 		return tier.getFlow();
 	}
 	
-	public void setMaxEnergy(int e) {
-		maxEnergy = e;
+	public void setMaxEnergy(float climateestationcost) {
+		maxEnergy = climateestationcost;
 	}
 	
 	public void setEnergy(int e) {
@@ -129,9 +134,9 @@ public class Machine extends ElectricConductor implements IEnergy{
 		
 		NBTTagList tagList = nbtTagCompound.getTagList("Energy_UT");
 		NBTTagCompound tagCompound = (NBTTagCompound) tagList.tagAt(0);
-		Energy = tagCompound.getInteger("Energy");
+		Energy = tagCompound.getFloat("Energy");
 		NBTTagCompound tagCompound2 = (NBTTagCompound) tagList.tagAt(1);
-		maxEnergy = tagCompound2.getInteger("EnergyMax");
+		maxEnergy = tagCompound2.getFloat("EnergyMax");
 	}
 	
 	@Override
@@ -140,10 +145,10 @@ public class Machine extends ElectricConductor implements IEnergy{
 		
 		NBTTagList tagList = new NBTTagList();
 		NBTTagCompound tagCompound = new NBTTagCompound();
-		tagCompound.setInteger("Energy", this.Energy);
+		tagCompound.setFloat("Energy", this.Energy);
 		tagList.appendTag(tagCompound);
 		NBTTagCompound tagCompound2 = new NBTTagCompound();
-		tagCompound2.setInteger("EnergyMax", this.maxEnergy);
+		tagCompound2.setFloat("EnergyMax", this.maxEnergy);
 		tagList.appendTag(tagCompound2);
 		nbtTagCompound.setTag("Energy_UT", tagList);
 	}
@@ -162,7 +167,7 @@ public class Machine extends ElectricConductor implements IEnergy{
 
 	public void sendGUINetworkData(Container cont,
 			ICrafting c) {
-		c.sendProgressBarUpdate(cont, 1, getEnergy());
+		c.sendProgressBarUpdate(cont, 1, (int) getEnergy());
 	}
 
 

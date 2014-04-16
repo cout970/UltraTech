@@ -9,23 +9,26 @@ import common.cout970.UltraTech.TileEntities.Tier1.LeadPipeEntity;
 import common.cout970.UltraTech.TileEntities.Tier2.EnergyTransformer;
 import common.cout970.UltraTech.TileEntities.Tier2.EngineEntity;
 import common.cout970.UltraTech.TileEntities.Tier2.SolarPanelEntity;
+import common.cout970.UltraTech.TileEntities.Tier2.TankEntity;
 import common.cout970.UltraTech.TileEntities.Tier2.WindMillEntity;
 import common.cout970.UltraTech.TileEntities.Tier3.HologramEmiterEntity;
 import common.cout970.UltraTech.TileEntities.Tier3.ReactorTankEntity;
-import common.cout970.UltraTech.machines.renders.Block_UT_Render;
+import common.cout970.UltraTech.machines.renders.DecoBlocksRender;
 import common.cout970.UltraTech.machines.renders.ReactorTankRender;
 import common.cout970.UltraTech.machines.renders.RenderBoiler;
-import common.cout970.UltraTech.machines.renders.RenderBoilerItem;
 import common.cout970.UltraTech.machines.renders.RenderCable;
 import common.cout970.UltraTech.machines.renders.RenderEngine;
-import common.cout970.UltraTech.machines.renders.RenderEngineItem;
 import common.cout970.UltraTech.machines.renders.RenderFluidPipe;
 import common.cout970.UltraTech.machines.renders.RenderHologram;
-import common.cout970.UltraTech.machines.renders.RenderSolarItem;
 import common.cout970.UltraTech.machines.renders.RenderSolarPanel;
+import common.cout970.UltraTech.machines.renders.RenderTank;
 import common.cout970.UltraTech.machines.renders.RenderTransformer;
 import common.cout970.UltraTech.machines.renders.RenderWindMill;
-import common.cout970.UltraTech.machines.renders.RenderWindMillItem;
+import common.cout970.UltraTech.machines.renders.items.RenderBoilerItem;
+import common.cout970.UltraTech.machines.renders.items.RenderEngineItem;
+import common.cout970.UltraTech.machines.renders.items.RenderSolarItem;
+import common.cout970.UltraTech.machines.renders.items.RenderTankItem;
+import common.cout970.UltraTech.machines.renders.items.RenderWindMillItem;
 import common.cout970.UltraTech.managers.BlockManager;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
@@ -38,6 +41,7 @@ public class ClientProxy extends CommonProxy{
 	public static int solarRenderPass;
 	public static int windmillRenderPass;
 	public static int boilerRenderPass;
+	public static int tankRenderPass;
 
 	@Override
 	public void registerRenders() {
@@ -52,6 +56,7 @@ public class ClientProxy extends CommonProxy{
 		ClientRegistry.bindTileEntitySpecialRenderer(CopperPipeEntity.class, new RenderFluidPipe());
 		ClientRegistry.bindTileEntitySpecialRenderer(LeadPipeEntity.class, new RenderFluidPipe());
 		ClientRegistry.bindTileEntitySpecialRenderer(BoilerEntity.class, new RenderBoiler());
+		ClientRegistry.bindTileEntitySpecialRenderer(TankEntity.class, new RenderTank());
 
 		setCustomRenderers();
 	}
@@ -60,7 +65,7 @@ public class ClientProxy extends CommonProxy{
       {	
 		  //deco blocks
 		  BlockRenderTipe = RenderingRegistry.getNextAvailableRenderId();
-		  RenderingRegistry.registerBlockHandler(new Block_UT_Render());
+		  RenderingRegistry.registerBlockHandler(new DecoBlocksRender());
 		  //engine
 		  engineRenderPass = RenderingRegistry.getNextAvailableRenderId();
 		  MinecraftForgeClient.registerItemRenderer(BlockManager.Engine.blockID, new RenderEngineItem());
@@ -73,5 +78,8 @@ public class ClientProxy extends CommonProxy{
 		//windmill
 		  boilerRenderPass = RenderingRegistry.getNextAvailableRenderId();
 		  MinecraftForgeClient.registerItemRenderer(BlockManager.Boiler.blockID, new RenderBoilerItem());
+		//tank
+		  tankRenderPass = RenderingRegistry.getNextAvailableRenderId();
+		  MinecraftForgeClient.registerItemRenderer(BlockManager.Tank.blockID, new RenderTankItem());
       }
 }

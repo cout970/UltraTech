@@ -4,6 +4,6 @@
 	<classpathentry kind="src" path="resources"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/Minecraft"/>
-	<classpathentry kind="lib" path="I:/Development/Minecraft mod development/forge/mcp/jars/mods/NotEnoughItems-dev 1.6.1.5_d1.jar"/>
+	<classpathentry kind="lib" path="I:/Development/Minecraft mod development/eclipse/NotEnoughItems-dev 1.6.1.5_d1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

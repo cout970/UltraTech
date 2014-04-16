@@ -39,9 +39,9 @@ public class WindMillEntity extends Machine{
 		if(obs)wind = 0;
 		
 		if(speed > wind){
-			speed -= 0.01;
+			speed -= 0.02;
 		}else if(speed < wind){
-			speed += 0.005f;
+			speed += 0.01f;
 		}
 		
 		if(timer++ > 200){
@@ -51,7 +51,7 @@ public class WindMillEntity extends Machine{
 		}
 		
 		if(worldObj.isRemote)return;
-		addEnergy((int)(speed*EnergyCosts.WindMillProduct));
+		addEnergy(speed*EnergyCosts.WindMillProduct);
 		
 	}
 

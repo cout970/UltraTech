@@ -63,13 +63,18 @@ public class CrafterGui extends GuiContainer{
 		if(entity.getStackInSlot(-1) != null){
 			if(isIn(mx,my, xStart+85, yStart+67, 9, 9)){
 				UT_Utils.sendPacket(entity, 0, 2);
+				entity.saveRecipe();
 			}
 		}
 		for(int d =0;d<9;d++){
 			if(isIn(mx, my, xStart+8 + d * 18, yStart+6, 18,18))if(entity.saves.getStackInSlot(d) != null){
-				if(b == 0)UT_Utils.sendPacket(entity, d, 3);
+				if(b == 0){
+					UT_Utils.sendPacket(entity, d, 3);
+					entity.loadRecipes(d);
+				}
 				if(b == 1){
 					UT_Utils.sendPacket(entity, d, 4);
+					entity.DellRecipe(d);
 				}
 			}
 		}
@@ -77,8 +82,12 @@ public class CrafterGui extends GuiContainer{
 		if(isIn(mx,my,xStart+80, yStart+43,18,18)){
 			if(b == 0){
 				UT_Utils.sendPacket(entity, 0, 1);
+				entity.canCraft();
+				if(entity.allFound())entity.craft();
 			}else if(b == 1){
+				UT_Utils.sendPacket(entity, 0, 7);
 				entity.emptyCraft();
+				entity.canCraft();
 			}
 		}
 		ItemStack i = null;

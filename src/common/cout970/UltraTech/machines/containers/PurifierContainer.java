@@ -46,7 +46,7 @@ public class PurifierContainer extends Container{
     {
         super.addCraftingToCrafters(par1ICrafting);
         par1ICrafting.sendProgressBarUpdate(this, 0, tileEntity.progres);
-        par1ICrafting.sendProgressBarUpdate(this, 1, tileEntity.getEnergy());
+        par1ICrafting.sendProgressBarUpdate(this, 1, (int)tileEntity.getEnergy());
         par1ICrafting.sendProgressBarUpdate(this, 2, tileEntity.speed);
     }
 	

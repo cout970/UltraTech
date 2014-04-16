@@ -27,7 +27,8 @@ public class Cuter_Recipes{
 					if(cuterEntity.getStackInSlot(1)==null){
 						return true;
 					}else{
-						if(OreDictionary.itemMatches(cuterEntity.getStackInSlot(1), a.getOutput(), true) && cuterEntity.getStackInSlot(1).stackSize + a.getInput().stackSize <= cuterEntity.getInventoryStackLimit())return true;
+						if(OreDictionary.itemMatches(cuterEntity.getStackInSlot(1), a.getOutput(), true))
+							if(cuterEntity.getStackInSlot(1).stackSize + a.getInput().stackSize <= cuterEntity.getInventoryStackLimit())return true;
 					}
 				}
 			}

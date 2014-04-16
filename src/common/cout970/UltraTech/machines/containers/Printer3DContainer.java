@@ -1,10 +1,8 @@
 package common.cout970.UltraTech.machines.containers;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
 
 import common.cout970.UltraTech.TileEntities.Tier1.Printer3DEntity;
+import common.cout970.UltraTech.lib.UT_Utils;
 import cpw.mods.fml.common.network.PacketDispatcher;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -12,8 +10,6 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.packet.Packet;
-import net.minecraft.network.packet.Packet250CustomPayload;
 
 public class Printer3DContainer extends Container{
 
@@ -98,23 +94,7 @@ public class Printer3DContainer extends Container{
 
 
 	public void sendUpdate() {
-		PacketDispatcher.sendPacketToServer(getPacket());
-		PacketDispatcher.sendPacketToAllPlayers(getPacket());
-	}
-	private Packet getPacket() {
-
-		ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-		DataOutputStream data = new DataOutputStream(bytes);
-		try {
-			data.writeInt(-1);
-			data.writeInt(tile.xCoord);
-			data.writeInt(tile.yCoord);
-			data.writeInt(tile.zCoord);
-			data.writeInt(color);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		Packet250CustomPayload packet = new Packet250CustomPayload("UltraTech",bytes.toByteArray());
-		return packet;
+		PacketDispatcher.sendPacketToServer(UT_Utils.getPacketToServer(tile,-1,color));
+		PacketDispatcher.sendPacketToAllPlayers(UT_Utils.getPacketToServer(tile,-1,color));
 	}
 }

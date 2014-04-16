@@ -1,21 +1,20 @@
-package common.cout970.UltraTech.machines.renders;
+package common.cout970.UltraTech.machines.renders.items;
 
 import org.lwjgl.opengl.GL11;
 
-import common.cout970.UltraTech.machines.models.NewEngine;
-
+import common.cout970.UltraTech.machines.models.ModelWindMill;
 import cpw.mods.fml.client.FMLClientHandler;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
 
-public class RenderEngineItem implements IItemRenderer{
+public class RenderWindMillItem implements IItemRenderer{
 
-	private NewEngine model;
-	private ResourceLocation texture = new ResourceLocation("ultratech:textures/misc/engine.png");
+	private ModelWindMill model;
+	private ResourceLocation texture = new ResourceLocation("ultratech:textures/misc/windmill.png");
 
-	public RenderEngineItem() {
-		this.model = new NewEngine();
+	public RenderWindMillItem() {
+		this.model = new ModelWindMill();
 	}
 	
 	@Override
@@ -33,19 +32,19 @@ public class RenderEngineItem implements IItemRenderer{
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
 		switch (type) {
             case ENTITY: {
-                render(0.5F, -0.5F, 0.5F, 1.0F);
+            	render(0.0F, -2.5F, 0.0F, 0.35F,true);
                 return;
             }
             case EQUIPPED: {
-                render(0.5F, -0.5F, 0.5F, 1.0F);
+                render(1.5F, -0.5F, 2.5F, 0.35F,false);
                 return;
             }
             case INVENTORY: {
-                render(0.0F, -1F, 0.0F, 1.0F,true);
+                render(0.0F, -2.5F, 0.0F, 0.30F,true);
                 return;
             }
             case EQUIPPED_FIRST_PERSON: {
-                render(0.5F, -0.5F, 0.5F, 1.0F);
+                render(1.5F, -0.5F, 0.5F, 0.35F,false);
                 return;
             }
             default:
@@ -53,9 +52,6 @@ public class RenderEngineItem implements IItemRenderer{
         }
 	}
 	
-	public void render(float x, float y, float z, float scale){
-		render(x, y, z, scale, false);
-	}
 	
 	public void render(float x, float y, float z, float scale, boolean rotate90Deg){
 		GL11.glPushMatrix();
@@ -67,7 +63,9 @@ public class RenderEngineItem implements IItemRenderer{
         }else{
             GL11.glRotatef(0F, 0, 0, 0);
         }
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(texture );
+        GL11.glRotatef(180F, 0, 0, 1);
+        GL11.glTranslatef(0, -1.5f, 0);
+        FMLClientHandler.instance().getClient().renderEngine.bindTexture(texture);
         model.render(null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
         GL11.glEnable(GL11.GL_LIGHTING);
         GL11.glPopMatrix();

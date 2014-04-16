@@ -32,7 +32,6 @@ public class LasserSword extends UT_Item implements IItemEnergyEstorage{
 		setTextureName("LasserSword");
 	}
 
-
 	public void registerIcons(IconRegister iconRegister){
 		this.itemIcon = iconRegister.registerIcon("ultratech:lassersword");
 	}
@@ -53,9 +52,9 @@ public class LasserSword extends UT_Item implements IItemEnergyEstorage{
 //energy
 	
 	@Override
-	public int getEnergy(ItemStack i) {
+	public float getEnergy(ItemStack i) {
 		if(i.stackTagCompound.hasKey("Energy")){
-			return i.stackTagCompound.getInteger("Energy");
+			return i.stackTagCompound.getFloat("Energy");
 		}
 		return 0;
 	}
@@ -63,7 +62,7 @@ public class LasserSword extends UT_Item implements IItemEnergyEstorage{
 	@Override
 	public int getDisplayDamage(ItemStack stack) {
 		if(stack.getTagCompound() != null && stack.getTagCompound().hasKey("Energy"))
-			return MaxEnergy - stack.getTagCompound().getInteger("Energy");
+			return (int) (MaxEnergy - stack.getTagCompound().getFloat("Energy"));
 		else
 			return MaxEnergy;
 	}
@@ -71,7 +70,7 @@ public class LasserSword extends UT_Item implements IItemEnergyEstorage{
 	@Override
 	public int getDamage(ItemStack stack) {
 		if(stack.getTagCompound() != null && stack.getTagCompound().hasKey("Energy"))
-			return MaxEnergy - stack.getTagCompound().getInteger("Energy");
+			return (int) (MaxEnergy - stack.getTagCompound().getFloat("Energy"));
 		else
 			return MaxEnergy;
 	}
@@ -85,8 +84,8 @@ public class LasserSword extends UT_Item implements IItemEnergyEstorage{
 	public void onCreated(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
         if( par1ItemStack.stackTagCompound == null )
                 par1ItemStack.setTagCompound( new NBTTagCompound());
-        par1ItemStack.stackTagCompound.setInteger("Energy", 0);
-        par1ItemStack.stackTagCompound.setInteger("MaxEnergy", MaxEnergy );
+        par1ItemStack.stackTagCompound.setFloat("Energy", 0);
+        par1ItemStack.stackTagCompound.setFloat("MaxEnergy", MaxEnergy );
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -94,42 +93,42 @@ public class LasserSword extends UT_Item implements IItemEnergyEstorage{
 		if( par1ItemStack.stackTagCompound == null )
 			par1ItemStack.setTagCompound( new NBTTagCompound( ) );
 		if(par1ItemStack.stackTagCompound.hasKey("Energy")){
-		par3List.add( par1ItemStack.stackTagCompound.getInteger("Energy")+"/"+this.MaxEnergy);
+		par3List.add( par1ItemStack.stackTagCompound.getFloat("Energy")+"/"+this.MaxEnergy);
 		}else{
 			par3List.add( 0+"/"+this.MaxEnergy);
 		}
 	}
 	
-	public int addEnergy(ItemStack stack, int energy){
+	public float addEnergy(ItemStack stack, float energy){
 		if(stack.getTagCompound() == null){
 			stack.stackTagCompound = new NBTTagCompound();
-			stack.getTagCompound().setInteger("Energy", 0);
+			stack.getTagCompound().setFloat("Energy", 0);
 		}
 		
-		int buffer = stack.getTagCompound().getInteger("Energy") + energy;
-		int aux = 0;
+		float buffer = (stack.getTagCompound().getFloat("Energy") + energy);
+		float aux = 0;
 		if(buffer > MaxEnergy)
 			buffer = MaxEnergy;
 		aux = buffer-MaxEnergy;
 		
-		stack.getTagCompound().setInteger("Energy", buffer);
-		stack.setItemDamage(buffer);
+		stack.getTagCompound().setFloat("Energy", buffer);
+		stack.setItemDamage((int)buffer);
 		return aux;
 	}
 	
-	public void removeEnergy(ItemStack stack, int energy){
+	public void removeEnergy(ItemStack stack, float energy){
 		if(stack.getTagCompound() == null){
 			stack.stackTagCompound = new NBTTagCompound();
 			stack.getTagCompound().setInteger("Energy", 0);
 		}
 		
-		int buffer = stack.getTagCompound().getInteger("Energy") - energy;
+		float buffer = (stack.getTagCompound().getFloat("Energy") - energy);
 		
 		if(buffer < 0)
 			buffer = 0;
 		
-		stack.getTagCompound().setInteger("Energy", buffer);
-		stack.setItemDamage(buffer);
+		stack.getTagCompound().setFloat("Energy", buffer);
+		stack.setItemDamage((int)buffer);
 	}
 
 	@Override
@@ -140,7 +139,7 @@ public class LasserSword extends UT_Item implements IItemEnergyEstorage{
 
 
 	@Override
-	public int getMaxEnergy() {
+	public float getMaxEnergy() {
 		return this.MaxEnergy;
 	}
 

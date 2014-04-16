@@ -3,6 +3,7 @@ package common.cout970.UltraTech.machines.gui;
 import org.lwjgl.opengl.GL11;
 
 import common.cout970.UltraTech.TileEntities.Tier1.BoilerEntity;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
@@ -64,17 +65,17 @@ public class BoilerGui extends GuiContainer{
 
 	}
 
-	private void bindTexture(FluidStack f) {
-		if(FluidRegistry.getFluidName(f).equals("water"))this.mc.renderEngine.bindTexture(new ResourceLocation("ultratech:textures/misc/fluids/water.png"));	
-		if(FluidRegistry.getFluidName(f).equals("juice"))this.mc.renderEngine.bindTexture(new ResourceLocation("ultratech:textures/misc/fluids/juice.png"));
-		if(FluidRegistry.getFluidName(f).equals("etanol"))this.mc.renderEngine.bindTexture(new ResourceLocation("ultratech:textures/misc/fluids/ethanol.png"));	
-		if(FluidRegistry.getFluidName(f).equals("oil"))this.mc.renderEngine.bindTexture(new ResourceLocation("ultratech:textures/misc/fluids/oil.png"));	
-		if(FluidRegistry.getFluidName(f).equals("fuel"))this.mc.renderEngine.bindTexture(new ResourceLocation("ultratech:textures/misc/fluids/fuel.png"));	
+	public static void bindTexture(FluidStack f) {
+		if(FluidRegistry.getFluidName(f).equals("water"))Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("ultratech:textures/misc/fluids/water.png"));	
+		if(FluidRegistry.getFluidName(f).equals("juice"))Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("ultratech:textures/misc/fluids/juice.png"));
+		if(FluidRegistry.getFluidName(f).equals("bioethanol"))Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("ultratech:textures/misc/fluids/ethanol.png"));	
+		if(FluidRegistry.getFluidName(f).equals("oil"))Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("ultratech:textures/misc/fluids/oil.png"));	
+		if(FluidRegistry.getFluidName(f).equals("fuel"))Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("ultratech:textures/misc/fluids/fuel.png"));	
 		if(FluidRegistry.getFluidName(f).equals("gas_oil")){
-			this.mc.renderEngine.bindTexture(new ResourceLocation("ultratech:textures/misc/fluids/gasoil.png"));
+			Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("ultratech:textures/misc/fluids/gasoil.png"));
 			return;
 		}
-		if(FluidRegistry.getFluidName(f).contains("gas"))this.mc.renderEngine.bindTexture(new ResourceLocation("ultratech:textures/misc/fluids/steam.png"));
+		if(FluidRegistry.getFluidName(f).contains("gas"))Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("ultratech:textures/misc/fluids/steam.png"));
 	}
 
 }

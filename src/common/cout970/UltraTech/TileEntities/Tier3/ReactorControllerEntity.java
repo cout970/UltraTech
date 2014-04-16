@@ -1,7 +1,9 @@
 package common.cout970.UltraTech.TileEntities.Tier3;
 
+import common.cout970.UltraTech.machines.containers.ControllerContainer;
 import common.cout970.UltraTech.managers.BlockManager;
 import common.cout970.UltraTech.misc.IReactorPart;
+import net.minecraft.inventory.ICrafting;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet;
@@ -16,12 +18,24 @@ public class ReactorControllerEntity extends TileEntity implements IReactorPart{
 	public boolean update = false;
 	public int meta;
 	public boolean on;
+	public boolean useHeat = false;
+	public int maxheat = 1000;
+	public int minheat = 900;
 	
 	public void updateEntity(){
 		if(!Structure && meta == 1){
 			meta = 0;
 		}else if(Structure && meta == 0){
 			meta = 1;
+		}
+		if(Reactor != null && !worldObj.isRemote && useHeat){
+			if(Reactor.heat > maxheat){
+				on = false;
+				Reactor.control = null;
+			}else if(Reactor.heat < minheat  && !on){
+				on = true;
+				Reactor.control = null;
+			}
 		}
 	}
 
@@ -54,7 +68,7 @@ public class ReactorControllerEntity extends TileEntity implements IReactorPart{
 	public void onNeighChange() {
 		if(Structure){
 			SearchReactor();
-			if(Reactor != null){
+			if(Reactor != null && !useHeat){
 				on = !worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord);
 				Reactor.control = null;
 			}
@@ -126,6 +140,7 @@ public class ReactorControllerEntity extends TileEntity implements IReactorPart{
 		super.readFromNBT(nbtTagCompound);
 		Structure = nbtTagCompound.getBoolean("Structure");
 		on = nbtTagCompound.getBoolean("on");
+		useHeat = nbtTagCompound.getBoolean("heat");
 	}
 
 	@Override
@@ -134,6 +149,7 @@ public class ReactorControllerEntity extends TileEntity implements IReactorPart{
 		super.writeToNBT(nbtTagCompound);
 		nbtTagCompound.setBoolean("Structure", Structure);
 		nbtTagCompound.setBoolean("on", on);
+		nbtTagCompound.setBoolean("heat", useHeat);
 	}
 	
 	//Synchronization
@@ -149,5 +165,16 @@ public class ReactorControllerEntity extends TileEntity implements IReactorPart{
     public void onDataPacket(INetworkManager net, Packet132TileEntityData pkt) {
     	this.readFromNBT(pkt.data);
     }
+
+	public void sendGUINetworkData(ControllerContainer controllerContainer,
+			ICrafting iCrafting) {
+		iCrafting.sendProgressBarUpdate(controllerContainer, 0, on ? 1:0);
+		iCrafting.sendProgressBarUpdate(controllerContainer, 1, useHeat ? 1:0);
+	}
+
+	public void getGUINetworkData(int i, int j) {
+		if(i == 0)on = j == 1;
+		if(i == 1)useHeat = j == 1;
+	}
 
 }

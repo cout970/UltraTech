@@ -9,10 +9,10 @@ import common.cout970.UltraTech.managers.ItemManager;
 import common.cout970.UltraTech.misc.ISpeedUpgradeabel;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ICrafting;
-import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 
-public class PresuricerEntity extends Machine implements IInventory,ISpeedUpgradeabel{
+public class PresuricerEntity extends Machine implements ISidedInventory,ISpeedUpgradeabel{
 
 	private ItemStack[] inventory;
 	public int progres;
@@ -190,5 +190,20 @@ public class PresuricerEntity extends Machine implements IInventory,ISpeedUpgrad
 			return new ItemStack(ItemManager.ItemName.get("SpeedUpgrade"),speedUpgrades);
 		}
 		return null;
+	}
+	
+	@Override
+	public int[] getAccessibleSlotsFromSide(int var1) {
+		return new int[]{0,1,2,3};
+	}
+
+	@Override
+	public boolean canInsertItem(int i, ItemStack itemstack, int j) {
+		return i == 0;
+	}
+
+	@Override
+	public boolean canExtractItem(int i, ItemStack itemstack, int j) {
+		return i==1 || i==2 || i==3;
 	}
 }

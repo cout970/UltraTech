@@ -9,12 +9,12 @@ import common.cout970.UltraTech.misc.ISpeedUpgradeabel;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
-import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 
-public class PurifierEntity extends Machine implements IInventory,ISpeedUpgradeabel{
+public class PurifierEntity extends Machine implements ISidedInventory,ISpeedUpgradeabel{
 
 	private ItemStack[] inventory;
 	public int progres = 0;
@@ -36,7 +36,6 @@ public class PurifierEntity extends Machine implements IInventory,ISpeedUpgradea
 			if(!hasEnergy){
 				hasEnergy = getEnergy() >= EnergyCosts.PurifierCost;
 			}
-
 			if(progres > 0){
 				removeEnergy(EnergyCosts.PurifierCost*speed/1000);
 			}
@@ -225,6 +224,21 @@ public class PurifierEntity extends Machine implements IInventory,ISpeedUpgradea
 		super.getGUINetworkData(id, value);
 		if(id == 2)progres = value;
 		if(id == 3)speed = value;
+	}
+	
+	@Override
+	public int[] getAccessibleSlotsFromSide(int var1) {
+		return new int[]{0,1};
+	}
+
+	@Override
+	public boolean canInsertItem(int i, ItemStack itemstack, int j) {
+		return i == 0;
+	}
+
+	@Override
+	public boolean canExtractItem(int i, ItemStack itemstack, int j) {
+		return i==1;
 	}
 
 	//Upgrades

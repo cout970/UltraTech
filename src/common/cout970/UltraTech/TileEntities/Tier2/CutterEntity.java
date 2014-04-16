@@ -9,12 +9,12 @@ import common.cout970.UltraTech.misc.ISpeedUpgradeabel;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
-import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 
-public class CutterEntity extends Machine implements IInventory,ISpeedUpgradeabel{
+public class CutterEntity extends Machine implements ISidedInventory,ISpeedUpgradeabel{
 
 	private ItemStack[] inventory;
 	public int progres = 0;
@@ -162,7 +162,7 @@ public class CutterEntity extends Machine implements IInventory,ISpeedUpgradeabe
 
 	@Override
 	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-		return true;
+		return i == 0;
 	}
 	
 	//Save & Load
@@ -248,6 +248,21 @@ public class CutterEntity extends Machine implements IInventory,ISpeedUpgradeabe
 			return new ItemStack(ItemManager.ItemName.get("SpeedUpgrade"),speedUpgrades);
 		}
 		return null;
+	}
+
+	@Override
+	public int[] getAccessibleSlotsFromSide(int var1) {
+		return new int[]{0,1};
+	}
+
+	@Override
+	public boolean canInsertItem(int i, ItemStack itemstack, int j) {
+		return i == 0;
+	}
+
+	@Override
+	public boolean canExtractItem(int i, ItemStack itemstack, int j) {
+		return i==1;
 	}
 	
 }

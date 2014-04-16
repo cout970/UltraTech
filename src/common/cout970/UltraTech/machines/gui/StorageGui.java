@@ -1,8 +1,10 @@
 package common.cout970.UltraTech.machines.gui;
 
+
 import org.lwjgl.opengl.GL11;
 
 import common.cout970.UltraTech.energy.api.Machine;
+import common.cout970.UltraTech.lib.UT_Utils;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -36,13 +38,11 @@ public class StorageGui extends GuiContainer{
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int x, int y) {
-
-		String e = entity.getEnergy()/10+"";
-		this.fontRenderer.drawString(e, this.xSize - 120+(-e.length()*5+35), 36, 4210752);
-		this.fontRenderer.drawString(" / ", this.xSize - 80, 36, 4210752);
-		String m = entity.maxEnergy()/10+"";
-		this.fontRenderer.drawString(m, this.xSize - 67+(-m.length()*5+35), 36, 4210752);
-
+		
+		String e = (int)entity.getEnergy()+"";
+		String m = (int)entity.maxEnergy()+"";
+		
+		this.drawCenteredString(fontRenderer, e+" / "+m, 105, 36, UT_Utils.RGBtoInt(255, 255, 255));
 		String f = "Interdimensional Storage";
 		this.fontRenderer.drawString(f, this.xSize - 130, 8, 4210752);
 	}

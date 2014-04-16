@@ -1,20 +1,20 @@
-package common.cout970.UltraTech.machines.renders;
+package common.cout970.UltraTech.machines.renders.items;
 
-import org.lwjgl.opengl.GL11;
-
-import common.cout970.UltraTech.machines.models.ModelWindMill;
-import cpw.mods.fml.client.FMLClientHandler;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
+import org.lwjgl.opengl.GL11;
 
-public class RenderWindMillItem implements IItemRenderer{
+import common.cout970.UltraTech.machines.models.ModelSolarPanel;
+import cpw.mods.fml.client.FMLClientHandler;
 
-	private ModelWindMill model;
-	private ResourceLocation texture = new ResourceLocation("ultratech:textures/misc/windmill.png");
+public class RenderSolarItem implements IItemRenderer{
 
-	public RenderWindMillItem() {
-		this.model = new ModelWindMill();
+	private ModelSolarPanel model;
+	private ResourceLocation texture = new ResourceLocation("ultratech:textures/misc/solarpanel.png");
+
+	public RenderSolarItem() {
+		this.model = new ModelSolarPanel();
 	}
 	
 	@Override
@@ -32,19 +32,19 @@ public class RenderWindMillItem implements IItemRenderer{
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
 		switch (type) {
             case ENTITY: {
-                render(0.5F, -0.5F, 0.5F, 0.5F,false);
+            	render(0.0F, -0.5F, 0.0F, 1.0F,false);
                 return;
             }
             case EQUIPPED: {
-                render(1.5F, -0.5F, 2.5F, 0.35F,false);
+                render(0.5F, -0.5F, 0.5F, 1.0F,false);
                 return;
             }
             case INVENTORY: {
-                render(0.0F, -2.5F, 0.0F, 0.30F,true);
+                render(0.0F, -1F, 0.0F, 1.0F,true);
                 return;
             }
             case EQUIPPED_FIRST_PERSON: {
-                render(1.5F, -0.5F, 0.5F, 0.35F,false);
+                render(0.5F, -0.5F, 0.5F, 1.0F,false);
                 return;
             }
             default:

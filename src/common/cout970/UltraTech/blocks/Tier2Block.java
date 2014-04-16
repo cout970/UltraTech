@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Random;
 
 import common.cout970.UltraTech.TileEntities.Tier2.CutterEntity;
+import common.cout970.UltraTech.TileEntities.Tier2.FluidGenerator;
 import common.cout970.UltraTech.TileEntities.Tier2.FurnaceEntity;
 import common.cout970.UltraTech.TileEntities.Tier2.PresuricerEntity;
 import common.cout970.UltraTech.TileEntities.Tier2.PurifierEntity;
@@ -24,12 +25,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class Tier2Block extends BlockContainer{
 
 	public Icon icons[];
-	public int numBlocks = 4;
+	public int numBlocks = 5;
 	
 	public Tier2Block(int par1, Material par2Material) {
 		super(par1, par2Material);
@@ -50,6 +52,8 @@ public class Tier2Block extends BlockContainer{
 		icons[3] = IR.registerIcon("ultratech:purifier");
 		icons[4] = IR.registerIcon("ultratech:cutter");
 		icons[5] = IR.registerIcon("ultratech:presuricer");
+		icons[6] = IR.registerIcon("ultratech:fluidgen");
+		icons[7] = IR.registerIcon("ultratech:fluidgenon");
 	}
 
 	@Override
@@ -58,7 +62,7 @@ public class Tier2Block extends BlockContainer{
 		if(metadata == 1)return new PurifierEntity();
 		if(metadata == 2)return new CutterEntity();
 		if(metadata == 3)return new PresuricerEntity();
-		if(metadata == 4)return null;
+		if(metadata == 4)return new FluidGenerator();
 		return null;
 	}
 
@@ -86,6 +90,27 @@ public class Tier2Block extends BlockContainer{
 			return icons[0];
 		}
 		default:return icons[0];
+		}
+	}
+	
+	@Override
+	public Icon getBlockTexture(IBlockAccess BA, int x, int y, int z, int side)
+	{
+		int meta = BA.getBlockMetadata(x, y, z);
+		if(meta == 4){
+			if(side == 1 || side == 0)return icons[0];
+			TileEntity t = BA.getBlockTileEntity(x, y, z);
+			if(t instanceof FluidGenerator){
+				if(((FluidGenerator)t).on){
+					return icons[7];
+				}else{
+					return icons[6];
+				}
+			}else{
+				return icons[0];
+			}
+		}else{
+			return getIcon(side, meta);
 		}
 	}
 

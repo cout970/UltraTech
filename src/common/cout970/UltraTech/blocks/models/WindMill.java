@@ -7,6 +7,8 @@ import common.cout970.UltraTech.energy.api.EnergyUtils;
 import common.cout970.UltraTech.energy.api.Machine;
 import common.cout970.UltraTech.managers.BlockManager;
 import common.cout970.UltraTech.proxy.ClientProxy;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -96,6 +98,7 @@ public class WindMill extends BlockContainer{
 		return false;
 	}
 
+	@SideOnly(Side.CLIENT)
 	@Override
 	public int getRenderType() {
 		return ClientProxy.windmillRenderPass;

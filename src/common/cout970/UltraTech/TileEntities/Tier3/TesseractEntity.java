@@ -2,9 +2,8 @@ package common.cout970.UltraTech.TileEntities.Tier3;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
+import java.util.ArrayList;
+import java.util.List;
 
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
@@ -16,54 +15,49 @@ import common.cout970.UltraTech.lib.EnergyCosts.MachineTier;
 import cpw.mods.fml.common.network.PacketDispatcher;
 
 public class TesseractEntity extends Machine{
-
-	public static Map<String,TesseractEntity> freqs = new HashMap<String,TesseractEntity>();
 	
-	public String frequency = "";
-	public String To = "";
+	public static List<TesseractEntity> tes = new ArrayList<TesseractEntity>();
+	public int frequency = 0;
 	public T_Mode mode = T_Mode.BOTH;
 	public boolean writing = false;
-	public boolean up;
 	
 	public TesseractEntity(){
 		tipe = MachineTipe.Nothing;
 		tier = MachineTier.Tier3;
-		frequency = (new Random()).nextInt(1000000)+"";
 	}
 	
 	public void updateEntity(){
 		if(worldObj.isRemote)return;
-		if(mode == T_Mode.RECEIVE || mode == T_Mode.BOTH){
-			emptyMachine();
+		if(mode == T_Mode.RECEIVE){
+			tipe = MachineTipe.Output;
+		}else if(mode == T_Mode.SEND){
+			tipe = MachineTipe.Nothing;
 		}else{
-			fillMachine();
+			tipe = MachineTipe.Storage;
 		}
-		if(To != "" && getEnergy() > 0){
-			if(mode == T_Mode.SEND || mode == T_Mode.BOTH){
-				if(freqs.containsKey(To)){
-					int amount = Math.min(this.tier.getFlow(), freqs.get(To).maxEnergy()-freqs.get(To).getEnergy());
-					amount = Math.min(amount, getEnergy());
-					freqs.get(To).addEnergy(amount);
-					this.removeEnergy(amount);
+		if(!tes.contains(this))tes.add(this);
+		if(mode == T_Mode.BOTH || mode == T_Mode.SEND)
+			for(TesseractEntity t : tes){
+				if(t.frequency == frequency && t!=this){
+					if(t.mode == T_Mode.RECEIVE || t.mode == T_Mode.BOTH){
+						passEnergy(this, t ,false);
+					}
 				}
 			}
-		}
+		super.updateEntity();
 	}
 	
-	public void setFrequency(String f){
-		if(worldObj.isRemote){
+	@Override
+	public float maxFlow() {
+		return 500;
+	}
+	
+	public void setFrequency(int f){
+		if(worldObj != null && worldObj.isRemote){
 			sendPacket();
 		}
-		if(freqs.containsKey(f)){
-				return;
-			}
-		if(frequency != null){
-			if(freqs.containsKey(frequency)){
-				freqs.remove(frequency);
-			}
-		}
+		if(!tes.contains(this) && worldObj != null && !worldObj.isRemote)tes.add(this);
 		frequency = f;
-		freqs.put(frequency, this);
 	}
 	
 	private void sendPacket() {
@@ -75,8 +69,7 @@ public class TesseractEntity extends Machine{
 			data.writeInt(yCoord);
 			data.writeInt(zCoord);
 			data.writeInt(mode.ordinal());
-			data.writeUTF(frequency);
-			data.writeUTF(To);
+			data.writeInt(frequency);
 		}catch(Exception e){}
 		Packet p = new Packet250CustomPayload("UltraTech", bytes.toByteArray());
 		PacketDispatcher.sendPacketToServer(p);
@@ -87,15 +80,13 @@ public class TesseractEntity extends Machine{
 	@Override
 	public void readFromNBT(NBTTagCompound nbtTagCompound) {
 		super.readFromNBT(nbtTagCompound);
-		setFrequency(nbtTagCompound.getString("Freq"));
-		To = nbtTagCompound.getString("To");
+		setFrequency(nbtTagCompound.getInteger("Freq"));
 	}
 
 	@Override
 	public void writeToNBT(NBTTagCompound nbtTagCompound) {
 		super.writeToNBT(nbtTagCompound);
-		nbtTagCompound.setString(frequency, "Freq");
-		nbtTagCompound.setString(To, "To");
+		nbtTagCompound.setInteger("Freq", frequency);
 	}
 	
 	public enum T_Mode{
@@ -113,14 +104,6 @@ public class TesseractEntity extends Machine{
 			if(o == 1)return SEND;
 			if(o == 2)return RECEIVE;
 			return BOTH;
-		}
-	}
-
-	
-	public void setDestine(String text) {
-		To = text;
-		if(worldObj.isRemote){
-			sendPacket();
 		}
 	}
 

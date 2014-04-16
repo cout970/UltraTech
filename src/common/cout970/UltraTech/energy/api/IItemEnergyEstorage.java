@@ -4,11 +4,11 @@ import net.minecraft.item.ItemStack;
 
 public interface IItemEnergyEstorage {
 
-	int addEnergy(ItemStack i,int amount);
+	float addEnergy(ItemStack i,float chargestationflow);
 
-	void removeEnergy(ItemStack i,int amount);
+	void removeEnergy(ItemStack i,float chargestationflow);
 
-	int getEnergy(ItemStack i);
+	float getEnergy(ItemStack i);
 	
-	int getMaxEnergy();
+	float getMaxEnergy();
 }

@@ -5,6 +5,8 @@ import java.io.DataInputStream;
 
 import common.cout970.UltraTech.TileEntities.Tier1.CrafterEntity;
 import common.cout970.UltraTech.TileEntities.Tier1.Printer3DEntity;
+import common.cout970.UltraTech.TileEntities.Tier3.ClimateEntity;
+import common.cout970.UltraTech.TileEntities.Tier3.ReactorControllerEntity;
 import common.cout970.UltraTech.TileEntities.Tier3.TesseractEntity;
 import common.cout970.UltraTech.TileEntities.Tier3.TesseractEntity.T_Mode;
 import net.minecraft.client.entity.EntityPlayerSP;
@@ -47,25 +49,22 @@ public class PacketHandler implements IPacketHandler{
 				te = playerSP.worldObj.getBlockTileEntity(x, y, z);
 			}
 
-			if(tipe == -2){////////tesseract
+			switch(tipe)
+			{case -2:{//tesseract
 				int mode;
-				String feq,to;
+				int feq;
 				mode = inputStream.readInt();
-				feq = inputStream.readUTF();
-				to = inputStream.readUTF();
+				feq = inputStream.readInt();
 				if(te instanceof TesseractEntity){
 					((TesseractEntity) te).setFrequency(feq);
-					((TesseractEntity) te).setDestine(to);
 					((TesseractEntity) te).changeMode(T_Mode.getMode(mode));
-				}
-				
-			}else if(tipe == -1){//////////////////printer
+				}break;
+			}case -1:{//3Dprinter
 				if(te instanceof Printer3DEntity){
 					((Printer3DEntity) te).color = inputStream.readInt();
 					((Printer3DEntity) te).update = true;
-				}
-			}else if(tipe == 0){//////////////////crafter
-				//setItemStackinSlot
+				}break;
+			}case 0:{//crater slot
 				slot = inputStream.readInt();
 				id = inputStream.readInt();
 				if(id == 0){
@@ -84,34 +83,48 @@ public class PacketHandler implements IPacketHandler{
 						item = new ItemStack(id, amount, meta);
 					}
 					c.craft.setInventorySlotContents(slot, item);
-					c.update();
-				}
-			}else if(tipe == 1){//craft()
-				
+					c.onInventoryChanged();
+				}break;
+			}case 1:{//crafter craft
 				if(te instanceof CrafterEntity){
 					CrafterEntity c = (CrafterEntity) te;
 					c.craft();
-					c.update();
-				}
-			}else if(tipe == 2){//save recipe
+					c.onInventoryChanged();
+				}break;
+			}case 2:{//crafter save recipe
 				if(te instanceof CrafterEntity){
 					CrafterEntity c = (CrafterEntity) te;
 					c.saveRecipe();
-					c.update();
-				}
-			}else if(tipe == 3){
+					c.onInventoryChanged();
+				}break;
+			}case 3:{
 				if(te instanceof CrafterEntity){
 					CrafterEntity c = (CrafterEntity) te;
 					c.loadRecipes(inputStream.readInt());
-					c.update();
-				}
-			}else if(tipe == 4){
+					c.onInventoryChanged();
+				}break;
+			}case 4:{
 				if(te instanceof CrafterEntity){
 					CrafterEntity c = (CrafterEntity) te;
 					c.DellRecipe(inputStream.readInt());
-					c.update();
-				}
+					c.onInventoryChanged();
+				}break;
+			}case 5:{
+				if(te instanceof ReactorControllerEntity){
+					((ReactorControllerEntity) te).useHeat = inputStream.readInt() == 1;
+				}break;
+			}case 6:{
+				if(te instanceof ClimateEntity){
+					((ClimateEntity) te).setClimate(inputStream.readInt());
+				}break;
+			}case 7:{
+				if(te instanceof CrafterEntity){
+					for(int f=0;f<9;f++)((CrafterEntity) te).craft.setInventorySlotContents(f, null);
+					((CrafterEntity) te).onInventoryChanged();
+				}break;
 			}
+			}
+//			System.out.println("packet received type: "+tipe);
 			
 		}catch(Exception e){
 			e.printStackTrace();

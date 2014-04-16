@@ -37,7 +37,8 @@ public class Block_UT_Render implements ISimpleBlockRenderingHandler {
 		float v1 = c.getInterpolatedV(16);
 
 		GL11.glPushMatrix();
-		GL11.glColor4f(1, 1, 1, 1);
+		GL11.glColor3f(1, 1, 1);
+		t.setColorOpaque_F(1, 1, 1);
 		int meta = world.getBlockMetadata(x, y, z);
 		this.setColor(meta, t);
 		float i = 0f;
@@ -108,6 +109,7 @@ public class Block_UT_Render implements ISimpleBlockRenderingHandler {
 		//out
 		renderBlockOut(world, x, y, z, block, modelId, renderer, t, meta);
 
+		GL11.glPopMatrix();
 		return true;
 	}
 
@@ -189,7 +191,6 @@ public class Block_UT_Render implements ISimpleBlockRenderingHandler {
 			t.setTextureUV(u1, v);
 			t.addVertex(x+1-i, y, z+1);
 		}
-		GL11.glPopMatrix();
 	}
 
 	@Override

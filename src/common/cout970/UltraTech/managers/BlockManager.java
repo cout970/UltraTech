@@ -8,6 +8,7 @@ import common.cout970.UltraTech.TileEntities.Tier2.*;
 import common.cout970.UltraTech.TileEntities.Tier3.*;
 import common.cout970.UltraTech.blocks.*;
 import common.cout970.UltraTech.blocks.models.CableBlock;
+import common.cout970.UltraTech.blocks.models.FluidTank;
 import common.cout970.UltraTech.blocks.models.WindMill;
 import common.cout970.UltraTech.energy.api.ElectricConductor;
 import common.cout970.UltraTech.itemBlock.*;
@@ -43,7 +44,8 @@ public class BlockManager {
 	public static  Block CopperPipe;
 	public static  Block LeadPipe;
 	public static  Block Boiler;
-
+	public static  Block Tank;
+	public static  Block Refinery;
 	
 	//fluid
 	public static Fluid Steam;
@@ -51,6 +53,7 @@ public class BlockManager {
 	public static Fluid Gas_etanol;
 	public static Fluid Etanol;
 	public static Fluid Gas_Oil;
+	public static Fluid Gasoline;
 
 
 	public static void InitBlocks(){
@@ -58,33 +61,37 @@ public class BlockManager {
 		Chasis = new ChasisBlock(ids.get("Chasis"), Material.iron);
 		Reactor = new ReactorMultiblock(ids.get("Reactor"),Material.iron);
 		Ores = new OreBlock(ids.get("Ores"), Material.rock);
-		SolarPanel = new common.cout970.UltraTech.blocks.models.SolarPanel(ids.get("SolarPanel"), Material.iron);
-		WindMill = new WindMill(ids.get("WindMill"), Material.iron);
-		Engine = new common.cout970.UltraTech.blocks.models.Engine(ids.get("Engine"), Material.iron);
-		Transformer = new common.cout970.UltraTech.blocks.models.Transformer(ids.get("Transformer"), Material.iron);
+		SolarPanel = new common.cout970.UltraTech.blocks.models.SolarPanel(ids.get("SolarPanel"), Material.piston);
+		WindMill = new WindMill(ids.get("WindMill"), Material.piston);
+		Engine = new common.cout970.UltraTech.blocks.models.Engine(ids.get("Engine"), Material.piston);
+		Transformer = new common.cout970.UltraTech.blocks.models.Transformer(ids.get("Transformer"), Material.piston);
 		Tier1 = new Tier1Block(ids.get("Tier1"), Material.iron);
 		Tier2 = new Tier2Block(ids.get("Tier2"), Material.iron);
 		Tier3 = new Tier3Block(ids.get("Tier3"), Material.iron);
 		Misc = new MiscBlock(ids.get("Misc"), Material.rock);
 		Storage = new StorageBlock(ids.get("Storage"), Material.iron);
-		Cable = new CableBlock(ids.get("Cable"),Material.iron);
+		Cable = new CableBlock(ids.get("Cable"),Material.circuits);
 		DiamondGlass = new DiamondGlass(ids.get("DiamondGlass"),Material.glass,false);	
 		CovedGlass = new CovedGlass(ids.get("CovedGlass"),Material.glass,false);
 		AluminumPipe = new common.cout970.UltraTech.blocks.models.AluminumPipe(ids.get("AluminumPipe"),Material.iron);
 		CopperPipe = new common.cout970.UltraTech.blocks.models.CopperPipe(ids.get("CopperPipe"),Material.iron);
 		LeadPipe = new common.cout970.UltraTech.blocks.models.LeadPipe(ids.get("LeadPipe"),Material.iron);
 		Boiler = new common.cout970.UltraTech.blocks.models.Boiler(ids.get("Boiler"),Material.iron);
+		Tank = new FluidTank(ids.get("Tank"),Material.iron);
+		Refinery = new RefineryBlock(ids.get("Refinery"), Material.iron);
 		//fluid
 		Steam = new Fluid("steam");
 		Juice = new Fluid("juice");
 		Gas_etanol = new Fluid("gas_ethanol");
 		Etanol = new Fluid("bioEthanol");
 		Gas_Oil = new Fluid("gas_oil");
+		Gasoline = new Fluid("gasoline");
 		if(!FluidRegistry.isFluidRegistered("steam"))FluidRegistry.registerFluid(Steam);
 		if(!FluidRegistry.isFluidRegistered("juice"))FluidRegistry.registerFluid(Juice);
 		if(!FluidRegistry.isFluidRegistered("gas_ethanol"))FluidRegistry.registerFluid(Gas_etanol);
 		if(!FluidRegistry.isFluidRegistered("bioethanol"))FluidRegistry.registerFluid(Etanol);
 		if(!FluidRegistry.isFluidRegistered("gas_oil"))FluidRegistry.registerFluid(Gas_Oil);
+		if(!FluidRegistry.isFluidRegistered("gasoline"))FluidRegistry.registerFluid(Gasoline);
 	}
 
 
@@ -102,6 +109,7 @@ public class BlockManager {
 		GameRegistry.registerBlock(Cable, UT_ItemBlockCable.class ,"Cable_UT");
 		GameRegistry.registerBlock(Reactor, UT_ItemBlockReactor.class, "ReactorMultiblock");
 		GameRegistry.registerBlock(Misc, UT_ItemBlockMisc.class, "Misc_UT");
+		GameRegistry.registerBlock(Refinery, UT_ItemBlockRefinery.class, "Refinery_UT");
 		
 		GameRegistry.registerBlock(SolarPanel, "SolarPanel");
 		GameRegistry.registerBlock(WindMill, "WindMill");
@@ -113,6 +121,7 @@ public class BlockManager {
 		GameRegistry.registerBlock(CopperPipe, "CopperPipe");
 		GameRegistry.registerBlock(LeadPipe, "LeadPipe");
 		GameRegistry.registerBlock(Boiler, "Boiler");
+		GameRegistry.registerBlock(Tank, "FluidTank");
 
 		//TileEntities
 
@@ -150,8 +159,11 @@ public class BlockManager {
 		GameRegistry.registerTileEntity(CopperPipeEntity.class, "CopperPipeEntity_UT");
 		GameRegistry.registerTileEntity(LeadPipeEntity.class, "LeadPipeEntity_UT");
 		GameRegistry.registerTileEntity(BoilerEntity.class, "Boiler_UT");
-		GameRegistry.registerTileEntity(CoolingEntity.class, "Cooler_UT");
-		
+		GameRegistry.registerTileEntity(RefineryEntity.class, "Refinery_UT");
+		GameRegistry.registerTileEntity(RefineryInEntity.class, "RefineryIn_UT");
+		GameRegistry.registerTileEntity(RefineryOutEntity.class, "RefineryOut_UT");
+		GameRegistry.registerTileEntity(TankEntity.class, "Tank_UT");
+		GameRegistry.registerTileEntity(FluidGenerator.class, "FluidGen_UT");
 		nameBlocks();
 	}
 	
@@ -187,8 +199,9 @@ public class BlockManager {
 		LanguageRegistry.addName(new ItemStack(Tier2,1,0), "Furnace");
 		LanguageRegistry.addName(new ItemStack(Tier2,1,1), "Purifier");
 		LanguageRegistry.addName(new ItemStack(Tier2,1,2), "Cutter");
-		LanguageRegistry.addName(new ItemStack(Tier2,1,3), "Pressurizer");
-
+		LanguageRegistry.addName(new ItemStack(Tier2,1,3), "Pressurizer WIP");
+		LanguageRegistry.addName(new ItemStack(Tier2,1,4), "Fluid Firebox");
+		
 		LanguageRegistry.addName(new ItemStack(Tier3,1,0), "Miner");
 		LanguageRegistry.addName(new ItemStack(Tier3,1,1), "Hologram Emiter");
 		LanguageRegistry.addName(new ItemStack(Tier3,1,2), "Precision Crafter");
@@ -198,6 +211,10 @@ public class BlockManager {
 		LanguageRegistry.addName(new ItemStack(Storage,1,0), "Battery Tier1");
 		LanguageRegistry.addName(new ItemStack(Storage,1,1), "Battery Tier2");
 		LanguageRegistry.addName(new ItemStack(Storage,1,2), "Battery Tier3");
+		
+		LanguageRegistry.addName(new ItemStack(Refinery,1,0), "Refinery Block");
+		LanguageRegistry.addName(new ItemStack(Refinery,1,1), "Refinery Input");
+		LanguageRegistry.addName(new ItemStack(Refinery,1,2), "Refinery Output");
 
 		LanguageRegistry.addName(new ItemStack(Misc,1,0), "Radionite Block");
 		LanguageRegistry.addName(new ItemStack(Misc,1,1), "Grafeno Block");
@@ -216,6 +233,7 @@ public class BlockManager {
 		LanguageRegistry.addName(Engine, "Engine");
 		LanguageRegistry.addName(Transformer, "Transformer");
 		LanguageRegistry.addName(Boiler, "Boiler");
+		LanguageRegistry.addName(Tank, "Tank");
 
 	}
 

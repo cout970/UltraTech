@@ -15,10 +15,11 @@ import net.minecraft.tileentity.TileEntityFurnace;
 public class GeneratorEntity extends Machine implements IInventory{
 
 	private ItemStack[] inventory;
-	public int Progres = 0;
+	public float Progres = 0;
 	public boolean on;
 	public int maxProgres;
 	public float heat = 25;
+	public float maxHeat = 1200;
 
 	public GeneratorEntity(){
 		super();
@@ -35,17 +36,24 @@ public class GeneratorEntity extends Machine implements IInventory{
 				if(!on){
 					change = true;
 				}
-				Progres--;
-				if(heat < 1200)heat+=1.3-heat/1000;
-				this.addEnergy((int)(75+(heat*25)/1200));
-			}else if(heat > 25)heat-=0.1+heat/1000;
+				if(Progres - (int)(heat*20/maxHeat) < 0){
+					addEnergy(Progres);
+					Progres = 0;
+				}else{
+				Progres-= (int)(heat*20/maxHeat);
+				this.addEnergy((int)(heat*20/maxHeat));
+				}
+				if(heat < maxHeat)heat+=1.3-heat/maxHeat;
+			}else{
+				if(heat > 25)heat-=0.1+heat/maxHeat;
+			}
 			
 			if(Progres <= 0){
 				if(inventory[0] != null){
 					int fuel = TileEntityFurnace.getItemBurnTime(inventory[0]);
-					if(fuel > 0 && getEnergy() <= (maxEnergy() - fuel/10)){
-						Progres = fuel/10;
-						maxProgres = fuel/10;
+					if(fuel > 0 && (getEnergy()+fuel <= maxEnergy() || (fuel > maxEnergy()&& getEnergy() < maxEnergy()))){
+						Progres = fuel;
+						maxProgres = fuel;
 						if(inventory[0] != null){
 							inventory[0].stackSize--;
 							if(inventory[0].stackSize <= 0){
@@ -160,7 +168,7 @@ public class GeneratorEntity extends Machine implements IInventory{
 	public void sendGUINetworkData(Container cont,
 			ICrafting c) {
 		super.sendGUINetworkData(cont, c);
-		c.sendProgressBarUpdate(cont, 2, Progres);
+		c.sendProgressBarUpdate(cont, 2, (int)Progres);
 		c.sendProgressBarUpdate(cont, 3, maxProgres);
 		c.sendProgressBarUpdate(cont, 4, on ? 1:0);
 		c.sendProgressBarUpdate(cont, 5, (int) heat);
@@ -184,7 +192,7 @@ public class GeneratorEntity extends Machine implements IInventory{
 	public void readFromNBT(NBTTagCompound nbt) {
 		if(worldObj != null)worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
 		super.readFromNBT(nbt);
-		Progres = nbt.getInteger("progres");
+		Progres = nbt.getFloat("progres");
 		on = nbt.getBoolean("on");
 		heat = nbt.getInteger("Heat");
 		NBTTagList tagList = nbt.getTagList("Inventory");
@@ -203,7 +211,7 @@ public class GeneratorEntity extends Machine implements IInventory{
 	public void writeToNBT(NBTTagCompound nbt) {
 
 		super.writeToNBT(nbt);
-		nbt.setInteger("progres", Progres);
+		nbt.setFloat("progres", Progres);
 		nbt.setInteger("Heat", (int) heat);
 		nbt.setBoolean("on", on);
 		NBTTagList tagList = new NBTTagList();

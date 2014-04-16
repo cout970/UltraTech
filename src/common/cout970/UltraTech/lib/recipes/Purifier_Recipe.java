@@ -6,6 +6,7 @@ import java.util.List;
 import common.cout970.UltraTech.TileEntities.Tier2.PurifierEntity;
 import common.cout970.UltraTech.lib.UT_Utils;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class Purifier_Recipe{
 	
@@ -24,8 +25,11 @@ public class Purifier_Recipe{
 		if(inv == null)return false;
 		for(Purifier_Recipe a:recipes){
 			if(inv.getStackInSlot(0) != null)
-			if(UT_Utils.areEcuals(a.getInput(), inv.getStackInSlot(0),true))if(inv.getStackInSlot(1)==null)return true;
-			else if(inv.getStackInSlot(1).itemID == a.getOutput().itemID)return true;
+			if(UT_Utils.areEcuals(a.getInput(), inv.getStackInSlot(0),true)){
+				if(inv.getStackInSlot(1)==null)return true;
+				else if(OreDictionary.itemMatches(inv.getStackInSlot(1), a.getOutput(), true))
+					if(inv.getStackInSlot(1).stackSize + a.getInput().stackSize <= inv.getInventoryStackLimit())return true;
+			}
 		}
 		return false;
 	}

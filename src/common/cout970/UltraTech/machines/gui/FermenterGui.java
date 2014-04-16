@@ -28,7 +28,7 @@ public class FermenterGui extends GuiContainer{
 		this.drawTexturedModalRect(xStart, yStart, 0, 0, xSize, ySize);
 
 		//progres
-		int i1 = (int) entity.progres*24/400;
+		int i1 = (int) entity.progres*24/200;
 		this.drawTexturedModalRect(xStart + 107+25-i1, yStart + 33, 176+25-i1, 14, i1+1, 16);
 
 		//water
@@ -53,7 +53,7 @@ public class FermenterGui extends GuiContainer{
 		if(!ju)this.drawTexturedModalRect(xStart+138, yStart+21, 224, 0, 20, 40);
 		//energy
 		this.mc.renderEngine.bindTexture(new ResourceLocation("ultratech:textures/misc/energy.png"));
-		int p = (int) entity.getEnergy()*50/entity.maxEnergy();
+		int p = (int) (entity.getEnergy()*50/entity.maxEnergy());
 		this.drawTexturedModalRect(xStart+14, yStart+15+(50-p), 0, 0, 25, p);
 	}
 

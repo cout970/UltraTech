@@ -1,5 +1,6 @@
 package common.cout970.UltraTech.machines.gui;
 
+
 import org.lwjgl.opengl.GL11;
 
 import common.cout970.UltraTech.TileEntities.Tier1.GeneratorEntity;
@@ -30,16 +31,16 @@ public class GeneratorGui extends GuiContainer{
 		//progres bar
 		int i1 = 0;
 		if(entity.maxProgres != 0)i1 = (int) entity.Progres*13/entity.maxProgres;
-		if(entity.Progres != 0)i1 += 1;
+		if(entity.Progres > 0)i1 += 1;
 		this.drawTexturedModalRect(xStart + 63, yStart + 59 - i1, 176, 12 - i1, 14, i1);
 
 		//temp var
-		int h = (int) ((entity.heat-25)*58/1175);
+		int h = (int) ((entity.heat-25)*58/(entity.maxHeat-25));
 		this.drawTexturedModalRect(xStart+152, yStart+14+(58-h), 191, 58-h, 6, h);
 
 		//energy
 		this.mc.renderEngine.bindTexture(new ResourceLocation("ultratech:textures/misc/energy.png"));
-		int p = (int) entity.getEnergy()*50/entity.maxEnergy();
+		int p = (int) (entity.getEnergy()*50/entity.maxEnergy());
 		this.drawTexturedModalRect(xStart+14, yStart+15+(50-p), 0, 0, 25, p);
 	}
 
@@ -49,8 +50,9 @@ public class GeneratorGui extends GuiContainer{
         this.fontRenderer.drawString(s, 65, 6, 4210752);
         String h = ((int)this.entity.heat)+"C";
         this.fontRenderer.drawString(h, 137-fontRenderer.getStringWidth(h), 29, 4210752);
-        String p = (int)(75+(entity.heat*25)/1200)+"E/t";
-        this.fontRenderer.drawString(p, 120-fontRenderer.getStringWidth(h)/2, 55, 4210752);
+        int e = (int)(entity.heat*20/entity.maxHeat);
+        String p = e+"FT/t";
+        this.fontRenderer.drawString(p, 115-fontRenderer.getStringWidth(h)/2, 55, 4210752);
 	}
 
 }

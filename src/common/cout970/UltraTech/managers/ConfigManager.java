@@ -30,6 +30,8 @@ public class ConfigManager {
 		ids.put("CopperPipe",config.getBlock("CopperPipe", x++).getInt());
 		ids.put("LeadPipe",config.getBlock("LeadPipe", x++).getInt());
 		ids.put("Boiler",config.getBlock("Boiler", x++).getInt());
+		ids.put("Tank",config.getBlock("Tank", x++).getInt());
+		ids.put("Refinery",config.getBlock("Refinery", x++).getInt());
 
 		//deco
 		Reference.StoneBlock = config.getBlock("StoneBlock", 2099).getInt();

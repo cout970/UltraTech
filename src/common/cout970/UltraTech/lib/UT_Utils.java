@@ -18,6 +18,20 @@ import net.minecraftforge.oredict.OreDictionary;
 
 public class UT_Utils {
 
+	/*
+	 * packet tipes:
+	 * -2 tesseract name change
+	 * -1 printer change color
+	 * 0 crafter slot change
+	 * 1 crafter crat a item
+	 * 2 crafter save a craft
+	 * 3 crafter load a save 
+	 * 4 crafter delete a save
+	 * 5 controller change mode
+	 * 6 climate station
+	 * 7 crafter clear grid
+	 */
+	
 	public static void sendPacket(TileEntity t){
 		if(t == null)return;			
 		Packet p =  t.getDescriptionPacket();
@@ -88,6 +102,27 @@ public class UT_Utils {
 		color += g * 256;
 		color += b;
 		return color;
+	}
+
+	public static Packet getPacketToServer(TileEntity t, int tipe, int... dato) {
+		if(t == null)return null;
+		ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+		DataOutputStream data = new DataOutputStream(bytes);
+		try {
+			data.writeInt(tipe);
+			data.writeInt(t.xCoord);
+			data.writeInt(t.yCoord);
+			data.writeInt(t.zCoord);
+			for(int i = 0; i< dato.length;i++)data.writeInt(dato[i]);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		Packet p = new Packet250CustomPayload("UltraTech", bytes.toByteArray());
+		return p;
+	}
+	
+	public static TileEntity getRelative(TileEntity from, ForgeDirection d){
+		return from.worldObj.getBlockTileEntity(from.xCoord + d.offsetX, from.yCoord + d.offsetY, from.zCoord + d.offsetZ);
 	}
 
 }

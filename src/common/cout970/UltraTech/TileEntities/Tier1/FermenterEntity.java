@@ -31,7 +31,7 @@ public class FermenterEntity extends Machine implements IInventory, IFluidHandle
 		if(worldObj.isRemote)return;
 		if(progres <= 0){
 			if(item != null && item.itemID == Item.sugar.itemID){
-				progres = 400;
+				progres = 200;
 				decrStackSize(0, 1);
 			}
 		}

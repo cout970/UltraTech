@@ -26,6 +26,9 @@ public class ModelWindMill extends ModelBase
     ModelRenderer fan1;
     ModelRenderer fan2;
     ModelRenderer fan3;
+    ModelRenderer fan4;
+    ModelRenderer fan5;
+    ModelRenderer fan6;
   
   public ModelWindMill()
   {
@@ -67,7 +70,7 @@ public class ModelWindMill extends ModelBase
 	      fan1.setRotationPoint(0F, -48F, 11F);
 	      fan1.setTextureSize(64, 128);
 	      fan1.mirror = true;
-	      setRotation(fan1, 0F, 0F, 2.094395F);
+	      setRotation(fan1, 0F, 0F, 2F);
 	      fan2 = new ModelRenderer(this, 24, 49);
 	      fan2.addBox(-1F, 0F, 0F, 2, 22, 1);
 	      fan2.setRotationPoint(0F, -48F, 11F);
@@ -79,7 +82,25 @@ public class ModelWindMill extends ModelBase
 	      fan3.setRotationPoint(0F, -48F, 11F);
 	      fan3.setTextureSize(64, 128);
 	      fan3.mirror = true;
-	      setRotation(fan3, 0F, 0F, -2.094395F);
+	      setRotation(fan3, 0F, 0F, -2F);
+	      fan4 = new ModelRenderer(this, 24, 49);
+	      fan4.addBox(-1F, 0F, 0F, 2, 22, 1);
+	      fan4.setRotationPoint(0F, -48F, 11F);
+	      fan4.setTextureSize(64, 128);
+	      fan4.mirror = true;
+	      setRotation(fan4, 0F, 0F, -1F);
+	      fan5 = new ModelRenderer(this, 24, 49);
+	      fan5.addBox(-1F, 0F, 0F, 2, 22, 1);
+	      fan5.setRotationPoint(0F, -48F, 11F);
+	      fan5.setTextureSize(64, 128);
+	      fan5.mirror = true;
+	      setRotation(fan5, 0F, 0F, 1F);
+	      fan6 = new ModelRenderer(this, 24, 49);
+	      fan6.addBox(-1F, 0F, 0F, 2, 22, 1);
+	      fan6.setRotationPoint(0F, -48F, 11F);
+	      fan6.setTextureSize(64, 128);
+	      fan6.mirror = true;
+	      setRotation(fan6, 0F, 0F, -3F);
   }
   
   public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
@@ -94,6 +115,9 @@ public class ModelWindMill extends ModelBase
     fan1.render(f5);
     fan2.render(f5);
     fan3.render(f5);
+    fan4.render(f5);
+    fan5.render(f5);
+    fan6.render(f5);
   }
   
   private void setRotation(ModelRenderer model, float x, float y, float z)
