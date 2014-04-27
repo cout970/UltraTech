@@ -9,6 +9,7 @@ import common.cout970.UltraTech.lib.EnergyCosts;
 import common.cout970.UltraTech.lib.UT_Utils;
 import common.cout970.UltraTech.managers.ItemManager;
 import common.cout970.UltraTech.misc.IReactorPart;
+import common.cout970.UltraTech.multiblocks.TileReactorPart;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
@@ -23,7 +24,7 @@ import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraft.tileentity.TileEntity;
 
 
-public class ReactorEntity extends TileEntity implements IInventory,IReactorPart{
+public class ReactorEntity extends TileReactorPart implements IInventory{
 
 	public Machine[] machines;
 	public static final int INVENTORY_SIZE = 6;

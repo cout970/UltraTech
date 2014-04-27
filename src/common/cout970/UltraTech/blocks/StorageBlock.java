@@ -31,7 +31,7 @@ public class StorageBlock extends BlockContainer{
 		super(par1, par2Material);
 		setCreativeTab(UltraTech.techTab);
 		setStepSound(soundMetalFootstep);
-		setHardness(1.0f);
+		setHardness(2.5f);
 		setUnlocalizedName("StorageBlock");
 	}
 

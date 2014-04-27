@@ -9,6 +9,7 @@ import common.cout970.UltraTech.TileEntities.Tier3.*;
 import common.cout970.UltraTech.blocks.*;
 import common.cout970.UltraTech.blocks.models.CableBlock;
 import common.cout970.UltraTech.blocks.models.FluidTank;
+import common.cout970.UltraTech.blocks.models.SteamTurbine;
 import common.cout970.UltraTech.blocks.models.WindMill;
 import common.cout970.UltraTech.energy.api.ElectricConductor;
 import common.cout970.UltraTech.itemBlock.*;
@@ -21,6 +22,7 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 
 public class BlockManager {
+
 
 	//blocks
 	public static Map<String,Integer> ids = new HashMap<String,Integer>(); 
@@ -46,6 +48,7 @@ public class BlockManager {
 	public static  Block Boiler;
 	public static  Block Tank;
 	public static  Block Refinery;
+	public static  Block Turbine;
 	
 	//fluid
 	public static Fluid Steam;
@@ -79,6 +82,7 @@ public class BlockManager {
 		Boiler = new common.cout970.UltraTech.blocks.models.Boiler(ids.get("Boiler"),Material.iron);
 		Tank = new FluidTank(ids.get("Tank"),Material.iron);
 		Refinery = new RefineryBlock(ids.get("Refinery"), Material.iron);
+		Turbine = new SteamTurbine(ids.get("Turbine"), Material.iron);
 		//fluid
 		Steam = new Fluid("steam");
 		Juice = new Fluid("juice");
@@ -122,6 +126,7 @@ public class BlockManager {
 		GameRegistry.registerBlock(LeadPipe, "LeadPipe");
 		GameRegistry.registerBlock(Boiler, "Boiler");
 		GameRegistry.registerBlock(Tank, "FluidTank");
+		GameRegistry.registerBlock(Turbine, "SteamTurbine");
 
 		//TileEntities
 
@@ -138,7 +143,7 @@ public class BlockManager {
 		GameRegistry.registerTileEntity(MinerEntity.class, "miner_UT");
 		GameRegistry.registerTileEntity(ReactorWallEntity.class, "reactorwall_UT");
 		GameRegistry.registerTileEntity(ReactorTankEntity.class, "ReactorTank_UT");
-		GameRegistry.registerTileEntity(SteamTurbineEntity.class, "SteamTurbine_UT");
+		GameRegistry.registerTileEntity(SteamExtractorEntity.class, "SteamTurbine_UT");
 		GameRegistry.registerTileEntity(WaterBlockEntity.class, "WaterBlock_UT");
 		GameRegistry.registerTileEntity(MolecularAssemblyEntity.class, "MolecularAssembly_UT");
 		GameRegistry.registerTileEntity(ChargeStationEntity.class, "ChargeStation_UT");
@@ -164,6 +169,8 @@ public class BlockManager {
 		GameRegistry.registerTileEntity(RefineryOutEntity.class, "RefineryOut_UT");
 		GameRegistry.registerTileEntity(TankEntity.class, "Tank_UT");
 		GameRegistry.registerTileEntity(FluidGenerator.class, "FluidGen_UT");
+		GameRegistry.registerTileEntity(SteamTurbineEntity.class, "Turbine_UT");
+
 		nameBlocks();
 	}
 	
@@ -175,7 +182,7 @@ public class BlockManager {
 		LanguageRegistry.addName(new ItemStack(Reactor,1,2), "Reactor Tank");
 		LanguageRegistry.addName(new ItemStack(Reactor,1,3), "Reactor Controller");
 		LanguageRegistry.addName(new ItemStack(Reactor,1,4), "Reactor Water Provider");
-		LanguageRegistry.addName(new ItemStack(Reactor,1,5), "Reactor Steam Turbine");
+		LanguageRegistry.addName(new ItemStack(Reactor,1,5), "Reactor Steam Extractor");
 
 		LanguageRegistry.addName(new ItemStack(Ores,1,0), "Radionite Ore");
 		LanguageRegistry.addName(new ItemStack(Ores,1,1), "Aluminum Ore");
@@ -234,6 +241,7 @@ public class BlockManager {
 		LanguageRegistry.addName(Transformer, "Transformer");
 		LanguageRegistry.addName(Boiler, "Boiler");
 		LanguageRegistry.addName(Tank, "Tank");
+		LanguageRegistry.addName(Turbine, "Steam Turbine");
 
 	}
 

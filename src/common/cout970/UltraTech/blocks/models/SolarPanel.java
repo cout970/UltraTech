@@ -18,7 +18,7 @@ public class SolarPanel extends BlockContainer{
 	public SolarPanel(int par1, Material par2Material) {
 		super(par1, par2Material);
 		setCreativeTab(UltraTech.techTab);
-		setHardness(0.5f);
+		setHardness(1.5f);
 		setStepSound(soundMetalFootstep);
 		setResistance(20);
 		setUnlocalizedName("SolarPanel");

@@ -8,8 +8,12 @@ public class StorageTier2 extends Machine{
 
 	public StorageTier2(){
 		super();
-		setMaxEnergy(EnergyCosts.Tier2Battery);
 		this.tipe = MachineTipe.Storage;
 		tier = MachineTier.Tier2;
+	}
+	
+	@Override
+	public float maxEnergy() {
+		return EnergyCosts.Tier2Battery;
 	}
 }

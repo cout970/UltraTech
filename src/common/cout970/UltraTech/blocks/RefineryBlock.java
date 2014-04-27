@@ -14,7 +14,6 @@ import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
@@ -31,7 +30,7 @@ public class RefineryBlock extends BlockContainer{
 		setCreativeTab(UltraTech.techTab);
 		setStepSound(soundMetalFootstep);
 		setResistance(50);
-		setHardness(2.0f);
+		setHardness(2.5f);
 		setUnlocalizedName("UT_RefineryBlock");
 	}
 
@@ -69,18 +68,7 @@ public class RefineryBlock extends BlockContainer{
 		}
 		return getIcon(side, meta);
 	}
-	
-	public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int par6, float par7, float par8, float par9) {
-		if(entityplayer.isSneaking()){
-			return true;
-		}else{
-			TileEntity tile = world.getBlockTileEntity(i, j, k);
-			if(tile != null){
-				
-			}
-		}
-		return true;
-	}
+
 
 	public void onNeighborBlockChange(World w, int x, int y, int z, int side){
 		TileEntity te = w.getBlockTileEntity(x, y, z);

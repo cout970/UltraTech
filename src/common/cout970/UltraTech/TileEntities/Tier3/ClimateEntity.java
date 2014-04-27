@@ -7,7 +7,11 @@ public class ClimateEntity extends Machine{
 
 	public ClimateEntity(){
 		tier = MachineTier.Tier3;
-		this.setMaxEnergy(EnergyCosts.ClimateEstationCost);
+	}
+	
+	@Override
+	public float maxEnergy() {
+		return EnergyCosts.ClimateEstationCost;
 	}
 	
 	public void updateEntity(){}

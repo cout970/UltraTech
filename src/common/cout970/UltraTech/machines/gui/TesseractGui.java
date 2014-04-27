@@ -40,6 +40,8 @@ public class TesseractGui extends GuiContainer{
 		drawTexturedModalRect(x, y, 176, v, 19, 19);
 		drawCenteredString(fontRenderer, "Freq: "+entity.frequency, xStart+65, yStart+24, UT_Utils.RGBtoInt(255, 255, 255));
 		drawCenteredString(fontRenderer, ""+((int)entity.getEnergy())+"FT", xStart+65, yStart+47, UT_Utils.RGBtoInt(255, 255, 255));
+		
+		this.drawCenteredString(fontRenderer, "Tesseract", xStart+85, yStart+4, UT_Utils.RGBtoInt(255, 255, 255));
 	}
 	
 	protected void keyTyped(char letra, int num)

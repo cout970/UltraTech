@@ -7,7 +7,7 @@ import common.cout970.UltraTech.TileEntities.Tier3.ReactorControllerEntity;
 import common.cout970.UltraTech.TileEntities.Tier3.ReactorEntity;
 import common.cout970.UltraTech.TileEntities.Tier3.ReactorTankEntity;
 import common.cout970.UltraTech.TileEntities.Tier3.ReactorWallEntity;
-import common.cout970.UltraTech.TileEntities.Tier3.SteamTurbineEntity;
+import common.cout970.UltraTech.TileEntities.Tier3.SteamExtractorEntity;
 import common.cout970.UltraTech.TileEntities.Tier3.WaterBlockEntity;
 import common.cout970.UltraTech.core.UltraTech;
 import common.cout970.UltraTech.energy.api.EnergyUtils;
@@ -39,7 +39,7 @@ public class ReactorMultiblock extends BlockContainer{
 		setCreativeTab(UltraTech.techTab);
 		setStepSound(soundMetalFootstep);
 		setResistance(50);
-		setHardness(2.0f);
+		setHardness(2.5f);
 		setUnlocalizedName("UT_ReactorMultiblock");
 	}
 	
@@ -161,7 +161,7 @@ public class ReactorMultiblock extends BlockContainer{
 		if(metadata == 2)return new ReactorTankEntity();
 		if(metadata == 3)return new ReactorControllerEntity();
 		if(metadata == 4)return new WaterBlockEntity();
-		if(metadata == 5)return new SteamTurbineEntity();
+		if(metadata == 5)return new SteamExtractorEntity();
 		return null;
 	}
 	

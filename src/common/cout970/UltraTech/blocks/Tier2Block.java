@@ -38,7 +38,7 @@ public class Tier2Block extends BlockContainer{
 		setCreativeTab(UltraTech.techTab);
 		setStepSound(soundMetalFootstep);
 		setResistance(50);
-		setHardness(2.0f);
+		setHardness(2.5f);
 		setUnlocalizedName("UT_Tier2Block");
 	}
 

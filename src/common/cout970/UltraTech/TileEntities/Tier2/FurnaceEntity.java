@@ -19,7 +19,7 @@ public class FurnaceEntity extends Machine implements ISidedInventory,ISpeedUpgr
 	private ItemStack[] inventory;
 	public int progres = 0;
 	public int speed = 10;
-	private int speedUpgrades;
+	public int speedUpgrades;
 	public boolean hasEnergy = false;
 
 

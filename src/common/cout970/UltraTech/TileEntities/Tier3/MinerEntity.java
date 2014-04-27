@@ -10,6 +10,7 @@ import common.cout970.UltraTech.lib.EnergyCosts;
 import common.cout970.UltraTech.lib.EnergyCosts.MachineTier;
 import common.cout970.UltraTech.machines.containers.MinerContainer;
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.IInventory;
@@ -46,6 +47,7 @@ public class MinerEntity extends Machine implements IInventory{
 	public int fortuneUpgrades=0;
 	private boolean mineFinish;
 	private int mineSize;
+	public boolean hasSilkUpgrade;
 	
  	
 	public MinerEntity(){
@@ -112,7 +114,19 @@ public class MinerEntity extends Machine implements IInventory{
 				int z = mining.get(current)[2];
 				if(canBreak(worldObj.getBlockId(x, y, z))){
 					removeEnergy(EnergyCosts.MinerCost);
-					ArrayList<ItemStack> items = Block.blocksList[worldObj.getBlockId(x, y, z)].getBlockDropped(worldObj, x, y, z, worldObj.getBlockMetadata(x, y, z), fortuneUpgrades);
+					ArrayList<ItemStack> items = new ArrayList<ItemStack>();
+					int id = worldObj.getBlockId(x, y, z);
+					int meta = worldObj.getBlockMetadata(x, y, z);
+					
+					if(!hasSilkUpgrade){
+						items = Block.blocksList[id].getBlockDropped(worldObj, x, y, z, meta, fortuneUpgrades);
+					}else{
+						if(Block.blocksList[id].canSilkHarvest(worldObj, Minecraft.getMinecraft().thePlayer , x, y, z, meta)){
+							items.add(new ItemStack(Block.blocksList[id],1,meta));//Block.blocksList[id].damageDropped(Block.blocksList[id].getDamageValue(worldObj, x, y, z))));
+						}else{
+							items = Block.blocksList[id].getBlockDropped(worldObj, x, y, z, meta, fortuneUpgrades);
+						}
+					}
 					for(int n = 0; n < items.size();n++){
 						blocked = !addItemStack(items.get(n));
 					}
@@ -418,13 +432,14 @@ public class MinerEntity extends Machine implements IInventory{
 		if(speedUpgrades > 0)hasSpeedUpgrades = true;
 		if(rangeUpgrades > 0)hasRangeUpgrades = true;
 		if(fortuneUpgrades > 0)hasFortuneUpgrades = true;
+		hasSilkUpgrade = nbtTagCompound.getBoolean("silk");
 	}
 
 	@Override
 	public void writeToNBT(NBTTagCompound nbtTagCompound) {
 
 		super.writeToNBT(nbtTagCompound);
-		
+		nbtTagCompound.setBoolean("silk", hasSilkUpgrade);
 		
 		NBTTagList tagList = new NBTTagList();
 		for (int currentIndex = 0; currentIndex < inventory.length; ++currentIndex) {

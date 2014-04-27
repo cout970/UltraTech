@@ -21,7 +21,7 @@ public class ChasisBlock extends Block{
 	public ChasisBlock(int par1, Material par2Material) {
 		super(par1, par2Material);
 		setCreativeTab(UltraTech.techTab);
-		setHardness(1.5f);
+		setHardness(2.5f);
 		setStepSound(soundMetalFootstep);
 		setResistance(25);
 		setUnlocalizedName("Chasis");

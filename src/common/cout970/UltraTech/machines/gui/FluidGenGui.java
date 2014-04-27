@@ -1,11 +1,16 @@
 package common.cout970.UltraTech.machines.gui;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.lwjgl.opengl.GL11;
 
 import common.cout970.UltraTech.TileEntities.Tier2.FluidGenerator;
 import common.cout970.UltraTech.lib.UT_Utils;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.inventory.Container;
+import net.minecraft.util.Icon;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.fluids.FluidStack;
@@ -28,15 +33,16 @@ public class FluidGenGui extends GuiContainer{
 		int yStart = (height - ySize) / 2;
 		this.drawTexturedModalRect(xStart, yStart, 0, 0, xSize, ySize);
 
-		//water
-		FluidStack water = entity.getTankInfo(ForgeDirection.UP)[0].fluid;
-		boolean w = water == null;
+		//fluid
+		FluidStack input = entity.getTankInfo(ForgeDirection.UP)[0].fluid;
+		boolean w = input == null;
 		if(!w){
-			BoilerGui.bindTexture(water);
-			int a = water.amount*40/entity.getTankInfo(ForgeDirection.UP)[0].capacity;
-			this.drawTexturedModalRect(xStart+139, yStart+61-a, 0, 0, 18, a);
+			BoilerGui.bindTexture(input);
+			Icon ic = input.getFluid().getStillIcon();
+			int a = input.amount*40/entity.getTankInfo(ForgeDirection.UP)[0].capacity;
+			this.drawTexturedModelRectFromIcon(xStart+139, yStart+61-a, ic, 18, a);
 		}
-		
+
 		//overlay
 		this.mc.renderEngine.bindTexture(new ResourceLocation("ultratech:textures/gui/fluidgen.png"));
 		if(!w)this.drawTexturedModalRect(xStart+138, yStart+21, 224, 0, 20, 40);
@@ -45,10 +51,21 @@ public class FluidGenGui extends GuiContainer{
 		int p = (int) (entity.getEnergy()*50/entity.maxEnergy());
 		this.drawTexturedModalRect(xStart+14, yStart+15+(50-p), 0, 0, 25, p);
 		if(!w){
-		String name = ""+water.getFluid().getName();
-		this.drawCenteredString(fontRenderer, name, xStart+90, yStart+28, UT_Utils.RGBtoInt(255, 255, 255));
-		String amount = ""+water.amount;
-		this.drawCenteredString(fontRenderer, amount, xStart+90, yStart+42, UT_Utils.RGBtoInt(255, 255, 255));
+			String name = ""+input.getFluid().getName();
+			this.drawCenteredString(fontRenderer, name, xStart+90, yStart+28, UT_Utils.RGBtoInt(255, 255, 255));
+			String amount = ""+input.amount;
+			this.drawCenteredString(fontRenderer, amount, xStart+90, yStart+42, UT_Utils.RGBtoInt(255, 255, 255));
 		}
+		
+		this.drawCenteredString(fontRenderer, "Fluid Firebox", xStart+85, yStart+6, UT_Utils.RGBtoInt(255, 255, 255));
+		//text
+		if(UT_Utils.isIn(i, j, xStart+14, yStart+15, 25, 50)){
+        	List<String> energy = new ArrayList<String>();
+        	energy.add("Energy: "+((int)entity.getEnergy())+"FT");
+        	this.drawHoveringText(energy, i, j, fontRenderer);
+        	RenderHelper.enableGUIStandardItemLighting();
+        }
 	}
+	
+	
 }

@@ -20,7 +20,7 @@ public class CableBlock extends ElectricBlock{
 		super(par1, par2Material);
 		setCreativeTab(UltraTech.techTab);
 		setStepSound(soundMetalFootstep);
-		setResistance(0.5f);
+		setResistance(1.0f);
 		setUnlocalizedName("Cable");
 	}
 

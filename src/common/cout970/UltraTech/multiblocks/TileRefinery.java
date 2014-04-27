@@ -1,12 +1,12 @@
 package common.cout970.UltraTech.multiblocks;
 
+import common.cout970.UltraTech.TileEntities.Tier1.RefineryInEntity;
 import common.cout970.UltraTech.lib.UT_Utils;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.ForgeDirection;
 
 public class TileRefinery extends TileEntity implements IRefinery{
 
@@ -35,29 +35,24 @@ public class TileRefinery extends TileEntity implements IRefinery{
 	}
 
 	@Override
-	public boolean searchMulti() {
-		int top = 0;
-		int botton = 0;
-		//direction
-		ForgeDirection[] vec ={null,null};
-		int v = 0;
-		ForgeDirection[] sides = {ForgeDirection.NORTH,ForgeDirection.SOUTH,ForgeDirection.WEST,ForgeDirection.EAST};
-		for(ForgeDirection d : sides)if(UT_Utils.getRelative(this, d) instanceof IRefinery) { if(vec[0] == null)vec[0]=d; else vec[1]=d; v++;}
-		if(v != 2)return false;
-		if(vec[0] == vec[1].getOpposite())return false;
-		//height
-		for(int j=1;j<6;j++)if(worldObj.getBlockTileEntity(xCoord, yCoord+j, zCoord) instanceof IRefinery)top++;
-		for(int j=1;j<6;j++)if(worldObj.getBlockTileEntity(xCoord, yCoord-j, zCoord) instanceof IRefinery)botton++;
-		if(top+botton >= 6)top-=((top+botton)-5);
-		//1 layer
-		if(!(worldObj.getBlockTileEntity(xCoord+vec[0].offsetX, yCoord, zCoord+vec[0].offsetZ)instanceof IRefinery))return false;
-		if(!(worldObj.getBlockTileEntity(xCoord+vec[1].offsetX, yCoord, zCoord+vec[1].offsetZ)instanceof IRefinery))return false;
-		if(!(worldObj.getBlockTileEntity(xCoord+vec[0].offsetX+vec[1].offsetX, yCoord, zCoord+vec[0].offsetZ+vec[1].offsetZ)instanceof IRefinery))return false;
-		//layers
-		for(int h = -botton;h<top;h++){
-			if(!(worldObj.getBlockTileEntity(xCoord+vec[0].offsetX, yCoord+h, zCoord+vec[0].offsetZ)instanceof IRefinery))return false;
-			if(!(worldObj.getBlockTileEntity(xCoord+vec[1].offsetX, yCoord+h, zCoord+vec[1].offsetZ)instanceof IRefinery))return false;
-			if(!(worldObj.getBlockTileEntity(xCoord+vec[0].offsetX+vec[1].offsetX, yCoord+h, zCoord+vec[0].offsetZ+vec[1].offsetZ)instanceof IRefinery))return false;
+	public boolean searchMulti(){
+		int height = 0;
+		if(this instanceof RefineryInEntity){
+			for(int h=0;h<8;h++)if(worldObj.getBlockTileEntity(xCoord, yCoord+h, zCoord) instanceof IRefinery)height++;
+			else break;
+		}else{
+			for(int j=-8;j<8;j++)if(worldObj.getBlockTileEntity(xCoord, yCoord+j, zCoord) instanceof RefineryInEntity){
+				return ((RefineryInEntity) worldObj.getBlockTileEntity(xCoord, yCoord+j, zCoord)).searchMulti();
+			}
+			return false;
+		}
+		if(height < 2)return false;
+		if(height %2 != 0)return false;
+		
+		for(int h = 0;h<height;h++){
+			if(!(worldObj.getBlockTileEntity(xCoord, yCoord+h, zCoord)instanceof IRefinery)){
+				return false;
+			}
 		}
 		if(structure == null){
 			setMulti(MultiBlock.create(this));
@@ -67,33 +62,41 @@ public class TileRefinery extends TileEntity implements IRefinery{
 			setMulti(multi);
 		}	
 		
-		for(int h = -botton;h<top;h++){
-			prepareRefBlock(structure, 0, h, 0 ,-botton);
-			prepareRefBlock(structure, vec[0].offsetX, h, vec[0].offsetZ, -botton);
-			prepareRefBlock(structure, vec[1].offsetX, h, vec[1].offsetZ, -botton);
-			prepareRefBlock(structure, vec[0].offsetX+vec[1].offsetX, h, vec[0].offsetZ+vec[1].offsetZ,-botton);
+		for(int h = 0;h<height;h++){
+			prepareRefBlock(structure,h);
 		}
 		return true;
 	}
 	
-	public void prepareRefBlock(MultiBlock m, int i,int j,int k,int min){
-		IRefinery ref = (IRefinery) worldObj.getBlockTileEntity(xCoord+i, yCoord+j, zCoord+k);
+	public void prepareRefBlock(MultiBlock m, int i){
+		IRefinery ref = (IRefinery) worldObj.getBlockTileEntity(xCoord, yCoord+i, zCoord);
 		if(ref == null)return;
 		ref.setMulti(structure);
-		ref.setHeight(j-min);
+		ref.setHeight(i);
 		m.addComponent(ref);
-		worldObj.markBlockForRenderUpdate(xCoord+i, yCoord+j, zCoord+k);
+		worldObj.markBlockForRenderUpdate(xCoord, yCoord+i, zCoord);
 	}
 
 	@Override
 	public void DellMulti() {
-		if(structure != null)
+		if(this instanceof RefineryInEntity){
+			for(int v=0;v<8;v++){
+				if(worldObj.getBlockTileEntity(xCoord, yCoord+v, zCoord) instanceof IRefinery){
+					IRefinery y = (IRefinery) worldObj.getBlockTileEntity(xCoord, yCoord+v, zCoord);
+					y.setMulti(null);
+					y.setHeight(-1);
+					if(y instanceof TileRefinery)((TileRefinery)y).update = false;
+				}
+			}
+		}else if(structure != null)
 			for(IRefinery ref : structure.comp){
-				ref.setHeight(-1);
-				ref.setMulti(null);
-				if(ref instanceof TileRefinery)((TileRefinery) ref).update = false;
+				if(ref instanceof RefineryInEntity){
+					ref.DellMulti();
+				}
 			}
 		setMulti(null);
+		setHeight(-1);
+		update = false;
 	}	
 
 	@Override

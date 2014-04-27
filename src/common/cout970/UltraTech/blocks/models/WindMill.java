@@ -1,5 +1,6 @@
 package common.cout970.UltraTech.blocks.models;
 
+import buildcraft.api.tools.IToolWrench;
 import common.cout970.UltraTech.TileEntities.Tier1.hitBoxEntity;
 import common.cout970.UltraTech.TileEntities.Tier2.WindMillEntity;
 import common.cout970.UltraTech.core.UltraTech;
@@ -13,6 +14,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
@@ -21,11 +23,24 @@ public class WindMill extends BlockContainer{
 	public WindMill(int par1, Material par2Material) {
 		super(par1, par2Material);
 		setCreativeTab(UltraTech.techTab);
-		setHardness(0.5f);
+		setHardness(2.5f);
 		setStepSound(soundMetalFootstep);
 		setResistance(20);
 		setUnlocalizedName("WindMill");
 		setBlockBounds(0f, 0f, 0f, 1f, 6f, 1f);
+	}
+	
+	public boolean onBlockActivated(World w, int x, int y, int z, EntityPlayer p, int par6, float par7, float par8, float par9)
+	{
+		if(p.isSneaking())return true;
+		WindMillEntity e = (WindMillEntity) w.getBlockTileEntity(x, y, z);
+		if(e != null){
+			if(p.getCurrentEquippedItem() != null && p.getCurrentEquippedItem().getItem() instanceof IToolWrench){
+				e.switchDirection();
+				return true;
+			}
+		}
+		return true;
 	}
 
 	@Override

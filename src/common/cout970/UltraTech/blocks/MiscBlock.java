@@ -24,6 +24,7 @@ public class MiscBlock extends BlockContainer{
 		setUnlocalizedName("Misc");
 		setStepSound(soundMetalFootstep);
 		setResistance(10);
+		setHardness(2.5f);
 	}
 
 	@Override

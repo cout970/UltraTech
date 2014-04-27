@@ -124,5 +124,14 @@ public class UT_Utils {
 	public static TileEntity getRelative(TileEntity from, ForgeDirection d){
 		return from.worldObj.getBlockTileEntity(from.xCoord + d.offsetX, from.yCoord + d.offsetY, from.zCoord + d.offsetZ);
 	}
+	
+	public static boolean isIn(int mx, int my, int x, int y, int w, int h){
+		if(mx > x && mx < x+w){
+			if(my > y && my < y+h){
+				return true;
+			}
+		}
+		return false;
+	}
 
 }

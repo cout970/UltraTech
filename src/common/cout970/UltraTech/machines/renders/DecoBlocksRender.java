@@ -38,12 +38,12 @@ public class DecoBlocksRender implements ISimpleBlockRenderingHandler{
 		block.setLightValue(0f);
 //		t.setBrightness((int) (65536*240));//65536*240
 		//in
-		if(!block.isBlockSolid(w, x, y+1, z, 0))r.renderFaceYPos(block, x, y, z, c);
-		if(!block.isBlockSolid(w, x, y-1, z, 0))r.renderFaceYNeg(block, x, y, z, c);
-		if(!block.isBlockSolid(w, x, y, z+1, 0))r.renderFaceZPos(block, x, y, z, c);
-		if(!block.isBlockSolid(w, x, y, z-1, 0))r.renderFaceZNeg(block, x, y, z, c);
-		if(!block.isBlockSolid(w, x+1, y, z, 0))r.renderFaceXPos(block, x, y, z, c);
-		if(!block.isBlockSolid(w, x-1, y, z, 0))r.renderFaceXNeg(block, x, y, z, c);
+		if(block.shouldSideBeRendered(w, x, y+1, z, 0))r.renderFaceYPos(block, x, y, z, c);
+		if(block.shouldSideBeRendered(w, x, y-1, z, 0))r.renderFaceYNeg(block, x, y, z, c);
+		if(block.shouldSideBeRendered(w, x, y, z+1, 0))r.renderFaceZPos(block, x, y, z, c);
+		if(block.shouldSideBeRendered(w, x, y, z-1, 0))r.renderFaceZNeg(block, x, y, z, c);
+		if(block.shouldSideBeRendered(w, x+1, y, z, 0))r.renderFaceXPos(block, x, y, z, c);
+		if(block.shouldSideBeRendered(w, x-1, y, z, 0))r.renderFaceXNeg(block, x, y, z, c);
 		//out
 		r.renderStandardBlock(block, x, y, z);
 		GL11.glPopMatrix();

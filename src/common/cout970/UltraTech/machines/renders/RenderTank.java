@@ -63,7 +63,7 @@ public class RenderTank  extends TileEntitySpecialRenderer{
 		drawWest(t, 1f-k, 0, k, h, k);
 	}
 
-	private void drawTop(Tessellator t, float x, float z, float x1, float z1, float y) {
+	public void drawTop(Tessellator t, float x, float z, float x1, float z1, float y) {
 		t.startDrawingQuads();
 		t.addVertexWithUV(x ,y ,z ,um ,vm);
 		t.addVertexWithUV(x ,y ,z1 ,u ,vm);
@@ -72,7 +72,7 @@ public class RenderTank  extends TileEntitySpecialRenderer{
 		t.draw();
 	}
 	
-	private void drawBottom(Tessellator t, float x, float z, float x1, float z1, float y) {
+	public void drawBottom(Tessellator t, float x, float z, float x1, float z1, float y) {
 		t.startDrawingQuads();
 		t.addVertexWithUV(x1 ,y ,z ,um ,v);
 		t.addVertexWithUV(x1 ,y ,z1 ,u ,v);
@@ -81,7 +81,7 @@ public class RenderTank  extends TileEntitySpecialRenderer{
 		t.draw();
 	}
 	
-	private void drawNorth(Tessellator t, float x, float y, float x1, float y1, float z) {
+	public void drawNorth(Tessellator t, float x, float y, float x1, float y1, float z) {
 		t.startDrawingQuads();
 		t.addVertexWithUV(x ,y ,z ,um ,vm);
 		t.addVertexWithUV(x ,y1 ,z ,u ,vm);
@@ -90,7 +90,7 @@ public class RenderTank  extends TileEntitySpecialRenderer{
 		t.draw();
 	}
 	
-	private void drawSouth(Tessellator t, float x, float y, float x1, float y1, float z) {
+	public void drawSouth(Tessellator t, float x, float y, float x1, float y1, float z) {
 		t.startDrawingQuads();
 		t.addVertexWithUV(x1 ,y ,z ,um ,v);
 		t.addVertexWithUV(x1 ,y1 ,z ,u ,v);
@@ -99,7 +99,7 @@ public class RenderTank  extends TileEntitySpecialRenderer{
 		t.draw();
 	}
 	
-	private void drawEast(Tessellator t, float z, float y, float z1, float y1, float x) {
+	public void drawEast(Tessellator t, float z, float y, float z1, float y1, float x) {
 		t.startDrawingQuads();
 		t.addVertexWithUV(x ,y ,z1 ,um ,vm);
 		t.addVertexWithUV(x ,y1 ,z1 ,u ,vm);
@@ -108,7 +108,7 @@ public class RenderTank  extends TileEntitySpecialRenderer{
 		t.draw();
 	}
 	
-	private void drawWest(Tessellator t, float z, float y, float z1, float y1, float x) {
+	public void drawWest(Tessellator t, float z, float y, float z1, float y1, float x) {
 		t.startDrawingQuads();
 		t.addVertexWithUV(x ,y ,z ,um ,v);
 		t.addVertexWithUV(x ,y1 ,z ,u ,v);

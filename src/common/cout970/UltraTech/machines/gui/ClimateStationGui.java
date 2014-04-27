@@ -1,11 +1,15 @@
 package common.cout970.UltraTech.machines.gui;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.lwjgl.opengl.GL11;
 
 import common.cout970.UltraTech.TileEntities.Tier3.ClimateEntity;
 import common.cout970.UltraTech.lib.UT_Utils;
 import cpw.mods.fml.common.network.PacketDispatcher;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.inventory.Container;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
@@ -31,6 +35,25 @@ public class ClimateStationGui extends GuiContainer{
 		this.mc.renderEngine.bindTexture(new ResourceLocation("ultratech:textures/misc/energy.png"));
 		int m = (int) (entity.getEnergy()*50/entity.maxEnergy());
 		this.drawTexturedModalRect(xStart+135, yStart+15+(50-m), 0, 0, 25, m);
+		
+		 //NAME
+		this.drawCenteredString(fontRenderer, "Climate Station", xStart+115, yStart+4, UT_Utils.RGBtoInt(255, 255, 255));
+
+	}
+	
+	@Override
+    protected void drawGuiContainerForegroundLayer(int x, int y) {
+
+        //text
+        int xStart = (width - xSize) / 2;
+		int yStart = (height - ySize) / 2;
+		
+        if(UT_Utils.isIn(x, y, xStart+135, yStart+15, 25, 50)){
+        	List<String> energy = new ArrayList<String>();
+        	energy.add("Energy: "+((int)entity.getEnergy())+"FT");
+        	this.drawHoveringText(energy, x-xStart, y-yStart, fontRenderer);
+        	RenderHelper.enableGUIStandardItemLighting();
+        }
 	}
 	
 	protected void mouseClicked(int par1, int par2, int par3)

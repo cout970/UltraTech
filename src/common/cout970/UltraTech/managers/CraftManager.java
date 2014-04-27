@@ -4,13 +4,17 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.ShapedOreRecipe;
+import common.cout970.UltraTech.TileEntities.Tier2.FluidGenerator;
 import common.cout970.UltraTech.blocks.DecoBlocks;
 import common.cout970.UltraTech.lib.recipes.Assembly_Recipes;
 import common.cout970.UltraTech.lib.recipes.Boiler_Recipes;
 import common.cout970.UltraTech.lib.recipes.CVD_Recipe;
 import common.cout970.UltraTech.lib.recipes.Cooling_Recipes;
 import common.cout970.UltraTech.lib.recipes.Cuter_Recipes;
+import common.cout970.UltraTech.lib.recipes.Fermenter_Recipes;
 import common.cout970.UltraTech.lib.recipes.Pressurizer_Recipes;
 import common.cout970.UltraTech.lib.recipes.Purifier_Recipe;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -61,8 +65,8 @@ public class CraftManager {
 
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(CovedGlass,8),new Object[]{"oo","oo",'o',"plateSilicon"}));//coved glass
 		
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Reactor,1,0),new Object[]{"lll","lml","lll",'l',"plateLead",'m',new ItemStack(Chasis,1,3)}));//reactor
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Reactor,4,1),new Object[]{"olo","lml","olo",'l',"plateLead",'m',new ItemStack(Chasis,1,2)}));//reactor wall
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Reactor,1,0),new Object[]{"lll","lml","lll",'l',"plateLead",'m',new ItemStack(Chasis,1,2)}));//reactor
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Reactor,4,1),new Object[]{"olo","lml","olo",'l',"plateLead",'m',new ItemStack(Chasis,1,1)}));//reactor wall
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Reactor,1,2),new Object[]{"olo","lml","olo",'o',"plateLead",'l',Block.thinGlass}));//reactor tank
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Reactor,1,3),new Object[]{"olo","lml","olo",'l',"plateLead",'m',ItemName.get("Circuit")}));//reactor controller
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Reactor,1,4),new Object[]{"olo","lml","olo",'l',"plateLead",'m',new ItemStack(Chasis,1,1),'o',ItemName.get("Circuit")}));//reactor water provider
@@ -100,12 +104,21 @@ public class CraftManager {
 		Pressurizer_Recipes.addRecipe(new Pressurizer_Recipes(new ItemStack(ItemManager.ItemName.get("Plate"),1,8), new ItemStack(ItemManager.ItemName.get("Plate"),1,8), new ItemStack(ItemManager.ItemName.get("Plate"),1,8), new ItemStack(DiamondGlass,4)));
 		Pressurizer_Recipes.addRecipe(new Pressurizer_Recipes(new ItemStack(ItemManager.ItemName.get("Plate"),1,9), new ItemStack(ItemManager.ItemName.get("Plate"),1,9), new ItemStack(ItemManager.ItemName.get("Plate"),1,9), new ItemStack(ItemName.get("GrafenoPlate"),1)));
 
+		//fermenter recipes
+		Fermenter_Recipes.recipes.put(Item.sugar, 75);
+		Fermenter_Recipes.recipes.put(Item.appleRed, 25);
+		Fermenter_Recipes.recipes.put(Item.wheat, 100);
+		
 		//liquid recipes
 		Boiler_Recipes.recipes.put("juice", "gas_ethanol");
 		Boiler_Recipes.recipes.put("oil", "gas_oil");
 		
-		Cooling_Recipes.recipes.add(new Cooling_Recipes("gas_ethanol", "bioethanol", "bioethanol", "bioethanol"));
-		Cooling_Recipes.recipes.add(new Cooling_Recipes("gas_oil", null, "fuel", "gasoline"));
+		Cooling_Recipes.recipes.add(new Cooling_Recipes(new FluidStack(FluidRegistry.getFluid("gas_ethanol"),100), new FluidStack(FluidRegistry.getFluid("bioethanol"),2), null, null));
+		if(FluidRegistry.getFluid("fuel") != null)Cooling_Recipes.recipes.add(new Cooling_Recipes(new FluidStack(FluidRegistry.getFluid("gas_oil"),100), null, new FluidStack(FluidRegistry.getFluid("fuel"),10), new FluidStack(FluidRegistry.getFluid("gasoline"),1)));
+		
+		FluidGenerator.fuels.put("fuel", 185);
+		FluidGenerator.fuels.put("gasoline", 600);
+		FluidGenerator.fuels.put("bioethanol", 75);
 	}
 
 	public static void Smelting(){
@@ -155,6 +168,10 @@ public class CraftManager {
 	}
 	public static void Cutter(){
 		//cuter recipes
+		Cuter_Recipes.addRecipe(new Cuter_Recipes(new ItemStack(Item.reed), new ItemStack(Item.sugar,2)));
+		Cuter_Recipes.addRecipe(new Cuter_Recipes(new ItemStack(Block.cloth), new ItemStack(Item.silk,4)));
+		Cuter_Recipes.addRecipe(new Cuter_Recipes(new ItemStack(Block.cobblestone), new ItemStack(Block.sand,1)));
+		Cuter_Recipes.addRecipe(new Cuter_Recipes(new ItemStack(Item.bone), new ItemStack(Item.dyePowder,6,15)));
 		Cuter_Recipes.addRecipe(new Cuter_Recipes(new ItemStack(Item.diamond), new ItemStack(ItemName.get("Plate"),8,8)));
 		Cuter_Recipes.addRecipe(new Cuter_Recipes(new ItemStack(Item.cookie), new ItemStack(ItemName.get("RawMeal"), 1)));
 		Cuter_Recipes.addRecipe(new Cuter_Recipes(new ItemStack(Item.rottenFlesh), new ItemStack(ItemName.get("RawMeal"), 2)));

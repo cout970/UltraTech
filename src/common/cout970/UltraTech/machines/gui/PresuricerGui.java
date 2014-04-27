@@ -3,6 +3,7 @@ package common.cout970.UltraTech.machines.gui;
 import org.lwjgl.opengl.GL11;
 
 import common.cout970.UltraTech.TileEntities.Tier2.PresuricerEntity;
+import common.cout970.UltraTech.lib.UT_Utils;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -38,6 +39,7 @@ public class PresuricerGui extends GuiContainer{
 		int p = (int) (entity.getEnergy()*50/entity.maxEnergy());
 		this.drawTexturedModalRect(xStart+14, yStart+15+(50-p), 0, 0, 25, p);
 
+		this.drawCenteredString(fontRenderer, "Pressurizer", xStart+85, yStart+3, UT_Utils.RGBtoInt(255, 255, 255));
 	}
 
 }

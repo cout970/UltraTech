@@ -19,7 +19,7 @@ public class Boiler extends BlockContainer{
 	public Boiler(int par1, Material par2Material) {
 		super(par1, par2Material);
 		setCreativeTab(UltraTech.techTab);
-		setHardness(1.5f);
+		setHardness(2.5f);
 		setStepSound(soundMetalFootstep);
 		setResistance(20);
 		setUnlocalizedName("Boiler");

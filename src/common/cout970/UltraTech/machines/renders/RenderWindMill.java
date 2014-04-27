@@ -9,6 +9,7 @@ import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.ForgeDirection;
 
 public class RenderWindMill extends TileEntitySpecialRenderer{
 
@@ -40,6 +41,9 @@ public class RenderWindMill extends TileEntitySpecialRenderer{
 		((ModelRenderer)model.boxList.get(8)).rotateAngleZ = (float) Math.toRadians(60+d);
 		((ModelRenderer)model.boxList.get(9)).rotateAngleZ = (float) Math.toRadians(180+d);
 		((ModelRenderer)model.boxList.get(10)).rotateAngleZ = (float) Math.toRadians(-60+d);
+		if(((WindMillEntity)te).facing == ForgeDirection.NORTH)GL11.glRotatef(180, 0, 1, 0);
+		if(((WindMillEntity)te).facing == ForgeDirection.WEST)GL11.glRotatef(90, 0, 1, 0);
+		if(((WindMillEntity)te).facing == ForgeDirection.EAST)GL11.glRotatef(-90, 0, 1, 0);
 		this.model.render((Entity)null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
 		GL11.glPopMatrix();
 	}

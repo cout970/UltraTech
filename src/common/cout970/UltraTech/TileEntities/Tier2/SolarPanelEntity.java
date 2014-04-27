@@ -12,7 +12,11 @@ public class SolarPanelEntity extends Machine{
 		super();
 		this.tipe = MachineTipe.Output;
 		this.tier = MachineTier.Tier2;
-		setMaxEnergy(1000);
+	}
+	
+	@Override
+	public float maxEnergy() {
+		return 200;
 	}
 	
 	@Override

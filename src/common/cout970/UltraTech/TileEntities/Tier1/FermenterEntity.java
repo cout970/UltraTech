@@ -4,7 +4,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.ForgeDirection;
@@ -16,22 +15,26 @@ import net.minecraftforge.fluids.IFluidHandler;
 import common.cout970.UltraTech.energy.api.Machine;
 import common.cout970.UltraTech.fluid.api.UT_Tank;
 import common.cout970.UltraTech.lib.EnergyCosts;
+import common.cout970.UltraTech.lib.recipes.Fermenter_Recipes;
 import common.cout970.UltraTech.managers.BlockManager;
 
 public class FermenterEntity extends Machine implements IInventory, IFluidHandler{
 
-	private UT_Tank water = null;
-	private UT_Tank juice = null;
+	public UT_Tank water = null;
+	public UT_Tank juice = null;
 	private ItemStack item;
 	public int progres = 0;
+	public int maxProgres = 1;
+	
 	
 	public void updateEntity(){
 		if(water == null)water = new UT_Tank(8000, worldObj, xCoord, yCoord, zCoord);
 		if(juice == null)juice = new UT_Tank(8000, worldObj, xCoord, yCoord, zCoord);
 		if(worldObj.isRemote)return;
 		if(progres <= 0){
-			if(item != null && item.itemID == Item.sugar.itemID){
-				progres = 200;
+			if(item != null && Fermenter_Recipes.hasRecipe(item)){
+				progres = Fermenter_Recipes.getTicks(item);
+				maxProgres = Fermenter_Recipes.getTicks(item);
 				decrStackSize(0, 1);
 			}
 		}
@@ -166,7 +169,7 @@ public class FermenterEntity extends Machine implements IInventory, IFluidHandle
 
 	@Override
 	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-		if(itemstack.itemID == Item.sugar.itemID)return true;
+		if(Fermenter_Recipes.hasRecipe(item))return true;
 		return false;
 	}
 	
@@ -204,6 +207,7 @@ public class FermenterEntity extends Machine implements IInventory, IFluidHandle
 		c.sendProgressBarUpdate(cont, 2, water.getFluidAmount());
 		c.sendProgressBarUpdate(cont, 3, juice.getFluidAmount());
 		c.sendProgressBarUpdate(cont, 4, progres);
+		c.sendProgressBarUpdate(cont, 5, maxProgres);
 	}
 
 
@@ -212,5 +216,6 @@ public class FermenterEntity extends Machine implements IInventory, IFluidHandle
 		if(id == 2)water.setFluid(new FluidStack(FluidRegistry.WATER, value));
 		if(id == 3)juice.setFluid(new FluidStack(FluidRegistry.getFluid("juice"), value));
 		if(id == 4)progres = value;
+		if(id == 5)maxProgres = value;
 	}
 }

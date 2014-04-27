@@ -28,6 +28,8 @@ public class HologramEmiterGui extends GuiContainer{
 		this.drawTexturedModalRect(xStart, yStart, 0, 0, xSize, ySize);
 		String mensage = "Height "+entity.map.height+" Color "+!entity.map.colorHeight;
 		this.drawCenteredString(fontRenderer,mensage, xStart+88, yStart+18, UT_Utils.RGBtoInt(255, 255, 255));
+		
+		this.drawCenteredString(fontRenderer, "Hologram emiter", xStart+85, yStart+3, UT_Utils.RGBtoInt(255, 255, 255));
 	}
 
 	@Override

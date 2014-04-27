@@ -19,7 +19,7 @@ public class PurifierEntity extends Machine implements ISidedInventory,ISpeedUpg
 	private ItemStack[] inventory;
 	public int progres = 0;
 	public int speed = 10;
-	private int speedUpgrades;
+	public int speedUpgrades;
 	public boolean hasEnergy = false;
 
 	public PurifierEntity(){

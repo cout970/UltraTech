@@ -81,12 +81,14 @@ public class TesseractEntity extends Machine{
 	public void readFromNBT(NBTTagCompound nbtTagCompound) {
 		super.readFromNBT(nbtTagCompound);
 		setFrequency(nbtTagCompound.getInteger("Freq"));
+		mode = T_Mode.getMode(nbtTagCompound.getInteger("Mode"));
 	}
 
 	@Override
 	public void writeToNBT(NBTTagCompound nbtTagCompound) {
 		super.writeToNBT(nbtTagCompound);
 		nbtTagCompound.setInteger("Freq", frequency);
+		nbtTagCompound.setInteger("Mode", mode.ordinal());
 	}
 	
 	public enum T_Mode{

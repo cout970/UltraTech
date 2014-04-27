@@ -34,7 +34,7 @@ public Machine tileEntity;
 	public void addCraftingToCrafters(ICrafting par1ICrafting)
     {
         super.addCraftingToCrafters(par1ICrafting);
-        par1ICrafting.sendProgressBarUpdate(this, 1, (int)tileEntity.getEnergy());
+//        par1ICrafting.sendProgressBarUpdate(this, 1, (int)tileEntity.getEnergy());
     }
 	
 	@Override

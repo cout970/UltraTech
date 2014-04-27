@@ -16,6 +16,7 @@ import common.cout970.UltraTech.items.MiningUpgrade;
 import common.cout970.UltraTech.items.ProcesedFood;
 import common.cout970.UltraTech.items.RadioniteCell;
 import common.cout970.UltraTech.items.RangeUpgrade;
+import common.cout970.UltraTech.items.SilkTouchUpgrade;
 import common.cout970.UltraTech.items.SpeedUpgrade;
 import common.cout970.UltraTech.items.UT_Dust;
 import common.cout970.UltraTech.items.UT_Ingot;
@@ -42,7 +43,6 @@ public class ItemManager {
 
 		//plates
 		Reg("Plate", "Plate", false);
-		
 		Reg("GrafenoPlate", "Grafeno Plate", true);
 		
 		//pieces
@@ -72,6 +72,11 @@ public class ItemManager {
 		Reg("LasserSword", "Lasser Sword", false);
 		Reg("ProcesedFood", "Procesed Food", false);
 		
+		//added
+		
+		Reg("SilverCable", "Silver cable",true);
+		Reg("SilkTouchUpgrade", "Silk Touch Upgrade", false);
+
 	}
 
 	public static void LoadConfigItems(Configuration c){
@@ -129,6 +134,8 @@ public class ItemManager {
 			return new FortuneUpgrade(i.id, i.name);
 		if(a=="ProcesedFood")
 			return new ProcesedFood(i.id);
+		if(a=="SilkTouchUpgrade")
+			return new SilkTouchUpgrade(i.id, i.name);
 		return null;
 	}
 

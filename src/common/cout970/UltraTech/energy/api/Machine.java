@@ -13,11 +13,9 @@ public class Machine extends ElectricConductor implements IEnergy{
 
 	public MachineTipe tipe = MachineTipe.Nothing;
 	private float Energy = 0;
-	private float maxEnergy;
 
 	public Machine(){
 		super();
-		maxEnergy = tier.getStorage();
 	}
 	
 	
@@ -111,17 +109,14 @@ public class Machine extends ElectricConductor implements IEnergy{
 
 	@Override
 	public float maxEnergy() {
-		return maxEnergy;
+		return tier.getStorage();
 	}
 	
 	@Override
 	public float maxFlow() {
 		return tier.getFlow();
 	}
-	
-	public void setMaxEnergy(float climateestationcost) {
-		maxEnergy = climateestationcost;
-	}
+
 	
 	public void setEnergy(int e) {
 		Energy = e;
@@ -131,12 +126,12 @@ public class Machine extends ElectricConductor implements IEnergy{
 	public void readFromNBT(NBTTagCompound nbtTagCompound) {
 		
 		super.readFromNBT(nbtTagCompound);
-		
+
 		NBTTagList tagList = nbtTagCompound.getTagList("Energy_UT");
-		NBTTagCompound tagCompound = (NBTTagCompound) tagList.tagAt(0);
-		Energy = tagCompound.getFloat("Energy");
-		NBTTagCompound tagCompound2 = (NBTTagCompound) tagList.tagAt(1);
-		maxEnergy = tagCompound2.getFloat("EnergyMax");
+		if(tagList.tagCount() > 0){
+			NBTTagCompound tagCompound = (NBTTagCompound) tagList.tagAt(0);
+			Energy = tagCompound.getFloat("Energy");
+		}
 	}
 	
 	@Override
@@ -147,9 +142,6 @@ public class Machine extends ElectricConductor implements IEnergy{
 		NBTTagCompound tagCompound = new NBTTagCompound();
 		tagCompound.setFloat("Energy", this.Energy);
 		tagList.appendTag(tagCompound);
-		NBTTagCompound tagCompound2 = new NBTTagCompound();
-		tagCompound2.setFloat("EnergyMax", this.maxEnergy);
-		tagList.appendTag(tagCompound2);
 		nbtTagCompound.setTag("Energy_UT", tagList);
 	}
 

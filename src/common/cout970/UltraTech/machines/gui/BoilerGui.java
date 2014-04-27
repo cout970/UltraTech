@@ -1,14 +1,20 @@
 package common.cout970.UltraTech.machines.gui;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.lwjgl.opengl.GL11;
 
 import common.cout970.UltraTech.TileEntities.Tier1.BoilerEntity;
+import common.cout970.UltraTech.lib.UT_Utils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.inventory.Container;
+import net.minecraft.util.Icon;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.ForgeDirection;
-import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
 public class BoilerGui extends GuiContainer{
@@ -34,22 +40,24 @@ public class BoilerGui extends GuiContainer{
 		int p = (int) ((((float)entity.getEnergy())*50/entity.maxEnergy()));
 		this.drawTexturedModalRect(xStart+14, yStart+15+(50-p), 0, 0, 25, p);
 		
-		//fluid 1 liquid
-		FluidStack liquid = entity.getTankInfo(ForgeDirection.UP)[0].fluid;
-		boolean l = liquid == null;
+		//fluid 1 gas
+		FluidStack output = entity.getTankInfo(ForgeDirection.UP)[0].fluid;
+		boolean l = output == null;
+		
 		if(!l){
-			liquid.getFluid().getIcon();
-			bindTexture(liquid);
-			int a = liquid.amount*40/entity.getTankInfo(ForgeDirection.UP)[0].capacity;
-			this.drawTexturedModalRect(xStart+139, yStart+61-a, 0, 0, 18, a);
+			Icon li = output.getFluid().getStillIcon();
+			bindTexture(output);
+			int a = output.amount*40/entity.getTankInfo(ForgeDirection.UP)[0].capacity;
+			drawTexturedModelRectFromIcon(xStart+139, yStart+61-a, li, 18, a);			
 		}
-		//fluid 2 gas
-		FluidStack gas = entity.getTankInfo(ForgeDirection.UP)[1].fluid;
-		boolean g = gas == null;
+		//fluid 2 liquid
+		FluidStack input = entity.getTankInfo(ForgeDirection.UP)[1].fluid;
+		boolean g = input == null;
 		if(!g){
-			bindTexture(gas);
-			int a = gas.amount*40/entity.getTankInfo(ForgeDirection.UP)[1].capacity;
-			this.drawTexturedModalRect(xStart+46, yStart+60-a, 0, 0, 18, a);
+			Icon li = input.getFluid().getStillIcon();
+			bindTexture(input);
+			int a = input.amount*40/entity.getTankInfo(ForgeDirection.UP)[1].capacity;
+			drawTexturedModelRectFromIcon(xStart+46, yStart+60-a, li, 18, a);
 		} 
 		//overlay
 		this.mc.renderEngine.bindTexture(new ResourceLocation("ultratech:textures/gui/boiler.png"));
@@ -57,25 +65,44 @@ public class BoilerGui extends GuiContainer{
 		if(!l)this.drawTexturedModalRect(xStart+138, yStart+21, 224, 0, 20, 40);
 		
 		//heat
-		int h = (int) ((entity.heat-25)*58/125);
+		int h = (int) ((entity.heat-25)*58/75);
 		this.drawTexturedModalRect(xStart+74, yStart+14+(58-h), 208, 58-h, 6, h);
 		
 		String s = ((int)this.entity.heat)+"C";
         this.fontRenderer.drawString(s, xStart+125-fontRenderer.getStringWidth(s), yStart+38, 4210752);
 
+        //NAME
+        this.drawCenteredString(fontRenderer, "Boiler", xStart+110, yStart+5, UT_Utils.RGBtoInt(255, 255, 255));
+        
+        //text
+        if(UT_Utils.isIn(i, j, xStart+14, yStart+15, 25, 50)){
+        	List<String> energy = new ArrayList<String>();
+        	energy.add("Energy: "+((int)entity.getEnergy())+"FT");
+        	this.drawHoveringText(energy, i, j, fontRenderer);
+        }
+        if(UT_Utils.isIn(i, j, xStart+45, yStart+20, 20, 40)){//storage
+        	List<String> fluid1 = new ArrayList<String>();
+        	if(entity.storage.getFluidAmount() == 0)fluid1.add("Empty");
+        	else {
+        		fluid1.add("Fluid: "+entity.storage.getFluid().getFluid().getName());
+        		fluid1.add(""+entity.storage.getFluidAmount()+"/"+entity.storage.getCapacity());
+        	}
+        	this.drawHoveringText(fluid1, i, j, fontRenderer);
+        }
+        if(UT_Utils.isIn(i, j, xStart+138, yStart+21, 20, 40)){//result
+        	List<String> fluid1 = new ArrayList<String>();
+        	if(entity.result.getFluidAmount() == 0)fluid1.add("Empty");
+        	else {
+        		fluid1.add("Fluid: "+entity.result.getFluid().getFluid().getName());
+        		fluid1.add(""+entity.result.getFluidAmount()+"/"+entity.result.getCapacity());
+        	}
+        	this.drawHoveringText(fluid1, i, j, fontRenderer);
+        }
+    	RenderHelper.enableGUIStandardItemLighting();
 	}
 
 	public static void bindTexture(FluidStack f) {
-		if(FluidRegistry.getFluidName(f).equals("water"))Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("ultratech:textures/misc/fluids/water.png"));	
-		if(FluidRegistry.getFluidName(f).equals("juice"))Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("ultratech:textures/misc/fluids/juice.png"));
-		if(FluidRegistry.getFluidName(f).equals("bioethanol"))Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("ultratech:textures/misc/fluids/ethanol.png"));	
-		if(FluidRegistry.getFluidName(f).equals("oil"))Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("ultratech:textures/misc/fluids/oil.png"));	
-		if(FluidRegistry.getFluidName(f).equals("fuel"))Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("ultratech:textures/misc/fluids/fuel.png"));	
-		if(FluidRegistry.getFluidName(f).equals("gas_oil")){
-			Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("ultratech:textures/misc/fluids/gasoil.png"));
-			return;
-		}
-		if(FluidRegistry.getFluidName(f).contains("gas"))Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("ultratech:textures/misc/fluids/steam.png"));
+		Minecraft.getMinecraft().renderEngine.bindTexture(TextureMap.locationBlocksTexture);
 	}
 
 }

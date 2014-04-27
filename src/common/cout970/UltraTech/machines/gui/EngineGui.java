@@ -4,6 +4,7 @@ import org.lwjgl.opengl.GL11;
 
 import common.cout970.UltraTech.TileEntities.Tier2.EngineEntity;
 import common.cout970.UltraTech.lib.EnergyCosts;
+import common.cout970.UltraTech.lib.UT_Utils;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -44,6 +45,9 @@ public class EngineGui extends GuiContainer{
 		this.drawCenteredString(fontRenderer, "Energy "+(int)entity.getEnergy(), xStart+85, yStart+25, 16777215);
 		this.drawCenteredString(fontRenderer, "BC MJ "+(int)entity.power.getEnergyStored(), xStart+87, yStart+37, 16777215);
 		this.drawCenteredString(fontRenderer, "Gen. "+EnergyCosts.Engine_MJ_Produced+" MJ/t", xStart+87, yStart+50, 16777215);
+
+		
+		this.drawCenteredString(fontRenderer, "FT Engine", xStart+85, yStart+6, UT_Utils.RGBtoInt(255, 255, 255));
 
 	}
 

@@ -18,7 +18,7 @@ public class CVD_Entity extends Machine implements ISidedInventory,ISpeedUpgrade
 	private ItemStack[] inventory;
 	public int progres = 0;
 	public int speed = 10;
-	private int speedUpgrades;
+	public int speedUpgrades;
 	public boolean hasEnergy = false;
 
 	public CVD_Entity(){

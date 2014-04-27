@@ -1,15 +1,18 @@
 package common.cout970.UltraTech.TileEntities.Tier2;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import common.cout970.UltraTech.energy.api.Machine;
 import common.cout970.UltraTech.fluid.api.UT_Tank;
 import common.cout970.UltraTech.lib.EnergyCosts;
+import common.cout970.UltraTech.lib.EnergyCosts.MachineTier;
 import common.cout970.UltraTech.lib.UT_Utils;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
@@ -19,7 +22,7 @@ public class FluidGenerator extends Machine implements IFluidHandler{
 	public UT_Tank storage;
 	public boolean on;
 	public int delay = 0;
-	public static final String[] fuels = {"bioethanol","fuel"};
+	public static Map<String,Integer> fuels = new HashMap<>();//{"bioethanol","fuel"};
 
 	public void createTank(){
 		storage = new UT_Tank(8000, this);
@@ -28,6 +31,7 @@ public class FluidGenerator extends Machine implements IFluidHandler{
 	public FluidGenerator(){
 		super();
 		this.tipe = MachineTipe.Output;
+		tier = MachineTier.Tier2;
 	}
 	
 	public void updateEntity(){
@@ -35,14 +39,14 @@ public class FluidGenerator extends Machine implements IFluidHandler{
 		if(storage == null)createTank();
 		if(worldObj.isRemote)return;
 		delay++;
-		if(storage.getFluidAmount() >= EnergyCosts.FluidGenGast && getEnergy()+EnergyCosts.FluidGenProduct <= maxEnergy()){
+		if(storage.getFluidAmount() >= EnergyCosts.FluidGenGast && getEnergy()+fuels.get(storage.getFluid().getFluid().getName()) <= maxEnergy()){
 			if(!on && delay > 20){
 				delay = 0;
 				on = true;
 				UT_Utils.sendPacket(this);
 			}
+			this.addEnergy(fuels.get(storage.getFluid().getFluid().getName()));
 			this.storage.drain(EnergyCosts.FluidGenGast, true);
-			this.addEnergy(EnergyCosts.FluidGenProduct);
 		}else{
 			if(on && delay > 20){
 				delay = 0;
@@ -56,9 +60,7 @@ public class FluidGenerator extends Machine implements IFluidHandler{
 	public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
 		if(storage == null)createTank();
 		boolean canAcept = false;
-		for(String g : fuels){
-			if(resource.fluidID == FluidRegistry.getFluidID(g))canAcept = true;
-		}
+			if(fuels.containsKey((resource.getFluid().getName())))canAcept = true;
 		if(!canAcept)return 0;
 		return storage.fill(resource, doFill);
 	}

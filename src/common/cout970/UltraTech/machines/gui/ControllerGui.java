@@ -39,7 +39,12 @@ public class ControllerGui extends GuiContainer {
 				String heat = "Redstone signal is "+!entity.on;
 				this.drawCenteredString(fontRenderer, heat, xStart+86, yStart+18, UT_Utils.RGBtoInt(255, 255, 255));
 			}
+		}else{
+			this.drawCenteredString(fontRenderer, "Reactor not found", xStart+85, yStart+25, UT_Utils.RGBtoInt(255, 255, 255));
 		}
+		
+		 //NAME
+        this.drawCenteredString(fontRenderer, "Reactor Controller", xStart+85, yStart+4, UT_Utils.RGBtoInt(255, 255, 255));
 	}
 	
 	protected void mouseClicked(int par1, int par2, int par3)

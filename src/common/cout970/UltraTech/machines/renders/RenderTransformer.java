@@ -10,12 +10,12 @@ import net.minecraft.util.ResourceLocation;
 
 public class RenderTransformer extends TileEntitySpecialRenderer{
 
-private ModelTransformer model;
-	
+	private ModelTransformer model;
+
 	public RenderTransformer(){
 		model = new ModelTransformer();
 	}
-	
+
 	@Override
 	public void renderTileEntityAt(TileEntity te, double x, double y,
 			double z, float scale) {
@@ -26,7 +26,7 @@ private ModelTransformer model;
 		GL11.glRotatef(90F, 1.0F, 0.0F, 0.0F);
 		this.model.render((Entity)null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
 		GL11.glPopMatrix();
-		
+
 	}
 
 }

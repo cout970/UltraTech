@@ -19,7 +19,7 @@ public class GeneratorEntity extends Machine implements IInventory{
 	public boolean on;
 	public int maxProgres;
 	public float heat = 25;
-	public float maxHeat = 1200;
+	public float maxHeat = 800;
 
 	public GeneratorEntity(){
 		super();
@@ -36,14 +36,14 @@ public class GeneratorEntity extends Machine implements IInventory{
 				if(!on){
 					change = true;
 				}
-				if(Progres - (int)(heat*20/maxHeat) < 0){
+				if(Progres - (int)(heat*10/maxHeat) < 0){
 					addEnergy(Progres);
 					Progres = 0;
 				}else{
-				Progres-= (int)(heat*20/maxHeat);
-				this.addEnergy((int)(heat*20/maxHeat));
+				Progres-= (int)(heat*10/maxHeat);
+				this.addEnergy((int)(heat*10/maxHeat));
 				}
-				if(heat < maxHeat)heat+=1.3-heat/maxHeat;
+				if(heat < maxHeat)heat+=1.2-heat/maxHeat;
 			}else{
 				if(heat > 25)heat-=0.1+heat/maxHeat;
 			}

@@ -2,8 +2,11 @@ package common.cout970.UltraTech.TileEntities.Tier2;
 
 import common.cout970.UltraTech.energy.api.Machine;
 import common.cout970.UltraTech.lib.EnergyCosts;
+import common.cout970.UltraTech.lib.UT_Utils;
 import common.cout970.UltraTech.lib.EnergyCosts.MachineTier;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraftforge.common.ForgeDirection;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -16,6 +19,7 @@ public class WindMillEntity extends Machine{
 	public boolean obs = false;
 	public long oldTime;
 	private float rand;
+	public ForgeDirection facing = ForgeDirection.NORTH;
 
 	public WindMillEntity(){
 		super();
@@ -44,7 +48,8 @@ public class WindMillEntity extends Machine{
 			speed += 0.01f;
 		}
 		
-		if(timer++ > 200){
+		
+		if(timer++ > 100){
 			timer = 0;
 			rand = (float) Math.random();
 			if(isObstruid()){obs = true;}else{obs = false;}
@@ -58,19 +63,50 @@ public class WindMillEntity extends Machine{
 	private boolean isObstruid() {
 		for(int x=-1;x<2;x++){
 			for(int y=-1;y<2;y++){
-				if(!worldObj.isAirBlock(xCoord+x, yCoord+4+y, zCoord+1)){
-					return true;
+				if(facing == ForgeDirection.SOUTH){
+					if(!worldObj.isAirBlock(xCoord+x, yCoord+4+y, zCoord+1)){
+						return true;
+					}
+				}else if(facing == ForgeDirection.WEST){
+					if(!worldObj.isAirBlock(xCoord-1, yCoord+4+y, zCoord+x)){
+						return true;
+					}
+				}else if(facing == ForgeDirection.EAST){
+					if(!worldObj.isAirBlock(xCoord+1, yCoord+4+y, zCoord+x)){
+						return true;
+					}
+				}else if(facing == ForgeDirection.NORTH){
+					if(!worldObj.isAirBlock(xCoord+x, yCoord+4+y, zCoord-1)){
+						return true;
+					}
 				}
 			}
 		}
-		for(int h=0;h<20;h++){
-			if(!worldObj.isAirBlock(xCoord, yCoord+4, zCoord+1+h)){
+		for(int h=1;h<20;h++){
+			if(!worldObj.isAirBlock(xCoord+h*facing.offsetX, yCoord+4, zCoord+h*facing.offsetZ)){
 				return true;
 			}
 		}
 		return false;
 	}
 	
+	public void switchDirection(){
+		if(facing.ordinal() <5 )facing = ForgeDirection.getOrientation(facing.ordinal()+1);
+		else facing = ForgeDirection.NORTH;
+		UT_Utils.sendPacket(this);
+	}
+	
+	@Override
+	public void readFromNBT(NBTTagCompound nbtTagCompound) {
+		super.readFromNBT(nbtTagCompound);
+		facing = ForgeDirection.getOrientation(nbtTagCompound.getInteger("Dir"));
+	}
+	
+	@Override
+	public void writeToNBT(NBTTagCompound nbtTagCompound) {
+		super.writeToNBT(nbtTagCompound);
+		nbtTagCompound.setInteger("Dir", facing.ordinal());
+	}
 	
 	@SideOnly(Side.CLIENT)
     public AxisAlignedBB getRenderBoundingBox()

@@ -16,15 +16,15 @@ public class EnergyCosts {
 	public static final float k = 1;//FT per burning time
 	
 	//production
-	public static final float SolarPanelProduct = 0.2f*k;
+	public static final float SolarPanelProduct = 0.4f*k;
 	public static final float SteamTurbineProduct = 12.5f*k;//80 steam = 120.0FT/t
 	public static final float WindMillProduct = 2.5f*k;
-	public static final  int Engine_MJ_Produced = 4;
-	public static final float FluidGenProduct = 16f*k;
-	public static final int ReactorSteamProduct = 160;//960
+	public static final   int Engine_MJ_Produced = 4;
+	public static final   int FluidGenGast = 10;
+	public static final   int ReactorSteamProduct = 160;//960
 	//consume
 	public static final float MinerCost = 100.0f*k;
-	public static final int ReactorWaterCost = 20;
+	public static final   int ReactorWaterCost = 20;
 	public static final float PurifierCost = 200f*k;
 	public static final float FurnaceCost = 200f*k;
 	public static final float CutterCost = 200f*k;
@@ -34,16 +34,15 @@ public class EnergyCosts {
 	public static final float FermenterCost = 2.5f*k;
 	public static final float Engine_EnergyConsume = 0.8f*k;
 	public static final float ClimateEstationCost = 200000f*k;
-	public static final float BoilerCost = 5f*k;
+	public static final float BoilerCost = 20f*k;
 	//storage
 	public static final int Tier1Battery = 64000;
 	public static final int Tier2Battery = 500000;
 	public static final int Tier3Battery = 8000000;
-	public static final int FluidGenGast = 10;
 	public static final int WaterBlockProduct = 20;
 	
 	public static enum MachineTier{
-		Tier1(50,4000,1),Tier2(100,8000,2),Tier3(500,16000,3);
+		Tier1(50,1600,1),Tier2(100,2400,2),Tier3(500,10000,3);
 		private int flow,storage,level;
 		private MachineTier(int flow,int storage,int level){
 			this.flow = flow;
@@ -59,6 +58,8 @@ public class EnergyCosts {
 			return level;
 		}
 	}
+
+	
 
 	//200EU/tick = 320steam/tick == 64 MJ/tick
 	

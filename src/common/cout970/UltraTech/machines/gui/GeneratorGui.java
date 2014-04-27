@@ -1,10 +1,15 @@
 package common.cout970.UltraTech.machines.gui;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.lwjgl.opengl.GL11;
 
 import common.cout970.UltraTech.TileEntities.Tier1.GeneratorEntity;
+import common.cout970.UltraTech.lib.UT_Utils;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
@@ -50,9 +55,20 @@ public class GeneratorGui extends GuiContainer{
         this.fontRenderer.drawString(s, 65, 6, 4210752);
         String h = ((int)this.entity.heat)+"C";
         this.fontRenderer.drawString(h, 137-fontRenderer.getStringWidth(h), 29, 4210752);
-        int e = (int)(entity.heat*20/entity.maxHeat);
+        int e = (int)(entity.heat*10/entity.maxHeat);
         String p = e+"FT/t";
         this.fontRenderer.drawString(p, 115-fontRenderer.getStringWidth(h)/2, 55, 4210752);
+        
+      //text
+        int xStart = (width - xSize) / 2;
+		int yStart = (height - ySize) / 2;
+		
+        if(UT_Utils.isIn(x, y, xStart+14, yStart+15, 25, 50)){
+        	List<String> energy = new ArrayList<String>();
+        	energy.add("Energy: "+((int)entity.getEnergy())+"FT");
+        	this.drawHoveringText(energy, x-xStart, y-yStart, fontRenderer);
+        	RenderHelper.enableGUIStandardItemLighting();
+        }
 	}
 
 }

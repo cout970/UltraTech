@@ -20,7 +20,7 @@ public class FluidTank extends BlockContainer{
 	public FluidTank(int par1, Material par2Material) {
 		super(par1, par2Material);
 		setCreativeTab(UltraTech.techTab);
-		setHardness(0.5f);
+		setHardness(2.5f);
 		setStepSound(soundMetalFootstep);
 		setResistance(20);
 		setUnlocalizedName("FluidTank");
