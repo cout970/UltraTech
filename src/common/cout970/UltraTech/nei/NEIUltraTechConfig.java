@@ -19,6 +19,7 @@ public class NEIUltraTechConfig implements IConfigureNEI{
 		API.registerUsageHandler(new CuterCrafting());
 		API.registerUsageHandler(new CVD_Crafting());
 		API.registerUsageHandler(new AssemblyCrafting());
+		API.registerUsageHandler(new FermenterCrafting());
 		API.registerGuiOverlayHandler(CrafterGui.class, new CrafterOverlayHandler(), "crafting");
 	}
 

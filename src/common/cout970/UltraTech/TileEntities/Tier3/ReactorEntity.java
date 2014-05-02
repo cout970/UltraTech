@@ -57,7 +57,7 @@ public class ReactorEntity extends TileReactorPart implements IInventory{
 			if(control == null)work = getControl();
 			if(work){
 				float e = 0.25f;
-				int c = 100;
+				int c = 200;
 				int id = ItemManager.ItemName.get("RadioniteCell").itemID;
 				afect(0,e,c,id);
 				afect(1,e,c,id);
@@ -332,11 +332,6 @@ public class ReactorEntity extends TileReactorPart implements IInventory{
 	}
 
 	//Reactor Part
-
-
-	public boolean found = false;
-	public ReactorEntity Reactor;
-	public boolean Structure = false;
 
 
 	@Override

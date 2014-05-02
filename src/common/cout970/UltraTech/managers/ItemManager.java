@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
 import common.cout970.UltraTech.items.AutoEjectUpgrade;
 import common.cout970.UltraTech.items.FortuneUpgrade;
@@ -18,6 +19,7 @@ import common.cout970.UltraTech.items.RadioniteCell;
 import common.cout970.UltraTech.items.RangeUpgrade;
 import common.cout970.UltraTech.items.SilkTouchUpgrade;
 import common.cout970.UltraTech.items.SpeedUpgrade;
+import common.cout970.UltraTech.items.UT_Chunk;
 import common.cout970.UltraTech.items.UT_Dust;
 import common.cout970.UltraTech.items.UT_Ingot;
 import common.cout970.UltraTech.items.UT_Item;
@@ -40,7 +42,8 @@ public class ItemManager {
 		
 		//dust
 		Reg("Dust", "Dust", false);
-
+		Reg("Chunk", "Chunk", false);
+		
 		//plates
 		Reg("Plate", "Plate", false);
 		Reg("GrafenoPlate", "Grafeno Plate", true);
@@ -50,7 +53,6 @@ public class ItemManager {
 		Reg("RawSilicon", "Raw Silicon", true);
 		Reg("Radionite", "Radionite", true);
 		Reg("RawMeal", "Raw Meal", true);
-		Reg("SolarPanel", "Solar Panel", true);
 		Reg("Fan", "Fan", true);
 		Reg("Coil", "Coil", true);
 		Reg("AdvCircuit", "Advanced Circuit", true);
@@ -101,8 +103,24 @@ public class ItemManager {
 			}
 			if(it == null)System.out.println(i.name);
 			GameRegistry.registerItem(it, i.name+"_UT");
-			LanguageRegistry.addName(it, i.GameName);
+			if(i.tipe == ItemTipe.DEFAULT){
+				LanguageRegistry.addName(it, i.GameName);
+			}else{
+				LangException(it, i.GameName);
+			}
 			ItemName.put(i.name, it);
+		}
+	}
+
+	private static void LangException(Item it, String a) {
+		if(a == "Chunk"){
+			for(int meta = 0;meta < UT_Chunk.names.length;meta++)LanguageRegistry.addName(new ItemStack(it,1,meta), "Dirty "+UT_Chunk.names[meta]);
+		}if(a == "Plate"){
+			for(int meta = 0;meta < UT_Plate.names.length;meta++)LanguageRegistry.addName(new ItemStack(it,1,meta), UT_Plate.names[meta]);
+		}if(a == "Ingot"){
+			for(int meta = 0;meta < UT_Ingot.names.length;meta++)LanguageRegistry.addName(new ItemStack(it,1,meta), UT_Ingot.names[meta]);
+		}if(a == "Dust"){
+			for(int meta = 0;meta < UT_Dust.names.length;meta++)LanguageRegistry.addName(new ItemStack(it,1,meta), UT_Dust.names[meta]);
 		}
 	}
 
@@ -110,6 +128,8 @@ public class ItemManager {
 		String a = i.name;
 		if(a=="Ingot")
 			return new UT_Ingot(i.id);
+		if(a=="Chunk")
+			return new UT_Chunk(i.id);
 		if(a=="Dust")
 			return new UT_Dust(i.id);
 		if(a=="Plate")

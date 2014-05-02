@@ -61,8 +61,7 @@ public class ReactorMultiblock extends BlockContainer{
 				}
 			}
 		}
-
-		return false;
+		return true;
 	}
 	
 	public void onNeighborBlockChange(World w, int x, int y, int z, int side){
@@ -151,7 +150,6 @@ public class ReactorMultiblock extends BlockContainer{
 	public void onBlockPreDestroy(World worldObj, int xCoord, int yCoord, int zCoord, int meta) {
 		TileEntity t = worldObj.getBlockTileEntity(xCoord, yCoord, zCoord);
 		if(t instanceof IReactorPart)((IReactorPart) t).onNeighChange();
-		if(t instanceof Machine)EnergyUtils.onBlockPreDestroy(worldObj, xCoord, yCoord, zCoord, meta);
 	}
 	
 	@Override

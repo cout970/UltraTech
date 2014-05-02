@@ -257,7 +257,7 @@ public class CrafterEntity extends TileEntity implements IInventory{
 	public void loadRecipes(int r){
 		craft = saves.recipes[r].getInventoryCrafter(this);
 		onInventoryChanged();
-		UT_Utils.sendPacket(this);
+		if(!worldObj.isRemote)UT_Utils.sendPacket(this);
 	}
 	
 	public void DellRecipe(int slot) {

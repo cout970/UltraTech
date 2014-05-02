@@ -8,9 +8,9 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 import common.cout970.UltraTech.fluid.api.UT_Tank;
-import common.cout970.UltraTech.multiblocks.TileRefinery;
+import common.cout970.UltraTech.multiblocks.TileDestilery;
 
-public class RefineryOutEntity extends TileRefinery implements IFluidHandler{
+public class DestileryOutEntity extends TileDestilery implements IFluidHandler{
 	
 	public UT_Tank result;
 	

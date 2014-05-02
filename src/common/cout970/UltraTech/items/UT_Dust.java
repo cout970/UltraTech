@@ -4,8 +4,8 @@ import java.util.List;
 
 
 
-import common.cout970.UltraTech.core.UltraTech;
 
+import common.cout970.UltraTech.core.UltraTech;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -22,7 +22,14 @@ public class UT_Dust extends Item{
 	private Icon itemIcon6;
 	private Icon itemIcon7;
 	private Icon itemIcon8;
+	public static String[] names = {"Aluminum Dust","Copper Dust","Tin Dust","Lead Dust","Silver Dust","Alloy Dust",
+		"Iron Dust","Gold Dust","Diamond Dust"};
 
+	@Override
+	public String getUnlocalizedName(ItemStack itemstack) {
+		return getUnlocalizedName() + "." + names[itemstack.getItemDamage()];
+	}
+	
 	public UT_Dust(int par1) {
 		super(par1);
 		setHasSubtypes(true);
@@ -56,41 +63,6 @@ public class UT_Dust extends Item{
 		subItems.add(new ItemStack(this, 1, 7));
 		subItems.add(new ItemStack(this, 1, 8));
     }
-	
-	public String getItemDisplayName(ItemStack par1ItemStack)
-	{
-		switch(par1ItemStack.getItemDamage()){
-		case 0:{
-			return "Aluminum Dust";
-		}
-		case 1:{
-			return "Copper Dust";
-		}
-		case 2:{
-			return "Tin Dust";
-		}
-		case 3:{
-			return "Lead Dust";
-		}
-		case 4:{
-			return "Silver Dust";
-		}
-		case 5:{
-			return "Alloy Dust";
-		}
-		case 6:{
-			return "Iron Dust";
-		}
-		case 7:{
-			return "Gold Dust";
-		}
-		case 8:{
-			return "Diamond Dust";
-		}
-		}
-		
-		return "Dust";
-	}
 	
 	public Icon getIconFromDamage(int par1)
     {

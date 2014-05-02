@@ -56,6 +56,12 @@ public class SteamExtractorEntity extends TileReactorPart implements IFluidHandl
 			}
 		}
 	}
+	
+	@Override 
+	public void onNeighChange(){
+		super.onNeighChange();
+		Tanks = null;
+	}
 
 	//tank
 

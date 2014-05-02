@@ -19,7 +19,7 @@ public class GeneratorEntity extends Machine implements IInventory{
 	public boolean on;
 	public int maxProgres;
 	public float heat = 25;
-	public float maxHeat = 800;
+	public float maxHeat = 600;
 
 	public GeneratorEntity(){
 		super();

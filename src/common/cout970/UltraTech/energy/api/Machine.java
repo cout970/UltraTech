@@ -97,13 +97,14 @@ public class Machine extends ElectricConductor implements IEnergy{
 	public void removeEnergy(float amount) {
 		if(Energy-amount >= 0){
 			Energy -= amount;	
+		}else{
+			Energy = 0;
 		}
 		if(Energy < 0)Energy = 0;
 	}
 
 	@Override
 	public float getEnergy() {
-		if(Energy < 0)Energy = 0;
 		return Energy;
 	}
 
@@ -157,8 +158,7 @@ public class Machine extends ElectricConductor implements IEnergy{
     	this.readFromNBT(pkt.data);
     }
 
-	public void sendGUINetworkData(Container cont,
-			ICrafting c) {
+	public void sendGUINetworkData(Container cont, ICrafting c) {
 		c.sendProgressBarUpdate(cont, 1, (int) getEnergy());
 	}
 

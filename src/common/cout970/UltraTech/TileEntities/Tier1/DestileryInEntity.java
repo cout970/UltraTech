@@ -2,7 +2,7 @@ package common.cout970.UltraTech.TileEntities.Tier1;
 
 import common.cout970.UltraTech.fluid.api.UT_Tank;
 import common.cout970.UltraTech.lib.recipes.Cooling_Recipes;
-import common.cout970.UltraTech.multiblocks.TileRefinery;
+import common.cout970.UltraTech.multiblocks.TileDestilery;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
@@ -10,11 +10,11 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 
-public class RefineryInEntity extends TileRefinery implements IFluidHandler{
+public class DestileryInEntity extends TileDestilery implements IFluidHandler{
 
 	public UT_Tank Gas;
 
-	public RefineryInEntity(){
+	public DestileryInEntity(){
 		super();
 		Gas = new UT_Tank(8000,this);
 	}
@@ -30,7 +30,7 @@ public class RefineryInEntity extends TileRefinery implements IFluidHandler{
 				int a1 = 0,a2 = 0,a3 = 0;
 				if(res[0]!= null){
 					boolean c = false;
-					for(RefineryOutEntity o : getMulti().getOut(0)){
+					for(DestileryOutEntity o : getMulti().getOut(0)){
 						if(o.getTank().getCapacity()-o.getTank().getFluidAmount() > res[0].amount){
 							c = true;
 						}
@@ -39,7 +39,7 @@ public class RefineryInEntity extends TileRefinery implements IFluidHandler{
 				}
 				if(res[1]!= null){
 					boolean c = false;
-					for(RefineryOutEntity o : getMulti().getOut(1)){
+					for(DestileryOutEntity o : getMulti().getOut(1)){
 						if(o.getTank().getCapacity()-o.getTank().getFluidAmount() > res[1].amount){
 							c = true;
 						}
@@ -48,7 +48,7 @@ public class RefineryInEntity extends TileRefinery implements IFluidHandler{
 				}
 				if(res[2]!= null){
 					boolean c = false;
-					for(RefineryOutEntity o : getMulti().getOut(2)){
+					for(DestileryOutEntity o : getMulti().getOut(2)){
 						if(o.getTank().getCapacity()-o.getTank().getFluidAmount() > res[2].amount){
 							c = true;
 						}

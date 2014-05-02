@@ -11,6 +11,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class MolecularAssemblyEntity extends Machine implements IInventory{
 
@@ -36,7 +37,7 @@ public class MolecularAssemblyEntity extends Machine implements IInventory{
 		if(progres > 0){
 			removeEnergy(EnergyCosts.FurnaceCost*speed/1000);
 		}
-		if (hasEnergy && hasrecipe){
+		if (hasEnergy && hasrecipe && (getStackInSlot(9) == null || OreDictionary.itemMatches(getStackInSlot(9), getStackInSlot(10), true))){
 			this.progres += speed;
 			if (this.progres >= 1000)
 			{

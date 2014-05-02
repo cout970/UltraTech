@@ -1,11 +1,9 @@
 package common.cout970.UltraTech.machines.containers;
 
 import common.cout970.UltraTech.energy.api.Machine;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
-import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
@@ -30,27 +28,6 @@ public Machine tileEntity;
 			addSlotToContainer(new Slot(inventoryPlayer, i, 8 + i * 18, 142));
 		}
 	}
-	
-	public void addCraftingToCrafters(ICrafting par1ICrafting)
-    {
-        super.addCraftingToCrafters(par1ICrafting);
-//        par1ICrafting.sendProgressBarUpdate(this, 1, (int)tileEntity.getEnergy());
-    }
-	
-	@Override
-	public void detectAndSendChanges() {
-		super.detectAndSendChanges();
-
-		for (int i = 0; i < crafters.size(); i++) {
-			tileEntity.sendGUINetworkData(this, (ICrafting) crafters.get(i));
-		}
-	}
-
-	@Override
-	public void updateProgressBar(int i, int j) {
-		tileEntity.getGUINetworkData(i, j);
-	}
-	
 	
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer player, int slot) {

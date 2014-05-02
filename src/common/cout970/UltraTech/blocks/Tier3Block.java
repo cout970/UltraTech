@@ -126,6 +126,9 @@ public class Tier3Block extends BlockContainer{
 		if(te instanceof ClimateEntity){
 			((ClimateEntity) te).restoneUpdate(w.isBlockIndirectlyGettingPowered(x, y, z));
 		}
+		if(te instanceof TesseractEntity){
+			TesseractEntity.tes.clear();
+		}
 	}
 
 	@Override

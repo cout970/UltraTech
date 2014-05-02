@@ -1,6 +1,6 @@
 package common.cout970.UltraTech.multiblocks;
 
-public interface IRefinery{
+public interface IDestilery{
 	
 	MultiBlock getMulti();
 	void setMulti(MultiBlock i);

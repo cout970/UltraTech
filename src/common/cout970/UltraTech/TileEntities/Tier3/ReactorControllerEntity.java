@@ -31,6 +31,15 @@ public class ReactorControllerEntity extends TileReactorPart{
 		}
 	}
 	
+	@Override
+	public void onNeighChange() {
+		super.onNeighChange();
+		if(!useHeat){
+			on = !worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord);
+			if(Reactor != null)Reactor.control = null;
+		}
+	}
+	
 	//Save and Load
 
 	@Override

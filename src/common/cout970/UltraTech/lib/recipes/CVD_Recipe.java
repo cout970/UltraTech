@@ -6,6 +6,7 @@ import java.util.List;
 import common.cout970.UltraTech.TileEntities.Tier1.CVD_Entity;
 import common.cout970.UltraTech.lib.UT_Utils;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class CVD_Recipe{
 
@@ -27,7 +28,7 @@ public class CVD_Recipe{
 				if(UT_Utils.areEcuals(a.getImput1(), inv.getStackInSlot(0),true) && UT_Utils.areEcuals(a.getImput2(), inv.getStackInSlot(1), true)){
 					if(inv.getStackInSlot(2) == null)	
 					return true;
-					if(inv.getStackInSlot(2).itemID == a.getOutput().itemID && inv.getInventoryStackLimit() >= inv.getStackInSlot(2).stackSize + a.getOutput().stackSize)
+					if(OreDictionary.itemMatches(inv.getStackInSlot(2), a.getOutput(),true) && inv.getInventoryStackLimit() >= inv.getStackInSlot(2).stackSize + a.getOutput().stackSize)
 					return true;
 				}
 			}

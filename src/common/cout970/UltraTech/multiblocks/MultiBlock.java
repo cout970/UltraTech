@@ -3,14 +3,14 @@ package common.cout970.UltraTech.multiblocks;
 import java.util.ArrayList;
 import java.util.List;
 
-import common.cout970.UltraTech.TileEntities.Tier1.RefineryInEntity;
-import common.cout970.UltraTech.TileEntities.Tier1.RefineryOutEntity;
+import common.cout970.UltraTech.TileEntities.Tier1.DestileryInEntity;
+import common.cout970.UltraTech.TileEntities.Tier1.DestileryOutEntity;
 
 public class MultiBlock {
 
-	public List<IRefinery> comp = new ArrayList<IRefinery>();
+	public List<IDestilery> comp = new ArrayList<IDestilery>();
 	
-	public static MultiBlock create(IRefinery base){
+	public static MultiBlock create(IDestilery base){
 		MultiBlock n = new MultiBlock();
 		n.comp.add(base);
 		return n;
@@ -18,27 +18,27 @@ public class MultiBlock {
 	
 	private MultiBlock(){}
 
-	public void addComponent(IRefinery ref) {
+	public void addComponent(IDestilery ref) {
 		comp.add(ref);
 		ref.setMulti(this);
 	}
 
-	public RefineryInEntity getIn() {
-		for(IRefinery ref : comp){
-			if(ref instanceof RefineryInEntity)return (RefineryInEntity) ref;
+	public DestileryInEntity getIn() {
+		for(IDestilery ref : comp){
+			if(ref instanceof DestileryInEntity)return (DestileryInEntity) ref;
 		}
 		return null;
 	}
 
 	public void mergeWith(MultiBlock s) {
-		for(IRefinery r : s.comp) if(!comp.contains(r))addComponent(r);
+		for(IDestilery r : s.comp) if(!comp.contains(r))addComponent(r);
 	}
 
-	public List<RefineryOutEntity> getOut(int i) {
-		List<RefineryOutEntity> f = new ArrayList<RefineryOutEntity>();
-		for(IRefinery ref : comp){
-			if(ref instanceof RefineryOutEntity){
-				if(((int)(ref.getHeight()/3))== i)f.add((RefineryOutEntity) ref);
+	public List<DestileryOutEntity> getOut(int i) {
+		List<DestileryOutEntity> f = new ArrayList<DestileryOutEntity>();
+		for(IDestilery ref : comp){
+			if(ref instanceof DestileryOutEntity){
+				if(((int)(ref.getHeight()/3))== i)f.add((DestileryOutEntity) ref);
 			}
 		}
 		return f;

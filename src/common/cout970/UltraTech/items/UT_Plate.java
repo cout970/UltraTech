@@ -3,7 +3,6 @@ package common.cout970.UltraTech.items;
 import java.util.List;
 
 import common.cout970.UltraTech.core.UltraTech;
-
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -24,7 +23,14 @@ public class UT_Plate extends Item{
 	private Icon itemIcon10;
 	private Icon itemIcon11;
 	private Icon itemIcon12;
+	public static String[] names = {"Aluminum Plate","Copper Plate","Tin Plate","Lead Plate","Silver Plate","Alloy Plate","Iron Plate","Gold Plate","Diamond Plate",
+		"Grafeno Plate","Silicon Plate","Redstone Plate","Radionite Plate"};
 
+	@Override
+	public String getUnlocalizedName(ItemStack itemstack) {
+		return getUnlocalizedName() + "." + names[itemstack.getItemDamage()];
+	}
+	
 	public UT_Plate(int par1) {
 		super(par1);
 		setHasSubtypes(true);
@@ -68,52 +74,6 @@ public class UT_Plate extends Item{
 		subItems.add(new ItemStack(this, 1, 12));
     }
 	
-	public String getItemDisplayName(ItemStack par1ItemStack)
-	{
-		switch(par1ItemStack.getItemDamage()){
-		case 0:{
-			return "Aluminum Plate";
-		}
-		case 1:{
-			return "Copper Plate";
-		}
-		case 2:{
-			return "Tin Plate";
-		}
-		case 3:{
-			return "Lead Plate";
-		}
-		case 4:{
-			return "Silver Plate";
-		}
-		case 5:{
-			return "Alloy Plate";
-		}
-		case 6:{
-			return "Iron Plate";
-		}
-		case 7:{
-			return "Gold Plate";
-		}
-		case 8:{
-			return "Diamond Plate";
-		}
-		case 9:{
-			return "Grafeno Plate";
-		}
-		case 10:{
-			return "Silicon Plate";
-		}
-		case 11:{
-			return "Redstone Plate";
-		}
-		case 12:{
-			return "Radionite Plate";
-		}
-		}
-		
-		return "Plate";
-	}
 	
 	public Icon getIconFromDamage(int par1)
     {

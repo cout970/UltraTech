@@ -9,6 +9,7 @@ import common.cout970.UltraTech.core.UltraTech;
 import common.cout970.UltraTech.energy.api.EnergyUtils;
 import common.cout970.UltraTech.energy.api.IItemEnergyEstorage;
 import common.cout970.UltraTech.energy.api.Machine;
+import common.cout970.UltraTech.proxy.ClientProxy;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.BlockContainer;
@@ -117,5 +118,21 @@ public class StorageBlock extends BlockContainer{
 	}
 	public void onBlockPreDestroy(World w, int x, int y, int z, int meta) {
 		EnergyUtils.onBlockPreDestroy(w, x, y, z, meta);
+	}
+	
+	public boolean isOpaqueCube()
+	{
+		return false;
+	}
+
+	public boolean renderAsNormalBlock()
+	{
+		return false;
+	}
+	
+	@SideOnly(Side.CLIENT)
+	@Override
+	public int getRenderType() {
+		return ClientProxy.batteryRenderPass;
 	}
 }

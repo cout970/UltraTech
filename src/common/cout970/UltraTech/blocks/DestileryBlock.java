@@ -2,12 +2,12 @@ package common.cout970.UltraTech.blocks;
 
 import java.util.List;
 
-import common.cout970.UltraTech.TileEntities.Tier1.RefineryEntity;
-import common.cout970.UltraTech.TileEntities.Tier1.RefineryInEntity;
-import common.cout970.UltraTech.TileEntities.Tier1.RefineryOutEntity;
+import common.cout970.UltraTech.TileEntities.Tier1.DestileryEntity;
+import common.cout970.UltraTech.TileEntities.Tier1.DestileryInEntity;
+import common.cout970.UltraTech.TileEntities.Tier1.DestileryOutEntity;
 import common.cout970.UltraTech.core.UltraTech;
-import common.cout970.UltraTech.multiblocks.IRefinery;
-import common.cout970.UltraTech.multiblocks.TileRefinery;
+import common.cout970.UltraTech.multiblocks.IDestilery;
+import common.cout970.UltraTech.multiblocks.TileDestilery;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.BlockContainer;
@@ -20,18 +20,18 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class RefineryBlock extends BlockContainer{
+public class DestileryBlock extends BlockContainer{
 
 	public Icon icons[];
 	public int numBlocks = 3;
 	
-	public RefineryBlock(int par1, Material par2Material) {
+	public DestileryBlock(int par1, Material par2Material) {
 		super(par1, par2Material);
 		setCreativeTab(UltraTech.techTab);
 		setStepSound(soundMetalFootstep);
 		setResistance(50);
 		setHardness(2.5f);
-		setUnlocalizedName("UT_RefineryBlock");
+		setUnlocalizedName("UT_Destilery");
 	}
 
 	@Override
@@ -59,8 +59,8 @@ public class RefineryBlock extends BlockContainer{
 	{
 		int meta = BA.getBlockMetadata(x, y, z);
 		TileEntity t = BA.getBlockTileEntity(x, y, z);
-		if(t instanceof IRefinery){
-				if(((IRefinery) t).isMulti()){
+		if(t instanceof IDestilery){
+				if(((IDestilery) t).isMulti()){
 					if(meta == 0)return icons[3];
 					if(meta == 1)return icons[4];
 					if(meta == 2)return icons[5];
@@ -72,15 +72,15 @@ public class RefineryBlock extends BlockContainer{
 
 	public void onNeighborBlockChange(World w, int x, int y, int z, int side){
 		TileEntity te = w.getBlockTileEntity(x, y, z);
-		if(te instanceof TileRefinery)((TileRefinery)te).update = false;
+		if(te instanceof TileDestilery)((TileDestilery)te).update = false;
 		w.markBlockForRenderUpdate(x, y, z);
 	}
 
 	@Override
 	public TileEntity createTileEntity(World world, int metadata) {
-		if(metadata == 0)return new RefineryEntity();
-		if(metadata == 1)return new RefineryInEntity();
-		if(metadata == 2)return new RefineryOutEntity();
+		if(metadata == 0)return new DestileryEntity();
+		if(metadata == 1)return new DestileryInEntity();
+		if(metadata == 2)return new DestileryOutEntity();
 		return null;
 	}
 	
@@ -108,10 +108,10 @@ public class RefineryBlock extends BlockContainer{
 	
 	@Override
 	public void onBlockAdded(World w, int x, int y, int z) {
-		((TileRefinery)w.getBlockTileEntity(x, y, z)).searchMulti();
+		((TileDestilery)w.getBlockTileEntity(x, y, z)).searchMulti();
 	}
 	public void onBlockPreDestroy(World w, int x, int y, int z, int meta) {
-		((TileRefinery)w.getBlockTileEntity(x, y, z)).DellMulti();
+		((TileDestilery)w.getBlockTileEntity(x, y, z)).DellMulti();
 	}
 
 }

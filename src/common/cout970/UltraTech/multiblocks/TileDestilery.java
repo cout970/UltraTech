@@ -1,6 +1,6 @@
 package common.cout970.UltraTech.multiblocks;
 
-import common.cout970.UltraTech.TileEntities.Tier1.RefineryInEntity;
+import common.cout970.UltraTech.TileEntities.Tier1.DestileryInEntity;
 import common.cout970.UltraTech.lib.UT_Utils;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.INetworkManager;
@@ -8,7 +8,7 @@ import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraft.tileentity.TileEntity;
 
-public class TileRefinery extends TileEntity implements IRefinery{
+public class TileDestilery extends TileEntity implements IDestilery{
 
 	public MultiBlock structure;
 	public boolean multi = false;
@@ -37,12 +37,12 @@ public class TileRefinery extends TileEntity implements IRefinery{
 	@Override
 	public boolean searchMulti(){
 		int height = 0;
-		if(this instanceof RefineryInEntity){
-			for(int h=0;h<8;h++)if(worldObj.getBlockTileEntity(xCoord, yCoord+h, zCoord) instanceof IRefinery)height++;
+		if(this instanceof DestileryInEntity){
+			for(int h=0;h<8;h++)if(worldObj.getBlockTileEntity(xCoord, yCoord+h, zCoord) instanceof IDestilery)height++;
 			else break;
 		}else{
-			for(int j=-8;j<8;j++)if(worldObj.getBlockTileEntity(xCoord, yCoord+j, zCoord) instanceof RefineryInEntity){
-				return ((RefineryInEntity) worldObj.getBlockTileEntity(xCoord, yCoord+j, zCoord)).searchMulti();
+			for(int j=-8;j<8;j++)if(worldObj.getBlockTileEntity(xCoord, yCoord+j, zCoord) instanceof DestileryInEntity){
+				return ((DestileryInEntity) worldObj.getBlockTileEntity(xCoord, yCoord+j, zCoord)).searchMulti();
 			}
 			return false;
 		}
@@ -50,7 +50,7 @@ public class TileRefinery extends TileEntity implements IRefinery{
 		if(height %2 != 0)return false;
 		
 		for(int h = 0;h<height;h++){
-			if(!(worldObj.getBlockTileEntity(xCoord, yCoord+h, zCoord)instanceof IRefinery)){
+			if(!(worldObj.getBlockTileEntity(xCoord, yCoord+h, zCoord)instanceof IDestilery)){
 				return false;
 			}
 		}
@@ -69,7 +69,7 @@ public class TileRefinery extends TileEntity implements IRefinery{
 	}
 	
 	public void prepareRefBlock(MultiBlock m, int i){
-		IRefinery ref = (IRefinery) worldObj.getBlockTileEntity(xCoord, yCoord+i, zCoord);
+		IDestilery ref = (IDestilery) worldObj.getBlockTileEntity(xCoord, yCoord+i, zCoord);
 		if(ref == null)return;
 		ref.setMulti(structure);
 		ref.setHeight(i);
@@ -79,18 +79,18 @@ public class TileRefinery extends TileEntity implements IRefinery{
 
 	@Override
 	public void DellMulti() {
-		if(this instanceof RefineryInEntity){
+		if(this instanceof DestileryInEntity){
 			for(int v=0;v<8;v++){
-				if(worldObj.getBlockTileEntity(xCoord, yCoord+v, zCoord) instanceof IRefinery){
-					IRefinery y = (IRefinery) worldObj.getBlockTileEntity(xCoord, yCoord+v, zCoord);
+				if(worldObj.getBlockTileEntity(xCoord, yCoord+v, zCoord) instanceof IDestilery){
+					IDestilery y = (IDestilery) worldObj.getBlockTileEntity(xCoord, yCoord+v, zCoord);
 					y.setMulti(null);
 					y.setHeight(-1);
-					if(y instanceof TileRefinery)((TileRefinery)y).update = false;
+					if(y instanceof TileDestilery)((TileDestilery)y).update = false;
 				}
 			}
 		}else if(structure != null)
-			for(IRefinery ref : structure.comp){
-				if(ref instanceof RefineryInEntity){
+			for(IDestilery ref : structure.comp){
+				if(ref instanceof DestileryInEntity){
 					ref.DellMulti();
 				}
 			}

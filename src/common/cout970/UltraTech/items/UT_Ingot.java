@@ -16,7 +16,13 @@ public class UT_Ingot extends Item{
 	private Icon itemIcon3;
 	private Icon itemIcon4;
 	private Icon itemIcon5;
+	public static String[] names = {"Aluminum Ingot","Copper Ingot","Tin Ingot","Lead Ingot","Silver Ingot","Alloy Ingot"};
 
+	@Override
+	public String getUnlocalizedName(ItemStack itemstack) {
+		return getUnlocalizedName() + "." + names[itemstack.getItemDamage()];
+	}
+	
 	public UT_Ingot(int par1) {
 		super(par1);
 		setHasSubtypes(true);
@@ -44,32 +50,7 @@ public class UT_Ingot extends Item{
 		subItems.add(new ItemStack(this, 1, 4));
 		subItems.add(new ItemStack(this, 1, 5));
     }
-	
-	public String getItemDisplayName(ItemStack par1ItemStack)
-	{
-		switch(par1ItemStack.getItemDamage()){
-		case 0:{
-			return "Aluminum Ingot";
-		}
-		case 1:{
-			return "Copper Ingot";
-		}
-		case 2:{
-			return "Tin Ingot";
-		}
-		case 3:{
-			return "Lead Ingot";
-		}
-		case 4:{
-			return "Silver Ingot";
-		}
-		case 5:{
-			return "Alloy Ingot";
-		}
-		}
-		
-		return "Ingot";
-	}
+
 	
 	public Icon getIconFromDamage(int par1)
     {
