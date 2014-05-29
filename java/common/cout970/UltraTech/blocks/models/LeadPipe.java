@@ -1,6 +1,7 @@
 package common.cout970.UltraTech.blocks.models;
 
 import common.cout970.UltraTech.TileEntities.Tier1.LeadPipeEntity;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.tileentity.TileEntity;
@@ -13,11 +14,11 @@ public class LeadPipe extends FluidPipeBlock{
 		setBlockName("LeadPipe");
 	}
 
-	public void registerIcons(IIconRegister iconRegister){
+	public void registerBlockIcons(IIconRegister iconRegister){
 		this.blockIcon = iconRegister.registerIcon("ultratech:leadpipe");
 	}
 
-	public void onNeighborBlockChange(World w, int x, int y, int z, int side){
+	public void onNeighborBlockChange(World w, int x, int y, int z, Block side){
 		LeadPipeEntity m = (LeadPipeEntity) w.getTileEntity(x, y, z);
 		if(m.getNetwork() != null)m.getNetwork().refresh();
 		m.tanks = null;

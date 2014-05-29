@@ -16,6 +16,7 @@ import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
@@ -104,10 +105,10 @@ public class RefineryBlock extends BlockContainer{
 	}
 	
 	@SuppressWarnings("unchecked")
-	public void getSubBlocks(int unknown, CreativeTabs tab, @SuppressWarnings("rawtypes") List subItems){
-			subItems.add(new ItemStack(this, 1, 0));
-			subItems.add(new ItemStack(this, 1, 1));
-			subItems.add(new ItemStack(this, 1, 4));
+	public void getSubBlocks(Item unknown, CreativeTabs tab, @SuppressWarnings("rawtypes") List subItems){
+		subItems.add(new ItemStack(this, 1, 0));
+		subItems.add(new ItemStack(this, 1, 1));
+		subItems.add(new ItemStack(this, 1, 4));
 	}
 
 	@Override

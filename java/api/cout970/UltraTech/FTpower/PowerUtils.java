@@ -1,5 +1,6 @@
 package api.cout970.UltraTech.FTpower;
 
+import api.cout970.UltraTech.fluids.UT_Tank;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 
@@ -25,7 +26,6 @@ public class PowerUtils {
 			double space = to.maxCharge()-to.getCharge();
 			double flow = Math.min(from.getFlow(), to.getFlow());
 			if(space > 0){
-				
 				if(from.getNetwork().canPowerGoToEnd(a,b)){
 					if(from.getCharge() > flow && space > flow){
 						from.removeCharge(flow);
@@ -46,8 +46,13 @@ public class PowerUtils {
 		return from.getWorldObj().getTileEntity(from.xCoord + d.offsetX, from.yCoord + d.offsetY, from.zCoord + d.offsetZ);
 	}
 
-	public static boolean canConnectTo(TileEntity tileEntity,
-			TileEntity tileEntity2) {
+	public static boolean canConnectTo(TileEntity a,
+			TileEntity b) {
+		if(a!=null && b!=null){
+			if(a instanceof IPowerConductor && b instanceof IPowerConductor){
+				return true;
+			}
+		}
 		return false;
 	}
 }

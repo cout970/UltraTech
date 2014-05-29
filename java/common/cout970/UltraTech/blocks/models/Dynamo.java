@@ -42,7 +42,7 @@ public class Dynamo extends BlockConductor{
 	}
 
 	public void registerBlockIcons(IIconRegister iconRegister){
-		this.blockIcon = iconRegister.registerIcon("ultratech:dynamo");
+		this.blockIcon = iconRegister.registerIcon("ultratech:chasis1");
 	}
 	
 	public boolean isOpaqueCube()

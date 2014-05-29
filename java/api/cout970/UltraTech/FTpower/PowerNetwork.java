@@ -58,7 +58,7 @@ public class PowerNetwork {
 	}
 	
 	public void onNetworkUpdate(){
-		
+		rutes.clear();
 	}
 	
 	public void mergeWith(PowerNetwork net){

@@ -145,7 +145,7 @@ public class UltraTech {
 		ItemManager.RegisterItems();
 		BlockManager.InitBlocks();
 		BlockManager.RegisterBlocks();
-		Language.setupLangFile();
+//		Language.setupLangFile(); for lag file only in debug
 		CompatibilityManager.initCompatibilitys();
 		CraftManager.registerCraft();
 		GameRegistry.registerWorldGenerator(new WorldGen(), 10);

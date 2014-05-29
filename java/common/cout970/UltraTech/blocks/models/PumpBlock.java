@@ -29,7 +29,7 @@ public class PumpBlock extends BlockConductor{
 	}
 	
 	public void registerBlockIcons(IIconRegister iconRegister){
-		this.blockIcon = iconRegister.registerIcon("ultratech:pump");
+		this.blockIcon = iconRegister.registerIcon("ultratech:chasis");
 	}
 	
 	public void onNeighborBlockChange(World w, int x, int y, int z, Block side){

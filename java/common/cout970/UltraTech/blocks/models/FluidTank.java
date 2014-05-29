@@ -26,7 +26,7 @@ public class FluidTank extends BlockContainer{
 		setBlockName("FluidTank");
 	}
 	
-	public void registerIcons(IIconRegister iconRegister){
+	public void registerBlockIcons(IIconRegister iconRegister){
 		this.blockIcon = iconRegister.registerIcon("ultratech:tank");
 	}
 	

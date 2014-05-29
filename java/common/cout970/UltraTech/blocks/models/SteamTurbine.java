@@ -44,7 +44,7 @@ public class SteamTurbine extends BlockConductor{
 	}
 
 	public void registerBlockIcons(IIconRegister iconRegister){
-		this.blockIcon = iconRegister.registerIcon("ultratech:turbine");
+		this.blockIcon = iconRegister.registerIcon("ultratech:chasis1");
 	}
 	
 	public boolean isOpaqueCube()

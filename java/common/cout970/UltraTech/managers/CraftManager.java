@@ -76,8 +76,9 @@ public class CraftManager {
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Destilery,2,1),new Object[]{"xix","ili","xix",'i',"plateCopper",'l',"plateIron"}));//refinery input
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Destilery,2,2),new Object[]{"xix","ili","xix",'i',"plateCopper",'l',"plateLead"}));//refinery output
 		
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Turbine,1),new Object[]{"xrx","iri","xrx",'x',"plateGrafeno",'i',Blocks.glass,'r',"plateIron"}));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(DiamondGlass,6),new Object[]{"xx","xx",'x',"plateDiamond"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Turbine,1),new Object[]{"xrx","iri","xrx",'x',"plateGrafeno",'i',Blocks.glass,'r',ItemName.get("Fan")}));//turbine
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(DiamondGlass,6),new Object[]{"xx","xx",'x',"plateDiamond"}));//diamond glass
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Pump,1),new Object[]{"xpx","ptp","mpt",'p',"plateIron",'t',AluminumPipe,'m',ItemName.get("Motor")}));
 		
 		//items
 		
@@ -97,6 +98,8 @@ public class CraftManager {
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(BlockManager.stoneblock,4,1),new Object[]{"ii","ii",'i',new ItemStack(BlockManager.stoneblock,4,0)}));//Deco block
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(BlockManager.stoneblock,4,3),new Object[]{"ii","ii",'i',new ItemStack(BlockManager.stoneblock,4,2)}));//Deco block
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("GrafenoPlate"),1),new Object[]{"iii","iii","iii",'i',"plateGrafeno"}));//plate grafeno
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("LasserSword"),1),new Object[]{"c","c","i",'i',"plateIron",'c',"plateAlloy_UT"}));//sword
+		
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Tank,1),new Object[]{"isi","sxs","isi",'i',"plateCopper",'s',"plateSilicon"}));//fluid tank
 		
 		Smelting();//furnace recipes

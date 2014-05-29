@@ -81,10 +81,10 @@ public class RF_Utils {
 				for(int k=-1;k<2;k++){
 					int meta = worldObj.getBlockMetadata(x+i, y+j, z+k);
 					if(meta == 1){
-						worldObj.setBlockMetadataWithNotify(x+i, y+j, z+k, 3, 2);
+						worldObj.setBlockMetadataWithNotify(x+i, y+j, z+k, 3, 3);
 						worldObj.markBlockForUpdate(x+i, y+j, z+k);
 					}else if(meta == 0){
-						worldObj.setBlockMetadataWithNotify(x+i, y+j, z+k, 5, 2);
+						worldObj.setBlockMetadataWithNotify(x+i, y+j, z+k, 5, 3);
 						worldObj.markBlockForUpdate(x+i, y+j, z+k);
 					}
 				}
@@ -100,7 +100,7 @@ public class RF_Utils {
 						((TileGag)worldObj.getTileEntity(x+i, y+j, z+k)).z = z;
 					}
 				}}}
-		worldObj.setBlockMetadataWithNotify(x, y+1, z, 2, 2);
+		worldObj.setBlockMetadataWithNotify(x, y+1, z, 2, 3);
 	}
 
 	public static int[] getCenter(World w, int x, int y, int z) {

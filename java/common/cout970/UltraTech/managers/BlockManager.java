@@ -234,78 +234,81 @@ public class BlockManager {
 		//Language
 
 		Language.addName(Cable, "Electric Cable");
-		LanguageRegistry.addName(new ItemStack(Reactor,1,0), "Reactor Core");
-		LanguageRegistry.addName(new ItemStack(Reactor,1,1), "Reactor Wall");
-		LanguageRegistry.addName(new ItemStack(Reactor,1,2), "Reactor Tank");
-		LanguageRegistry.addName(new ItemStack(Reactor,1,3), "Reactor Controller");
-		LanguageRegistry.addName(new ItemStack(Reactor,1,4), "Reactor Water Provider");
-		LanguageRegistry.addName(new ItemStack(Reactor,1,5), "Reactor Steam Extractor");
+		Language.addName(new ItemStack(Reactor,1,0), "Reactor Core");
+		Language.addName(new ItemStack(Reactor,1,1), "Reactor Wall");
+		Language.addName(new ItemStack(Reactor,1,2), "Reactor Tank");
+		Language.addName(new ItemStack(Reactor,1,3), "Reactor Controller");
+		Language.addName(new ItemStack(Reactor,1,4), "Reactor Water Provider");
+		Language.addName(new ItemStack(Reactor,1,5), "Reactor Steam Extractor");
 
-		LanguageRegistry.addName(new ItemStack(Ores,1,0), "Radionite Ore");
-		LanguageRegistry.addName(new ItemStack(Ores,1,1), "Aluminum Ore");
-		LanguageRegistry.addName(new ItemStack(Ores,1,2), "Copper Ore");
-		LanguageRegistry.addName(new ItemStack(Ores,1,3), "Tin Ore");
-		LanguageRegistry.addName(new ItemStack(Ores,1,4), "Lead Ore");
-		LanguageRegistry.addName(new ItemStack(Ores,1,5), "Silver Ore");
+		Language.addName(new ItemStack(Ores,1,0), "Radionite Ore");
+		Language.addName(new ItemStack(Ores,1,1), "Aluminum Ore");
+		Language.addName(new ItemStack(Ores,1,2), "Copper Ore");
+		Language.addName(new ItemStack(Ores,1,3), "Tin Ore");
+		Language.addName(new ItemStack(Ores,1,4), "Lead Ore");
+		Language.addName(new ItemStack(Ores,1,5), "Silver Ore");
 		
-		LanguageRegistry.addName(new ItemStack(Chasis,1,0), "Machine Chasis MK1");
-		LanguageRegistry.addName(new ItemStack(Chasis,1,1), "Machine Chasis MK2");
-		LanguageRegistry.addName(new ItemStack(Chasis,1,2), "Machine Chasis MK3");
+		Language.addName(new ItemStack(Chasis,1,0), "Machine Chasis MK1");
+		Language.addName(new ItemStack(Chasis,1,1), "Machine Chasis MK2");
+		Language.addName(new ItemStack(Chasis,1,2), "Machine Chasis MK3");
 		
-		LanguageRegistry.addName(new ItemStack(Tier1,1,0), "Crafter");
-		LanguageRegistry.addName(new ItemStack(Tier1,1,1), "Generator");
-		LanguageRegistry.addName(new ItemStack(Tier1,1,2), "CVD");
-		LanguageRegistry.addName(new ItemStack(Tier1,1,3), "Painter");
-		LanguageRegistry.addName(new ItemStack(Tier1,1,4), "Charge Station");
-		LanguageRegistry.addName(new ItemStack(Tier1,1,5), "Fermenter");
-		LanguageRegistry.addName(new ItemStack(Tier1,1,6), "Cooling block");
+		Language.addName(new ItemStack(Tier1,1,0), "Crafter");
+		Language.addName(new ItemStack(Tier1,1,1), "Generator");
+		Language.addName(new ItemStack(Tier1,1,2), "CVD");
+		Language.addName(new ItemStack(Tier1,1,3), "Painter");
+		Language.addName(new ItemStack(Tier1,1,4), "Charge Station");
+		Language.addName(new ItemStack(Tier1,1,5), "Fermenter");
+		Language.addName(new ItemStack(Tier1,1,6), "Cooling block");
 		
-		LanguageRegistry.addName(new ItemStack(Tier2,1,0), "Furnace");
-		LanguageRegistry.addName(new ItemStack(Tier2,1,1), "Purifier");
-		LanguageRegistry.addName(new ItemStack(Tier2,1,2), "Cutter");
-		LanguageRegistry.addName(new ItemStack(Tier2,1,3), "Pressurizer WIP");
-		LanguageRegistry.addName(new ItemStack(Tier2,1,4), "Fluid Firebox");
+		Language.addName(new ItemStack(Tier2,1,0), "Furnace");
+		Language.addName(new ItemStack(Tier2,1,1), "Purifier");
+		Language.addName(new ItemStack(Tier2,1,2), "Cutter");
+		Language.addName(new ItemStack(Tier2,1,3), "Pressurizer WIP");
+		Language.addName(new ItemStack(Tier2,1,4), "Fluid Firebox");
 		
-		LanguageRegistry.addName(new ItemStack(Tier3,1,0), "Miner");
-		LanguageRegistry.addName(new ItemStack(Tier3,1,1), "Hologram Emiter");
-		LanguageRegistry.addName(new ItemStack(Tier3,1,2), "Precision Crafter");
-		LanguageRegistry.addName(new ItemStack(Tier3,1,3), "Climate Station");
-		LanguageRegistry.addName(new ItemStack(Tier3,1,4), "Tesseract");
+		Language.addName(new ItemStack(Tier3,1,0), "Miner");
+		Language.addName(new ItemStack(Tier3,1,1), "Hologram Emiter");
+		Language.addName(new ItemStack(Tier3,1,2), "Precision Crafter");
+		Language.addName(new ItemStack(Tier3,1,3), "Climate Station");
+		Language.addName(new ItemStack(Tier3,1,4), "Tesseract");
 		
-		LanguageRegistry.addName(new ItemStack(Storage,1,0), "Battery Tier1");
-		LanguageRegistry.addName(new ItemStack(Storage,1,1), "Battery Tier2");
-		LanguageRegistry.addName(new ItemStack(Storage,1,2), "Battery Tier3");
+		Language.addName(new ItemStack(Storage,1,0), "Battery Tier1");
+		Language.addName(new ItemStack(Storage,1,1), "Battery Tier2");
+		Language.addName(new ItemStack(Storage,1,2), "Battery Tier3");
 		
-		LanguageRegistry.addName(new ItemStack(Destilery,1,0), "Destilery Block");
-		LanguageRegistry.addName(new ItemStack(Destilery,1,1), "Destilery Input");
-		LanguageRegistry.addName(new ItemStack(Destilery,1,2), "Destilery Output");
+		Language.addName(new ItemStack(Destilery,1,0), "Destilery Block");
+		Language.addName(new ItemStack(Destilery,1,1), "Destilery Input");
+		Language.addName(new ItemStack(Destilery,1,2), "Destilery Output");
 
-		LanguageRegistry.addName(new ItemStack(Refinery,1,0), "Refinery Base");
-		LanguageRegistry.addName(new ItemStack(Refinery,1,1), "Refinery Structure Block");
-		LanguageRegistry.addName(new ItemStack(Refinery,1,2), "Refinery Core");
-		LanguageRegistry.addName(new ItemStack(Refinery,1,3), "Refinery Structure Block");
-		LanguageRegistry.addName(new ItemStack(Refinery,1,4), "Refinery Output");
-		LanguageRegistry.addName(new ItemStack(Refinery,1,5), "Refinery Base");
+		Language.addName(new ItemStack(Refinery,1,0), "Refinery Base");
+		Language.addName(new ItemStack(Refinery,1,1), "Refinery Structure Block");
+		Language.addName(new ItemStack(Refinery,1,2), "Refinery Core");
+		Language.addName(new ItemStack(Refinery,1,3), "Refinery Structure Block");
+		Language.addName(new ItemStack(Refinery,1,4), "Refinery Output");
+		Language.addName(new ItemStack(Refinery,1,5), "Refinery Base");
 		
-		LanguageRegistry.addName(new ItemStack(Misc,1,0), "Radionite Block");
-		LanguageRegistry.addName(new ItemStack(Misc,1,1), "Grafeno Block");
+		Language.addName(new ItemStack(Misc,1,0), "Radionite Block");
+		Language.addName(new ItemStack(Misc,1,1), "Grafeno Block");
 		
-		LanguageRegistry.addName(new ItemStack(Cable,1,0), "Electric Cable");
+		Language.addName(new ItemStack(Cable,1,0), "Electric Cable");
 
-		LanguageRegistry.addName(DiamondGlass, "Diamond Glass");
-		LanguageRegistry.addName(CovedGlass, "Coved Glass");
+		Language.addName(DiamondGlass, "Diamond Glass");
+		Language.addName(CovedGlass, "Coved Glass");
 		
-		LanguageRegistry.addName(AluminumPipe, "Aluminum Pipe");
-		LanguageRegistry.addName(CopperPipe, "Copper Pipe");
-		LanguageRegistry.addName(LeadPipe, "Lead Pipe");
+		Language.addName(AluminumPipe, "Aluminum Pipe");
+		Language.addName(CopperPipe, "Copper Pipe");
+		Language.addName(LeadPipe, "Lead Pipe");
 		
-		LanguageRegistry.addName(SolarPanel, "Solar Panel");
-		LanguageRegistry.addName(WindMill, "Wind Mill");
-		LanguageRegistry.addName(Engine, "Engine");
-//		LanguageRegistry.addName(Transformer, "Transformer");
-		LanguageRegistry.addName(Boiler, "Boiler");
-		LanguageRegistry.addName(Tank, "Tank");
-		LanguageRegistry.addName(Turbine, "Steam Turbine");
+		Language.addName(SolarPanel, "Solar Panel");
+		Language.addName(WindMill, "Wind Mill");
+		Language.addName(Engine, "Engine");
+
+		Language.addName(Boiler, "Boiler");
+		Language.addName(Tank, "Tank");
+		Language.addName(Turbine, "Steam Turbine");
+		Language.addName(Pump, "Pump");
+		Language.addName(Dynamo, "FT Dynamo");
+		Language.addName(MultiTank, "Multitank");
 
 	}
 
