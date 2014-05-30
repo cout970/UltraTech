@@ -17,11 +17,14 @@ import common.cout970.UltraTech.blocks.models.RefineryBlock;
 import common.cout970.UltraTech.blocks.models.SteamTurbine;
 import common.cout970.UltraTech.blocks.models.WindMill;
 import common.cout970.UltraTech.itemBlock.*;
+import common.cout970.UltraTech.microparts.ItemCableMultipart;
+import common.cout970.UltraTech.microparts.MicroRegistry;
 import common.cout970.UltraTech.multiblocks.refinery.BaseRef;
 import common.cout970.UltraTech.multiblocks.refinery.CoreRefinery;
 import common.cout970.UltraTech.multiblocks.refinery.OutRef;
 import common.cout970.UltraTech.multiblocks.refinery.TileGag;
 import common.cout970.UltraTech.proxy.Language;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraft.block.Block;
@@ -31,7 +34,6 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 
 public class BlockManager {
-
 
 	//blocks	
 	public static List<UT_Block> deco = new ArrayList<UT_Block>();
@@ -48,7 +50,6 @@ public class BlockManager {
 	public static  Block Tier3;
 	public static  Block Misc;
 	public static  Block Storage;
-	public static  Block Cable;
 	public static  Block DiamondGlass;
 	public static  Block CovedGlass;
 	public static  Block AluminumPipe;
@@ -62,7 +63,7 @@ public class BlockManager {
 	public static  Block Dynamo;
 	public static  Block MultiTank;
 	public static  Block Pump;
-	
+
 	//fluid
 	public static Fluid Steam;
 	public static Fluid Juice;
@@ -86,7 +87,6 @@ public class BlockManager {
 		Tier3 = new Tier3Block(Material.iron);
 		Misc = new MiscBlock(Material.rock);
 		Storage = new StorageBlock(Material.iron);
-		Cable = new CableBlock(Material.circuits);
 		DiamondGlass = new DiamondGlass(Material.glass,false);	
 		CovedGlass = new CovedGlass(Material.glass,false);
 		AluminumPipe = new common.cout970.UltraTech.blocks.models.AluminumPipe(Material.iron);
@@ -156,7 +156,7 @@ public class BlockManager {
 		GameRegistry.registerBlock(Tier2, UT_ItemBlockTier2.class ,"Tier2_UT");
 		GameRegistry.registerBlock(Tier3, UT_ItemBlockTier3.class ,"Tier3_UT");
 		GameRegistry.registerBlock(Storage, UT_ItemBlockStorage.class ,"Storage_UT");
-		GameRegistry.registerBlock(Cable, UT_ItemBlockCable.class ,"Cable_UT");
+//		GameRegistry.registerBlock(Cable, UT_ItemBlockCable.class ,"Cable_UT");
 		GameRegistry.registerBlock(Reactor, UT_ItemBlockReactor.class, "ReactorMultiblock");
 		GameRegistry.registerBlock(Misc, UT_ItemBlockMisc.class, "Misc_UT");
 		GameRegistry.registerBlock(Destilery, UT_ItemBlockDestilery.class, "Destilery_UT");
@@ -233,7 +233,6 @@ public class BlockManager {
 	public static void nameBlocks(){
 		//Language
 
-		Language.addName(Cable, "Electric Cable");
 		Language.addName(new ItemStack(Reactor,1,0), "Reactor Core");
 		Language.addName(new ItemStack(Reactor,1,1), "Reactor Wall");
 		Language.addName(new ItemStack(Reactor,1,2), "Reactor Tank");
@@ -289,8 +288,6 @@ public class BlockManager {
 		
 		Language.addName(new ItemStack(Misc,1,0), "Radionite Block");
 		Language.addName(new ItemStack(Misc,1,1), "Grafeno Block");
-		
-		Language.addName(new ItemStack(Cable,1,0), "Electric Cable");
 
 		Language.addName(DiamondGlass, "Diamond Glass");
 		Language.addName(CovedGlass, "Coved Glass");

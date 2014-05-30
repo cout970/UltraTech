@@ -48,10 +48,10 @@ public class ItemPower extends Item implements IStorageItem{
 	
 	@SuppressWarnings("unchecked")
 	public void getSubItems(Item unknown, CreativeTabs tab, @SuppressWarnings("rawtypes") List subItems){
-		ItemStack a = new ItemStack(this, 1, 0);	
+		ItemStack a = new ItemStack(this, 1, this.getMaxDamage());	
 		((IStorageItem)a.getItem()).addPower(a, MaxPower);
 		subItems.add(a);
-		subItems.add(new ItemStack(this, 1, this.getMaxDamage()));
+		subItems.add(new ItemStack(this, 1, 0));
 	}
 
 	//power

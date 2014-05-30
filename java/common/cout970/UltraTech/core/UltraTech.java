@@ -15,6 +15,7 @@ import common.cout970.UltraTech.managers.CompatibilityManager;
 import common.cout970.UltraTech.managers.ConfigManager;
 import common.cout970.UltraTech.managers.CraftManager;
 import common.cout970.UltraTech.managers.ItemManager;
+import common.cout970.UltraTech.microparts.MicroRegistry;
 import common.cout970.UltraTech.packets.PacketClimateStation;
 import common.cout970.UltraTech.packets.PacketController;
 import common.cout970.UltraTech.packets.PacketCrafter;
@@ -25,6 +26,7 @@ import common.cout970.UltraTech.proxy.Language;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.SidedProxy;
@@ -145,6 +147,9 @@ public class UltraTech {
 		ItemManager.RegisterItems();
 		BlockManager.InitBlocks();
 		BlockManager.RegisterBlocks();
+		if (Loader.isModLoaded("ForgeMultipart")) {
+            new MicroRegistry().load();
+        }
 //		Language.setupLangFile(); for lag file only in debug
 		CompatibilityManager.initCompatibilitys();
 		CraftManager.registerCraft();

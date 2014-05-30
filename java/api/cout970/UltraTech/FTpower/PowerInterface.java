@@ -1,9 +1,13 @@
 package api.cout970.UltraTech.FTpower;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
+import codechicken.lib.vec.Cuboid6;
 import common.cout970.UltraTech.TileEntities.Tier2.PumpEntity;
-
+import common.cout970.UltraTech.lib.UT_Utils;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -16,7 +20,7 @@ import net.minecraftforge.common.util.ForgeDirection;
  */
 public class PowerInterface implements IPower{
 	
-	public int conections = 0;
+	private Map<ForgeDirection, Boolean> connections = new HashMap<ForgeDirection, Boolean>();
     private TileEntity Parent; //machine
     private PowerNetwork net; //machines conected
     
@@ -74,8 +78,21 @@ public class PowerInterface implements IPower{
     	net.onNetworkUpdate();
     }
 
-    public void reconect(){
-    	
+    public void reconect(TileEntity tileEntity){
+    	connections.clear();
+    	for(ForgeDirection d:ForgeDirection.VALID_DIRECTIONS){
+    		TileEntity t = UT_Utils.getRelative(tileEntity, d);
+    		if(t instanceof IPowerConductor){
+    			PowerInterface i =((IPowerConductor) t).getPower();
+    			if(Arrays.asList(i.getConnectableSides()).contains(d.getOpposite())){
+    				connections.put(d, true);
+    			}else{
+    				connections.put(d, false);
+    			}
+    		}else{
+    			connections.put(d, false);
+    		}
+    	}
     }
 
 	@Override
@@ -100,5 +117,9 @@ public class PowerInterface implements IPower{
 	@Override
 	public double getFlow() {
 		return 0;
+	}
+
+	public Map<ForgeDirection, Boolean> getConections() {
+		return connections;
 	}
 }

@@ -4,7 +4,6 @@ import org.lwjgl.opengl.GL11;
 
 import common.cout970.UltraTech.TileEntities.Tier2.DynamoEntity;
 import common.cout970.UltraTech.lib.RenderUtil;
-import common.cout970.UltraTech.models.ModelCable;
 import common.cout970.UltraTech.models.ModelDynamo;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.Entity;

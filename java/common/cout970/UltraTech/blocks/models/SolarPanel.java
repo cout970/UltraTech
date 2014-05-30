@@ -22,7 +22,7 @@ public class SolarPanel extends BlockConductor{
 		setStepSound(soundTypeMetal);
 		setResistance(20);
 		setBlockName("SolarPanel");
-		setBlockBounds(0f, 0.375f, 0f, 1f, 0.625f, 1f);
+		setBlockBounds(0f, 0f, 0f, 1f, 0.250f, 1f);
 	}
 
 	@Override

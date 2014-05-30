@@ -6,7 +6,6 @@ import common.cout970.UltraTech.TileEntities.Tier1.StorageTier1;
 import common.cout970.UltraTech.TileEntities.Tier2.StorageTier2;
 import common.cout970.UltraTech.TileEntities.Tier3.StorageTier3;
 import common.cout970.UltraTech.models.ModelBattery;
-import common.cout970.UltraTech.models.ModelCable;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
@@ -15,12 +14,12 @@ import net.minecraft.util.ResourceLocation;
 public class RenderBattery extends TileEntitySpecialRenderer{
 
 	private ModelBattery model;
-	private ModelCable cable;
+//	private ModelCable cable;
 	
 	public RenderBattery(){
 		super();
 		model = new ModelBattery();
-		cable = new ModelCable();
+//		cable = new ModelCable();
 	}
 	
 	@Override
@@ -36,7 +35,7 @@ public class RenderBattery extends TileEntitySpecialRenderer{
 		
 		if(te != null){
 		bindTexture(new ResourceLocation("ultratech:textures/misc/cable/cable.png"));
-		cable.renderModel(0.0625f, te.getWorldObj(), te.xCoord, te.yCoord, te.zCoord);
+//		cable.renderModel(0.0625f, te.getWorldObj(), te.xCoord, te.yCoord, te.zCoord);
 		}
 		GL11.glPopMatrix();
 	}
