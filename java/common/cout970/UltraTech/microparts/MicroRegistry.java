@@ -5,27 +5,40 @@ import net.minecraftforge.client.MinecraftForgeClient;
 import codechicken.multipart.MultiPartRegistry;
 import codechicken.multipart.MultiPartRegistry.IPartFactory;
 import codechicken.multipart.TMultiPart;
-
 import common.cout970.UltraTech.machines.renders.items.RenderPumpItem;
 import common.cout970.UltraTech.managers.BlockManager;
-
 import cpw.mods.fml.common.registry.GameRegistry;
 
-public class MicroRegistry implements IPartFactory{
+public class MicroRegistry{
 
 	//micro
-	public static Item Cable;
+	public static Item PlaneCable;
+	public static Item BigCable;
 
 	public void load(){
-		MicroRegistry.Cable = new ItemCableMultipart();
-		GameRegistry.registerItem(Cable, "UT_Cable");
-		MultiPartRegistry.registerParts(this, new String[]{MicroRegistry.Cable.getUnlocalizedName()});
-		MinecraftForgeClient.registerItemRenderer(Cable, new RenderCableItem());
+		MicroRegistry.PlaneCable = new ItemPlaneCableMultipart();
+		GameRegistry.registerItem(PlaneCable, "UT_Cable_Plane");
+		MultiPartRegistry.registerParts(new PlaneCable(), new String[]{MicroRegistry.PlaneCable.getUnlocalizedName()});
+		MinecraftForgeClient.registerItemRenderer(PlaneCable, new RenderCablePlaneItem());
+		
+		MicroRegistry.BigCable = new ItemBigCableMultipart();
+		GameRegistry.registerItem(BigCable, "UT_Cable_Big");
+		MultiPartRegistry.registerParts(new BigCable(), new String[]{MicroRegistry.BigCable.getUnlocalizedName()});
+		MinecraftForgeClient.registerItemRenderer(BigCable, new RenderCableBigItem());
 	}
 	
-	@Override
-	public TMultiPart createPart(String arg0, boolean arg1) {
-		return new MicroCable();
+	
+	public class PlaneCable implements IPartFactory{
+		@Override
+		public TMultiPart createPart(String arg0, boolean arg1) {
+			return new MicroCablePlane();
+		}		
 	}
-
+	
+	public class BigCable implements IPartFactory{
+		@Override
+		public TMultiPart createPart(String arg0, boolean arg1) {
+			return new MicroCableBig();
+		}		
+	}
 }

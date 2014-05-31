@@ -16,8 +16,10 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import org.lwjgl.opengl.GL11;
 
+import api.cout970.UltraTech.FTpower.ConnType;
 import api.cout970.UltraTech.FTpower.IPowerConductor;
 import api.cout970.UltraTech.FTpower.PowerInterface;
+import api.cout970.UltraTech.FTpower.PowerUtils;
 import codechicken.lib.raytracer.IndexedCuboid6;
 import codechicken.lib.render.RenderUtils;
 import codechicken.lib.vec.Cuboid6;
@@ -28,14 +30,15 @@ import codechicken.multipart.NormallyOccludedPart;
 import codechicken.multipart.PartMap;
 import codechicken.multipart.TFacePart;
 import codechicken.multipart.TMultiPart;
+import codechicken.multipart.TSlottedPart;
 import codechicken.multipart.TileMultipart;
 import common.cout970.UltraTech.lib.RenderUtil;
 import common.cout970.UltraTech.lib.UT_Utils;
 
-public class MicroCable extends TMultiPart implements IPowerConductor, JNormalOcclusion, TFacePart{
+public class MicroCablePlane extends TMultiPart implements IPowerConductor, JNormalOcclusion, TFacePart{
 
 	public PowerInterface cond = null;
-	private Map<ForgeDirection,Boolean> conn = new HashMap<ForgeDirection,Boolean>();
+	public Map<ForgeDirection,Boolean> conn = new HashMap<ForgeDirection,Boolean>();
 
 	//boxes
 	private static Cuboid6[]boundingBoxes = new Cuboid6[6];
@@ -55,9 +58,9 @@ public class MicroCable extends TMultiPart implements IPowerConductor, JNormalOc
 		ArrayList<Cuboid6> t2 = new ArrayList<Cuboid6>();
 		t2.add(boundingBoxes[0]);
 		for(int i=2; i<6; i++){
-				if(isConnectedOnSide(ForgeDirection.getOrientation(i))){
-					t2.add(boundingBoxes[i]);
-				}
+			if(isConnectedOnSide(ForgeDirection.getOrientation(i))){
+				t2.add(boundingBoxes[i]);
+			}
 		}
 		return t2;
 	}
@@ -84,46 +87,51 @@ public class MicroCable extends TMultiPart implements IPowerConductor, JNormalOc
 		return Arrays.asList(new Cuboid6[] { boundingBoxes[0] });
 	}
 
-	private boolean isConnectedOnSide(ForgeDirection o) {
+	boolean isConnectedOnSide(ForgeDirection o) {
 		return conn.containsKey(o) && conn.get(o);
 	}
 	
 	public void updateConnections(){
-		if(tile() == null)return ;
+		if(tile() == null)return;
+		if(!tile().getWorldObj().isRemote)if(tile().getWorldObj().getBlock(x(), y()-1, z()) == null || !tile().getWorldObj().getBlock(x(), y()-1, z()).isBlockSolid(tile().getWorldObj(), x(), y()-1, z(), 0)){
+			this.tile().dropItems(this.getDrops());
+			try{
+			this.tile().remPart(this);
+			}catch(Exception e){}
+			return;
+		}
 		conn.clear();
-		for(ForgeDirection o : ForgeDirection.VALID_DIRECTIONS){
-			boolean a = tile().canAddPart(new NormallyOccludedPart(boundingBoxes[o.ordinal()]));
+		for(int i=2;i<6;i++){
+			boolean a = tile().canAddPart(new NormallyOccludedPart(boundingBoxes[i]));
 			boolean b = false;
-			TileEntity tile = UT_Utils.getRelative(tile(), o);
-			if(tile instanceof IPowerConductor){
-				b = true;
-			}else{
-				if(tile instanceof TileMultipart){
-					TileMultipart m = (TileMultipart) tile;
-					for(TMultiPart g : m.jPartList()){
-						if(g instanceof MicroCable){
-							if(((MicroCable) g).isConnectedOnSide(o.getOpposite()))b = true;
-						}
-					}
-				}
-			}
-			conn.put(o, a && b);
+			TileEntity tile = UT_Utils.getRelative(tile(), ForgeDirection.getOrientation(i));
+			if(PowerUtils.canConect(this,tile,ForgeDirection.getOrientation(i)))b = true;
+			conn.put(ForgeDirection.getOrientation(i), a && b);
 		}
 	}
 
 	//tipe
 	@Override
 	public String getType() {
-		return MicroRegistry.Cable.getUnlocalizedName();
+		return MicroRegistry.PlaneCable.getUnlocalizedName();
 	}
 
 	//energy
 	@Override
 	public PowerInterface getPower() {
-		if(cond == null)cond = new PowerInterface(tile()){
-			public ForgeDirection[] getConnectableSides(){
-			return new ForgeDirection[]{ForgeDirection.DOWN,ForgeDirection.EAST,ForgeDirection.NORTH,ForgeDirection.SOUTH,ForgeDirection.WEST};}
-		};
+		if(cond == null){
+			cond = new PowerInterface(tile()){
+				public ForgeDirection[] getConnectableSides(){
+					return new ForgeDirection[]{ForgeDirection.DOWN,ForgeDirection.EAST,ForgeDirection.NORTH,ForgeDirection.SOUTH,ForgeDirection.WEST};
+				}
+				
+				public ConnType getConnectionType(ForgeDirection side){
+					if(side == ForgeDirection.UP)return ConnType.NOTHING;
+					return ConnType.SMALL_CABLE;
+				}
+			};
+			
+		}
 		return cond;
 	}
 
@@ -167,34 +175,33 @@ public class MicroCable extends TMultiPart implements IPowerConductor, JNormalOc
 	@Override
 	public Iterable<ItemStack> getDrops() {
 		LinkedList<ItemStack> items = new LinkedList<ItemStack>();
-		items.add(new ItemStack(MicroRegistry.Cable));
+		items.add(new ItemStack(MicroRegistry.PlaneCable));
 		return items;
 	}
 
 	@Override
 	public ItemStack pickItem(MovingObjectPosition hit) {
 
-		return new ItemStack(MicroRegistry.Cable);
+		return new ItemStack(MicroRegistry.PlaneCable);
 	}
 
 	@Override
 	public float getStrength(MovingObjectPosition hit, EntityPlayer player) {
 
-		return 2;
+		return 1f;
 	}
 
 	//render
 
-	private RenderCable render;
+	private RenderCablePlane render;
 
 	@Override
 	public void renderDynamic(Vector3 pos, float frame, int pass) {
 		if (pass == 0) {
-			if (render == null) render = new RenderCable();
+			if (render == null) render = new RenderCablePlane();
 			render.render(this, pos);
 		}
 	}
-	//cover
 
 	@Override
 	public int redstoneConductionMap() {

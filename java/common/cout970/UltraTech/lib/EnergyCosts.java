@@ -19,7 +19,7 @@ public class EnergyCosts {
 	
 	//production
 	public static final float SolarPanelProduct = 0.4f*k;
-	public static final float SteamTurbineProduct = 12.8f*k;//80 steam = 12.8FT/t
+	public static final float SteamTurbineProduct = 1.6f*k;//80 steam = 12.8FT/t
 	public static final float WindMillProduct = 2.5f*k;
 	public static final   int Engine_MJ_Produced = 4;
 	public static final   int FluidGenGast = 10;

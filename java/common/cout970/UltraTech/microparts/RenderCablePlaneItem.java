@@ -11,13 +11,13 @@ import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.IItemRenderer.ItemRenderType;
 import net.minecraftforge.client.IItemRenderer.ItemRendererHelper;
 
-public class RenderCableItem implements IItemRenderer {
+public class RenderCablePlaneItem implements IItemRenderer {
 
 	private ModelCable model;
-	private ResourceLocation texture = new ResourceLocation("ultratech:textures/misc/modelcable.png");
+	private ResourceLocation texture = new ResourceLocation("ultratech:textures/misc/planecable.png");
 	
 
-	public RenderCableItem() {
+	public RenderCablePlaneItem() {
 		this.model = new ModelCable();
 	}
 	
@@ -40,7 +40,7 @@ public class RenderCableItem implements IItemRenderer {
                 return;
             }
             case EQUIPPED: {
-                render(0.5F, 0.0F, 0.5F, 1.0F,false);
+                render(0.5F, 0.5F, 0.5F, 1.0F,false);
                 return;
             }
             case INVENTORY: {

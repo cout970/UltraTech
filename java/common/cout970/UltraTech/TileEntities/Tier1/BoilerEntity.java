@@ -1,5 +1,6 @@
 package common.cout970.UltraTech.TileEntities.Tier1;
 
+import api.cout970.UltraTech.FTpower.ConnType;
 import api.cout970.UltraTech.FTpower.IPowerConductor;
 import api.cout970.UltraTech.FTpower.Machine;
 import api.cout970.UltraTech.FTpower.PowerInterface;
@@ -21,7 +22,7 @@ import common.cout970.UltraTech.lib.recipes.Boiler_Recipes;
 public class BoilerEntity extends Machine implements IFluidHandler{
 
 	public BoilerEntity() {
-		super(2400, 2, MachineTipe.Nothing);
+		super(2400, 2, MachineTipe.Nothing,true);
 	}
 
 	public UT_Tank result;
@@ -145,4 +146,7 @@ public class BoilerEntity extends Machine implements IFluidHandler{
 			if(id == 6)result.setFluid(new FluidStack(value, 1));
 		}
 
+		public ConnType getConection(ForgeDirection side) {
+			return ConnType.ONLY_BIG;
+		}
 }

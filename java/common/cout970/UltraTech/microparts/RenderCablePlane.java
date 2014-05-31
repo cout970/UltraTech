@@ -11,17 +11,17 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class RenderCable{
+public class RenderCablePlane{
 
 	private ModelCable model;
 	
-	public RenderCable(){
+	public RenderCablePlane(){
 		model = new ModelCable();
 	}
-	public void render(MicroCable mc, Vector3 pos) {
+	public void render(MicroCablePlane mc, Vector3 pos) {
 		GL11.glPushMatrix();
 		GL11.glTranslatef((float) pos.x + 0.5F, (float) pos.y + 1.5F, (float) pos.z + 0.5F);
-		RenderUtil.bindTexture(new ResourceLocation("ultratech:textures/misc/modelcable.png"));
+		RenderUtil.bindTexture(new ResourceLocation("ultratech:textures/misc/planecable.png"));
 		GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
 		if(model == null)model = new ModelCable();
 		model.render(mc, pos, 0.0625F);

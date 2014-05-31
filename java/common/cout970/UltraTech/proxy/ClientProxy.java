@@ -46,7 +46,7 @@ import common.cout970.UltraTech.machines.renders.items.RenderTurbineItem;
 import common.cout970.UltraTech.machines.renders.items.RenderWindMillItem;
 import common.cout970.UltraTech.managers.BlockManager;
 import common.cout970.UltraTech.managers.ItemManager;
-import common.cout970.UltraTech.microparts.RenderCable;
+import common.cout970.UltraTech.microparts.RenderCablePlane;
 import common.cout970.UltraTech.multiblocks.refinery.CoreRefinery;
 import common.cout970.UltraTech.multiblocks.refinery.RenderRefinery;
 import cpw.mods.fml.client.registry.ClientRegistry;

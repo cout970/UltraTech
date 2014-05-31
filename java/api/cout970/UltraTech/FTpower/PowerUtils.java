@@ -1,5 +1,9 @@
 package api.cout970.UltraTech.FTpower;
 
+import codechicken.multipart.TMultiPart;
+import codechicken.multipart.TileMultipart;
+import common.cout970.UltraTech.microparts.MicroCableBig;
+import common.cout970.UltraTech.microparts.MicroCablePlane;
 import api.cout970.UltraTech.fluids.UT_Tank;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -54,5 +58,34 @@ public class PowerUtils {
 			}
 		}
 		return false;
+	}
+
+	public static boolean isConductor(TileEntity tile) {
+		if(tile == null)return false;
+		if(tile instanceof IPowerConductor){
+			return true;
+		}
+		return false;
+	}
+
+	public static boolean canConect(TMultiPart mc, TileEntity tile, ForgeDirection side) {
+		if(tile == null || mc == null)return false;
+		if(isConductor(tile)){
+			if(((IPowerConductor) tile).getPower().isConnectableSide(side.getOpposite(), ((IPowerConductor) mc).getPower().getConnectionType(side)))
+			if (areConectables(((IPowerConductor) mc),((IPowerConductor) tile), side))return true;
+		}else{
+			if(tile instanceof TileMultipart){
+				TileMultipart m = (TileMultipart) tile;
+				for(TMultiPart g : m.jPartList()){
+					if(g instanceof MicroCablePlane && mc instanceof MicroCablePlane)return true;
+					if(g instanceof MicroCableBig && mc instanceof MicroCableBig)return true;
+				}
+			}
+		}
+		return false;
+	}
+	
+	public static boolean areConectables(IPowerConductor a , IPowerConductor b, ForgeDirection side){
+		return ConnType.isCompatible(a.getPower().getConnectionType(side.getOpposite()), b.getPower().getConnectionType(side));
 	}
 }

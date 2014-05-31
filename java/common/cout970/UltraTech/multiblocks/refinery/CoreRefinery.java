@@ -18,20 +18,19 @@ public class CoreRefinery extends TileGag{
 	public List<OutRef> out = new ArrayList<OutRef>();
 	public List<TileGag> MultiBlock;
 	public UT_Tank input;
-	public UT_Tank[] output;
+	public UT_Tank[] output = new UT_Tank[3];
 	
 	public void updateEntity(){
 		super.updateEntity();
 		if(worldObj.isRemote)return;
-		System.out.println("Working");
 		if(MultiBlock == null){
 			MultiBlock = new ArrayList<TileGag>();
 			in.clear();
 			out.clear();
-			for(int k=-zCoord;k<3-zCoord;k++){
+			for(int k=-1;k<2;k++){
 				for(int j=-1;j<7;j++){
-					for(int i=-xCoord;i<3-xCoord;i++){
-						TileEntity t = worldObj.getTileEntity(x+i, y+j, z+k);
+					for(int i=-1;i<2;i++){
+						TileEntity t = worldObj.getTileEntity(i+xCoord, j+yCoord, k+zCoord);
 						if(t instanceof TileGag){MultiBlock.add((TileGag) t);
 							if(t instanceof BaseRef){in.add((BaseRef) t);}
 							if(t instanceof OutRef){out.add((OutRef) t);
@@ -42,6 +41,7 @@ public class CoreRefinery extends TileGag{
 				}
 			}
 		}
+		
 		int ini = Cooling_Recipes.getInit(getTank().getFluid());
 		FluidStack[] res = Cooling_Recipes.getResult(getTank().getFluid());
 		if(ini != 0 && res != null){
@@ -49,11 +49,14 @@ public class CoreRefinery extends TileGag{
 			boolean[] a = new boolean[3];
 			for(int i=0;i<3;i++){
 				if(res[i]!= null){
-					if(getTank(i).getCapacity()-getTank(i).getFluidAmount() >= res[i].amount){
-						a[i] = true;
+					if((getTank(i).getCapacity()-getTank(i).getFluidAmount()) >= res[i].amount){
+						a[i] = true;					
 					}
+				}else{
+					a[i]= true;
 				}
 			}
+			
 			//all good
 			if(a[0] && a[1] && a[2]){
 				FluidStack g = getTank().drain(ini, true);
@@ -72,7 +75,8 @@ public class CoreRefinery extends TileGag{
 		return input;
 	}
 	public UT_Tank getTank(int level) {
-		if(output[level] == null)output[level] = new UT_Tank(8000, this);
+		if(output[level] == null)
+			output[level] = new UT_Tank(8000, this);
 		return output[level];
 	}
 	

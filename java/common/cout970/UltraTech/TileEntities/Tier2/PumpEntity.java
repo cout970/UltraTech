@@ -19,7 +19,9 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidHandler;
+import api.cout970.UltraTech.FTpower.ConnType;
 import api.cout970.UltraTech.FTpower.Machine;
+import api.cout970.UltraTech.FTpower.StorageInterface.MachineTipe;
 import api.cout970.UltraTech.fluids.TankConection;
 
 public class PumpEntity extends Machine{
@@ -29,7 +31,12 @@ public class PumpEntity extends Machine{
 	private Fluid fluid;
 	
 	public PumpEntity(){
-		super(2400,2);
+		super(2400,2,MachineTipe.Nothing,true);
+	}
+	
+	public ConnType getConection(ForgeDirection side) {
+		if(side == ForgeDirection.DOWN)return ConnType.ONLY_BIG;
+		return ConnType.ONLY_SMALL;
 	}
 	
 	public void updateEntity(){

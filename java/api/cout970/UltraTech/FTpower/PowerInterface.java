@@ -33,8 +33,8 @@ public class PowerInterface implements IPower{
     	return Parent;
     }
     
-	public ForgeDirection[] getConnectableSides(){
-		return ForgeDirection.VALID_DIRECTIONS;
+	public boolean isConnectableSide(ForgeDirection side ,ConnType conection){
+		return true;
 	}
 
     public PowerNetwork getNetwork() {
@@ -57,7 +57,7 @@ public class PowerInterface implements IPower{
     		TileEntity e = PowerUtils.getRelative(Parent, dir);
     		if(e instanceof IPowerConductor){
     			PowerInterface p = ((IPowerConductor) e).getPower();
-    			if(Arrays.asList(p.getConnectableSides()).contains(dir.getOpposite())){
+    			if(p.isConnectableSide(dir.getOpposite(), getConnectionType(dir))){
     				if(p.getNetwork() != null){
     					if(!hasNetwork){
     						setNetwork(p.getNetwork());
@@ -101,6 +101,10 @@ public class PowerInterface implements IPower{
 	@Override
 	public double getFlow() {
 		return 0;
+	}
+	
+	public ConnType getConnectionType(ForgeDirection side){
+		return ConnType.ALL_CABLES;
 	}
 
 }

@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import codechicken.lib.vec.Vector3;
-import common.cout970.UltraTech.microparts.MicroCable;
+import common.cout970.UltraTech.microparts.MicroCablePlane;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
@@ -118,10 +118,10 @@ public class ModelCable extends ModelBase
     super.setRotationAngles(f, f1, f2, f3, f4, f5, t);
   }
 
-public void render(MicroCable mc, Vector3 pos, float f5) {
+public void render(MicroCablePlane mc, Vector3 pos, float f5) {
 	baseD.render(f5);
-	mc.getPower().reconect(mc.tile());
-	Map<ForgeDirection, Boolean> m = mc.getPower().getConections();
+	mc.updateConnections();
+	Map<ForgeDirection, Boolean> m = mc.conn;
 	
     if(m.containsKey(ForgeDirection.NORTH) && m.get(ForgeDirection.NORTH)){
     	DF.render(f5);

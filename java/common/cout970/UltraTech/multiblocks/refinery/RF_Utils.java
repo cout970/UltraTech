@@ -17,14 +17,14 @@ public class RF_Utils {
 	 * 5 in (base inv)
 	 */
 	public static int[][][] refinery ={
-		{{0,0,0},{0,0,0},{0,0,0}},
+		{{0,0,0},{0,0,0},{0,0,0}},//down
 		{{1,1,1},{1,1,1},{1,1,1}},
 		{{1,1,1},{1,1,1},{1,1,1}},
 		{{1,1,1},{1,1,1},{1,1,1}},
 		{{1,1,1},{1,1,1},{1,1,1}},
 		{{1,1,1},{1,1,1},{1,1,1}},
 		{{1,1,1},{1,1,1},{1,1,1}},
-		{{1,1,1},{1,1,1},{1,1,1}}};
+		{{1,1,1},{1,1,1},{1,1,1}}};//up
 
 	
 	public static boolean refreshRefinery(World worldObj, int x,int y,int z){
@@ -100,6 +100,7 @@ public class RF_Utils {
 						((TileGag)worldObj.getTileEntity(x+i, y+j, z+k)).z = z;
 					}
 				}}}
+		worldObj.removeTileEntity(x, y+1, z);
 		worldObj.setBlockMetadataWithNotify(x, y+1, z, 2, 3);
 	}
 

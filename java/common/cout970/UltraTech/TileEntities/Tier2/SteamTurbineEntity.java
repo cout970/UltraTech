@@ -1,5 +1,6 @@
 package common.cout970.UltraTech.TileEntities.Tier2;
 
+import api.cout970.UltraTech.FTpower.ConnType;
 import api.cout970.UltraTech.FTpower.Machine;
 import api.cout970.UltraTech.FTpower.StorageInterface;
 import api.cout970.UltraTech.FTpower.StorageInterface.MachineTipe;
@@ -27,12 +28,12 @@ public class SteamTurbineEntity extends Machine implements IFluidHandler{
 	
 	
 	public SteamTurbineEntity(){
-		super(2400,2,MachineTipe.Output);
-		
+		super(2400,2,MachineTipe.Output,true);
 	}
 	
-	public ForgeDirection[] getConnectableSides(){
-		return new ForgeDirection[]{facing.getOpposite()};
+	public ConnType getConection(ForgeDirection side) {
+		if(side == facing)return ConnType.ALL_CABLES;
+		return ConnType.ONLY_SMALL;
 	}
 	
 	public void updateEntity(){
@@ -41,11 +42,11 @@ public class SteamTurbineEntity extends Machine implements IFluidHandler{
 			tank = new UT_Tank(16000, this);
 		}
 		if(!worldObj.isRemote){
-			if(tank.getFluidAmount() > 20 && getEnergy()+EnergyCosts.SteamTurbineProduct/8 <= maxEnergy()){
+			if(tank.getFluidAmount() >= 10 && getEnergy()+EnergyCosts.SteamTurbineProduct <= maxEnergy()){
 				tank.drain(10, true);
-				this.addEnergy(EnergyCosts.SteamTurbineProduct/8);
+				this.addEnergy(EnergyCosts.SteamTurbineProduct);
 				if(worldObj.getTotalWorldTime()%10 == 0)Net_Utils.sendUpdate(this);
-			}else tank.drain(1,true);
+			}
 			if(tank.getFluidAmount() > 20){
 				if(!work){
 					work = true;

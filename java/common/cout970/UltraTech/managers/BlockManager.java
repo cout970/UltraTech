@@ -17,7 +17,7 @@ import common.cout970.UltraTech.blocks.models.RefineryBlock;
 import common.cout970.UltraTech.blocks.models.SteamTurbine;
 import common.cout970.UltraTech.blocks.models.WindMill;
 import common.cout970.UltraTech.itemBlock.*;
-import common.cout970.UltraTech.microparts.ItemCableMultipart;
+import common.cout970.UltraTech.microparts.ItemPlaneCableMultipart;
 import common.cout970.UltraTech.microparts.MicroRegistry;
 import common.cout970.UltraTech.multiblocks.refinery.BaseRef;
 import common.cout970.UltraTech.multiblocks.refinery.CoreRefinery;
