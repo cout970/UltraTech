@@ -1,9 +1,14 @@
 package common.cout970.UltraTech.microparts;
 
 import net.minecraft.item.Item;
+import net.minecraftforge.client.MinecraftForgeClient;
 import codechicken.multipart.MultiPartRegistry;
 import codechicken.multipart.MultiPartRegistry.IPartFactory;
 import codechicken.multipart.TMultiPart;
+
+import common.cout970.UltraTech.machines.renders.items.RenderPumpItem;
+import common.cout970.UltraTech.managers.BlockManager;
+
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class MicroRegistry implements IPartFactory{
@@ -15,6 +20,7 @@ public class MicroRegistry implements IPartFactory{
 		MicroRegistry.Cable = new ItemCableMultipart();
 		GameRegistry.registerItem(Cable, "UT_Cable");
 		MultiPartRegistry.registerParts(this, new String[]{MicroRegistry.Cable.getUnlocalizedName()});
+		MinecraftForgeClient.registerItemRenderer(Cable, new RenderCableItem());
 	}
 	
 	@Override

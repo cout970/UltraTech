@@ -2,50 +2,62 @@ package common.cout970.UltraTech.microparts;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.Vec3;
 import net.minecraftforge.common.util.ForgeDirection;
+
+import org.lwjgl.opengl.GL11;
+
 import api.cout970.UltraTech.FTpower.IPowerConductor;
 import api.cout970.UltraTech.FTpower.PowerInterface;
-import common.cout970.UltraTech.lib.UT_Utils;
-import common.cout970.UltraTech.machines.renders.RenderCable;
 import codechicken.lib.raytracer.IndexedCuboid6;
+import codechicken.lib.render.RenderUtils;
 import codechicken.lib.vec.Cuboid6;
-import codechicken.lib.vec.Rotation;
 import codechicken.lib.vec.Vector3;
-import codechicken.microblock.ISidedHollowConnect;
 import codechicken.multipart.JNormalOcclusion;
 import codechicken.multipart.NormalOcclusionTest;
+import codechicken.multipart.NormallyOccludedPart;
+import codechicken.multipart.PartMap;
+import codechicken.multipart.TFacePart;
 import codechicken.multipart.TMultiPart;
-import codechicken.multipart.TSlottedPart;
+import codechicken.multipart.TileMultipart;
+import common.cout970.UltraTech.lib.RenderUtil;
+import common.cout970.UltraTech.lib.UT_Utils;
 
-public class MicroCable extends TMultiPart implements IPowerConductor, JNormalOcclusion, TSlottedPart, ISidedHollowConnect{
+public class MicroCable extends TMultiPart implements IPowerConductor, JNormalOcclusion, TFacePart{
 
 	public PowerInterface cond = null;
+	private Map<ForgeDirection,Boolean> conn = new HashMap<ForgeDirection,Boolean>();
 
 	//boxes
-	private static Cuboid6[] boundingBoxes = new Cuboid6[5];
+	private static Cuboid6[]boundingBoxes = new Cuboid6[6];
 
 	static {
 		double w = 0.125;
-		boundingBoxes[0] = new Cuboid6(0.5-w, 0, 0.5-w, 0.5+w, w, 0.5+w);
-		boundingBoxes[1] = new Cuboid6(0, 0, 0.5-w, 0.5-w, w, 0.5+w);
-		boundingBoxes[2] = new Cuboid6(0.5+w, 0, 0.5-w, 1, w, 0.5+w);
-		boundingBoxes[3] = new Cuboid6(0.5-w, 0, 0.5+w, 0.5+w, w, 1);
-		boundingBoxes[4] = new Cuboid6(0.5-w, 0, 0, 0.5+w, w, 0.5-w);
+		boundingBoxes[0] = new Cuboid6(0.5-w, 0, 0.5-w, 0.5+w, w, 0.5+w);//base
+		boundingBoxes[2] = new Cuboid6(0.5-w, 0, 0, 0.5+w, w, 0.5-w);//north 2
+		boundingBoxes[3] = new Cuboid6(0.5-w, 0, 0.5+w, 0.5+w, w, 1);//south 3
+		boundingBoxes[4] = new Cuboid6(0, 0, 0.5-w, 0.5-w, w, 0.5+w);//west 4
+		boundingBoxes[5] = new Cuboid6(0.5+w, 0, 0.5-w, 1, w, 0.5+w);//east 5
 	}
+
 
 	@Override
 	public Iterable<Cuboid6> getCollisionBoxes() {
 		ArrayList<Cuboid6> t2 = new ArrayList<Cuboid6>();
 		t2.add(boundingBoxes[0]);
-		for (int i = 0; i < 4; i++) {
-			if (isConnectedOnSide(ForgeDirection.getOrientation(i))) {
-				t2.add(boundingBoxes[i + 1]);
-			}
+		for(int i=2; i<6; i++){
+				if(isConnectedOnSide(ForgeDirection.getOrientation(i))){
+					t2.add(boundingBoxes[i]);
+				}
 		}
 		return t2;
 	}
@@ -73,9 +85,30 @@ public class MicroCable extends TMultiPart implements IPowerConductor, JNormalOc
 	}
 
 	private boolean isConnectedOnSide(ForgeDirection o) {
-		if(getPower() == null)return false;
-		return UT_Utils.getRelative(tile(), o) instanceof IPowerConductor;
-//		return getPower().getConections().containsKey(o) && getPower().getConections().get(o);
+		return conn.containsKey(o) && conn.get(o);
+	}
+	
+	public void updateConnections(){
+		if(tile() == null)return ;
+		conn.clear();
+		for(ForgeDirection o : ForgeDirection.VALID_DIRECTIONS){
+			boolean a = tile().canAddPart(new NormallyOccludedPart(boundingBoxes[o.ordinal()]));
+			boolean b = false;
+			TileEntity tile = UT_Utils.getRelative(tile(), o);
+			if(tile instanceof IPowerConductor){
+				b = true;
+			}else{
+				if(tile instanceof TileMultipart){
+					TileMultipart m = (TileMultipart) tile;
+					for(TMultiPart g : m.jPartList()){
+						if(g instanceof MicroCable){
+							if(((MicroCable) g).isConnectedOnSide(o.getOpposite()))b = true;
+						}
+					}
+				}
+			}
+			conn.put(o, a && b);
+		}
 	}
 
 	//tipe
@@ -87,53 +120,48 @@ public class MicroCable extends TMultiPart implements IPowerConductor, JNormalOc
 	//energy
 	@Override
 	public PowerInterface getPower() {
-		if(cond == null && tile() != null)cond = new PowerInterface(tile());
+		if(cond == null)cond = new PowerInterface(tile()){
+			public ForgeDirection[] getConnectableSides(){
+			return new ForgeDirection[]{ForgeDirection.DOWN,ForgeDirection.EAST,ForgeDirection.NORTH,ForgeDirection.SOUTH,ForgeDirection.WEST};}
+		};
 		return cond;
 	}
 
 	@Override
 	public void update() {
 		super.update();
-		if(getPower().getParent() == null)cond = new PowerInterface(tile());
 		getPower().MachineUpdate();
 	}
 
 	@Override
 	public void onNeighborChanged() {
-		if(getPower() == null)return;
-		getPower().reconect(tile());
+		updateConnections();
 	}
 
 	@Override
 	public void onPartChanged(TMultiPart part) {
-		if(getPower() == null)return;
-		getPower().reconect(tile());
+		updateConnections();
 	}
 
 	@Override
 	public void onAdded() {
-//		if(getPower() == null)return;
-//		getPower().iterate();
-//		getPower().reconect(tile());
+		getPower().iterate();
+		updateConnections();
 	}
 
 	@Override
 	public void onRemoved() {
-//		if(getPower() == null)return;
-//		getPower().iterate();
+		if(getPower().getNetwork() != null){
+			getPower().getNetwork().excludeAndRecalculate(this);
+		}
 	}
 
 	//multipart
 
 	@Override
 	public int getSlotMask() {
-
-		return 0x40;
-	}
-
-	@Override
-	public int getHollowSize(int arg0) {
-		return 5;
+		
+		return PartMap.BOTTOM.mask;
 	}
 
 	@Override
@@ -165,5 +193,16 @@ public class MicroCable extends TMultiPart implements IPowerConductor, JNormalOc
 			if (render == null) render = new RenderCable();
 			render.render(this, pos);
 		}
+	}
+	//cover
+
+	@Override
+	public int redstoneConductionMap() {
+		return 0xF;
+	}
+
+	@Override
+	public boolean solid(int arg0) {
+		return false;
 	}
 }

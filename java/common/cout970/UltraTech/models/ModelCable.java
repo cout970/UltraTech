@@ -141,5 +141,17 @@ public void render(MicroCable mc, Vector3 pos, float f5) {
     }
 }
 
+public void renderItem(float f5) {
+	baseD.render(f5);
+    DF.render(f5);
+    DB.render(f5);
+    DR.render(f5);
+    DL.render(f5);
+    cornerF.render(f5);
+    cornerB.render(f5);
+    cornerL.render(f5);
+    cornerR.render(f5);
+}
+
 
 }

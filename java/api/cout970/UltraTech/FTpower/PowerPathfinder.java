@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
+import codechicken.multipart.TMultiPart;
+import codechicken.multipart.TileMultipart;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 /**
@@ -39,6 +41,21 @@ public class PowerPathfinder {
 					if(!excluded.contains(e.getPower()) && !visited.contains(e)){
 						visited.add(e);
 						list(e.getPower());
+					}
+				}
+			}else{
+				if(tile instanceof TileMultipart){
+					TileMultipart m = (TileMultipart) tile;
+					for(TMultiPart g : m.jPartList()){
+						if(g instanceof IPowerConductor){
+							IPowerConductor e = (IPowerConductor) g;
+							if(Arrays.asList(e.getPower().getConnectableSides()).contains(dir.getOpposite())){
+								if(!excluded.contains(e.getPower()) && !visited.contains(e)){
+									visited.add(e);
+									list(e.getPower());
+								}
+							}
+						}
 					}
 				}
 			}
