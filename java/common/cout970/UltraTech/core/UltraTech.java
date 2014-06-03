@@ -39,7 +39,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 
 
-@Mod(modid = "UltraTech", name = "UltraTech",version = "0.9.0")
+@Mod(modid = "UltraTech", name = "UltraTech",version = "0.9.0.2")
 
 
 public class UltraTech {
