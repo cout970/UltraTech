@@ -57,7 +57,7 @@ public class PacketUpdate extends PacketBase{
 		z = PB.readInt();
 		try {
 			nbt = PB.readNBTTagCompoundFromBuffer();
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
