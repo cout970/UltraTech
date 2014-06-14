@@ -2,9 +2,9 @@ package common.cout970.UltraTech.machines.renders;
 
 import org.lwjgl.opengl.GL11;
 
-import common.cout970.UltraTech.TileEntities.Tier1.AluminumPipeEntity;
-import common.cout970.UltraTech.TileEntities.Tier1.CopperPipeEntity;
-import common.cout970.UltraTech.TileEntities.Tier1.LeadPipeEntity;
+import common.cout970.UltraTech.TileEntities.fluid.AluminumPipeEntity;
+import common.cout970.UltraTech.TileEntities.fluid.CopperPipeEntity;
+import common.cout970.UltraTech.TileEntities.fluid.LeadPipeEntity;
 import common.cout970.UltraTech.models.ModelFluidPipe;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;

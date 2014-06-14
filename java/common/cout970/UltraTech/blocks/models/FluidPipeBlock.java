@@ -2,7 +2,7 @@ package common.cout970.UltraTech.blocks.models;
 
 import api.cout970.UltraTech.fluids.FluidUtils;
 import api.cout970.UltraTech.fluids.Pipe;
-import common.cout970.UltraTech.TileEntities.Tier2.PumpEntity;
+import common.cout970.UltraTech.TileEntities.electric.PumpEntity;
 import common.cout970.UltraTech.core.UltraTech;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

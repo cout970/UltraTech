@@ -5,7 +5,8 @@ import java.util.List;
 
 import org.lwjgl.opengl.GL11;
 
-import common.cout970.UltraTech.TileEntities.Tier3.MinerEntity;
+import common.cout970.UltraTech.TileEntities.electric.MinerEntity;
+import common.cout970.UltraTech.lib.EnergyCosts;
 import common.cout970.UltraTech.lib.UT_Utils;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.RenderHelper;
@@ -61,7 +62,7 @@ public class MinerGui extends GuiContainer{
 		
         if(UT_Utils.isIn(x, y, xStart+9, yStart+105, 25, 50)){
         	List<String> energy = new ArrayList<String>();
-        	energy.add("Energy: "+((int)entity.getEnergy())+"FT");
+        	energy.add("Energy: "+((int)entity.getEnergy())+EnergyCosts.E);
         	this.drawHoveringText(energy, x-xStart, y-yStart, fontRendererObj);
         	RenderHelper.enableGUIStandardItemLighting();
         }

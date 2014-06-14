@@ -1,9 +1,11 @@
 package common.cout970.UltraTech.blocks.models;
 
-import api.cout970.UltraTech.FTpower.BlockConductor;
-import api.cout970.UltraTech.FTpower.Machine;
-import common.cout970.UltraTech.TileEntities.Tier1.BoilerEntity;
-import common.cout970.UltraTech.TileEntities.Tier2.DynamoEntity;
+import buildcraft.api.tools.IToolWrench;
+import api.cout970.UltraTech.Vpower.BlockConductor;
+import api.cout970.UltraTech.Vpower.Machine;
+import common.cout970.UltraTech.TileEntities.electric.BoilerEntity;
+import common.cout970.UltraTech.TileEntities.intermod.DynamoEntity;
+import common.cout970.UltraTech.TileEntities.intermod.EngineEntity;
 import common.cout970.UltraTech.core.UltraTech;
 import common.cout970.UltraTech.proxy.ClientProxy;
 import cpw.mods.fml.relauncher.Side;
@@ -29,13 +31,23 @@ public class Dynamo extends BlockConductor{
 	public boolean onBlockActivated(World w, int x, int y, int z, EntityPlayer p, int par6, float par7, float par8, float par9)
 	{
 		if(p.isSneaking())return true;
-		TileEntity e = w.getTileEntity(x, y, z);
+		DynamoEntity e = (DynamoEntity) w.getTileEntity(x, y, z);
 		if(e != null){
+			if(p.getCurrentEquippedItem() != null && p.getCurrentEquippedItem().getItem() instanceof IToolWrench){
+				e.switchOrientation();
+				return true;
+			}
 			p.openGui(UltraTech.instance, 13, w, x, y, z);
 		}
 		return true;
 	}
 
+	public void onNeighborBlockChange(World w, int x, int y, int z, Block side){
+		DynamoEntity m = (DynamoEntity) w.getTileEntity(x, y, z);
+		if(m.getNetwork() != null)m.getNetwork().refresh();
+		m.updateReceptor();
+	}
+	
 	@Override
 	public TileEntity createNewTileEntity(World world,int b) {
 		return new DynamoEntity();

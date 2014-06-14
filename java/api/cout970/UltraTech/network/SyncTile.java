@@ -1,7 +1,7 @@
 package api.cout970.UltraTech.network;
 
-import api.cout970.UltraTech.FTpower.IPowerConductor;
-import api.cout970.UltraTech.FTpower.StorageInterface;
+import api.cout970.UltraTech.Vpower.IPowerConductor;
+import api.cout970.UltraTech.Vpower.StorageInterface;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.nbt.NBTTagCompound;

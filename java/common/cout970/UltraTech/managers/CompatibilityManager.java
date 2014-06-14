@@ -54,6 +54,8 @@ public class CompatibilityManager {
 		OreDictionary.registerOre("plateSilicon", new ItemStack(ItemManager.ItemName.get("Plate"),1,10));
 		OreDictionary.registerOre("plateRedstone", new ItemStack(ItemManager.ItemName.get("Plate"),1,11));
 		OreDictionary.registerOre("plateRadionite", new ItemStack(ItemManager.ItemName.get("Plate"),1,12));
+		
+		OreDictionary.registerOre("dustSulfur", new ItemStack(ItemManager.ItemName.get("Sulfur")));
 	}
 
 

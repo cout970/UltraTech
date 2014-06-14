@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.item.ItemStack;
-import common.cout970.UltraTech.TileEntities.Tier2.PresuricerEntity;
+import common.cout970.UltraTech.TileEntities.electric.PresuricerEntity;
 import common.cout970.UltraTech.lib.UT_Utils;
 
 public class Pressurizer_Recipes {

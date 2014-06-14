@@ -1,6 +1,6 @@
 package common.cout970.UltraTech.blocks.models;
 
-import common.cout970.UltraTech.TileEntities.Tier1.CopperPipeEntity;
+import common.cout970.UltraTech.TileEntities.fluid.CopperPipeEntity;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.tileentity.TileEntity;

@@ -39,7 +39,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 
 
-@Mod(modid = "UltraTech", name = "UltraTech",version = "0.9.0.2")
+@Mod(modid = "UltraTech", name = "UltraTech",version = "0.9.0.2",dependencies = "required-after:ForgeMultipart;required-after:CodeChickenCore")
 
 
 public class UltraTech {
@@ -150,7 +150,7 @@ public class UltraTech {
 		if (Loader.isModLoaded("ForgeMultipart")) {
             new MicroRegistry().load();
         }
-//		Language.setupLangFile(); for lag file only in debug
+//		Language.setupLangFile(); //for lag file only in debug
 		CompatibilityManager.initCompatibilitys();
 		CraftManager.registerCraft();
 		GameRegistry.registerWorldGenerator(new WorldGen(), 10);

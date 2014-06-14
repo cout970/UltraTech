@@ -5,7 +5,8 @@ import java.util.List;
 
 import org.lwjgl.opengl.GL11;
 
-import common.cout970.UltraTech.TileEntities.Tier2.FluidGenerator;
+import common.cout970.UltraTech.TileEntities.electric.FluidGenerator;
+import common.cout970.UltraTech.lib.EnergyCosts;
 import common.cout970.UltraTech.lib.UT_Utils;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.RenderHelper;
@@ -61,7 +62,7 @@ public class FluidGenGui extends GuiContainer{
 		//text
 		if(UT_Utils.isIn(i, j, xStart+14, yStart+15, 25, 50)){
         	List<String> energy = new ArrayList<String>();
-        	energy.add("Energy: "+((int)entity.getEnergy())+"FT");
+        	energy.add("Energy: "+((int)entity.getEnergy())+EnergyCosts.E);
         	this.drawHoveringText(energy, i, j, fontRendererObj);
         	RenderHelper.enableGUIStandardItemLighting();
         }

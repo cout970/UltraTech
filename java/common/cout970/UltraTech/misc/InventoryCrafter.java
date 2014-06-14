@@ -1,6 +1,6 @@
 package common.cout970.UltraTech.misc;
 
-import common.cout970.UltraTech.TileEntities.Tier1.CrafterEntity;
+import common.cout970.UltraTech.TileEntities.utility.CrafterEntity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.InventoryCrafting;

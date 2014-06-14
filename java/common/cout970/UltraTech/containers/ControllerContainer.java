@@ -1,6 +1,6 @@
 package common.cout970.UltraTech.containers;
 
-import common.cout970.UltraTech.TileEntities.Tier3.ReactorControllerEntity;
+import common.cout970.UltraTech.TileEntities.utility.ReactorControllerEntity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.ICrafting;

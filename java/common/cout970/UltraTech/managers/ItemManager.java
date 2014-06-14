@@ -27,6 +27,7 @@ import common.cout970.UltraTech.items.UT_Item;
 import common.cout970.UltraTech.items.UT_Plate;
 import common.cout970.UltraTech.misc.ItemInfo;
 import common.cout970.UltraTech.misc.ItemInfo.ItemTipe;
+import common.cout970.UltraTech.proxy.Language;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
@@ -75,11 +76,16 @@ public class ItemManager {
 		Reg("LasserSword", "Lasser Sword", false);
 		Reg("ProcesedFood", "Procesed Food", false);
 		
+		
 		//added
 		
 		Reg("SilverCable", "Silver cable",true);
 		Reg("SilkTouchUpgrade", "Silk Touch Upgrade", false);
-
+		Reg("Sulfur", "Sulfur", true);
+		Reg("SulfuricAcid", "Sulfuric Acid", true);
+		Reg("ElectricCell", "Electric Cell", true);
+		Reg("MediumElectricCell", "Medium Electric Cell", true);
+		Reg("BigElectricCell", "Big Electric Cell", true);
 	}
 
 	public static void LoadConfigItems(Configuration c){
@@ -98,25 +104,21 @@ public class ItemManager {
 			}
 			if(it == null)System.out.println(i.name);
 			GameRegistry.registerItem(it, i.name+"_UT");
-			if(i.tipe == ItemTipe.DEFAULT){
-				LanguageRegistry.addName(it, i.GameName);
-			}else{
-				LangException(it, i.GameName);
-			}
+			LangException(it, i.GameName);
 			ItemName.put(i.name, it);
 		}
 	}
 
 	private static void LangException(Item it, String a) {
 		if(a == "Chunk"){
-			for(int meta = 0;meta < UT_Chunk.names.length;meta++)LanguageRegistry.addName(new ItemStack(it,1,meta), "Dirty "+UT_Chunk.names[meta]);
+			for(int meta = 0;meta < UT_Chunk.names.length;meta++)Language.addName(new ItemStack(it,1,meta), "Dirty "+UT_Chunk.names[meta]);
 		}else if(a == "Plate"){
-			for(int meta = 0;meta < UT_Plate.names.length;meta++)LanguageRegistry.addName(new ItemStack(it,1,meta), UT_Plate.names[meta]);
+			for(int meta = 0;meta < UT_Plate.names.length;meta++)Language.addName(new ItemStack(it,1,meta), UT_Plate.names[meta]);
 		}else if(a == "Ingot"){
-			for(int meta = 0;meta < UT_Ingot.names.length;meta++)LanguageRegistry.addName(new ItemStack(it,1,meta), UT_Ingot.names[meta]);
+			for(int meta = 0;meta < UT_Ingot.names.length;meta++)Language.addName(new ItemStack(it,1,meta), UT_Ingot.names[meta]);
 		}else if(a == "Dust"){
-			for(int meta = 0;meta < UT_Dust.names.length;meta++)LanguageRegistry.addName(new ItemStack(it,1,meta), UT_Dust.names[meta]);
-		}else LanguageRegistry.addName(it, a);
+			for(int meta = 0;meta < UT_Dust.names.length;meta++)Language.addName(new ItemStack(it,1,meta), UT_Dust.names[meta]);
+		}else Language.addName(it, a);
 	}
 
 	private static Item Exception(ItemInfo i) {

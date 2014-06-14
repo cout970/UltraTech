@@ -5,7 +5,8 @@ import java.util.List;
 
 import org.lwjgl.opengl.GL11;
 
-import common.cout970.UltraTech.TileEntities.Tier1.FermenterEntity;
+import common.cout970.UltraTech.TileEntities.electric.FermenterEntity;
+import common.cout970.UltraTech.lib.EnergyCosts;
 import common.cout970.UltraTech.lib.UT_Utils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -78,7 +79,7 @@ public class FermenterGui extends GuiContainer{
 		
         if(UT_Utils.isIn(x, y, xStart+14, yStart+15, 25, 50)){
         	List<String> energy = new ArrayList<String>();
-        	energy.add("Energy: "+((int)entity.getEnergy())+"FT");
+        	energy.add("Energy: "+((int)entity.getEnergy())+EnergyCosts.E);
         	this.drawHoveringText(energy, x-xStart, y-yStart, fontRendererObj);
         }
         if(UT_Utils.isIn(x, y, xStart+45, yStart+20, 20, 40)){

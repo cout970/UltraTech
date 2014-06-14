@@ -1,6 +1,6 @@
 package common.cout970.UltraTech.blocks.models;
 
-import common.cout970.UltraTech.TileEntities.Tier2.TankEntity;
+import common.cout970.UltraTech.TileEntities.fluid.TankEntity;
 import common.cout970.UltraTech.core.UltraTech;
 import common.cout970.UltraTech.proxy.ClientProxy;
 import cpw.mods.fml.relauncher.Side;

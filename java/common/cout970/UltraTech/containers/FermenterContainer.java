@@ -1,6 +1,6 @@
 package common.cout970.UltraTech.containers;
 
-import common.cout970.UltraTech.TileEntities.Tier1.FermenterEntity;
+import common.cout970.UltraTech.TileEntities.electric.FermenterEntity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;

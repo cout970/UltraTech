@@ -7,6 +7,7 @@ import codechicken.multipart.MultiPartRegistry.IPartFactory;
 import codechicken.multipart.TMultiPart;
 import common.cout970.UltraTech.machines.renders.items.RenderPumpItem;
 import common.cout970.UltraTech.managers.BlockManager;
+import common.cout970.UltraTech.proxy.Language;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class MicroRegistry{
@@ -25,6 +26,9 @@ public class MicroRegistry{
 		GameRegistry.registerItem(BigCable, "UT_Cable_Big");
 		MultiPartRegistry.registerParts(new BigCable(), new String[]{MicroRegistry.BigCable.getUnlocalizedName()});
 		MinecraftForgeClient.registerItemRenderer(BigCable, new RenderCableBigItem());
+		
+		Language.addName(PlaneCable, "Ribbon Cable");
+		Language.addName(BigCable, "Big Cable");
 	}
 	
 	

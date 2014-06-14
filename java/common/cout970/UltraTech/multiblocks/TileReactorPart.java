@@ -6,7 +6,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import common.cout970.UltraTech.TileEntities.Tier3.ReactorEntity;
+import common.cout970.UltraTech.TileEntities.utility.ReactorEntity;
 import common.cout970.UltraTech.managers.BlockManager;
 import common.cout970.UltraTech.misc.IReactorPart;
 

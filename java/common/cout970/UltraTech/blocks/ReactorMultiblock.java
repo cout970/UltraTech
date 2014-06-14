@@ -3,12 +3,12 @@ package common.cout970.UltraTech.blocks;
 import java.util.List;
 import java.util.Random;
 
-import common.cout970.UltraTech.TileEntities.Tier3.ReactorControllerEntity;
-import common.cout970.UltraTech.TileEntities.Tier3.ReactorEntity;
-import common.cout970.UltraTech.TileEntities.Tier3.ReactorTankEntity;
-import common.cout970.UltraTech.TileEntities.Tier3.ReactorWallEntity;
-import common.cout970.UltraTech.TileEntities.Tier3.SteamExtractorEntity;
-import common.cout970.UltraTech.TileEntities.Tier3.WaterBlockEntity;
+import common.cout970.UltraTech.TileEntities.utility.ReactorControllerEntity;
+import common.cout970.UltraTech.TileEntities.utility.ReactorEntity;
+import common.cout970.UltraTech.TileEntities.utility.ReactorTankEntity;
+import common.cout970.UltraTech.TileEntities.utility.ReactorWallEntity;
+import common.cout970.UltraTech.TileEntities.utility.SteamExtractorEntity;
+import common.cout970.UltraTech.TileEntities.utility.WaterBlockEntity;
 import common.cout970.UltraTech.core.UltraTech;
 import common.cout970.UltraTech.misc.IReactorPart;
 import cpw.mods.fml.relauncher.Side;

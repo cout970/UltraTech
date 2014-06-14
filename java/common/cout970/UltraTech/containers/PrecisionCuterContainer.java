@@ -1,6 +1,6 @@
 package common.cout970.UltraTech.containers;
 
-import common.cout970.UltraTech.TileEntities.Tier2.CutterEntity;
+import common.cout970.UltraTech.TileEntities.electric.CutterEntity;
 import common.cout970.UltraTech.lib.recipes.Cuter_Recipes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;

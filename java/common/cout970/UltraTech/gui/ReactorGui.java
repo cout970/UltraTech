@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.lwjgl.opengl.GL11;
 
-import common.cout970.UltraTech.TileEntities.Tier3.ReactorEntity;
+import common.cout970.UltraTech.TileEntities.utility.ReactorEntity;
 import common.cout970.UltraTech.lib.UT_Utils;
 import common.cout970.UltraTech.managers.BlockManager;
 import net.minecraft.client.Minecraft;

@@ -1,6 +1,6 @@
 package common.cout970.UltraTech.containers;
 
-import common.cout970.UltraTech.TileEntities.Tier1.CVD_Entity;
+import common.cout970.UltraTech.TileEntities.electric.CVD_Entity;
 import common.cout970.UltraTech.lib.recipes.CVD_Recipe;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;

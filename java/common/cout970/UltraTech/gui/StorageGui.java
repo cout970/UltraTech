@@ -3,7 +3,7 @@ package common.cout970.UltraTech.gui;
 
 import org.lwjgl.opengl.GL11;
 
-import api.cout970.UltraTech.FTpower.Machine;
+import api.cout970.UltraTech.Vpower.Machine;
 import common.cout970.UltraTech.lib.UT_Utils;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;

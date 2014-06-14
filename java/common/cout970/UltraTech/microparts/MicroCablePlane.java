@@ -16,10 +16,10 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import org.lwjgl.opengl.GL11;
 
-import api.cout970.UltraTech.FTpower.ConnType;
-import api.cout970.UltraTech.FTpower.IPowerConductor;
-import api.cout970.UltraTech.FTpower.PowerInterface;
-import api.cout970.UltraTech.FTpower.PowerUtils;
+import api.cout970.UltraTech.Vpower.CableType;
+import api.cout970.UltraTech.Vpower.IPowerConductor;
+import api.cout970.UltraTech.Vpower.PowerInterface;
+import api.cout970.UltraTech.Vpower.PowerUtils;
 import codechicken.lib.raytracer.IndexedCuboid6;
 import codechicken.lib.render.RenderUtils;
 import codechicken.lib.vec.Cuboid6;
@@ -93,7 +93,7 @@ public class MicroCablePlane extends TMultiPart implements IPowerConductor, JNor
 	
 	public void updateConnections(){
 		if(tile() == null)return;
-		if(!tile().getWorldObj().isRemote)if(tile().getWorldObj().getBlock(x(), y()-1, z()) == null || !tile().getWorldObj().getBlock(x(), y()-1, z()).isBlockSolid(tile().getWorldObj(), x(), y()-1, z(), 0)){
+		if(!tile().getWorldObj().isRemote)if(tile().getWorldObj().getBlock(x(), y()-1, z()) == null || !tile().getWorldObj().getBlock(x(), y()-1, z()).isBlockSolid(tile().getWorldObj(), x(), y()-1, z(), ForgeDirection.UP.ordinal())){
 			this.tile().dropItems(this.getDrops());
 			try{
 			this.tile().remPart(this);
@@ -125,9 +125,9 @@ public class MicroCablePlane extends TMultiPart implements IPowerConductor, JNor
 					return new ForgeDirection[]{ForgeDirection.DOWN,ForgeDirection.EAST,ForgeDirection.NORTH,ForgeDirection.SOUTH,ForgeDirection.WEST};
 				}
 				
-				public ConnType getConnectionType(ForgeDirection side){
-					if(side == ForgeDirection.UP)return ConnType.NOTHING;
-					return ConnType.SMALL_CABLE;
+				public CableType getConnectionType(ForgeDirection side){
+					if(side == ForgeDirection.UP)return CableType.NOTHING;
+					return CableType.RIBBON_BOTTOM;
 				}
 			};
 			

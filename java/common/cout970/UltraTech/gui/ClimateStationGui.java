@@ -6,7 +6,8 @@ import java.util.List;
 import org.lwjgl.opengl.GL11;
 
 import api.cout970.UltraTech.network.Net_Utils;
-import common.cout970.UltraTech.TileEntities.Tier3.ClimateEntity;
+import common.cout970.UltraTech.TileEntities.electric.ClimateEntity;
+import common.cout970.UltraTech.lib.EnergyCosts;
 import common.cout970.UltraTech.lib.UT_Utils;
 import common.cout970.UltraTech.packets.PacketClimateStation;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -51,7 +52,7 @@ public class ClimateStationGui extends GuiContainer{
 		
         if(UT_Utils.isIn(x, y, xStart+135, yStart+15, 25, 50)){
         	List<String> energy = new ArrayList<String>();
-        	energy.add("Energy: "+((int)entity.getEnergy())+"FT");
+        	energy.add("Energy: "+((int)entity.getEnergy())+EnergyCosts.E);
         	this.drawHoveringText(energy, x-xStart, y-yStart, fontRendererObj);
         	RenderHelper.enableGUIStandardItemLighting();
         }

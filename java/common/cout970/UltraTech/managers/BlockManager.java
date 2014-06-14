@@ -1,37 +1,94 @@
 package common.cout970.UltraTech.managers;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import api.cout970.UltraTech.FTpower.Machine;
-import common.cout970.UltraTech.TileEntities.Tier1.*;
-import common.cout970.UltraTech.TileEntities.Tier2.*;
-import common.cout970.UltraTech.TileEntities.Tier3.*;
-import common.cout970.UltraTech.blocks.*;
-import common.cout970.UltraTech.blocks.models.CableBlock;
-import common.cout970.UltraTech.blocks.models.FluidTank;
-import common.cout970.UltraTech.blocks.models.PumpBlock;
-import common.cout970.UltraTech.blocks.models.RefineryBlock;
-import common.cout970.UltraTech.blocks.models.SteamTurbine;
-import common.cout970.UltraTech.blocks.models.WindMill;
-import common.cout970.UltraTech.itemBlock.*;
-import common.cout970.UltraTech.microparts.ItemPlaneCableMultipart;
-import common.cout970.UltraTech.microparts.MicroRegistry;
-import common.cout970.UltraTech.multiblocks.refinery.BaseRef;
-import common.cout970.UltraTech.multiblocks.refinery.CoreRefinery;
-import common.cout970.UltraTech.multiblocks.refinery.OutRef;
-import common.cout970.UltraTech.multiblocks.refinery.TileGag;
-import common.cout970.UltraTech.proxy.Language;
-import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
+import api.cout970.UltraTech.Vpower.Machine;
+
+import common.cout970.UltraTech.TileEntities.electric.BoilerEntity;
+import common.cout970.UltraTech.TileEntities.electric.CVD_Entity;
+import common.cout970.UltraTech.TileEntities.electric.ChargeStationEntity;
+import common.cout970.UltraTech.TileEntities.electric.ClimateEntity;
+import common.cout970.UltraTech.TileEntities.electric.CutterEntity;
+import common.cout970.UltraTech.TileEntities.electric.FermenterEntity;
+import common.cout970.UltraTech.TileEntities.electric.FluidGenerator;
+import common.cout970.UltraTech.TileEntities.electric.FurnaceEntity;
+import common.cout970.UltraTech.TileEntities.electric.GeneratorEntity;
+import common.cout970.UltraTech.TileEntities.electric.MinerEntity;
+import common.cout970.UltraTech.TileEntities.electric.MolecularAssemblyEntity;
+import common.cout970.UltraTech.TileEntities.electric.PresuricerEntity;
+import common.cout970.UltraTech.TileEntities.electric.PumpEntity;
+import common.cout970.UltraTech.TileEntities.electric.PurifierEntity;
+import common.cout970.UltraTech.TileEntities.electric.SolarPanelEntity;
+import common.cout970.UltraTech.TileEntities.electric.SteamTurbineEntity;
+import common.cout970.UltraTech.TileEntities.electric.StorageTier1;
+import common.cout970.UltraTech.TileEntities.electric.StorageTier2;
+import common.cout970.UltraTech.TileEntities.electric.StorageTier3;
+import common.cout970.UltraTech.TileEntities.electric.TesseractEntity;
+import common.cout970.UltraTech.TileEntities.electric.WindMillEntity;
+import common.cout970.UltraTech.TileEntities.fluid.AluminumPipeEntity;
+import common.cout970.UltraTech.TileEntities.fluid.CopperPipeEntity;
+import common.cout970.UltraTech.TileEntities.fluid.DestileryEntity;
+import common.cout970.UltraTech.TileEntities.fluid.DestileryInEntity;
+import common.cout970.UltraTech.TileEntities.fluid.DestileryOutEntity;
+import common.cout970.UltraTech.TileEntities.fluid.LeadPipeEntity;
+import common.cout970.UltraTech.TileEntities.fluid.TankEntity;
+import common.cout970.UltraTech.TileEntities.intermod.DynamoEntity;
+import common.cout970.UltraTech.TileEntities.intermod.EnergyTransformer;
+import common.cout970.UltraTech.TileEntities.intermod.EngineEntity;
+import common.cout970.UltraTech.TileEntities.utility.CrafterEntity;
+import common.cout970.UltraTech.TileEntities.utility.HologramEmiterEntity;
+import common.cout970.UltraTech.TileEntities.utility.Printer3DEntity;
+import common.cout970.UltraTech.TileEntities.utility.ReactorControllerEntity;
+import common.cout970.UltraTech.TileEntities.utility.ReactorEntity;
+import common.cout970.UltraTech.TileEntities.utility.ReactorTankEntity;
+import common.cout970.UltraTech.TileEntities.utility.ReactorWallEntity;
+import common.cout970.UltraTech.TileEntities.utility.SteamExtractorEntity;
+import common.cout970.UltraTech.TileEntities.utility.WaterBlockEntity;
+import common.cout970.UltraTech.TileEntities.utility.hitBoxEntity;
+import common.cout970.UltraTech.blocks.ChasisBlock;
+import common.cout970.UltraTech.blocks.CovedGlass;
+import common.cout970.UltraTech.blocks.DestileryBlock;
+import common.cout970.UltraTech.blocks.DiamondGlass;
+import common.cout970.UltraTech.blocks.MiscBlock;
+import common.cout970.UltraTech.blocks.MultiTank;
+import common.cout970.UltraTech.blocks.OreBlock;
+import common.cout970.UltraTech.blocks.ReactorMultiblock;
+import common.cout970.UltraTech.blocks.StoneBlock;
+import common.cout970.UltraTech.blocks.StorageBlock;
+import common.cout970.UltraTech.blocks.Tier1Block;
+import common.cout970.UltraTech.blocks.Tier2Block;
+import common.cout970.UltraTech.blocks.Tier3Block;
+import common.cout970.UltraTech.blocks.UT_Block;
+import common.cout970.UltraTech.blocks.models.FluidTank;
+import common.cout970.UltraTech.blocks.models.PumpBlock;
+import common.cout970.UltraTech.blocks.models.RefineryBlock;
+import common.cout970.UltraTech.blocks.models.SteamTurbine;
+import common.cout970.UltraTech.blocks.models.WindMill;
+import common.cout970.UltraTech.itemBlock.UT_ItemBlock;
+import common.cout970.UltraTech.itemBlock.UT_ItemBlockDeco;
+import common.cout970.UltraTech.itemBlock.UT_ItemBlockDestilery;
+import common.cout970.UltraTech.itemBlock.UT_ItemBlockMisc;
+import common.cout970.UltraTech.itemBlock.UT_ItemBlockOre;
+import common.cout970.UltraTech.itemBlock.UT_ItemBlockReactor;
+import common.cout970.UltraTech.itemBlock.UT_ItemBlockRefinery;
+import common.cout970.UltraTech.itemBlock.UT_ItemBlockStone;
+import common.cout970.UltraTech.itemBlock.UT_ItemBlockStorage;
+import common.cout970.UltraTech.itemBlock.UT_ItemBlockTier1;
+import common.cout970.UltraTech.itemBlock.UT_ItemBlockTier2;
+import common.cout970.UltraTech.itemBlock.UT_ItemBlockTier3;
+import common.cout970.UltraTech.multiblocks.refinery.BaseRef;
+import common.cout970.UltraTech.multiblocks.refinery.CoreRefinery;
+import common.cout970.UltraTech.multiblocks.refinery.OutRef;
+import common.cout970.UltraTech.multiblocks.refinery.TileGag;
+import common.cout970.UltraTech.proxy.Language;
+
+import cpw.mods.fml.common.registry.GameRegistry;
 
 public class BlockManager {
 
@@ -206,7 +263,6 @@ public class BlockManager {
 		GameRegistry.registerTileEntity(CrafterEntity.class, "Crafter_UT");
 		GameRegistry.registerTileEntity(EngineEntity.class, "Engine_UT");
 		GameRegistry.registerTileEntity(ReactorEntity.class, "Reactor_UT");
-		GameRegistry.registerTileEntity(CableEntity.class, "Cable_UT");
 		GameRegistry.registerTileEntity(EnergyTransformer.class, "TransFormer_UT");
 		GameRegistry.registerTileEntity(TesseractEntity.class, "Tesseract_UT");
 		GameRegistry.registerTileEntity(FermenterEntity.class, "Fermenter_UT");
@@ -233,6 +289,10 @@ public class BlockManager {
 	public static void nameBlocks(){
 		//Language
 
+		for(UT_Block b : deco){
+			Language.addName(b, "Deco Block");
+		}
+		
 		Language.addName(new ItemStack(Reactor,1,0), "Reactor Core");
 		Language.addName(new ItemStack(Reactor,1,1), "Reactor Wall");
 		Language.addName(new ItemStack(Reactor,1,2), "Reactor Tank");
@@ -279,7 +339,7 @@ public class BlockManager {
 		Language.addName(new ItemStack(Destilery,1,1), "Destilery Input");
 		Language.addName(new ItemStack(Destilery,1,2), "Destilery Output");
 
-		Language.addName(new ItemStack(Refinery,1,0), "Refinery Base");
+		Language.addName(new ItemStack(Refinery,1,0), "Refinery Base WIP");
 		Language.addName(new ItemStack(Refinery,1,1), "Refinery Structure Block");
 		Language.addName(new ItemStack(Refinery,1,2), "Refinery Core");
 		Language.addName(new ItemStack(Refinery,1,3), "Refinery Structure Block");
@@ -305,7 +365,8 @@ public class BlockManager {
 		Language.addName(Turbine, "Steam Turbine");
 		Language.addName(Pump, "Pump");
 		Language.addName(Dynamo, "FT Dynamo");
-		Language.addName(MultiTank, "Multitank");
+		Language.addName(MultiTank, "MultiTank WIP");
+		
 
 	}
 

@@ -2,7 +2,7 @@ package common.cout970.UltraTech.gui;
 
 import org.lwjgl.opengl.GL11;
 
-import common.cout970.UltraTech.TileEntities.Tier1.Printer3DEntity;
+import common.cout970.UltraTech.TileEntities.utility.Printer3DEntity;
 import common.cout970.UltraTech.containers.Printer3DContainer;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;

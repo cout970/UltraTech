@@ -3,7 +3,7 @@ package common.cout970.UltraTech.gui;
 import org.lwjgl.opengl.GL11;
 
 import api.cout970.UltraTech.network.Net_Utils;
-import common.cout970.UltraTech.TileEntities.Tier3.ReactorControllerEntity;
+import common.cout970.UltraTech.TileEntities.utility.ReactorControllerEntity;
 import common.cout970.UltraTech.lib.UT_Utils;
 import common.cout970.UltraTech.packets.PacketController;
 import net.minecraft.client.gui.inventory.GuiContainer;

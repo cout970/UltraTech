@@ -1,6 +1,6 @@
 package common.cout970.UltraTech.blocks.models;
 
-import common.cout970.UltraTech.TileEntities.Tier1.LeadPipeEntity;
+import common.cout970.UltraTech.TileEntities.fluid.LeadPipeEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;

@@ -3,7 +3,7 @@ package common.cout970.UltraTech.lib.recipes;
 import java.util.ArrayList;
 import java.util.List;
 
-import common.cout970.UltraTech.TileEntities.Tier2.PurifierEntity;
+import common.cout970.UltraTech.TileEntities.electric.PurifierEntity;
 import common.cout970.UltraTech.lib.UT_Utils;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;

@@ -2,7 +2,7 @@ package common.cout970.UltraTech.machines.renders;
 
 import org.lwjgl.opengl.GL11;
 
-import common.cout970.UltraTech.TileEntities.Tier3.HologramEmiterEntity;
+import common.cout970.UltraTech.TileEntities.utility.HologramEmiterEntity;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;

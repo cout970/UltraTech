@@ -7,10 +7,10 @@ import java.util.LinkedList;
 import java.util.Map;
 
 import common.cout970.UltraTech.lib.UT_Utils;
-import api.cout970.UltraTech.FTpower.ConnType;
-import api.cout970.UltraTech.FTpower.IPowerConductor;
-import api.cout970.UltraTech.FTpower.PowerInterface;
-import api.cout970.UltraTech.FTpower.PowerUtils;
+import api.cout970.UltraTech.Vpower.CableType;
+import api.cout970.UltraTech.Vpower.IPowerConductor;
+import api.cout970.UltraTech.Vpower.PowerInterface;
+import api.cout970.UltraTech.Vpower.PowerUtils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -30,7 +30,7 @@ import codechicken.multipart.TMultiPart;
 import codechicken.multipart.TSlottedPart;
 import codechicken.multipart.TileMultipart;
 
-public class MicroCableBig extends TMultiPart implements IPowerConductor, JNormalOcclusion, TSlottedPart, ISidedHollowConnect{
+public class MicroCableBig extends TMultiPart implements IPowerConductor, JNormalOcclusion, ISidedHollowConnect{
 
 	private static Cuboid6[]boundingBoxes = new Cuboid6[7];
 	public Map<ForgeDirection,Boolean> conn = new HashMap<ForgeDirection,Boolean>();
@@ -114,10 +114,10 @@ public class MicroCableBig extends TMultiPart implements IPowerConductor, JNorma
 		return 8;
 	}
 
-	@Override
-	public int getSlotMask() {
-		return 6;
-	}
+//	@Override
+//	public int getSlotMask() {
+//		return 6;
+//	}
 
 	//power
 	public PowerInterface cond = null;
@@ -126,8 +126,8 @@ public class MicroCableBig extends TMultiPart implements IPowerConductor, JNorma
 	public PowerInterface getPower() {
 		if(cond == null){
 			cond = new PowerInterface(tile()){
-				public ConnType getConnectionType(ForgeDirection side){
-					return ConnType.ONLY_BIG;
+				public CableType getConnectionType(ForgeDirection side){
+					return CableType.BIG_CENTER;
 				}
 			};
 		}

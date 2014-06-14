@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import api.cout970.UltraTech.network.PacketBase;
-import common.cout970.UltraTech.TileEntities.Tier1.CrafterEntity;
+import common.cout970.UltraTech.TileEntities.utility.CrafterEntity;
 import common.cout970.UltraTech.core.UltraTech;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;

@@ -1,6 +1,6 @@
 package common.cout970.UltraTech.containers;
 
-import common.cout970.UltraTech.TileEntities.Tier2.EngineEntity;
+import common.cout970.UltraTech.TileEntities.intermod.EngineEntity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;

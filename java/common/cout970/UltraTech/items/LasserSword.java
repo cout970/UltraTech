@@ -2,8 +2,8 @@ package common.cout970.UltraTech.items;
 
 import java.util.List;
 
-import api.cout970.UltraTech.FTpower.IStorageItem;
-import api.cout970.UltraTech.FTpower.ItemPower;
+import api.cout970.UltraTech.Vpower.IStorageItem;
+import api.cout970.UltraTech.Vpower.ItemPower;
 
 import com.google.common.collect.Multimap;
 
@@ -25,7 +25,7 @@ public class LasserSword extends ItemPower{
 	
 
 	public LasserSword(String name){
-		super(10000);
+		super(1250);
 		setCreativeTab(UltraTech.ResourceTab);
 		setUnlocalizedName("LasserSword");
 	}
@@ -47,8 +47,8 @@ public class LasserSword extends ItemPower{
 
 	public boolean hitEntity(ItemStack i, EntityLivingBase par2EntityLivingBase, EntityLivingBase par3EntityLivingBase)
 	{
-		if(((IStorageItem)i.getItem()).getPower(i) >= 200){
-			((IStorageItem)i.getItem()).removePower(i, 200);
+		if(((IStorageItem)i.getItem()).getPower(i) >= 25){
+			((IStorageItem)i.getItem()).removePower(i, 25);
 		}else{
 			return false;
 		}
@@ -71,8 +71,8 @@ public class LasserSword extends ItemPower{
 	{
 		if ((double)par3.getBlockHardness(par2World, par4, par5, par6) != 0.0D)
 		{
-			if(((IStorageItem)par1ItemStack.getItem()).getPower(par1ItemStack) >= 100){
-				((IStorageItem)par1ItemStack.getItem()).removePower(par1ItemStack, 100);
+			if(((IStorageItem)par1ItemStack.getItem()).getPower(par1ItemStack) >= 25){
+				((IStorageItem)par1ItemStack.getItem()).removePower(par1ItemStack, 25);
 			}else{
 				return false;
 			}
@@ -80,4 +80,9 @@ public class LasserSword extends ItemPower{
 
 		return true;
 	}
+	
+	public int getItemEnchantability()
+    {
+        return 22;
+    }
 }

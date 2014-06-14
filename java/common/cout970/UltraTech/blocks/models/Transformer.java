@@ -1,8 +1,8 @@
 package common.cout970.UltraTech.blocks.models;
 
-import api.cout970.UltraTech.FTpower.BlockConductor;
-import api.cout970.UltraTech.FTpower.Machine;
-import common.cout970.UltraTech.TileEntities.Tier2.EnergyTransformer;
+import api.cout970.UltraTech.Vpower.BlockConductor;
+import api.cout970.UltraTech.Vpower.Machine;
+import common.cout970.UltraTech.TileEntities.intermod.EnergyTransformer;
 import common.cout970.UltraTech.core.UltraTech;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

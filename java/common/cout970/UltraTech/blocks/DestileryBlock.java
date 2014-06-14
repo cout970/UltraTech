@@ -2,9 +2,9 @@ package common.cout970.UltraTech.blocks;
 
 import java.util.List;
 
-import common.cout970.UltraTech.TileEntities.Tier1.DestileryEntity;
-import common.cout970.UltraTech.TileEntities.Tier1.DestileryInEntity;
-import common.cout970.UltraTech.TileEntities.Tier1.DestileryOutEntity;
+import common.cout970.UltraTech.TileEntities.fluid.DestileryEntity;
+import common.cout970.UltraTech.TileEntities.fluid.DestileryInEntity;
+import common.cout970.UltraTech.TileEntities.fluid.DestileryOutEntity;
 import common.cout970.UltraTech.core.UltraTech;
 import common.cout970.UltraTech.multiblocks.IDestilery;
 import common.cout970.UltraTech.multiblocks.TileDestilery;

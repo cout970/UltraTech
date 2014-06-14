@@ -2,7 +2,7 @@ package common.cout970.UltraTech.machines.renders;
 
 import org.lwjgl.opengl.GL11;
 
-import common.cout970.UltraTech.TileEntities.Tier2.TankEntity;
+import common.cout970.UltraTech.TileEntities.fluid.TankEntity;
 import common.cout970.UltraTech.models.ModelFluidTank;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureMap;

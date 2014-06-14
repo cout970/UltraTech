@@ -2,7 +2,7 @@ package common.cout970.UltraTech.machines.renders;
 
 import org.lwjgl.opengl.GL11;
 
-import common.cout970.UltraTech.TileEntities.Tier2.SteamTurbineEntity;
+import common.cout970.UltraTech.TileEntities.electric.SteamTurbineEntity;
 import common.cout970.UltraTech.managers.BlockManager;
 import common.cout970.UltraTech.models.ModelTurbine;
 import net.minecraft.client.renderer.Tessellator;

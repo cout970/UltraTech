@@ -19,6 +19,13 @@ public class CoreRefinery extends TileGag{
 	public List<TileGag> MultiBlock;
 	public UT_Tank input;
 	public UT_Tank[] output = new UT_Tank[3];
+
+	public void restaureBlock(){
+		System.out.println("break");
+		worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 1, 2);
+		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+		worldObj.removeTileEntity(xCoord, yCoord, zCoord);
+	}
 	
 	public void updateEntity(){
 		super.updateEntity();

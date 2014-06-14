@@ -1,8 +1,8 @@
 package common.cout970.UltraTech.blocks.models;
 
-import api.cout970.UltraTech.FTpower.BlockConductor;
-import common.cout970.UltraTech.TileEntities.Tier1.hitBoxEntity;
-import common.cout970.UltraTech.TileEntities.Tier2.PumpEntity;
+import api.cout970.UltraTech.Vpower.BlockConductor;
+import common.cout970.UltraTech.TileEntities.electric.PumpEntity;
+import common.cout970.UltraTech.TileEntities.utility.hitBoxEntity;
 import common.cout970.UltraTech.core.UltraTech;
 import common.cout970.UltraTech.managers.BlockManager;
 import common.cout970.UltraTech.misc.IReactorPart;

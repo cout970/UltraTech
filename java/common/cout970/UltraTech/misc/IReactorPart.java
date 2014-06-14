@@ -1,6 +1,6 @@
 package common.cout970.UltraTech.misc;
 
-import common.cout970.UltraTech.TileEntities.Tier3.ReactorEntity;
+import common.cout970.UltraTech.TileEntities.utility.ReactorEntity;
 
 public interface IReactorPart {
 

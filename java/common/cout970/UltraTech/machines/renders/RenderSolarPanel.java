@@ -11,7 +11,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import org.lwjgl.opengl.GL11;
 
-import api.cout970.UltraTech.FTpower.IPowerConductor;
+import api.cout970.UltraTech.Vpower.IPowerConductor;
 import common.cout970.UltraTech.models.ModelSolarPanel;
 
 

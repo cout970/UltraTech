@@ -2,9 +2,9 @@ package common.cout970.UltraTech.machines.renders;
 
 import org.lwjgl.opengl.GL11;
 
-import common.cout970.UltraTech.TileEntities.Tier1.StorageTier1;
-import common.cout970.UltraTech.TileEntities.Tier2.StorageTier2;
-import common.cout970.UltraTech.TileEntities.Tier3.StorageTier3;
+import common.cout970.UltraTech.TileEntities.electric.StorageTier1;
+import common.cout970.UltraTech.TileEntities.electric.StorageTier2;
+import common.cout970.UltraTech.TileEntities.electric.StorageTier3;
 import common.cout970.UltraTech.models.ModelBattery;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.Entity;

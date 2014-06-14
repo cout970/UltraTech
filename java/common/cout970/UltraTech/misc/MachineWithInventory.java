@@ -1,7 +1,9 @@
 package common.cout970.UltraTech.misc;
 
-import api.cout970.UltraTech.FTpower.Machine;
-import api.cout970.UltraTech.FTpower.StorageInterface.MachineTipe;
+import common.cout970.UltraTech.lib.CostData;
+
+import api.cout970.UltraTech.Vpower.Machine;
+import api.cout970.UltraTech.Vpower.StorageInterface.MachineTipe;
 import api.cout970.UltraTech.network.SyncTile;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -22,6 +24,12 @@ public class MachineWithInventory extends Machine implements IInventory{
 	
 	public MachineWithInventory(int slots,String n,double cap,int tier) {
 		super(cap, tier);
+		inventory = new ItemStack[slots];
+		name = n;
+	}
+
+	public MachineWithInventory(int slots, String n, CostData a) {
+		super(a);
 		inventory = new ItemStack[slots];
 		name = n;
 	}

@@ -2,9 +2,10 @@ package common.cout970.UltraTech.gui;
 
 import org.lwjgl.opengl.GL11;
 
-import api.cout970.UltraTech.FTpower.Machine;
-import common.cout970.UltraTech.TileEntities.Tier3.TesseractEntity;
-import common.cout970.UltraTech.TileEntities.Tier3.TesseractEntity.T_Mode;
+import api.cout970.UltraTech.Vpower.Machine;
+import common.cout970.UltraTech.TileEntities.electric.TesseractEntity;
+import common.cout970.UltraTech.TileEntities.electric.TesseractEntity.T_Mode;
+import common.cout970.UltraTech.lib.EnergyCosts;
 import common.cout970.UltraTech.lib.UT_Utils;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -39,7 +40,7 @@ public class TesseractGui extends GuiContainer{
 		v = entity.mode.ordinal()*19;
 		drawTexturedModalRect(x, y, 176, v, 19, 19);
 		drawCenteredString(fontRendererObj, "Freq: "+entity.frequency, xStart+65, yStart+24, UT_Utils.RGBtoInt(255, 255, 255));
-		drawCenteredString(fontRendererObj, ""+((int)entity.getEnergy())+"FT", xStart+65, yStart+47, UT_Utils.RGBtoInt(255, 255, 255));
+		drawCenteredString(fontRendererObj, ""+((int)entity.getEnergy())+EnergyCosts.E, xStart+65, yStart+47, UT_Utils.RGBtoInt(255, 255, 255));
 		
 		this.drawCenteredString(fontRendererObj, "Tesseract", xStart+85, yStart+4, UT_Utils.RGBtoInt(255, 255, 255));
 	}

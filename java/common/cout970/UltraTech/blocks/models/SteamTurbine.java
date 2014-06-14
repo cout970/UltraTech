@@ -1,8 +1,8 @@
 package common.cout970.UltraTech.blocks.models;
 
-import api.cout970.UltraTech.FTpower.BlockConductor;
+import api.cout970.UltraTech.Vpower.BlockConductor;
 import buildcraft.api.tools.IToolWrench;
-import common.cout970.UltraTech.TileEntities.Tier2.SteamTurbineEntity;
+import common.cout970.UltraTech.TileEntities.electric.SteamTurbineEntity;
 import common.cout970.UltraTech.core.UltraTech;
 import common.cout970.UltraTech.proxy.ClientProxy;
 import cpw.mods.fml.relauncher.Side;

@@ -1,6 +1,6 @@
 package common.cout970.UltraTech.items;
 
-import common.cout970.UltraTech.TileEntities.Tier3.MinerEntity;
+import common.cout970.UltraTech.TileEntities.electric.MinerEntity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;

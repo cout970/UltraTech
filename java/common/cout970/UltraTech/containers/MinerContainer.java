@@ -1,7 +1,7 @@
 package common.cout970.UltraTech.containers;
 
 
-import common.cout970.UltraTech.TileEntities.Tier3.MinerEntity;
+import common.cout970.UltraTech.TileEntities.electric.MinerEntity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;

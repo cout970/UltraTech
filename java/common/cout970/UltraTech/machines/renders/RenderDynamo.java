@@ -2,7 +2,7 @@ package common.cout970.UltraTech.machines.renders;
 
 import org.lwjgl.opengl.GL11;
 
-import common.cout970.UltraTech.TileEntities.Tier2.DynamoEntity;
+import common.cout970.UltraTech.TileEntities.intermod.DynamoEntity;
 import common.cout970.UltraTech.lib.RenderUtil;
 import common.cout970.UltraTech.models.ModelDynamo;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;

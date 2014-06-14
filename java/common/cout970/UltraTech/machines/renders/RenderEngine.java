@@ -2,7 +2,7 @@ package common.cout970.UltraTech.machines.renders;
 
 import org.lwjgl.opengl.GL11;
 
-import common.cout970.UltraTech.TileEntities.Tier2.EngineEntity;
+import common.cout970.UltraTech.TileEntities.intermod.EngineEntity;
 import common.cout970.UltraTech.models.ModelEngine_FT;
 import common.cout970.UltraTech.models.NewEngine;
 import net.minecraft.client.model.ModelRenderer;

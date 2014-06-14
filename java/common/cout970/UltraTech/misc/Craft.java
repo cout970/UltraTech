@@ -1,6 +1,6 @@
 package common.cout970.UltraTech.misc;
 
-import common.cout970.UltraTech.TileEntities.Tier1.CrafterEntity;
+import common.cout970.UltraTech.TileEntities.utility.CrafterEntity;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;

@@ -5,7 +5,8 @@ import java.util.List;
 
 import org.lwjgl.opengl.GL11;
 
-import common.cout970.UltraTech.TileEntities.Tier1.BoilerEntity;
+import common.cout970.UltraTech.TileEntities.electric.BoilerEntity;
+import common.cout970.UltraTech.lib.EnergyCosts;
 import common.cout970.UltraTech.lib.UT_Utils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -77,7 +78,7 @@ public class BoilerGui extends GuiContainer{
         //text
         if(UT_Utils.isIn(i, j, xStart+14, yStart+15, 25, 50)){
         	List<String> energy = new ArrayList<String>();
-        	energy.add("Energy: "+((int)entity.getEnergy())+"FT");
+        	energy.add("Energy: "+((int)entity.getEnergy())+EnergyCosts.E);
         	this.drawHoveringText(energy, i, j, fontRendererObj);
         }
         if(UT_Utils.isIn(i, j, xStart+45, yStart+20, 20, 40)){//storage

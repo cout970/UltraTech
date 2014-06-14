@@ -3,7 +3,7 @@ package common.cout970.UltraTech.blocks;
 import java.util.List;
 import java.util.Random;
 
-import common.cout970.UltraTech.TileEntities.Tier1.hitBoxEntity;
+import common.cout970.UltraTech.TileEntities.utility.hitBoxEntity;
 import common.cout970.UltraTech.core.UltraTech;
 import common.cout970.UltraTech.managers.BlockManager;
 import cpw.mods.fml.relauncher.Side;

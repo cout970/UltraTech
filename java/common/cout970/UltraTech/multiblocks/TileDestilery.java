@@ -2,7 +2,7 @@ package common.cout970.UltraTech.multiblocks;
 
 import api.cout970.UltraTech.network.Net_Utils;
 import api.cout970.UltraTech.network.SyncTile;
-import common.cout970.UltraTech.TileEntities.Tier1.DestileryInEntity;
+import common.cout970.UltraTech.TileEntities.fluid.DestileryInEntity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 

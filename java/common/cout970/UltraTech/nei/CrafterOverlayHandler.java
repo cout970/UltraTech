@@ -1,7 +1,7 @@
 package common.cout970.UltraTech.nei;
 
 import api.cout970.UltraTech.network.Net_Utils;
-import common.cout970.UltraTech.TileEntities.Tier1.CrafterEntity;
+import common.cout970.UltraTech.TileEntities.utility.CrafterEntity;
 import common.cout970.UltraTech.gui.CrafterGui;
 import common.cout970.UltraTech.lib.UT_Utils;
 import common.cout970.UltraTech.packets.PacketCrafter;

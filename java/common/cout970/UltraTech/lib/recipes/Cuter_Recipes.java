@@ -5,7 +5,7 @@ import java.util.List;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
-import common.cout970.UltraTech.TileEntities.Tier2.CutterEntity;
+import common.cout970.UltraTech.TileEntities.electric.CutterEntity;
 import common.cout970.UltraTech.lib.UT_Utils;
 
 public class Cuter_Recipes{

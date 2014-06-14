@@ -1,8 +1,8 @@
 package common.cout970.UltraTech.packets;
 
 import api.cout970.UltraTech.network.PacketBase;
-import common.cout970.UltraTech.TileEntities.Tier3.TesseractEntity;
-import common.cout970.UltraTech.TileEntities.Tier3.TesseractEntity.T_Mode;
+import common.cout970.UltraTech.TileEntities.electric.TesseractEntity;
+import common.cout970.UltraTech.TileEntities.electric.TesseractEntity.T_Mode;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import net.minecraft.entity.player.EntityPlayer;

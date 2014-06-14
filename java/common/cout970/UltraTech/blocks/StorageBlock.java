@@ -2,14 +2,14 @@ package common.cout970.UltraTech.blocks;
 
 import java.util.List;
 
-import api.cout970.UltraTech.FTpower.BlockConductor;
-import api.cout970.UltraTech.FTpower.IPowerConductor;
-import api.cout970.UltraTech.FTpower.IStorageItem;
-import api.cout970.UltraTech.FTpower.Machine;
-import api.cout970.UltraTech.FTpower.StorageInterface;
-import common.cout970.UltraTech.TileEntities.Tier1.StorageTier1;
-import common.cout970.UltraTech.TileEntities.Tier2.StorageTier2;
-import common.cout970.UltraTech.TileEntities.Tier3.StorageTier3;
+import api.cout970.UltraTech.Vpower.BlockConductor;
+import api.cout970.UltraTech.Vpower.IPowerConductor;
+import api.cout970.UltraTech.Vpower.IStorageItem;
+import api.cout970.UltraTech.Vpower.Machine;
+import api.cout970.UltraTech.Vpower.StorageInterface;
+import common.cout970.UltraTech.TileEntities.electric.StorageTier1;
+import common.cout970.UltraTech.TileEntities.electric.StorageTier2;
+import common.cout970.UltraTech.TileEntities.electric.StorageTier3;
 import common.cout970.UltraTech.core.UltraTech;
 import common.cout970.UltraTech.proxy.ClientProxy;
 import cpw.mods.fml.relauncher.Side;

@@ -6,7 +6,7 @@ import net.minecraft.item.ItemStack;
 public class UT_ItemBlockOre extends UT_ItemBlock{
 
 	public final static String[] subNames = {
-		"Radionite","Aluminum","Copper","Tin","Lead","Silver"
+		"Radionite","Aluminum","Copper","Tin","Lead","Silver","Sulfur"
 	};
 	
 	public UT_ItemBlockOre(Block par1) {
