@@ -1,7 +1,7 @@
 package common.cout970.UltraTech.blocks.models;
 
-import api.cout970.UltraTech.Vpower.BlockConductor;
-import api.cout970.UltraTech.Vpower.Machine;
+import api.cout970.UltraTech.Wpower.BlockConductor;
+import api.cout970.UltraTech.Wpower.Machine;
 import buildcraft.api.tools.IToolWrench;
 import common.cout970.UltraTech.TileEntities.electric.WindMillEntity;
 import common.cout970.UltraTech.TileEntities.utility.hitBoxEntity;

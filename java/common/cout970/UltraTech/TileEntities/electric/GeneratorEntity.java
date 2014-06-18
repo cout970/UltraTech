@@ -1,9 +1,9 @@
 package common.cout970.UltraTech.TileEntities.electric;
 
 
-import api.cout970.UltraTech.Vpower.Machine;
-import api.cout970.UltraTech.Vpower.StorageInterface;
-import api.cout970.UltraTech.Vpower.StorageInterface.MachineTipe;
+import api.cout970.UltraTech.Wpower.Machine;
+import api.cout970.UltraTech.Wpower.StorageInterface;
+import api.cout970.UltraTech.Wpower.StorageInterface.MachineTipe;
 import api.cout970.UltraTech.network.Net_Utils;
 import common.cout970.UltraTech.lib.EnergyCosts;
 import common.cout970.UltraTech.lib.CostData;
@@ -49,7 +49,6 @@ public class GeneratorEntity extends MachineWithInventory{
 			}else{
 				if(heat > 25)heat-=0.1+heat/maxHeat;
 			}
-
 			if(Progres <= 0){
 				if(inventory[0] != null){
 					int fuel = TileEntityFurnace.getItemBurnTime(inventory[0]);
@@ -74,11 +73,12 @@ public class GeneratorEntity extends MachineWithInventory{
 					}
 				}
 			}
-
+			
 			if(change){
 				on = Progres > 0;
-							Net_Utils.sendUpdate(this);
+				Net_Utils.sendUpdate(this);
 			}
+			
 		}
 	}
 

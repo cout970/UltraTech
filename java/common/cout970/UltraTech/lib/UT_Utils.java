@@ -36,8 +36,10 @@ public class UT_Utils {
 		if(a == null && b == null)return true;
 		if(a != null && b != null){
 			if(OreDictionary.itemMatches(a, b, meta))return true;
-			if(OreDictionary.getOreID(a) != -1 && OreDictionary.getOreID(b) != -1){
-				if(OreDictionary.getOreID(a) == OreDictionary.getOreID(b))return true;
+			if(OreDictionary.getOreIDs(a).length != 0 && OreDictionary.getOreIDs(b).length != 0){
+				for(int i : OreDictionary.getOreIDs(a)){
+					for(int j : OreDictionary.getOreIDs(b))if(i == j)return true;
+				}
 			}
 		}
 		return false;

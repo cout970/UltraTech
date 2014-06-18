@@ -1,6 +1,6 @@
 package common.cout970.UltraTech.TileEntities.utility;
 
-import api.cout970.UltraTech.Vpower.Machine;
+import api.cout970.UltraTech.Wpower.Machine;
 import api.cout970.UltraTech.network.SyncTile;
 import net.minecraft.util.AxisAlignedBB;
 import common.cout970.UltraTech.machines.renders.Map;

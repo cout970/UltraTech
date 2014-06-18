@@ -3,12 +3,11 @@ package common.cout970.UltraTech.TileEntities.intermod;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
-import api.cout970.UltraTech.Vpower.CableType;
-import api.cout970.UltraTech.Vpower.Machine;
+import api.cout970.UltraTech.Wpower.CableType;
+import api.cout970.UltraTech.Wpower.Machine;
 import api.cout970.UltraTech.network.Net_Utils;
 import cofh.api.energy.EnergyStorage;
 import cofh.api.energy.IEnergyHandler;
-
 import common.cout970.UltraTech.lib.CostData;
 import common.cout970.UltraTech.lib.UT_Utils;
 

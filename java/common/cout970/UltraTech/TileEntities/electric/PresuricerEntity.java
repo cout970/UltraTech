@@ -1,6 +1,6 @@
 package common.cout970.UltraTech.TileEntities.electric;
 
-import api.cout970.UltraTech.Vpower.Machine;
+import api.cout970.UltraTech.Wpower.Machine;
 import common.cout970.UltraTech.containers.PresuricerContaner;
 import common.cout970.UltraTech.lib.CostData;
 import common.cout970.UltraTech.lib.EnergyCosts;

@@ -13,7 +13,7 @@ package common.cout970.UltraTech.models;
 
 import java.util.Map;
 
-import common.cout970.UltraTech.microparts.MicroCableBig;
+import api.cout970.UltraTech.microparts.MicroCableBig;
 import codechicken.lib.vec.Vector3;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;

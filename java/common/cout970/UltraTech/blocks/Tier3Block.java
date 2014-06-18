@@ -3,8 +3,8 @@ package common.cout970.UltraTech.blocks;
 import java.util.List;
 import java.util.Random;
 
-import api.cout970.UltraTech.Vpower.BlockConductor;
-import api.cout970.UltraTech.Vpower.Machine;
+import api.cout970.UltraTech.Wpower.BlockConductor;
+import api.cout970.UltraTech.Wpower.Machine;
 import buildcraft.api.tools.IToolWrench;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;

@@ -1,9 +1,8 @@
 package common.cout970.UltraTech.misc;
 
 import common.cout970.UltraTech.lib.CostData;
-
-import api.cout970.UltraTech.Vpower.Machine;
-import api.cout970.UltraTech.Vpower.StorageInterface.MachineTipe;
+import api.cout970.UltraTech.Wpower.Machine;
+import api.cout970.UltraTech.Wpower.StorageInterface.MachineTipe;
 import api.cout970.UltraTech.network.SyncTile;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;

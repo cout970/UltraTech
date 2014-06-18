@@ -2,8 +2,8 @@ package common.cout970.UltraTech.items;
 
 import java.util.List;
 
-import api.cout970.UltraTech.Vpower.IStorageItem;
-import api.cout970.UltraTech.Vpower.ItemPower;
+import api.cout970.UltraTech.Wpower.IStorageItem;
+import api.cout970.UltraTech.Wpower.ItemPower;
 
 import com.google.common.collect.Multimap;
 

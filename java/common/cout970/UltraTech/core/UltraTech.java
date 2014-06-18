@@ -1,12 +1,14 @@
 package common.cout970.UltraTech.core;
 
 
+import api.cout970.UltraTech.microparts.MicroRegistry;
 import api.cout970.UltraTech.network.Net_Utils;
 import api.cout970.UltraTech.network.PacketUpdate;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Configuration;
+import common.cout970.UltraTech.handlers.FuelHandler;
 //import net.minecraftforge.common.Configuration;
 import common.cout970.UltraTech.handlers.GuiHandler;
 import common.cout970.UltraTech.handlers.WorldGen;
@@ -15,7 +17,6 @@ import common.cout970.UltraTech.managers.CompatibilityManager;
 import common.cout970.UltraTech.managers.ConfigManager;
 import common.cout970.UltraTech.managers.CraftManager;
 import common.cout970.UltraTech.managers.ItemManager;
-import common.cout970.UltraTech.microparts.MicroRegistry;
 import common.cout970.UltraTech.packets.PacketClimateStation;
 import common.cout970.UltraTech.packets.PacketController;
 import common.cout970.UltraTech.packets.PacketCrafter;
@@ -55,7 +56,7 @@ public class UltraTech {
 	public static final CreativeTabs ResourceTab = new CreativeTabs("UltraTech Resources"){
 
 		public ItemStack getIconItemStack() {
-			return new ItemStack(ItemManager.ItemName.get("Plate"), 1, 7);
+			return new ItemStack(ItemManager.ItemName.get("MetalPlate"), 1, 4);
 		}
 
 		@SideOnly(Side.CLIENT)
@@ -149,9 +150,12 @@ public class UltraTech {
 		BlockManager.RegisterBlocks();
 		if (Loader.isModLoaded("ForgeMultipart")) {
             new MicroRegistry().load();
+        }else{
+        	
         }
 //		Language.setupLangFile(); //for lag file only in debug
 		CompatibilityManager.initCompatibilitys();
+		GameRegistry.registerFuelHandler(new FuelHandler());
 		CraftManager.registerCraft();
 		GameRegistry.registerWorldGenerator(new WorldGen(), 10);
 		proxy.registerRenders();

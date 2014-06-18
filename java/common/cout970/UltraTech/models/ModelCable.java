@@ -9,8 +9,8 @@ package common.cout970.UltraTech.models;
 import java.util.HashMap;
 import java.util.Map;
 
+import api.cout970.UltraTech.microparts.MicroCablePlane;
 import codechicken.lib.vec.Vector3;
-import common.cout970.UltraTech.microparts.MicroCablePlane;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;

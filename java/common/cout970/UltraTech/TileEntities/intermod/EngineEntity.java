@@ -2,7 +2,7 @@ package common.cout970.UltraTech.TileEntities.intermod;
 
 import common.cout970.UltraTech.lib.EnergyCosts;
 import common.cout970.UltraTech.lib.UT_Utils;
-import api.cout970.UltraTech.Vpower.Machine;
+import api.cout970.UltraTech.Wpower.Machine;
 import api.cout970.UltraTech.network.Net_Utils;
 import buildcraft.api.mj.IBatteryObject;
 import buildcraft.api.mj.MjAPI;

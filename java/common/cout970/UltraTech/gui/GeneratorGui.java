@@ -57,7 +57,8 @@ public class GeneratorGui extends GuiContainer{
         String h = ((int)this.entity.heat)+"C";
         this.fontRendererObj.drawString(h, 137-fontRendererObj.getStringWidth(h), 29, 4210752);
         int e = (int)(entity.heat*10/entity.maxHeat);
-        String p = e+"FT/t";
+        if(entity.Progres <= 0)e = 0;
+        String p = e+EnergyCosts.E+"/t";
         this.fontRendererObj.drawString(p, 115-fontRendererObj.getStringWidth(h)/2, 55, 4210752);
         
       //text

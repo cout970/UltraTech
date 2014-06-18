@@ -1,9 +1,9 @@
 package common.cout970.UltraTech.TileEntities.electric;
 
-import api.cout970.UltraTech.Vpower.IPowerConductor;
-import api.cout970.UltraTech.Vpower.Machine;
-import api.cout970.UltraTech.Vpower.PowerInterface;
-import api.cout970.UltraTech.Vpower.StorageInterface;
+import api.cout970.UltraTech.Wpower.IPowerConductor;
+import api.cout970.UltraTech.Wpower.Machine;
+import api.cout970.UltraTech.Wpower.PowerInterface;
+import api.cout970.UltraTech.Wpower.StorageInterface;
 import common.cout970.UltraTech.lib.EnergyCosts;
 import common.cout970.UltraTech.lib.CostData;
 import common.cout970.UltraTech.managers.ItemManager;

@@ -3,11 +3,11 @@ package common.cout970.UltraTech.TileEntities.electric;
 import common.cout970.UltraTech.lib.CostData;
 import common.cout970.UltraTech.lib.EnergyCosts;
 import common.cout970.UltraTech.misc.MachineWithInventory;
-import api.cout970.UltraTech.Vpower.IPowerConductor;
-import api.cout970.UltraTech.Vpower.IStorageItem;
-import api.cout970.UltraTech.Vpower.PowerInterface;
-import api.cout970.UltraTech.Vpower.StorageInterface;
-import api.cout970.UltraTech.Vpower.StorageInterface.MachineTipe;
+import api.cout970.UltraTech.Wpower.IPowerConductor;
+import api.cout970.UltraTech.Wpower.IStorageItem;
+import api.cout970.UltraTech.Wpower.PowerInterface;
+import api.cout970.UltraTech.Wpower.StorageInterface;
+import api.cout970.UltraTech.Wpower.StorageInterface.MachineTipe;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -26,9 +26,9 @@ public class ChargeStationEntity extends MachineWithInventory implements IPowerC
 			if(inventory[u] != null){
 				if(inventory[u].getItem() instanceof IStorageItem){
 					IStorageItem b = ((IStorageItem)inventory[u].getItem());
-					double space = b.getMaxPower()-b.getPower(inventory[u]);
-					double flow = Math.min(CostData.Charge_Station.use, space);
-					double drain = Math.min(flow, getEnergy());
+					int space = b.getMaxPower()-b.getPower(inventory[u]);
+					int flow = (int) Math.min(CostData.Charge_Station.use, space);
+					int drain = (int) Math.min(flow, getEnergy());
 					if(drain >= 1){
 						b.addPower(inventory[u], drain);
 						this.removeEnergy(drain);
@@ -42,8 +42,8 @@ public class ChargeStationEntity extends MachineWithInventory implements IPowerC
 				if(inventory[u].getItem() instanceof IStorageItem){
 					IStorageItem b = ((IStorageItem)inventory[u].getItem());
 					double space = maxEnergy() - getEnergy();
-					double flow = Math.min(CostData.Charge_Station.use,space);
-					double fill = Math.min(flow, b.getPower(inventory[u]));
+					int flow = (int) Math.min(CostData.Charge_Station.use,space);
+					int fill = Math.min(flow, b.getPower(inventory[u]));
 					if(fill >= 1){
 						addEnergy(fill);
 						b.removePower(inventory[u],fill);

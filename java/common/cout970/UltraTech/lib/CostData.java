@@ -1,6 +1,6 @@
 package common.cout970.UltraTech.lib;
 
-import api.cout970.UltraTech.Vpower.StorageInterface.MachineTipe;
+import api.cout970.UltraTech.Wpower.StorageInterface.MachineTipe;
 
 public enum CostData {
 	/**
@@ -22,7 +22,9 @@ public enum CostData {
 	Miner    		(  800d	,3	,15.2d		,0),
 	Dynamo     		(  400d	,2	,1d			,0),
 	Tesseract		( 1250d ,3	,0			,0),
-	WindMill		(  200d ,2	,1/6			,1),
+	WindMill		(  200d ,2	,1/6		,1),
+	LavaGenerator   (  200d	,2	,1			,1),
+	
 	Storage_1		( 	20000d	,1	,0			,2),
 	Storage_2		(  120000d	,2	,0			,2),
 	Storage_3		( 1200000d	,3	,0			,2);

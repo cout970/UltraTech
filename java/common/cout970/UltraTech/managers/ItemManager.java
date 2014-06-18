@@ -11,20 +11,23 @@ import net.minecraftforge.common.config.Configuration;
 //import net.minecraftforge.common.Configuration;
 import common.cout970.UltraTech.items.AutoEjectUpgrade;
 import common.cout970.UltraTech.items.FortuneUpgrade;
-import common.cout970.UltraTech.items.HidrogenBattery;
+import common.cout970.UltraTech.items.Battery;
 import common.cout970.UltraTech.items.LasserSword;
 import common.cout970.UltraTech.items.Linker;
+import common.cout970.UltraTech.items.MetalPlate;
 import common.cout970.UltraTech.items.MiningUpgrade;
 import common.cout970.UltraTech.items.ProcesedFood;
 import common.cout970.UltraTech.items.RadioniteCell;
 import common.cout970.UltraTech.items.RangeUpgrade;
 import common.cout970.UltraTech.items.SilkTouchUpgrade;
 import common.cout970.UltraTech.items.SpeedUpgrade;
+import common.cout970.UltraTech.items.Tablet;
 import common.cout970.UltraTech.items.UT_Chunk;
 import common.cout970.UltraTech.items.UT_Dust;
 import common.cout970.UltraTech.items.UT_Ingot;
 import common.cout970.UltraTech.items.UT_Item;
 import common.cout970.UltraTech.items.UT_Plate;
+import common.cout970.UltraTech.items.UnorganicPlate;
 import common.cout970.UltraTech.misc.ItemInfo;
 import common.cout970.UltraTech.misc.ItemInfo.ItemTipe;
 import common.cout970.UltraTech.proxy.Language;
@@ -47,7 +50,8 @@ public class ItemManager {
 		Reg("Chunk", "Chunk", false);
 		
 		//plates
-		Reg("Plate", "Plate", false);
+		Reg("MetalPlate", "Metal Plate", false);
+		Reg("UnorganicPlate", "Unorganic Plate", false);
 		Reg("GrafenoPlate", "Grafeno Plate", true);
 		
 		//pieces
@@ -72,9 +76,10 @@ public class ItemManager {
 		//other
 		Reg("Linker", "Linker", false);
 		Reg("RadioniteCell", "Radionite Cell", false);
-		Reg("HidrogenBattery", "Hidrogen Battery", false);
+		Reg("Battery", "Battery", false);
 		Reg("LasserSword", "Lasser Sword", false);
 		Reg("ProcesedFood", "Procesed Food", false);
+		Reg("Tablet", "Tablet", false);
 		
 		
 		//added
@@ -112,8 +117,10 @@ public class ItemManager {
 	private static void LangException(Item it, String a) {
 		if(a == "Chunk"){
 			for(int meta = 0;meta < UT_Chunk.names.length;meta++)Language.addName(new ItemStack(it,1,meta), "Dirty "+UT_Chunk.names[meta]);
-		}else if(a == "Plate"){
-			for(int meta = 0;meta < UT_Plate.names.length;meta++)Language.addName(new ItemStack(it,1,meta), UT_Plate.names[meta]);
+		}else if(a == "MetalPlate"){
+			for(int meta = 0;meta < MetalPlate.names.length;meta++)Language.addName(new ItemStack(it,1,meta), MetalPlate.names[meta]+" Plate");
+		}else if(a == "UnorganicPlate"){
+			for(int meta = 0;meta < UnorganicPlate.names.length;meta++)Language.addName(new ItemStack(it,1,meta), UnorganicPlate.names[meta]+" Plate");
 		}else if(a == "Ingot"){
 			for(int meta = 0;meta < UT_Ingot.names.length;meta++)Language.addName(new ItemStack(it,1,meta), UT_Ingot.names[meta]);
 		}else if(a == "Dust"){
@@ -129,8 +136,10 @@ public class ItemManager {
 			return new UT_Chunk();
 		if(a=="Dust")
 			return new UT_Dust();
-		if(a=="Plate")
-			return new UT_Plate();
+		if(a=="MetalPlate")
+			return new MetalPlate();
+		if(a=="UnorganicPlate")
+			return new UnorganicPlate();
 		if(a=="SpeedUpgrade")
 			return new SpeedUpgrade(i.name);
 		if(a=="MiningUpgrade")
@@ -143,8 +152,8 @@ public class ItemManager {
 			return new Linker(i.name);
 		if(a=="RadioniteCell")
 			return new RadioniteCell(i.name);
-		if(a=="HidrogenBattery")
-			return new HidrogenBattery(i.name);
+		if(a=="Battery")
+			return new Battery(i.name);
 		if(a=="LasserSword")
 			return new LasserSword(i.name);
 		if(a=="FortuneUpgrade")
@@ -153,6 +162,8 @@ public class ItemManager {
 			return new ProcesedFood();
 		if(a=="SilkTouchUpgrade")
 			return new SilkTouchUpgrade(i.name);
+		if(a=="Tablet")
+			return new Tablet(i.name);
 		return null;
 	}
 

@@ -102,6 +102,7 @@ public class OreBlock extends Block{
 	
 	@Override
 	public int damageDropped (int metadata) {
+		if(metadata == 6)return 0;
 		return metadata;
 	}
 	

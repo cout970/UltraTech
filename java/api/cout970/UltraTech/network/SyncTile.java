@@ -1,7 +1,7 @@
 package api.cout970.UltraTech.network;
 
-import api.cout970.UltraTech.Vpower.IPowerConductor;
-import api.cout970.UltraTech.Vpower.StorageInterface;
+import api.cout970.UltraTech.Wpower.IPowerConductor;
+import api.cout970.UltraTech.Wpower.StorageInterface;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.nbt.NBTTagCompound;
@@ -9,11 +9,20 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.ForgeInternalHandler;
+import net.minecraftforge.common.ForgeVersion;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.network.ForgeNetworkHandler;
+import net.minecraftforge.transformers.ForgeAccessTransformer;
 
 public class SyncTile extends TileEntity{
 
 	public void Sync(){
-		Net_Utils.sendUpdate(this);
+//		System.out.println(this.worldObj.getBlock(xCoord, yCoord, zCoord));
+		if(!this.worldObj.isRemote){
+			markDirty();
+			Net_Utils.sendUpdate(this);
+		}
 	}
 	
 	public Packet getDescriptionPacket(){

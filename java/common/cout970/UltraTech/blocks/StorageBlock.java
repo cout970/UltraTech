@@ -2,11 +2,11 @@ package common.cout970.UltraTech.blocks;
 
 import java.util.List;
 
-import api.cout970.UltraTech.Vpower.BlockConductor;
-import api.cout970.UltraTech.Vpower.IPowerConductor;
-import api.cout970.UltraTech.Vpower.IStorageItem;
-import api.cout970.UltraTech.Vpower.Machine;
-import api.cout970.UltraTech.Vpower.StorageInterface;
+import api.cout970.UltraTech.Wpower.BlockConductor;
+import api.cout970.UltraTech.Wpower.IPowerConductor;
+import api.cout970.UltraTech.Wpower.IStorageItem;
+import api.cout970.UltraTech.Wpower.Machine;
+import api.cout970.UltraTech.Wpower.StorageInterface;
 import common.cout970.UltraTech.TileEntities.electric.StorageTier1;
 import common.cout970.UltraTech.TileEntities.electric.StorageTier2;
 import common.cout970.UltraTech.TileEntities.electric.StorageTier3;
@@ -85,9 +85,7 @@ public class StorageBlock extends BlockConductor{
 			if(tile != null){ 
 				ItemStack it = entityplayer.getCurrentEquippedItem();
 				if(it != null && it.getItem() instanceof IStorageItem){
-					((StorageInterface) ((IPowerConductor)tile).getPower()).addCharge(((IStorageItem)it.getItem()).getPower(it));
-					((IStorageItem)it.getItem()).removePower(it, ((IStorageItem)it.getItem()).getPower(it));
-					return true;
+					return false;
 				}else{
 					entityplayer.openGui(UltraTech.instance, 13, world, i, j, k);
 				return true;

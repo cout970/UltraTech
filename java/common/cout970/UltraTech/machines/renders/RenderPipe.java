@@ -2,30 +2,51 @@ package common.cout970.UltraTech.machines.renders;
 
 import org.lwjgl.opengl.GL11;
 
+import api.cout970.UltraTech.fluids.TankConection;
+import common.cout970.UltraTech.TileEntities.fluid.CopperPipeEntity;
 import common.cout970.UltraTech.models.ModelPipe;
+import common.cout970.UltraTech.models.ModelPipeBase;
+import common.cout970.UltraTech.models.ModelPipeIn;
 import common.cout970.UltraTech.models.ModelPump;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class RenderPipe extends TileEntitySpecialRenderer{
 
 	private ModelPipe model;
+	private ModelPipeIn in;
+	private ModelPipeBase base;
 
 	public RenderPipe(){
 		super();
 		model = new ModelPipe();
+		in = new ModelPipeIn();
+		base = new ModelPipeBase();
 	}
 
 	@Override
 	public void renderTileEntityAt(TileEntity te, double x, double y,
 			double z, float f) {
 		GL11.glPushMatrix();
-		bindTexture(new ResourceLocation("ultratech:textures/misc/pipe.png"));
+		
 		GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
 		GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
-		model.renderModel(0.0625F, te.getWorldObj(), te.xCoord, te.yCoord, te.zCoord);
+		boolean[] a = new boolean[6];
+		boolean[] b = new boolean[6];
+		CopperPipeEntity p = (CopperPipeEntity) te;
+		for(TankConection t : p.connections){
+			b[t.side.ordinal()] = true;
+		}
+		for(ForgeDirection t : p.pipes){
+			a[t.ordinal()] = true;
+		}
+		bindTexture(new ResourceLocation("ultratech:textures/misc/fluids/pipebase.png"));
+		base.render(0.0625f, a);
+		bindTexture(new ResourceLocation("ultratech:textures/misc/fluids/pipe.png"));
+		model.render(0.0625f,a, b);
 		GL11.glPopMatrix();
 	}
 

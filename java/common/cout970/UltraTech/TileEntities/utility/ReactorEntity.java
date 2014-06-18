@@ -4,7 +4,7 @@ package common.cout970.UltraTech.TileEntities.utility;
 import java.util.ArrayList;
 import java.util.List;
 
-import api.cout970.UltraTech.Vpower.Machine;
+import api.cout970.UltraTech.Wpower.Machine;
 import api.cout970.UltraTech.network.Net_Utils;
 import common.cout970.UltraTech.lib.EnergyCosts;
 import common.cout970.UltraTech.lib.UT_Utils;

@@ -14,16 +14,25 @@ import net.minecraftforge.fluids.IFluidHandler;
 public class TankEntity extends SyncTile implements IFluidHandler{
 
 	private UT_Tank storage;
+	private boolean FluidChange = true;
 
 	public UT_Tank getTank(){
 		if(storage == null)storage = new UT_Tank(16000, this);
 		return storage;
 	}
+	
+	public void updateEntity(){
+		if(worldObj.getTotalWorldTime()%20 == 0 && FluidChange){
+			FluidChange = false;
+			Sync();
+		}
+	}
 
 	@Override
 	public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
 		int f = getTank().fill(resource, doFill);
-		Sync();
+		if(f > 0)
+			FluidChange = true;
 		return f;
 	}
 
@@ -37,7 +46,9 @@ public class TankEntity extends SyncTile implements IFluidHandler{
 	@Override
 	public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain) {
 		FluidStack f = getTank().drain(maxDrain, doDrain);
-		Sync();
+		if(f != null && f.amount > 0){
+			FluidChange = true;
+		}
 		return f;
 	}
 

@@ -3,10 +3,11 @@ package common.cout970.UltraTech.TileEntities.electric;
 import java.util.ArrayList;
 import java.util.List;
 
-import api.cout970.UltraTech.Vpower.Machine;
+import api.cout970.UltraTech.Wpower.Machine;
 import buildcraft.api.transport.IPipeTile;
 import buildcraft.api.transport.IPipeTile.PipeType;
 import common.cout970.UltraTech.containers.MinerContainer;
+import common.cout970.UltraTech.lib.Control;
 import common.cout970.UltraTech.lib.CostData;
 import common.cout970.UltraTech.lib.EnergyCosts;
 import common.cout970.UltraTech.misc.MachineWithInventory;
@@ -62,12 +63,12 @@ public class MinerEntity extends MachineWithInventory implements IInventory{
 	public void updateEntity(){
 		super.updateEntity();
 		if(this.worldObj.isRemote)return;
-		
+		ex_Inv=null;
 		if(ex_Inv == null){
 			searchInventories();
 		}
 		if(eject && !isEmpty()){
-			expulse();
+			for(int g =0;g<2;g++)expulse();
 		}
 		
 		if(!blocked){
@@ -76,7 +77,7 @@ public class MinerEntity extends MachineWithInventory implements IInventory{
 				hasMine = true;
 			}
 			if(!hasEnergy){
-				hasEnergy = this.getEnergy() >= CostData.Miner.use;
+				hasEnergy = this.getEnergy() >= CostData.Miner.use || Control.debug;
 			}
 			boolean changes = false;
 			
@@ -87,7 +88,11 @@ public class MinerEntity extends MachineWithInventory implements IInventory{
 					changes = true;
 					hasEnergy = false;
 					BreakNextBlock();
+					
 				}
+			}
+			if(Control.debug){
+				for(int i = 0;i<25;i++)BreakNextBlock();
 			}
 
 			if (changes)

@@ -21,12 +21,14 @@ public class WorldGen implements IWorldGenerator{
 		case -1:
 		    generateNether(world, random, chunkX * 16, chunkZ * 16);
 		    break;
-		case 0:
-		    generateSurface(world, random, chunkX * 16, chunkZ * 16);
-		    break;
 		case 1:
 //		    generateEnd(world, random, chunkX * 16, chunkZ * 16);
 		    break;
+		default:{
+			generateSurface(world, random, chunkX * 16, chunkZ * 16);
+//			generateShip(random, chunkX * 16, chunkZ * 16, world);
+//			if(chunkX%4==0)if(chunkZ%4==0)generateOil(random, chunkX * 16, chunkZ * 16, world);
+		}
 		}
 	}
 
@@ -37,6 +39,16 @@ public class WorldGen implements IWorldGenerator{
 			int firstBlockZCoord = j + random.nextInt(16);
 			(new WorldGenMinable(BlockManager.Ores,0,4,Blocks.netherrack)).generate(world, random, firstBlockXCoord, firstBlockYCoord, firstBlockZCoord);
 		}
+		for(int k = 0; k < 5; k++) {
+			int firstBlockXCoord = i + random.nextInt(16);
+			int firstBlockYCoord = random.nextInt(10)+30;
+			int firstBlockZCoord = j + random.nextInt(16);
+			(new WorldGenMinable(BlockManager.Ores,6,12,Blocks.netherrack)).generate(world, random, firstBlockXCoord, firstBlockYCoord, firstBlockZCoord);
+		}
+		int firstBlockXCoord = i + random.nextInt(16);
+		int firstBlockYCoord = random.nextInt(100);
+		int firstBlockZCoord = j + random.nextInt(16);
+		(new WorldGenMinable(BlockManager.Ores,6,20,Blocks.netherrack)).generate(world, random, firstBlockXCoord, firstBlockYCoord, firstBlockZCoord);
 	}
 
 	private void generateSurface(World world, Random random, int i, int j) {
@@ -71,6 +83,37 @@ public class WorldGen implements IWorldGenerator{
 			int firstBlockYCoord = random.nextInt(maxheight);
 			int firstBlockZCoord = j + random.nextInt(16);
 			(new WorldGenMinable(id,meta,amount,Blocks.stone)).generate(world, random, firstBlockXCoord, firstBlockYCoord, firstBlockZCoord);
+		}
+	}
+	
+	public void generateShip(Random r,int x, int y,World w){
+		System.out.println("gen");
+		int j = 150;//+ r.nextInt(20);
+		for(int l = -2;l<3;l++){
+			if(l == -2 || l == 2){
+				for(int i=0;i<5;i++)for(int k=0;k<5;k++)w.setBlock(x+i, j+l, y+k,BlockManager.AlienBlock);
+			}else{
+				for(int i=0;i<5;i++)for(int k=0;k<5;k++){
+					if(i==0 || i==4 || k==0 || k==4)w.setBlock(x+i, j+l, y+k,BlockManager.AlienBlock);
+				}
+			}
+		}
+	}
+	
+
+	private void generateOil(Random r, int x, int y, World w) {
+		int t = 7;
+		int j = 150;//+ r.nextInt(20);
+		for(int l =-t/4-4;l<t/4+4;l++){
+			for(int s=-t;s<t+1;s++)
+				for(int d=-t*4;d<t*4+1;d++){
+					double b = Math.sqrt(s*s+d*d*0.25+l*l*4);
+					b = Math.abs(b);
+					if(b<t)w.setBlock(x+s, j+l, y+d,Blocks.glass);
+					else if(b < t+2){
+						w.setBlock(x+s, j+l, y+d,Blocks.stone);
+					}
+				}
 		}
 	}
 }

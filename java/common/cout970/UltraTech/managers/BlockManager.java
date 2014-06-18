@@ -8,8 +8,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
-import api.cout970.UltraTech.Vpower.Machine;
-
+import api.cout970.UltraTech.Wpower.Machine;
 import common.cout970.UltraTech.TileEntities.electric.BoilerEntity;
 import common.cout970.UltraTech.TileEntities.electric.CVD_Entity;
 import common.cout970.UltraTech.TileEntities.electric.ChargeStationEntity;
@@ -19,6 +18,7 @@ import common.cout970.UltraTech.TileEntities.electric.FermenterEntity;
 import common.cout970.UltraTech.TileEntities.electric.FluidGenerator;
 import common.cout970.UltraTech.TileEntities.electric.FurnaceEntity;
 import common.cout970.UltraTech.TileEntities.electric.GeneratorEntity;
+import common.cout970.UltraTech.TileEntities.electric.LavaGeneratorEntity;
 import common.cout970.UltraTech.TileEntities.electric.MinerEntity;
 import common.cout970.UltraTech.TileEntities.electric.MolecularAssemblyEntity;
 import common.cout970.UltraTech.TileEntities.electric.PresuricerEntity;
@@ -66,6 +66,7 @@ import common.cout970.UltraTech.blocks.Tier2Block;
 import common.cout970.UltraTech.blocks.Tier3Block;
 import common.cout970.UltraTech.blocks.UT_Block;
 import common.cout970.UltraTech.blocks.models.FluidTank;
+import common.cout970.UltraTech.blocks.models.LavaGenerator;
 import common.cout970.UltraTech.blocks.models.PumpBlock;
 import common.cout970.UltraTech.blocks.models.RefineryBlock;
 import common.cout970.UltraTech.blocks.models.SteamTurbine;
@@ -87,7 +88,6 @@ import common.cout970.UltraTech.multiblocks.refinery.CoreRefinery;
 import common.cout970.UltraTech.multiblocks.refinery.OutRef;
 import common.cout970.UltraTech.multiblocks.refinery.TileGag;
 import common.cout970.UltraTech.proxy.Language;
-
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class BlockManager {
@@ -120,7 +120,9 @@ public class BlockManager {
 	public static  Block Dynamo;
 	public static  Block MultiTank;
 	public static  Block Pump;
-
+	public static  Block AlienBlock;
+	public static  Block LavaGenerator;
+	
 	//fluid
 	public static Fluid Steam;
 	public static Fluid Juice;
@@ -157,7 +159,8 @@ public class BlockManager {
 		Dynamo = new common.cout970.UltraTech.blocks.models.Dynamo(Material.iron);
 		MultiTank = new MultiTank(Material.iron);
 		Pump = new PumpBlock(Material.iron);
-		
+		AlienBlock = new common.cout970.UltraTech.blocks.AlienBlock(Material.iron);
+		LavaGenerator = new LavaGenerator(Material.iron);
 		//deco
 		
 		deco.add(new UT_Block("deco",true));
@@ -235,6 +238,8 @@ public class BlockManager {
 		GameRegistry.registerBlock(Dynamo, "Dynamo");
 		GameRegistry.registerBlock(MultiTank, "MultiTank");
 		GameRegistry.registerBlock(Pump, "Pump");
+		GameRegistry.registerBlock(AlienBlock, "AlienBlock");
+		GameRegistry.registerBlock(LavaGenerator, "Lava Generator");
 		//TileEntities
 		
 		GameRegistry.registerTileEntity(Machine.class, "Energy_UT");
@@ -283,6 +288,8 @@ public class BlockManager {
 		GameRegistry.registerTileEntity(OutRef.class, "RefOut_UT");
 		GameRegistry.registerTileEntity(DynamoEntity.class, "Dynamo_UT");
 		GameRegistry.registerTileEntity(PumpEntity.class, "Pump_UT");
+		GameRegistry.registerTileEntity(LavaGeneratorEntity.class, "LavaGenerator_UT");
+
 		nameBlocks();
 	}
 	

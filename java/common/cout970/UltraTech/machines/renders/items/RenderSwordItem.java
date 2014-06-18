@@ -8,7 +8,7 @@ import net.minecraftforge.client.IItemRenderer.ItemRendererHelper;
 
 import org.lwjgl.opengl.GL11;
 
-import api.cout970.UltraTech.Vpower.IStorageItem;
+import api.cout970.UltraTech.Wpower.IStorageItem;
 import common.cout970.UltraTech.models.ModelDynamo;
 import common.cout970.UltraTech.models.ModelSword;
 import cpw.mods.fml.client.FMLClientHandler;

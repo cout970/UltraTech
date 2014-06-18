@@ -1,7 +1,7 @@
 package common.cout970.UltraTech.TileEntities.electric;
 
-import api.cout970.UltraTech.Vpower.Machine;
-import api.cout970.UltraTech.Vpower.StorageInterface.MachineTipe;
+import api.cout970.UltraTech.Wpower.Machine;
+import api.cout970.UltraTech.Wpower.StorageInterface.MachineTipe;
 import common.cout970.UltraTech.lib.EnergyCosts;
 import common.cout970.UltraTech.lib.CostData;
 import common.cout970.UltraTech.lib.recipes.Cuter_Recipes;

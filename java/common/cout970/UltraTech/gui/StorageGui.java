@@ -3,7 +3,11 @@ package common.cout970.UltraTech.gui;
 
 import org.lwjgl.opengl.GL11;
 
-import api.cout970.UltraTech.Vpower.Machine;
+import api.cout970.UltraTech.Wpower.Machine;
+import common.cout970.UltraTech.TileEntities.electric.StorageTier1;
+import common.cout970.UltraTech.TileEntities.electric.StorageTier2;
+import common.cout970.UltraTech.TileEntities.electric.StorageTier3;
+import common.cout970.UltraTech.lib.EnergyCosts;
 import common.cout970.UltraTech.lib.UT_Utils;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -40,11 +44,15 @@ public class StorageGui extends GuiContainer{
 	protected void drawGuiContainerForegroundLayer(int x, int y) {
 		
 		String e = (int)entity.getEnergy()+"";
-		String m = (int)entity.maxEnergy()+"";
+		String m = (int)entity.maxEnergy()+""+EnergyCosts.E;
 		
 		this.drawCenteredString(fontRendererObj, e+" / "+m, 105, 36, UT_Utils.RGBtoInt(255, 255, 255));
 		String f = "Interdimensional Storage";
-		this.fontRendererObj.drawString(f, this.xSize - 130, 8, 4210752);
+		int c = UT_Utils.RGBtoInt(0, 0, 0);
+		if(entity instanceof StorageTier1)c = UT_Utils.RGBtoInt(0, 120, 0);
+		if(entity instanceof StorageTier2)c = UT_Utils.RGBtoInt(255, 0, 0);
+		if(entity instanceof StorageTier3)c = UT_Utils.RGBtoInt(0, 0, 255);
+		this.fontRendererObj.drawString(f, this.xSize - 130, 8, c);
 	}
 
 }

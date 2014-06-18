@@ -4,8 +4,7 @@ package common.cout970.UltraTech.handlers;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import api.cout970.UltraTech.Vpower.Machine;
-
+import api.cout970.UltraTech.Wpower.Machine;
 import common.cout970.UltraTech.TileEntities.electric.BoilerEntity;
 import common.cout970.UltraTech.TileEntities.electric.CVD_Entity;
 import common.cout970.UltraTech.TileEntities.electric.ChargeStationEntity;
@@ -48,6 +47,7 @@ import common.cout970.UltraTech.containers.Printer3DContainer;
 import common.cout970.UltraTech.containers.PurifierContainer;
 import common.cout970.UltraTech.containers.ReactorContainer;
 import common.cout970.UltraTech.containers.StorageContainer;
+import common.cout970.UltraTech.containers.TabletContainer;
 import common.cout970.UltraTech.containers.TesseractContainer;
 import common.cout970.UltraTech.containers.UTfurnaceContainer;
 import common.cout970.UltraTech.gui.BoilerGui;
@@ -56,7 +56,7 @@ import common.cout970.UltraTech.gui.ChargeStationGui;
 import common.cout970.UltraTech.gui.ClimateStationGui;
 import common.cout970.UltraTech.gui.ControllerGui;
 import common.cout970.UltraTech.gui.CrafterGui;
-import common.cout970.UltraTech.gui.CuterGui;
+import common.cout970.UltraTech.gui.CutterGui;
 import common.cout970.UltraTech.gui.EngineGui;
 import common.cout970.UltraTech.gui.FermenterGui;
 import common.cout970.UltraTech.gui.FluidGenGui;
@@ -69,9 +69,9 @@ import common.cout970.UltraTech.gui.Printer3DGui;
 import common.cout970.UltraTech.gui.PurifierGui;
 import common.cout970.UltraTech.gui.ReactorGui;
 import common.cout970.UltraTech.gui.StorageGui;
+import common.cout970.UltraTech.gui.TabletGui;
 import common.cout970.UltraTech.gui.TesseractGui;
 import common.cout970.UltraTech.gui.UTfurnaceGui;
-
 import cpw.mods.fml.common.network.IGuiHandler;
 
 public class GuiHandler implements IGuiHandler{
@@ -79,6 +79,8 @@ public class GuiHandler implements IGuiHandler{
 	@Override
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
 
+		if(ID == 20)return new TabletContainer(player.inventory);
+		
 		TileEntity tileEntity = world.getTileEntity(x, y, z);
 
 		//CVDmachine
@@ -172,6 +174,8 @@ public class GuiHandler implements IGuiHandler{
 	@Override
 	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
 
+		if(ID == 20)return new TabletGui(new TabletContainer(player.inventory));
+		
 		TileEntity tileEntity = world.getTileEntity(x, y, z);
 
 		//CVDmachine
@@ -188,7 +192,7 @@ public class GuiHandler implements IGuiHandler{
 		}
 		//cuter
 		if(tileEntity instanceof CutterEntity){
-			return new CuterGui(new PrecisionCuterContainer(player.inventory, (CutterEntity) tileEntity),player.inventory, (CutterEntity) tileEntity);
+			return new CutterGui(new PrecisionCuterContainer(player.inventory, (CutterEntity) tileEntity),player.inventory, (CutterEntity) tileEntity);
 		}
 		//presurechamber
 		if(tileEntity instanceof PresuricerEntity){
