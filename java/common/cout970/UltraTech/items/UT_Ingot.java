@@ -15,8 +15,7 @@ public class UT_Ingot extends Item{
 	private IIcon itemIcon2;
 	private IIcon itemIcon3;
 	private IIcon itemIcon4;
-	private IIcon itemIcon5;
-	public static String[] names = {"Aluminum Ingot","Copper Ingot","Tin Ingot","Lead Ingot","Silver Ingot","Alloy Ingot"};
+	public static String[] names = {"Aluminum Ingot","Copper Ingot","Tin Ingot","Lead Ingot","Silver Ingot"};
 
 	@Override
 	public String getUnlocalizedName(ItemStack itemstack) {
@@ -37,7 +36,6 @@ public class UT_Ingot extends Item{
 		this.itemIcon2 = iconRegister.registerIcon("ultratech:metal/tin"+"ingot");
 		this.itemIcon3 = iconRegister.registerIcon("ultratech:metal/lead"+"ingot");
 		this.itemIcon4 = iconRegister.registerIcon("ultratech:metal/silver"+"ingot");
-		this.itemIcon5 = iconRegister.registerIcon("ultratech:metal/alloy"+"ingot");
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -48,7 +46,6 @@ public class UT_Ingot extends Item{
 		subItems.add(new ItemStack(this, 1, 2));
 		subItems.add(new ItemStack(this, 1, 3));
 		subItems.add(new ItemStack(this, 1, 4));
-		subItems.add(new ItemStack(this, 1, 5));
     }
 
 	
@@ -69,9 +66,6 @@ public class UT_Ingot extends Item{
 		}
 		case 4:{
 			 return this.itemIcon4;
-		}
-		case 5:{
-			 return this.itemIcon5;
 		}
 		}
 		return this.itemIcon;

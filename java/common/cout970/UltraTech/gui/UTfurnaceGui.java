@@ -40,6 +40,7 @@ public class UTfurnaceGui extends GuiContainer{
 
 		//energy bar  
 		this.mc.renderEngine.bindTexture(new ResourceLocation("ultratech:textures/misc/energy.png"));
+		System.out.println(entity.getPower().maxCharge());
 		int p = (int) (entity.getPower().getCharge()*50/entity.getPower().maxCharge());
 		this.drawTexturedModalRect(xStart+14, yStart+15+(50-p), 0, 0, 25, p);
 		
@@ -58,7 +59,7 @@ public class UTfurnaceGui extends GuiContainer{
 		
         if(UT_Utils.isIn(x, y, xStart+14, yStart+15, 25, 50)){
         	List<String> energy = new ArrayList<String>();
-        	energy.add("Energy: "+((int)entity.getPower().getCharge())+EnergyCosts.E);
+        	energy.add("Energy: "+entity.getPower().getCharge()+EnergyCosts.E);
         	this.drawHoveringText(energy, x-xStart, y-yStart, fontRendererObj);
         	RenderHelper.enableGUIStandardItemLighting();
         }

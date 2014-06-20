@@ -58,7 +58,7 @@ public class CVDgui extends GuiContainer{
 		
         if(UT_Utils.isIn(x, y, xStart+14, yStart+15, 25, 50)){
         	List<String> energy = new ArrayList<String>();
-        	energy.add("Energy: "+((int)entity.getEnergy())+EnergyCosts.E);
+        	energy.add("Energy: "+(entity.getEnergy())+EnergyCosts.E);
         	this.drawHoveringText(energy, x-xStart, y-yStart, fontRendererObj);
         	RenderHelper.enableGUIStandardItemLighting();
         }

@@ -9,12 +9,12 @@
 
 
 
-package common.cout970.UltraTech.models;
+package api.cout970.UltraTech.microparts;
 
 import java.util.Map;
 
-import api.cout970.UltraTech.microparts.MicroCableBig;
 import codechicken.lib.vec.Vector3;
+import cpw.mods.fml.common.Optional;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
@@ -105,6 +105,7 @@ public class ModelBigCable extends ModelBase
     super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
   }
 
+  @Optional.Method(modid = "ForgeMultipart")
   public void render(float f5, Vector3 pos, MicroCableBig mc) {
 	  mc.updateConnections();
 	  Map<ForgeDirection, Boolean> c = mc.conn;
@@ -125,6 +126,17 @@ public class ModelBigCable extends ModelBase
 	  South.render(f5);
 	  Left.render(f5);
 	  Right.render(f5);
+  }
+
+  public void render(float f5, boolean[] b) {
+	  base.render(f5);
+	  if(b == null)return;
+	  if(b[1])Down.render(f5);
+	  if(b[0])Up.render(f5);
+	  if(b[2])North.render(f5);
+	  if(b[3])South.render(f5);
+	  if(b[4])Right.render(f5);
+	  if(b[5])Left.render(f5);
   }
 
 }

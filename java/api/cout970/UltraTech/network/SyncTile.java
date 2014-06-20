@@ -40,12 +40,19 @@ public class SyncTile extends TileEntity{
 	public void sendGUINetworkData(Container cont, ICrafting c) {
 		if(this instanceof IPowerConductor){
 			c.sendProgressBarUpdate(cont, 0, (int) ((IPowerConductor)this).getPower().getCharge());
+			double ent = ((IPowerConductor)this).getPower().getCharge();
+			float d = (float) (ent - ((int)ent));
+			int deci = (int) (d*10);
+			c.sendProgressBarUpdate(cont, -1, deci);
 		}
 	}
 
 	public void getGUINetworkData(int id, int value) {
 		if(id==0)if(this instanceof IPowerConductor){
 			((StorageInterface)((IPowerConductor)this).getPower()).setCharge(value);
+		}
+		if(id==-1)if(this instanceof IPowerConductor){
+			((StorageInterface)((IPowerConductor)this).getPower()).setChargeDeci(value);
 		}
 	}
 }

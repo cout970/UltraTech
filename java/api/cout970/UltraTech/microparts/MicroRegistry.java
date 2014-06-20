@@ -7,7 +7,7 @@ import codechicken.multipart.MultiPartRegistry.IPartFactory;
 import codechicken.multipart.TMultiPart;
 import common.cout970.UltraTech.machines.renders.items.RenderPumpItem;
 import common.cout970.UltraTech.managers.BlockManager;
-import common.cout970.UltraTech.proxy.Language;
+import common.cout970.UltraTech.managers.Language;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class MicroRegistry{

@@ -25,8 +25,8 @@ public class TabletGui extends GuiContainer{
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float f, int i, int j) {
 
-		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-
+		GL11.glEnable(GL11.GL_BLEND);
+		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1F);
 		this.mc.renderEngine.bindTexture(texture);
 		int xStart = (width - xSize) / 2;
 		int yStart = (height - ySize) / 2;
@@ -42,10 +42,12 @@ public class TabletGui extends GuiContainer{
 	protected void mouseClicked(int x, int y, int b)
 	{
 		super.mouseClicked(x, y, b);
+		int xStart = (width - xSize) / 2;
+		int yStart = (height - ySize) / 2;
 		if(curr == null){
-			main.mouseClick(x, x);
+			main.mouseClick(x-xStart, y-yStart);
 		}else{
-			curr.mouseClick(x, y);
+			curr.mouseClick(x-xStart, y-yStart);
 		}
 	}
 }

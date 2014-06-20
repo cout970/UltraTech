@@ -12,18 +12,19 @@ import common.cout970.UltraTech.handlers.FuelHandler;
 //import net.minecraftforge.common.Configuration;
 import common.cout970.UltraTech.handlers.GuiHandler;
 import common.cout970.UltraTech.handlers.WorldGen;
+import common.cout970.UltraTech.lib.Control;
 import common.cout970.UltraTech.managers.BlockManager;
 import common.cout970.UltraTech.managers.CompatibilityManager;
 import common.cout970.UltraTech.managers.ConfigManager;
 import common.cout970.UltraTech.managers.CraftManager;
 import common.cout970.UltraTech.managers.ItemManager;
+import common.cout970.UltraTech.managers.Language;
 import common.cout970.UltraTech.packets.PacketClimateStation;
 import common.cout970.UltraTech.packets.PacketController;
 import common.cout970.UltraTech.packets.PacketCrafter;
 import common.cout970.UltraTech.packets.PacketPainter;
 import common.cout970.UltraTech.packets.PacketTesseract;
 import common.cout970.UltraTech.proxy.CommonProxy;
-import common.cout970.UltraTech.proxy.Language;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -40,7 +41,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 
 
-@Mod(modid = "UltraTech", name = "UltraTech",version = "0.9.0.3",dependencies = "required-after:ForgeMultipart;required-after:CodeChickenCore")
+@Mod(modid = "UltraTech", name = "UltraTech",version = "0.9.0.4")
 
 
 public class UltraTech {
@@ -147,13 +148,13 @@ public class UltraTech {
 		NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
 		ItemManager.RegisterItems();
 		BlockManager.InitBlocks();
-		BlockManager.RegisterBlocks();
-		if (Loader.isModLoaded("ForgeMultipart")) {
+		if (Loader.isModLoaded("ForgeMultipart") && Loader.isModLoaded("CodeChickenCore")){
+			Control.isMicroPartActived = true;
             new MicroRegistry().load();
-        }else{
-        	
         }
-//		Language.setupLangFile(); //for lag file only in debug
+		BlockManager.RegisterBlocks();
+		
+		if(Control.debug)Language.setupLangFile(); //for lag file only in debug
 		CompatibilityManager.initCompatibilitys();
 		GameRegistry.registerFuelHandler(new FuelHandler());
 		CraftManager.registerCraft();

@@ -13,12 +13,11 @@ public class Tablet extends UT_Item{
 		super(name);
 		setMaxStackSize(1);
 	}
-
-	public boolean onItemUseFirst(ItemStack stack, EntityPlayer p, World w, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
-	{
-		if(p.isSneaking())return true;
-		p.openGui(UltraTech.instance, 20, w, x, y, z);
-		return false;
-	}
+	
+	public ItemStack onItemRightClick(ItemStack par1ItemStack, World w, EntityPlayer p)
+    {
+		if(!p.isSneaking())	p.openGui(UltraTech.instance, 20, w, p.serverPosX, p.serverPosY, p.serverPosZ);
+        return par1ItemStack;
+    }
 
 }

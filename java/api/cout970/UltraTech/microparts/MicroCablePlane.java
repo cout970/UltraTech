@@ -41,7 +41,7 @@ public class MicroCablePlane extends TMultiPart implements IPowerConductor, JNor
 	public Map<ForgeDirection,Boolean> conn = new HashMap<ForgeDirection,Boolean>();
 
 	//boxes
-	private static Cuboid6[]boundingBoxes = new Cuboid6[6];
+	public static Cuboid6[]boundingBoxes = new Cuboid6[6];
 
 	static {
 		double w = 0.125;
@@ -105,7 +105,7 @@ public class MicroCablePlane extends TMultiPart implements IPowerConductor, JNor
 			boolean a = tile().canAddPart(new NormallyOccludedPart(boundingBoxes[i]));
 			boolean b = false;
 			TileEntity tile = UT_Utils.getRelative(tile(), ForgeDirection.getOrientation(i));
-			if(PowerUtils.canConect(this,tile,ForgeDirection.getOrientation(i)))b = true;
+			if(MicroPartUtil.canConect(this,tile,ForgeDirection.getOrientation(i)))b = true;
 			conn.put(ForgeDirection.getOrientation(i), a && b);
 		}
 	}

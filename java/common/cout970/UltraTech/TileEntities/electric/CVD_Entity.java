@@ -95,30 +95,20 @@ public class CVD_Entity extends MachineWithInventory implements ISidedInventory,
 	//Save & Load
 	
 	@Override
-	public void readFromNBT(NBTTagCompound nbtTagCompound) {
+	public void readFromNBT(NBTTagCompound nbt) {
 
-		super.readFromNBT(nbtTagCompound);
+		super.readFromNBT(nbt);
 
-		NBTTagList tagList2 = nbtTagCompound.getTagList("Upgrades",11);
-		NBTTagCompound tagCompound2 = (NBTTagCompound) tagList2.getCompoundTagAt(0);
-		speed = tagCompound2.getInteger("Speed");
-		NBTTagCompound tagCompound3 = (NBTTagCompound) tagList2.getCompoundTagAt(1);
-		speedUpgrades = tagCompound3.getInteger("Speedupgrades");
+		speed = nbt.getInteger("Speed");
+		speedUpgrades = nbt.getInteger("Speedupgrades");
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound nbtTagCompound) {
+	public void writeToNBT(NBTTagCompound nbt) {
 
-		super.writeToNBT(nbtTagCompound);
-		
-		NBTTagList tagList2 = new NBTTagList();
-		NBTTagCompound tagCompound = new NBTTagCompound();
-		tagCompound.setInteger("Speed", this.speed);
-		tagList2.appendTag(tagCompound);
-		NBTTagCompound tagCompound2 = new NBTTagCompound();
-		tagCompound2.setInteger("Speedupgrades", this.speedUpgrades);
-		tagList2.appendTag(tagCompound2);
-		nbtTagCompound.setTag("Upgrades", tagList2);
+		super.writeToNBT(nbt);
+		nbt.setInteger("Speed", this.speed);
+		nbt.setInteger("Speedupgrades", this.speedUpgrades);
 	}
 
 	

@@ -3,13 +3,17 @@ package common.cout970.UltraTech.wiki;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.lwjgl.opengl.GL11;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.Tessellator;
 
 public abstract class Page implements IPage{
 
 	public List<TabletButtom> bott = new ArrayList<TabletButtom>();//buttoms in page
 	public List<TabletLabel> labb = new ArrayList<TabletLabel>();//labels in page
-	private double zLevel;
+	private static double zLevel;
 
 	@Override
 	public TabletButtom[] getButtoms() {
@@ -38,16 +42,20 @@ public abstract class Page implements IPage{
         tessellator.draw();
     }
     
-    public void drawTextureBox(int x, int y,int w, int h)
+    public static void drawTextureBox(int x, int y,int w, int h)
     {
         float f = 0.00390625F;
         float f1 = 0.00390625F;
         Tessellator tessellator = Tessellator.instance;
         tessellator.startDrawingQuads();
-        tessellator.addVertexWithUV((double)(x + 0), (double)(y + h), (double)this.zLevel, 0, 1);
-        tessellator.addVertexWithUV((double)(x + w), (double)(y + h), (double)this.zLevel, 1, 1);
-        tessellator.addVertexWithUV((double)(x + w), (double)(y + 0), (double)this.zLevel, 1, 0);
-        tessellator.addVertexWithUV((double)(x + 0), (double)(y + 0), (double)this.zLevel, 0, 0);
+        tessellator.addVertexWithUV((double)(x + 0), (double)(y + h), (double)Page.zLevel, 0, 1);
+        tessellator.addVertexWithUV((double)(x + w), (double)(y + h), (double)Page.zLevel, 1, 1);
+        tessellator.addVertexWithUV((double)(x + w), (double)(y + 0), (double)Page.zLevel, 1, 0);
+        tessellator.addVertexWithUV((double)(x + 0), (double)(y + 0), (double)Page.zLevel, 0, 0);
         tessellator.draw();
     }
+	public static void drawString(String string, int x, int y, int par4) {
+		FontRenderer f = Minecraft.getMinecraft().fontRenderer;
+		f.drawString(string, x-f.getStringWidth(string)/2, y-f.getStringWidth("1")/2, par4);
+	}
 }

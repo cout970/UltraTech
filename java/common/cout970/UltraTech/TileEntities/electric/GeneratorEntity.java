@@ -23,7 +23,7 @@ public class GeneratorEntity extends MachineWithInventory{
 	public boolean on;
 	public int maxProgres;
 	public float heat = 25;
-	public float maxHeat = 600;
+	public float maxHeat = 800;
 
 	public GeneratorEntity(){
 		super(1,"Generator",CostData.Generator);
@@ -38,12 +38,14 @@ public class GeneratorEntity extends MachineWithInventory{
 				if(!on){
 					change = true;
 				}
-				if(Progres - (int)(heat*10/maxHeat) < 0){
-					addEnergy(Progres*EnergyCosts.k);
+				int t = (int)(heat*8/maxHeat);
+				float gain = t*1f/4f;
+				if(Progres - t*2 < 0){
+					addEnergy(Progres*1d/4d);
 					Progres = 0;
 				}else{
-					Progres-= (int)(heat*10/maxHeat);
-					this.addEnergy(((int)(heat*10/maxHeat))*EnergyCosts.k);
+					Progres -= t*2;
+					addEnergy(gain);
 				}
 				if(heat < maxHeat)heat+=1.2-heat/maxHeat;
 			}else{

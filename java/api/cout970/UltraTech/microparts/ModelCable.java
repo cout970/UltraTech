@@ -4,12 +4,11 @@
 // Keep in mind that you still need to fill in some blanks
 // - ZeuX
 
-package common.cout970.UltraTech.models;
+package api.cout970.UltraTech.microparts;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import api.cout970.UltraTech.microparts.MicroCablePlane;
 import codechicken.lib.vec.Vector3;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;

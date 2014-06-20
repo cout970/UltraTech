@@ -17,7 +17,7 @@ public class TankEntity extends SyncTile implements IFluidHandler{
 	private boolean FluidChange = true;
 
 	public UT_Tank getTank(){
-		if(storage == null)storage = new UT_Tank(16000, this);
+		if(storage == null)storage = new UT_Tank(32000, this);
 		return storage;
 	}
 	

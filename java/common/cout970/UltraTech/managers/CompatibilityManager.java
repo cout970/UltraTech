@@ -27,7 +27,7 @@ public class CompatibilityManager {
 		OreDictionary.registerOre("ingotTin", new ItemStack(ItemManager.ItemName.get("Ingot"),1,2));
 		OreDictionary.registerOre("ingotLead", new ItemStack(ItemManager.ItemName.get("Ingot"),1,3));
 		OreDictionary.registerOre("ingotSilver", new ItemStack(ItemManager.ItemName.get("Ingot"),1,4));
-		OreDictionary.registerOre("ingotAlloy_UT", new ItemStack(ItemManager.ItemName.get("Ingot"),1,5));
+//		OreDictionary.registerOre("ingotAlloy_UT", new ItemStack(ItemManager.ItemName.get("Ingot"),1,5));
 		//dust
 		OreDictionary.registerOre("dustAluminum", new ItemStack(ItemManager.ItemName.get("Dust"),1,0));
 		OreDictionary.registerOre("dustAluminium", new ItemStack(ItemManager.ItemName.get("Dust"),1,0));
@@ -35,10 +35,11 @@ public class CompatibilityManager {
 		OreDictionary.registerOre("dustTin", new ItemStack(ItemManager.ItemName.get("Dust"),1,2));
 		OreDictionary.registerOre("dustLead", new ItemStack(ItemManager.ItemName.get("Dust"),1,3));
 		OreDictionary.registerOre("dustSilver", new ItemStack(ItemManager.ItemName.get("Dust"),1,4));
-		OreDictionary.registerOre("dustAlloy_UT", new ItemStack(ItemManager.ItemName.get("Dust"),1,5));
+		OreDictionary.registerOre("dustObalti", new ItemStack(ItemManager.ItemName.get("Dust"),1,5));
 		OreDictionary.registerOre("dustIron", new ItemStack(ItemManager.ItemName.get("Dust"),1,6));
 		OreDictionary.registerOre("dustGold", new ItemStack(ItemManager.ItemName.get("Dust"),1,7));
 		OreDictionary.registerOre("dustDiamond", new ItemStack(ItemManager.ItemName.get("Dust"),1,8));
+		OreDictionary.registerOre("dustObsidian", new ItemStack(ItemManager.ItemName.get("Dust"),1,9));
 		//plates
 		OreDictionary.registerOre("plateAluminum", new ItemStack(ItemManager.ItemName.get("MetalPlate"),1,0));
 		OreDictionary.registerOre("plateAluminium", new ItemStack(ItemManager.ItemName.get("MetalPlate"),1,0));

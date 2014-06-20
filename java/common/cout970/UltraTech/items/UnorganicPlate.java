@@ -17,13 +17,13 @@ public class UnorganicPlate extends Item{
 	
 	@Override
 	public String getUnlocalizedName(ItemStack itemstack) {
-		return getUnlocalizedName() + "." + names[itemstack.getItemDamage()].toLowerCase()+".unorganicplate";
+		return getUnlocalizedName() + "." + names[itemstack.getItemDamage()].toLowerCase();
 	}
 	
 	public UnorganicPlate() {
 		super();
 		setHasSubtypes(true);
-		setUnlocalizedName("UnorganicPlate");
+		setUnlocalizedName("unorganicplate");
 		setCreativeTab(UltraTech.ResourceTab);
 		setMaxStackSize(64);
 	}

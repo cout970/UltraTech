@@ -18,13 +18,13 @@ public class MetalPlate extends Item{
 	
 	@Override
 	public String getUnlocalizedName(ItemStack itemstack) {
-		return getUnlocalizedName() + "." + names[itemstack.getItemDamage()].toLowerCase()+".metalplate";
+		return getUnlocalizedName() + "." + names[itemstack.getItemDamage()].toLowerCase();
 	}
 	
 	public MetalPlate() {
 		super();
 		setHasSubtypes(true);
-		setUnlocalizedName("MetalPlate");
+		setUnlocalizedName("metalplate");
 		setCreativeTab(UltraTech.ResourceTab);
 		setMaxStackSize(64);
 	}

@@ -44,13 +44,19 @@ public class Dynamo extends BlockConductor{
 
 	public void onNeighborBlockChange(World w, int x, int y, int z, Block side){
 		DynamoEntity m = (DynamoEntity) w.getTileEntity(x, y, z);
-		if(m.getNetwork() != null)m.getNetwork().refresh();
+		if(m.getPower().getNetwork() != null)m.getPower().getNetwork().refresh();
 		m.updateReceptor();
 	}
 	
 	@Override
 	public TileEntity createNewTileEntity(World world,int b) {
 		return new DynamoEntity();
+	}
+	
+	public void onBlockAdded(World w, int x, int y, int z) {
+		super.onBlockAdded(w, x, y, z);
+		DynamoEntity d = (DynamoEntity) w.getTileEntity(x, y, z);
+		d.switchOrientation();
 	}
 
 	public void registerBlockIcons(IIconRegister iconRegister){

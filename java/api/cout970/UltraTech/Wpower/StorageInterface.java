@@ -120,5 +120,10 @@ public class StorageInterface extends PowerInterface{
 		Output,Input,Nothing,Storage
 	}
 
+	public void setChargeDeci(int value) {
+		int c = (int) getCharge();
+		Charge = (c+((double) value/10));
+	}
+
 	
 }

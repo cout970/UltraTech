@@ -13,16 +13,9 @@ import net.minecraft.util.IIcon;
 
 public class UT_Dust extends Item{
 
-	private IIcon itemIcon1;
-	private IIcon itemIcon2;
-	private IIcon itemIcon3;
-	private IIcon itemIcon4;
-	private IIcon itemIcon5;
-	private IIcon itemIcon6;
-	private IIcon itemIcon7;
-	private IIcon itemIcon8;
-	public static String[] names = {"Aluminum Dust","Copper Dust","Tin Dust","Lead Dust","Silver Dust","Alloy Dust",
-		"Iron Dust","Gold Dust","Diamond Dust"};
+	private IIcon[] ico;
+	public static String[] names = {"Aluminum Dust","Copper Dust","Tin Dust","Lead Dust","Silver Dust","Obalti Dust",
+		"Iron Dust","Gold Dust","Diamond Dust","Obsidian Dust"};
 
 	@Override
 	public String getUnlocalizedName(ItemStack itemstack) {
@@ -38,62 +31,31 @@ public class UT_Dust extends Item{
 	}
 	
 	public void registerIcons(IIconRegister iconRegister){
-		this.itemIcon = iconRegister.registerIcon("ultratech:metal/aluminum"+"dust");
-		this.itemIcon1 = iconRegister.registerIcon("ultratech:metal/copper"+"dust");
-		this.itemIcon2 = iconRegister.registerIcon("ultratech:metal/tin"+"dust");
-		this.itemIcon3 = iconRegister.registerIcon("ultratech:metal/lead"+"dust");
-		this.itemIcon4 = iconRegister.registerIcon("ultratech:metal/silver"+"dust");
-		this.itemIcon5 = iconRegister.registerIcon("ultratech:metal/alloy"+"dust");
-		this.itemIcon6 = iconRegister.registerIcon("ultratech:metal/iron"+"dust");
-		this.itemIcon7 = iconRegister.registerIcon("ultratech:metal/gold"+"dust");
-		this.itemIcon8 = iconRegister.registerIcon("ultratech:metal/diamond"+"dust");
+		ico = new IIcon[names.length];
+		ico[0] = iconRegister.registerIcon("ultratech:metal/aluminum"+"dust");
+		ico[1] = iconRegister.registerIcon("ultratech:metal/copper"+"dust");
+		ico[2] = iconRegister.registerIcon("ultratech:metal/tin"+"dust");
+		ico[3] = iconRegister.registerIcon("ultratech:metal/lead"+"dust");
+		ico[4] = iconRegister.registerIcon("ultratech:metal/silver"+"dust");
+		ico[5] = iconRegister.registerIcon("ultratech:metal/obalti"+"dust");
+		ico[6] = iconRegister.registerIcon("ultratech:metal/iron"+"dust");
+		ico[7] = iconRegister.registerIcon("ultratech:metal/gold"+"dust");
+		ico[8] = iconRegister.registerIcon("ultratech:metal/diamond"+"dust");
+		ico[9] = iconRegister.registerIcon("ultratech:metal/obsidian"+"dust");
+		this.itemIcon = ico[0];
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List subItems)
     {
-		subItems.add(new ItemStack(this, 1, 0));
-		subItems.add(new ItemStack(this, 1, 1));
-		subItems.add(new ItemStack(this, 1, 2));
-		subItems.add(new ItemStack(this, 1, 3));
-		subItems.add(new ItemStack(this, 1, 4));
-		subItems.add(new ItemStack(this, 1, 5));
-		subItems.add(new ItemStack(this, 1, 6));
-		subItems.add(new ItemStack(this, 1, 7));
-		subItems.add(new ItemStack(this, 1, 8));
+		for(int i=0;i<names.length;i++){
+			subItems.add(new ItemStack(this, 1, i));
+		}
     }
 	
 	public IIcon getIconFromDamage(int par1)
     {
-		switch(par1){
-		case 0:{
-			 return this.itemIcon;
-		}
-		case 1:{
-			 return this.itemIcon1;
-		}
-		case 2:{
-			 return this.itemIcon2;
-		}
-		case 3:{
-			 return this.itemIcon3;
-		}
-		case 4:{
-			 return this.itemIcon4;
-		}
-		case 5:{
-			 return this.itemIcon5;
-		}
-		case 6:{
-			 return this.itemIcon6;
-		}
-		case 7:{
-			 return this.itemIcon7;
-		}
-		case 8:{
-			 return this.itemIcon8;
-		}
-		}
-		return this.itemIcon;
+		if(par1 >= names.length)return ico[0];
+		return ico[par1];
     }
 }

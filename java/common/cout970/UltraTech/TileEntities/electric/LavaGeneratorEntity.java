@@ -31,9 +31,9 @@ public class LavaGeneratorEntity extends Machine implements IFluidHandler{
 		}
 		if(Proces > 0){
 			double space = maxEnergy()-getEnergy();
-			if(space >= CostData.LavaGenerator.use){
+			if(space >= CostData.LavaGenerator.use*2){
 				Proces--;
-				addEnergy(CostData.LavaGenerator.use);
+				addEnergy(CostData.LavaGenerator.use*2);
 			}
 		}
 	}

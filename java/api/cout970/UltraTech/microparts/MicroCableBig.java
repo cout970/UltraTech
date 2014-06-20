@@ -32,7 +32,7 @@ import codechicken.multipart.TileMultipart;
 
 public class MicroCableBig extends TMultiPart implements IPowerConductor, JNormalOcclusion, ISidedHollowConnect{
 
-	private static Cuboid6[]boundingBoxes = new Cuboid6[7];
+	public static Cuboid6[]boundingBoxes = new Cuboid6[7];
 	public Map<ForgeDirection,Boolean> conn = new HashMap<ForgeDirection,Boolean>();
 	//boxes
 	static {
@@ -141,7 +141,7 @@ public class MicroCableBig extends TMultiPart implements IPowerConductor, JNorma
 			boolean a = tile().canAddPart(new NormallyOccludedPart(boundingBoxes[o.ordinal()]));
 			boolean b = false;
 			TileEntity tile = UT_Utils.getRelative(tile(), o);
-			if(PowerUtils.canConect(this,tile,o))b = true;
+			if(MicroPartUtil.canConect(this,tile,o))b = true;
 			if(o == ForgeDirection.DOWN){
 				for(TMultiPart t : tile().jPartList())if(t instanceof MicroCablePlane){b = true; a = true;}
 			}

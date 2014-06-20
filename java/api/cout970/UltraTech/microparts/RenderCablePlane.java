@@ -4,7 +4,6 @@ import org.lwjgl.opengl.GL11;
 
 import codechicken.lib.vec.Vector3;
 import common.cout970.UltraTech.lib.RenderUtil;
-import common.cout970.UltraTech.models.ModelCable;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;

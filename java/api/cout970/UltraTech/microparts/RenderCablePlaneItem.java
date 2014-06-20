@@ -3,7 +3,6 @@ package api.cout970.UltraTech.microparts;
 import org.lwjgl.opengl.GL11;
 
 import common.cout970.UltraTech.models.ModelBattery;
-import common.cout970.UltraTech.models.ModelCable;
 import cpw.mods.fml.client.FMLClientHandler;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;

@@ -6,7 +6,7 @@ public enum CostData {
 	/**
 	 * 1MeV = 8 FT => 0.125 MeV = 1FT
 	 */
-	Generator		(  200d	,1	,1/8		,1),
+	Generator		(  200d	,1	,1d/8		,1),
 	Boiler   		(  400d	,2	,2d			,0),
 	Solar_Panel		(    5d	,1	,0.05d		,1),
 	Furnace			(   50d	,2	,25d		,0),
@@ -22,8 +22,8 @@ public enum CostData {
 	Miner    		(  800d	,3	,15.2d		,0),
 	Dynamo     		(  400d	,2	,1d			,0),
 	Tesseract		( 1250d ,3	,0			,0),
-	WindMill		(  200d ,2	,1/6		,1),
-	LavaGenerator   (  200d	,2	,1			,1),
+	WindMill		(  200d ,2	,1d/6		,1),
+	LavaGenerator   (  200d	,2	,0.4d		,1),
 	
 	Storage_1		( 	20000d	,1	,0			,2),
 	Storage_2		(  120000d	,2	,0			,2),

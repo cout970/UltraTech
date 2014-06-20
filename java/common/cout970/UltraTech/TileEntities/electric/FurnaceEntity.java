@@ -24,7 +24,6 @@ public class FurnaceEntity extends MachineWithInventory implements ISidedInvento
 	public int speed = 10;
 	public int speedUpgrades;
 	public boolean hasEnergy = false;
-	public StorageInterface cond = new StorageInterface(this, 2400, 2);
 
 	public FurnaceEntity(){
 		super(2,"Furnace",CostData.Furnace);		
@@ -39,7 +38,7 @@ public class FurnaceEntity extends MachineWithInventory implements ISidedInvento
 			if(!hasEnergy){
 				hasEnergy = cond.getCharge() >= CostData.Furnace.use;
 			}
-
+			
 			if(progres > 0){
 				cond.removeCharge(CostData.Furnace.use*speed/1000);
 			}
@@ -177,11 +176,6 @@ public class FurnaceEntity extends MachineWithInventory implements ISidedInvento
 			return new ItemStack(ItemManager.ItemName.get("SpeedUpgrade"),speedUpgrades);
 		}
 		return null;
-	}
-
-	@Override
-	public PowerInterface getPower() {
-		return cond;
 	}
 
 }
