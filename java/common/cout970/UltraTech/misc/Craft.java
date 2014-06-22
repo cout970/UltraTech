@@ -34,7 +34,7 @@ public class Craft {
 
 	public void writeToNBT(NBTTagCompound nbt) {
 		NBTTagList list = new NBTTagList();
-		for(int h =0;h<9;h++){
+		for(int h = 0; h<9; h++){
 			if(items[h] != null){
 			NBTTagCompound tag = new NBTTagCompound();
 			tag.setByte("Slot", (byte) h);
@@ -48,7 +48,7 @@ public class Craft {
 	public void readFromNBT(NBTTagCompound tagCompound) {
 		NBTTagList list = tagCompound.getTagList("Recipe",10);
 		for (int i = 0; i < list.tagCount(); ++i) {
-			NBTTagCompound tag = (NBTTagCompound) list.getCompoundTagAt(0);
+			NBTTagCompound tag = (NBTTagCompound) list.getCompoundTagAt(i);//0 => i
 			int slot = tag.getByte("Slot");
 			if(slot >= 0 && slot <9){
 				ItemStack a = ItemStack.loadItemStackFromNBT(tag);

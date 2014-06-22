@@ -12,7 +12,7 @@ import common.cout970.UltraTech.TileEntities.electric.GeneratorEntity;
 import common.cout970.UltraTech.TileEntities.utility.CrafterEntity;
 import common.cout970.UltraTech.TileEntities.utility.Printer3DEntity;
 import common.cout970.UltraTech.core.UltraTech;
-import common.cout970.UltraTech.managers.BlockManager;
+import common.cout970.UltraTech.managers.FluidManager;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -48,12 +48,6 @@ public class Tier1Block extends BlockConductor{
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister IR){
-		BlockManager.Juice.setIcons(IR.registerIcon("ultratech:juice"));
-		BlockManager.Steam.setIcons(IR.registerIcon("ultratech:steam"));
-		BlockManager.Gas_etanol.setIcons(IR.registerIcon("ultratech:steam"));
-		BlockManager.Etanol.setIcons(IR.registerIcon("ultratech:etanol"));
-		BlockManager.Gas_Oil.setIcons(IR.registerIcon("ultratech:gasoil"));
-		BlockManager.Gasoline.setIcons(IR.registerIcon("ultratech:gas"));
 		icons = new IIcon[9];
 		icons[0] = IR.registerIcon("ultratech:chasis");
 		icons[1] = IR.registerIcon("ultratech:crafter");
@@ -165,12 +159,13 @@ public class Tier1Block extends BlockConductor{
 		return false;
 	}
 
-	public void onNeighborBlockChange(World w, int x, int y, int z, int side){
+	public void onNeighborBlockChange(World w, int x, int y, int z, Block side){
 		TileEntity te = w.getTileEntity(x, y, z);
 		if(te instanceof Machine){
 			if(((Machine)te).getNetwork() != null)((Machine)te).getNetwork().refresh();
 		}if(te instanceof CrafterEntity){
-			((CrafterEntity) te).update();
+//			((CrafterEntity) te).update();
+			((CrafterEntity) te).onNeigChange(((CrafterEntity) te).getSignal());
 		}
 	}
 

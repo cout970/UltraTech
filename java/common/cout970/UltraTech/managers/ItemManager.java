@@ -90,6 +90,7 @@ public class ItemManager {
 		Reg("ElectricCell", "Electric Cell", true);
 		Reg("MediumElectricCell", "Medium Electric Cell", true);
 		Reg("BigElectricCell", "Big Electric Cell", true);
+		Reg("Rubber","Rubber",true);
 	}
 
 	public static void LoadConfigItems(Configuration c){

@@ -68,4 +68,8 @@ public class UT_Utils {
 		return false;
 	}
 
+	public static List<TileEntity> getTiles(TileEntity t) {
+		return getTiles(t.getWorldObj(), t.xCoord, t.yCoord, t.zCoord);
+	}
+
 }

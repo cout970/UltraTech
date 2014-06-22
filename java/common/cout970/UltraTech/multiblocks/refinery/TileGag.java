@@ -8,7 +8,7 @@ public class TileGag extends SyncTile{
 
 	public int tipe = -1;
 	public int x,y,z;
-	public CoreRefinery main;
+	public RefineryCore main;
 	
 	public void restaureBlock(){
 		if(tipe != -1){
@@ -36,7 +36,7 @@ public class TileGag extends SyncTile{
 		nbt.setInteger("Tipe", tipe);
 	}
 
-	public void setMulti(CoreRefinery t) {
+	public void setMulti(RefineryCore t) {
 		main = t;
 	}
 	

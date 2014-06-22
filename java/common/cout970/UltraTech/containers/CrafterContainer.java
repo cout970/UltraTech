@@ -23,7 +23,7 @@ public class CrafterContainer extends UT_Container{
 			}
 		}	
 		c = 0;
-		addSlotToContainer(new SlotPhantom(tileEntity2, -1, 81, 44));
+		addSlotToContainer(new SlotPhantom(tileEntity2, -1, 80, 44));
 		for (int x = 0; x < 3; x++) {
 			for (int j = 0; j < 3; j++) {
 				addSlotToContainer(new Slot(tileEntity2, c, 111 + x * 18, 26 + j * 18));

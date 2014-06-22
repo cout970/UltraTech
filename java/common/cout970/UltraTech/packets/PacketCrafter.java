@@ -43,7 +43,7 @@ public class PacketCrafter extends PacketBase{
 	 * 1 clear crafting grid
 	 * 2 set itemstack in slot
 	 * 3 saves
-	 * 
+	 * 4 mode
 	 */
 	
 	public int x,y,z;
@@ -51,6 +51,7 @@ public class PacketCrafter extends PacketBase{
 	public ItemStack item;
 	public int slot;
 	public int mode;
+	public boolean option;
 	
 	public PacketCrafter(){}
 	
@@ -83,6 +84,14 @@ public class PacketCrafter extends PacketBase{
 		this.slot = slot;
 	}
 
+	public PacketCrafter(CrafterEntity e, int i, boolean b) {
+		x = e.xCoord;
+		y = e.yCoord;
+		z = e.zCoord;
+		tipe = i;
+		option = b;
+	}
+
 	@Override
 	public void encodeInto(ChannelHandlerContext ctx, ByteBuf buffer){
 		PacketBuffer pb = new PacketBuffer(buffer);
@@ -92,6 +101,7 @@ public class PacketCrafter extends PacketBase{
 		pb.writeInt(z);
 		if(tipe == 2){ pb.writeShort(slot); try { pb.writeBoolean(item != null); if(item != null)pb.writeItemStackToBuffer(item); }catch (IOException e) {e.printStackTrace();}}
 		if(tipe == 3){ pb.writeInt(mode); pb.writeShort(slot);}
+		if(tipe == 4){ pb.writeBoolean(option);}
 	}
 
 	@Override
@@ -103,6 +113,7 @@ public class PacketCrafter extends PacketBase{
 		z = pb.readInt();
 		if(tipe == 3){ mode = pb.readInt(); slot = pb.readShort();}
 		if(tipe == 2){ slot = pb.readShort(); boolean b = pb.readBoolean(); if(b){try{ item = pb.readItemStackFromBuffer();}catch(IOException e){e.printStackTrace();}}}
+		if(tipe == 4){ option = pb.readBoolean();}
 	}
 
 	@Override
@@ -116,6 +127,7 @@ public class PacketCrafter extends PacketBase{
 			if(mode == 1)ce.loadRecipes(slot);
 			if(mode == 2)ce.DellRecipe(slot);
 		}
+		if(tipe == 4){ce.restrictMode = option;}
 		ce.update();
 	}
 

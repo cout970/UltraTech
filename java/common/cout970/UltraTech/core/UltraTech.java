@@ -1,13 +1,14 @@
 package common.cout970.UltraTech.core;
 
 
-import api.cout970.UltraTech.microparts.MicroRegistry;
-import api.cout970.UltraTech.network.Net_Utils;
-import api.cout970.UltraTech.network.PacketUpdate;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Configuration;
+import api.cout970.UltraTech.microparts.MicroRegistry;
+import api.cout970.UltraTech.network.Net_Utils;
+import api.cout970.UltraTech.network.PacketUpdate;
+
 import common.cout970.UltraTech.handlers.FuelHandler;
 //import net.minecraftforge.common.Configuration;
 import common.cout970.UltraTech.handlers.GuiHandler;
@@ -17,6 +18,7 @@ import common.cout970.UltraTech.managers.BlockManager;
 import common.cout970.UltraTech.managers.CompatibilityManager;
 import common.cout970.UltraTech.managers.ConfigManager;
 import common.cout970.UltraTech.managers.CraftManager;
+import common.cout970.UltraTech.managers.FluidManager;
 import common.cout970.UltraTech.managers.ItemManager;
 import common.cout970.UltraTech.managers.Language;
 import common.cout970.UltraTech.packets.PacketClimateStation;
@@ -25,14 +27,15 @@ import common.cout970.UltraTech.packets.PacketCrafter;
 import common.cout970.UltraTech.packets.PacketPainter;
 import common.cout970.UltraTech.packets.PacketTesseract;
 import common.cout970.UltraTech.proxy.CommonProxy;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
-import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.Mod.Instance;
+import cpw.mods.fml.common.SidedProxy;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 //import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -133,11 +136,21 @@ public class UltraTech {
 
 		Configuration config = new Configuration(event.getSuggestedConfigurationFile());
 		ConfigManager.LoadConfigs(config);
+		if (Loader.isModLoaded("ForgeMultipart") && Loader.isModLoaded("CodeChickenCore")){
+			Control.isMicroPartActived = true;
+        }
+		ItemManager.RegisterItems();
+		BlockManager.InitBlocks();
+		
+		BlockManager.RegisterBlocks();
+		FluidManager.InitFluids();
+		FluidManager.RegisterFluids();
+		if(Control.debug)Language.setupLangFile(); //for lag file only in debug
 	}
 
 	@EventHandler
 	public void load(FMLInitializationEvent event){
-
+		
 		Net_Utils.PipeLine.channels = NetworkRegistry.INSTANCE.newChannel("UltraTech", Net_Utils.PipeLine);
 		Net_Utils.PipeLine.registerPacket(PacketUpdate.class);
 		Net_Utils.PipeLine.registerPacket(PacketCrafter.class);
@@ -146,15 +159,7 @@ public class UltraTech {
 		Net_Utils.PipeLine.registerPacket(PacketPainter.class);
 		Net_Utils.PipeLine.registerPacket(PacketClimateStation.class);
 		NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
-		ItemManager.RegisterItems();
-		BlockManager.InitBlocks();
-		if (Loader.isModLoaded("ForgeMultipart") && Loader.isModLoaded("CodeChickenCore")){
-			Control.isMicroPartActived = true;
-            new MicroRegistry().load();
-        }
-		BlockManager.RegisterBlocks();
-		
-		if(Control.debug)Language.setupLangFile(); //for lag file only in debug
+		if(Control.isMicroPartActived) new MicroRegistry().load();
 		CompatibilityManager.initCompatibilitys();
 		GameRegistry.registerFuelHandler(new FuelHandler());
 		CraftManager.registerCraft();

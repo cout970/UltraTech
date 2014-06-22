@@ -9,6 +9,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenMinable;
+import net.minecraftforge.fluids.FluidRegistry;
 import cpw.mods.fml.common.IWorldGenerator;
 
 public class WorldGen implements IWorldGenerator{
@@ -27,7 +28,7 @@ public class WorldGen implements IWorldGenerator{
 		default:{
 			generateSurface(world, random, chunkX * 16, chunkZ * 16);
 //			generateShip(random, chunkX * 16, chunkZ * 16, world);
-//			if(chunkX%4==0)if(chunkZ%4==0)generateOil(random, chunkX * 16, chunkZ * 16, world);
+			if(chunkX%16==0)if(chunkZ%16==0)generateOil(random, chunkX * 16, chunkZ * 16, world);
 		}
 		}
 	}
@@ -103,13 +104,13 @@ public class WorldGen implements IWorldGenerator{
 
 	private void generateOil(Random r, int x, int y, World w) {
 		int t = 7;
-		int j = 150;//+ r.nextInt(20);
+		int j = 10+ r.nextInt(20);
 		for(int l =-t/4-4;l<t/4+4;l++){
 			for(int s=-t;s<t+1;s++)
 				for(int d=-t*4;d<t*4+1;d++){
 					double b = Math.sqrt(s*s+d*d*0.25+l*l*4);
 					b = Math.abs(b);
-					if(b<t)w.setBlock(x+s, j+l, y+d,Blocks.glass);
+					if(b<t)w.setBlock(x+s, j+l, y+d,FluidRegistry.getFluid("oil").getBlock());
 					else if(b < t+2){
 						w.setBlock(x+s, j+l, y+d,Blocks.stone);
 					}

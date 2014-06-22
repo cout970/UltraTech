@@ -2,8 +2,10 @@ package common.cout970.UltraTech.machines.renders;
 
 import org.lwjgl.opengl.GL11;
 
+import api.cout970.UltraTech.fluids.IFluidTransport;
 import api.cout970.UltraTech.fluids.TankConection;
 import common.cout970.UltraTech.TileEntities.fluid.CopperPipeEntity;
+import common.cout970.UltraTech.lib.UT_Utils;
 import common.cout970.UltraTech.models.ModelCenterPipe;
 import common.cout970.UltraTech.models.ModelPipe;
 import common.cout970.UltraTech.models.ModelPipeBase;
@@ -12,8 +14,11 @@ import common.cout970.UltraTech.models.ModelPump;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.IFluidHandler;
 
 public class RenderPipe extends TileEntitySpecialRenderer{
 
@@ -38,17 +43,23 @@ public class RenderPipe extends TileEntitySpecialRenderer{
 		boolean[] a = {true,true,true,true,true,true};
 		boolean[] b = new boolean[6];
 		CopperPipeEntity p = (CopperPipeEntity) te;
-		for(TankConection t : p.connections){
-			b[t.side.ordinal()] = true;
-		}
-		for(ForgeDirection t : p.pipes){
-			a[t.ordinal()] = false;
+		for(ForgeDirection d : ForgeDirection.VALID_DIRECTIONS){
+			TileEntity g = UT_Utils.getRelative(te, d);
+			if(g instanceof IFluidHandler && !(g instanceof IFluidTransport))b[d.getOpposite().ordinal()] = true;
+			if(g instanceof IFluidTransport || g instanceof IFluidHandler)a[d.ordinal()] = false;
 		}
 		bindTexture(new ResourceLocation("ultratech:textures/misc/fluids/pipebase.png"));
-		base.render(0.0625f, a);
+		base.render(0.0625f, a);//render centeter
 		for(int j=0;j<a.length;j++)a[j] = !a[j];
-		bindTexture(new ResourceLocation("ultratech:textures/misc/fluids/pipe.png"));
-		model.render(0.0625f,a, b);
+		bindTexture(new ResourceLocation("ultratech:textures/misc/fluids/pipebase.png"));
+		model.render(0.0625f,a);//render pipe conections
+		if(!p.mode)bindTexture(new ResourceLocation("ultratech:textures/misc/fluids/conduit.png"));
+		else bindTexture(new ResourceLocation("ultratech:textures/misc/fluids/conduit2.png"));
+		model.render(0.0625f,b,true);//render conections
+		//render in
+		bindTexture(new ResourceLocation("ultratech:textures/misc/fluids/pipebase.png"));
+		GL11.glColor3f(0.7f, 0.7f, 0.7f);
+		in.render(0.0625F,a);
 		GL11.glPopMatrix();
 	}
 

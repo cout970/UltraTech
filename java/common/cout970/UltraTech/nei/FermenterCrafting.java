@@ -15,7 +15,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidRegistry;
 import common.cout970.UltraTech.lib.RenderUtil;
 import common.cout970.UltraTech.lib.recipes.Fermenter_Recipes;
-import common.cout970.UltraTech.managers.BlockManager;
+import common.cout970.UltraTech.managers.FluidManager;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.TemplateRecipeHandler;
 
@@ -86,7 +86,7 @@ public class FermenterCrafting extends TemplateRecipeHandler{
 		int a = (int) (40f*(1f-(cycleticks % 200 / (float)200)));
 		this.drawTexturedModelRectFromIcon(41, 50-a, ic, 18, a);
 		//juice
-		ic = BlockManager.Juice.getStillIcon();
+		ic = FluidManager.Juice.getStillIcon();
 		a = (int) (40f*((cycleticks % 200 / (float)200)));
 		this.drawTexturedModelRectFromIcon(134, 51-a, ic, 18, a);
 		RenderUtil.bindTexture(new ResourceLocation("ultratech:textures/gui/fermenter.png"));

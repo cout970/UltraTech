@@ -134,9 +134,7 @@ public class Language {
 		Language.addName(DiamondGlass, "Diamond Glass");
 		Language.addName(CovedGlass, "Coved Glass");
 		
-		Language.addName(AluminumPipe, "Aluminum Pipe");
 		Language.addName(CopperPipe, "Copper Pipe");
-		Language.addName(LeadPipe, "Lead Pipe");
 		
 		Language.addName(SolarPanel, "Solar Panel");
 		Language.addName(WindMill, "Wind Mill");

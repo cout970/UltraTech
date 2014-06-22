@@ -5,14 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import api.cout970.UltraTech.network.Net_Utils;
-import api.cout970.UltraTech.network.SyncTile;
-import common.cout970.UltraTech.containers.CrafterContainer;
-import common.cout970.UltraTech.gui.CrafterGui;
-import common.cout970.UltraTech.lib.UT_Utils;
-import common.cout970.UltraTech.misc.Craft;
-import common.cout970.UltraTech.misc.CrafterRecipe;
-import common.cout970.UltraTech.misc.InventoryCrafter;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.IInventory;
@@ -21,9 +13,24 @@ import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.player.PlayerDestroyItemEvent;
+import net.minecraftforge.fluids.FluidContainerRegistry;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.IFluidHandler;
 import net.minecraftforge.oredict.OreDictionary;
+import api.cout970.UltraTech.fluids.FluidUtils;
+import api.cout970.UltraTech.fluids.TankConection;
+import api.cout970.UltraTech.network.SyncTile;
+import common.cout970.UltraTech.containers.CrafterContainer;
+import common.cout970.UltraTech.lib.UT_Utils;
+import common.cout970.UltraTech.misc.Craft;
+import common.cout970.UltraTech.misc.CrafterRecipe;
+import common.cout970.UltraTech.misc.IRedstoneControl;
+import common.cout970.UltraTech.misc.InventoryCrafter;
+import cpw.mods.fml.common.FMLCommonHandler;
 
-public class CrafterEntity extends SyncTile implements IInventory{
+public class CrafterEntity extends SyncTile implements IInventory,IRedstoneControl{
 
 	public ItemStack[] inventory;
 	public ItemStack result;
@@ -31,6 +38,9 @@ public class CrafterEntity extends SyncTile implements IInventory{
 	public CrafterRecipe saves;
 	public boolean[] found = new boolean[9];
 	private boolean loop;
+	private boolean redstone;
+	private EntityPlayer player;
+	public boolean restrictMode = false;
 
 	public CrafterEntity(){
 		inventory = new ItemStack[9];
@@ -50,14 +60,14 @@ public class CrafterEntity extends SyncTile implements IInventory{
 	public void canCraft(){
 		found = new boolean[9];
 		Map<Integer,Integer> already = new HashMap<Integer,Integer>();
-		for(int c = 0; c < 9;c++){
-			if(craft.getStackInSlot(c)== null){
+		for(int c = 0; c < 9;c++){//serach in own inv for crafting things
+			if(craft.getStackInSlot(c)== null){//not have to search because is empty
 				found[c] = true;
 			}else{
 				for(int i = 0; i < this.getSizeInventory();i++){//searching in this inventory
-					if(equal(this.getStackInSlot(i),craft.getStackInSlot(c),c)){
+					if(equal(this.getStackInSlot(i),craft.getStackInSlot(c),c)){//is item valid
 						boolean cant;
-						if(already.containsKey(i)){
+						if(already.containsKey(i)){//has enght
 							cant = false;
 							int aux = already.get(i);
 							if(aux < getStackInSlot(i).stackSize){
@@ -82,10 +92,10 @@ public class CrafterEntity extends SyncTile implements IInventory{
 		for(TileEntity tile : t)if(tile instanceof IInventory)in.add((IInventory) tile);
 		for(IInventory inv : in){
 			Map<Integer,Integer> alreadyInv = new HashMap<Integer,Integer>();
-			for(int c = 0; c < 9;c++){
-				if(!found[c]){
+			for(int c = 0; c < 9;c++){//check the crafting grid
+				if(!found[c]){//if item is not found
 					for(int i = 0; i < inv.getSizeInventory();i++){//searching on inventorys
-						if(equal(inv.getStackInSlot(i),craft.getStackInSlot(c),c)){
+						if(equal(inv.getStackInSlot(i),craft.getStackInSlot(c),c)){//is item valid
 							boolean cant = true;
 							if(alreadyInv.containsKey(i)){
 								cant = false;
@@ -105,20 +115,45 @@ public class CrafterEntity extends SyncTile implements IInventory{
 							}
 						}
 					}
-					if(found[c])break;
-					if(inv instanceof CrafterEntity && !loop){
-						loop = true;
-						if(equal(inv.getStackInSlot(-1),craft.getStackInSlot(c),c)){
-							((CrafterEntity) inv).canCraft();
-							if(((CrafterEntity) inv).allFound())found[c] = true;
-							break;
+				}
+			}
+		}
+		if(!allFound() && hasFluidInCraft()){
+			
+			List<TankConection> tanks = FluidUtils.getConections(this);
+			Map<Integer,Integer> liq = new HashMap<Integer,Integer>();
+			
+			for(int c = 0; c < 9;c++){
+				if(FluidContainerRegistry.isContainer(craft.getStackInSlot(c))){
+					FluidStack f = FluidContainerRegistry.getFluidForFilledItem(craft.getStackInSlot(c));
+					if(f != null){
+						for(TankConection tan : tanks){
+							int toD = 1000;
+							if(liq.containsKey(f.fluidID)){
+								toD = liq.get(f.fluidID)+1000;
+							}
+							FluidStack drain = tan.tank.drain(tan.side, toD, false);
+							if(drain != null && drain.fluidID == f.fluidID && drain.amount >= toD){
+								found[c] = true;
+								liq.put(f.fluidID,toD);
+								break;
+							}
 						}
 					}
 				}
 			}
 		}
 	}
-	
+
+	private boolean hasFluidInCraft() {
+		for(int c = 0; c < 9;c++){
+			if(FluidContainerRegistry.isContainer(craft.getStackInSlot(c))){
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public boolean allFound() {
 		for(int x=0;x<9;x++) if(!found[x])return false;
 		if(result == null)return false;
@@ -130,53 +165,70 @@ public class CrafterEntity extends SyncTile implements IInventory{
 		if(a != null && b == null)return false;
 		if(a == null && b != null)return false;
 		if(OreDictionary.itemMatches(a, b, true))return true;
-		if(OreDictionary.getOreID(a)!= -1 && OreDictionary.getOreID(b)!= -1){
-			if(OreDictionary.getOreID(a) == OreDictionary.getOreID(b))return true;
+
+		//restrictive mode
+		if(!restrictMode){
+			if(OreDictionary.getOreIDs(a).length != 0 && OreDictionary.getOreIDs(b).length != 0){
+				for(int i : OreDictionary.getOreIDs(a)){
+					for(int j : OreDictionary.getOreIDs(b))if(i == j)return true;
+				}
+			}
+			InventoryCrafter c = new InventoryCrafter(this, 3, 3);
+			for(int r = 0;r<9;r++){
+				c.setInventorySlotContents(r, craft.getStackInSlot(r));
+			}
+			c.setInventorySlotContents(slot, a);
+			ItemStack g = CraftingManager.getInstance().findMatchingRecipe(c, worldObj);
+			ItemStack h = CraftingManager.getInstance().findMatchingRecipe(craft, worldObj);
+			if(g == null)return false;
+			if(h == null)return false;
+			if(OreDictionary.itemMatches(g, h, true))return true;
 		}
-		//remplace and check
-//		InventoryCrafter c = new InventoryCrafter(this, 3, 3);
-//		for(int r = 0;r<9;r++){
-//			c.setInventorySlotContents(r, craft.getStackInSlot(r));
-//		}
-//		c.setInventorySlotContents(slot, a);
-//		ItemStack g = CraftingManager.getInstance().findMatchingRecipe(c, worldObj);
-//		ItemStack h = CraftingManager.getInstance().findMatchingRecipe(craft, worldObj);
-//		if(g == null)return false;
-//		if(h == null)return false;
-//		if(OreDictionary.itemMatches(g, h, true))return true;
 		return false;
 	}
 
 	public void craft() {
 		if(allFound() && addItemStack(result)){
+			if(player != null)FMLCommonHandler.instance().firePlayerCraftingEvent(player, getStackInSlot(-1), craft);
 			for(int c = 0; c < 9;c++){
 				if(craft.getStackInSlot(c)!= null){
+					boolean used = false;
 					for(int i = 0; i < this.getSizeInventory();i++){
 						if(equal(this.getStackInSlot(i),craft.getStackInSlot(c),c)){
 							useItemToCraft(this, i);
+							used = true;
 							break;
 						}
 					}
+					if(used)continue;
 					List<TileEntity> t = UT_Utils.getTiles(worldObj, xCoord, yCoord, zCoord);
 					List<IInventory> in = new ArrayList<IInventory>();
 					for(TileEntity tile : t)if(tile instanceof IInventory)in.add((IInventory) tile);
 					for(IInventory inv : in){
+						System.out.println("used 2");
 						for(int i = 0; i < inv.getSizeInventory();i++){
 							if(equal(inv.getStackInSlot(i),craft.getStackInSlot(c),c)){
 								useItemToCraft(inv, i);
+								used = true;
 								break;
 							}
-							if(inv instanceof CrafterEntity){
-								if(equal(inv.getStackInSlot(-1),craft.getStackInSlot(c),c)){
-									((CrafterEntity) inv).canCraft();
-									((CrafterEntity) inv).craft();
-									for(int j = 0; j < inv.getSizeInventory();j++){
-										if(equal(inv.getStackInSlot(j),craft.getStackInSlot(c),c)){
-											useItemToCraft(inv, j);
-											break;
-										}
+						}
+						if(used)break;
+					}
+
+					if(!used && hasFluidInCraft()){
+						if(FluidContainerRegistry.isContainer(craft.getStackInSlot(c))){
+
+							List<TankConection> tanks = FluidUtils.getConections(this);
+
+							FluidStack f = FluidContainerRegistry.getFluidForFilledItem(craft.getStackInSlot(c));
+							if(f != null){
+								for(TankConection tan : tanks){
+									FluidStack drain = tan.tank.drain(tan.side, 1000, false);
+									if(drain != null && drain.fluidID == f.fluidID && drain.amount >= 1000){
+										tan.tank.drain(tan.side, 1000, true);
+										break;
 									}
-									break;
 								}
 							}
 						}
@@ -193,15 +245,12 @@ public class CrafterEntity extends SyncTile implements IInventory{
 			if (item.getItem().hasContainerItem(item))
 			{
 				ItemStack itemContainer = item.getItem().getContainerItem(item);
-				if(itemContainer == null){
+				
+				if(itemContainer != null && itemContainer.isItemStackDamageable() && itemContainer.getItemDamage() > itemContainer.getMaxDamage()){
+					 if(player != null)MinecraftForge.EVENT_BUS.post(new PlayerDestroyItemEvent(player, itemContainer));
 					return;
-				}else if(itemContainer.isItemStackDamageable() && itemContainer.getItemDamage() > itemContainer.getMaxDamage()){
-					itemContainer = null;
-					inv.setInventorySlotContents(slot, itemContainer);
-					return;
-				}else{
-					inv.setInventorySlotContents(slot, itemContainer);
 				}
+				addItemStack(itemContainer);
 			}
 		}
 	}
@@ -323,6 +372,7 @@ public class CrafterEntity extends SyncTile implements IInventory{
 
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer entityplayer) {
+		player = entityplayer;
 		return true;
 	}
 
@@ -368,6 +418,7 @@ public class CrafterEntity extends SyncTile implements IInventory{
 				saves.recipes[slot] = new Craft(tagCompound);
 			}
 		}
+		restrictMode = nbtTagCompound.getBoolean("mode");
 	}
 
 	@Override
@@ -398,17 +449,18 @@ public class CrafterEntity extends SyncTile implements IInventory{
 		nbtTagCompound.setTag("Craft", tagList2);
 		
 		//saves
-		NBTTagList list = new NBTTagList();
-		for (int currentIndex = 0; currentIndex < saves.getSizeInventory(); ++currentIndex) {
-			if (saves.getStackInSlot(currentIndex) != null) {
-				NBTTagCompound tagCompound = new NBTTagCompound();
-				tagCompound.setByte("Slot", (byte) currentIndex);
-				saves.getStackInSlot(currentIndex).writeToNBT(tagCompound);
-				saves.recipes[currentIndex].writeToNBT(tagCompound);
-				list.appendTag(tagCompound);
+		NBTTagList main = new NBTTagList();
+		for (int ind = 0; ind < saves.getSizeInventory(); ++ind) {
+			if (saves.getStackInSlot(ind) != null) {//save not empty
+				NBTTagCompound nbt = new NBTTagCompound();
+				nbt.setByte("Slot", (byte) ind);
+				saves.getStackInSlot(ind).writeToNBT(nbt);
+				saves.recipes[ind].writeToNBT(nbt);
+				main.appendTag(nbt);
 			}
 		}
-		nbtTagCompound.setTag("Saves", list);
+		nbtTagCompound.setTag("Saves", main);
+		nbtTagCompound.setBoolean("mode", restrictMode);
 	}
 
 
@@ -444,6 +496,23 @@ public class CrafterEntity extends SyncTile implements IInventory{
 
 	@Override
 	public void closeInventory() {		
+	}
+
+	@Override
+	public void onNeigChange(boolean power) {
+		if(redstone && !power)redstone = false;
+		if(!redstone && power){
+			redstone = true;
+			if(!worldObj.isRemote){
+				canCraft();
+				craft();
+			}
+		}
+	}
+
+	@Override
+	public boolean getSignal() {
+		return worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord);
 	}
 
 }

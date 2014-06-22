@@ -24,13 +24,16 @@ public class CrafterGui extends GuiContainer{
 	}
 
 	@Override
-	protected void drawGuiContainerBackgroundLayer(float f, int i, int j) {
+	public void drawGuiContainerBackgroundLayer(float f, int i, int j) {
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		this.mc.renderEngine.bindTexture(new ResourceLocation("ultratech:textures/gui/crafter.png"));
 		int xStart = (width - xSize) / 2;
 		int yStart = (height - ySize) / 2;
 		this.drawTexturedModalRect(xStart, yStart, 0, 0, xSize, ySize);
-		if(entity.getStackInSlot(-1) != null)this.drawTexturedModalRect(xStart+85, yStart+67, 177, 0, 9, 9);
+		if(entity.getStackInSlot(-1) != null)this.drawTexturedModalRect(xStart+71, yStart+28, 176, 28, 15, 10);//save buttom
+		else this.drawTexturedModalRect(xStart+71, yStart+28, 192, 28, 15, 10);
+		if(entity.restrictMode)this.drawTexturedModalRect(xStart+89, yStart+28, 176, 39, 15, 10);// mode buttom
+		else this.drawTexturedModalRect(xStart+89, yStart+28, 192, 39, 15, 10);
 		//draw needs not haves
 		GL11.glEnable(GL11.GL_BLEND);
 		//craft grid
@@ -49,24 +52,28 @@ public class CrafterGui extends GuiContainer{
 		
 		//craft result
 		if(entity.getStackInSlot(-1) != null && !entity.allFound()){
-			this.drawTexturedModalRect(xStart+81, yStart+44, 177, h, 16, 16);
+			this.drawTexturedModalRect(xStart+80, yStart+44, 177, h, 16, 16);
 		}
 		GL11.glDisable(GL11.GL_BLEND);
 	}
 	
 	@Override
-	protected void mouseClicked(int mx, int my, int b)
+	public void mouseClicked(int mx, int my, int b)
 	{
 		super.mouseClicked(mx, my, b);
 		int xStart = (width - xSize) / 2;
 		int yStart = (height - ySize) / 2;
 		entity.update();
-		if(entity.getStackInSlot(-1) != null){
-			if(isIn(mx,my, xStart+85, yStart+67, 9, 9)){
+		if(entity.getStackInSlot(-1) != null){//save buttom
+			if(isIn(mx,my, xStart+71, yStart+28, 15, 10)){
 				Net_Utils.PipeLine.sendToServer(new PacketCrafter(entity,0,0));
 			}
 		}
-		for(int d =0;d<9;d++){
+		if(isIn(mx,my, xStart+89, yStart+28, 15, 10)){//mode buttom
+			Net_Utils.PipeLine.sendToServer(new PacketCrafter(entity,4,!entity.restrictMode));
+		}
+		
+		for(int d =0;d<9;d++){//saves
 			if(isIn(mx, my, xStart+8 + d * 18, yStart+6, 18,18))if(entity.saves.getStackInSlot(d) != null){
 				if(b == 0){
 					Net_Utils.PipeLine.sendToServer(new PacketCrafter(entity,1,d));
@@ -77,7 +84,7 @@ public class CrafterGui extends GuiContainer{
 			}
 		}
 		
-		if(isIn(mx,my,xStart+80, yStart+43,18,18)){
+		if(isIn(mx,my,xStart+80, yStart+43,18,18)){//craft
 			if(b == 0){
 				Net_Utils.PipeLine.sendToServer(new PacketCrafter(entity,true));//craft item
 			}else if(b == 1){
@@ -89,7 +96,7 @@ public class CrafterGui extends GuiContainer{
 			i = p.getItemStack().copy();
 			i .stackSize = 1;
 		}
-		for(int x=0;x<3;x++){
+		for(int x=0;x<3;x++){//grid
 			for(int y=0;y<3;y++){
 				if(isIn(mx,my,xStart+12+x*18, yStart+25+y*18,18,18)){
 					if(b == 0)Net_Utils.PipeLine.sendToServer(new PacketCrafter(entity,i,x+y*3));

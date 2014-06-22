@@ -8,6 +8,7 @@ import java.util.TreeMap;
 
 import common.cout970.UltraTech.lib.EnergyCosts;
 import common.cout970.UltraTech.lib.UT_Utils;
+import common.cout970.UltraTech.managers.FluidManager;
 import common.cout970.UltraTech.misc.BlockPos;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockStaticLiquid;
@@ -46,13 +47,14 @@ public class PumpEntity extends Machine{
 		if(worldObj.getTotalWorldTime()% 20 != 0)return;
 		if(fluid == null){
 			for(int y=yCoord;y>0;y--){
-				if(getFluid(worldObj.getBlock(xCoord, y, zCoord)) != null){
-					fluid = getFluid(worldObj.getBlock(xCoord, y, zCoord));
+				if((fluid = getFluid(worldObj.getBlock(xCoord, y, zCoord))) != null){
 					break;
 				}
 			}
 		}
-		if(getEnergy() >= EnergyCosts.PumpCost && hasSpace() ){
+		
+		if(getEnergy() >= EnergyCosts.PumpCost && hasSpace()){
+			
 			boolean found = false;
 			for(int y=yCoord-1;y>0;y--){
 				if(getFluid(worldObj.getBlock(xCoord, y, zCoord)) != null){
@@ -82,6 +84,7 @@ public class PumpEntity extends Machine{
 	}
 
 	private Fluid getFluid(Block block,int meta) {
+		
 		Fluid fluid = FluidRegistry.lookupFluidForBlock(block);
 		if(fluid != null){
 			if(meta == 0)return fluid;
@@ -91,6 +94,9 @@ public class PumpEntity extends Machine{
 	
 	private Fluid getFluid(Block block) {
 		Fluid fluid = FluidRegistry.lookupFluidForBlock(block);
+		for(Fluid f : FluidRegistry.getRegisteredFluids().values()){
+//			System.out.println(f.getLocalizedName()+": "+f.getBlock()+" "+(f.getBlock() == block));
+		}
 		return fluid;
 	}
 
@@ -104,7 +110,7 @@ public class PumpEntity extends Machine{
 	private boolean fill(BlockPos p) {
 		if(p == null)return false;
 		Fluid g = getFluid(worldObj.getBlock(p.x, p.y, p.z),worldObj.getBlockMetadata(p.x, p.y, p.z));
-		if(g != null){
+		if(g != null && currentTank != -1){
 			FluidStack f = new FluidStack(g, 1000);
 			worldObj.setBlockToAir(p.x, p.y, p.z);
 			TankConection t = tanks.get(currentTank);

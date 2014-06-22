@@ -3,7 +3,7 @@ package common.cout970.UltraTech.machines.renders;
 import org.lwjgl.opengl.GL11;
 
 import common.cout970.UltraTech.TileEntities.electric.SteamTurbineEntity;
-import common.cout970.UltraTech.managers.BlockManager;
+import common.cout970.UltraTech.managers.FluidManager;
 import common.cout970.UltraTech.models.ModelTurbine;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureMap;
@@ -67,7 +67,7 @@ public class RenderTurbine extends TileEntitySpecialRenderer{
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		bindTexture(TextureMap.locationBlocksTexture);
 		Tessellator t = Tessellator.instance;
-		IIcon i = BlockManager.Steam.getIcon();
+		IIcon i = FluidManager.Steam.getIcon();
 		float k = 14.99f*(1f/16f);
 		u = i.getInterpolatedU(16);
 		v = i.getInterpolatedV(16);

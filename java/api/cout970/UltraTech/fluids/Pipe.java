@@ -1,9 +1,10 @@
 package api.cout970.UltraTech.fluids;
 
+import api.cout970.UltraTech.network.SyncTile;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class Pipe extends TileEntity implements IFluidTransport{
+public class Pipe extends SyncTile implements IFluidTransport{
 
 	private FluidNetwork net;
 	
@@ -29,7 +30,7 @@ public class Pipe extends TileEntity implements IFluidTransport{
 				}
 			}
 			if(!hasNetwork){
-				te.setNetwork(FluidNetwork.create(te));
+				te.setNetwork(FluidNetwork.create(te,this));
 			}
 			te.getNetwork().refresh();
 		}

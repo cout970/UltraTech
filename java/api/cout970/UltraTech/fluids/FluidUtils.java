@@ -1,6 +1,9 @@
 package api.cout970.UltraTech.fluids;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -29,7 +32,7 @@ public class FluidUtils {
 			}
 		}
 		if(!hasNetwork){
-			te.setNetwork(FluidNetwork.create(te));
+			te.setNetwork(FluidNetwork.create(te,w.getTileEntity(x, y, z)));
 		}
 		te.getNetwork().refresh();
 	}
@@ -59,5 +62,16 @@ public class FluidUtils {
 
 	public static TileEntity getRelative(TileEntity from, ForgeDirection dir) {
 		return from.getWorldObj().getTileEntity(from.xCoord+dir.offsetX, from.yCoord+dir.offsetY, from.zCoord+dir.offsetZ);
+	}
+
+	public static List<TankConection> getConections(TileEntity tile) {
+		List<TankConection> t = new ArrayList<TankConection>();
+		for(ForgeDirection d : ForgeDirection.VALID_DIRECTIONS){
+			TileEntity y = getRelative(tile, d);
+			if(y instanceof IFluidHandler){
+				t.add(new TankConection((IFluidHandler) y, d.getOpposite()));
+			}
+		}
+		return t;
 	}
 }

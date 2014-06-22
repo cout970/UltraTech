@@ -7,7 +7,7 @@ import org.lwjgl.opengl.GL11;
 
 import common.cout970.UltraTech.TileEntities.utility.ReactorEntity;
 import common.cout970.UltraTech.lib.UT_Utils;
-import common.cout970.UltraTech.managers.BlockManager;
+import common.cout970.UltraTech.managers.FluidManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.RenderHelper;
@@ -43,11 +43,13 @@ public class ReactorGui extends GuiContainer{
 		//STEAM VAR
 		if(entity.MaxSteam != 0){
 			Minecraft.getMinecraft().renderEngine.bindTexture(TextureMap.locationBlocksTexture);
-			IIcon ic = BlockManager.Steam.getStillIcon();
-			int a = entity.steam*40/entity.MaxSteam;
-			this.drawTexturedModelRectFromIcon(xStart+77, yStart+50-a, ic, 18, a);
-			this.mc.renderEngine.bindTexture(new ResourceLocation("ultratech:textures/gui/reactor.png"));
-			this.drawTexturedModalRect(xStart+76, yStart+10, 224, 0, 20, 40);
+			IIcon ic = FluidManager.Steam.getStillIcon();
+			if(ic != null){
+				int a = entity.steam*40/entity.MaxSteam;
+				this.drawTexturedModelRectFromIcon(xStart+77, yStart+50-a, ic, 18, a);
+				this.mc.renderEngine.bindTexture(new ResourceLocation("ultratech:textures/gui/reactor.png"));
+				this.drawTexturedModalRect(xStart+76, yStart+10, 224, 0, 20, 40);
+			}
 		}
 		
 		//WATER VAR

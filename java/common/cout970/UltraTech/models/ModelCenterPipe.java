@@ -210,10 +210,10 @@ public class ModelCenterPipe extends ModelBase
 	  UpFL.render(f5);
 	  UpLB.render(f5);
 	  UpBR.render(f5);
-	  if(a[1])UbarL.render(f5);
-	  if(a[1])UbarR.render(f5);
-	  if(a[1])UbarB.render(f5);
-	  if(a[1])UbarF.render(f5);
+	  if(a[1] && a[4])UbarL.render(f5);
+	  if(a[1] && a[5])UbarR.render(f5);
+	  if(a[1] && a[3])UbarB.render(f5);
+	  if(a[1] && a[2])UbarF.render(f5);
 	  if(a[2] && a[5])HbarRF.render(f5);
 	  if(a[3] && a[5])HbarBR.render(f5);
 	  if(a[3] && a[4])HbarLB.render(f5);
@@ -222,10 +222,10 @@ public class ModelCenterPipe extends ModelBase
 	  DownBR.render(f5);
 	  DownLB.render(f5);
 	  DownFL.render(f5);
-	  if(a[0])DbarF.render(f5);
-	  if(a[0])DbarB.render(f5);
-	  if(a[0])DbarL.render(f5);
-	  if(a[0])DbarR.render(f5);
+	  if(a[0] && a[2])DbarF.render(f5);
+	  if(a[0] && a[3])DbarB.render(f5);
+	  if(a[0] && a[4])DbarL.render(f5);
+	  if(a[0] && a[5])DbarR.render(f5);
   }
 
 }

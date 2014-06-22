@@ -47,9 +47,11 @@ public class BoilerGui extends GuiContainer{
 		
 		if(!l){
 			IIcon li = output.getFluid().getStillIcon();
-			bindTexture(output);
-			int a = output.amount*40/entity.getTankInfo(ForgeDirection.UP)[0].capacity;
-			drawTexturedModelRectFromIcon(xStart+139, yStart+61-a, li, 18, a);			
+			if(li != null){
+				bindTexture(output);
+				int a = output.amount*40/entity.getTankInfo(ForgeDirection.UP)[0].capacity;
+				drawTexturedModelRectFromIcon(xStart+139, yStart+61-a, li, 18, a);		
+			}
 		}
 		//fluid 2 liquid
 		FluidStack input = entity.getTankInfo(ForgeDirection.UP)[1].fluid;

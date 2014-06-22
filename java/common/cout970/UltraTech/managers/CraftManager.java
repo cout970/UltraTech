@@ -62,9 +62,7 @@ public class CraftManager {
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Tier3,1,3),new Object[]{"zxz","xmx","zxz",'m',new ItemStack(Chasis,1,2),'z',"plateSilver",'x',ItemName.get("AdvCircuit")}));//climate station
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Tier3,1,4),new Object[]{"aaa","gmg","aaa",'m',new ItemStack(Chasis,1,2),'a',"plateAlloy_UT",'g',ItemName.get("AdvCircuit")}));//tesseract
 
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(AluminumPipe,8),new Object[]{"oao","aga","oao",'a',"plateAluminum",'g',Blocks.glass_pane}));//aluminum pipe
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(CopperPipe,8),new Object[]{"oao","aga","oao",'a',"plateCopper",'g',Blocks.glass_pane}));//copper pipe
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(LeadPipe,8),new Object[]{"oao","aga","oao",'a',"plateLead",'g',Blocks.glass_pane}));//lead pipe
 
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(CovedGlass,8),new Object[]{"oo","oo",'o',"plateSilicon"}));//coved glass
 		
@@ -81,7 +79,7 @@ public class CraftManager {
 		
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Turbine,1),new Object[]{"xrx","iri","xrx",'x',"plateGrafeno",'i',Blocks.glass,'r',ItemName.get("Fan")}));//turbine
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(DiamondGlass,6),new Object[]{"xx","xx",'x',"plateDiamond"}));//diamond glass
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Pump,1),new Object[]{"xpx","ptp","mpt",'p',"plateIron",'t',AluminumPipe,'m',ItemName.get("Motor")}));//pump
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Pump,1),new Object[]{"xpx","ptp","mpt",'p',"plateIron",'t',CopperPipe,'m',ItemName.get("Motor")}));//pump
 		
 		//items
 		
@@ -148,9 +146,7 @@ public class CraftManager {
 		Boiler_Recipes.recipes.put("oil", "gas_oil");
 		Boiler_Recipes.recipes.put("water", "steam");
 		
-		Cooling_Recipes.recipes.add(new Cooling_Recipes(new FluidStack(FluidRegistry.getFluid("gas_ethanol"),100), new FluidStack(FluidRegistry.getFluid("bioethanol"),2), null, null));
-		if(FluidRegistry.getFluid("fuel") != null)Cooling_Recipes.recipes.add(new Cooling_Recipes(new FluidStack(FluidRegistry.getFluid("gas_oil"),100), null, new FluidStack(FluidRegistry.getFluid("fuel"),10), new FluidStack(FluidRegistry.getFluid("gasoline"),1)));
-		
+		Cooling_Recipes.recipes.add(new Cooling_Recipes(FluidRegistry.getFluidStack("gas_oil", 100), FluidRegistry.getFluidStack("plastic", 40), FluidRegistry.getFluidStack("fuel", 60), FluidRegistry.getFluidStack("gasoline", 10)));
 		if(FluidRegistry.isFluidRegistered("fuel"))FluidGenerator.fuels.put("fuel", 185);
 		FluidGenerator.fuels.put("gasoline", 600);
 		FluidGenerator.fuels.put("bioethanol", 75);

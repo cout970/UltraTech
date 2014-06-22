@@ -11,10 +11,9 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 import api.cout970.UltraTech.fluids.UT_Tank;
-
 import common.cout970.UltraTech.lib.CostData;
 import common.cout970.UltraTech.lib.recipes.Fermenter_Recipes;
-import common.cout970.UltraTech.managers.BlockManager;
+import common.cout970.UltraTech.managers.FluidManager;
 import common.cout970.UltraTech.misc.MachineWithInventory;
 
 public class FermenterEntity extends MachineWithInventory implements  IFluidHandler{
@@ -43,7 +42,7 @@ public class FermenterEntity extends MachineWithInventory implements  IFluidHand
 		if(progres > 0){
 			if(juice.getFluidAmount() + 10 <= juice.getCapacity() && water.getFluidAmount() >= 10 && getEnergy() >= CostData.Fermenter.use){
 				progres--;
-				juice.fill(new FluidStack(BlockManager.Juice, 10), true);
+				juice.fill(new FluidStack(FluidManager.Juice, 10), true);
 				water.drain(10, true);
 				removeEnergy(CostData.Fermenter.use);
 			}

@@ -49,6 +49,7 @@ public class RenderTank  extends TileEntitySpecialRenderer{
 		bindTexture(TextureMap.locationBlocksTexture);
 		Tessellator t = Tessellator.instance;
 		IIcon i = te.getTank().getFluid().getFluid().getIcon();
+		if(i == null)return;
 		u = i.getInterpolatedU(16);
 		v = i.getInterpolatedV(16);
 		um = i.getInterpolatedU(0);

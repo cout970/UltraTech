@@ -11,13 +11,14 @@ public class RF_Utils {
 	 * metas
 	 * 0 base
 	 * 1 structure
-	 * 2 core
-	 * 3 invisible
-	 * 4 out
-	 * 5 in (base inv)
+	 * 2 struc inv
+	 * 3 core
+	 * 4 bses output-input
+	 * 
 	 */
 	public static int[][][] refinery ={
 		{{0,0,0},{0,0,0},{0,0,0}},//down
+		{{0,0,0},{0,0,0},{0,0,0}},
 		{{1,1,1},{1,1,1},{1,1,1}},
 		{{1,1,1},{1,1,1},{1,1,1}},
 		{{1,1,1},{1,1,1},{1,1,1}},
@@ -31,17 +32,16 @@ public class RF_Utils {
 		Block id = BlockManager.Refinery;
 		if(worldObj.getBlock(x, y, z) != id)return false;
 		int index[] = getPos(worldObj,x,y,z,id);
-		boolean hasStructure = true;
 		for(int k=-index[0];k<3-index[0];k++){
-			for(int j=0;j<8;j++){
+			for(int j=0;j<9;j++){
 				for(int i=-index[1];i<3-index[1];i++){
-					if(worldObj.getBlock(x+i, y+j, z+k) != id || (worldObj.getBlockMetadata(x+i, y+j, z+k) != refinery[j][index[0]+k][index[1]+i]) && worldObj.getBlockMetadata(x+i, y+j, z+k) != 4){
-						hasStructure = false;
+					if(worldObj.getBlock(x+i, y+j, z+k) != id || (worldObj.getBlockMetadata(x+i, y+j, z+k) != refinery[j][index[0]+k][index[1]+i])){
+						return false;
 					}
 				}
 			}
 		}
-		return hasStructure;
+		return true;
 	}
 	
 	public static int[] getPos(World worldObj, int x,int y,int z,Block id){
@@ -66,7 +66,7 @@ public class RF_Utils {
 	
 	public static  void removeRefinery(World worldObj, int x,int y,int z){
 		for(int i=-1;i<2;i++){
-			for(int j=0;j<8;j++){
+			for(int j=0;j<9;j++){
 				for(int k=-1;k<2;k++){
 					TileEntity t = worldObj.getTileEntity(x+i, y+j, z+k);
 					if(t instanceof TileGag)((TileGag) t).restaureBlock();
@@ -76,32 +76,33 @@ public class RF_Utils {
 	}
 
 	public static void setRefinery(World worldObj, int x,int y,int z){
+		
 		for(int i=-1;i<2;i++){
-			for(int j=0;j<8;j++){
+			for(int j=0;j<9;j++){
 				for(int k=-1;k<2;k++){
 					int meta = worldObj.getBlockMetadata(x+i, y+j, z+k);
 					if(meta == 1){
-						worldObj.setBlockMetadataWithNotify(x+i, y+j, z+k, 3, 3);
+						worldObj.setBlockMetadataWithNotify(x+i, y+j, z+k, 2, 3);
 						worldObj.markBlockForUpdate(x+i, y+j, z+k);
 					}else if(meta == 0){
-						worldObj.setBlockMetadataWithNotify(x+i, y+j, z+k, 5, 3);
+						worldObj.setBlockMetadataWithNotify(x+i, y+j, z+k, 4, 3);
 						worldObj.markBlockForUpdate(x+i, y+j, z+k);
 					}
 				}
 			}
 		}
 		for(int i=-1;i<2;i++){
-			for(int j=0;j<8;j++){
+			for(int j=0;j<9;j++){
 				for(int k=-1;k<2;k++){
 					if(worldObj.getTileEntity(x+i, y+j, z+k) instanceof TileGag){
-						((TileGag)worldObj.getTileEntity(x+i, y+j, z+k)).tipe = (j == 0)? 0 : 1;
+						((TileGag)worldObj.getTileEntity(x+i, y+j, z+k)).tipe = (j < 2)? 0: 1;
 						((TileGag)worldObj.getTileEntity(x+i, y+j, z+k)).x = x;
 						((TileGag)worldObj.getTileEntity(x+i, y+j, z+k)).y = y+1;
 						((TileGag)worldObj.getTileEntity(x+i, y+j, z+k)).z = z;
 					}
 				}}}
-		worldObj.removeTileEntity(x, y+1, z);
-		worldObj.setBlockMetadataWithNotify(x, y+1, z, 2, 3);
+		worldObj.removeTileEntity(x, y+2, z);
+		worldObj.setBlockMetadataWithNotify(x, y+2, z, 3, 3);
 	}
 
 	public static int[] getCenter(World w, int x, int y, int z) {
