@@ -10,12 +10,12 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
 
-public class CVDcontainer extends Container{
+public class CVDcontainer extends UT_Container{
 
 	public CVD_Entity tileEntity;
 	
 	public CVDcontainer(InventoryPlayer inventoryPlayer, CVD_Entity tileEntity2){
-		super();
+		super(inventoryPlayer,tileEntity2);
 		tileEntity = tileEntity2;
 		
 		addSlotToContainer(new Slot(tileEntity, 0, 53, 33));
@@ -27,18 +27,6 @@ public class CVDcontainer extends Container{
 			}
 		});
 		bindPlayerInventory(inventoryPlayer);
-	}
-	
-	private void bindPlayerInventory(InventoryPlayer inventoryPlayer) {
-		for (int i = 0; i < 3; i++) {
-			for (int j = 0; j < 9; j++) {
-				 addSlotToContainer(new Slot(inventoryPlayer, j + i * 9 + 9,
-                         8 + j * 18, 84 + i * 18));
-			}
-		}
-		for (int i = 0; i < 9; i++) {
-			addSlotToContainer(new Slot(inventoryPlayer, i, 8 + i * 18, 142));
-		}
 	}
 	
 	public void addCraftingToCrafters(ICrafting par1ICrafting)
@@ -64,10 +52,7 @@ public class CVDcontainer extends Container{
 	}
 	
 	
-	@Override
-	public boolean canInteractWith(EntityPlayer entityplayer) {
-		return true;
-	}
+	
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer player, int slot) {
 		return transfer(player, slot, 3);

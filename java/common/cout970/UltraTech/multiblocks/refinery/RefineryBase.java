@@ -7,6 +7,8 @@ import api.cout970.UltraTech.fluids.UT_Tank;
 import common.cout970.UltraTech.lib.recipes.Cooling_Recipes;
 import common.cout970.UltraTech.managers.BlockManager;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.Container;
+import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -22,6 +24,7 @@ public class RefineryBase extends TileGag implements IFluidHandler{
 
 	public UT_Tank tank;
 	public int mode = 0;
+	public RefineryCore main;
 	/**
 	 * mode
 	 * 0 nothing
@@ -90,5 +93,23 @@ public class RefineryBase extends TileGag implements IFluidHandler{
 		super.writeToNBT(nbt);
 		nbt.setInteger("mode", mode);
 		getTank().writeToNBT(nbt, "fluid");
+	}
+
+	public void onNeigUpdate() {
+		if(main != null){
+			main.update();
+		}
+	}
+	
+	public void sendGUINetworkData(Container cont, ICrafting c) {
+		super.sendGUINetworkData(cont, c);
+		if(getTank().getFluid() != null)c.sendProgressBarUpdate(cont, 5, getTank().getFluid().fluidID);
+		c.sendProgressBarUpdate(cont, 2, getTank().getFluidAmount());
+	}
+
+	public void getGUINetworkData(int id, int value) {
+		super.getGUINetworkData(id, value);
+		if(id == 2)getTank().setFluidAmount(value);
+		if(id == 5)getTank().setFluid(new FluidStack(value, 1));
 	}
 }

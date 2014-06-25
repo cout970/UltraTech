@@ -10,6 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Configuration;
 //import net.minecraftforge.common.Configuration;
 import common.cout970.UltraTech.items.AutoEjectUpgrade;
+import common.cout970.UltraTech.items.Bottle;
 import common.cout970.UltraTech.items.FortuneUpgrade;
 import common.cout970.UltraTech.items.Battery;
 import common.cout970.UltraTech.items.LasserSword;
@@ -91,6 +92,11 @@ public class ItemManager {
 		Reg("MediumElectricCell", "Medium Electric Cell", true);
 		Reg("BigElectricCell", "Big Electric Cell", true);
 		Reg("Rubber","Rubber",true);
+		Reg("Bottle","Bottle",false);
+		Reg("Plastic","Plastic",true);
+		Reg("Rubber_bulcanized","Vulcanized Rubber",true);
+		Reg("Dynamo","Dynamo",true);
+		
 	}
 
 	public static void LoadConfigItems(Configuration c){
@@ -125,6 +131,8 @@ public class ItemManager {
 			for(int meta = 0;meta < UT_Ingot.names.length;meta++)Language.addName(new ItemStack(it,1,meta), UT_Ingot.names[meta]);
 		}else if(a == "Dust"){
 			for(int meta = 0;meta < UT_Dust.names.length;meta++)Language.addName(new ItemStack(it,1,meta), UT_Dust.names[meta]);
+		}else if(a == "Bottle"){
+			for(int meta = 0;meta < Bottle.names.length;meta++)Language.addName(new ItemStack(it,1,meta), Bottle.names[meta]+" Bottle");
 		}else{ 
 			Language.addName(it, a);
 		}
@@ -132,6 +140,8 @@ public class ItemManager {
 
 	private static Item Exception(ItemInfo i) {
 		String a = i.name;
+		if(a == "Bottle")
+			return new Bottle();
 		if(a=="Ingot")
 			return new UT_Ingot();
 		if(a=="Chunk")

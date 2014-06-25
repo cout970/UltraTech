@@ -18,15 +18,17 @@ public class RangeUpgrade extends UT_Item{
 		if(par3World.getTileEntity(x, y, z) instanceof MinerEntity){
 
 			MinerEntity te = (MinerEntity) par3World.getTileEntity(x, y, z);
-			if(te.height < 31 && te.widht < 31){	
-				te.height += 1;
-				te.widht += 1;
+			if(te.height < 56 && te.widht < 56){	
+				te.height += 2;
+				te.widht += 2;
 				te.hasMine = false;
 				te.current = 0;
 				te.hasRangeUpgrades = true;
 				te.rangeUpgrades += 1;
 				par1ItemStack.splitStack(1);
 				return true;
+			}else{
+				System.out.println(te.height+" "+te.widht);
 			}
 		}
 		return false;

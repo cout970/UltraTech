@@ -33,9 +33,7 @@ public class RefineryCore extends TileGag{
 		super.updateEntity();
 		if(worldObj.isRemote)return;
 		if(IO == null)getBase();
-		boolean[] found = new boolean[4];
 		
-		if(in != null)recipe = Cooling_Recipes.getResult(in);
 		if(recipe != null && in != null && out1 != null && out2 != null && out3 != null){
 			if(in.getFluidAmount() >= recipe.input.amount){
 				if(recipe.product[0] == null || out1.fill(recipe.product[0], false) >= recipe.product[0].amount)
@@ -44,23 +42,30 @@ public class RefineryCore extends TileGag{
 							craft();
 						}
 			}
-		}else{
-			for(RefineryBase b : IO){
-				if(b.mode == 1 && !found[0]){
-					found[0] = true;
-					in = b.getTank();
-				}else if(b.mode == 2 && !found[1]){
-					found[1] = true;
-					out1 = b.getTank();
-				}else if(b.mode == 3 && !found[2]){
-					found[2] = true;
-					out2 = b.getTank();
-				}else if(b.mode == 4 && !found[3]){
-					found[3] = true;
-					out3 = b.getTank();
-				}
+		}
+
+
+	}
+	
+	public void update(){
+		boolean[] found = new boolean[4];
+
+		for(RefineryBase b : IO){
+			if(b.mode == 1 && !found[0]){
+				found[0] = true;
+				in = b.getTank();
+			}else if(b.mode == 2 && !found[1]){
+				found[1] = true;
+				out1 = b.getTank();
+			}else if(b.mode == 3 && !found[2]){
+				found[2] = true;
+				out2 = b.getTank();
+			}else if(b.mode == 4 && !found[3]){
+				found[3] = true;
+				out3 = b.getTank();
 			}
 		}
+		if(in != null)recipe = Cooling_Recipes.getResult(in);
 	}
 
 
@@ -72,10 +77,12 @@ public class RefineryCore extends TileGag{
 					TileEntity t = worldObj.getTileEntity(xCoord+i-1, yCoord-j, zCoord+k-1);
 					if(t instanceof RefineryBase){
 						IO.add((RefineryBase) t);
+						((RefineryBase) t).main = this;
 					}
 				}
 			}
 		}
+		this.update();
 	}
 
 	public void craft(){

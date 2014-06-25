@@ -27,7 +27,6 @@ public class CompatibilityManager {
 		OreDictionary.registerOre("ingotTin", new ItemStack(ItemManager.ItemName.get("Ingot"),1,2));
 		OreDictionary.registerOre("ingotLead", new ItemStack(ItemManager.ItemName.get("Ingot"),1,3));
 		OreDictionary.registerOre("ingotSilver", new ItemStack(ItemManager.ItemName.get("Ingot"),1,4));
-//		OreDictionary.registerOre("ingotAlloy_UT", new ItemStack(ItemManager.ItemName.get("Ingot"),1,5));
 		//dust
 		OreDictionary.registerOre("dustAluminum", new ItemStack(ItemManager.ItemName.get("Dust"),1,0));
 		OreDictionary.registerOre("dustAluminium", new ItemStack(ItemManager.ItemName.get("Dust"),1,0));
@@ -59,6 +58,9 @@ public class CompatibilityManager {
 		OreDictionary.registerOre("plateObsidian", new ItemStack(ItemManager.ItemName.get("UnorganicPlate"),1,5));
 		
 		OreDictionary.registerOre("dustSulfur", new ItemStack(ItemManager.ItemName.get("Sulfur")));
+		OreDictionary.registerOre("rawRubber", new ItemStack(ItemManager.ItemName.get("Rubber")));
+		OreDictionary.registerOre("plastic", new ItemStack(ItemManager.ItemName.get("Plastic")));
+		OreDictionary.registerOre("itemRubber", new ItemStack(ItemManager.ItemName.get("Rubber_bulcanized")));
 	}
 
 

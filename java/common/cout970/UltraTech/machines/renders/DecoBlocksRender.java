@@ -31,6 +31,7 @@ public class DecoBlocksRender implements ISimpleBlockRenderingHandler{
 		block.setLightLevel(1f);
 		t.setBrightness(block.getMixedBrightnessForBlock(w, x, y, z));
 		block.setLightLevel(0f);
+		
 //		//in		
 		if(block.shouldSideBeRendered(w, x, y+1, z, 0))r.renderFaceYPos(block, x, y, z, c);
 		if(block.shouldSideBeRendered(w, x, y-1, z, 0))r.renderFaceYNeg(block, x, y, z, c);

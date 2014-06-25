@@ -5,12 +5,15 @@ import common.cout970.UltraTech.block.fluids.BlockFluidFin;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 
 public class FluidManager{
-
-	public static boolean icons = false;
+	
+	
 	//fluid
 	public static Fluid Steam;
 	public static Fluid Juice;
@@ -20,6 +23,10 @@ public class FluidManager{
 	public static Fluid Gas_Oil;
 	public static Fluid Oil;
 	public static Fluid Plastic;
+	public static Fluid Fuel;
+	public static Fluid Acid;
+	
+	public static Fluid[] fluids;
 	
 	public static Block SteamBlock;
 	public static Block JuiceBlock;
@@ -29,6 +36,8 @@ public class FluidManager{
 	public static Block GasolineBlock;
 	public static Block OilBlock;
 	public static Block PlasticBlock;
+	public static Block FuelBlock;
+	public static Block AcidBlock;
 	
 
 	public static void InitFluids() {
@@ -40,6 +49,11 @@ public class FluidManager{
 		Gasoline = new Fluid("gasoline");
 		Oil = new Fluid("oil");
 		Plastic = new Fluid("plastic");
+		Fuel = new Fluid("fuel");
+		Acid = new Fluid("sulfuric_acid");
+		
+		Fluid[] fluid = {Steam,Juice,Gas_Ethanol,Ethanol,Gasoline,Gas_Oil,Oil,Plastic,Fuel,Acid};
+		fluids = fluid;
 		
 		setupFluids();
 		
@@ -51,20 +65,8 @@ public class FluidManager{
 		GasolineBlock = new BlockFluidBase(Gasoline).setBlockName("gasoline");
 		OilBlock = new BlockFluidBase(Oil).setBlockName("oil");
 		PlasticBlock = new BlockFluidBase(Plastic).setBlockName("plastic");
-	}
-	
-	public static void setIcons(IIconRegister ic){
-		if(!icons){
-			icons = true;
-			Steam.setIcons(ic.registerIcon("ultratech:/fluids/fluidstill_"+"steam"));
-			Juice.setIcons(ic.registerIcon("ultratech:/fluids/fluidstill_"+"juice"));
-			Gas_Ethanol.setIcons(ic.registerIcon("ultratech:/fluids/fluidstill_"+"gas_ethanol"));
-			Ethanol.setIcons(ic.registerIcon("ultratech:/fluids/fluidstill_"+"ethanol"));
-			Gas_Oil.setIcons(ic.registerIcon("ultratech:/fluids/fluidstill_"+"gas_oil"));
-			Gasoline.setIcons(ic.registerIcon("ultratech:/fluids/fluidstill_"+"gasoline"));
-			Oil.setIcons(ic.registerIcon("ultratech:/fluids/fluidstill_"+"oil"));
-			Plastic.setIcons(ic.registerIcon("ultratech:/fluids/fluidstill_"+"plastic"));
-		}
+		FuelBlock = new BlockFluidBase(Fuel).setBlockName("fuel");
+		AcidBlock = new BlockFluidBase(Acid).setBlockName("sulfuric_acid");
 	}
 	
 	private static void setupFluids(){
@@ -74,6 +76,8 @@ public class FluidManager{
 			FluidRegistry.registerFluid(FluidManager.Gasoline);
 			FluidRegistry.registerFluid(FluidManager.Oil);
 			FluidRegistry.registerFluid(Plastic);
+			FluidRegistry.registerFluid(Fuel);
+			FluidRegistry.registerFluid(Acid);
 			
 		//gas
 			Steam.setDensity(-5000);
@@ -103,6 +107,13 @@ public class FluidManager{
 		GameRegistry.registerBlock(GasolineBlock, "ultratech_"+"gasoline");
 		GameRegistry.registerBlock(OilBlock, "ultratech_"+"oil");
 		GameRegistry.registerBlock(PlasticBlock, "ultratech_"+"plastic");
+		GameRegistry.registerBlock(FuelBlock, "ultratech_"+"fuel");
+		GameRegistry.registerBlock(AcidBlock, "ultratech_"+"sulfuric_acid");
+		
+		FluidContainerRegistry.registerFluidContainer(Acid, new ItemStack(ItemManager.ItemName.get("SulfuricAcid"),1), new ItemStack(Items.potionitem,1,0));
+		for(int x=0;x<fluids.length;x++){
+			FluidContainerRegistry.registerFluidContainer(fluids[x], new ItemStack(ItemManager.ItemName.get("Bottle"),1,x+1), new ItemStack(ItemManager.ItemName.get("Bottle"),1,0));
+		}
 		
 		Language.addName(Ethanol, "Ethanol");
 		Language.addName(Oil, "Oil");
@@ -112,6 +123,8 @@ public class FluidManager{
 		Language.addName(Gas_Ethanol, "Ethanol Gas");
 		Language.addName(Gasoline, "Gasoline");
 		Language.addName(Plastic, "Plastic");
+		Language.addName(Fuel, "Fuel");
+		Language.addName(Acid, "Sulfuric Acid");
 		
 		Language.addName(EthanolBlock, "Ethanol");
 		Language.addName(OilBlock, "Oil");
@@ -121,5 +134,7 @@ public class FluidManager{
 		Language.addName(Gas_EthanolBlock, "Ethanol Gas");
 		Language.addName(GasolineBlock, "Gasoline");
 		Language.addName(PlasticBlock, "Plastic");
+		Language.addName(FuelBlock, "Fuel");
+		Language.addName(AcidBlock, "Sulfuric Acid");
 	}
 }

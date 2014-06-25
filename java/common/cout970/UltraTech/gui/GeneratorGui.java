@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.lwjgl.opengl.GL11;
 
-import common.cout970.UltraTech.TileEntities.electric.GeneratorEntity;
+import common.cout970.UltraTech.TileEntities.electric.CoalGeneratorEntityT1;
 import common.cout970.UltraTech.lib.CostData;
 import common.cout970.UltraTech.lib.EnergyCosts;
 import common.cout970.UltraTech.lib.UT_Utils;
@@ -18,9 +18,9 @@ import net.minecraft.util.ResourceLocation;
 
 public class GeneratorGui extends GuiContainer{
 
-	private GeneratorEntity entity;
+	private CoalGeneratorEntityT1 entity;
 	
-	public GeneratorGui(Container par1Container,InventoryPlayer ip,GeneratorEntity entity) {
+	public GeneratorGui(Container par1Container,InventoryPlayer ip,CoalGeneratorEntityT1 entity) {
 		super(par1Container);
 		this.entity = entity;
 	}

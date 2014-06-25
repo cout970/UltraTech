@@ -47,8 +47,14 @@ public class RefineryBlock extends BlockContainer{
 			if(meta == 4){
 				RefineryBase b = (RefineryBase) w.getTileEntity(x, y, z);
 				b.changeMode();
+				b.onNeigUpdate();
 				w.markBlockForUpdate(x, y, z);
 				return true;
+			}
+		}else{
+			int meta = w.getBlockMetadata(x, y, z);
+			if(meta == 4){
+				p.openGui(UltraTech.instance, 14, w, x, y, z);
 			}
 		}
 		return false;
@@ -62,19 +68,15 @@ public class RefineryBlock extends BlockContainer{
 	public void onNeighborBlockChange(World w, int x, int y, int z, Block b){
 		super.onNeighborBlockChange(w, x, y, z, b);
 		TileEntity e = w.getTileEntity(x, y, z);
-		if(w.getBlockMetadata(x, y, z) == 0 && w.getBlock(x, y-1, z) != BlockManager.Refinery){
-				if(RF_Utils.refreshRefinery(w, x, y, z)){
-					int[] a = RF_Utils.getCenter(w, x, y, z);
-					RF_Utils.setRefinery(w, x+a[0], y+a[1], z+a[2]);
-				}
+		int meta = w.getBlockMetadata(x, y, z);
+		if(meta == 0 && w.getBlock(x, y-1, z) != BlockManager.Refinery){
+			if(RF_Utils.refreshRefinery(w, x, y, z)){
+				int[] a = RF_Utils.getCenter(w, x, y, z);
+				RF_Utils.setRefinery(w, x+a[0], y+a[1], z+a[2]);
+			}
 		}
-//		else if(w.getBlockMetadata(x, y, z) == 2){
-//			TileGag t = (TileGag) e;
-//			if(w.getBlockMetadata(t.x, t.y, t.z) != 2 || w.getBlockMetadata(t.x, t.y, t.z) != 0){
-//				RF_Utils.removeRefinery(w, t.x, t.y-1, t.z);
-//			}
-//		}else 
-			if(w.getBlockMetadata(x, y, z) == 1){
+
+		if(meta == 1){
 			for(int j = 0;j<8;j++){
 				if(Block.isEqualTo(w.getBlock(x, y-j, z),BlockManager.Refinery) && w.getBlockMetadata(x, y-j, z) == 0){
 					this.onNeighborBlockChange(w, x, y-j-1, z, b);
@@ -82,6 +84,9 @@ public class RefineryBlock extends BlockContainer{
 				}
 			}
 		} 
+		if(meta == 4){
+			((RefineryBase)e).onNeigUpdate();
+		}
 	}
 	
 	 @SideOnly(Side.CLIENT)

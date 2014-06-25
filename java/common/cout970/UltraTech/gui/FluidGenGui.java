@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.lwjgl.opengl.GL11;
 
-import common.cout970.UltraTech.TileEntities.electric.FluidGenerator;
+import common.cout970.UltraTech.TileEntities.electric.FluidGeneratorEntity;
 import common.cout970.UltraTech.lib.EnergyCosts;
 import common.cout970.UltraTech.lib.UT_Utils;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -18,9 +18,9 @@ import net.minecraftforge.fluids.FluidStack;
 
 public class FluidGenGui extends GuiContainer{
 
-	public FluidGenerator entity;
+	public FluidGeneratorEntity entity;
 
-	public FluidGenGui(Container par1Container, FluidGenerator tile) {
+	public FluidGenGui(Container par1Container, FluidGeneratorEntity tile) {
 		super(par1Container);
 		entity = tile;
 	}

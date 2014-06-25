@@ -1,15 +1,15 @@
 thinks to do:
 solve dependencies --
-solve language bugs 
-solve bug with deco blocks
+solve language bugs --
+solve bug with deco blocks (I hate minecraft 1.7.2 render system)
 finish {
-pipes,
-refinery,
-crafter,
+pipes, --
+refinery, --
+crafter, --
 animation engine,
 pump,
 multitank,
-dynamo, -
+dynamo, --
 turbine,
 heater for boiler
 tesseract gui
@@ -19,9 +19,9 @@ steam turbine tiers
 generator nerf and upgrades 
 }
 for this public alpha
-remake dependencies
+remake dependencies --
 change generator
 change turbine
 change boiler
-ocult wiki
-refractor oreblock and UT-plate
+ocult wiki 
+refractor UT-plate --

@@ -19,7 +19,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 
-public class FluidGenerator extends Machine implements IFluidHandler{
+public class FluidGeneratorEntity extends Machine implements IFluidHandler{
 
 	public UT_Tank storage;
 	public boolean on;
@@ -30,7 +30,7 @@ public class FluidGenerator extends Machine implements IFluidHandler{
 		storage = new UT_Tank(8000, this);
 	}
 	
-	public FluidGenerator(){
+	public FluidGeneratorEntity(){
 		super(CostData.Fluid_Generator);
 	}
 	

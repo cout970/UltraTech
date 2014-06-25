@@ -8,10 +8,11 @@ import api.cout970.UltraTech.Wpower.Machine;
 import common.cout970.UltraTech.TileEntities.electric.CVD_Entity;
 import common.cout970.UltraTech.TileEntities.electric.ChargeStationEntity;
 import common.cout970.UltraTech.TileEntities.electric.FermenterEntity;
-import common.cout970.UltraTech.TileEntities.electric.GeneratorEntity;
+import common.cout970.UltraTech.TileEntities.electric.CoalGeneratorEntityT1;
 import common.cout970.UltraTech.TileEntities.utility.CrafterEntity;
 import common.cout970.UltraTech.TileEntities.utility.Printer3DEntity;
 import common.cout970.UltraTech.core.UltraTech;
+import common.cout970.UltraTech.lib.UT_Utils;
 import common.cout970.UltraTech.managers.FluidManager;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -62,7 +63,7 @@ public class Tier1Block extends BlockConductor{
 	@Override
 	public TileEntity createNewTileEntity(World world, int metadata) {
 		if(metadata == 0)return new CrafterEntity();
-		if(metadata == 1)return new GeneratorEntity();
+		if(metadata == 1)return new CoalGeneratorEntityT1();
 		if(metadata == 2)return new CVD_Entity();
 		if(metadata == 3)return new Printer3DEntity();
 		if(metadata == 4)return new ChargeStationEntity();
@@ -107,8 +108,8 @@ public class Tier1Block extends BlockConductor{
 		if(meta == 1){
 			if(side == 1 || side == 0)return icons[0];
 			TileEntity t = BA.getTileEntity(x, y, z);
-			if(t instanceof GeneratorEntity){
-				if(((GeneratorEntity)t).on){
+			if(t instanceof CoalGeneratorEntityT1){
+				if(((CoalGeneratorEntityT1)t).on){
 					return icons[3];
 				}else{
 					return icons[2];
@@ -133,7 +134,7 @@ public class Tier1Block extends BlockConductor{
 					entityplayer.openGui(UltraTech.instance, 13, world, i, j, k);
 					return true;
 				}
-				if(tile instanceof GeneratorEntity){
+				if(tile instanceof CoalGeneratorEntityT1){
 					entityplayer.openGui(UltraTech.instance, 13, world, i, j, k);
 					return true;
 				}
@@ -192,7 +193,7 @@ public class Tier1Block extends BlockConductor{
 	public void breakBlock(World world, int x, int y, int z, Block par5, int par6){
 		TileEntity t = world.getTileEntity(x, y, z);
 		if(t instanceof IInventory){	
-			dropItems(world, x, y, z);
+			UT_Utils.dropItems(world, x, y, z);
 		}
 		super.breakBlock(world, x, y, z, par5, par6);
 	}

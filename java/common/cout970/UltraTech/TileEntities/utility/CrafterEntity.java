@@ -37,7 +37,6 @@ public class CrafterEntity extends SyncTile implements IInventory,IRedstoneContr
 	public InventoryCrafter craft;
 	public CrafterRecipe saves;
 	public boolean[] found = new boolean[9];
-	private boolean loop;
 	private boolean redstone;
 	private EntityPlayer player;
 	public boolean restrictMode = false;
@@ -50,7 +49,6 @@ public class CrafterEntity extends SyncTile implements IInventory,IRedstoneContr
 
 	public void update(){
 		if(worldObj.isRemote)return;
-		loop = false;
 		result = CraftingManager.getInstance().findMatchingRecipe(craft, worldObj);
 		canCraft();
 		this.markDirty();

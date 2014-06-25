@@ -6,7 +6,7 @@ import java.util.Random;
 import api.cout970.UltraTech.Wpower.BlockConductor;
 import api.cout970.UltraTech.Wpower.Machine;
 import common.cout970.UltraTech.TileEntities.electric.CutterEntity;
-import common.cout970.UltraTech.TileEntities.electric.FluidGenerator;
+import common.cout970.UltraTech.TileEntities.electric.FluidGeneratorEntity;
 import common.cout970.UltraTech.TileEntities.electric.FurnaceEntity;
 import common.cout970.UltraTech.TileEntities.electric.PresuricerEntity;
 import common.cout970.UltraTech.TileEntities.electric.PurifierEntity;
@@ -64,7 +64,7 @@ public class Tier2Block extends BlockConductor{
 		if(metadata == 1)return new PurifierEntity();
 		if(metadata == 2)return new CutterEntity();
 		if(metadata == 3)return new PresuricerEntity();
-		if(metadata == 4)return new FluidGenerator();
+		if(metadata == 4)return new FluidGeneratorEntity();
 		return null;
 	}
 
@@ -102,8 +102,8 @@ public class Tier2Block extends BlockConductor{
 		if(meta == 4){
 			if(side == 1 || side == 0)return icons[0];
 			TileEntity t = BA.getTileEntity(x, y, z);
-			if(t instanceof FluidGenerator){
-				if(((FluidGenerator)t).on){
+			if(t instanceof FluidGeneratorEntity){
+				if(((FluidGeneratorEntity)t).on){
 					return icons[7];
 				}else{
 					return icons[6];

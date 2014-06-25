@@ -4,4 +4,5 @@ public class Control{
 
 	public static boolean debug = true;
 	public static boolean isMicroPartActived = false;
+	
 }

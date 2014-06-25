@@ -96,7 +96,7 @@ public class Language {
 		Language.addName(new ItemStack(Tier1,1,0), "Crafter");
 		Language.addName(new ItemStack(Tier1,1,1), "Generator");
 		Language.addName(new ItemStack(Tier1,1,2), "CVD");
-		Language.addName(new ItemStack(Tier1,1,3), "Painter");
+		Language.addName(new ItemStack(Tier1,1,3), "3D Printer");
 		Language.addName(new ItemStack(Tier1,1,4), "Charge Station");
 		Language.addName(new ItemStack(Tier1,1,5), "Fermenter");
 		Language.addName(new ItemStack(Tier1,1,6), "Cooling block");
@@ -117,10 +117,6 @@ public class Language {
 		Language.addName(new ItemStack(Storage,1,1), "Battery Tier2");
 		Language.addName(new ItemStack(Storage,1,2), "Battery Tier3");
 		
-		Language.addName(new ItemStack(Destilery,1,0), "Destilery Block");
-		Language.addName(new ItemStack(Destilery,1,1), "Destilery Input");
-		Language.addName(new ItemStack(Destilery,1,2), "Destilery Output");
-
 		Language.addName(new ItemStack(Refinery,1,0), "Refinery Base WIP");
 		Language.addName(new ItemStack(Refinery,1,1), "Refinery Structure Block");
 		Language.addName(new ItemStack(Refinery,1,2), "Refinery Core");
@@ -147,6 +143,7 @@ public class Language {
 		Language.addName(Dynamo, "FT Dynamo");
 		Language.addName(MultiTank, "MultiTank WIP");
 		Language.addName(LavaGenerator, "Lava Generator");
+		Language.addName(Laminator, "Laminator");
 		
 		if(!Control.isMicroPartActived)Language.addName(CableBlock, "Cable");
 	}

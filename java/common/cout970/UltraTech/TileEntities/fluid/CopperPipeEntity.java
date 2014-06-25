@@ -25,6 +25,7 @@ public class CopperPipeEntity extends Pipe implements IFluidHandler{
 	
 	public void updateEntity(){
 		super.updateEntity();
+		if(worldObj.isRemote)return;
 		if(!up){onNeighUpdate(); up = true;}
 		if(connections.size() == 0 || getNetwork() == null)return;
 		if(!mode){
@@ -36,15 +37,17 @@ public class CopperPipeEntity extends Pipe implements IFluidHandler{
 				FluidStack df = drain(t.side.getOpposite(), t.tank.fill(t.side, f, true), true);
 			}
 		}else{
-			
 			for(TankConection t : connections){
-				FluidStack f = t.tank.drain(t.side, 50, false);
+				FluidStack f = t.tank.drain(t.side, 100, false);
 				if(f != null && (getNetwork().getBuffer().getFluid() == null || getNetwork().getBuffer().getFluid().fluidID == f.fluidID)){
 					int space;
 					if(getNetwork().getBuffer().getFluid() != null)space = getNetwork().getBuffer().getCapacity()-getNetwork().getBuffer().getFluidAmount();
 					else space = 2000;
-					FluidStack c = t.tank.drain(t.side, 50, true);
-					this.fill(null, c, true);
+					int toD = Math.min(space, 100);
+					if(toD >0){
+						FluidStack c = t.tank.drain(t.side, toD, true);
+						this.fill(null, c, true);
+					}
 				}
 			}
 		}
@@ -110,12 +113,13 @@ public class CopperPipeEntity extends Pipe implements IFluidHandler{
     {
         super.readFromNBT(p_145839_1_);
         mode = p_145839_1_.getBoolean("mode");
+        lock = p_145839_1_.getBoolean("lock");
     }
 
     public void writeToNBT(NBTTagCompound p_145841_1_)
     {
     	super.writeToNBT(p_145841_1_);
     	p_145841_1_.setBoolean("mode", mode);
-    	
+    	p_145841_1_.setBoolean("lock", lock);
     }
 }

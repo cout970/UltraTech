@@ -16,9 +16,8 @@ import net.minecraftforge.common.network.ForgeNetworkHandler;
 import net.minecraftforge.transformers.ForgeAccessTransformer;
 
 public class SyncTile extends TileEntity{
-
+	
 	public void Sync(){
-//		System.out.println(this.worldObj.getBlock(xCoord, yCoord, zCoord));
 		if(!this.worldObj.isRemote){
 			markDirty();
 			Net_Utils.sendUpdate(this);

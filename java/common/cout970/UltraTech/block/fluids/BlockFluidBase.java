@@ -9,6 +9,7 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
 import net.minecraftforge.fluids.BlockFluidClassic;
 import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
 
 public class BlockFluidBase extends BlockFluidClassic{
 
@@ -32,7 +33,7 @@ public class BlockFluidBase extends BlockFluidClassic{
     public void registerBlockIcons(IIconRegister register) {
             stillIcon = register.registerIcon("ultratech:fluids/fluidstill_"+fluidName);
             flowingIcon = stillIcon;
-            FluidManager.setIcons(register);
+            FluidRegistry.getFluid(fluidName).setIcons(stillIcon, flowingIcon);
 //            flowingIcon = register.registerIcon("ultratech:fluids/fluidflowing_"+fluidName);
     }
 

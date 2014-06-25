@@ -17,7 +17,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntityFurnace;
 
-public class GeneratorEntity extends MachineWithInventory{
+public class CoalGeneratorEntityT2 extends MachineWithInventory{
 
 	public float Progres = 0;
 	public boolean on;
@@ -25,7 +25,7 @@ public class GeneratorEntity extends MachineWithInventory{
 	public float heat = 25;
 	public float maxHeat = 800;
 
-	public GeneratorEntity(){
+	public CoalGeneratorEntityT2(){
 		super(1,"Generator",CostData.Generator);
 	}
 

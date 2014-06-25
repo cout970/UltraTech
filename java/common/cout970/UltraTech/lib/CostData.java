@@ -24,10 +24,12 @@ public enum CostData {
 	Tesseract		( 1250d ,3	,0			,0),
 	WindMill		(  200d ,2	,1d/6		,1),
 	LavaGenerator   (  200d	,2	,0.4d		,1),
+	Laminator		(   80d ,1	,40d		,0),
+	ChemicalPlant	(  200d ,2	,20d		,0),
 	
 	Storage_1		( 	20000d	,1	,0			,2),
 	Storage_2		(  120000d	,2	,0			,2),
-	Storage_3		( 1200000d	,3	,0			,2);
+	Storage_3		( 1200000d	,3	,0			,2),  ;
 	
 	public double cap,use;
 	public int tier;
