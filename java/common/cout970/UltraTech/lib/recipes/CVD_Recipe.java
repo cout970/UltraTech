@@ -3,13 +3,15 @@ package common.cout970.UltraTech.lib.recipes;
 import java.util.ArrayList;
 import java.util.List;
 
-import common.cout970.UltraTech.TileEntities.electric.CVD_Entity;
-import common.cout970.UltraTech.lib.UT_Utils;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
-public class CVD_Recipe{
+import common.cout970.UltraTech.lib.UT_Utils;
 
+public class CVD_Recipe implements IRecipeHandler{
+
+	public static IRecipeHandler INSTANCE = new CVD_Recipe(null,null,null);
 	public static List<CVD_Recipe> recipes = new ArrayList<CVD_Recipe>();
 	private final ItemStack input1;
 	private final ItemStack input2;
@@ -21,7 +23,7 @@ public class CVD_Recipe{
 		this.output = output;
 	}
 
-	public static boolean matches(CVD_Entity inv) {
+	public boolean matches(IInventory inv) {
 		if(inv == null)return false;
 		for(CVD_Recipe a :recipes){
 			if(inv.getStackInSlot(0) != null && inv.getStackInSlot(1) != null){
@@ -37,7 +39,7 @@ public class CVD_Recipe{
 	}
 
 
-	public static ItemStack getCraftingResult(CVD_Entity inv) {
+	public ItemStack getCraftingResult(IInventory inv) {
 		if(inv == null)return null;
 		for(CVD_Recipe a :recipes){
 			if(inv.getStackInSlot(0) != null && inv.getStackInSlot(1) != null){
@@ -62,7 +64,12 @@ public class CVD_Recipe{
 		return input1;
 	}
 
-	public static void addRecipe(CVD_Recipe a){
+	public static void addRecipe(CVD_Recipe r){
+		INSTANCE.addRecipe((IRecipeHandler)r);
+	}
+	
+	public void addRecipe(IRecipeHandler r){
+		CVD_Recipe a = (CVD_Recipe) r;
 		if(a.getImput1().stackSize == 0)a.input1.stackSize = 1;
 		if(a.getImput2().stackSize == 0)a.input2.stackSize = 1;
 		if(a.getOutput().stackSize == 0)a.output.stackSize = 1;
@@ -88,7 +95,7 @@ public class CVD_Recipe{
 		return false;
 	}
 
-	public static ItemStack getResult(ItemStack itemstack) {
+	public ItemStack getResult(ItemStack itemstack) {
 		if(itemstack == null)return null;
 		for(CVD_Recipe a:recipes){
 			if(UT_Utils.areEcuals(a.getImput1(), itemstack, true) || UT_Utils.areEcuals(a.getImput2(), itemstack, true))
@@ -96,5 +103,4 @@ public class CVD_Recipe{
 		}
 		return null;
 	}
-
 }

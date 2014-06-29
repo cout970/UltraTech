@@ -1,34 +1,34 @@
 package common.cout970.UltraTech.TileEntities.electric;
 
-import api.cout970.UltraTech.Wpower.CableType;
-import api.cout970.UltraTech.Wpower.IPowerConductor;
-import api.cout970.UltraTech.Wpower.Machine;
-import api.cout970.UltraTech.Wpower.PowerInterface;
-import api.cout970.UltraTech.Wpower.StorageInterface;
-import api.cout970.UltraTech.Wpower.StorageInterface.MachineTipe;
+import api.cout970.UltraTech.MeVpower.CableType;
+import api.cout970.UltraTech.MeVpower.IPowerConductor;
+import api.cout970.UltraTech.MeVpower.Machine;
+import api.cout970.UltraTech.MeVpower.PowerInterface;
+import api.cout970.UltraTech.MeVpower.StorageInterface;
+import api.cout970.UltraTech.MeVpower.StorageInterface.MachineTipe;
 import api.cout970.UltraTech.fluids.UT_Tank;
 import api.cout970.UltraTech.network.SyncTile;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
+import common.cout970.UltraTech.TileEntities.electric.tiers.Heater_Entity;
 import common.cout970.UltraTech.lib.EnergyCosts;
 import common.cout970.UltraTech.lib.CostData;
+import common.cout970.UltraTech.lib.UT_Utils;
 import common.cout970.UltraTech.lib.recipes.Boiler_Recipes;
+import common.cout970.UltraTech.misc.IUpdatedEntity;
 
-public class BoilerEntity extends Machine implements IFluidHandler{
-
-	public BoilerEntity() {
-		super(CostData.Boiler,true);
-	}
+public class BoilerEntity extends SyncTile implements IFluidHandler,IUpdatedEntity{
 
 	public UT_Tank result;
 	public UT_Tank storage;
-	public float heat = 25;
+	public Heater_Entity heatProvider;
 	
 	public void updateEntity(){
 		super.updateEntity();
@@ -36,24 +36,16 @@ public class BoilerEntity extends Machine implements IFluidHandler{
 		if(storage == null)storage = new UT_Tank(8000, worldObj, xCoord, yCoord, zCoord);
 		if(worldObj.isRemote)return;
 
-		if(heat > 25 && cond.getCharge() <= CostData.Boiler.use)heat -= 0.1f;
-		if(heat >= 100 && storage != null){
-			if(storage.getFluidAmount() >= 10 && result.getFluidAmount()+100 <= result.getCapacity() && cond.getCharge() >= CostData.Boiler.use){
+		if(heatProvider != null && heatProvider.Heat >= 100 && storage != null){
+			if(storage.getFluidAmount() >= 10 && result.getFluidAmount()+100 <= result.getCapacity()){
 				Fluid s = Boiler_Recipes.getResult(storage.getFluid());
 				if(s != null){
 					storage.drain(10, true);
 					FluidStack t = new FluidStack(s,100);
 					result.fill(t, true);
-					cond.removeCharge(CostData.Boiler.use);
+					heatProvider.Heat -= 1;
 				}
 			}
-		}
-		if(heat <= 100){
-			if(cond.getCharge() >= CostData.Boiler.use){
-				heat+= 0.1f;
-				cond.removeCharge(0.05d);
-			}
-			
 		}
 	}
 	
@@ -110,7 +102,6 @@ public class BoilerEntity extends Machine implements IFluidHandler{
 			if(result == null)result = new UT_Tank(16000, worldObj, xCoord, yCoord, zCoord);
 			storage.readFromNBT(nbtTagCompound, "storage");
 			result.readFromNBT(nbtTagCompound, "result");
-			heat = nbtTagCompound.getFloat("H");
 		}
 
 		@Override
@@ -120,7 +111,6 @@ public class BoilerEntity extends Machine implements IFluidHandler{
 			if(result == null)result = new UT_Tank(16000, worldObj, xCoord, yCoord, zCoord);
 			storage.writeToNBT(nbtTagCompound, "storage");
 			result.writeToNBT(nbtTagCompound, "result");
-			nbtTagCompound.setFloat("H", heat);
 		}
 		
 		//Synchronization
@@ -131,21 +121,25 @@ public class BoilerEntity extends Machine implements IFluidHandler{
 			if(result.getFluid() != null)c.sendProgressBarUpdate(cont, 6, result.getFluid().fluidID);
 			c.sendProgressBarUpdate(cont, 2, storage.getFluidAmount());
 			c.sendProgressBarUpdate(cont, 3, result.getFluidAmount());
-			c.sendProgressBarUpdate(cont, 4, (int) heat);
-			
-
 		}
 
 		public void getGUINetworkData(int id, int value) {
 			super.getGUINetworkData(id, value);
 			if(id == 2)storage.setFluidAmount(value);
 			if(id == 3)result.setFluidAmount(value);
-			if(id == 4)heat = value;
 			if(id == 5)storage.setFluid(new FluidStack(value, 1));
 			if(id == 6)result.setFluid(new FluidStack(value, 1));
 		}
 
 		public CableType getConection(ForgeDirection side) {
 			return CableType.BIG_CENTER;
+		}
+
+		@Override
+		public void onNeigUpdate() {
+			for(TileEntity t : UT_Utils.getTiles(this)){
+				if(t instanceof Heater_Entity)heatProvider = (Heater_Entity) t;
+			}
+			System.out.println("update! "+(heatProvider != null));
 		}
 }

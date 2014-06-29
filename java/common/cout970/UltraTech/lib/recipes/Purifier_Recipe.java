@@ -3,15 +3,17 @@ package common.cout970.UltraTech.lib.recipes;
 import java.util.ArrayList;
 import java.util.List;
 
-import common.cout970.UltraTech.TileEntities.electric.PurifierEntity;
-import common.cout970.UltraTech.lib.UT_Utils;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
-public class Purifier_Recipe{
+import common.cout970.UltraTech.lib.UT_Utils;
+
+public class Purifier_Recipe implements IRecipeHandler{
 	
 	public static List<Purifier_Recipe> recipes = new ArrayList<Purifier_Recipe>();
-	
+
+	public static Purifier_Recipe INSTANCE = new Purifier_Recipe(null, null);
 	protected final ItemStack input;
 	protected final ItemStack output;
 	
@@ -21,7 +23,11 @@ public class Purifier_Recipe{
 		this.output = output;
 	}
 	
-	public static boolean matches(PurifierEntity inv){
+	public static void addRecipe(Purifier_Recipe r){
+		INSTANCE.addRecipe((IRecipeHandler)r);
+	}
+	
+	public boolean matches(IInventory inv){
 		if(inv == null)return false;
 		for(Purifier_Recipe a:recipes){
 			if(inv.getStackInSlot(0) != null)
@@ -34,7 +40,7 @@ public class Purifier_Recipe{
 		return false;
 	}
 	
-	public static ItemStack getCraftingResult(PurifierEntity inv){
+	public ItemStack getCraftingResult(IInventory inv){
 		if(inv != null)if(inv.getStackInSlot(0) != null)
 			for(Purifier_Recipe a:recipes){
 			if(UT_Utils.areEcuals(a.getInput(), inv.getStackInSlot(0),true))
@@ -51,14 +57,15 @@ public class Purifier_Recipe{
 		return output;
 	}
 	
-	public static void addRecipe(Purifier_Recipe a){
+	public void addRecipe(IRecipeHandler b){
+		Purifier_Recipe a = (Purifier_Recipe) b;
 		if(a.getInput().stackSize == 0)a.input.stackSize = 1;
 		if(a.getOutput().stackSize == 0)a.output.stackSize = 1;
 		if(!recipes.contains(a))
 		recipes.add(a);
 	}
 
-	public static ItemStack getResult(ItemStack itemstack) {
+	public ItemStack getResult(ItemStack itemstack) {
 		if(itemstack == null)return null;
 		for(Purifier_Recipe a:recipes){
 			if(UT_Utils.areEcuals(a.getInput(), itemstack,true))

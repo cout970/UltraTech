@@ -3,7 +3,7 @@ package common.cout970.UltraTech.TileEntities.electric;
 import java.util.ArrayList;
 import java.util.List;
 
-import api.cout970.UltraTech.Wpower.Machine;
+import api.cout970.UltraTech.MeVpower.Machine;
 import buildcraft.api.transport.IPipeTile;
 import buildcraft.api.transport.IPipeTile.PipeType;
 import common.cout970.UltraTech.containers.MinerContainer;

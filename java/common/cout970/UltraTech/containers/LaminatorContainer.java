@@ -1,16 +1,15 @@
 package common.cout970.UltraTech.containers;
 
-import common.cout970.UltraTech.TileEntities.electric.LaminatorEntity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
+
+import common.cout970.UltraTech.TileEntities.electric.tiers.LaminatorT1_Entity;
 
 public class LaminatorContainer extends UT_Container{
 
-	public LaminatorContainer(InventoryPlayer inventoryPlayer, LaminatorEntity t) {
+	public LaminatorContainer(InventoryPlayer inventoryPlayer, LaminatorT1_Entity t) {
 		super(inventoryPlayer, t);
 		
 		addSlotToContainer(new Slot(t, 0, 53, 33));

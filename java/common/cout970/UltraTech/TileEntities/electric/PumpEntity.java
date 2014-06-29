@@ -20,9 +20,9 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidHandler;
-import api.cout970.UltraTech.Wpower.CableType;
-import api.cout970.UltraTech.Wpower.Machine;
-import api.cout970.UltraTech.Wpower.StorageInterface.MachineTipe;
+import api.cout970.UltraTech.MeVpower.CableType;
+import api.cout970.UltraTech.MeVpower.Machine;
+import api.cout970.UltraTech.MeVpower.StorageInterface.MachineTipe;
 import api.cout970.UltraTech.fluids.TankConection;
 
 public class PumpEntity extends Machine{

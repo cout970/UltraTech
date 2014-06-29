@@ -1,7 +1,7 @@
 package common.cout970.UltraTech.packets;
 
 import api.cout970.UltraTech.network.PacketBase;
-import common.cout970.UltraTech.TileEntities.utility.Printer3DEntity;
+import common.cout970.UltraTech.TileEntities.utility.Painter3DEntity;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import net.minecraft.entity.player.EntityPlayer;
@@ -44,7 +44,7 @@ public class PacketPainter extends PacketBase{
 
 	@Override
 	public void handleServerSide(EntityPlayer player) {
-		Printer3DEntity t = (Printer3DEntity) player.worldObj.getTileEntity(x, y, z);
+		Painter3DEntity t = (Painter3DEntity) player.worldObj.getTileEntity(x, y, z);
 		t.color = color;
 		t.update = true;
 	}

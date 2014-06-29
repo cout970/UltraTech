@@ -1,7 +1,7 @@
 package common.cout970.UltraTech.containers;
 
 
-import common.cout970.UltraTech.TileEntities.utility.Printer3DEntity;
+import common.cout970.UltraTech.TileEntities.utility.Painter3DEntity;
 import common.cout970.UltraTech.lib.UT_Utils;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
@@ -14,9 +14,9 @@ import net.minecraft.item.ItemStack;
 
 public class Printer3DContainer extends Container{
 
-	public Printer3DEntity tile;
+	public Painter3DEntity tile;
 	
-	public Printer3DContainer(InventoryPlayer inventoryPlayer, Printer3DEntity tileEntity2){
+	public Printer3DContainer(InventoryPlayer inventoryPlayer, Painter3DEntity tileEntity2){
 		super();
 		tile = tileEntity2;
 		addSlotToContainer(new Slot(tileEntity2, 0, 11, 11));

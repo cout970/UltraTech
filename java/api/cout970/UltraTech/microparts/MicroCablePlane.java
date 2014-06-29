@@ -16,10 +16,10 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import org.lwjgl.opengl.GL11;
 
-import api.cout970.UltraTech.Wpower.CableType;
-import api.cout970.UltraTech.Wpower.IPowerConductor;
-import api.cout970.UltraTech.Wpower.PowerInterface;
-import api.cout970.UltraTech.Wpower.PowerUtils;
+import api.cout970.UltraTech.MeVpower.CableType;
+import api.cout970.UltraTech.MeVpower.IPowerConductor;
+import api.cout970.UltraTech.MeVpower.PowerInterface;
+import api.cout970.UltraTech.MeVpower.PowerUtils;
 import codechicken.lib.raytracer.IndexedCuboid6;
 import codechicken.lib.render.RenderUtils;
 import codechicken.lib.vec.Cuboid6;
@@ -45,11 +45,12 @@ public class MicroCablePlane extends TMultiPart implements IPowerConductor, JNor
 
 	static {
 		double w = 0.125;
-		boundingBoxes[0] = new Cuboid6(0.5-w, 0, 0.5-w, 0.5+w, w, 0.5+w);//base
-		boundingBoxes[2] = new Cuboid6(0.5-w, 0, 0, 0.5+w, w, 0.5-w);//north 2
-		boundingBoxes[3] = new Cuboid6(0.5-w, 0, 0.5+w, 0.5+w, w, 1);//south 3
-		boundingBoxes[4] = new Cuboid6(0, 0, 0.5-w, 0.5-w, w, 0.5+w);//west 4
-		boundingBoxes[5] = new Cuboid6(0.5+w, 0, 0.5-w, 1, w, 0.5+w);//east 5
+		float h = 0.0625f*3;
+		boundingBoxes[0] = new Cuboid6(0.5-w, 0,  0.5-w, 0.5+w, h, 0.5+w);//base
+		boundingBoxes[2] = new Cuboid6(0.5-w, 0,  0,     0.5+w, h, 0.5-w);//north 2
+		boundingBoxes[3] = new Cuboid6(0.5-w, 0,  0.5+w, 0.5+w, h, 1    );//south 3
+		boundingBoxes[4] = new Cuboid6(0,     0,  0.5-w, 0.5-w, h, 0.5+w);//west 4
+		boundingBoxes[5] = new Cuboid6(0.5+w, 0,  0.5-w, 1,     h, 0.5+w);//east 5
 	}
 
 

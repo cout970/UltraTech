@@ -1,6 +1,6 @@
 package common.cout970.UltraTech.blocks.models;
 
-import api.cout970.UltraTech.Wpower.BlockConductor;
+import api.cout970.UltraTech.MeVpower.BlockConductor;
 import buildcraft.api.tools.IToolWrench;
 import common.cout970.UltraTech.TileEntities.intermod.EngineEntity;
 import common.cout970.UltraTech.core.UltraTech;

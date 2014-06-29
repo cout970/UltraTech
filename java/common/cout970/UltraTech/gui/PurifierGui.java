@@ -3,22 +3,24 @@ package common.cout970.UltraTech.gui;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.lwjgl.opengl.GL11;
-
-import common.cout970.UltraTech.TileEntities.electric.PurifierEntity;
-import common.cout970.UltraTech.lib.EnergyCosts;
-import common.cout970.UltraTech.lib.UT_Utils;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 
+import org.lwjgl.opengl.GL11;
+
+import common.cout970.UltraTech.TileEntities.electric.tiers.PurifierT1_Entity;
+import common.cout970.UltraTech.lib.EnergyCosts;
+import common.cout970.UltraTech.lib.UT_Utils;
+import common.cout970.UltraTech.misc.ISpeeded;
+
 public class PurifierGui extends GuiContainer{
 
-	private PurifierEntity entity;
+	private PurifierT1_Entity entity;
 	
-	public PurifierGui(Container par1Container, InventoryPlayer inventory, PurifierEntity tileEntity) {
+	public PurifierGui(Container par1Container, InventoryPlayer inventory, PurifierT1_Entity tileEntity) {
 		super(par1Container);
 		entity = tileEntity;
 	}
@@ -34,7 +36,9 @@ public class PurifierGui extends GuiContainer{
 		this.drawTexturedModalRect(xStart, yStart, 0, 0, xSize, ySize);
 
 		//progres bar
-		int i1 = (int) entity.progres*24/1000;
+		int i1;
+		if(entity.maxProgres > 0)i1 = (int) entity.Progres*24/entity.maxProgres;
+		else i1 = (int) (entity.Progres*24);
 		this.drawTexturedModalRect(xStart + 85, yStart + 31, 176, 14, i1 + 1, 16);
 
 		//energy bar
@@ -44,7 +48,8 @@ public class PurifierGui extends GuiContainer{
 		
 		this.drawCenteredString(fontRendererObj, "Purifier", xStart+95, yStart+6, UT_Utils.RGBtoInt(255, 255, 255));
 		
-		this.drawCenteredString(fontRendererObj, "Speed upgrades: "+entity.speedUpgrades+"/5", xStart+95, yStart+70, UT_Utils.RGBtoInt(255, 255, 255));
+		if(entity instanceof ISpeeded)
+			this.drawCenteredString(fontRendererObj, "Speed upgrades: "+((ISpeeded) entity).getUpgrades()+"/5", xStart+95, yStart+70, UT_Utils.RGBtoInt(255, 255, 255));
 	}
 	
 	@Override
@@ -57,7 +62,7 @@ public class PurifierGui extends GuiContainer{
 		
         if(UT_Utils.isIn(x, y, xStart+14, yStart+15, 25, 50)){
         	List<String> energy = new ArrayList<String>();
-        	energy.add("Energy: "+((int)entity.getEnergy())+EnergyCosts.E);
+        	energy.add("Energy: "+entity.getEnergy()+EnergyCosts.E);
         	this.drawHoveringText(energy, x-xStart, y-yStart, fontRendererObj);
         	RenderHelper.enableGUIStandardItemLighting();
         }

@@ -14,7 +14,7 @@ public class EnergyCosts {
 	 *	1coal = 1600 FT Always
 	 *  1000steam = 160FT
 	*/
-	public static final String E = " W";
+	public static final String E = " MeV";
 	public static final float k = 1/8f;
 	
 	//production
@@ -27,6 +27,10 @@ public class EnergyCosts {
 	
 	//storage
 	public static final int WaterBlockProduct = 20;
+
+	public static double toEnergy(double extract) {
+		return extract/2;
+	}
 
 
 

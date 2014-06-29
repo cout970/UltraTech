@@ -1,17 +1,20 @@
 package common.cout970.UltraTech.blocks.models;
 
-import api.cout970.UltraTech.Wpower.BlockConductor;
-import api.cout970.UltraTech.Wpower.Machine;
+import api.cout970.UltraTech.MeVpower.BlockConductor;
+import api.cout970.UltraTech.MeVpower.Machine;
 import common.cout970.UltraTech.TileEntities.electric.BoilerEntity;
 import common.cout970.UltraTech.core.UltraTech;
+import common.cout970.UltraTech.misc.IUpdatedEntity;
 import common.cout970.UltraTech.proxy.ClientProxy;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class Boiler extends BlockConductor{
@@ -40,9 +43,9 @@ public class Boiler extends BlockConductor{
 		return new BoilerEntity();
 	}
 	
-	public void onNeighborBlockChange(World w, int x, int y, int z, int side){
-		Machine m = (Machine) w.getTileEntity(x, y, z);
-		if(m.getNetwork() != null)m.getNetwork().refresh();
+	public void onNeighborChange(IBlockAccess world, int x, int y, int z, int tileX, int tileY, int tileZ){
+		IUpdatedEntity i = (IUpdatedEntity) world.getTileEntity(x, y, z);
+		i.onNeigUpdate();
 	}
 
 	public void registerBlockIcons(IIconRegister iconRegister){

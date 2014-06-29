@@ -3,7 +3,7 @@ package common.cout970.UltraTech.gui;
 
 import org.lwjgl.opengl.GL11;
 
-import api.cout970.UltraTech.Wpower.Machine;
+import api.cout970.UltraTech.MeVpower.Machine;
 import common.cout970.UltraTech.TileEntities.electric.StorageTier1;
 import common.cout970.UltraTech.TileEntities.electric.StorageTier2;
 import common.cout970.UltraTech.TileEntities.electric.StorageTier3;

@@ -3,8 +3,8 @@ package common.cout970.UltraTech.blocks;
 import java.util.List;
 import java.util.Random;
 
-import api.cout970.UltraTech.Wpower.BlockConductor;
-import api.cout970.UltraTech.Wpower.Machine;
+import api.cout970.UltraTech.MeVpower.BlockConductor;
+import api.cout970.UltraTech.MeVpower.Machine;
 import buildcraft.api.tools.IToolWrench;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -161,87 +161,90 @@ public class Tier3Block extends BlockConductor{
 		super.breakBlock(world, x, y, z, par5, par6);
 	}
 
-	private void dropItems(World world, int x, int y, int z){
+	@Override
+	public void dropItems(World world, int x, int y, int z){
 		Random rand = new Random();
 		TileEntity tileEntity = world.getTileEntity(x, y, z);
+		if(tileEntity instanceof IInventory){
 
-		IInventory inventory = (IInventory) tileEntity;
-		for (int i = 0; i < inventory.getSizeInventory(); i++) {
-			ItemStack item = inventory.getStackInSlot(i);
-			if (item != null && item.stackSize > 0) {
+			IInventory inventory = (IInventory) tileEntity;
+			for (int i = 0; i < inventory.getSizeInventory(); i++) {
+				ItemStack item = inventory.getStackInSlot(i);
+				if (item != null && item.stackSize > 0) {
+					float rx = rand.nextFloat() * 0.8F + 0.1F;
+					float ry = rand.nextFloat() * 0.8F + 0.1F;
+					float rz = rand.nextFloat() * 0.8F + 0.1F;
+					EntityItem entityItem = new EntityItem(world,
+							x + rx, y + ry, z + rz,
+							new ItemStack(item.getItem(), item.stackSize, item.getItemDamage()));
+					if (item.hasTagCompound()) {
+						entityItem.getEntityItem().setTagCompound((NBTTagCompound) item.getTagCompound().copy());
+					}
+					float factor = 0.05F;
+					entityItem.motionX = rand.nextGaussian() * factor;
+					entityItem.motionY = rand.nextGaussian() * factor + 0.2F;
+					entityItem.motionZ = rand.nextGaussian() * factor;
+					world.spawnEntityInWorld(entityItem);
+					item.stackSize = 0;
+				}
+			}
+		}
+		if (!(tileEntity instanceof MinerEntity)) {
+			return;
+		}
+		MinerEntity me = (MinerEntity) tileEntity;
+		if(me.eject){
+			float rx = rand.nextFloat() * 0.8F + 0.1F;
+			float ry = rand.nextFloat() * 0.8F + 0.1F;
+			float rz = rand.nextFloat() * 0.8F + 0.1F;
+			EntityItem entityItem = new EntityItem(world,
+					x + rx, y + ry, z + rz,
+					new ItemStack(ItemManager.ItemName.get("AutoEjectUpgrade"), 1, 0));
+			float factor = 0.05F;
+			entityItem.motionX = rand.nextGaussian() * factor;
+			entityItem.motionY = rand.nextGaussian() * factor + 0.2F;
+			entityItem.motionZ = rand.nextGaussian() * factor;
+			world.spawnEntityInWorld(entityItem);
+		}
+		if(me.hasSpeedUpgrades){
+			for(int d = me.speedUpgrades;d > 0;d--){
 				float rx = rand.nextFloat() * 0.8F + 0.1F;
 				float ry = rand.nextFloat() * 0.8F + 0.1F;
 				float rz = rand.nextFloat() * 0.8F + 0.1F;
-				EntityItem entityItem = new EntityItem(world,
-						x + rx, y + ry, z + rz,
-						new ItemStack(item.getItem(), item.stackSize, item.getItemDamage()));
-				if (item.hasTagCompound()) {
-					entityItem.getEntityItem().setTagCompound((NBTTagCompound) item.getTagCompound().copy());
-				}
+				EntityItem entityItem = new EntityItem(world, x + rx, y + ry, z + rz, new ItemStack(ItemManager.ItemName.get("MiningUpgrade"), 1, 0));
 				float factor = 0.05F;
 				entityItem.motionX = rand.nextGaussian() * factor;
 				entityItem.motionY = rand.nextGaussian() * factor + 0.2F;
 				entityItem.motionZ = rand.nextGaussian() * factor;
 				world.spawnEntityInWorld(entityItem);
-				item.stackSize = 0;
 			}
 		}
-		 if (!(tileEntity instanceof MinerEntity)) {
-			 return;
-		 }
-		 MinerEntity me = (MinerEntity) tileEntity;
-		 if(me.eject){
-			 float rx = rand.nextFloat() * 0.8F + 0.1F;
-			 float ry = rand.nextFloat() * 0.8F + 0.1F;
-			 float rz = rand.nextFloat() * 0.8F + 0.1F;
-			 EntityItem entityItem = new EntityItem(world,
-                   x + rx, y + ry, z + rz,
-                   new ItemStack(ItemManager.ItemName.get("AutoEjectUpgrade"), 1, 0));
-			 float factor = 0.05F;
-			 entityItem.motionX = rand.nextGaussian() * factor;
-			 entityItem.motionY = rand.nextGaussian() * factor + 0.2F;
-			 entityItem.motionZ = rand.nextGaussian() * factor;
-			 world.spawnEntityInWorld(entityItem);
-		 }
-		 if(me.hasSpeedUpgrades){
-			 for(int d = me.speedUpgrades;d > 0;d--){
-				 float rx = rand.nextFloat() * 0.8F + 0.1F;
-				 float ry = rand.nextFloat() * 0.8F + 0.1F;
-				 float rz = rand.nextFloat() * 0.8F + 0.1F;
-				 EntityItem entityItem = new EntityItem(world, x + rx, y + ry, z + rz, new ItemStack(ItemManager.ItemName.get("MiningUpgrade"), 1, 0));
-				 float factor = 0.05F;
-				 entityItem.motionX = rand.nextGaussian() * factor;
-				 entityItem.motionY = rand.nextGaussian() * factor + 0.2F;
-				 entityItem.motionZ = rand.nextGaussian() * factor;
-				 world.spawnEntityInWorld(entityItem);
-			 }
-		 }
-		 if(me.hasRangeUpgrades){
-			 for(int d = me.rangeUpgrades;d > 0;d--){
-			 float rx = rand.nextFloat() * 0.8F + 0.1F;
-			 float ry = rand.nextFloat() * 0.8F + 0.1F;
-			 float rz = rand.nextFloat() * 0.8F + 0.1F;
-			 EntityItem entityItem = new EntityItem(world, x + rx, y + ry, z + rz, new ItemStack(ItemManager.ItemName.get("RangeUpgrade"), 1, 0));
-			 float factor = 0.05F;
-			 entityItem.motionX = rand.nextGaussian() * factor;
-			 entityItem.motionY = rand.nextGaussian() * factor + 0.2F;
-			 entityItem.motionZ = rand.nextGaussian() * factor;
-			 world.spawnEntityInWorld(entityItem);
-			 }
-		 }
-		 if(me.hasFortuneUpgrades){
-			 for(int d = me.fortuneUpgrades;d > 0;d--){
-			 float rx = rand.nextFloat() * 0.8F + 0.1F;
-			 float ry = rand.nextFloat() * 0.8F + 0.1F;
-			 float rz = rand.nextFloat() * 0.8F + 0.1F;
-			 EntityItem entityItem = new EntityItem(world, x + rx, y + ry, z + rz, new ItemStack(ItemManager.ItemName.get("FortuneUpgrade"), 1, 0));
-			 float factor = 0.05F;
-			 entityItem.motionX = rand.nextGaussian() * factor;
-			 entityItem.motionY = rand.nextGaussian() * factor + 0.2F;
-			 entityItem.motionZ = rand.nextGaussian() * factor;
-			 world.spawnEntityInWorld(entityItem);
-			 }
-		 }
+		if(me.hasRangeUpgrades){
+			for(int d = me.rangeUpgrades;d > 0;d--){
+				float rx = rand.nextFloat() * 0.8F + 0.1F;
+				float ry = rand.nextFloat() * 0.8F + 0.1F;
+				float rz = rand.nextFloat() * 0.8F + 0.1F;
+				EntityItem entityItem = new EntityItem(world, x + rx, y + ry, z + rz, new ItemStack(ItemManager.ItemName.get("RangeUpgrade"), 1, 0));
+				float factor = 0.05F;
+				entityItem.motionX = rand.nextGaussian() * factor;
+				entityItem.motionY = rand.nextGaussian() * factor + 0.2F;
+				entityItem.motionZ = rand.nextGaussian() * factor;
+				world.spawnEntityInWorld(entityItem);
+			}
+		}
+		if(me.hasFortuneUpgrades){
+			for(int d = me.fortuneUpgrades;d > 0;d--){
+				float rx = rand.nextFloat() * 0.8F + 0.1F;
+				float ry = rand.nextFloat() * 0.8F + 0.1F;
+				float rz = rand.nextFloat() * 0.8F + 0.1F;
+				EntityItem entityItem = new EntityItem(world, x + rx, y + ry, z + rz, new ItemStack(ItemManager.ItemName.get("FortuneUpgrade"), 1, 0));
+				float factor = 0.05F;
+				entityItem.motionX = rand.nextGaussian() * factor;
+				entityItem.motionY = rand.nextGaussian() * factor + 0.2F;
+				entityItem.motionZ = rand.nextGaussian() * factor;
+				world.spawnEntityInWorld(entityItem);
+			}
+		}
 	}
 
 }

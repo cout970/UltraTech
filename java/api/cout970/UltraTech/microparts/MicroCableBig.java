@@ -7,10 +7,10 @@ import java.util.LinkedList;
 import java.util.Map;
 
 import common.cout970.UltraTech.lib.UT_Utils;
-import api.cout970.UltraTech.Wpower.CableType;
-import api.cout970.UltraTech.Wpower.IPowerConductor;
-import api.cout970.UltraTech.Wpower.PowerInterface;
-import api.cout970.UltraTech.Wpower.PowerUtils;
+import api.cout970.UltraTech.MeVpower.CableType;
+import api.cout970.UltraTech.MeVpower.IPowerConductor;
+import api.cout970.UltraTech.MeVpower.PowerInterface;
+import api.cout970.UltraTech.MeVpower.PowerUtils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;

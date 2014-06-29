@@ -3,11 +3,11 @@ package common.cout970.UltraTech.TileEntities.intermod;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
-import api.cout970.UltraTech.Wpower.CableType;
-import api.cout970.UltraTech.Wpower.IPowerConductor;
-import api.cout970.UltraTech.Wpower.Machine;
-import api.cout970.UltraTech.Wpower.PowerInterface;
-import api.cout970.UltraTech.Wpower.StorageInterface;
+import api.cout970.UltraTech.MeVpower.CableType;
+import api.cout970.UltraTech.MeVpower.IPowerConductor;
+import api.cout970.UltraTech.MeVpower.Machine;
+import api.cout970.UltraTech.MeVpower.PowerInterface;
+import api.cout970.UltraTech.MeVpower.StorageInterface;
 import api.cout970.UltraTech.network.Net_Utils;
 import api.cout970.UltraTech.network.SyncTile;
 import cofh.api.energy.EnergyStorage;
@@ -19,8 +19,8 @@ public class DynamoEntity extends SyncTile implements IPowerConductor, IEnergyHa
 
 	public ForgeDirection facing = ForgeDirection.UP;
 	protected EnergyStorage storage;//RF
-	protected StorageInterface inter;//w
-	public static final int RF = 80;//RF => MeV
+	protected StorageInterface inter;//Mev
+	public static final int RF = 20;//RF => MeV
 	public boolean on = false;
 	public IEnergyHandler recep = null;
 
@@ -32,34 +32,26 @@ public class DynamoEntity extends SyncTile implements IPowerConductor, IEnergyHa
 
 	public void updateEntity(){
 		super.updateEntity();
-		
-		if(inter.getCharge() >= 1 && storage.getMaxEnergyStored()-storage.getEnergyStored() >= RF){
+		if(worldObj.isRemote)return;
+		if(inter.getCharge() >= 4 && storage.getMaxEnergyStored()-storage.getEnergyStored() >= RF*4){
+			inter.removeCharge(4d);
+			storage.receiveEnergy(RF*4, false);
+		}else if(inter.getCharge() >= 1 && storage.getMaxEnergyStored()-storage.getEnergyStored() >= RF){
 			inter.removeCharge(1d);
 			storage.receiveEnergy(RF, false);
-			if(!on){
-			on = true;
-			Sync();
-			}
-		}else{
-			if(on){
-			on = false;
-			Sync();
-			}
 		}
-		 
-		if(!worldObj.isRemote && recep != null){
+		if(recep != null){
 			int send = Math.min(400, storage.getEnergyStored());
 			int b = ((IEnergyHandler) recep).receiveEnergy(facing.getOpposite(), send, false);
 			if(b > 0){
 				int e = this.extractEnergy(facing, b, false);
 			}
 		}
-		
 	}
+	
 	public void updateReceptor(){
 		TileEntity a = UT_Utils.getRelative(this, facing);
 		if(a instanceof IEnergyHandler)recep = (IEnergyHandler) a;
-		Sync();
 	}
 
 	public CableType getConection(ForgeDirection side) {

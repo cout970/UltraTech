@@ -2,7 +2,7 @@ package common.cout970.UltraTech.gui;
 
 import org.lwjgl.opengl.GL11;
 
-import common.cout970.UltraTech.TileEntities.utility.Printer3DEntity;
+import common.cout970.UltraTech.TileEntities.utility.Painter3DEntity;
 import common.cout970.UltraTech.containers.Printer3DContainer;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -11,9 +11,9 @@ import net.minecraft.util.ResourceLocation;
 
 public class Printer3DGui extends GuiContainer{
 
-	public Printer3DEntity entity;
+	public Painter3DEntity entity;
 	
-	public Printer3DGui(Container par1Container,InventoryPlayer ip,Printer3DEntity entity) {
+	public Printer3DGui(Container par1Container,InventoryPlayer ip,Painter3DEntity entity) {
 		super(par1Container);
 		this.entity = entity;
 	}

@@ -10,7 +10,7 @@ import net.minecraftforge.fluids.IFluidHandler;
 import common.cout970.UltraTech.lib.CostData;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import api.cout970.UltraTech.Wpower.Machine;
+import api.cout970.UltraTech.MeVpower.Machine;
 import api.cout970.UltraTech.fluids.UT_Tank;
 
 public class LavaGeneratorEntity extends Machine implements IFluidHandler{

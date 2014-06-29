@@ -1,9 +1,9 @@
 package common.cout970.UltraTech.TileEntities.electric;
 
-import api.cout970.UltraTech.Wpower.CableType;
-import api.cout970.UltraTech.Wpower.Machine;
-import api.cout970.UltraTech.Wpower.StorageInterface;
-import api.cout970.UltraTech.Wpower.StorageInterface.MachineTipe;
+import api.cout970.UltraTech.MeVpower.CableType;
+import api.cout970.UltraTech.MeVpower.Machine;
+import api.cout970.UltraTech.MeVpower.StorageInterface;
+import api.cout970.UltraTech.MeVpower.StorageInterface.MachineTipe;
 import api.cout970.UltraTech.fluids.UT_Tank;
 import api.cout970.UltraTech.network.Net_Utils;
 import net.minecraft.nbt.NBTTagCompound;

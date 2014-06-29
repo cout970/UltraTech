@@ -3,15 +3,16 @@ package common.cout970.UltraTech.lib.recipes;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
-import common.cout970.UltraTech.TileEntities.electric.CVD_Entity;
-import common.cout970.UltraTech.TileEntities.electric.LaminatorEntity;
+
 import common.cout970.UltraTech.lib.UT_Utils;
 
-public class Laminator_Recipe {
+public class Laminator_Recipe implements IRecipeHandler{
 	
 	public static List<Laminator_Recipe> recipes = new ArrayList<Laminator_Recipe>();
+	public static Laminator_Recipe INSTANCE = new Laminator_Recipe(null, null);
 	private final ItemStack input;
 	private final ItemStack output;
 	
@@ -19,8 +20,12 @@ public class Laminator_Recipe {
 		this.input = input;
 		this.output = output;
 	}
+	
+	public static void addRecipe(Laminator_Recipe r){
+		INSTANCE.addRecipe((IRecipeHandler)r);
+	}
 
-	public static boolean matches(LaminatorEntity inv) {
+	public boolean matches(IInventory inv) {
 		if(inv == null)return false;
 		for(Laminator_Recipe a :recipes){
 			if(inv.getStackInSlot(0) != null){
@@ -36,7 +41,7 @@ public class Laminator_Recipe {
 	}
 
 
-	public static ItemStack getCraftingResult(LaminatorEntity inv) {
+	public ItemStack getCraftingResult(IInventory inv) {
 		if(inv == null)return null;
 		for(Laminator_Recipe a :recipes){
 			if(inv.getStackInSlot(0) != null){
@@ -57,7 +62,8 @@ public class Laminator_Recipe {
 		return input;
 	}
 
-	public static void addRecipe(Laminator_Recipe a){
+	public void addRecipe(IRecipeHandler b){
+		Laminator_Recipe a = (Laminator_Recipe) b;
 		if(a.getInput().stackSize == 0)a.input.stackSize = 1;
 		if(a.getOutput().stackSize == 0)a.output.stackSize = 1;
 		
@@ -65,7 +71,7 @@ public class Laminator_Recipe {
 		recipes.add(a);
 	}
 
-	public static ItemStack getResult(ItemStack itemstack) {
+	public ItemStack getResult(ItemStack itemstack) {
 		if(itemstack == null)return null;
 		for(Laminator_Recipe a:recipes){
 			if(UT_Utils.areEcuals(a.getInput(), itemstack, true))
@@ -73,5 +79,4 @@ public class Laminator_Recipe {
 		}
 		return null;
 	}
-
 }

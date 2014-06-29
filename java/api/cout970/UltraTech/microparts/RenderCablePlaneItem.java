@@ -3,6 +3,8 @@ package api.cout970.UltraTech.microparts;
 import org.lwjgl.opengl.GL11;
 
 import common.cout970.UltraTech.models.ModelBattery;
+import common.cout970.UltraTech.models.ModelPlaneCable;
+import common.cout970.UltraTech.models.ModelPlaneCableBase;
 import cpw.mods.fml.client.FMLClientHandler;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -12,12 +14,14 @@ import net.minecraftforge.client.IItemRenderer.ItemRendererHelper;
 
 public class RenderCablePlaneItem implements IItemRenderer {
 
-	private ModelCable model;
-	private ResourceLocation texture = new ResourceLocation("ultratech:textures/misc/planecable.png");
-	
+	private ModelPlaneCable model;
+	private ModelPlaneCableBase base;
+	private ResourceLocation texture = new ResourceLocation("ultratech:textures/misc/cable/plane.png");
+	private ResourceLocation baseTex = new ResourceLocation("ultratech:textures/misc/cable/planecablebase_0.png");
 
 	public RenderCablePlaneItem() {
-		this.model = new ModelCable();
+		this.model = new ModelPlaneCable();
+		this.base = new ModelPlaneCableBase();
 	}
 	
 	@Override
@@ -70,6 +74,8 @@ public class RenderCablePlaneItem implements IItemRenderer {
         GL11.glTranslatef(0, -1.5f, 0);
         FMLClientHandler.instance().getClient().renderEngine.bindTexture(texture);
         model.renderItem(0.0625F);
+        FMLClientHandler.instance().getClient().renderEngine.bindTexture(baseTex);
+        base.renderItem(0.0625F);
         GL11.glEnable(GL11.GL_LIGHTING);
         GL11.glPopMatrix();
 	}

@@ -13,7 +13,7 @@ import cpw.mods.fml.client.FMLClientHandler;
 public class RenderCableBigItem implements IItemRenderer {
 
 	private ModelBigCable model;
-	private ResourceLocation texture = new ResourceLocation("ultratech:textures/misc/bigcable.png");
+	private ResourceLocation texture = new ResourceLocation("ultratech:textures/misc/cable/bigcable.png");
 	
 
 	public RenderCableBigItem() {

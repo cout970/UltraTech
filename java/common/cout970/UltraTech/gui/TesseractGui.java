@@ -2,7 +2,7 @@ package common.cout970.UltraTech.gui;
 
 import org.lwjgl.opengl.GL11;
 
-import api.cout970.UltraTech.Wpower.Machine;
+import api.cout970.UltraTech.MeVpower.Machine;
 import common.cout970.UltraTech.TileEntities.electric.TesseractEntity;
 import common.cout970.UltraTech.TileEntities.electric.TesseractEntity.T_Mode;
 import common.cout970.UltraTech.lib.EnergyCosts;

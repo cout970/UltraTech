@@ -2,11 +2,11 @@ package common.cout970.UltraTech.blocks;
 
 import java.util.List;
 
-import api.cout970.UltraTech.Wpower.BlockConductor;
-import api.cout970.UltraTech.Wpower.IPowerConductor;
-import api.cout970.UltraTech.Wpower.IStorageItem;
-import api.cout970.UltraTech.Wpower.Machine;
-import api.cout970.UltraTech.Wpower.StorageInterface;
+import api.cout970.UltraTech.MeVpower.BlockConductor;
+import api.cout970.UltraTech.MeVpower.IPowerConductor;
+import api.cout970.UltraTech.MeVpower.IStorageItem;
+import api.cout970.UltraTech.MeVpower.Machine;
+import api.cout970.UltraTech.MeVpower.StorageInterface;
 import common.cout970.UltraTech.TileEntities.electric.StorageTier1;
 import common.cout970.UltraTech.TileEntities.electric.StorageTier2;
 import common.cout970.UltraTech.TileEntities.electric.StorageTier3;

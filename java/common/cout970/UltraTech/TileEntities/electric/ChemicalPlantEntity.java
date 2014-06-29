@@ -11,7 +11,7 @@ import net.minecraftforge.oredict.OreDictionary;
 import common.cout970.UltraTech.lib.CostData;
 import common.cout970.UltraTech.managers.ItemManager;
 import common.cout970.UltraTech.misc.MachineWithInventory;
-import api.cout970.UltraTech.Wpower.Machine;
+import api.cout970.UltraTech.MeVpower.Machine;
 import api.cout970.UltraTech.fluids.UT_Tank;
 
 public class ChemicalPlantEntity extends MachineWithInventory implements IFluidHandler{

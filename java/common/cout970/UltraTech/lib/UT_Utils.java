@@ -38,11 +38,14 @@ public class UT_Utils {
 	 */
 	public static boolean areEcuals(ItemStack a, ItemStack b, boolean meta){
 		if(a == null && b == null)return true;
-		if(a != null && b != null){
+		if(a != null && b != null && a.getItem() != null && b.getItem() != null){
 			if(OreDictionary.itemMatches(a, b, meta))return true;
-			if(OreDictionary.getOreIDs(a).length != 0 && OreDictionary.getOreIDs(b).length != 0){
-				for(int i : OreDictionary.getOreIDs(a)){
-					for(int j : OreDictionary.getOreIDs(b))if(i == j)return true;
+			int[] c = OreDictionary.getOreIDs(a);
+			int[] d = OreDictionary.getOreIDs(b);
+			if(c.length > 0 && d.length > 0){
+				for(int i : c){
+					for(int j : d)
+						if(i == j)return true;
 				}
 			}
 		}

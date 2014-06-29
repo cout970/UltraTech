@@ -5,11 +5,11 @@ import codechicken.multipart.TMultiPart;
 import codechicken.multipart.TileMultipart;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
-import api.cout970.UltraTech.Wpower.CableType;
-import api.cout970.UltraTech.Wpower.IPowerConductor;
-import api.cout970.UltraTech.Wpower.PowerInterface;
-import api.cout970.UltraTech.Wpower.PowerPathfinder;
-import api.cout970.UltraTech.Wpower.PowerUtils;
+import api.cout970.UltraTech.MeVpower.CableType;
+import api.cout970.UltraTech.MeVpower.IPowerConductor;
+import api.cout970.UltraTech.MeVpower.PowerInterface;
+import api.cout970.UltraTech.MeVpower.PowerPathfinder;
+import api.cout970.UltraTech.MeVpower.PowerUtils;
 
 public class MicroPartUtil {
 

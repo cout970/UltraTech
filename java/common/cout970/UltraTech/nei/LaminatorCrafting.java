@@ -8,7 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.TemplateRecipeHandler;
-import common.cout970.UltraTech.lib.recipes.Cuter_Recipes;
+
 import common.cout970.UltraTech.lib.recipes.Laminator_Recipe;
 
 public class LaminatorCrafting extends TemplateRecipeHandler{

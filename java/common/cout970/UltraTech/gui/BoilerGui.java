@@ -36,11 +36,6 @@ public class BoilerGui extends GuiContainer{
 		int yStart = (height - ySize) / 2;
 		this.drawTexturedModalRect(xStart, yStart, 0, 0, xSize, ySize);
 		
-		//energy
-		this.mc.renderEngine.bindTexture(new ResourceLocation("ultratech:textures/misc/energy.png"));
-		int p = (int) ((((float)entity.getEnergy())*50/entity.maxEnergy()));
-		this.drawTexturedModalRect(xStart+14, yStart+15+(50-p), 0, 0, 25, p);
-		
 		//fluid 1 gas
 		FluidStack output = entity.getTankInfo(ForgeDirection.UP)[0].fluid;
 		boolean l = output == null;
@@ -66,23 +61,19 @@ public class BoilerGui extends GuiContainer{
 		this.mc.renderEngine.bindTexture(new ResourceLocation("ultratech:textures/gui/boiler.png"));
 		if(!g)this.drawTexturedModalRect(xStart+45, yStart+20, 224, 0, 20, 40);
 		if(!l)this.drawTexturedModalRect(xStart+138, yStart+21, 224, 0, 20, 40);
-		
 		//heat
-		int h = (int) ((entity.heat-25)*58/75);
+		if(entity.heatProvider != null){
+			
+		int h = (int) ((entity.heatProvider.Heat*58)/1000f);
 		this.drawTexturedModalRect(xStart+74, yStart+14+(58-h), 208, 58-h, 6, h);
 		
-		String s = ((int)this.entity.heat)+"C";
+		String s = ((int)this.entity.heatProvider.Heat)+"C";
         this.fontRendererObj.drawString(s, xStart+125-fontRendererObj.getStringWidth(s), yStart+38, 4210752);
+		}
 
         //NAME
         this.drawCenteredString(fontRendererObj, "Boiler", xStart+110, yStart+5, UT_Utils.RGBtoInt(255, 255, 255));
         
-        //text
-        if(UT_Utils.isIn(i, j, xStart+14, yStart+15, 25, 50)){
-        	List<String> energy = new ArrayList<String>();
-        	energy.add("Energy: "+((int)entity.getEnergy())+EnergyCosts.E);
-        	this.drawHoveringText(energy, i, j, fontRendererObj);
-        }
         if(UT_Utils.isIn(i, j, xStart+45, yStart+20, 20, 40)){//storage
         	List<String> fluid1 = new ArrayList<String>();
         	if(entity.storage.getFluidAmount() == 0)fluid1.add("Empty");

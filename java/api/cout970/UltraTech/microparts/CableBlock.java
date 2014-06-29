@@ -10,9 +10,9 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import api.cout970.UltraTech.Wpower.BlockConductor;
-import api.cout970.UltraTech.Wpower.IPowerConductor;
-import api.cout970.UltraTech.Wpower.PowerUtils;
+import api.cout970.UltraTech.MeVpower.BlockConductor;
+import api.cout970.UltraTech.MeVpower.IPowerConductor;
+import api.cout970.UltraTech.MeVpower.PowerUtils;
 import api.cout970.UltraTech.fluids.FluidUtils;
 import api.cout970.UltraTech.fluids.Pipe;
 

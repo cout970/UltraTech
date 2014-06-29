@@ -5,9 +5,10 @@ import java.io.DataOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import api.cout970.UltraTech.Wpower.Machine;
-import api.cout970.UltraTech.Wpower.PowerUtils;
-import api.cout970.UltraTech.Wpower.StorageInterface;
+import api.cout970.UltraTech.MeVpower.IPowerConductor;
+import api.cout970.UltraTech.MeVpower.Machine;
+import api.cout970.UltraTech.MeVpower.PowerUtils;
+import api.cout970.UltraTech.MeVpower.StorageInterface;
 import api.cout970.UltraTech.network.Net_Utils;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
@@ -39,11 +40,35 @@ public class TesseractEntity extends Machine{
 			for(TesseractEntity t : tes){
 				if(t.frequency == frequency && t!=this){
 					if(t.mode == T_Mode.RECEIVE || t.mode == T_Mode.BOTH){
-						PowerUtils.MoveCharge(this, t);
+						this.MoveCharge(this, t);
 					}
 				}
 			}
 		super.updateEntity();
+	}
+	
+	public static void MoveCharge(IPowerConductor a, IPowerConductor b){
+		if(a == null || b == null)return;
+		StorageInterface from = (StorageInterface) a.getPower();
+		StorageInterface to = (StorageInterface) b.getPower();
+		if(from == null || to == null)return;
+		if(from.equals(to))return;
+		if(from.getCharge() > 0){
+			double space = to.maxCharge()-to.getCharge();
+			double flow = Math.min(from.getFlow(), to.getFlow());
+			if(space > 0){
+				if(from.getCharge() > flow && space > flow){
+					from.removeCharge(flow);
+					to.addCharge(flow);
+				}else if(from.getCharge() >= space){
+					from.removeCharge(space);
+					to.addCharge(space);
+				}else{
+					to.addCharge(from.getCharge());
+					from.removeCharge(from.getCharge());
+				}
+			}
+		}
 	}
 	
 	public void setFrequency(int f){

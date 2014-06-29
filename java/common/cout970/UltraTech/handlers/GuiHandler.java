@@ -4,30 +4,28 @@ package common.cout970.UltraTech.handlers;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import api.cout970.UltraTech.Wpower.Machine;
-
+import api.cout970.UltraTech.MeVpower.Machine;
 import common.cout970.UltraTech.TileEntities.electric.BoilerEntity;
-import common.cout970.UltraTech.TileEntities.electric.CVD_Entity;
 import common.cout970.UltraTech.TileEntities.electric.ChargeStationEntity;
 import common.cout970.UltraTech.TileEntities.electric.ClimateEntity;
-import common.cout970.UltraTech.TileEntities.electric.CutterEntity;
 import common.cout970.UltraTech.TileEntities.electric.FermenterEntity;
 import common.cout970.UltraTech.TileEntities.electric.FluidGeneratorEntity;
-import common.cout970.UltraTech.TileEntities.electric.FurnaceEntity;
-import common.cout970.UltraTech.TileEntities.electric.CoalGeneratorEntityT1;
-import common.cout970.UltraTech.TileEntities.electric.LaminatorEntity;
 import common.cout970.UltraTech.TileEntities.electric.MinerEntity;
 import common.cout970.UltraTech.TileEntities.electric.MolecularAssemblyEntity;
-import common.cout970.UltraTech.TileEntities.electric.PresuricerEntity;
-import common.cout970.UltraTech.TileEntities.electric.PurifierEntity;
 import common.cout970.UltraTech.TileEntities.electric.StorageTier1;
 import common.cout970.UltraTech.TileEntities.electric.StorageTier2;
 import common.cout970.UltraTech.TileEntities.electric.StorageTier3;
 import common.cout970.UltraTech.TileEntities.electric.TesseractEntity;
+import common.cout970.UltraTech.TileEntities.electric.tiers.ChemicalVaporDesintegrationT1_Entity;
+import common.cout970.UltraTech.TileEntities.electric.tiers.CoalGeneratorEntityT1_Entity;
+import common.cout970.UltraTech.TileEntities.electric.tiers.CutterT1_Entity;
+import common.cout970.UltraTech.TileEntities.electric.tiers.FurnaceT1_Entity;
+import common.cout970.UltraTech.TileEntities.electric.tiers.LaminatorT1_Entity;
+import common.cout970.UltraTech.TileEntities.electric.tiers.PurifierT1_Entity;
 import common.cout970.UltraTech.TileEntities.intermod.EngineEntity;
 import common.cout970.UltraTech.TileEntities.utility.CrafterEntity;
 import common.cout970.UltraTech.TileEntities.utility.HologramEmiterEntity;
-import common.cout970.UltraTech.TileEntities.utility.Printer3DEntity;
+import common.cout970.UltraTech.TileEntities.utility.Painter3DEntity;
 import common.cout970.UltraTech.TileEntities.utility.ReactorControllerEntity;
 import common.cout970.UltraTech.TileEntities.utility.ReactorEntity;
 import common.cout970.UltraTech.containers.BoilerContainer;
@@ -36,16 +34,16 @@ import common.cout970.UltraTech.containers.ChargeStationContainer;
 import common.cout970.UltraTech.containers.ClimateStationContainer;
 import common.cout970.UltraTech.containers.ControllerContainer;
 import common.cout970.UltraTech.containers.CrafterContainer;
+import common.cout970.UltraTech.containers.CutterContainer;
 import common.cout970.UltraTech.containers.EngineContainer;
 import common.cout970.UltraTech.containers.FermenterContainer;
 import common.cout970.UltraTech.containers.FluidGenContainer;
+import common.cout970.UltraTech.containers.FurnaceContainer;
 import common.cout970.UltraTech.containers.GeneratorContainer;
 import common.cout970.UltraTech.containers.HologramEmiterContainer;
 import common.cout970.UltraTech.containers.LaminatorContainer;
 import common.cout970.UltraTech.containers.MAssemblyContainer;
 import common.cout970.UltraTech.containers.MinerContainer;
-import common.cout970.UltraTech.containers.PrecisionCuterContainer;
-import common.cout970.UltraTech.containers.PresuricerContaner;
 import common.cout970.UltraTech.containers.Printer3DContainer;
 import common.cout970.UltraTech.containers.PurifierContainer;
 import common.cout970.UltraTech.containers.ReactorContainer;
@@ -53,7 +51,6 @@ import common.cout970.UltraTech.containers.RefineryContainer;
 import common.cout970.UltraTech.containers.StorageContainer;
 import common.cout970.UltraTech.containers.TabletContainer;
 import common.cout970.UltraTech.containers.TesseractContainer;
-import common.cout970.UltraTech.containers.UTfurnaceContainer;
 import common.cout970.UltraTech.gui.BoilerGui;
 import common.cout970.UltraTech.gui.CVDgui;
 import common.cout970.UltraTech.gui.ChargeStationGui;
@@ -69,7 +66,6 @@ import common.cout970.UltraTech.gui.HologramEmiterGui;
 import common.cout970.UltraTech.gui.LaminatorGui;
 import common.cout970.UltraTech.gui.MAssemblyGui;
 import common.cout970.UltraTech.gui.MinerGui;
-import common.cout970.UltraTech.gui.PresuricerGui;
 import common.cout970.UltraTech.gui.Printer3DGui;
 import common.cout970.UltraTech.gui.PurifierGui;
 import common.cout970.UltraTech.gui.ReactorGui;
@@ -79,7 +75,6 @@ import common.cout970.UltraTech.gui.TabletGui;
 import common.cout970.UltraTech.gui.TesseractGui;
 import common.cout970.UltraTech.gui.UTfurnaceGui;
 import common.cout970.UltraTech.multiblocks.refinery.RefineryBase;
-
 import cpw.mods.fml.common.network.IGuiHandler;
 
 public class GuiHandler implements IGuiHandler{
@@ -92,32 +87,32 @@ public class GuiHandler implements IGuiHandler{
 		TileEntity tileEntity = world.getTileEntity(x, y, z);
 
 		//CVDmachine
-		if(tileEntity instanceof CVD_Entity){
-			return new CVDcontainer(player.inventory, (CVD_Entity) tileEntity);
+		if(tileEntity instanceof ChemicalVaporDesintegrationT1_Entity){
+			return new CVDcontainer(player.inventory, (ChemicalVaporDesintegrationT1_Entity) tileEntity);
 		}
 		//furnace
-		if(tileEntity instanceof FurnaceEntity){
-			return new UTfurnaceContainer(player.inventory, (FurnaceEntity) tileEntity);
+		if(tileEntity instanceof FurnaceT1_Entity){
+			return new FurnaceContainer(player.inventory, (FurnaceT1_Entity) tileEntity);
 		}
 		//storage
 		if(tileEntity instanceof StorageTier1 || tileEntity instanceof StorageTier2 || tileEntity instanceof StorageTier3){
 			return new StorageContainer(player.inventory, (Machine) tileEntity);
 		}
 		//cuter
-		if(tileEntity instanceof CutterEntity){
-			return new PrecisionCuterContainer(player.inventory, (CutterEntity) tileEntity);
+		if(tileEntity instanceof CutterT1_Entity){
+			return new CutterContainer(player.inventory, (CutterT1_Entity) tileEntity);
 		}
 		//presurechamber
-		if(tileEntity instanceof PresuricerEntity){
-			return new PresuricerContaner(player.inventory, (PresuricerEntity) tileEntity);
-		}
+//		if(tileEntity instanceof PresuricerEntity){
+//			return new PresuricerContaner(player.inventory, (PresuricerEntity) tileEntity);
+//		}
 		//purifier
-		if(tileEntity instanceof PurifierEntity){
-			return new PurifierContainer(player.inventory, (PurifierEntity) tileEntity);
+		if(tileEntity instanceof PurifierT1_Entity){
+			return new PurifierContainer(player.inventory, (PurifierT1_Entity) tileEntity);
 		}
 		//Generator
-		if(tileEntity instanceof CoalGeneratorEntityT1){
-			return new GeneratorContainer(player.inventory, (CoalGeneratorEntityT1) tileEntity);
+		if(tileEntity instanceof CoalGeneratorEntityT1_Entity){
+			return new GeneratorContainer(player.inventory, (CoalGeneratorEntityT1_Entity) tileEntity);
 		}
 		//Miner
 		if(tileEntity instanceof MinerEntity){
@@ -136,8 +131,8 @@ public class GuiHandler implements IGuiHandler{
 			return new ChargeStationContainer(player.inventory, (ChargeStationEntity) tileEntity);
 		}
 		//Printer3D
-		if(tileEntity instanceof Printer3DEntity){
-			return new Printer3DContainer(player.inventory, (Printer3DEntity) tileEntity);
+		if(tileEntity instanceof Painter3DEntity){
+			return new Printer3DContainer(player.inventory, (Painter3DEntity) tileEntity);
 		}
 		//Engine
 		if(tileEntity instanceof EngineEntity){
@@ -180,8 +175,8 @@ public class GuiHandler implements IGuiHandler{
 			return new RefineryContainer(player.inventory, tileEntity);
 		}
 		//Laminator
-		if(tileEntity instanceof LaminatorEntity){
-			return new LaminatorContainer(player.inventory, (LaminatorEntity) tileEntity);
+		if(tileEntity instanceof LaminatorT1_Entity){
+			return new LaminatorContainer(player.inventory, (LaminatorT1_Entity) tileEntity);
 		}
 
 		return null;
@@ -195,32 +190,32 @@ public class GuiHandler implements IGuiHandler{
 		TileEntity tileEntity = world.getTileEntity(x, y, z);
 
 		//CVDmachine
-		if(tileEntity instanceof CVD_Entity){
-			return new CVDgui(new CVDcontainer(player.inventory, (CVD_Entity) tileEntity),player.inventory, (CVD_Entity) tileEntity);
+		if(tileEntity instanceof ChemicalVaporDesintegrationT1_Entity){
+			return new CVDgui(new CVDcontainer(player.inventory, (ChemicalVaporDesintegrationT1_Entity) tileEntity),player.inventory, (ChemicalVaporDesintegrationT1_Entity) tileEntity);
 		}
 		//furnace
-		if(tileEntity instanceof FurnaceEntity){
-			return new UTfurnaceGui(new UTfurnaceContainer(player.inventory, (FurnaceEntity) tileEntity),player.inventory, (FurnaceEntity) tileEntity);
+		if(tileEntity instanceof FurnaceT1_Entity){
+			return new UTfurnaceGui(new FurnaceContainer(player.inventory, (FurnaceT1_Entity) tileEntity),player.inventory, (FurnaceT1_Entity) tileEntity);
 		}
 		//storage
 		if(tileEntity instanceof StorageTier1 || tileEntity instanceof StorageTier2 || tileEntity instanceof StorageTier3){
 			return new StorageGui(new StorageContainer(player.inventory, (Machine) tileEntity), player.inventory, (Machine) tileEntity);
 		}
 		//cuter
-		if(tileEntity instanceof CutterEntity){
-			return new CutterGui(new PrecisionCuterContainer(player.inventory, (CutterEntity) tileEntity),player.inventory, (CutterEntity) tileEntity);
+		if(tileEntity instanceof CutterT1_Entity){
+			return new CutterGui(new CutterContainer(player.inventory, (CutterT1_Entity) tileEntity),player.inventory, (CutterT1_Entity) tileEntity);
 		}
 		//presurechamber
-		if(tileEntity instanceof PresuricerEntity){
-			return new PresuricerGui(new PresuricerContaner(player.inventory, (PresuricerEntity) tileEntity),player.inventory, (PresuricerEntity) tileEntity);
-		}
+//		if(tileEntity instanceof PresuricerEntity){
+//			return new PresuricerGui(new PresuricerContaner(player.inventory, (PresuricerEntity) tileEntity),player.inventory, (PresuricerEntity) tileEntity);
+//		}
 		//purifier
-		if(tileEntity instanceof PurifierEntity){
-			return new PurifierGui(new PurifierContainer(player.inventory, (PurifierEntity) tileEntity),player.inventory, (PurifierEntity) tileEntity);
+		if(tileEntity instanceof PurifierT1_Entity){
+			return new PurifierGui(new PurifierContainer(player.inventory, (PurifierT1_Entity) tileEntity),player.inventory, (PurifierT1_Entity) tileEntity);
 		}
 		//generator
-		if(tileEntity instanceof CoalGeneratorEntityT1){
-			return new GeneratorGui(new GeneratorContainer(player.inventory, (CoalGeneratorEntityT1) tileEntity), player.inventory, (CoalGeneratorEntityT1) tileEntity);
+		if(tileEntity instanceof CoalGeneratorEntityT1_Entity){
+			return new GeneratorGui(new GeneratorContainer(player.inventory, (CoalGeneratorEntityT1_Entity) tileEntity), player.inventory, (CoalGeneratorEntityT1_Entity) tileEntity);
 		}
 		//Miner
 		if(tileEntity instanceof MinerEntity){
@@ -239,8 +234,8 @@ public class GuiHandler implements IGuiHandler{
 			return new ChargeStationGui(new ChargeStationContainer(player.inventory, (ChargeStationEntity) tileEntity), player.inventory, (ChargeStationEntity) tileEntity);
 		}
 		//Printer3D
-		if(tileEntity instanceof Printer3DEntity){
-			return new Printer3DGui(new Printer3DContainer(player.inventory, (Printer3DEntity) tileEntity), player.inventory, (Printer3DEntity) tileEntity);
+		if(tileEntity instanceof Painter3DEntity){
+			return new Printer3DGui(new Printer3DContainer(player.inventory, (Painter3DEntity) tileEntity), player.inventory, (Painter3DEntity) tileEntity);
 		}
 		//Engine
 		if(tileEntity instanceof EngineEntity){
@@ -283,8 +278,8 @@ public class GuiHandler implements IGuiHandler{
 			return new RefineryGui(new RefineryContainer(player.inventory, tileEntity),(RefineryBase) tileEntity);
 		}
 		//Laminator
-		if(tileEntity instanceof LaminatorEntity){
-			return new LaminatorGui(new LaminatorContainer(player.inventory, (LaminatorEntity) tileEntity),(LaminatorEntity) tileEntity);
+		if(tileEntity instanceof LaminatorT1_Entity){
+			return new LaminatorGui(new LaminatorContainer(player.inventory, (LaminatorT1_Entity) tileEntity),(LaminatorT1_Entity) tileEntity);
 		}
 		return null;
 	}

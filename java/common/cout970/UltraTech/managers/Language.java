@@ -93,19 +93,19 @@ public class Language {
 		Language.addName(new ItemStack(Chasis,1,1), "Machine Chasis MK2");
 		Language.addName(new ItemStack(Chasis,1,2), "Machine Chasis MK3");
 		
-		Language.addName(new ItemStack(Tier1,1,0), "Crafter");
-		Language.addName(new ItemStack(Tier1,1,1), "Generator");
-		Language.addName(new ItemStack(Tier1,1,2), "CVD");
-		Language.addName(new ItemStack(Tier1,1,3), "3D Printer");
-		Language.addName(new ItemStack(Tier1,1,4), "Charge Station");
-		Language.addName(new ItemStack(Tier1,1,5), "Fermenter");
-		Language.addName(new ItemStack(Tier1,1,6), "Cooling block");
-		
-		Language.addName(new ItemStack(Tier2,1,0), "Furnace");
-		Language.addName(new ItemStack(Tier2,1,1), "Purifier");
-		Language.addName(new ItemStack(Tier2,1,2), "Cutter");
-		Language.addName(new ItemStack(Tier2,1,3), "Pressurizer WIP");
-		Language.addName(new ItemStack(Tier2,1,4), "Fluid Firebox");
+//		Language.addName(new ItemStack(Tier1,1,0), "Crafter");
+//		Language.addName(new ItemStack(Tier1,1,1), "Generator");
+//		Language.addName(new ItemStack(Tier1,1,2), "CVD");
+//		Language.addName(new ItemStack(Tier1,1,3), "3D Printer");
+//		Language.addName(new ItemStack(Tier1,1,4), "Charge Station");
+//		Language.addName(new ItemStack(Tier1,1,5), "Fermenter");
+//		Language.addName(new ItemStack(Tier1,1,6), "Cooling block");
+//		
+//		Language.addName(new ItemStack(Tier2,1,0), "Furnace");
+//		Language.addName(new ItemStack(Tier2,1,1), "Purifier");
+//		Language.addName(new ItemStack(Tier2,1,2), "Cutter");
+//		Language.addName(new ItemStack(Tier2,1,3), "Pressurizer WIP");
+//		Language.addName(new ItemStack(Tier2,1,4), "Fluid Firebox");
 		
 		Language.addName(new ItemStack(Tier3,1,0), "Miner");
 		Language.addName(new ItemStack(Tier3,1,1), "Hologram Emiter");
@@ -143,7 +143,7 @@ public class Language {
 		Language.addName(Dynamo, "FT Dynamo");
 		Language.addName(MultiTank, "MultiTank WIP");
 		Language.addName(LavaGenerator, "Lava Generator");
-		Language.addName(Laminator, "Laminator");
+//		Language.addName(Laminator, "Laminator");
 		
 		if(!Control.isMicroPartActived)Language.addName(CableBlock, "Cable");
 	}

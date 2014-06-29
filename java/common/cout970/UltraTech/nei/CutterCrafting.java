@@ -3,16 +3,17 @@ package common.cout970.UltraTech.nei;
 import java.util.ArrayList;
 import java.util.List;
 
-import common.cout970.UltraTech.lib.recipes.Cuter_Recipes;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.TemplateRecipeHandler;
 
+import common.cout970.UltraTech.lib.recipes.Cutter_Recipe;
+
 public class CutterCrafting extends TemplateRecipeHandler {
 
-	List<Cuter_Recipes> recipes = new ArrayList<Cuter_Recipes>();
+	List<Cutter_Recipe> recipes = new ArrayList<Cutter_Recipe>();
 
 	@Override
 	public String getRecipeName() {
@@ -27,9 +28,9 @@ public class CutterCrafting extends TemplateRecipeHandler {
 	@Override
 	public void loadCraftingRecipes(ItemStack result)
 	{
-		for(int x = 0; x < Cuter_Recipes.recipes.size();x++ ){
-			if(NEIUltraTechConfig.matches(result, Cuter_Recipes.recipes.get(x).getOutput())){
-				recipes.add(Cuter_Recipes.recipes.get(x));
+		for(int x = 0; x < Cutter_Recipe.recipes.size();x++ ){
+			if(NEIUltraTechConfig.matches(result, Cutter_Recipe.recipes.get(x).getOutput())){
+				recipes.add(Cutter_Recipe.recipes.get(x));
 			}
 		}
 	}
@@ -37,9 +38,9 @@ public class CutterCrafting extends TemplateRecipeHandler {
 
 	@Override
 	public void loadUsageRecipes(ItemStack ingredient){
-		for(int x = 0; x < Cuter_Recipes.recipes.size();x++ ){
-			if(NEIUltraTechConfig.matches(ingredient, Cuter_Recipes.recipes.get(x).getInput())){
-				recipes.add(Cuter_Recipes.recipes.get(x));
+		for(int x = 0; x < Cutter_Recipe.recipes.size();x++ ){
+			if(NEIUltraTechConfig.matches(ingredient, Cutter_Recipe.recipes.get(x).getInput())){
+				recipes.add(Cutter_Recipe.recipes.get(x));
 			}
 		}
 	}

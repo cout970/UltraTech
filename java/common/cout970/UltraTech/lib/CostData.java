@@ -1,35 +1,36 @@
 package common.cout970.UltraTech.lib;
 
-import api.cout970.UltraTech.Wpower.StorageInterface.MachineTipe;
+import api.cout970.UltraTech.MeVpower.StorageInterface.MachineTipe;
 
 public enum CostData {
 	/**
-	 * 1MeV = 8 FT => 0.125 MeV = 1FT
+	 * 1FT = 2DP => 0.5 DP = 1FT
 	 */
-	Generator		(  200d	,1	,1d/8		,1),
-	Boiler   		(  400d	,2	,2d			,0),
-	Solar_Panel		(    5d	,1	,0.05d		,1),
-	Furnace			(   50d	,2	,25d		,0),
-	Purifier		(   50d	,2	,25d		,0),
-	Cutter			(   60d	,2	,30d		,0), 
-	MA				(  400d  ,3	,50d		,0),
-	Charge_Station	(  400d	,1	,20d		,2),
-	Climate_Station ( 1200d	,3	,1200d		,0),
-	CVD				(   80d	,1	,40d		,0),
-	Fermenter		(  200d	,1	,3/8		,0),
-	Fluid_Generator (  200d	,2	,0d			,1), 
-	Turbine			(  200d	,2	,2d			,1),
+	Generator		( 1600d	,1	,5d			,1),
+//	Boiler   		(  800d	,2	,2d			,0),
+	Solar_Panel		(   10d	,1	,0.2d		,1),
+	Furnace			(  800d	,2	,100d		,0),
+	Purifier		(  800d	,2	,100d		,0),
+	Cutter			(  800d	,2	,100d		,0), 
+	MA				( 1600d  ,3	,100d		,0),
+	Charge_Station	( 1600d	,1	,80d		,2),
+	Climate_Station (20000d	,3	,20000d		,0),
+	CVD				(  800d	,1	,100d		,0),
+	Fermenter		(  800d	,1	,10			,0),
+	Fluid_Generator (  800d	,2	,0d			,1), 
+	Turbine			(  800d	,2	,20d			,1),
 	Miner    		(  800d	,3	,15.2d		,0),
-	Dynamo     		(  400d	,2	,1d			,0),
-	Tesseract		( 1250d ,3	,0			,0),
-	WindMill		(  200d ,2	,1d/6		,1),
-	LavaGenerator   (  200d	,2	,0.4d		,1),
-	Laminator		(   80d ,1	,40d		,0),
-	ChemicalPlant	(  200d ,2	,20d		,0),
+	Dynamo     		( 1600d	,2	,1d			,0),
+	Tesseract		(20000d ,3	,0			,0),
+	WindMill		(  800d ,2	,1d/6		,1),
+	LavaGenerator   (  800d	,2	,0.4d		,1),
+	Laminator		(  800d ,1	,40d		,0),
+	ChemicalPlant	(  800d ,2	,20d		,0),
+	Heater			(  400d	,2	,50d			,0), 
 	
-	Storage_1		( 	20000d	,1	,0			,2),
-	Storage_2		(  120000d	,2	,0			,2),
-	Storage_3		( 1200000d	,3	,0			,2),  ;
+	Storage_1		(    64000d	,1	,0			,2),
+	Storage_2		(   400000d	,2	,0			,2),
+	Storage_3		(  7000000d	,3	,0			,2);
 	
 	public double cap,use;
 	public int tier;

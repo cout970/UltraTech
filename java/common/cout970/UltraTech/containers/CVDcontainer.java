@@ -1,20 +1,19 @@
 package common.cout970.UltraTech.containers;
 
-import common.cout970.UltraTech.TileEntities.electric.CVD_Entity;
-import common.cout970.UltraTech.lib.recipes.CVD_Recipe;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import common.cout970.UltraTech.TileEntities.electric.tiers.ChemicalVaporDesintegrationT1_Entity;
+import common.cout970.UltraTech.lib.recipes.CVD_Recipe;
 
 
 public class CVDcontainer extends UT_Container{
 
-	public CVD_Entity tileEntity;
+	public ChemicalVaporDesintegrationT1_Entity tileEntity;
 	
-	public CVDcontainer(InventoryPlayer inventoryPlayer, CVD_Entity tileEntity2){
+	public CVDcontainer(InventoryPlayer inventoryPlayer, ChemicalVaporDesintegrationT1_Entity tileEntity2){
 		super(inventoryPlayer,tileEntity2);
 		tileEntity = tileEntity2;
 		
@@ -29,13 +28,12 @@ public class CVDcontainer extends UT_Container{
 		bindPlayerInventory(inventoryPlayer);
 	}
 	
-	public void addCraftingToCrafters(ICrafting par1ICrafting)
-    {
-        super.addCraftingToCrafters(par1ICrafting);
-        par1ICrafting.sendProgressBarUpdate(this, 0, tileEntity.progres);
-        par1ICrafting.sendProgressBarUpdate(this, 1, (int)tileEntity.getEnergy());
-        par1ICrafting.sendProgressBarUpdate(this, 2, tileEntity.speed);
-    }
+//	public void addCraftingToCrafters(ICrafting par1ICrafting)
+//    {
+//        super.addCraftingToCrafters(par1ICrafting);
+//        par1ICrafting.sendProgressBarUpdate(this, 2, (int) tileEntity.Progres);
+//        par1ICrafting.sendProgressBarUpdate(this, 1, (int)tileEntity.getEnergy());
+//    }
 	
 	@Override
 	public void detectAndSendChanges() {
@@ -72,7 +70,7 @@ public class CVDcontainer extends UT_Container{
 				}
 				current.onSlotChange(itemstack, aux);
 			}else{
-				if(CVD_Recipe.getResult(itemstack) != null){
+				if(CVD_Recipe.INSTANCE.getResult(itemstack) != null){
 					if(!mergeItemStack(itemstack, 0, inv-1, false)){
 						return null;
 					}

@@ -3,7 +3,11 @@ package api.cout970.UltraTech.microparts;
 import org.lwjgl.opengl.GL11;
 
 import codechicken.lib.vec.Vector3;
+import codechicken.multipart.NormallyOccludedPart;
 import common.cout970.UltraTech.lib.RenderUtil;
+import common.cout970.UltraTech.lib.UT_Utils;
+import common.cout970.UltraTech.models.ModelPlaneCable;
+import common.cout970.UltraTech.models.ModelPlaneCableBase;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
@@ -12,19 +16,35 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 public class RenderCablePlane{
 
-	private ModelCable model;
+	private ModelPlaneCable model;
+	private ModelPlaneCableBase base;
 	
 	public RenderCablePlane(){
-		model = new ModelCable();
+		model = new ModelPlaneCable();
+		base = new ModelPlaneCableBase();
 	}
 	public void render(MicroCablePlane mc, Vector3 pos) {
 		GL11.glPushMatrix();
 		GL11.glTranslatef((float) pos.x + 0.5F, (float) pos.y + 1.5F, (float) pos.z + 0.5F);
-		RenderUtil.bindTexture(new ResourceLocation("ultratech:textures/misc/planecable.png"));
+		RenderUtil.bindTexture(new ResourceLocation("ultratech:textures/misc/cable/plane.png"));
 		GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
-		if(model == null)model = new ModelCable();
-		model.render(mc, pos, 0.0625F);
+		boolean[] a = new boolean[4];
+		for(int d = 2; d<6;d++){
+			a[d-2] = canConect(mc, ForgeDirection.getOrientation(d));
+		}
+		model.render(0.0625F,a);
+		int i = RenderUtil.getDir(a);
+		if(i == -1)i = 0;
+		RenderUtil.bindTexture(new ResourceLocation("ultratech:textures/misc/cable/planecablebase_"+i+".png"));
+		base.render(0.0625f);
 		GL11.glPopMatrix();
+	}
+	private boolean canConect(MicroCablePlane c, ForgeDirection i) {
+		boolean a = c.tile().canAddPart(new NormallyOccludedPart(c.boundingBoxes[i.ordinal()]));
+		boolean b = false;
+		TileEntity tile = UT_Utils.getRelative(c.tile(), i);
+		if(MicroPartUtil.canConect(c,tile,i))b = true;
+		return a && b;
 	}
 
 }
