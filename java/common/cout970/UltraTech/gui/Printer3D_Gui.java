@@ -9,11 +9,11 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 
-public class Printer3DGui extends GuiContainer{
+public class Printer3D_Gui extends GuiContainer{
 
 	public Painter3DEntity entity;
 	
-	public Printer3DGui(Container par1Container,InventoryPlayer ip,Painter3DEntity entity) {
+	public Printer3D_Gui(Container par1Container,InventoryPlayer ip,Painter3DEntity entity) {
 		super(par1Container);
 		this.entity = entity;
 	}

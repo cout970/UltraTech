@@ -12,7 +12,7 @@ import net.minecraft.util.IIcon;
 
 public class Bottle extends UT_Item{
 
-	public static String[] names = {"Empty","Steam","Juice","Ethanol Gas","Ethanol","Gasoline","Oil Gas","Liquid Plastic","Fuel","Sulfuric Acid"};
+	public static String[] names = {"Empty","Steam","Juice","Ethanol Gas","Ethanol","Gasoline","Oil Gas","Liquid Plastic","Fuel","Sulfuric Acid","Oil"};
 	public IIcon[] icons;
 	
 	public Bottle() {

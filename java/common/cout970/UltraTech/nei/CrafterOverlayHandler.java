@@ -2,7 +2,7 @@ package common.cout970.UltraTech.nei;
 
 import api.cout970.UltraTech.network.Net_Utils;
 import common.cout970.UltraTech.TileEntities.utility.CrafterEntity;
-import common.cout970.UltraTech.gui.CrafterGui;
+import common.cout970.UltraTech.gui.Crafter_Gui;
 import common.cout970.UltraTech.lib.UT_Utils;
 import common.cout970.UltraTech.packets.PacketCrafter;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -16,8 +16,8 @@ public class CrafterOverlayHandler implements IOverlayHandler {
 	public void overlayRecipe(GuiContainer firstGui, IRecipeHandler recipe,
 			int recipeIndex, boolean shift) {
 
-		if(firstGui instanceof CrafterGui){
-			CrafterGui crafter = (CrafterGui) firstGui;
+		if(firstGui instanceof Crafter_Gui){
+			Crafter_Gui crafter = (Crafter_Gui) firstGui;
 			
 			CrafterEntity entity = (CrafterEntity) crafter.entity.getWorldObj().getTileEntity(crafter.entity.xCoord, crafter.entity.yCoord, crafter.entity.zCoord);
 			

@@ -3,11 +3,13 @@ package common.cout970.UltraTech.TileEntities.electric.tiers;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.minecraft.inventory.Container;
+import net.minecraft.inventory.ICrafting;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraftforge.common.util.ForgeDirection;
-import common.cout970.UltraTech.TileEntities.electric.BoilerEntity;
+import common.cout970.UltraTech.TileEntities.fluid.BoilerEntity;
 import common.cout970.UltraTech.blocks.models.Boiler;
 import common.cout970.UltraTech.lib.CostData;
 import common.cout970.UltraTech.lib.UT_Utils;
@@ -31,9 +33,10 @@ public class Heater_Entity extends ConfigurableMachine{
 		super.updateEntity();
 		if(worldObj.isRemote)return;
 		if(Progres > 0){
-			if(Heat < maxHeat){
-				Heat += 0.5;
-				Progres-=5;
+			if(Heat <= maxHeat){
+				Heat += 0.2;
+				Progres-=2;
+				
 				if(Progres <= 0)change = true;
 			}
 		}
@@ -53,11 +56,13 @@ public class Heater_Entity extends ConfigurableMachine{
 					markDirty();
 				}
 			}else if(getEnergy() >= CostData.Heater.use){
-				Progres = 100;
+				Progres = 200;
+				maxProgres = 200;
 				removeEnergy(CostData.Heater.use);
 				change = true;
-			}else{
-				if(Heat >= 25)Heat -= Heat*2/maxHeat;
+			}
+			if(Progres <= 0 && Heat > 25){
+				Heat -= Heat/1000;
 			}
 		}
 		if(change){
@@ -78,14 +83,45 @@ public class Heater_Entity extends ConfigurableMachine{
 
 	public void onNeigUpdate(){
 		super.onNeigUpdate();
-		inter = new ArrayList<HeaterInteraction>();
+		List<HeaterInteraction> h = new ArrayList<HeaterInteraction>();
+		if(inter == null)inter = new ArrayList<HeaterInteraction>();
+		else{
+			h = inter;
+			inter = new ArrayList<HeaterInteraction>();
+		}
 		for(ForgeDirection d : ForgeDirection.VALID_DIRECTIONS){
 			Interaction in = HeaterInteraction.isInteresting(this,d);
 			if(in != Interaction.Nothing){
-				inter.add(new HeaterInteraction(this, d, in));
+				HeaterInteraction hi = new HeaterInteraction(this, d, in);
+				for(HeaterInteraction i : h){
+					if(i.type == Interaction.Block && i.side == d){
+						hi.own = i.own;
+					}
+				}
+				inter.add(hi);
 			}
 		}
+		
 	}
+
+	//Synchronization
+
+	public void sendGUINetworkData(Container cont,
+			ICrafting c) {
+		super.sendGUINetworkData(cont, c);
+		c.sendProgressBarUpdate(cont, 2, (int)Progres);
+		c.sendProgressBarUpdate(cont, 3, maxProgres);
+		c.sendProgressBarUpdate(cont, 4, (int) Heat);
+	}
+
+	public void getGUINetworkData(int id, int value) {
+		super.getGUINetworkData(id, value);
+		if(id == 2)Progres = value;
+		if(id == 3)maxProgres = value;
+		if(id == 4)Heat = value;
+	}
+
+	//Save & Load
 
 	public void readFromNBT(NBTTagCompound nbt)
 	{

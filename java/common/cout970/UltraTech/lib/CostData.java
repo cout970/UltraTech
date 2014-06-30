@@ -18,7 +18,7 @@ public enum CostData {
 	CVD				(  800d	,1	,100d		,0),
 	Fermenter		(  800d	,1	,10			,0),
 	Fluid_Generator (  800d	,2	,0d			,1), 
-	Turbine			(  800d	,2	,20d			,1),
+	Turbine			(  800d	,2	,5d			,1),
 	Miner    		(  800d	,3	,15.2d		,0),
 	Dynamo     		( 1600d	,2	,1d			,0),
 	Tesseract		(20000d ,3	,0			,0),
@@ -26,7 +26,7 @@ public enum CostData {
 	LavaGenerator   (  800d	,2	,0.4d		,1),
 	Laminator		(  800d ,1	,40d		,0),
 	ChemicalPlant	(  800d ,2	,20d		,0),
-	Heater			(  400d	,2	,50d			,0), 
+	Heater			( 1600d	,2	,100d			,0), 
 	
 	Storage_1		(    64000d	,1	,0			,2),
 	Storage_2		(   400000d	,2	,0			,2),

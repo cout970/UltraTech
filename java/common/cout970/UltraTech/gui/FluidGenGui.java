@@ -38,7 +38,7 @@ public class FluidGenGui extends GuiContainer{
 		FluidStack input = entity.getTankInfo(ForgeDirection.UP)[0].fluid;
 		boolean w = input == null;
 		if(!w){
-			BoilerGui.bindTexture(input);
+			Boiler_Gui.bindTexture(input);
 			IIcon ic = input.getFluid().getStillIcon();
 			int a = input.amount*40/entity.getTankInfo(ForgeDirection.UP)[0].capacity;
 			this.drawTexturedModelRectFromIcon(xStart+139, yStart+61-a, ic, 18, a);

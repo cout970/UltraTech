@@ -12,12 +12,12 @@ import net.minecraft.inventory.Container;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
-public class CrafterGui extends GuiContainer{
+public class Crafter_Gui extends GuiContainer{
 
 	public CrafterEntity entity;
 	public InventoryPlayer p;
 	
-	public CrafterGui(Container par1Container, InventoryPlayer inventory, CrafterEntity tileEntity) {
+	public Crafter_Gui(Container par1Container, InventoryPlayer inventory, CrafterEntity tileEntity) {
 		super(par1Container);
 		entity = tileEntity;
 		p = inventory;

@@ -18,11 +18,11 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidStack;
 
-public class FermenterGui extends GuiContainer{
+public class Fermenter_Gui extends GuiContainer{
 
 	public FermenterEntity entity;
 	
-	public FermenterGui(Container par1Container, FermenterEntity tile) {
+	public Fermenter_Gui(Container par1Container, FermenterEntity tile) {
 		super(par1Container);
 		entity = tile;
 	}

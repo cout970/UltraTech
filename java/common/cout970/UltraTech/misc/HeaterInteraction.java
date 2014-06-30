@@ -1,7 +1,7 @@
 package common.cout970.UltraTech.misc;
 
-import common.cout970.UltraTech.TileEntities.electric.BoilerEntity;
 import common.cout970.UltraTech.TileEntities.electric.tiers.Heater_Entity;
+import common.cout970.UltraTech.TileEntities.fluid.BoilerEntity;
 import common.cout970.UltraTech.lib.UT_Utils;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
@@ -18,7 +18,7 @@ public class HeaterInteraction {
 	public ForgeDirection side;
 	public Object target;
 	public Interaction type;
-	public float own = 25;
+	public float own;
 	
 	public HeaterInteraction(Heater_Entity h,ForgeDirection s,Interaction t){
 		src = h;
@@ -26,18 +26,12 @@ public class HeaterInteraction {
 		type = t;
 		if(type == Interaction.Block || type == Interaction.Fluid){
 			target = src.getWorldObj().getBlock(src.xCoord+side.offsetX, src.yCoord+side.offsetY, src.zCoord+side.offsetZ);
-		}else if(type == Interaction.Boiler || type == Interaction.Furnace){
-			target = UT_Utils.getRelative(src, side);
 		}
 	}
 	
 	public float apply(float heat){
-		System.out.println("Current Heat: "+heat+" Own Heat: "+own);
-		float dif = Math.abs(heat - own);
-		float change = dif/2;
-		own += change;
 		if(type == Interaction.Block){
-			if(own > 800){
+			if(own > 900){
 				if(target instanceof Block){
 					if(target == Blocks.cobblestone){
 						src.getWorldObj().setBlock(src.xCoord+side.offsetX, src.yCoord+side.offsetY, src.zCoord+side.offsetZ, Blocks.lava);
@@ -46,27 +40,45 @@ public class HeaterInteraction {
 					}
 				}
 			}
+			float dif = heat-own;
+			if(dif < 0)dif = 0;
+			float change = dif/2;
+			change = Math.min(change, heat-25);
+			own += change;
+			return change;
 		}else if(type == Interaction.Fluid){
-			if(own > 100){
+			if(heat > 100){
 				if(target instanceof Block){
 					if(target == Blocks.water){
 						src.getWorldObj().setBlock(src.xCoord+side.offsetX, src.yCoord+side.offsetY, src.zCoord+side.offsetZ, FluidRegistry.getFluid("steam").getBlock());
 					}
 				}
 			}
+			return 0f;
 		}else if(type == Interaction.Boiler){
+			if(target == null)target = UT_Utils.getRelative(src, side);
+			if(target instanceof BoilerEntity){
+				BoilerEntity b = (BoilerEntity) target;
+				float dif = heat-b.heat;
+				if(dif < 0)dif = 0;
+				float change = dif/2;
+				change = Math.min(change, heat-25);
+				b.heat += change;
+				return change;
+			}
 			return 0;
 		}else if(type == Interaction.Furnace){
+			if(target == null)target = UT_Utils.getRelative(src, side);
 			if(target instanceof TileEntityFurnace){
 				TileEntityFurnace tf = (TileEntityFurnace) target;
-				if(heat >= 100){
-//					tf.furnaceBurnTime = (int) h;
-//					tf.currentItemBurnTime = (int) h;
-//					heat -= h;
+				if(tf.currentItemBurnTime < heat)tf.currentItemBurnTime = (int) heat;
+				if(heat >= 100 && tf.furnaceBurnTime < heat){
+					tf.furnaceBurnTime += (int) 4;
+					return 0.2f;
 				}
 			}
 		}
-		return change;
+		return 0.1f;
 	}
 
 	public static Interaction isInteresting(Heater_Entity h, ForgeDirection d) {

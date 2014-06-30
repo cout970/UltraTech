@@ -16,11 +16,11 @@ import net.minecraft.inventory.Container;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 
-public class ClimateStationGui extends GuiContainer{
+public class ClimateStation_Gui extends GuiContainer{
 
 	public ClimateEntity entity;
 	
-	public ClimateStationGui(Container par1Container,TileEntity tile) {
+	public ClimateStation_Gui(Container par1Container,TileEntity tile) {
 		super(par1Container);
 		entity = (ClimateEntity) tile;
 	}

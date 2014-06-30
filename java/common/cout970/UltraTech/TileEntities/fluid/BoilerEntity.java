@@ -1,4 +1,4 @@
-package common.cout970.UltraTech.TileEntities.electric;
+package common.cout970.UltraTech.TileEntities.fluid;
 
 import api.cout970.UltraTech.MeVpower.CableType;
 import api.cout970.UltraTech.MeVpower.IPowerConductor;
@@ -28,29 +28,29 @@ public class BoilerEntity extends SyncTile implements IFluidHandler,IUpdatedEnti
 
 	public UT_Tank result;
 	public UT_Tank storage;
-	public Heater_Entity heatProvider;
-	
+	public float heat;
+
 	public void updateEntity(){
 		super.updateEntity();
 		if(result == null)result = new UT_Tank(16000, worldObj, xCoord, yCoord, zCoord);
 		if(storage == null)storage = new UT_Tank(8000, worldObj, xCoord, yCoord, zCoord);
 		if(worldObj.isRemote)return;
 
-		if(heatProvider != null && heatProvider.Heat >= 100 && storage != null){
-			if(storage.getFluidAmount() >= 10 && result.getFluidAmount()+100 <= result.getCapacity()){
+		if(heat >= 101 && storage != null){
+			if(storage.getFluidAmount() >= 1 && result.getFluidAmount()+10 <= result.getCapacity()){
 				Fluid s = Boiler_Recipes.getResult(storage.getFluid());
 				if(s != null){
-					storage.drain(10, true);
-					FluidStack t = new FluidStack(s,100);
+					storage.drain(1, true);
+					FluidStack t = new FluidStack(s,10);
 					result.fill(t, true);
-					heatProvider.Heat -= 1;
+					heat -= 0.5f;
 				}
 			}
 		}
 	}
-	
+
 	//Fluids
-	
+
 	@Override
 	public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
 		if(resource == null || storage == null)return 0;
@@ -92,54 +92,53 @@ public class BoilerEntity extends SyncTile implements IFluidHandler,IUpdatedEnti
 		if(result == null || storage == null)return new FluidTankInfo[]{}; 
 		return new FluidTankInfo[]{result.getInfo(),storage.getInfo()}; 
 	}
-		
+
 	//Save & Load
-	
-		@Override
-		public void readFromNBT(NBTTagCompound nbtTagCompound) {
-			super.readFromNBT(nbtTagCompound);
-			if(storage == null)storage = new UT_Tank(8000, worldObj, xCoord, yCoord, zCoord);
-			if(result == null)result = new UT_Tank(16000, worldObj, xCoord, yCoord, zCoord);
-			storage.readFromNBT(nbtTagCompound, "storage");
-			result.readFromNBT(nbtTagCompound, "result");
-		}
 
-		@Override
-		public void writeToNBT(NBTTagCompound nbtTagCompound) {
-			super.writeToNBT(nbtTagCompound);
-			if(storage == null)storage = new UT_Tank(8000, worldObj, xCoord, yCoord, zCoord);
-			if(result == null)result = new UT_Tank(16000, worldObj, xCoord, yCoord, zCoord);
-			storage.writeToNBT(nbtTagCompound, "storage");
-			result.writeToNBT(nbtTagCompound, "result");
-		}
+	@Override
+	public void readFromNBT(NBTTagCompound nbtTagCompound) {
+		super.readFromNBT(nbtTagCompound);
+		if(storage == null)storage = new UT_Tank(8000, worldObj, xCoord, yCoord, zCoord);
+		if(result == null)result = new UT_Tank(16000, worldObj, xCoord, yCoord, zCoord);
+		storage.readFromNBT(nbtTagCompound, "storage");
+		result.readFromNBT(nbtTagCompound, "result");
+	}
+
+	@Override
+	public void writeToNBT(NBTTagCompound nbtTagCompound) {
+		super.writeToNBT(nbtTagCompound);
+		if(storage == null)storage = new UT_Tank(8000, worldObj, xCoord, yCoord, zCoord);
+		if(result == null)result = new UT_Tank(16000, worldObj, xCoord, yCoord, zCoord);
+		storage.writeToNBT(nbtTagCompound, "storage");
+		result.writeToNBT(nbtTagCompound, "result");
+	}
+
+	//Synchronization
+
+	public void sendGUINetworkData(Container cont, ICrafting c) {
+		super.sendGUINetworkData(cont, c);
+		if(storage.getFluid() != null)c.sendProgressBarUpdate(cont, 5, storage.getFluid().fluidID);
+		if(result.getFluid() != null)c.sendProgressBarUpdate(cont, 6, result.getFluid().fluidID);
+		c.sendProgressBarUpdate(cont, 2, storage.getFluidAmount());
+		c.sendProgressBarUpdate(cont, 3, result.getFluidAmount());
+		c.sendProgressBarUpdate(cont, 4, (int) heat);
+	}
+
+	public void getGUINetworkData(int id, int value) {
+		super.getGUINetworkData(id, value);
+		if(id == 2)storage.setFluidAmount(value);
+		if(id == 3)result.setFluidAmount(value);
+		if(id == 4)heat = value;
+		if(id == 5)storage.setFluid(new FluidStack(value, 1));
+		if(id == 6)result.setFluid(new FluidStack(value, 1));
+	}
+
+	public CableType getConection(ForgeDirection side) {
+		return CableType.BIG_CENTER;
+	}
+
+	@Override
+	public void onNeigUpdate() {
 		
-		//Synchronization
-
-		public void sendGUINetworkData(Container cont, ICrafting c) {
-			super.sendGUINetworkData(cont, c);
-			if(storage.getFluid() != null)c.sendProgressBarUpdate(cont, 5, storage.getFluid().fluidID);
-			if(result.getFluid() != null)c.sendProgressBarUpdate(cont, 6, result.getFluid().fluidID);
-			c.sendProgressBarUpdate(cont, 2, storage.getFluidAmount());
-			c.sendProgressBarUpdate(cont, 3, result.getFluidAmount());
-		}
-
-		public void getGUINetworkData(int id, int value) {
-			super.getGUINetworkData(id, value);
-			if(id == 2)storage.setFluidAmount(value);
-			if(id == 3)result.setFluidAmount(value);
-			if(id == 5)storage.setFluid(new FluidStack(value, 1));
-			if(id == 6)result.setFluid(new FluidStack(value, 1));
-		}
-
-		public CableType getConection(ForgeDirection side) {
-			return CableType.BIG_CENTER;
-		}
-
-		@Override
-		public void onNeigUpdate() {
-			for(TileEntity t : UT_Utils.getTiles(this)){
-				if(t instanceof Heater_Entity)heatProvider = (Heater_Entity) t;
-			}
-			System.out.println("update! "+(heatProvider != null));
-		}
+	}
 }

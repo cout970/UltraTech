@@ -18,7 +18,7 @@ public class AlienBlock extends Block{
 
 	public AlienBlock(Material p_i45394_1_) {
 		super(p_i45394_1_);
-		setCreativeTab(UltraTech.techTab);
+		setCreativeTab(UltraTech.DecoTab);
 		setHardness(2f);
 		setStepSound(soundTypeMetal);
 		setResistance(5000);

@@ -3,7 +3,7 @@ package common.cout970.UltraTech.blocks.models;
 import buildcraft.api.tools.IToolWrench;
 import api.cout970.UltraTech.MeVpower.BlockConductor;
 import api.cout970.UltraTech.MeVpower.Machine;
-import common.cout970.UltraTech.TileEntities.electric.BoilerEntity;
+import common.cout970.UltraTech.TileEntities.fluid.BoilerEntity;
 import common.cout970.UltraTech.TileEntities.intermod.DynamoEntity;
 import common.cout970.UltraTech.TileEntities.intermod.EngineEntity;
 import common.cout970.UltraTech.core.UltraTech;

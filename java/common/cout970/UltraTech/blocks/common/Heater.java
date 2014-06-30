@@ -3,6 +3,7 @@ package common.cout970.UltraTech.blocks.common;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
@@ -45,6 +46,11 @@ public class Heater extends BlockConductor{
 	public void onNeighborBlockChange(World w, int x, int y, int z, Block b) {
 		IUpdatedEntity i = (IUpdatedEntity) w.getTileEntity(x, y, z);
 		i.onNeigUpdate();
+	}
+	
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer p, int a, float b, float c, float d){
+		if(!p.isSneaking())p.openGui(UltraTech.instance, 1, world, x, y, z);
+		return true;
 	}
 
 }

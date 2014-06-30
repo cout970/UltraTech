@@ -27,10 +27,9 @@ public class CopperPipe extends FluidPipeBlock{
 				e.mode = !e.mode;
 				e.lock = e.mode;
 				e.Sync();
-				return true;
 			}
 		}
-		return true;
+		return false;
 	}
 
 	public void registerBlockIcons(IIconRegister iconRegister){

@@ -19,7 +19,7 @@ public class CovedGlass extends BlockBreakable{
 	public CovedGlass(Material par3Material,
 			boolean par4) {
 		super("CovedGlass", par3Material, par4);
-		setCreativeTab(UltraTech.techTab);
+		setCreativeTab(UltraTech.DecoTab);
 		setHardness(0.2f);
 		setStepSound(soundTypeGlass);
 		setResistance(200);

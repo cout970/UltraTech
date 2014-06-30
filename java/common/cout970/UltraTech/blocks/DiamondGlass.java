@@ -19,7 +19,7 @@ public class DiamondGlass extends BlockBreakable{
 	public DiamondGlass(Material par3Material,
 			boolean par4) {
 		super("DiamondGlass", par3Material, par4);
-		setCreativeTab(UltraTech.techTab);
+		setCreativeTab(UltraTech.DecoTab);
 		setHardness(0.2f);
 		setStepSound(soundTypeGlass);
 		setResistance(5000);

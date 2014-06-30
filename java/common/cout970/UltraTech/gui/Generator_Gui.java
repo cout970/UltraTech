@@ -18,11 +18,11 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 
-public class GeneratorGui extends GuiContainer{
+public class Generator_Gui extends GuiContainer{
 
 	private CoalGeneratorEntityT1_Entity entity;
 	
-	public GeneratorGui(Container par1Container,InventoryPlayer ip,CoalGeneratorEntityT1_Entity entity) {
+	public Generator_Gui(Container par1Container,InventoryPlayer ip,CoalGeneratorEntityT1_Entity entity) {
 		super(par1Container);
 		this.entity = entity;
 	}

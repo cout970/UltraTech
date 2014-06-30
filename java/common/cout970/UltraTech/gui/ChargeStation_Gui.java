@@ -14,11 +14,11 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 
-public class ChargeStationGui extends GuiContainer{
+public class ChargeStation_Gui extends GuiContainer{
 
 	private ChargeStationEntity entity;
 
-	public ChargeStationGui(Container par1Container, InventoryPlayer inventory,ChargeStationEntity tile) {
+	public ChargeStation_Gui(Container par1Container, InventoryPlayer inventory,ChargeStationEntity tile) {
 		super(par1Container);
 		entity = tile;
 	}

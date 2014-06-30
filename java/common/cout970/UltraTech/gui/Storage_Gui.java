@@ -14,11 +14,11 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 
-public class StorageGui extends GuiContainer{
+public class Storage_Gui extends GuiContainer{
 
 	private Machine entity;
 
-	public StorageGui(Container par1Container,InventoryPlayer ip ,Machine entity) {
+	public Storage_Gui(Container par1Container,InventoryPlayer ip ,Machine entity) {
 		super(par1Container);
 		this.entity = entity;
 	}

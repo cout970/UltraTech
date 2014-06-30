@@ -52,7 +52,7 @@ public class FluidManager{
 		Fuel = new Fluid("fuel");
 		Acid = new Fluid("sulfuric_acid");
 		
-		Fluid[] fluid = {Steam,Juice,Gas_Ethanol,Ethanol,Gasoline,Gas_Oil,Oil,Plastic,Fuel,Acid};
+		Fluid[] fluid = {Steam,Juice,Gas_Ethanol,Ethanol,Gasoline,Gas_Oil,Plastic,Fuel,Acid,Oil};
 		fluids = fluid;
 		
 		setupFluids();

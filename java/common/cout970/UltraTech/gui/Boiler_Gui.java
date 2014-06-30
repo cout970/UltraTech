@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.lwjgl.opengl.GL11;
 
-import common.cout970.UltraTech.TileEntities.electric.BoilerEntity;
+import common.cout970.UltraTech.TileEntities.fluid.BoilerEntity;
 import common.cout970.UltraTech.lib.EnergyCosts;
 import common.cout970.UltraTech.lib.UT_Utils;
 import net.minecraft.client.Minecraft;
@@ -18,11 +18,11 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidStack;
 
-public class BoilerGui extends GuiContainer{
+public class Boiler_Gui extends GuiContainer{
 
 	public BoilerEntity entity;
 	
-	public BoilerGui(Container par1Container, BoilerEntity t) {
+	public Boiler_Gui(Container par1Container, BoilerEntity t) {
 		super(par1Container);
 		entity = t;
 	}
@@ -61,15 +61,12 @@ public class BoilerGui extends GuiContainer{
 		this.mc.renderEngine.bindTexture(new ResourceLocation("ultratech:textures/gui/boiler.png"));
 		if(!g)this.drawTexturedModalRect(xStart+45, yStart+20, 224, 0, 20, 40);
 		if(!l)this.drawTexturedModalRect(xStart+138, yStart+21, 224, 0, 20, 40);
-		//heat
-		if(entity.heatProvider != null){
-			
-		int h = (int) ((entity.heatProvider.Heat*58)/1000f);
+		//heat			
+		int h = (int) ((entity.heat*58)/1000f);
 		this.drawTexturedModalRect(xStart+74, yStart+14+(58-h), 208, 58-h, 6, h);
 		
-		String s = ((int)this.entity.heatProvider.Heat)+"C";
+		String s = ((int)this.entity.heat)+"C";
         this.fontRendererObj.drawString(s, xStart+125-fontRendererObj.getStringWidth(s), yStart+38, 4210752);
-		}
 
         //NAME
         this.drawCenteredString(fontRendererObj, "Boiler", xStart+110, yStart+5, UT_Utils.RGBtoInt(255, 255, 255));

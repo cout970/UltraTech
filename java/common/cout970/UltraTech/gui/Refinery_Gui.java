@@ -18,11 +18,11 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidStack;
 
-public class RefineryGui extends GuiContainer{
+public class Refinery_Gui extends GuiContainer{
 
 	public RefineryBase entity;
 	
-	public RefineryGui(Container par1Container, RefineryBase e) {
+	public Refinery_Gui(Container par1Container, RefineryBase e) {
 		super(par1Container);
 		entity = e;
 	}

@@ -4,8 +4,6 @@ import net.minecraft.item.Item;
 import net.minecraftforge.client.MinecraftForgeClient;
 import api.cout970.UltraTech.microparts.CableEntity;
 import api.cout970.UltraTech.microparts.RenderCableBig;
-
-import common.cout970.UltraTech.TileEntities.electric.BoilerEntity;
 import common.cout970.UltraTech.TileEntities.electric.PumpEntity;
 import common.cout970.UltraTech.TileEntities.electric.SolarPanelEntity;
 import common.cout970.UltraTech.TileEntities.electric.SteamTurbineEntity;
@@ -13,6 +11,7 @@ import common.cout970.UltraTech.TileEntities.electric.StorageTier1;
 import common.cout970.UltraTech.TileEntities.electric.StorageTier2;
 import common.cout970.UltraTech.TileEntities.electric.StorageTier3;
 import common.cout970.UltraTech.TileEntities.electric.WindMillEntity;
+import common.cout970.UltraTech.TileEntities.fluid.BoilerEntity;
 import common.cout970.UltraTech.TileEntities.fluid.CopperPipeEntity;
 import common.cout970.UltraTech.TileEntities.fluid.TankEntity;
 import common.cout970.UltraTech.TileEntities.intermod.DynamoEntity;
@@ -48,7 +47,6 @@ import common.cout970.UltraTech.managers.BlockManager;
 import common.cout970.UltraTech.managers.ItemManager;
 import common.cout970.UltraTech.multiblocks.refinery.RefineryCore;
 import common.cout970.UltraTech.multiblocks.refinery.RenderRefinery;
-
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 
