@@ -17,37 +17,39 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class UT_Block extends Block{
+public class Deco_Block extends Block{
 
-	public String texture;
+	public static IIcon Base;
 	public boolean black = true;
-	public static IIcon blockIconIn;
+	public IIcon blockIconIn;
+	public int number;
 	
-	public UT_Block(String name,boolean black) {
+	public Deco_Block(int number,boolean black) {
 		super(Material.rock);
 		this.black = black;
 		setCreativeTab(UltraTech.DecoTab);
 		setHardness(0.4f);
 		setStepSound(soundTypeStone);
 		setResistance(30);
-		setBlockName(name);
-		texture = name.toLowerCase();
+		this.number = number;
+		setBlockName("Deco_"+number);
 	}
 	
 	public boolean canCreatureSpawn(EnumCreatureType type, IBlockAccess world, int x, int y, int z) {
     	return false;
     }
 	
-	@SuppressWarnings("static-access")
 	public void registerBlockIcons(IIconRegister iconRegister){
-		this.blockIcon = iconRegister.registerIcon("ultratech:deco_"+((!black) ? "white" : "black")+"/"+texture);
-		this.blockIconIn = iconRegister.registerIcon("ultratech:deco_white/base");
+		if(Base == null)Base = iconRegister.registerIcon("ultratech:deco_white/base");
+		this.blockIcon = iconRegister.registerIcon("ultratech:deco_"+((!black) ? "white" : "black")+"/deco"+number);
+		this.blockIconIn = iconRegister.registerIcon("ultratech:deco_white/deco_in_"+number);
 	}
 	
 	@SideOnly(Side.CLIENT)
 	@Override
 	public IIcon getIcon(int par1, int par2)
     {		
+		if(par1 == -1)return this.blockIconIn;
         return this.blockIcon;
     }
 	

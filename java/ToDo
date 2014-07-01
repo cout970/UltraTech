@@ -1,7 +1,7 @@
 thinks to do:
 solve dependencies --
-solve language bugs --
-solve bug with deco blocks (I hate minecraft 1.7.2 render system)
+solve language bugs: new thinks, new bugs!
+solve bug with deco blocks (I hate minecraft 1.7.2 render system) solved? a bit, not all bugs
 finish {
 pipes, --
 refinery, --
@@ -11,17 +11,15 @@ pump,
 multitank,
 dynamo, --
 turbine,
-heater for boiler
+heater for boiler --
 tesseract gui
 molecular assembly remake
-redstone control for machines
+redstone control for machines -*
 steam turbine tiers
-generator nerf and upgrades 
+generator nerf and upgrades --
 }
 for this public alpha
-remake dependencies --
-change generator
 change turbine
-change boiler
-ocult wiki 
-refractor UT-plate --
+remake pump
+fluid generator
+make wiki! 

@@ -1,13 +1,10 @@
-package common.cout970.UltraTech.gui;
+package common.cout970.UltraTech.wiki;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.lwjgl.opengl.GL11;
 
-import common.cout970.UltraTech.wiki.IPage;
-import common.cout970.UltraTech.wiki.MainPage;
-import common.cout970.UltraTech.wiki.TabletButtom;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;

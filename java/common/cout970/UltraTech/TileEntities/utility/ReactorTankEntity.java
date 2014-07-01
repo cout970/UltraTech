@@ -32,8 +32,8 @@ public class ReactorTankEntity extends TileReactorPart implements IFluidHandler,
 
 	@Override
 	public void updateEntity(){
-		if(liquid != null){
-			if(liquid.amount != last){
+		if(liquid != null && !worldObj.isRemote){
+			if(liquid.amount != last && worldObj.getTotalWorldTime()%20 == 0){
 				Net_Utils.sendUpdate(this);
 				last = liquid.amount;
 			}

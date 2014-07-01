@@ -77,10 +77,10 @@ import common.cout970.UltraTech.gui.Purifier_Gui;
 import common.cout970.UltraTech.gui.ReactorGui;
 import common.cout970.UltraTech.gui.Refinery_Gui;
 import common.cout970.UltraTech.gui.Storage_Gui;
-import common.cout970.UltraTech.gui.TabletGui;
 import common.cout970.UltraTech.gui.TesseractGui;
 import common.cout970.UltraTech.gui.Furnace_Gui;
 import common.cout970.UltraTech.multiblocks.refinery.RefineryBase;
+import common.cout970.UltraTech.wiki.TabletGui;
 import cpw.mods.fml.common.network.IGuiHandler;
 
 public class GuiHandler implements IGuiHandler{

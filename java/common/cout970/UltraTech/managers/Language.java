@@ -14,13 +14,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import static common.cout970.UltraTech.managers.BlockManager.*;
 
 import org.apache.commons.io.output.WriterOutputStream;
 
-import common.cout970.UltraTech.blocks.UT_Block;
+import common.cout970.UltraTech.blocks.Deco_Block;
 import common.cout970.UltraTech.lib.Control;
-
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -29,6 +29,7 @@ public class Language {
 	
 	public static List<String> unloc = new ArrayList<String>();
 	public static List<String> name = new ArrayList<String>();
+	private final static String[] colors = {"White","Black","Blue","Steal Blue","Cian","Sea Green","Green","Light Green","Yellow","Orange","Red","Purple","Pink","Blue Violet"};
 	
 	public static void addName(Object obj,String name){
 		if(obj == null)return;
@@ -66,8 +67,8 @@ public class Language {
 	
 	public static void AddBlockNames(){
 		
-		for(UT_Block b : deco){
-			for(int meta=0;meta<14;meta++)Language.addName(new ItemStack(b,1,meta), "Deco Block");
+		for(Deco_Block b : deco){
+			for(int meta=0;meta<14;meta++)Language.addName(new ItemStack(b,1,meta), "Deco Block "+colors[meta]);
 		}
 		Language.addName(new ItemStack(stoneblock,1,0), "Stone Block Black");
 		Language.addName(new ItemStack(stoneblock,1,1), "Stone Bricks Black");

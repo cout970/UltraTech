@@ -2,7 +2,7 @@ package common.cout970.UltraTech.machines.renders;
 
 import org.lwjgl.opengl.GL11;
 
-import common.cout970.UltraTech.blocks.UT_Block;
+import common.cout970.UltraTech.blocks.Deco_Block;
 import common.cout970.UltraTech.proxy.ClientProxy;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
@@ -24,7 +24,7 @@ public class DecoBlocksRender implements ISimpleBlockRenderingHandler{
 	public boolean renderWorldBlock(IBlockAccess w, int x, int y, int z, Block block, int modelId, RenderBlocks r) {
 		Tessellator t = Tessellator.instance;
 		//texture
-		IIcon c = UT_Block.blockIconIn;
+		IIcon c = block.getIcon(-1, 0);
 		GL11.glPushMatrix();
 		int m = w.getBlockMetadata(x, y, z);
 		setColorT(m);
@@ -49,7 +49,7 @@ public class DecoBlocksRender implements ISimpleBlockRenderingHandler{
 	@Override
 	public void renderInventoryBlock(Block b, int m, int modelID, RenderBlocks r) {
 		Tessellator t = Tessellator.instance;
-		IIcon f = UT_Block.blockIconIn;
+		IIcon f = Deco_Block.Base;
 		setColorGL(m);
 		
 		//interior

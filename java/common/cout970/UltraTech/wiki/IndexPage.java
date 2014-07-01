@@ -1,7 +1,5 @@
 package common.cout970.UltraTech.wiki;
 
-import common.cout970.UltraTech.gui.TabletGui;
-
 import net.minecraft.client.renderer.texture.TextureManager;
 
 public class IndexPage extends Page {

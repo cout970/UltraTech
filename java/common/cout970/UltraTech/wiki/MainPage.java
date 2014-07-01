@@ -1,6 +1,5 @@
 package common.cout970.UltraTech.wiki;
 
-import common.cout970.UltraTech.gui.TabletGui;
 import common.cout970.UltraTech.lib.UT_Utils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.TextureManager;

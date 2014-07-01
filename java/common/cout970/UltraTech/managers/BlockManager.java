@@ -76,7 +76,7 @@ import common.cout970.UltraTech.blocks.ReactorMultiblock;
 import common.cout970.UltraTech.blocks.StoneBlock;
 import common.cout970.UltraTech.blocks.StorageBlock;
 import common.cout970.UltraTech.blocks.Tier3Block;
-import common.cout970.UltraTech.blocks.UT_Block;
+import common.cout970.UltraTech.blocks.Deco_Block;
 import common.cout970.UltraTech.blocks.common.ChemicalPlant;
 import common.cout970.UltraTech.blocks.common.CrafterBlock;
 import common.cout970.UltraTech.blocks.common.FermenterBlock;
@@ -111,7 +111,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 public class BlockManager {
 
 	//blocks	
-	public static List<UT_Block> deco = new ArrayList<UT_Block>();
+	public static List<Deco_Block> deco = new ArrayList<Deco_Block>();
 
 	public static  Block stoneblock;
 	public static  Block Chasis;
@@ -204,23 +204,23 @@ public class BlockManager {
 		Crafter = new CrafterBlock(m);
 		//deco
 
-		deco.add(new UT_Block("deco",true));
-		deco.add(new UT_Block("deco2",true));
-		deco.add(new UT_Block("deco3",true));
-		deco.add(new UT_Block("deco4",true));
-		deco.add(new UT_Block("deco5",true));
-		deco.add(new UT_Block("deco6",true));
-		deco.add(new UT_Block("deco7",true));
-		deco.add(new UT_Block("deco8",true));
+		deco.add(new Deco_Block(1,true));
+		deco.add(new Deco_Block(2,true));
+		deco.add(new Deco_Block(3,true));
+		deco.add(new Deco_Block(4,true));
+		deco.add(new Deco_Block(5,true));
+		deco.add(new Deco_Block(6,true));
+		deco.add(new Deco_Block(7,true));
+		deco.add(new Deco_Block(8,true));
 		//white
-		deco.add(new UT_Block("deco",false));
-		deco.add(new UT_Block("deco2",false));
-		deco.add(new UT_Block("deco3",false));
-		deco.add(new UT_Block("deco4",false));
-		deco.add(new UT_Block("deco5",false));
-		deco.add(new UT_Block("deco6",false));
-		deco.add(new UT_Block("deco7",false));
-		deco.add(new UT_Block("deco8",false));
+		deco.add(new Deco_Block(1,false));
+		deco.add(new Deco_Block(2,false));
+		deco.add(new Deco_Block(3,false));
+		deco.add(new Deco_Block(4,false));
+		deco.add(new Deco_Block(5,false));
+		deco.add(new Deco_Block(6,false));
+		deco.add(new Deco_Block(7,false));
+		deco.add(new Deco_Block(8,false));
 
 		stoneblock = new StoneBlock(Material.rock);
 	}
@@ -228,8 +228,8 @@ public class BlockManager {
 
 	public static void RegisterBlocks(){
 
-		for(UT_Block b : deco)
-			GameRegistry.registerBlock(b, UT_ItemBlockDeco.class, b.texture+"_"+(b.black ? "w" : "b"));
+		for(Deco_Block b : deco)
+			GameRegistry.registerBlock(b, UT_ItemBlockDeco.class, "Deco_"+b.number+"_"+(b.black ? "w" : "b"));
 
 		//Blocks & Itemblocks
 		GameRegistry.registerBlock(Chasis, UT_ItemBlock.class ,"Chasis_UT");
