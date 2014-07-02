@@ -32,6 +32,7 @@ public class ReactorTankRender extends TileEntitySpecialRenderer{
 			bindTexture(TextureMap.locationBlocksTexture);
 			float fill = (float)a/(float)b;
 			GL11.glPushMatrix();
+			GL11.glDisable(GL11.GL_LIGHTING);
 			GL11.glTranslated(x, y, z);
 			GL11.glColor3f(1f, 1f, 1f);
 			IIcon i = FluidRegistry.WATER.getStillIcon();

@@ -6,134 +6,183 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.TreeMap;
 
+import common.cout970.UltraTech.lib.CostData;
 import common.cout970.UltraTech.lib.EnergyCosts;
 import common.cout970.UltraTech.lib.UT_Utils;
 import common.cout970.UltraTech.managers.FluidManager;
 import common.cout970.UltraTech.misc.BlockPos;
+import common.cout970.UltraTech.misc.IUpdatedEntity;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockStaticLiquid;
 import net.minecraft.init.Blocks;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 import api.cout970.UltraTech.MeVpower.CableType;
 import api.cout970.UltraTech.MeVpower.Machine;
 import api.cout970.UltraTech.MeVpower.StorageInterface.MachineTipe;
 import api.cout970.UltraTech.fluids.TankConection;
+import api.cout970.UltraTech.fluids.UT_Tank;
 
-public class PumpEntity extends Machine{
+public class PumpEntity extends Machine implements IFluidHandler,IUpdatedEntity{
 
-	public List<TankConection> tanks;
-	public int currentTank=-1;
-	private Fluid fluid;
+	//for the animation
+	public long animationTime;
+	public boolean up;
+	public float p;
+	
+	//for the pump
+	private UT_Tank tank;
+	public int height;
+	public LinkedList<BlockPos> layer = new LinkedList<BlockPos>();
+	private boolean FluidUpdate;
+	
 	
 	public PumpEntity(){
-		super(2400,2,MachineTipe.Nothing,true);
+		super(3200,2,MachineTipe.Nothing,true);
+		height = yCoord-3;
 	}
 	
-	public CableType getConection(ForgeDirection side) {
-		if(side == ForgeDirection.DOWN)return CableType.BLOCK;
-		return CableType.RIBBON_BOTTOM;
+	public UT_Tank getTank(){
+		if(tank == null)tank = new UT_Tank(8000, this);
+		return tank;
 	}
 	
 	public void updateEntity(){
 		super.updateEntity();
 		if(worldObj.isRemote)return;
-		if(tanks == null)getTanks();
-		if(worldObj.getTotalWorldTime()% 20 != 0)return;
-		if(fluid == null){
-			for(int y=yCoord;y>0;y--){
-				if((fluid = getFluid(worldObj.getBlock(xCoord, y, zCoord))) != null){
-					break;
-				}
-			}
+		if(worldObj.getTotalWorldTime()% 10 != 0)return;
+		if(FluidUpdate && worldObj.getTotalWorldTime()% 40 == 0){
+			FluidUpdate = false;
+			Sync();
 		}
-		
-		if(getEnergy() >= EnergyCosts.PumpCost && hasSpace()){
-			
-			boolean found = false;
-			for(int y=yCoord-1;y>0;y--){
-				if(getFluid(worldObj.getBlock(xCoord, y, zCoord)) != null){
-					boolean stop = false;
-					for(int x=-20;x<21;x++){
-						for(int z=-20;z<21;z++){
-							if(x != 0 || z != 0){
-								Block b = worldObj.getBlock(xCoord+x, y, zCoord+z);
-								if(getFluid(b,worldObj.getBlockMetadata(xCoord+x, y, zCoord+z)) == fluid){
-									if(fill(new BlockPos(xCoord+x, y, zCoord+z)))removeEnergy(EnergyCosts.PumpCost);
-									stop = true;
-									found = true;
-								}
-							}if(stop)break;
-						}if(stop)break;
+		if(getEnergy() >= CostData.Pump.use){
+			if(layer.isEmpty() && worldObj.getTotalWorldTime()% 40 == 0){
+				if(height<=0)height = yCoord-3;
+				for(;height>0;){
+					if(worldObj.isAirBlock(xCoord, height, zCoord) || getFluid(worldObj.getBlock(xCoord, height, zCoord), 0) != null){
+						if(layer.isEmpty()){
+							loadLayer();
+							if(layer.isEmpty())height -= 1;
+							else break;
+						}else break;
+					}else{
+						height = yCoord-3;
+						break;
 					}
-					if(!found && getFluid(worldObj.getBlock(xCoord, y, zCoord),worldObj.getBlockMetadata(xCoord, y, zCoord)) != null){
-						if(fill(new BlockPos(xCoord, y, zCoord)))removeEnergy(EnergyCosts.PumpCost);
-					}
-					found = true;
-					break;
 				}
-			}if(!found){
-				fluid = null;
+			}else if(!layer.isEmpty() && getTank().getCapacity()-getTank().getFluidAmount() >= 1000){
+				for(int u=0;u<5;u++){
+					BlockPos b = layer.pollFirst();
+					if(b != null){
+						Fluid f = getFluid(worldObj.getBlock(b.x, b.y, b.z), worldObj.getBlockMetadata(b.x, b.y, b.z));
+						if(f != null){
+							if(b.x != xCoord || b.z != zCoord)worldObj.setBlock(b.x, b.y, b.z, Blocks.stone, 0, 6);
+							else worldObj.setBlockToAir(b.x, b.y, b.z);
+							this.fill(null,new FluidStack(f, 1000), true);
+							removeEnergy(CostData.Pump.use);
+							break;
+						}
+					}
+				}
 			}
 		}
 	}
 
+	private void loadLayer() {
+		layer.clear();
+		if(getFluid(worldObj.getBlock(xCoord, height, zCoord), 0)!= null)
+			for(int x=-100;x<100;x++){for(int z=-100;z<100;z++){
+				Fluid f = getFluid(worldObj.getBlock(xCoord+x, height, zCoord+z), worldObj.getBlockMetadata(xCoord+x, height, zCoord+z));
+				if(f != null && (getTank().getFluid() == null || getTank().getFluid().getFluid() == f)){
+					layer.add(new BlockPos(xCoord+x, height, zCoord+z));
+					if(layer.size() > 1000)break;
+				}
+			}
+			if(layer.size() > 1000)break;
+			}
+	}
+
 	private Fluid getFluid(Block block,int meta) {
-		
 		Fluid fluid = FluidRegistry.lookupFluidForBlock(block);
 		if(fluid != null){
 			if(meta == 0)return fluid;
 		}
 		return null;
 	}
+
+	@Override
+	public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
+		int f = getTank().fill(resource, doFill);
+		if(f > 0)
+			FluidUpdate = true;
+		return f;
+	}
+
+	@Override
+	public FluidStack drain(ForgeDirection from, FluidStack resource,
+			boolean doDrain) {
+		if(resource == null)return null;
+		return drain(from, resource.amount, doDrain);
+	}
+
+	@Override
+	public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain) {
+		FluidStack f = getTank().drain(maxDrain, doDrain);
+		if(f != null && f.amount > 0){
+			FluidUpdate = true;
+		}
+		return f;
+	}
+
+	@Override
+	public boolean canFill(ForgeDirection from, Fluid fluid) {
+		return getTank().fill(new FluidStack(fluid, 1), false) != 0;
+	}
+
+	@Override
+	public boolean canDrain(ForgeDirection from, Fluid fluid) {
+		return getTank().drain(1, false) != null;
+	}
+
+	@Override
+	public FluidTankInfo[] getTankInfo(ForgeDirection from) {
+		return new FluidTankInfo[]{new FluidTankInfo(getTank())};
+	}
+
+	@Override
+	public void readFromNBT(NBTTagCompound nbtTagCompound) {
+		super.readFromNBT(nbtTagCompound);
+		getTank().readFromNBT(nbtTagCompound, "liquid");
+	}
+
+	@Override
+	public void writeToNBT(NBTTagCompound nbtTagCompound) {
+		super.writeToNBT(nbtTagCompound);
+		getTank().writeToNBT(nbtTagCompound, "liquid");
+	}
+
+	@Override
+	public void onNeigUpdate() {
+		// TODO Auto-generated method stub
+		
+	}
 	
-	private Fluid getFluid(Block block) {
-		Fluid fluid = FluidRegistry.lookupFluidForBlock(block);
-		for(Fluid f : FluidRegistry.getRegisteredFluids().values()){
-//			System.out.println(f.getLocalizedName()+": "+f.getBlock()+" "+(f.getBlock() == block));
-		}
-		return fluid;
-	}
-
-	private void getTanks() {
-		tanks = new ArrayList<TankConection>();
-		for(ForgeDirection d : ForgeDirection.VALID_DIRECTIONS){
-			if(UT_Utils.getRelative(this, d) instanceof IFluidHandler)tanks.add(new TankConection((IFluidHandler) UT_Utils.getRelative(this, d), d.getOpposite()));
-		}
-	}
-
-	private boolean fill(BlockPos p) {
-		if(p == null)return false;
-		Fluid g = getFluid(worldObj.getBlock(p.x, p.y, p.z),worldObj.getBlockMetadata(p.x, p.y, p.z));
-		if(g != null && currentTank != -1){
-			FluidStack f = new FluidStack(g, 1000);
-			worldObj.setBlockToAir(p.x, p.y, p.z);
-			TankConection t = tanks.get(currentTank);
-			t.tank.fill(t.side, f, true);
-			if(t.tank.fill(t.side, f, false) != 1000)currentTank = -1;
-			return true;
-		}
-		return false;
-	}
-
-	private boolean hasSpace(){
-		if(tanks.size() == 0)return false;
-		if(fluid == null)return false;
-		if(currentTank == -1){
-			for(TankConection f : tanks){
-				if(f.tank.fill(f.side,new FluidStack(fluid,1000),false) == 1000){
-					currentTank = tanks.indexOf(f);
-					break;
-				}
-			}
-			if(currentTank == -1)return false;
-		}
-		return true;
-	}
+	@SideOnly(Side.CLIENT)
+    public AxisAlignedBB getRenderBoundingBox()
+    {
+        AxisAlignedBB bb = INFINITE_EXTENT_AABB;
+        bb = AxisAlignedBB.getBoundingBox(xCoord, yCoord-2, zCoord, xCoord+1, yCoord+1, zCoord+1);
+        return bb;
+    }
 
 }

@@ -4,29 +4,32 @@ import api.cout970.UltraTech.MeVpower.StorageInterface.MachineTipe;
 
 public enum CostData {
 	/**
-	 * 1FT = 2DP => 0.5 DP = 1FT
+	 * 1FT = 2MeV
 	 */
-	Generator		( 1600d	,1	,5d			,1),
-//	Boiler   		(  800d	,2	,2d			,0),
-	Solar_Panel		(   10d	,1	,0.2d		,1),
-	Furnace			(  800d	,2	,100d		,0),
-	Purifier		(  800d	,2	,100d		,0),
-	Cutter			(  800d	,2	,100d		,0), 
-	MA				( 1600d  ,3	,100d		,0),
-	Charge_Station	( 1600d	,1	,80d		,2),
-	Climate_Station (20000d	,3	,20000d		,0),
-	CVD				(  800d	,1	,100d		,0),
-	Fermenter		(  800d	,1	,10			,0),
-	Fluid_Generator (  800d	,2	,0d			,1), 
+	Generator		( 3200d	,1	,1d			,1),//1coal => 800Mev
+	Solar_Panel		(   10d	,1	,0.2d		,1),//1Mev => 5 ticks
+	Fluid_Generator (  800d	,2	,1d			,1),//Wip
 	Turbine			(  800d	,2	,5d			,1),
-	Miner    		(  800d	,3	,15.2d		,0),
+	LavaGenerator   (  800d	,2	,10d		,1),//MeV per 1mb
+	WindMill		(  400d ,2	,1d		    ,1),//idk (I don't know)
+
+	Furnace			( 1000d	,2	,100d		,0),//1 items cost
+	Purifier		( 1000d	,2	,150d		,0),
+	Cutter			( 1000d	,2	,200d		,0), 
+	CVD				( 1000d	,1	,100d		,0),
+	Laminator		( 1000d ,1	,100d		,0),
+	
+	Miner    		(  800d	,3	,50d		,0),
+	MA				( 1600d ,3	,100d		,0),
+	Charge_Station	( 3200d	,1	,80d		,2),
+	Climate_Station(200000d	,3	,200000d	,0),
+	Fermenter		(  800d	,1	,10d		,0),//Mev per mb
+	Tesseract		(20000d ,3	,0d			,0),
+	ChemicalPlant	( 1000d ,2	,100d		,0),
+	Heater			( 1600d	,2	,100d		,0), 
+	Pump			( 2000d ,2  ,150d		,0),
+	
 	Dynamo     		( 1600d	,2	,1d			,0),
-	Tesseract		(20000d ,3	,0			,0),
-	WindMill		(  800d ,2	,1d/6		,1),
-	LavaGenerator   (  800d	,2	,0.4d		,1),
-	Laminator		(  800d ,1	,40d		,0),
-	ChemicalPlant	(  800d ,2	,20d		,0),
-	Heater			( 1600d	,2	,100d			,0), 
 	
 	Storage_1		(    64000d	,1	,0			,2),
 	Storage_2		(   400000d	,2	,0			,2),

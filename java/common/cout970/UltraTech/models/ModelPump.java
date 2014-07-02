@@ -110,7 +110,6 @@ public class ModelPump extends ModelBase
     tank.render(f5);
     pipe.render(f5);
     base.render(f5);
-    motor.render(f5);
     deco1.render(f5);
     deco2.render(f5);
     suport.render(f5);
@@ -118,6 +117,10 @@ public class ModelPump extends ModelBase
     suport2.render(f5);
     suport3.render(f5);
     base2.render(f5);
+  }
+  
+  public void renderMotor(float f5){
+	  motor.render(f5);
   }
   
   private void setRotation(ModelRenderer model, float x, float y, float z)

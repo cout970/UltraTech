@@ -40,7 +40,7 @@ public class Deco_Block extends Block{
     }
 	
 	public void registerBlockIcons(IIconRegister iconRegister){
-		if(Base == null)Base = iconRegister.registerIcon("ultratech:deco_white/base");
+		Base = iconRegister.registerIcon("ultratech:deco_white/base");
 		this.blockIcon = iconRegister.registerIcon("ultratech:deco_"+((!black) ? "white" : "black")+"/deco"+number);
 		this.blockIconIn = iconRegister.registerIcon("ultratech:deco_white/deco_in_"+number);
 	}

@@ -45,7 +45,6 @@ public class DecoBlocksRender implements ISimpleBlockRenderingHandler{
 		return true;
 	}
 
-
 	@Override
 	public void renderInventoryBlock(Block b, int m, int modelID, RenderBlocks r) {
 		Tessellator t = Tessellator.instance;

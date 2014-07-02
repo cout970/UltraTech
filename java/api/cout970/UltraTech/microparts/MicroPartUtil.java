@@ -1,5 +1,7 @@
 package api.cout970.UltraTech.microparts;
 
+import common.cout970.UltraTech.lib.UT_Utils;
+
 import codechicken.multipart.NormallyOccludedPart;
 import codechicken.multipart.TMultiPart;
 import codechicken.multipart.TileMultipart;
@@ -76,6 +78,21 @@ public class MicroPartUtil {
 			}
 		}
 		return false;
+	}
+
+	public static void excludeAndRecalculate(IPowerConductor p) {
+		for(TileEntity t : UT_Utils.getTiles(p.getPower().getParent())){
+			if(t instanceof IPowerConductor){
+				((IPowerConductor) t).getPower().getNetwork().refresh();
+			}else if(t instanceof TileMultipart){
+				TileMultipart tm = (TileMultipart) t;
+				for(TMultiPart s : tm.jPartList()){
+					if(s instanceof IPowerConductor){
+						((IPowerConductor) s).getPower().getNetwork().refresh();
+					}
+				}
+			}
+		}
 	}
 
 }

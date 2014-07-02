@@ -3,6 +3,10 @@ package api.cout970.UltraTech.MeVpower;
 import java.util.ArrayList;
 import java.util.List;
 
+import api.cout970.UltraTech.microparts.MicroPartUtil;
+import common.cout970.UltraTech.core.UltraTech;
+import common.cout970.UltraTech.lib.Control;
+import common.cout970.UltraTech.lib.UT_Utils;
 import net.minecraft.tileentity.TileEntity;
 /**
  * 
@@ -78,13 +82,20 @@ public class PowerNetwork {
 			return true;
 		}else return false;
 	}
-	
+
 	public void excludeAndRecalculate(IPowerConductor p) {
 		try{
-		interfaces.remove(p.getPower());
-		excluded.add(p.getPower());
+			if(Control.isMicroPartActived){
+				MicroPartUtil.excludeAndRecalculate(p);
+			}else{
+				for(TileEntity t : UT_Utils.getTiles(p.getPower().getParent())){
+					if(t instanceof IPowerConductor){
+						((IPowerConductor) t).getPower().getNetwork().refresh();
+					}
+				}
+			}
 		}catch(Exception e){}
-		for(PowerInterface c :interfaces)c.getNetwork().refresh();
+
 	}
 	
 }

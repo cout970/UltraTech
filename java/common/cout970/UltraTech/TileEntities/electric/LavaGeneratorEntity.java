@@ -25,15 +25,15 @@ public class LavaGeneratorEntity extends Machine implements IFluidHandler{
 	public void updateEntity(){
 		super.updateEntity();
 		if(worldObj.isRemote)return;
-		if(Proces <=0 && getTank().getFluidAmount() >= 50){
-			Proces = 25;
-			getTank().drain(50, true);
+		if(Proces <=0 && getTank().getFluidAmount() >= 100){
+			Proces = 20;
+			getTank().drain(100, true);
 		}
 		if(Proces > 0){
 			double space = maxEnergy()-getEnergy();
-			if(space >= CostData.LavaGenerator.use*2){
+			if(space >= CostData.LavaGenerator.use*5){
 				Proces--;
-				addEnergy(CostData.LavaGenerator.use*2);
+				addEnergy(CostData.LavaGenerator.use*5);
 			}
 		}
 	}

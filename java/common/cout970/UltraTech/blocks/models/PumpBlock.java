@@ -6,6 +6,7 @@ import common.cout970.UltraTech.TileEntities.utility.hitBoxEntity;
 import common.cout970.UltraTech.core.UltraTech;
 import common.cout970.UltraTech.managers.BlockManager;
 import common.cout970.UltraTech.misc.IReactorPart;
+import common.cout970.UltraTech.misc.IUpdatedEntity;
 import common.cout970.UltraTech.proxy.ClientProxy;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -25,7 +26,6 @@ public class PumpBlock extends BlockConductor{
 		setStepSound(soundTypeMetal);
 		setResistance(20);
 		setBlockName("Pump");
-		setBlockBounds(0f, 0f, 0f, 1f, 3f, 1f);
 	}
 	
 	public void registerBlockIcons(IIconRegister iconRegister){
@@ -34,29 +34,20 @@ public class PumpBlock extends BlockConductor{
 	
 	public void onNeighborBlockChange(World w, int x, int y, int z, Block side){
 		super.onNeighborBlockChange(w, x, y, z, side);
-		TileEntity te = w.getTileEntity(x, y, z);
-		if(te != null){
-			if(te instanceof PumpEntity)
-				((PumpEntity) te).tanks = null;
-			((PumpEntity) te).currentTank =-1;
-		}
+		IUpdatedEntity i = (IUpdatedEntity) w.getTileEntity(x, y, z);
+		if(i != null)i.onNeigUpdate();
 	}
 	
 	@Override
-	public void onBlockAdded(World par1World, int xCoord, int yCoord, int zCoord)
+	public void onBlockAdded(World w, int xCoord, int yCoord, int zCoord)
 	{
-		super.onBlockAdded(par1World, xCoord, yCoord, zCoord);
-		for(int d=1;d<3;d++){
-			par1World.setBlock(xCoord, yCoord+d, zCoord, BlockManager.Misc);
-			par1World.setBlockMetadataWithNotify(xCoord, yCoord+d, zCoord, 3,3);
-		}
-		for(int d=1;d<3;d++){
-			hitBoxEntity h =((hitBoxEntity)par1World.getTileEntity(xCoord, yCoord+d, zCoord));
-			if(h != null){
-				h.x = xCoord;
-				h.y = yCoord;
-				h.z = zCoord;
-			}
+		super.onBlockAdded(w, xCoord, yCoord, zCoord);
+		Block b = w.getBlock(xCoord, yCoord-1, zCoord);
+		if(b != this || (w.getBlockMetadata(xCoord, yCoord-1, zCoord) == 2)){
+			w.setBlock(xCoord, yCoord+1, zCoord, this);
+			w.setBlockMetadataWithNotify(xCoord, yCoord+1, zCoord, 1, 3);
+			w.setBlock(xCoord, yCoord+2, zCoord, this);
+			w.setBlockMetadataWithNotify(xCoord, yCoord+2, zCoord, 2, 3);
 		}
 	}
 	
@@ -73,11 +64,15 @@ public class PumpBlock extends BlockConductor{
 	}
 	
 	@Override
-	public void breakBlock(World world, int x, int y, int z, Block par5, int par6)
+	public void breakBlock(World world, int x, int y, int z, Block par5, int m)
 	{
-		super.breakBlock(world, x, y, z, par5, par6);
-		for(int d=1;d<3;d++){
-			world.setBlockToAir(x, y+d, z);
+		super.breakBlock(world, x, y, z, par5, m);
+		int m1 = 2-m;
+		for(;m>0;m--){
+			world.setBlockToAir(x, y-m, z);
+		}
+		for(;m1>0;m1--){
+			world.setBlockToAir(x, y+m1, z);
 		}
 	}
 	
@@ -98,8 +93,9 @@ public class PumpBlock extends BlockConductor{
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World var1, int var2) {
-		return new PumpEntity();
+	public TileEntity createNewTileEntity(World var1, int meta) {
+		if(meta == 2)return new PumpEntity();
+		return null;
 	}
 
 }
