@@ -1,6 +1,6 @@
-package common.cout970.UltraTech.Tiers.blocks;
+package common.cout970.UltraTech.blocks.tiers;
 
-import common.cout970.UltraTech.TileEntities.electric.tiers.PurifierT1_Entity;
+import common.cout970.UltraTech.TileEntities.electric.tiers.CoalGeneratorEntityT1_Entity;
 import common.cout970.UltraTech.core.UltraTech;
 import common.cout970.UltraTech.misc.IUpdatedEntity;
 import net.minecraft.block.Block;
@@ -12,28 +12,28 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import api.cout970.UltraTech.MeVpower.BlockConductor;
 
-public class PurifierT1 extends BlockConductor{
+public class CoalGeneratorT1 extends BlockConductor{
 
 	public IIcon[] icons;
 	
-	public PurifierT1(Material m) {
+	public CoalGeneratorT1(Material m) {
 		super(m);
 		setCreativeTab(UltraTech.techTab);
 		setHardness(2f);
 		setStepSound(soundTypeMetal);
-		setBlockName("PurifierT1");
+		setBlockName("CoalGeneratorT1");
 	}
 
 	@Override
 	public TileEntity createNewTileEntity(World var1, int var2) {
-		return new PurifierT1_Entity();
+		return new CoalGeneratorEntityT1_Entity();
 	}
 	
 	public void registerBlockIcons(IIconRegister IR){
 		icons = new IIcon[3];
 		icons[0] = IR.registerIcon("ultratech:chasis");
-		icons[1] = IR.registerIcon("ultratech:machines/purifier_off");
-		icons[2] = IR.registerIcon("ultratech:machines/purifier_on");
+		icons[1] = IR.registerIcon("ultratech:machines/generator_off");
+		icons[2] = IR.registerIcon("ultratech:machines/generator_on");
 	}
 	
 	public IIcon getIcon(int side, int meta){
@@ -43,7 +43,7 @@ public class PurifierT1 extends BlockConductor{
 	}
 	
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer p, int a, float b, float c, float d){
-		if(!p.isSneaking())p.openGui(UltraTech.instance, 1, world, x, y, z);
+		if(!p.isSneaking())p.openGui(UltraTech.instance, 0, world, x, y, z);
 		return true;
 	}
 
@@ -51,5 +51,4 @@ public class PurifierT1 extends BlockConductor{
 		IUpdatedEntity t = (IUpdatedEntity) w.getTileEntity(x, y, z);
 		t.onNeigUpdate();
 	}
-
 }

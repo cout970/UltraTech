@@ -30,7 +30,7 @@ public class MinerEntity extends MachineWithInventory implements IInventory{
 
 	private ItemStack waiting;
 	private int progres = 0;
-	public int speed = 10;
+	public int maxProgres = 10;
 	boolean hasEnergy = false ;
 	public int current = 0;
 	private ArrayList<int[]> mining;
@@ -82,8 +82,8 @@ public class MinerEntity extends MachineWithInventory implements IInventory{
 			boolean changes = false;
 			
 			if(hasEnergy && current < mining.size()){
-				progres += speed;
-				if(progres >= 100){
+				progres++;
+				if(progres >= maxProgres){
 					progres = 0;
 					changes = true;
 					hasEnergy = false;
@@ -97,7 +97,7 @@ public class MinerEntity extends MachineWithInventory implements IInventory{
 
 			if (changes)
 			{
-				Sync();
+				markDirty();
 			}
 		}else{
 			blocked = !addItemStack(waiting);
@@ -317,7 +317,7 @@ public class MinerEntity extends MachineWithInventory implements IInventory{
 		
 		height = nbtTagCompound.getInteger("tam");
 		widht = height;
-		speed = nbtTagCompound.getInteger("speed");
+		maxProgres = nbtTagCompound.getInteger("maxProgres");
 		eject = nbtTagCompound.getBoolean("eject");
 		switch(nbtTagCompound.getInteger("mode")){
 		case 0:{
@@ -341,6 +341,7 @@ public class MinerEntity extends MachineWithInventory implements IInventory{
 		if(rangeUpgrades > 0)hasRangeUpgrades = true;
 		if(fortuneUpgrades > 0)hasFortuneUpgrades = true;
 		hasSilkUpgrade = nbtTagCompound.getBoolean("silk");
+		maxProgres = 10 - speedUpgrades*2;
 	}
 
 	@Override
@@ -350,7 +351,7 @@ public class MinerEntity extends MachineWithInventory implements IInventory{
 		nbtTagCompound.setBoolean("silk", hasSilkUpgrade);
 		
 		nbtTagCompound.setInteger("tam", height);
-		nbtTagCompound.setInteger("speed", speed);
+		nbtTagCompound.setInteger("maxProgres", maxProgres);
 		nbtTagCompound.setBoolean("eject", eject);
 		switch(mode){
 		case Horizontal:{
@@ -379,7 +380,7 @@ public class MinerEntity extends MachineWithInventory implements IInventory{
 			ICrafting iCrafting) {
 		super.sendGUINetworkData(minerContainer, iCrafting);
 		iCrafting.sendProgressBarUpdate(minerContainer, 2, widht);
-		iCrafting.sendProgressBarUpdate(minerContainer, 3, speed);
+		iCrafting.sendProgressBarUpdate(minerContainer, 3, maxProgres);
 		iCrafting.sendProgressBarUpdate(minerContainer, 4, mineSize);
 		iCrafting.sendProgressBarUpdate(minerContainer, 5, current);
 	}
@@ -390,7 +391,7 @@ public class MinerEntity extends MachineWithInventory implements IInventory{
 			widht = value;
 			height = value;
 		}
-		if(id == 3)speed = value;
+		if(id == 3)maxProgres = value;
 		if(id == 4)mineSize = value;
 		if(id == 5)current = value;
 	}

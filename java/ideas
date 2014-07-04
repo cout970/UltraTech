@@ -1,25 +1,25 @@
 
 cables --
 pipe --
-heater
+heater --
 tank like railcraft
 repulsion block
 quarry with new system to mine more space(landmarks?)
 fission chamber
 magmatic crucible and extrusor
 oil gen --
-oil pump
+oil pump --
 terminate refinery --
-maybe boiler multiblock
+maybe boiler multiblock **
 RF dynamo --
 satelite back 
 solar power from mirrows
-item to exchange energy to diferents apis
-change energy name and values to (I dont know)
-petroleum prospector
+item to exchange energy to diferents apis **
+change energy name and values to (I dont know) --
+petroleum prospector 
 refinery change --
 industrialcraft2 transformer
-compatibility to alloys with plates(maybe plate machine and cvd only for coal ando other no metals)
+compatibility to alloys with plates(maybe plate machine and cvd only for coal and other no metals)
 waila compt
 vehicles to transport items and liquids(boats,trucks,helicopters)prety hard
 roads,docks,heliports
@@ -28,3 +28,4 @@ electric lamps with very long range
 sulfur to make batterys for storage --
 radionite from micelium
 under water generator
+tuneler

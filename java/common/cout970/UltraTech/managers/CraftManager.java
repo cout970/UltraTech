@@ -1,26 +1,6 @@
 package common.cout970.UltraTech.managers;
 
-import static common.cout970.UltraTech.managers.BlockManager.Boiler;
-import static common.cout970.UltraTech.managers.BlockManager.CableBlock;
-import static common.cout970.UltraTech.managers.BlockManager.Chasis;
-import static common.cout970.UltraTech.managers.BlockManager.CopperPipe;
-import static common.cout970.UltraTech.managers.BlockManager.CovedGlass;
-import static common.cout970.UltraTech.managers.BlockManager.DiamondGlass;
-import static common.cout970.UltraTech.managers.BlockManager.Engine;
-import static common.cout970.UltraTech.managers.BlockManager.MultiTank;
-import static common.cout970.UltraTech.managers.BlockManager.Ores;
-import static common.cout970.UltraTech.managers.BlockManager.Pump;
-import static common.cout970.UltraTech.managers.BlockManager.Reactor;
-import static common.cout970.UltraTech.managers.BlockManager.Refinery;
-import static common.cout970.UltraTech.managers.BlockManager.SolarPanel;
-import static common.cout970.UltraTech.managers.BlockManager.Storage;
-import static common.cout970.UltraTech.managers.BlockManager.Tank;
-//import static common.cout970.UltraTech.managers.BlockManager.Tier1;
-//import static common.cout970.UltraTech.managers.BlockManager.Tier2;
-import static common.cout970.UltraTech.managers.BlockManager.Tier3;
-import static common.cout970.UltraTech.managers.BlockManager.Turbine;
-import static common.cout970.UltraTech.managers.BlockManager.WindMill;
-import static common.cout970.UltraTech.managers.BlockManager.stoneblock;
+import static common.cout970.UltraTech.managers.BlockManager.*;
 import static common.cout970.UltraTech.managers.ItemManager.ItemName;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -28,7 +8,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import api.cout970.UltraTech.microparts.MicroRegistry;
-
 import common.cout970.UltraTech.TileEntities.electric.FluidGeneratorEntity;
 import common.cout970.UltraTech.lib.Control;
 import common.cout970.UltraTech.lib.recipes.Boiler_Recipes;
@@ -38,111 +17,128 @@ import common.cout970.UltraTech.lib.recipes.Cutter_Recipe;
 import common.cout970.UltraTech.lib.recipes.Fermenter_Recipes;
 import common.cout970.UltraTech.lib.recipes.Laminator_Recipe;
 import common.cout970.UltraTech.lib.recipes.Purifier_Recipe;
-
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class CraftManager {
 
 	public static void registerCraft(){
-		
+
 		//crafting recipes
 		//blocks
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Chasis,1,0),new Object[]{"aaa","a a","aaa",'a',"ingotAluminum"}));//chasis mk1
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Chasis,1,1),new Object[]{"aaa","a a","aaa",'a',"plateGrafeno"}));//chasis mk2
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Chasis,1,2),new Object[]{"aaa","a a","aaa",'a',"plateDiamond"}));//chasis mk3
-		
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(WindMill,1),new Object[]{"omf","opo","oco",'m',ItemName.get("Motor"),'f',ItemName.get("Fan"),'p',"plateGrafeno",'c',new ItemStack(Chasis,1,1)}));//windmill
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Engine,1),new Object[]{"pcp","aaa","pcp",'a',"plateAlloy_UT",'p',"plateGrafeno",'c',ItemName.get("Coil")}));//engine
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Boiler,1),new Object[]{"ctc","cac","ccc",'a',ItemName.get("HeatCoil"),'c',"plateCopper",'t',CopperPipe}));//boiler
-		
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Storage,1,0),new Object[]{"ccc","aaa","ccc",'a',ItemName.get("ElectricCell"),'c',"plateGrafeno"}));//storage mk1
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Storage,1,1),new Object[]{"cpc","ama","cpc",'m',new ItemStack(Chasis,1,1),'c',"plateGrafeno",'p',"plateSilver",'a',ItemName.get("MediumElectricCell")}));//storage mk2
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Storage,1,2),new Object[]{"cpc","ama","cpc",'m',new ItemStack(Chasis,1,2),'c',"plateGrafeno",'p',"plateSilver",'a',ItemName.get("BigElectricCell")}));//storage mk3
-		
-//		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Tier1,1,0),new Object[]{"oco","oho","oeo",'c',Blocks.crafting_table,'h',new ItemStack(Chasis,1,0),'e',Blocks.chest}));//crafter
-//		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Tier1,1,1),new Object[]{"oco","oho","oco",'c',"ingotCopper",'h',new ItemStack(Chasis,1,0),'o',"ingotAluminum"}));//generator
-//		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Tier1,1,2),new Object[]{"aaa","oho","iii",'a',"ingotAluminum",'h',new ItemStack(Chasis,1,0),'o',"ingotTin",'i',Items.iron_ingot}));//CVD
-//		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Tier1,1,3),new Object[]{"cwc","oho","cwc",'c',"ingotCopper",'h',new ItemStack(Chasis,1,0),'o',"ingotTin",'w',Blocks.wool}));//painter
-//		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Tier1,1,4),new Object[]{"lll","lhl","lll",'l',"ingotLead",'h',new ItemStack(Chasis,1,0)}));//charge station
-//		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Tier1,1,5),new Object[]{"ctc","tht","ctc",'c',"ingotCopper",'t',"ingotTin",'h',new ItemStack(Chasis,1,0)}));//fermenter
-//		
-//		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Tier2,1,0),new Object[]{"iii","lml","lsl",'m',new ItemStack(Chasis,1,1),'i',"plateIron",'l',"plateAluminum",'s',"plateSilver"}));//furnace
-//		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Tier2,1,1),new Object[]{"iii","lml","sss",'m',new ItemStack(Chasis,1,1),'i',"plateGrafeno",'l',"plateGold",'s',"plateIron"}));//purifier
-//		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Tier2,1,2),new Object[]{"ixi","xmx","ixi",'m',new ItemStack(Chasis,1,1),'i',"plateGrafeno",'x',"dustDiamond"}));//cuter
-//		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Tier2,1,3),new Object[]{"xxx","xmx","iii",'m',new ItemStack(Chasis,1,1),'i',Blocks.piston,'x',"plateIron"}));//pressurizer
-//		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Tier2,1,4),new Object[]{"oso","lml","oco",'o',"plateAluminum",'m',new ItemStack(Chasis,1,1),'l',Items.bucket,'s',"plateSilicon",'c',ItemName.get("Circuit")}));//fluid firebox(fluid generator<)
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Chasis,1,0),new Object[]{"aaa","a a","aaa",'a',"ingotAluminum"}));																							//chasis mk1
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Chasis,1,1),new Object[]{"aaa","aba","aaa",'a',"plateGrafeno",'b',"itemPlastic"}));																		//chasis mk2
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Chasis,1,2),new Object[]{"aaa","aba","aaa",'a',"plateDiamond",'b',new ItemStack(Chasis,1,1)}));															//chasis mk3
+		//tier1
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Crafter,1,0),new Object[]{"a","b","c",'a',Blocks.crafting_table,'b',new ItemStack(Chasis,1,0),'c',Blocks.chest})); 										//crafter
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(CVD_T1,1,0),new Object[]{"aca","cbc","aca",'a',"ingotIron",'b',new ItemStack(Chasis,1,0),'c',"ingotAluminum"}));   										//cvd t1
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Furnace_T1,1,0),new Object[]{"aaa","aba","aaa",'a',"ingotIron",'b',new ItemStack(Chasis,1,0)}));   				 										//furnace t1
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Cutter_T1,1,0),new Object[]{"aca","cbc","aca",'a',"ingotTin",'b',new ItemStack(Chasis,1,0),'c',"dustDiamond"}));   										//cutter t1
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Purifier_T1,1,0),new Object[]{"aca","cbc","aca",'c',"ingotTin",'b',new ItemStack(Chasis,1,0),'a',"ingotAluminum"}));										//purifier t1
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Laminator_T1,1,0),new Object[]{"aaa","aba","aaa",'a',"ingotTin",'b',new ItemStack(Chasis,1,0)}));															//laminator t1
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Generator_T1,1,0),new Object[]{"aaa","cba","aaa",'a',"ingotIron",'b',new ItemStack(Chasis,1,0),'c',ItemName.get("Dynamo")}));								//generator t1
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChargeStation,1,0),new Object[]{"aaa","aba","ccc",'a',"plateCopper",'b',new ItemStack(Chasis,1,0),'c',"plateIron"}));								//charge station
+		//tier2
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Painter,1,0),new Object[]{"aca","aba","aca",'a',Blocks.wool,'b',new ItemStack(Chasis,1,0),'c',"ingotCopper"}));											//painter 
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Fermenter,1,0),new Object[]{"ata","aba","aca",'a',"plateAluminum",'b',new ItemStack(Chasis,1,0),'c',"plateTin",'t',Tank}));								//fermenter 
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Tank,1,0),new Object[]{"aca","cxc","aca",'a',"plateCopper",'c',"paneGlass"}));																				//tank 
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChemicalPlant,1,0),new Object[]{"bbb","ama","bbb",'b',Items.glass_bottle,'a',"plateAluminum",'m',new ItemStack(Chasis,1,1)}));								//chemical plant 
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Heater,1,0),new Object[]{"bbb","aaa","bbb",'b',"plateGrafeno",'a',ItemName.get("HeatCoil")}));																//heater
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(LavaGenerator,1,0),new Object[]{"ooo","tmt","ooo",'o',"plateObsidian",'t',Tank,'m',new ItemStack(Chasis,1,1)}));											//lava generator
 
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(CVD_T2,1,0),new Object[]{"aca","cbc","aca",'a',"plateIron",'b',new ItemStack(Chasis,1,1),'c',"plateAluminum"}));   										//cvd t2
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Furnace_T2,1,0),new Object[]{"aaa","aba","aaa",'a',"plateIron",'b',new ItemStack(Chasis,1,1)}));   				 										//furnace t2
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Cutter_T2,1,0),new Object[]{"aca","cbc","aca",'a',"plateTin",'b',new ItemStack(Chasis,1,1),'c',"dustDiamond"}));   										//cutter t2
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Purifier_T2,1,0),new Object[]{"aca","cbc","aca",'c',"plateTin",'b',new ItemStack(Chasis,1,1),'a',"plateAluminum"}));										//purifier t2
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Laminator_T2,1,0),new Object[]{"aaa","aba","aaa",'a',"plateTin",'b',new ItemStack(Chasis,1,1)}));															//laminator t2
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Generator_T2,1,0),new Object[]{"aaa","cba","aaa",'a',"plateIron",'b',new ItemStack(Chasis,1,1),'c',ItemName.get("Dynamo")}));								//generator t2
+		//tier 3
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Tier3,1,0),new Object[]{"dpd","gmg","scs",'m',new ItemStack(Chasis,1,2),'d',"plateDiamond",'g',"plateGold",'s',"plateSilver",'c',ItemName.get("AdvCircuit"),'p',Items.diamond_pickaxe}));//miner
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Tier3,1,1),new Object[]{"oio","csc","omo",'m',new ItemStack(Chasis,1,2),'i',"plateSilicon",'s',"plateSilver",'c',ItemName.get("Circuit")}));//hologram emiter
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Tier3,1,2),new Object[]{"rrr","ggg","cmc",'m',new ItemStack(Chasis,1,2),'r',"plateRedstone",'g',"plateGold",'c',ItemName.get("Circuit")}));//adv crafter
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Tier3,1,3),new Object[]{"zxz","xmx","zxz",'m',new ItemStack(Chasis,1,2),'z',"plateSilver",'x',ItemName.get("AdvCircuit")}));//climate station
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Tier3,1,4),new Object[]{"aaa","gmg","aaa",'m',new ItemStack(Chasis,1,2),'a',"plateAlloy_UT",'g',ItemName.get("AdvCircuit")}));//tesseract
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Tier3,1,1),new Object[]{"oio","csc","omo",'m',new ItemStack(Chasis,1,2),'i',"plateSilicon",'s',"plateSilver",'c',ItemName.get("Circuit")}));				//hologram emiter
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Tier3,1,2),new Object[]{"rrr","ggg","cmc",'m',new ItemStack(Chasis,1,2),'r',"plateObalti",'g',"plateSilver",'c',ItemName.get("Circuit")}));				//molecular assembly
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Tier3,1,3),new Object[]{"zxz","xmx","zxz",'m',new ItemStack(Chasis,1,2),'z',"plateSilver",'x',ItemName.get("AdvCircuit")}));								//climate station
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Tier3,1,4),new Object[]{"aga","gmg","aga",'m',new ItemStack(Chasis,1,2),'g',Items.ender_pearl,'a',ItemName.get("AdvCircuit")}));							//tesseract
 
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(CopperPipe,8),new Object[]{"oao","aga","oao",'a',"plateCopper",'g',Blocks.glass_pane}));//copper pipe
+		//models
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(SolarPanel,1), new Object[]{"hhh","aaa","bbb",'h',"plateSilicon",'a',"plateSilver",'b', "plateGrafeno"}));													//solarPanel
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(WindMill,1),new Object[]{"dff","poo","coo",'d',ItemName.get("Dynamo"),'f',ItemName.get("Fan"),'p',"plateGrafeno",'c',new ItemStack(Chasis,1,1)}));			//windmil
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Engine,1),new Object[]{"sss","xlx","gpg",'p',Blocks.piston,'g',ItemName.get("AluminumGear"),'l',"blockGlass",'s',"plateSilver"}));							//engine
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(CopperPipe,8),new Object[]{"oao","aga","oao",'a',"plateCopper",'g',Blocks.glass_pane}));																	//copper pipe
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Boiler,1),new Object[]{"ctc","cac","ccc",'c',"plateCopper",'t',CopperPipe}));																				//boiler
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Turbine,1),new Object[]{"xrx","iri","xrx",'x',"plateGrafeno",'i',Blocks.glass,'r',ItemName.get("Fan")}));													//turbine
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Dynamo,1),new Object[]{"xsx","gag","ara",'s',"plateSilver",'g',ItemName.get("AluminumGear"),'a',"plateAluminum",'r',Items.redstone}));						//Dynamo
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Pump,1),new Object[]{"gtg","gpg","gmg",'g',"plateGrafeno",'m',ItemName.get("Motor"),'p',CopperPipe,'t',Tank}));											//pump
 
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(CovedGlass,8),new Object[]{"oo","oo",'o',"plateSilicon"}));//coved glass
+		//multiblocks
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Refinery,18), new Object[]{"cbc","btb","cbc",'c',"plateGrafeno",'b',new ItemStack(Chasis,1,1),'t',Tank}));													//refinery base
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Refinery,18,1), new Object[]{"ccc","ctc","ccc",'c',"plateCopper",'t',CopperPipe}));																		//refinerystruc
 		
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Reactor,1,0),new Object[]{"lll","lml","lll",'l',"plateLead",'m',new ItemStack(Chasis,1,2)}));//reactor
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Reactor,4,1),new Object[]{"olo","lml","olo",'l',"plateLead",'m',new ItemStack(Chasis,1,1)}));//reactor wall
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Reactor,1,2),new Object[]{"olo","lml","olo",'o',"plateLead",'l',Blocks.glass_pane}));//reactor tank
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Reactor,1,3),new Object[]{"olo","lml","olo",'l',"plateLead",'m',ItemName.get("Circuit"),'o',"plateGrafeno"}));//reactor controller
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Reactor,1,4),new Object[]{"clo","lml","olc",'l',"plateLead",'m',new ItemStack(Chasis,1,1),'o',ItemName.get("Circuit"),'c',"plateGrafeno"}));//reactor water provider
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Reactor,1,5),new Object[]{"ooo","lml","ooo",'o',"plateLead",'m',new ItemStack(Chasis,1,1),'l',CopperPipe}));//reactor steam extractor
-		
-		
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Turbine,1),new Object[]{"xrx","iri","xrx",'x',"plateGrafeno",'i',Blocks.glass,'r',ItemName.get("Fan")}));//turbine
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(DiamondGlass,6),new Object[]{"xx","xx",'x',"plateDiamond"}));//diamond glass
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Pump,1),new Object[]{"xpx","ptp","mpt",'p',"plateIron",'t',CopperPipe,'m',ItemName.get("Motor")}));//pump
-		
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Reactor,1,0),new Object[]{"lll","lml","lll",'l',"plateLead",'m',new ItemStack(Chasis,1,2)}));																//reactor
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Reactor,4,1),new Object[]{"olo","lml","olo",'l',"plateLead",'m',new ItemStack(Chasis,1,1)}));																//reactor wall
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Reactor,1,2),new Object[]{"olo","lml","olo",'o',"plateLead",'l',Blocks.glass_pane}));																		//reactor tank
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Reactor,1,3),new Object[]{"olo","lml","olo",'l',"plateLead",'m',ItemName.get("Circuit"),'o',"plateGrafeno"}));												//reactor controller
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Reactor,1,4),new Object[]{"clo","lml","olc",'l',"plateLead",'m',new ItemStack(Chasis,1,1),'o',ItemName.get("Circuit"),'c',"plateGrafeno"}));				//reactor water provider
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Reactor,1,5),new Object[]{"ooo","lml","ooo",'o',"plateLead",'m',new ItemStack(Chasis,1,1),'l',CopperPipe}));												//reactor steam extractor
+
+		//storage
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Storage,1,0),new Object[]{"ccc","aaa","ccc",'a',ItemName.get("ElectricCell"),'c',"plateGrafeno"}));														//storage mk1
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Storage,1,1),new Object[]{"cpc","ama","cpc",'m',new ItemStack(Chasis,1,1),'c',"plateGrafeno",'p',"plateSilver",'a',ItemName.get("MediumElectricCell")}));	//storage mk2
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Storage,1,2),new Object[]{"cpc","ama","cpc",'m',new ItemStack(Chasis,1,2),'c',"plateGrafeno",'p',"plateSilver",'a',ItemName.get("BigElectricCell")}));		//storage mk3
+
 		//items
-		
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(MicroRegistry.PlaneCable,3), new Object[]{"ttt","sss","ttt",'s',ItemName.get("SilverCable"),'t',Items.string}));//plane cable
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(MicroRegistry.BigCable,3),new Object[]{"ttt","tst","ttt",'s',"plateSilver",'t',Items.string}));//Big cable
-		
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("UpgradeBase"),4),new Object[]{"iii","ici","iii",'i',"plateIron",'c',ItemName.get("Circuit")}));//upgrade base
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("SpeedUpgrade"),1),new Object[]{"iii","ici","iii",'i',"plateSilver",'c',ItemName.get("UpgradeBase")}));//speed upgrade
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("MiningUpgrade"),2),new Object[]{"iii","ici","iii",'i',"plateGold",'c',ItemName.get("UpgradeBase")}));//mining upgrade
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("RangeUpgrade"),3),new Object[]{"iii","ici","iii",'i',"plateRedstone",'c',ItemName.get("UpgradeBase")}));//range upgrade
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("AutoEjectUpgrade"),1),new Object[]{"iii","ici","iii",'i',"plateTin",'c',ItemName.get("UpgradeBase")}));//auto eject upgrade
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("FortuneUpgrade"),1),new Object[]{"iii","ici","iii",'i',"plateDiamond",'c',ItemName.get("UpgradeBase")}));//fortune upgrade
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("Dynamo"),1),new Object[]{"sa ","iii","sa ",'i',"ingotIron",'s',"ingotSilver",'a',"ingotAluminum"}));											//dynamo
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("Fan"),1), new Object[]{"rxr","xgx","rxr",'g',"plateGrafeno",'r',"itemRubber"}));																//fan
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("AluminumGear"),1), new Object[]{"rxr","xgx","rxr",'x',"plateAluminum",'g',"gearStone"}));													//gear
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("SulfuricAcid"),1),new Object[]{"ws",'w',Items.potionitem,'s',"dustSulfur"}));																//sulfuric acid
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("ElectricCell"),1),new Object[]{"cal",'c',"plateCopper",'l',"plateLead",'a',ItemName.get("SulfuricAcid")}));									//electric cell
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("MediumElectricCell"),1),new Object[]{"ccc","ccc","ccc",'c',ItemName.get("ElectricCell")}));													//medium electric cell
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("BigElectricCell"),1),new Object[]{"ccc","ccc","ccc",'c',ItemName.get("MediumElectricCell")}));												//big electric cell
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Items.gunpowder,3),new Object[]{"cs",'c',Items.coal,'s',"dustSulfur"}));																					//gunpowder
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("Battery"),1),new Object[]{"ese","clc","glg",'s',"plateSilver",'l',ItemName.get("ElectricCell"),'c',"plateCopper",'g',"plateGrafeno"}));		//battery
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("Tablet"),1),new Object[]{"gga","gga","aaa",'g',"blockGlass",'a',"ingotAluminum"}));															//tablet
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("AdvCircuit"),1), new Object[]{"hph","hah","hph",'h',ItemName.get("SilverCable"),'a',"plateSilicon",'p',"plateDiamond"}));					//adv circuit
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("Motor"),1), new Object[]{"rc ","iii","rc ",'c',ItemName.get("Coil"),'r', "plateSilver",'i',"plateIron"}));									//motor
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("Coil"),1), new Object[]{"r","p","r",'p',"plateIron",'r',"plateRedstone"}));																	//redstone coil
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("Circuit"),1),new Object[]{"igi","iri","igi",'g',"plateGrafeno",'r',"plateRedstone",'i',Items.redstone}));									//Circuit
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("Linker"),1),new Object[]{"iio","iio","oox",'i',"plateIron",'x',"plateRedstone"}));															//Linker
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("RadioniteCell"),1),new Object[]{"ioi","ioi","ioi",'i',"plateIron",'o',"plateRadionite"}));													//Radionite Cell
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("Ingot"),1,0),new Object[]{"i",'i',"ingotAluminium"}));																						//aluminium change
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("GrafenoPlate"),1),new Object[]{"iii","iii","iii",'i',"plateGrafeno"}));																		//plate grafeno
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("LasserSword"),1),new Object[]{"c","c","i",'i',"plateObalti",'c',"plateDiamond"}));															//sword
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("HeatCoil"),1), new Object[]{"pp","pp",'p',"plateLead"}));																					//heat coil
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("Dust"),3,5), new Object[]{"abc",'a',"dustObsidian",'b',"dustAluminum",'c',"dustTin"}));														//obalti
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("Bottle"),8,0), new Object[]{"xcx","cxc","xcx",'c',"plastic"}));																				//bottle
 
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("Linker"),1),new Object[]{"iio","iio","oox",'i',"plateIron",'x',"plateRedstone"}));//Linker
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("RadioniteCell"),1),new Object[]{"ioi","ioi","ioi",'i',"plateIron",'o',"plateRadionite"}));//Radionite Cell
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(BlockManager.Misc,1,0),new Object[]{"iii","iii","iii",'i',ItemName.get("Radionite")}));//Radionite block
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("Circuit"),1),new Object[]{"igi","iri","igi",'g',"plateGrafeno",'r',"plateRedstone",'i',Items.redstone}));//Circuit
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(BlockManager.stoneblock,4,1),new Object[]{"ii","ii",'i',new ItemStack(BlockManager.stoneblock,4,0)}));//Deco block
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(BlockManager.stoneblock,4,3),new Object[]{"ii","ii",'i',new ItemStack(BlockManager.stoneblock,4,2)}));//Deco block
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("GrafenoPlate"),1),new Object[]{"iii","iii","iii",'i',"plateGrafeno"}));//plate grafeno
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("LasserSword"),1),new Object[]{"c","c","i",'i',"plateObalti",'c',"plateDiamond"}));//sword
+		//upgrades
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("UpgradeBase"),4),new Object[]{"iii","ici","iii",'i',"plateIron",'c',ItemName.get("Circuit")}));												//upgrade base
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("SpeedUpgrade"),1),new Object[]{"iii","ici","iii",'i',"plateSilver",'c',ItemName.get("UpgradeBase")}));										//speed upgrade
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("MiningUpgrade"),1),new Object[]{"iii","ici","iii",'i',"plateGold",'c',ItemName.get("UpgradeBase")}));										//mining upgrade
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("RangeUpgrade"),4),new Object[]{"iii","ici","iii",'i',"plateRedstone",'c',ItemName.get("UpgradeBase")}));										//range upgrade
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("AutoEjectUpgrade"),1),new Object[]{"iii","ici","iii",'i',"plateTin",'c',ItemName.get("UpgradeBase")}));										//auto eject upgrade
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("FortuneUpgrade"),1),new Object[]{"iii","ici","iii",'i',"plateDiamond",'c',ItemName.get("UpgradeBase")}));									//fortune upgrade
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("SilkTouchUpgrade"),1),new Object[]{"iui","ucu","iui",'i',Items.diamond,'u',Items.emerald,'c',ItemName.get("UpgradeBase")}));					//silktouch upgrade
 		
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Tank,1),new Object[]{"isi","sxs","isi",'i',"plateCopper",'s',"paneGlass"}));//fluid tank
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(MultiTank,4),new Object[]{"pgp","ggg","pgp",'p',"plateAluminum",'g',"blockGlass"}));//MultiTank
+		//cables
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(MicroRegistry.PlaneCable,2), new Object[]{"ttt","tst","ttt",'s',ItemName.get("SilverCable"),'t',Items.string}));											//plane cable (ribbon)
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(MicroRegistry.BigCable,1),new Object[]{"ttt","tst","ttt",'s',"plateSilver",'t',Items.string}));															//Big cable
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(MicroRegistry.PlaneCable,6), new Object[]{"ttt","sss","ttt",'s',ItemName.get("SilverCable"),'t',Blocks.wool}));											//plane cable (ribbon)
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(MicroRegistry.BigCable,3),new Object[]{"ttt","sss","ttt",'s',"plateSilver",'t',Blocks.wool}));																//Big cable
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(MicroRegistry.PlaneCable,12), new Object[]{"ttt","sss","ttt",'s',ItemName.get("SilverCable"),'t',ItemName.get("Rubber_bulcanized")}));						//plane cable (ribbon)
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(MicroRegistry.BigCable,8),new Object[]{"ttt","tst","ttt",'s',"plateSilver",'t',ItemName.get("Rubber_bulcanized")}));															//Big cable
 
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("SulfuricAcid"),1),new Object[]{"ws",'w',Items.potionitem,'s',"dustSulfur"}));//sulfuric acid
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("ElectricCell"),1),new Object[]{"cal",'c',"plateCopper",'l',"plateLead",'a',ItemName.get("SulfuricAcid")}));//electric cell
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("MediumElectricCell"),1),new Object[]{"ccc","ccc","ccc",'c',ItemName.get("ElectricCell")}));//medium electric cell
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("BigElectricCell"),1),new Object[]{"ccc","ccc","ccc",'c',ItemName.get("MediumElectricCell")}));//big electric cell
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Items.gunpowder,3),new Object[]{"cs",'c',Items.coal,'s',"dustSulfur"}));//gunpowder
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("Battery"),1),new Object[]{"ese","clc","glg",'s',"plateSilver",'l',ItemName.get("ElectricCell"),'c',"plateCopper",'g',"plateGrafeno"}));//battery
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("Tablet"),1),new Object[]{"gga","gga","aaa",'g',"blockGlass",'a',"ingotAluminum"}));//tablet
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("Tablet"),1),new Object[]{"gga","gga","aaa",'g',"blockGlass",'a',"ingotAluminium"}));//tablet
-		
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("Motor"),1), new Object[]{"rc ","iii","rc ",'c',ItemName.get("Coil"),'r', "plateSilver",'i',"plateIron"}));//motor
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(SolarPanel,1), new Object[]{"hhh","aaa","bbb",'h',"plateSilicon",'a',"plateSilver",'b', "plateGrafeno"}));//solarPanel
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("AdvCircuit"),1), new Object[]{"hph","hah","hph",'h',ItemName.get("SilverCable"),'a',"plateSilicon",'p',"plateDiamond"}));//adv circuit
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("Fan"),1), new Object[]{"opo","ppp","opo",'p',"plateGrafeno"}));//fan
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("Coil"),2), new Object[]{"r","p","r",'p',"plateIron",'r',"plateRedstone"}));//redstone coil
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("HeatCoil"),1), new Object[]{"pp","pp",'p',"plateLead"}));//heat coil
-
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("Dust"),3,5), new Object[]{"abc",'a',"dustObsidian",'b',"dustAluminum",'c',"dustTin"}));//obalti
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("Dust"),3,5), new Object[]{"abc",'a',"dustObsidian",'b',"dustAluminium",'c',"dustTin"}));//obalti
-		
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Refinery,18), new Object[]{"cbc","btb","cbc",'c',"plateGrafeno",'b',new ItemStack(Chasis,1,1),'t',Tank}));//refinery base
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Refinery,18,1), new Object[]{"ccc","ctc","ccc",'c',"plateCopper",'t',CopperPipe}));//refinerystruc
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("Bottle"),8,0), new Object[]{"xcx","cxc","xcx",'c',"plastic"}));//bottle
-		
 		if(Control.isMicroPartActived)
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(CableBlock,6), new Object[]{"sss","lll","sss",'s',Items.string,'l',ItemName.get("SilverCable")}));
+
+		//deco
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(CovedGlass,4),new Object[]{"oo","oo",'o',"plateSilicon"}));																								//coved glass
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(DiamondGlass,6),new Object[]{"xx","xx",'x',"plateDiamond"}));																								//diamond glass
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(BlockManager.stoneblock,4,1),new Object[]{"ii","ii",'i',new ItemStack(BlockManager.stoneblock,4,0)}));														//stoneblock black bricks
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(BlockManager.stoneblock,4,3),new Object[]{"ii","ii",'i',new ItemStack(BlockManager.stoneblock,4,2)}));														//stoneblock white bricks
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(MultiTank,4),new Object[]{"pgp","ggg","pgp",'p',"plateAluminum",'g',"blockGlass"}));																		//MultiTank
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(BlockManager.Misc,1,0),new Object[]{"iii","iii","iii",'i',ItemName.get("Radionite")}));																	//Radionite block
+
+
+
 		Smelting();//furnace recipes
 		CVD();
 		Purifier();
@@ -150,23 +146,19 @@ public class CraftManager {
 		Assembly();
 		Laminator();
 
-		//presurizer
-//		Pressurizer_Recipes.addRecipe(new Pressurizer_Recipes(new ItemStack(ItemManager.ItemName.get("Plate"),1,8), new ItemStack(ItemManager.ItemName.get("Plate"),1,8), new ItemStack(ItemManager.ItemName.get("Plate"),1,8), new ItemStack(DiamondGlass,4)));
-//		Pressurizer_Recipes.addRecipe(new Pressurizer_Recipes(new ItemStack(ItemManager.ItemName.get("Plate"),1,9), new ItemStack(ItemManager.ItemName.get("Plate"),1,9), new ItemStack(ItemManager.ItemName.get("Plate"),1,9), new ItemStack(ItemName.get("GrafenoPlate"),1)));
-
 		//fermenter recipes
 		Fermenter_Recipes.recipes.put(Items.sugar, 75);
 		Fermenter_Recipes.recipes.put(Items.apple, 25);
 		Fermenter_Recipes.recipes.put(Items.wheat, 100);
-		
+
 		//liquid recipes
 		Boiler_Recipes.recipes.put("juice", "gas_ethanol");
 		Boiler_Recipes.recipes.put("oil", "gas_oil");
 		Boiler_Recipes.recipes.put("water", "steam");
-		
+
 		Cooling_Recipes.recipes.add(new Cooling_Recipes(FluidRegistry.getFluidStack("gas_oil", 100), FluidRegistry.getFluidStack("plastic", 40), FluidRegistry.getFluidStack("fuel", 60), FluidRegistry.getFluidStack("gasoline", 10)));
 		Cooling_Recipes.recipes.add(new Cooling_Recipes(FluidRegistry.getFluidStack("gas_ethanol", 100), FluidRegistry.getFluidStack("bioethanol", 80), FluidRegistry.getFluidStack("water", 9), FluidRegistry.getFluidStack("water", 1)));
-		
+
 		FluidGeneratorEntity.fuels.put("fuel", 2);
 		FluidGeneratorEntity.fuels.put("gasoline", 3);
 		FluidGeneratorEntity.fuels.put("bioethanol", 1);
@@ -186,7 +178,7 @@ public class CraftManager {
 	}
 
 	public static void Smelting(){
-		
+
 		for(int r = 0;r < 5;r++)//dust to ingots
 			GameRegistry.addSmelting(new ItemStack(ItemName.get("Dust"),1, r), new ItemStack(ItemName.get("Ingot"),1,r), 0.5f);
 		GameRegistry.addSmelting(new ItemStack(ItemName.get("Dust"),1, 6), new ItemStack(Items.iron_ingot,1), 0.5f);
@@ -198,23 +190,24 @@ public class CraftManager {
 		for(int r=0;r<5;r++)GameRegistry.addSmelting(new ItemStack(ItemName.get("MetalPlate"),1,r), new ItemStack(ItemName.get("Ingot"),1,r), 0.5f);
 		GameRegistry.addSmelting(new ItemStack(ItemName.get("MetalPlate"),1,5), new ItemStack(Items.iron_ingot), 0.5f);
 		GameRegistry.addSmelting(new ItemStack(ItemName.get("MetalPlate"),1,6), new ItemStack(Items.gold_ingot), 0.5f);
-		
+
 		//other
 		GameRegistry.addSmelting(ItemName.get("RawMeal"), new ItemStack(ItemName.get("ProcesedFood")), 0.35f);
 	}
 
-	
+
 	public static void CVD(){
 		//cvd recipes
 		CVD_Recipe.addRecipe(new CVD_Recipe(new ItemStack(Items.coal), new ItemStack(Items.coal),new ItemStack(ItemName.get("UnorganicPlate"),2,1)));//grafeno
 		CVD_Recipe.addRecipe(new CVD_Recipe(new ItemStack(Items.coal,1,1), new ItemStack(Items.coal,1,1),new ItemStack(ItemName.get("UnorganicPlate"),2,1)));//grafeno
 		CVD_Recipe.addRecipe(new CVD_Recipe(new ItemStack(Items.iron_ingot), new ItemStack(Items.redstone),new ItemStack(ItemName.get("UnorganicPlate"),1,3)));//restone plate
-		CVD_Recipe.addRecipe(new CVD_Recipe(new ItemStack(ItemName.get("Radionite"),1), new ItemStack(ItemName.get("Radionite"),1),new ItemStack(ItemName.get("UnorganicPlate"),1,2)));//radionite plate
+		CVD_Recipe.addRecipe(new CVD_Recipe(new ItemStack(ItemName.get("Radionite"),1), new ItemStack(ItemName.get("Radionite"),1),new ItemStack(ItemName.get("UnorganicPlate"),1,4)));//radionite plate
 		CVD_Recipe.addRecipe(new CVD_Recipe(new ItemStack(ItemName.get("GrafenoPlate")), new ItemStack(ItemName.get("GrafenoPlate")),new ItemStack(ItemName.get("Dust"),1,8)));//diamond dust
 		CVD_Recipe.addRecipe(new CVD_Recipe(new ItemStack(ItemName.get("Dust"),1,0), new ItemStack(stoneblock,1,0),new ItemStack(stoneblock,1,2)));
 		CVD_Recipe.addRecipe(new CVD_Recipe(new ItemStack(ItemName.get("Sulfur"),1,0), new ItemStack(ItemName.get("Rubber"),1,0),new ItemStack(ItemName.get("Rubber_bulcanized"),1,0)));
+		CVD_Recipe.addRecipe(new CVD_Recipe(new ItemStack(Blocks.obsidian,1,0), new ItemStack(Blocks.obsidian,1,0),new ItemStack(ItemName.get("UnorganicPlate"),2,5)));
 	}
-	
+
 	public static void Purifier(){
 		//purifier recipes
 		Purifier_Recipe.addRecipe(new Purifier_Recipe(new ItemStack(Blocks.sand), new ItemStack(ItemName.get("RawSilicon"),1)));
@@ -229,8 +222,8 @@ public class CraftManager {
 		Purifier_Recipe.addRecipe(new Purifier_Recipe(new ItemStack(ItemName.get("Chunk"),1,6),new ItemStack(ItemName.get("Dust"),1,7)));
 		Purifier_Recipe.addRecipe(new Purifier_Recipe(new ItemStack(ItemName.get("Chunk"),1,7),new ItemStack(ItemName.get("Radionite"),1)));
 	}
-	
-	
+
+
 	public static void Cutter(){
 		//cuter recipes
 		Cutter_Recipe.addRecipe(new Cutter_Recipe(new ItemStack(Items.reeds), new ItemStack(Items.sugar,2)));
@@ -265,13 +258,13 @@ public class CraftManager {
 	}
 	public static void Assembly(){
 		//assembly recipes
-//		Assembly_Recipes.addRecipe(new Assembly_Recipes(new ItemStack(ItemName.get("Motor"),1), new Object[]{"rc ","iii","rc ",'c',ItemName.get("Coil"),'r', new ItemStack(ItemManager.ItemName.get("Plate"),1,4),'i',new ItemStack(ItemName.get("Plate"),1,6)}));
-//		Assembly_Recipes.addRecipe(new Assembly_Recipes(new ItemStack(ItemName.get("Battery"),1), new Object[]{"hah","hah","hah",'h',new ItemStack(ItemName.get("Plate"),1,0),'a',new ItemStack(ItemName.get("Plate"),1,5)}));
-//		Assembly_Recipes.addRecipe(new Assembly_Recipes(new ItemStack(SolarPanel,1), new Object[]{"hhh","aaa","bbb",'h',new ItemStack(ItemName.get("Plate"),1,10),'a',new ItemStack(ItemName.get("Plate"),1,5),'b', new ItemStack(ItemManager.ItemName.get("Plate"),1,4)}));
-//		Assembly_Recipes.addRecipe(new Assembly_Recipes(new ItemStack(ItemName.get("AdvCircuit"),1), new Object[]{"hph","hah","hph",'h',new ItemStack(MicroRegistry.PlaneCable,1),'a',new ItemStack(ItemName.get("Plate"),1,10),'p',new ItemStack(ItemManager.ItemName.get("Plate"),1,8)}));
-//		Assembly_Recipes.addRecipe(new Assembly_Recipes(new ItemStack(ItemName.get("Fan"),1), new Object[]{"opo","ppp","opo",'p',new ItemStack(ItemManager.ItemName.get("Plate"),1,9)}));
-//		Assembly_Recipes.addRecipe(new Assembly_Recipes(new ItemStack(ItemName.get("Coil"),2), new Object[]{"rrr","ppp","rrr",'p',new ItemStack(ItemManager.ItemName.get("Plate"),1,6),'r',new ItemStack(ItemManager.ItemName.get("Plate"),1,11)}));
-//		Assembly_Recipes.addRecipe(new Assembly_Recipes(new ItemStack(ItemName.get("HeatCoil"),1), new Object[]{"pp ","pp ","   ",'p',new ItemStack(ItemManager.ItemName.get("Plate"),1,5)}));
+		//		Assembly_Recipes.addRecipe(new Assembly_Recipes(new ItemStack(ItemName.get("Motor"),1), new Object[]{"rc ","iii","rc ",'c',ItemName.get("Coil"),'r', new ItemStack(ItemManager.ItemName.get("Plate"),1,4),'i',new ItemStack(ItemName.get("Plate"),1,6)}));
+		//		Assembly_Recipes.addRecipe(new Assembly_Recipes(new ItemStack(ItemName.get("Battery"),1), new Object[]{"hah","hah","hah",'h',new ItemStack(ItemName.get("Plate"),1,0),'a',new ItemStack(ItemName.get("Plate"),1,5)}));
+		//		Assembly_Recipes.addRecipe(new Assembly_Recipes(new ItemStack(SolarPanel,1), new Object[]{"hhh","aaa","bbb",'h',new ItemStack(ItemName.get("Plate"),1,10),'a',new ItemStack(ItemName.get("Plate"),1,5),'b', new ItemStack(ItemManager.ItemName.get("Plate"),1,4)}));
+		//		Assembly_Recipes.addRecipe(new Assembly_Recipes(new ItemStack(ItemName.get("AdvCircuit"),1), new Object[]{"hph","hah","hph",'h',new ItemStack(MicroRegistry.PlaneCable,1),'a',new ItemStack(ItemName.get("Plate"),1,10),'p',new ItemStack(ItemManager.ItemName.get("Plate"),1,8)}));
+		//		Assembly_Recipes.addRecipe(new Assembly_Recipes(new ItemStack(ItemName.get("Fan"),1), new Object[]{"opo","ppp","opo",'p',new ItemStack(ItemManager.ItemName.get("Plate"),1,9)}));
+		//		Assembly_Recipes.addRecipe(new Assembly_Recipes(new ItemStack(ItemName.get("Coil"),2), new Object[]{"rrr","ppp","rrr",'p',new ItemStack(ItemManager.ItemName.get("Plate"),1,6),'r',new ItemStack(ItemManager.ItemName.get("Plate"),1,11)}));
+		//		Assembly_Recipes.addRecipe(new Assembly_Recipes(new ItemStack(ItemName.get("HeatCoil"),1), new Object[]{"pp ","pp ","   ",'p',new ItemStack(ItemManager.ItemName.get("Plate"),1,5)}));
 	}
 
 }

@@ -49,7 +49,7 @@ public class Boiler extends BlockConductor{
 	}
 
 	public void registerBlockIcons(IIconRegister iconRegister){
-		this.blockIcon = iconRegister.registerIcon("ultratech:boiler");
+		this.blockIcon = iconRegister.registerIcon("ultratech:chasis0");
 	}
 	
 	public boolean isOpaqueCube()

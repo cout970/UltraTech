@@ -19,10 +19,10 @@ public class MiningUpgrade extends UT_Item{
 		if(par3World.getTileEntity(x, y, z) instanceof MinerEntity){
 
 			MinerEntity te = (MinerEntity) par3World.getTileEntity(x, y, z);
-			if(te.speed < 50){	
-				te.speed += 10;
+			if(te.speedUpgrades < 5){	
 				te.hasSpeedUpgrades = true;
 				te.speedUpgrades += 1;
+				te.maxProgres = 10 - te.speedUpgrades*2;
 				par1ItemStack.splitStack(1);
 				return true;
 			}

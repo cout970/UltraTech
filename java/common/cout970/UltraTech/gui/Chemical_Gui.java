@@ -66,7 +66,7 @@ public class Chemical_Gui extends MachineGuiBase{
 		int xStart = (width - xSize) / 2;
 		int yStart = (height - ySize) / 2;
 		//name
-		this.drawCenteredString(fontRendererObj, "Chemical Plant", xStart+99, yStart+6, UT_Utils.RGBtoInt(255, 255, 255));
+		this.drawCenteredString(fontRendererObj, "Chemical Plant", 99, 6, UT_Utils.RGBtoInt(255, 255, 255));
 		
 		if(UT_Utils.isIn(x, y, xStart+14, yStart+15, 25, 50)){
         	List<String> energy = new ArrayList<String>();

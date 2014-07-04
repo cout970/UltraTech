@@ -59,7 +59,7 @@ public class CompatibilityManager {
 		
 		OreDictionary.registerOre("dustSulfur", new ItemStack(ItemManager.ItemName.get("Sulfur")));
 		OreDictionary.registerOre("rawRubber", new ItemStack(ItemManager.ItemName.get("Rubber")));
-		OreDictionary.registerOre("plastic", new ItemStack(ItemManager.ItemName.get("Plastic")));
+		OreDictionary.registerOre("itemPlastic", new ItemStack(ItemManager.ItemName.get("Plastic")));
 		OreDictionary.registerOre("itemRubber", new ItemStack(ItemManager.ItemName.get("Rubber_bulcanized")));
 	}
 

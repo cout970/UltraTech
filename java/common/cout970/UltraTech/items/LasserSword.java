@@ -25,13 +25,13 @@ public class LasserSword extends ItemPower{
 	
 
 	public LasserSword(String name){
-		super(1250);
+		super(16000);
 		setCreativeTab(UltraTech.ResourceTab);
 		setUnlocalizedName("LasserSword");
 	}
 
 	public void registerIcons(IIconRegister iconRegister){
-		this.itemIcon = iconRegister.registerIcon("ultratech:lassersword");
+		this.itemIcon = iconRegister.registerIcon("ultratech:cable");
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -47,8 +47,8 @@ public class LasserSword extends ItemPower{
 
 	public boolean hitEntity(ItemStack i, EntityLivingBase par2EntityLivingBase, EntityLivingBase par3EntityLivingBase)
 	{
-		if(((IStorageItem)i.getItem()).getPower(i) >= 25){
-			((IStorageItem)i.getItem()).removePower(i, 25);
+		if(((IStorageItem)i.getItem()).getPower(i) >= 500){
+			((IStorageItem)i.getItem()).removePower(i, 500);
 		}else{
 			return false;
 		}
@@ -71,8 +71,8 @@ public class LasserSword extends ItemPower{
 	{
 		if ((double)par3.getBlockHardness(par2World, par4, par5, par6) != 0.0D)
 		{
-			if(((IStorageItem)par1ItemStack.getItem()).getPower(par1ItemStack) >= 25){
-				((IStorageItem)par1ItemStack.getItem()).removePower(par1ItemStack, 25);
+			if(((IStorageItem)par1ItemStack.getItem()).getPower(par1ItemStack) >= 100){
+				((IStorageItem)par1ItemStack.getItem()).removePower(par1ItemStack, 100);
 			}else{
 				return false;
 			}

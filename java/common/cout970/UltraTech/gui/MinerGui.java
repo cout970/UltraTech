@@ -40,7 +40,7 @@ public class MinerGui extends GuiContainer{
 		this.drawTexturedModalRect(xStart+9, yStart+105+(50-p), 0, 0, 25, p);
 		
 		//speed
-		this.drawCenteredString(fontRendererObj, (entity.speed/10)+"x", xStart+21, yStart+167, UT_Utils.RGBtoInt(255, 255, 255));
+		this.drawCenteredString(fontRendererObj, (entity.speedUpgrades)+"x", xStart+21, yStart+167, UT_Utils.RGBtoInt(255, 255, 255));
 		
 		//range
 		this.drawCenteredString(fontRendererObj, (entity.height*2+1)+"x"+(entity.widht*2+1), xStart+225, yStart+167, UT_Utils.RGBtoInt(255, 255, 255));

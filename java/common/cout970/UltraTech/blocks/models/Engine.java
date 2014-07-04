@@ -46,7 +46,7 @@ public class Engine extends BlockConductor{
 	}
 
 	public void registerBlockIcons(IIconRegister iconRegister){
-		this.blockIcon = iconRegister.registerIcon("ultratech:engine");
+		this.blockIcon = iconRegister.registerIcon("ultratech:chasis1");
 	}
 
 	public void onNeighborBlockChange(World w, int x, int y, int z, Block side){

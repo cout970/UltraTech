@@ -7,6 +7,7 @@ import common.cout970.UltraTech.TileEntities.fluid.BoilerEntity;
 import common.cout970.UltraTech.TileEntities.intermod.DynamoEntity;
 import common.cout970.UltraTech.TileEntities.intermod.EngineEntity;
 import common.cout970.UltraTech.core.UltraTech;
+import common.cout970.UltraTech.misc.IUpdatedEntity;
 import common.cout970.UltraTech.proxy.ClientProxy;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -43,9 +44,8 @@ public class Dynamo extends BlockConductor{
 	}
 
 	public void onNeighborBlockChange(World w, int x, int y, int z, Block side){
-		DynamoEntity m = (DynamoEntity) w.getTileEntity(x, y, z);
-		if(m.getPower().getNetwork() != null)m.getPower().getNetwork().refresh();
-		m.updateReceptor();
+		IUpdatedEntity m = (IUpdatedEntity) w.getTileEntity(x, y, z);
+		m.onNeigUpdate();
 	}
 	
 	@Override

@@ -1,4 +1,4 @@
-package common.cout970.UltraTech.Tiers.blocks;
+package common.cout970.UltraTech.blocks.tiers;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -30,16 +30,14 @@ public class CutterT2 extends BlockConductor{
 	}
 	
 	public void registerBlockIcons(IIconRegister IR){
-		icons = new IIcon[3];
+		icons = new IIcon[2];
 		icons[0] = IR.registerIcon("ultratech:chasis1");
 		icons[1] = IR.registerIcon("ultratech:machines/cutter_off_2");
-		icons[2] = IR.registerIcon("ultratech:machines/cutter_on_2");
 	}
 	
 	public IIcon getIcon(int side, int meta){
 		if(side == 0 || side == 1)return icons[0];
-		if(meta == 0)return icons[1];
-		return icons[2];
+		return icons[1];
 	}
 	
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer p, int a, float b, float c, float d){

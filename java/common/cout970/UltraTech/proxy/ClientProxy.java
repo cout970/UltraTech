@@ -37,6 +37,7 @@ import common.cout970.UltraTech.machines.renders.items.RenderBatteryItem;
 import common.cout970.UltraTech.machines.renders.items.RenderBoilerItem;
 import common.cout970.UltraTech.machines.renders.items.RenderDynamoItem;
 import common.cout970.UltraTech.machines.renders.items.RenderEngineItem;
+import common.cout970.UltraTech.machines.renders.items.RenderPipeItem;
 import common.cout970.UltraTech.machines.renders.items.RenderPumpItem;
 import common.cout970.UltraTech.machines.renders.items.RenderSolarItem;
 import common.cout970.UltraTech.machines.renders.items.RenderSwordItem;
@@ -63,6 +64,7 @@ public class ClientProxy extends CommonProxy{
 	public static int batteryRenderPass;
 	public static int dynamoRenderPass;
 	public static int pumpRenderPass;
+	public static int pipeRenderPass;
 
 	@Override
 	public void registerRenders() {
@@ -118,6 +120,9 @@ public class ClientProxy extends CommonProxy{
 		//pump
 		  pumpRenderPass = RenderingRegistry.getNextAvailableRenderId();
 		  MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockManager.Pump), new RenderPumpItem());
+		//pipe
+		  pipeRenderPass = RenderingRegistry.getNextAvailableRenderId();
+		  MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockManager.CopperPipe), new RenderPipeItem());
 		  
 		  
 		  //Items

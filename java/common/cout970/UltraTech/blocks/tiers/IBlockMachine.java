@@ -1,4 +1,4 @@
-package common.cout970.UltraTech.Tiers.blocks;
+package common.cout970.UltraTech.blocks.tiers;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;

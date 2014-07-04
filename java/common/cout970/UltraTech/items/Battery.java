@@ -24,7 +24,7 @@ public class Battery extends ItemPower{
 	private String name;
 	
 	public Battery(String name) {
-		super(12800);
+		super(48000);
 		setUnlocalizedName(name);
 		setCreativeTab(UltraTech.ResourceTab);
 		setMaxStackSize(64);

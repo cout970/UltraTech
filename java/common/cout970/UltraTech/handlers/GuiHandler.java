@@ -24,6 +24,7 @@ import common.cout970.UltraTech.TileEntities.electric.tiers.Heater_Entity;
 import common.cout970.UltraTech.TileEntities.electric.tiers.LaminatorT1_Entity;
 import common.cout970.UltraTech.TileEntities.electric.tiers.PurifierT1_Entity;
 import common.cout970.UltraTech.TileEntities.fluid.BoilerEntity;
+import common.cout970.UltraTech.TileEntities.intermod.DynamoEntity;
 import common.cout970.UltraTech.TileEntities.intermod.EngineEntity;
 import common.cout970.UltraTech.TileEntities.utility.CrafterEntity;
 import common.cout970.UltraTech.TileEntities.utility.HologramEmiterEntity;
@@ -38,6 +39,7 @@ import common.cout970.UltraTech.containers.ClimateStationContainer;
 import common.cout970.UltraTech.containers.ControllerContainer;
 import common.cout970.UltraTech.containers.CrafterContainer;
 import common.cout970.UltraTech.containers.CutterContainer;
+import common.cout970.UltraTech.containers.Dynamo_Container;
 import common.cout970.UltraTech.containers.EngineContainer;
 import common.cout970.UltraTech.containers.FermenterContainer;
 import common.cout970.UltraTech.containers.FluidGenContainer;
@@ -63,6 +65,7 @@ import common.cout970.UltraTech.gui.ClimateStation_Gui;
 import common.cout970.UltraTech.gui.ControllerGui;
 import common.cout970.UltraTech.gui.Crafter_Gui;
 import common.cout970.UltraTech.gui.Cutter_Gui;
+import common.cout970.UltraTech.gui.Dynamo_Gui;
 import common.cout970.UltraTech.gui.EngineGui;
 import common.cout970.UltraTech.gui.Fermenter_Gui;
 import common.cout970.UltraTech.gui.FluidGenGui;
@@ -188,6 +191,10 @@ public class GuiHandler implements IGuiHandler{
 		if(tileEntity instanceof ChemicalPlant_Entity){
 			return new Chemical_Container(player.inventory, (ChemicalPlant_Entity) tileEntity);
 		}
+		//Dynamo
+		if(tileEntity instanceof DynamoEntity){
+			return new Dynamo_Container(player.inventory, (DynamoEntity) tileEntity);
+		}
 		return null;
 	}
 
@@ -297,6 +304,10 @@ public class GuiHandler implements IGuiHandler{
 		//Chemical
 		if(tileEntity instanceof ChemicalPlant_Entity){
 			return new Chemical_Gui(new Chemical_Container(player.inventory, (ChemicalPlant_Entity) tileEntity),(ChemicalPlant_Entity) tileEntity);
+		}
+		//Dynamo
+		if(tileEntity instanceof DynamoEntity){
+			return new Dynamo_Gui(new Dynamo_Container(player.inventory,tileEntity),(DynamoEntity) tileEntity);
 		}
 		return null;
 	}

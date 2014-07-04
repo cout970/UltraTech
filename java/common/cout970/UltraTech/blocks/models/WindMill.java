@@ -54,7 +54,7 @@ public class WindMill extends BlockConductor{
 	}
 
 	public void registerBlockIcons(IIconRegister iconRegister){
-		this.blockIcon = iconRegister.registerIcon("ultratech:windmill");
+		this.blockIcon = iconRegister.registerIcon("ultratech:chasis1");
 	}
 	
 	@Override

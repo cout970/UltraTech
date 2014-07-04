@@ -1,12 +1,14 @@
 package api.cout970.UltraTech.microparts;
 
 import common.cout970.UltraTech.core.UltraTech;
-
 import codechicken.lib.vec.BlockCoord;
 import codechicken.lib.vec.Vector3;
 import codechicken.multipart.JItemMultiPart;
 import codechicken.multipart.TMultiPart;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -18,8 +20,14 @@ public class ItemBigCableMultipart extends JItemMultiPart{
         super();
         setUnlocalizedName("UT_Big_cable");
         setCreativeTab(UltraTech.techTab);
-    }
+	}
 
+	@SideOnly(Side.CLIENT)
+	public void registerIcons(IIconRegister par1IconRegister)
+	{
+		this.itemIcon = par1IconRegister.registerIcon("ultratech:cable");
+	}
+	 
     @Override
     public boolean onItemUse(ItemStack stack, EntityPlayer player, World w, int x, int y, int z, int side, float f, float f2, float f3) {
     

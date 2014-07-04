@@ -24,6 +24,7 @@ import common.cout970.UltraTech.lib.Control;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.Fluid;
 
 public class Language {
 	
@@ -39,6 +40,10 @@ public class Language {
 			Language.put(((Block) obj).getUnlocalizedName(), name);
 		}else if(obj instanceof Item){
 			Language.put(((Item) obj).getUnlocalizedName(), name);
+		}else if(obj instanceof Fluid){
+			Language.put(((Fluid) obj).getUnlocalizedName(), name);
+		}else{
+			System.out.println("Exception: tipe not found in "+obj+" with name "+name);
 		}
 	}
 	
@@ -94,31 +99,34 @@ public class Language {
 		Language.addName(new ItemStack(Chasis,1,1), "Machine Chasis MK2");
 		Language.addName(new ItemStack(Chasis,1,2), "Machine Chasis MK3");
 		
-//		Language.addName(new ItemStack(Tier1,1,0), "Crafter");
-//		Language.addName(new ItemStack(Tier1,1,1), "Generator");
-//		Language.addName(new ItemStack(Tier1,1,2), "CVD");
-//		Language.addName(new ItemStack(Tier1,1,3), "3D Printer");
-//		Language.addName(new ItemStack(Tier1,1,4), "Charge Station");
-//		Language.addName(new ItemStack(Tier1,1,5), "Fermenter");
-//		Language.addName(new ItemStack(Tier1,1,6), "Cooling block");
-//		
-//		Language.addName(new ItemStack(Tier2,1,0), "Furnace");
-//		Language.addName(new ItemStack(Tier2,1,1), "Purifier");
-//		Language.addName(new ItemStack(Tier2,1,2), "Cutter");
-//		Language.addName(new ItemStack(Tier2,1,3), "Pressurizer WIP");
-//		Language.addName(new ItemStack(Tier2,1,4), "Fluid Firebox");
+		Language.addName(new ItemStack(Painter,1,0), "3D Painter");
+		Language.addName(new ItemStack(ChargeStation,1,0), "Charge Station");
+		Language.addName(new ItemStack(Fermenter,1,0), "Fermenter");
+		
+		Language.addName(new ItemStack(CVD_T1,1,0), "CVD T1");
+		Language.addName(new ItemStack(CVD_T2,1,0), "CVD T2");
+		Language.addName(new ItemStack(Purifier_T1,1,0), "Purifier T1");
+		Language.addName(new ItemStack(Purifier_T2,1,0), "Purifier T2");
+		Language.addName(new ItemStack(Cutter_T1,1,0), "Cutter T1");
+		Language.addName(new ItemStack(Cutter_T2,1,0), "Cutter T2");
+		Language.addName(new ItemStack(Furnace_T1,1,0), "Furnace T1");
+		Language.addName(new ItemStack(Furnace_T2,1,0), "Furnace T2");
+		Language.addName(new ItemStack(Laminator_T1,1,0), "Laminator T1");
+		Language.addName(new ItemStack(Laminator_T2,1,0), "Laminator T2");
+		Language.addName(new ItemStack(Generator_T1,1,0), "Generator T1");
+		Language.addName(new ItemStack(Generator_T2,1,0), "Generator T2");
 		
 		Language.addName(new ItemStack(Tier3,1,0), "Miner");
 		Language.addName(new ItemStack(Tier3,1,1), "Hologram Emiter");
 		Language.addName(new ItemStack(Tier3,1,2), "Precision Crafter");
 		Language.addName(new ItemStack(Tier3,1,3), "Climate Station");
-		Language.addName(new ItemStack(Tier3,1,4), "Tesseract");
+		Language.addName(new ItemStack(Tier3,1,4), "Energy Tesseract");
 		
 		Language.addName(new ItemStack(Storage,1,0), "Battery Tier1");
 		Language.addName(new ItemStack(Storage,1,1), "Battery Tier2");
 		Language.addName(new ItemStack(Storage,1,2), "Battery Tier3");
 		
-		Language.addName(new ItemStack(Refinery,1,0), "Refinery Base WIP");
+		Language.addName(new ItemStack(Refinery,1,0), "Refinery Base");
 		Language.addName(new ItemStack(Refinery,1,1), "Refinery Structure Block");
 		Language.addName(new ItemStack(Refinery,1,2), "Refinery Core");
 		Language.addName(new ItemStack(Refinery,1,3), "Refinery Structure Block");
@@ -144,7 +152,10 @@ public class Language {
 		Language.addName(Dynamo, "FT Dynamo");
 		Language.addName(MultiTank, "MultiTank WIP");
 		Language.addName(LavaGenerator, "Lava Generator");
-//		Language.addName(Laminator, "Laminator");
+		Language.addName(ChemicalPlant, "Chemical Plant");
+		Language.addName(Crafter, "Crafter");
+		Language.addName(Heater, "Heater");
+		Language.addName(AlienBlock, "Alien Block");
 		
 		if(!Control.isMicroPartActived)Language.addName(CableBlock, "Cable");
 	}

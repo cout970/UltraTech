@@ -8,18 +8,6 @@ import net.minecraft.block.material.Material;
 import api.cout970.UltraTech.MeVpower.Machine;
 import api.cout970.UltraTech.microparts.CableBlock;
 import api.cout970.UltraTech.microparts.CableEntity;
-import common.cout970.UltraTech.Tiers.blocks.ChemicalVaporDesintegrationT1;
-import common.cout970.UltraTech.Tiers.blocks.ChemicalVaporDesintegrationT2;
-import common.cout970.UltraTech.Tiers.blocks.CoalGeneratorT1;
-import common.cout970.UltraTech.Tiers.blocks.CoalGeneratorT2;
-import common.cout970.UltraTech.Tiers.blocks.CutterT1;
-import common.cout970.UltraTech.Tiers.blocks.CutterT2;
-import common.cout970.UltraTech.Tiers.blocks.FurnaceT1;
-import common.cout970.UltraTech.Tiers.blocks.FurnaceT2;
-import common.cout970.UltraTech.Tiers.blocks.LaminatorT1;
-import common.cout970.UltraTech.Tiers.blocks.LaminatorT2;
-import common.cout970.UltraTech.Tiers.blocks.PurifierT1;
-import common.cout970.UltraTech.Tiers.blocks.PurifierT2;
 import common.cout970.UltraTech.TileEntities.electric.ChargeStationEntity;
 import common.cout970.UltraTech.TileEntities.electric.ClimateEntity;
 import common.cout970.UltraTech.TileEntities.electric.FermenterEntity;
@@ -68,6 +56,7 @@ import common.cout970.UltraTech.TileEntities.utility.hitBoxEntity;
 import common.cout970.UltraTech.blocks.AlienBlock;
 import common.cout970.UltraTech.blocks.ChasisBlock;
 import common.cout970.UltraTech.blocks.CovedGlass;
+import common.cout970.UltraTech.blocks.Deco_Block;
 import common.cout970.UltraTech.blocks.DiamondGlass;
 import common.cout970.UltraTech.blocks.MiscBlock;
 import common.cout970.UltraTech.blocks.MultiTank;
@@ -76,7 +65,7 @@ import common.cout970.UltraTech.blocks.ReactorMultiblock;
 import common.cout970.UltraTech.blocks.StoneBlock;
 import common.cout970.UltraTech.blocks.StorageBlock;
 import common.cout970.UltraTech.blocks.Tier3Block;
-import common.cout970.UltraTech.blocks.Deco_Block;
+import common.cout970.UltraTech.blocks.common.ChargeStation;
 import common.cout970.UltraTech.blocks.common.ChemicalPlant;
 import common.cout970.UltraTech.blocks.common.CrafterBlock;
 import common.cout970.UltraTech.blocks.common.FermenterBlock;
@@ -93,6 +82,18 @@ import common.cout970.UltraTech.blocks.models.PumpBlock;
 import common.cout970.UltraTech.blocks.models.SolarPanel;
 import common.cout970.UltraTech.blocks.models.SteamTurbine;
 import common.cout970.UltraTech.blocks.models.WindMill;
+import common.cout970.UltraTech.blocks.tiers.ChemicalVaporDesintegrationT1;
+import common.cout970.UltraTech.blocks.tiers.ChemicalVaporDesintegrationT2;
+import common.cout970.UltraTech.blocks.tiers.CoalGeneratorT1;
+import common.cout970.UltraTech.blocks.tiers.CoalGeneratorT2;
+import common.cout970.UltraTech.blocks.tiers.CutterT1;
+import common.cout970.UltraTech.blocks.tiers.CutterT2;
+import common.cout970.UltraTech.blocks.tiers.FurnaceT1;
+import common.cout970.UltraTech.blocks.tiers.FurnaceT2;
+import common.cout970.UltraTech.blocks.tiers.LaminatorT1;
+import common.cout970.UltraTech.blocks.tiers.LaminatorT2;
+import common.cout970.UltraTech.blocks.tiers.PurifierT1;
+import common.cout970.UltraTech.blocks.tiers.PurifierT2;
 import common.cout970.UltraTech.itemBlock.UT_ItemBlock;
 import common.cout970.UltraTech.itemBlock.UT_ItemBlockDeco;
 import common.cout970.UltraTech.itemBlock.UT_ItemBlockMisc;
@@ -140,6 +141,7 @@ public class BlockManager {
 	public static  Block Painter;
 	public static  Block Fermenter;
 	public static  Block Heater;
+	public static  Block ChargeStation;
 	//tiers
 	public static  Block CVD_T1;
 	public static  Block CVD_T2;
@@ -153,6 +155,7 @@ public class BlockManager {
 	public static  Block Furnace_T2;
 	public static  Block Generator_T1;
 	public static  Block Generator_T2;
+	
 
 	public static  Block CableBlock;
 
@@ -160,32 +163,6 @@ public class BlockManager {
 		Material m = Material.iron;
 		
 		Chasis = new ChasisBlock(Material.iron);
-		Reactor = new ReactorMultiblock(Material.iron);
-		Ores = new OreBlock(Material.rock);
-		SolarPanel = new SolarPanel(Material.piston);
-		WindMill = new WindMill(Material.piston);
-		Engine = new Engine(Material.piston);
-		Tier3 = new Tier3Block(Material.iron);
-		Misc = new MiscBlock(Material.rock);
-		Storage = new StorageBlock(Material.iron);
-		DiamondGlass = new DiamondGlass(Material.glass,false);	
-		CovedGlass = new CovedGlass(Material.glass,false);
-		CopperPipe = new CopperPipe(Material.iron);
-		Boiler = new Boiler(Material.iron);
-		Tank = new FluidTank(Material.iron);
-		Turbine = new SteamTurbine(Material.iron);
-		Refinery = new RefineryBlock(Material.iron);
-		Dynamo = new Dynamo(Material.iron);
-		MultiTank = new MultiTank(Material.iron);
-		Pump = new PumpBlock(Material.iron);
-		AlienBlock = new AlienBlock(Material.iron);
-		LavaGenerator = new LavaGenerator(Material.iron);
-		ChemicalPlant = new ChemicalPlant(Material.iron);
-		Painter = new Painter3D(m);
-		Fermenter = new FermenterBlock(m);
-		Heater = new Heater(m);
-		
-		if(!Control.isMicroPartActived)CableBlock = new CableBlock(Material.iron);
 		//tiers
 		CVD_T1 = new ChemicalVaporDesintegrationT1(m);
 		Laminator_T1 = new LaminatorT1(m);
@@ -202,6 +179,39 @@ public class BlockManager {
 		Generator_T2 = new CoalGeneratorT2(m);
 		
 		Crafter = new CrafterBlock(m);
+		Painter = new Painter3D(m);
+		Fermenter = new FermenterBlock(m);
+		Heater = new Heater(m);
+		ChargeStation = new ChargeStation(m);
+		LavaGenerator = new LavaGenerator(m);
+		ChemicalPlant = new ChemicalPlant(m);
+		
+		Tier3 = new Tier3Block(m);
+		Reactor = new ReactorMultiblock(m);
+		Refinery = new RefineryBlock(m);
+		Misc = new MiscBlock(m);
+		
+		
+		//models
+		SolarPanel = new SolarPanel(Material.piston);
+		WindMill = new WindMill(Material.piston);
+		Engine = new Engine(Material.piston);
+		Storage = new StorageBlock(Material.iron);
+		CopperPipe = new CopperPipe(Material.iron);
+		Boiler = new Boiler(Material.iron);
+		Tank = new FluidTank(Material.iron);
+		Turbine = new SteamTurbine(Material.iron);
+		Dynamo = new Dynamo(Material.iron);
+		MultiTank = new MultiTank(Material.iron);
+		Pump = new PumpBlock(Material.iron);
+		if(!Control.isMicroPartActived)CableBlock = new CableBlock(Material.iron);
+		
+		//decotab
+		Ores = new OreBlock(Material.rock);
+		AlienBlock = new AlienBlock(Material.iron);
+		DiamondGlass = new DiamondGlass(Material.glass,false);	
+		CovedGlass = new CovedGlass(Material.glass,false);
+		
 		//deco
 
 		deco.add(new Deco_Block(1,true));
@@ -257,6 +267,7 @@ public class BlockManager {
 		GameRegistry.registerBlock(LavaGenerator, "Lava Generator");
 		GameRegistry.registerBlock(ChemicalPlant, "ChemicalPlant");
 		GameRegistry.registerBlock(Heater, "Heater");
+		GameRegistry.registerBlock(ChargeStation, "Charge Station");
 
 		//tiers
 		GameRegistry.registerBlock(CVD_T1, "CVD_T1");

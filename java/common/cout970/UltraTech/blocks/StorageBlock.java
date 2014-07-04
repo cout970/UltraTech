@@ -42,11 +42,6 @@ public class StorageBlock extends BlockConductor{
 	@Override
 	public IIcon getIcon(int side, int meta)
 	{		
-		switch(meta){
-		case 0:return this.blockIcon;
-		case 1:return this.blockIcon1;
-		case 2:return this.blockIcon2;
-		}
 		return this.blockIcon;
 	}
 	
@@ -62,9 +57,7 @@ public class StorageBlock extends BlockConductor{
 
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister iconRegister){
-		this.blockIcon = iconRegister.registerIcon("ultratech:storage0");
-		this.blockIcon1 = iconRegister.registerIcon("ultratech:storage1");
-		this.blockIcon2 = iconRegister.registerIcon("ultratech:storage2");
+		this.blockIcon = iconRegister.registerIcon("ultratech:chasis1");
 	}
 	
 	@SuppressWarnings("unchecked")

@@ -36,7 +36,7 @@ public class SolarPanel extends BlockConductor{
 	}
 
 	public void registerBlockIcons(IIconRegister iconRegister){
-		this.blockIcon = iconRegister.registerIcon("ultratech:solarpanel");
+		this.blockIcon = iconRegister.registerIcon("ultratech:chasis1");
 	}
 	
 	public boolean isOpaqueCube()

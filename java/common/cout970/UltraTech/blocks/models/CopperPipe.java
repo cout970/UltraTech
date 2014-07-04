@@ -4,6 +4,9 @@ import buildcraft.api.tools.IToolWrench;
 import common.cout970.UltraTech.TileEntities.fluid.CopperPipeEntity;
 import common.cout970.UltraTech.TileEntities.intermod.EngineEntity;
 import common.cout970.UltraTech.core.UltraTech;
+import common.cout970.UltraTech.proxy.ClientProxy;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -33,7 +36,7 @@ public class CopperPipe extends FluidPipeBlock{
 	}
 
 	public void registerBlockIcons(IIconRegister iconRegister){
-		this.blockIcon = iconRegister.registerIcon("ultratech:copperpipe");
+		this.blockIcon = iconRegister.registerIcon("ultratech:chasis0");
 	}
 
 	public void onNeighborBlockChange(World w, int x, int y, int z, Block side){
@@ -46,5 +49,10 @@ public class CopperPipe extends FluidPipeBlock{
 	public TileEntity createNewTileEntity(World world,int a) {
 		return new CopperPipeEntity();
 	}
-
+	
+	@SideOnly(Side.CLIENT)
+	@Override
+	public int getRenderType() {
+		return ClientProxy.pipeRenderPass;
+	}
 }

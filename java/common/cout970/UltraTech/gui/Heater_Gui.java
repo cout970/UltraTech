@@ -55,7 +55,7 @@ public class Heater_Gui extends MachineGuiBase{
 	@Override
 	protected void drawGuiContainerForegroundLayer(int x, int y) {
 		//name
-		this.drawCenteredString(fontRendererObj, "Heater", xStart+99, yStart+6, UT_Utils.RGBtoInt(255, 255, 255));
+		this.drawCenteredString(fontRendererObj, "Heater", 99, 6, UT_Utils.RGBtoInt(255, 255, 255));
 
         if(UT_Utils.isIn(x, y, xStart+137, yStart+15, 25, 50)){
         	List<String> energy = new ArrayList<String>();

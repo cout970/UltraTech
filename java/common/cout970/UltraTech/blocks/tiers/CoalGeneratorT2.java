@@ -1,6 +1,7 @@
-package common.cout970.UltraTech.Tiers.blocks;
+package common.cout970.UltraTech.blocks.tiers;
 
 import common.cout970.UltraTech.TileEntities.electric.tiers.CoalGeneratorEntityT1_Entity;
+import common.cout970.UltraTech.TileEntities.electric.tiers.CoalGeneratorEntityT2_Entity;
 import common.cout970.UltraTech.core.UltraTech;
 import common.cout970.UltraTech.misc.IUpdatedEntity;
 import net.minecraft.block.Block;
@@ -12,28 +13,28 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import api.cout970.UltraTech.MeVpower.BlockConductor;
 
-public class CoalGeneratorT1 extends BlockConductor{
+public class CoalGeneratorT2 extends BlockConductor{
 
 	public IIcon[] icons;
 	
-	public CoalGeneratorT1(Material m) {
+	public CoalGeneratorT2(Material m) {
 		super(m);
 		setCreativeTab(UltraTech.techTab);
 		setHardness(2f);
 		setStepSound(soundTypeMetal);
-		setBlockName("CoalGeneratorT1");
+		setBlockName("CoalGeneratorT2");
 	}
 
 	@Override
 	public TileEntity createNewTileEntity(World var1, int var2) {
-		return new CoalGeneratorEntityT1_Entity();
+		return new CoalGeneratorEntityT2_Entity();
 	}
 	
 	public void registerBlockIcons(IIconRegister IR){
 		icons = new IIcon[3];
-		icons[0] = IR.registerIcon("ultratech:chasis");
-		icons[1] = IR.registerIcon("ultratech:machines/generator_off");
-		icons[2] = IR.registerIcon("ultratech:machines/generator_on");
+		icons[0] = IR.registerIcon("ultratech:chasis1");
+		icons[1] = IR.registerIcon("ultratech:machines/generator_off_2");
+		icons[2] = IR.registerIcon("ultratech:machines/generator_on_2");
 	}
 	
 	public IIcon getIcon(int side, int meta){

@@ -8,10 +8,13 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import api.cout970.UltraTech.MeVpower.BlockConductor;
 
 public class ChemicalPlant extends BlockConductor {
+
+	private IIcon up;
 
 	public ChemicalPlant(Material m) {
 		super(m);
@@ -29,6 +32,13 @@ public class ChemicalPlant extends BlockConductor {
 	
 	public void registerBlockIcons(IIconRegister iconRegister){
 		this.blockIcon = iconRegister.registerIcon("ultratech:chemical");
+		up = iconRegister.registerIcon("ultratech:chasis1");
+	}
+	
+	@Override
+	public IIcon getIcon(int side, int meta) {
+		if(side == 1 || side == 0)return up;
+		return blockIcon;
 	}
 	
 	public void onNeighborBlockChange(World w, int x, int y, int z, Block block){

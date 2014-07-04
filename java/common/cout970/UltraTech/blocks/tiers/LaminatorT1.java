@@ -1,4 +1,4 @@
-package common.cout970.UltraTech.Tiers.blocks;
+package common.cout970.UltraTech.blocks.tiers;
 
 import api.cout970.UltraTech.MeVpower.BlockConductor;
 import net.minecraft.block.Block;
@@ -8,38 +8,36 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-import common.cout970.UltraTech.TileEntities.electric.tiers.LaminatorT2_Entity;
+import common.cout970.UltraTech.TileEntities.electric.tiers.LaminatorT1_Entity;
 import common.cout970.UltraTech.core.UltraTech;
 import common.cout970.UltraTech.misc.IUpdatedEntity;
 
-public class LaminatorT2 extends BlockConductor{
+public class LaminatorT1 extends BlockConductor{
 
 	public IIcon[] icons;
 	
-	public LaminatorT2(Material m) {
+	public LaminatorT1(Material m) {
 		super(m);
 		setCreativeTab(UltraTech.techTab);
 		setHardness(2f);
 		setStepSound(soundTypeMetal);
-		setBlockName("LaminatorT2");
+		setBlockName("LaminatorT1");
 	}
 
 	@Override
 	public TileEntity createNewTileEntity(World var1, int var2) {
-		return new LaminatorT2_Entity();
+		return new LaminatorT1_Entity();
 	}
 	
 	public void registerBlockIcons(IIconRegister IR){
-		icons = new IIcon[3];
-		icons[0] = IR.registerIcon("ultratech:chasis1");
-		icons[1] = IR.registerIcon("ultratech:machines/laminator_off_2");
-		icons[2] = IR.registerIcon("ultratech:machines/laminator_on_2");
+		icons = new IIcon[2];
+		icons[0] = IR.registerIcon("ultratech:chasis");
+		icons[1] = IR.registerIcon("ultratech:machines/laminator_off");
 	}
 	
 	public IIcon getIcon(int side, int meta){
 		if(side == 0 || side == 1)return icons[0];
-		if(meta == 0)return icons[1];
-		return icons[2];
+		return icons[1];
 	}
 	
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer p, int a, float b, float c, float d){

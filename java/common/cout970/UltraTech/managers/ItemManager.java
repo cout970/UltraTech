@@ -96,7 +96,7 @@ public class ItemManager {
 		Reg("Plastic","Plastic",true);
 		Reg("Rubber_bulcanized","Vulcanized Rubber",true);
 		Reg("Dynamo","Dynamo",true);
-		
+		Reg("AluminumGear","Aluminum Gear",true);
 	}
 
 	public static void LoadConfigItems(Configuration c){

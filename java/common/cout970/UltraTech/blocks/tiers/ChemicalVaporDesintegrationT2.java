@@ -1,6 +1,6 @@
-package common.cout970.UltraTech.Tiers.blocks;
+package common.cout970.UltraTech.blocks.tiers;
 
-import common.cout970.UltraTech.TileEntities.electric.tiers.PurifierT2_Entity;
+import common.cout970.UltraTech.TileEntities.electric.tiers.ChemicalVaporDesintegrationT2_Entity;
 import common.cout970.UltraTech.core.UltraTech;
 import common.cout970.UltraTech.misc.IUpdatedEntity;
 import net.minecraft.block.Block;
@@ -12,34 +12,32 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import api.cout970.UltraTech.MeVpower.BlockConductor;
 
-public class PurifierT2 extends BlockConductor{
+public class ChemicalVaporDesintegrationT2 extends BlockConductor{
 
 	public IIcon[] icons;
 	
-	public PurifierT2(Material m) {
+	public ChemicalVaporDesintegrationT2(Material m) {
 		super(m);
 		setCreativeTab(UltraTech.techTab);
 		setHardness(2f);
 		setStepSound(soundTypeMetal);
-		setBlockName("PurifierT2");
+		setBlockName("ChemicalVaporDesintegrationT2");
 	}
 
 	@Override
 	public TileEntity createNewTileEntity(World var1, int var2) {
-		return new PurifierT2_Entity();
+		return new ChemicalVaporDesintegrationT2_Entity();
 	}
-	
+
 	public void registerBlockIcons(IIconRegister IR){
-		icons = new IIcon[3];
+		icons = new IIcon[2];
 		icons[0] = IR.registerIcon("ultratech:chasis1");
-		icons[1] = IR.registerIcon("ultratech:machines/purifier_off_2");
-		icons[2] = IR.registerIcon("ultratech:machines/purifier_on_2");
+		icons[1] = IR.registerIcon("ultratech:machines/CVD_off_2");
 	}
 	
 	public IIcon getIcon(int side, int meta){
 		if(side == 0 || side == 1)return icons[0];
-		if(meta == 0)return icons[1];
-		return icons[2];
+		return icons[1];
 	}
 	
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer p, int a, float b, float c, float d){

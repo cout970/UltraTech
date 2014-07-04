@@ -1,9 +1,5 @@
-package common.cout970.UltraTech.Tiers.blocks;
+package common.cout970.UltraTech.blocks.tiers;
 
-import common.cout970.UltraTech.TileEntities.electric.tiers.CoalGeneratorEntityT1_Entity;
-import common.cout970.UltraTech.TileEntities.electric.tiers.CoalGeneratorEntityT2_Entity;
-import common.cout970.UltraTech.core.UltraTech;
-import common.cout970.UltraTech.misc.IUpdatedEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -11,30 +7,33 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+import common.cout970.UltraTech.TileEntities.electric.tiers.FurnaceT1_Entity;
+import common.cout970.UltraTech.core.UltraTech;
+import common.cout970.UltraTech.misc.IUpdatedEntity;
 import api.cout970.UltraTech.MeVpower.BlockConductor;
 
-public class CoalGeneratorT2 extends BlockConductor{
+public class FurnaceT1 extends BlockConductor{
 
 	public IIcon[] icons;
 	
-	public CoalGeneratorT2(Material m) {
+	public FurnaceT1(Material m) {
 		super(m);
 		setCreativeTab(UltraTech.techTab);
 		setHardness(2f);
 		setStepSound(soundTypeMetal);
-		setBlockName("CoalGeneratorT2");
+		setBlockName("FurnaceT1");
 	}
 
 	@Override
 	public TileEntity createNewTileEntity(World var1, int var2) {
-		return new CoalGeneratorEntityT2_Entity();
+		return new FurnaceT1_Entity();
 	}
 	
 	public void registerBlockIcons(IIconRegister IR){
 		icons = new IIcon[3];
-		icons[0] = IR.registerIcon("ultratech:chasis1");
-		icons[1] = IR.registerIcon("ultratech:machines/generator_off_2");
-		icons[2] = IR.registerIcon("ultratech:machines/generator_on_2");
+		icons[0] = IR.registerIcon("ultratech:chasis");
+		icons[1] = IR.registerIcon("ultratech:machines/furnace_off");
+		icons[2] = IR.registerIcon("ultratech:machines/furnace_on");
 	}
 	
 	public IIcon getIcon(int side, int meta){
@@ -44,7 +43,7 @@ public class CoalGeneratorT2 extends BlockConductor{
 	}
 	
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer p, int a, float b, float c, float d){
-		if(!p.isSneaking())p.openGui(UltraTech.instance, 0, world, x, y, z);
+		if(!p.isSneaking())p.openGui(UltraTech.instance, 1, world, x, y, z);
 		return true;
 	}
 
@@ -52,4 +51,5 @@ public class CoalGeneratorT2 extends BlockConductor{
 		IUpdatedEntity t = (IUpdatedEntity) w.getTileEntity(x, y, z);
 		t.onNeigUpdate();
 	}
+
 }

@@ -27,7 +27,7 @@ public class FluidTank extends BlockContainer{
 	}
 	
 	public void registerBlockIcons(IIconRegister iconRegister){
-		this.blockIcon = iconRegister.registerIcon("ultratech:tank");
+		this.blockIcon = iconRegister.registerIcon("ultratech:chasis0");
 	}
 	
 	public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int par6, float par7, float par8, float par9)

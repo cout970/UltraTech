@@ -1,5 +1,7 @@
 package common.cout970.UltraTech.TileEntities.intermod;
 
+import net.minecraft.inventory.Container;
+import net.minecraft.inventory.ICrafting;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -14,8 +16,9 @@ import cofh.api.energy.EnergyStorage;
 import cofh.api.energy.IEnergyHandler;
 import common.cout970.UltraTech.lib.CostData;
 import common.cout970.UltraTech.lib.UT_Utils;
+import common.cout970.UltraTech.misc.IUpdatedEntity;
 
-public class DynamoEntity extends SyncTile implements IPowerConductor, IEnergyHandler{
+public class DynamoEntity extends SyncTile implements IPowerConductor, IEnergyHandler, IUpdatedEntity{
 
 	public ForgeDirection facing = ForgeDirection.UP;
 	protected EnergyStorage storage;//RF
@@ -27,7 +30,7 @@ public class DynamoEntity extends SyncTile implements IPowerConductor, IEnergyHa
 	public DynamoEntity(){
 		super();
 		storage = new EnergyStorage((int) (CostData.Dynamo.cap*RF));
-		inter = new StorageInterface(this,400,2);
+		inter = new StorageInterface(this,CostData.Dynamo.cap,2);
 	}
 
 	public void updateEntity(){
@@ -39,25 +42,18 @@ public class DynamoEntity extends SyncTile implements IPowerConductor, IEnergyHa
 		}else if(inter.getCharge() >= 1 && storage.getMaxEnergyStored()-storage.getEnergyStored() >= RF){
 			inter.removeCharge(1d);
 			storage.receiveEnergy(RF, false);
+		}else if(inter.getCharge() >= 1d/RF && storage.getMaxEnergyStored()-storage.getEnergyStored() >= 1){
+			inter.removeCharge(1d/RF);
+			storage.receiveEnergy(1, false);
 		}
 		if(recep != null){
 			int send = Math.min(400, storage.getEnergyStored());
-			int b = ((IEnergyHandler) recep).receiveEnergy(facing.getOpposite(), send, false);
+			int b = recep.receiveEnergy(facing.getOpposite(), send, false);
+			
 			if(b > 0){
 				int e = this.extractEnergy(facing, b, false);
 			}
 		}
-	}
-	
-	public void updateReceptor(){
-		TileEntity a = UT_Utils.getRelative(this, facing);
-		if(a instanceof IEnergyHandler)recep = (IEnergyHandler) a;
-	}
-
-	public CableType getConection(ForgeDirection side) {
-		if(side == facing.getOpposite())return CableType.BLOCK;
-		if(side == facing)return CableType.NOTHING;
-		return CableType.RIBBON_BOTTOM;
 	}
 
 	public boolean isWorking() {
@@ -118,7 +114,6 @@ public class DynamoEntity extends SyncTile implements IPowerConductor, IEnergyHa
 		for(ForgeDirection d : ForgeDirection.VALID_DIRECTIONS){
 			if(UT_Utils.getRelative(this, d) instanceof IEnergyHandler){
 				facing = d;
-				updateReceptor();
 				return;
 			}
 		}	
@@ -127,5 +122,22 @@ public class DynamoEntity extends SyncTile implements IPowerConductor, IEnergyHa
 	@Override
 	public PowerInterface getPower() {
 		return inter;
+	}
+	
+	public void sendGUINetworkData(Container cont, ICrafting c) {
+		super.sendGUINetworkData(cont, c);
+		c.sendProgressBarUpdate(cont, 2, storage.getEnergyStored());
+	}
+
+	public void getGUINetworkData(int id, int value) {
+		super.getGUINetworkData(id, value);
+		if(id == 2)storage.setEnergyStored(value);
+	}
+
+	@Override
+	public void onNeigUpdate() {
+		TileEntity a = UT_Utils.getRelative(this, facing);
+		if(a instanceof IEnergyHandler)recep = (IEnergyHandler) a;
+		switchOrientation();
 	}
 }

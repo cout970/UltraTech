@@ -10,8 +10,8 @@ public enum CostData {
 	Solar_Panel		(   10d	,1	,0.2d		,1),//1Mev => 5 ticks
 	Fluid_Generator (  800d	,2	,1d			,1),//Wip
 	Turbine			(  800d	,2	,5d			,1),
-	LavaGenerator   (  800d	,2	,10d		,1),//MeV per 1mb
-	WindMill		(  400d ,2	,1d		    ,1),//idk (I don't know)
+	LavaGenerator   (  800d	,2	,2d	   		,1),//MeV per 1mb
+	WindMill		(  400d ,2	,1.5d		,1),//idk (I don't know)
 
 	Furnace			( 1000d	,2	,100d		,0),//1 items cost
 	Purifier		( 1000d	,2	,150d		,0),
@@ -19,21 +19,21 @@ public enum CostData {
 	CVD				( 1000d	,1	,100d		,0),
 	Laminator		( 1000d ,1	,100d		,0),
 	
-	Miner    		(  800d	,3	,50d		,0),
+	Miner    		(32000d	,3	,100d		,0),//per block
 	MA				( 1600d ,3	,100d		,0),
-	Charge_Station	( 3200d	,1	,80d		,2),
+	Charge_Station	( 3200d	,1	,80d		,2),//per tick
 	Climate_Station(200000d	,3	,200000d	,0),
 	Fermenter		(  800d	,1	,10d		,0),//Mev per mb
 	Tesseract		(20000d ,3	,0d			,0),
-	ChemicalPlant	( 1000d ,2	,100d		,0),
-	Heater			( 1600d	,2	,100d		,0), 
-	Pump			( 2000d ,2  ,150d		,0),
+	ChemicalPlant	( 1000d ,2	,100d		,0),//per item
+	Heater			( 1600d	,2	,100d		,0), //per 10ticks
+	Pump			( 2000d ,2  ,150d		,0),//per 1000mb
 	
 	Dynamo     		( 1600d	,2	,1d			,0),
 	
 	Storage_1		(    64000d	,1	,0			,2),
-	Storage_2		(   400000d	,2	,0			,2),
-	Storage_3		(  7000000d	,3	,0			,2);
+	Storage_2		(   500000d	,2	,0			,2),
+	Storage_3		(  8000000d	,3	,0			,2);
 	
 	public double cap,use;
 	public int tier;
