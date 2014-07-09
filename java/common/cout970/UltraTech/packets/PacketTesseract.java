@@ -1,6 +1,6 @@
 package common.cout970.UltraTech.packets;
 
-import api.cout970.UltraTech.network.PacketBase;
+import api.cout970.UltraTech.network.AbstractPacket;
 import common.cout970.UltraTech.TileEntities.electric.TesseractEntity;
 import common.cout970.UltraTech.TileEntities.electric.TesseractEntity.T_Mode;
 import io.netty.buffer.ByteBuf;
@@ -9,7 +9,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntity;
 
-public class PacketTesseract extends PacketBase{
+public class PacketTesseract extends AbstractPacket{
 
 	int x,y,z;
 	int mode,freq;

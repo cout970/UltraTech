@@ -7,7 +7,7 @@ import net.minecraft.item.ItemFood;
 public class ProcesedFood extends ItemFood{
 
 	public ProcesedFood() {
-		super(4, true);
+		super(6, true);
 		setCreativeTab(UltraTech.ResourceTab);
 		setMaxStackSize(64);
 		setUnlocalizedName("ProcesedFood");

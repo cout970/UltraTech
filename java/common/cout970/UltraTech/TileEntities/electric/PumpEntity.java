@@ -71,7 +71,7 @@ public class PumpEntity extends Machine implements IFluidHandler,IUpdatedEntity{
 				for(;height>0;){
 					if(worldObj.isAirBlock(xCoord, height, zCoord) || getFluid(worldObj.getBlock(xCoord, height, zCoord), 0) != null){
 						if(layer.isEmpty()){
-							loadLayer();
+							loadLayer(getFluid(worldObj.getBlock(xCoord, height, zCoord), 0));
 							if(layer.isEmpty())height -= 1;
 							else break;
 						}else break;
@@ -86,7 +86,7 @@ public class PumpEntity extends Machine implements IFluidHandler,IUpdatedEntity{
 					if(b != null){
 						Fluid f = getFluid(worldObj.getBlock(b.x, b.y, b.z), worldObj.getBlockMetadata(b.x, b.y, b.z));
 						if(f != null){
-							if(b.x != xCoord || b.z != zCoord)worldObj.setBlock(b.x, b.y, b.z, Blocks.stone, 0, 6);
+							if((b.x != xCoord || b.z != zCoord) && f == FluidRegistry.LAVA)worldObj.setBlock(b.x, b.y, b.z, Blocks.stone, 0, 6);
 							else worldObj.setBlockToAir(b.x, b.y, b.z);
 							this.fill(null,new FluidStack(f, 1000), true);
 							removeEnergy(CostData.Pump.use);
@@ -98,12 +98,12 @@ public class PumpEntity extends Machine implements IFluidHandler,IUpdatedEntity{
 		}
 	}
 
-	private void loadLayer() {
+	private void loadLayer(Fluid d) {
 		layer.clear();
 		if(getFluid(worldObj.getBlock(xCoord, height, zCoord), 0)!= null)
 			for(int x=-100;x<100;x++){for(int z=-100;z<100;z++){
 				Fluid f = getFluid(worldObj.getBlock(xCoord+x, height, zCoord+z), worldObj.getBlockMetadata(xCoord+x, height, zCoord+z));
-				if(f != null && (getTank().getFluid() == null || getTank().getFluid().getFluid() == f)){
+				if(f != null && f == d &&(getTank().getFluid() == null  || getTank().getFluid().getFluid() == f)){
 					layer.add(new BlockPos(xCoord+x, height, zCoord+z));
 					if(layer.size() > 1000)break;
 				}
@@ -173,7 +173,6 @@ public class PumpEntity extends Machine implements IFluidHandler,IUpdatedEntity{
 
 	@Override
 	public void onNeigUpdate() {
-		// TODO Auto-generated method stub
 		
 	}
 	

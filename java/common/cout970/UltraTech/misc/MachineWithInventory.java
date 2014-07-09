@@ -72,8 +72,8 @@ public class MachineWithInventory extends Machine implements IInventory{
 		if (itemStack != null && itemStack.stackSize > this.getInventoryStackLimit()) {
 			itemStack.stackSize = this.getInventoryStackLimit();
 		}
-		
-		Sync();
+		markDirty();
+//		Sync();
 	}
 
 	@Override

@@ -22,7 +22,7 @@ public class UT_ItemBlockStone extends UT_ItemBlock{
 	
 	@Override
 	public String getUnlocalizedName(ItemStack itemstack) {
-		return getUnlocalizedName() + ".deco";
+		return getUnlocalizedName() + ".deco."+itemstack.getItemDamage();
 	}
 	
 	public String getItemDisplayName(ItemStack is) {

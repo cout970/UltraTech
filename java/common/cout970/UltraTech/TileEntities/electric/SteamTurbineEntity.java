@@ -43,8 +43,15 @@ public class SteamTurbineEntity extends Machine implements IFluidHandler{
 			tank = new UT_Tank(16000, this);
 		}
 		if(!worldObj.isRemote){
-			if(tank.getFluidAmount() >= 80 && getEnergy()+CostData.Turbine.use <= maxEnergy()){
-				tank.drain(80, true);
+			
+			if(tank.getFluidAmount() >= 100 && getEnergy()+CostData.Turbine.use*100 <= maxEnergy()){
+				tank.drain(100, true);
+				this.addEnergy(CostData.Turbine.use*100);
+			}else if(tank.getFluidAmount() >= 10 && getEnergy()+CostData.Turbine.use*10 <= maxEnergy()){
+				tank.drain(10, true);
+				this.addEnergy(CostData.Turbine.use*10);
+			}else if(tank.getFluidAmount() >= 1 && getEnergy()+CostData.Turbine.use <= maxEnergy()){
+				tank.drain(1, true);
 				this.addEnergy(CostData.Turbine.use);
 			}
 		}

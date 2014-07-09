@@ -32,7 +32,10 @@ public class ChemicalPlant_Entity extends ConfigurableMachine implements IFluidH
 		if(!fuel){
 			FluidStack f = getTank().getFluid();
 			if(f != null && FluidRegistry.getFluid("plastic") == f.getFluid() && f.amount >= 1000){
-				if(getEnergy() >= CostData.ChemicalPlant.use && shouldWork())fuel = true;
+				if(getEnergy() >= CostData.ChemicalPlant.use && shouldWork())
+					if(getStackInSlot(0) == null || getStackInSlot(0).stackSize+2 <= 64)
+						if(getStackInSlot(1) == null || getStackInSlot(1).stackSize+2 <= 64)
+							if(getStackInSlot(2) == null || getStackInSlot(2).stackSize+1 <= 64)fuel = true;
 			}
 		}
 		if(fuel)Progres +=1;

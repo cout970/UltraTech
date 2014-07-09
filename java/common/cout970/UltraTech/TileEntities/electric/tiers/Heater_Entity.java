@@ -15,6 +15,7 @@ import common.cout970.UltraTech.lib.CostData;
 import common.cout970.UltraTech.lib.UT_Utils;
 import common.cout970.UltraTech.misc.HeaterInteraction;
 import common.cout970.UltraTech.misc.HeaterInteraction.Interaction;
+import common.cout970.UltraTech.misc.PowerExchange;
 
 public class Heater_Entity extends ConfigurableMachine{
 
@@ -34,9 +35,8 @@ public class Heater_Entity extends ConfigurableMachine{
 		if(worldObj.isRemote)return;
 		if(Progres > 0){
 			if(Heat <= maxHeat){
-				Heat += 0.2;
-				Progres-=2;
-				
+				Heat += PowerExchange.FTtoHeat(10);
+				Progres-=10;
 				if(Progres <= 0)change = true;
 			}
 		}

@@ -7,6 +7,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Configuration;
 import api.cout970.UltraTech.microparts.MicroRegistry;
 import api.cout970.UltraTech.network.Net_Utils;
+import api.cout970.UltraTech.network.PacketPipeLine;
 import api.cout970.UltraTech.network.PacketUpdate;
 
 import common.cout970.UltraTech.handlers.FuelHandler;
@@ -133,9 +134,10 @@ public class UltraTech {
 	//init
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event){
-
+		
 		Configuration config = new Configuration(event.getSuggestedConfigurationFile());
 		ConfigManager.LoadConfigs(config);
+		
 		if (Loader.isModLoaded("ForgeMultipart") && Loader.isModLoaded("CodeChickenCore")){
 			Control.isMicroPartActived = true;
         }

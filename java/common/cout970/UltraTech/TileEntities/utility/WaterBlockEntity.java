@@ -29,6 +29,12 @@ public class WaterBlockEntity extends TileReactorPart implements IFluidHandler{
 				if(tanks.containsKey(f))tanks.get(f).fill(f.getOpposite(), new FluidStack(FluidRegistry.WATER,EnergyCosts.WaterBlockProduct), true);
 			}
 	}
+	
+	@Override
+	public void onNeighChange() {
+		super.onNeighChange();
+		updateTanks();
+	}
 
 	private void updateTanks() {
 		tanks = new HashMap<ForgeDirection,IFluidHandler>();

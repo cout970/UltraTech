@@ -1,30 +1,16 @@
 thinks to do:
-solve dependencies --
-solve language bugs: new thinks, new bugs!
-solve bug with deco blocks (I hate minecraft 1.7.2 render system) solved? a bit, not all bugs
 finish {
-pipes, --
-refinery, --
-crafter, --
 animation engine,
-pump,
+pump, - (still need add pipes but for now is good)
 multitank,
-dynamo, --
 turbine,
-heater for boiler --
 tesseract gui
-molecular assembly remake
 redstone control for machines -*
 steam turbine tiers
-generator nerf and upgrades --
 multiblock pipes
 new cable like the 1.6.4 version
 lava generator lava + water = energy + cobble or obsidian
-}
-for this public alpha
 change turbine -*
-remake pump --
-balance energy cost
-fluid generator
+fluid generator **
 make wiki! 
-nei refinery and chemical
+}

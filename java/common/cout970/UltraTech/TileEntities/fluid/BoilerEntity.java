@@ -23,6 +23,7 @@ import common.cout970.UltraTech.lib.CostData;
 import common.cout970.UltraTech.lib.UT_Utils;
 import common.cout970.UltraTech.lib.recipes.Boiler_Recipes;
 import common.cout970.UltraTech.misc.IUpdatedEntity;
+import common.cout970.UltraTech.misc.PowerExchange;
 
 public class BoilerEntity extends SyncTile implements IFluidHandler,IUpdatedEntity{
 
@@ -36,14 +37,18 @@ public class BoilerEntity extends SyncTile implements IFluidHandler,IUpdatedEnti
 		if(storage == null)storage = new UT_Tank(8000, worldObj, xCoord, yCoord, zCoord);
 		if(worldObj.isRemote)return;
 
-		if(heat >= 101 && storage != null){
-			if(storage.getFluidAmount() >= 1 && result.getFluidAmount()+10 <= result.getCapacity()){
-				Fluid s = Boiler_Recipes.getResult(storage.getFluid());
-				if(s != null){
-					storage.drain(1, true);
-					FluidStack t = new FluidStack(s,10);
-					result.fill(t, true);
-					heat -= 0.5f;
+		if(storage != null){
+			float exces = heat-99;
+			int toBoil = (int) exces;
+			if(toBoil >= 1){
+				if(storage.getFluidAmount() >= toBoil && result.getFluidAmount()+toBoil*10 <= result.getCapacity()){
+					Fluid s = Boiler_Recipes.getResult(storage.getFluid());
+					if(s != null){
+						storage.drain(toBoil, true);
+						FluidStack t = new FluidStack(s,toBoil*10);
+						result.fill(t, true);
+						heat -= PowerExchange.HeatPerFluid(toBoil)*10;
+					}
 				}
 			}
 		}

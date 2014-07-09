@@ -26,20 +26,17 @@ public class UT_ItemBlockDeco extends UT_ItemBlock{
 	
 	@Override
 	public String getUnlocalizedName(ItemStack itemstack) {
-		return getUnlocalizedName() + ".deco";
+		return getUnlocalizedName() + ".deco."+itemstack.getItemDamage();
 	}
-	
-	public String getItemDisplayName(ItemStack is) {
-		return "Decorative Block "+subNames[is.getItemDamage()];
-	}
+
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack is, EntityPlayer par2EntityPlayer, List l, boolean par4) {
-		super.addInformation(is, par2EntityPlayer, l, par4);
+	public void addInformation(ItemStack is, EntityPlayer p, List l, boolean par4) {
+		super.addInformation(is, p, l, par4);
 		try{
-			l.add("use a 3D printer to change the color");
+			l.add("Use a 3D painter to change the color");
 		}catch(Exception e){}
 	}
 	

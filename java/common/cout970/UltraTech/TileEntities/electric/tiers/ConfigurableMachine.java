@@ -1,6 +1,7 @@
 package common.cout970.UltraTech.TileEntities.electric.tiers;
 
 import cofh.api.tileentity.IRedstoneControl;
+
 import common.cout970.UltraTech.lib.CostData;
 import common.cout970.UltraTech.misc.IUpdatedEntity;
 import common.cout970.UltraTech.misc.MachineWithInventory;

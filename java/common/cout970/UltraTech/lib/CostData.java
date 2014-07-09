@@ -9,7 +9,7 @@ public enum CostData {
 	Generator		( 3200d	,1	,1d			,1),//1coal => 800Mev
 	Solar_Panel		(   10d	,1	,0.2d		,1),//1Mev => 5 ticks
 	Fluid_Generator (  800d	,2	,1d			,1),//Wip
-	Turbine			(  800d	,2	,5d			,1),
+	Turbine			(  800d	,2	,0.1d		,1),//per mb
 	LavaGenerator   (  800d	,2	,2d	   		,1),//MeV per 1mb
 	WindMill		(  400d ,2	,1.5d		,1),//idk (I don't know)
 
@@ -21,12 +21,12 @@ public enum CostData {
 	
 	Miner    		(32000d	,3	,100d		,0),//per block
 	MA				( 1600d ,3	,100d		,0),
-	Charge_Station	( 3200d	,1	,80d		,2),//per tick
+	Charge_Station	( 3200d	,1	,200d		,2),//per tick
 	Climate_Station(200000d	,3	,200000d	,0),
 	Fermenter		(  800d	,1	,10d		,0),//Mev per mb
 	Tesseract		(20000d ,3	,0d			,0),
 	ChemicalPlant	( 1000d ,2	,100d		,0),//per item
-	Heater			( 1600d	,2	,100d		,0), //per 10ticks
+	Heater			( 1600d	,2	,100d		,0),//per 200proces
 	Pump			( 2000d ,2  ,150d		,0),//per 1000mb
 	
 	Dynamo     		( 1600d	,2	,1d			,0),

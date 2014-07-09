@@ -12,8 +12,6 @@
 package api.cout970.UltraTech.microparts;
 
 import java.util.Map;
-
-import codechicken.lib.vec.Vector3;
 import cpw.mods.fml.common.Optional;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
@@ -105,18 +103,18 @@ public class ModelBigCable extends ModelBase
     super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
   }
 
-  @Optional.Method(modid = "ForgeMultipart")
-  public void render(float f5, Vector3 pos, MicroCableBig mc) {
-	  mc.updateConnections();
-	  Map<ForgeDirection, Boolean> c = mc.conn;
-	  base.render(f5);
-	  if(c.get(ForgeDirection.UP))Down.render(f5);
-	  if(c.get(ForgeDirection.DOWN))Up.render(f5);
-	  if(c.get(ForgeDirection.NORTH))North.render(f5);
-	  if(c.get(ForgeDirection.SOUTH))South.render(f5);
-	  if(c.get(ForgeDirection.WEST))Right.render(f5);
-	  if(c.get(ForgeDirection.EAST))Left.render(f5);
-  }
+//  @Optional.Method(modid = "ForgeMultipart")
+//  public void render(float f5, MicroCableBig mc) {
+//	  mc.updateConnections();
+//	  Map<ForgeDirection, Boolean> c = mc.conn;
+//	  base.render(f5);
+//	  if(c.get(ForgeDirection.UP))Down.render(f5);
+//	  if(c.get(ForgeDirection.DOWN))Up.render(f5);
+//	  if(c.get(ForgeDirection.NORTH))North.render(f5);
+//	  if(c.get(ForgeDirection.SOUTH))South.render(f5);
+//	  if(c.get(ForgeDirection.WEST))Right.render(f5);
+//	  if(c.get(ForgeDirection.EAST))Left.render(f5);
+//  }
 
   public void renderItem(float f5) {
 	  base.render(f5);

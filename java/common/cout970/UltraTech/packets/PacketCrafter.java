@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import api.cout970.UltraTech.network.PacketBase;
+import api.cout970.UltraTech.network.AbstractPacket;
 import common.cout970.UltraTech.TileEntities.utility.CrafterEntity;
 import common.cout970.UltraTech.core.UltraTech;
 import io.netty.buffer.ByteBuf;
@@ -21,7 +21,7 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-public class PacketCrafter extends PacketBase{
+public class PacketCrafter extends AbstractPacket{
 
 	/**old
 	 * packet tipes:
@@ -99,7 +99,7 @@ public class PacketCrafter extends PacketBase{
 		pb.writeInt(x);
 		pb.writeShort(y);
 		pb.writeInt(z);
-		if(tipe == 2){ pb.writeShort(slot); try { pb.writeBoolean(item != null); if(item != null)pb.writeItemStackToBuffer(item); }catch (IOException e) {e.printStackTrace();}}
+		if(tipe == 2){ pb.writeShort(slot); try { pb.writeBoolean(item != null); if(item != null)pb.writeItemStackToBuffer(item); }catch (Exception e) {e.printStackTrace();}}
 		if(tipe == 3){ pb.writeInt(mode); pb.writeShort(slot);}
 		if(tipe == 4){ pb.writeBoolean(option);}
 	}
@@ -112,7 +112,7 @@ public class PacketCrafter extends PacketBase{
 		y = pb.readShort();
 		z = pb.readInt();
 		if(tipe == 3){ mode = pb.readInt(); slot = pb.readShort();}
-		if(tipe == 2){ slot = pb.readShort(); boolean b = pb.readBoolean(); if(b){try{ item = pb.readItemStackFromBuffer();}catch(IOException e){e.printStackTrace();}}}
+		if(tipe == 2){ slot = pb.readShort(); boolean b = pb.readBoolean(); if(b){try{ item = pb.readItemStackFromBuffer();}catch(Exception e){e.printStackTrace();}}}
 		if(tipe == 4){ option = pb.readBoolean();}
 	}
 

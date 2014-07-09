@@ -11,7 +11,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntity;
 
-public class PacketUpdate extends PacketBase{
+public class PacketUpdate extends AbstractPacket{
 
 	public int x,y,z;
 	public NBTTagCompound nbt = new NBTTagCompound();

@@ -15,12 +15,16 @@ public class NEIUltraTechConfig implements IConfigureNEI{
 		API.registerRecipeHandler(new CVD_Crafting());
 		API.registerRecipeHandler(new AssemblyCrafting());
 		API.registerRecipeHandler(new LaminatorCrafting());
+		API.registerRecipeHandler(new ChemicalCrafting());
+		API.registerRecipeHandler(new RefineryCrafting());
+		
 		API.registerUsageHandler(new PurifierCrafting());
 		API.registerUsageHandler(new CutterCrafting());
 		API.registerUsageHandler(new CVD_Crafting());
 		API.registerUsageHandler(new AssemblyCrafting());
 		API.registerUsageHandler(new FermenterCrafting());
 		API.registerUsageHandler(new LaminatorCrafting());
+		API.registerUsageHandler(new RefineryCrafting());
 		API.registerGuiOverlayHandler(Crafter_Gui.class, new CrafterOverlayHandler(), "crafting");
 	}
 

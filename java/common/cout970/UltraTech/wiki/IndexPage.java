@@ -1,5 +1,7 @@
 package common.cout970.UltraTech.wiki;
 
+import common.cout970.UltraTech.lib.UT_Utils;
+
 import net.minecraft.client.renderer.texture.TextureManager;
 
 public class IndexPage extends Page {
@@ -23,7 +25,7 @@ public class IndexPage extends Page {
 
 	@Override
 	public void renderPage(TextureManager t, int x, int y) {
-
+		this.drawString("WIP", x, y, UT_Utils.RGBtoInt(0, 0, 0));
 	}
 
 	@Override

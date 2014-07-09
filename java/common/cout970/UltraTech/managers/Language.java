@@ -53,7 +53,7 @@ public class Language {
 	}
 
 	public static void setupLangFile(){
-		File f = new File("I:/Development/Minecraft Mod 1.7.2/gradle/src/main/resources/assets/ultratech/lang/en_US.lang");
+		File f = new File("I:/Development/Minecraft Mod 1.7.10/gradle/src/main/resources/assets/ultratech/lang/en_US.lang");
 		Writer w;
 		try {
 			w = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(f)));

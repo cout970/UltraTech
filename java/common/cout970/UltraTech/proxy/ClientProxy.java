@@ -3,7 +3,8 @@ package common.cout970.UltraTech.proxy;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.MinecraftForgeClient;
 import api.cout970.UltraTech.microparts.CableEntity;
-import api.cout970.UltraTech.microparts.RenderCableBig;
+import api.cout970.UltraTech.microparts.RenderCableWithoutMP;
+
 import common.cout970.UltraTech.TileEntities.electric.PumpEntity;
 import common.cout970.UltraTech.TileEntities.electric.SolarPanelEntity;
 import common.cout970.UltraTech.TileEntities.electric.SteamTurbineEntity;
@@ -48,6 +49,7 @@ import common.cout970.UltraTech.managers.BlockManager;
 import common.cout970.UltraTech.managers.ItemManager;
 import common.cout970.UltraTech.multiblocks.refinery.RefineryCore;
 import common.cout970.UltraTech.multiblocks.refinery.RenderRefinery;
+
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 
@@ -84,7 +86,7 @@ public class ClientProxy extends CommonProxy{
 		ClientRegistry.bindTileEntitySpecialRenderer(StorageTier3.class, new RenderBattery());
 		ClientRegistry.bindTileEntitySpecialRenderer(DynamoEntity.class, new RenderDynamo());
 		ClientRegistry.bindTileEntitySpecialRenderer(PumpEntity.class, new RenderPump());
-		ClientRegistry.bindTileEntitySpecialRenderer(CableEntity.class, new RenderCableBig());
+		ClientRegistry.bindTileEntitySpecialRenderer(CableEntity.class, new RenderCableWithoutMP());
 		setCustomRenderers();
 	}
 	

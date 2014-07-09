@@ -42,7 +42,7 @@ public class RenderPump extends TileEntitySpecialRenderer{
 		GL11.glDisable(GL11.GL_CULL_FACE);
 		//aninmation
 		PumpEntity te = (PumpEntity) e;
-		long dif = System.currentTimeMillis()-te.animationTime;
+		double dif = System.currentTimeMillis()-te.animationTime;
 		te.animationTime = System.currentTimeMillis();
 		if(dif > 50)dif = 0;
 		dif /= 10;
