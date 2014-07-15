@@ -1,13 +1,13 @@
 package common.cout970.UltraTech.blocks.models;
 
-import api.cout970.UltraTech.MeVpower.BlockConductor;
 import common.cout970.UltraTech.TileEntities.electric.PumpEntity;
 import common.cout970.UltraTech.TileEntities.utility.hitBoxEntity;
-import common.cout970.UltraTech.core.UltraTech;
 import common.cout970.UltraTech.managers.BlockManager;
+import common.cout970.UltraTech.managers.UT_Tabs;
 import common.cout970.UltraTech.misc.IReactorPart;
 import common.cout970.UltraTech.misc.IUpdatedEntity;
 import common.cout970.UltraTech.proxy.ClientProxy;
+import common.cout970.UltraTech.util.power.BlockConductor;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -21,7 +21,7 @@ public class PumpBlock extends BlockConductor{
 
 	public PumpBlock(Material p_i45386_1_) {
 		super(p_i45386_1_);
-		setCreativeTab(UltraTech.techTab);
+		setCreativeTab(UT_Tabs.techTab);
 		setHardness(2.5f);
 		setStepSound(soundTypeMetal);
 		setResistance(20);

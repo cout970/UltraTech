@@ -6,9 +6,8 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-
 import common.cout970.UltraTech.TileEntities.electric.tiers.PurifierT1_Entity;
-import common.cout970.UltraTech.lib.recipes.Purifier_Recipe;
+import common.cout970.UltraTech.recipes.Purifier_Recipe;
 
 public class PurifierContainer extends Container{
 

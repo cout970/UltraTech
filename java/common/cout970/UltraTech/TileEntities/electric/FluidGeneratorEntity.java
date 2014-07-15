@@ -3,13 +3,6 @@ package common.cout970.UltraTech.TileEntities.electric;
 import java.util.HashMap;
 import java.util.Map;
 
-import api.cout970.UltraTech.MeVpower.Machine;
-import api.cout970.UltraTech.MeVpower.StorageInterface;
-import api.cout970.UltraTech.MeVpower.StorageInterface.MachineTipe;
-import api.cout970.UltraTech.fluids.UT_Tank;
-import api.cout970.UltraTech.network.Net_Utils;
-import common.cout970.UltraTech.lib.CostData;
-import common.cout970.UltraTech.lib.EnergyCosts;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.nbt.NBTTagCompound;
@@ -18,6 +11,11 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
+
+import common.cout970.UltraTech.managers.MachineData;
+import common.cout970.UltraTech.network.Net_Utils;
+import common.cout970.UltraTech.util.fluids.UT_Tank;
+import common.cout970.UltraTech.util.power.Machine;
 
 public class FluidGeneratorEntity extends Machine implements IFluidHandler{
 
@@ -31,7 +29,7 @@ public class FluidGeneratorEntity extends Machine implements IFluidHandler{
 	}
 	
 	public FluidGeneratorEntity(){
-		super(CostData.Fluid_Generator);
+		super(MachineData.Fluid_Generator);
 	}
 	
 	public void updateEntity(){
@@ -39,13 +37,13 @@ public class FluidGeneratorEntity extends Machine implements IFluidHandler{
 		if(storage == null)createTank();
 		if(worldObj.isRemote)return;
 		delay++;
-		if(storage.getFluidAmount() >= 10 && getEnergy()+fuels.get(storage.getFluid().getFluid().getName()) <= maxEnergy()){
+		if(storage.getFluidAmount() >= 10 && getCharge()+fuels.get(storage.getFluid().getFluid().getName()) <= getCapacity()){
 			if(!on && delay > 20){
 				delay = 0;
 				on = true;
 				Net_Utils.sendUpdate(this);
 			}
-			this.addEnergy(fuels.get(storage.getFluid().getFluid().getName()));
+			this.addCharge(fuels.get(storage.getFluid().getFluid().getName()));
 			this.storage.drain(10, true);
 		}else{
 			if(on && delay > 20){

@@ -1,9 +1,9 @@
 package common.cout970.UltraTech.blocks.models;
 
-import api.cout970.UltraTech.fluids.FluidUtils;
-import api.cout970.UltraTech.fluids.Pipe;
 import common.cout970.UltraTech.TileEntities.electric.PumpEntity;
-import common.cout970.UltraTech.core.UltraTech;
+import common.cout970.UltraTech.managers.UT_Tabs;
+import common.cout970.UltraTech.util.fluids.FluidUtils;
+import common.cout970.UltraTech.util.fluids.Pipe;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -18,7 +18,7 @@ public abstract class FluidPipeBlock extends BlockContainer{
 
 	public FluidPipeBlock(Material par2Material) {
 		super(par2Material);
-		setCreativeTab(UltraTech.techTab);
+		setCreativeTab(UT_Tabs.techTab);
 		setStepSound(soundTypeMetal);
 		setResistance(10);
 		setHardness(1.5f);

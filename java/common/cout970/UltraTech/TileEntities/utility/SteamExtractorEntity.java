@@ -3,9 +3,9 @@ package common.cout970.UltraTech.TileEntities.utility;
 import java.util.ArrayList;
 import java.util.List;
 
-import api.cout970.UltraTech.fluids.UT_Tank;
-import common.cout970.UltraTech.lib.UT_Utils;
-import common.cout970.UltraTech.multiblocks.TileReactorPart;
+import common.cout970.UltraTech.TileEntities.multiblocks.TileReactorPart;
+import common.cout970.UltraTech.util.UT_Utils;
+import common.cout970.UltraTech.util.fluids.UT_Tank;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;

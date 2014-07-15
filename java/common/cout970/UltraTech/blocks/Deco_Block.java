@@ -2,11 +2,12 @@ package common.cout970.UltraTech.blocks;
 
 import java.util.List;
 
-import common.cout970.UltraTech.core.UltraTech;
+import common.cout970.UltraTech.managers.UT_Tabs;
 import common.cout970.UltraTech.proxy.ClientProxy;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
+import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -25,9 +26,9 @@ public class Deco_Block extends Block{
 	public int number;
 	
 	public Deco_Block(int number,boolean black) {
-		super(Material.rock);
+		super(new Material(MapColor.stoneColor));
 		this.black = black;
-		setCreativeTab(UltraTech.DecoTab);
+		setCreativeTab(UT_Tabs.DecoTab);
 		setHardness(0.4f);
 		setStepSound(soundTypeStone);
 		setResistance(30);

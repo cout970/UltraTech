@@ -5,19 +5,20 @@ import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import common.cout970.UltraTech.lib.CostData;
-import common.cout970.UltraTech.lib.recipes.CVD_Recipe;
-import common.cout970.UltraTech.lib.recipes.Cutter_Recipe;
-import common.cout970.UltraTech.lib.recipes.Laminator_Recipe;
+import common.cout970.UltraTech.managers.MachineData;
+import common.cout970.UltraTech.recipes.CVD_Recipe;
+import common.cout970.UltraTech.recipes.Cutter_Recipe;
+import common.cout970.UltraTech.recipes.Laminator_Recipe;
+import common.cout970.UltraTech.util.ConfigurableMachineWithInventory;
 
-public class CutterT1_Entity extends ConfigurableMachine implements ISidedInventory{
+public class CutterT1_Entity extends ConfigurableMachineWithInventory implements ISidedInventory{
 
 	public float Progres = 0;
 	public int maxProgres = 80;
 	public boolean hasEnergy;
 
 	public CutterT1_Entity() {
-		super(2, "Cutter", CostData.Cutter);
+		super(2, "Cutter", MachineData.Cutter);
 	}
 
 	@Override
@@ -27,12 +28,12 @@ public class CutterT1_Entity extends ConfigurableMachine implements ISidedInvent
 		boolean changes = false;
 		if(Progres > 0){
 			double extract;
-			if(maxProgres > 0)extract = CostData.Cutter.use/maxProgres;
-			else extract = CostData.Cutter.use;
-			removeEnergy(extract);
+			if(maxProgres > 0)extract = MachineData.Cutter.use/maxProgres;
+			else extract = MachineData.Cutter.use;
+			removeCharge(extract);
 		}
 		if(!hasEnergy && shouldWork()){
-			hasEnergy = this.getEnergy() >= CostData.Cutter.use;
+			hasEnergy = this.getCharge() >= MachineData.Cutter.use;
 		}
 		if(hasEnergy && Cutter_Recipe.INSTANCE.matches(this)){
 			Progres++;

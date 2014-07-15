@@ -1,8 +1,8 @@
 package common.cout970.UltraTech.items;
 
+import common.cout970.UltraTech.managers.UT_Tabs;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.Item;
-import common.cout970.UltraTech.core.UltraTech;
 
 public class UT_Item extends Item{
 
@@ -11,7 +11,7 @@ public class UT_Item extends Item{
 	public UT_Item(String name){
 		super();
 		setUnlocalizedName(name);
-		setCreativeTab(UltraTech.ResourceTab);
+		setCreativeTab(UT_Tabs.ResourceTab);
 		setMaxStackSize(64);
 		this.name = name;
 	}

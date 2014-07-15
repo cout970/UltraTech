@@ -18,8 +18,9 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import common.cout970.UltraTech.core.UltraTech;
 import common.cout970.UltraTech.managers.BlockManager;
+import common.cout970.UltraTech.managers.UT_Tabs;
+import common.cout970.UltraTech.managers.UltraTech;
 import common.cout970.UltraTech.multiblocks.refinery.RF_Utils;
 import common.cout970.UltraTech.multiblocks.refinery.RefineryBase;
 import common.cout970.UltraTech.multiblocks.refinery.RefineryCore;
@@ -33,7 +34,7 @@ public class RefineryBlock extends BlockContainer{
 
 	public RefineryBlock(Material par2Material) {
 		super(par2Material);
-		setCreativeTab(UltraTech.techTab);
+		setCreativeTab(UT_Tabs.techTab);
 		setHardness(2.5f);
 		setStepSound(soundTypeMetal);
 		setResistance(20);

@@ -1,9 +1,10 @@
 package common.cout970.UltraTech.blocks.common;
 
-import api.cout970.UltraTech.MeVpower.Machine;
 import common.cout970.UltraTech.TileEntities.utility.CrafterEntity;
-import common.cout970.UltraTech.core.UltraTech;
-import common.cout970.UltraTech.lib.UT_Utils;
+import common.cout970.UltraTech.managers.UT_Tabs;
+import common.cout970.UltraTech.managers.UltraTech;
+import common.cout970.UltraTech.util.UT_Utils;
+import common.cout970.UltraTech.util.power.Machine;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -22,7 +23,7 @@ public class CrafterBlock extends BlockContainer{
 
 	public CrafterBlock(Material m) {
 		super(m);
-		setCreativeTab(UltraTech.techTab);
+		setCreativeTab(UT_Tabs.techTab);
 		setStepSound(soundTypeMetal);
 		setResistance(50);
 		setHardness(2.0f);

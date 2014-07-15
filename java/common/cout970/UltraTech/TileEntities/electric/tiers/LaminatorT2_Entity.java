@@ -4,10 +4,10 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import common.cout970.UltraTech.lib.CostData;
-import common.cout970.UltraTech.lib.recipes.CVD_Recipe;
-import common.cout970.UltraTech.lib.recipes.Laminator_Recipe;
+import common.cout970.UltraTech.managers.MachineData;
 import common.cout970.UltraTech.misc.ISpeeded;
+import common.cout970.UltraTech.recipes.CVD_Recipe;
+import common.cout970.UltraTech.recipes.Laminator_Recipe;
 
 public class LaminatorT2_Entity extends LaminatorT1_Entity implements ISpeeded{
 
@@ -25,12 +25,12 @@ public class LaminatorT2_Entity extends LaminatorT1_Entity implements ISpeeded{
 		boolean changes = false;
 		if(Progres > 0){
 			double extract;
-			if(maxProgres > 0)extract = CostData.Laminator.use/maxProgres;
-			else extract = CostData.Laminator.use;
-			removeEnergy(extract);
+			if(maxProgres > 0)extract = MachineData.Laminator.use/maxProgres;
+			else extract = MachineData.Laminator.use;
+			removeCharge(extract);
 		}
 		if(!hasEnergy){
-			hasEnergy = this.getEnergy() >= CostData.Laminator.use;
+			hasEnergy = this.getCharge() >= MachineData.Laminator.use;
 		}
 		if(hasEnergy && Laminator_Recipe.INSTANCE.matches(this)){
 			Progres++;

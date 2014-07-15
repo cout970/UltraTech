@@ -4,11 +4,11 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import common.cout970.UltraTech.lib.CostData;
-import common.cout970.UltraTech.lib.recipes.CVD_Recipe;
-import common.cout970.UltraTech.lib.recipes.Cutter_Recipe;
-import common.cout970.UltraTech.lib.recipes.Laminator_Recipe;
+import common.cout970.UltraTech.managers.MachineData;
 import common.cout970.UltraTech.misc.ISpeeded;
+import common.cout970.UltraTech.recipes.CVD_Recipe;
+import common.cout970.UltraTech.recipes.Cutter_Recipe;
+import common.cout970.UltraTech.recipes.Laminator_Recipe;
 
 public class CutterT2_Entity extends CutterT1_Entity implements ISpeeded{
 
@@ -26,12 +26,12 @@ public class CutterT2_Entity extends CutterT1_Entity implements ISpeeded{
 		boolean changes = false;
 		if(Progres > 0){
 			double extract;
-			if(maxProgres > 0)extract = CostData.Cutter.use/maxProgres;
-			else extract = CostData.Cutter.use;
-			removeEnergy(extract);
+			if(maxProgres > 0)extract = MachineData.Cutter.use/maxProgres;
+			else extract = MachineData.Cutter.use;
+			removeCharge(extract);
 		}
 		if(!hasEnergy && shouldWork()){
-			hasEnergy = this.getEnergy() >= CostData.Cutter.use;
+			hasEnergy = this.getCharge() >= MachineData.Cutter.use;
 		}
 		if(hasEnergy && Cutter_Recipe.INSTANCE.matches(this)){
 			Progres++;

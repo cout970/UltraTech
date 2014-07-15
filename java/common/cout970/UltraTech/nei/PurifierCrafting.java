@@ -1,15 +1,18 @@
 package common.cout970.UltraTech.nei;
 
 
+import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 
-import common.cout970.UltraTech.lib.recipes.Purifier_Recipe;
+import common.cout970.UltraTech.recipes.Cutter_Recipe;
+import common.cout970.UltraTech.recipes.Purifier_Recipe;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.TemplateRecipeHandler;
+import codechicken.nei.recipe.TemplateRecipeHandler.RecipeTransferRect;
 
 public class PurifierCrafting extends TemplateRecipeHandler {
 
@@ -24,6 +27,27 @@ public class PurifierCrafting extends TemplateRecipeHandler {
 	public String getGuiTexture() {
 		return "nei:textures/gui/purifier.png";
 	}
+	
+	@Override
+	public void loadTransferRects() {
+
+		transferRects.add(new RecipeTransferRect(new Rectangle(80, 20, 24, 15), getRecipesID()));
+	}
+
+	private String getRecipesID() {
+		return "purifier";
+	}
+
+	
+	
+	@Override
+    public void loadCraftingRecipes(String outputId, Object... results) {
+    
+        if (outputId.equals(getRecipesID())) {
+            for (Purifier_Recipe recipe : Purifier_Recipe.recipes)
+                recipes.add(recipe);
+        }  else super.loadCraftingRecipes(outputId, results);
+    }
 
 	@Override
 	public void loadCraftingRecipes(ItemStack result)

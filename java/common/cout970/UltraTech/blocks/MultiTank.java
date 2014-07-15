@@ -2,8 +2,8 @@ package common.cout970.UltraTech.blocks;
 
 import java.util.Random;
 
-import common.cout970.UltraTech.core.UltraTech;
-import common.cout970.UltraTech.lib.RenderUtil;
+import common.cout970.UltraTech.managers.UT_Tabs;
+import common.cout970.UltraTech.util.RenderUtil;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -21,7 +21,7 @@ public class MultiTank extends BlockContainer{
 
 	public MultiTank(Material p_i45386_1_) {
 		super(p_i45386_1_);
-		setCreativeTab(UltraTech.techTab);
+		setCreativeTab(UT_Tabs.techTab);
 		setHardness(0.5f);
 		setStepSound(soundTypeGlass);
 		setResistance(50);

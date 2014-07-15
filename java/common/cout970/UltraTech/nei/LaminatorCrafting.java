@@ -1,5 +1,6 @@
 package common.cout970.UltraTech.nei;
 
+import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,8 +9,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.TemplateRecipeHandler;
-
-import common.cout970.UltraTech.lib.recipes.Laminator_Recipe;
+import codechicken.nei.recipe.TemplateRecipeHandler.RecipeTransferRect;
+import common.cout970.UltraTech.recipes.Laminator_Recipe;
+import common.cout970.UltraTech.recipes.Purifier_Recipe;
 
 public class LaminatorCrafting extends TemplateRecipeHandler{
 
@@ -24,6 +26,24 @@ public class LaminatorCrafting extends TemplateRecipeHandler{
 	public String getGuiTexture() {
 		return "nei:textures/gui/laminator.png";
 	}
+	
+	@Override
+	public void loadTransferRects() {
+
+		transferRects.add(new RecipeTransferRect(new Rectangle(88, 20, 24, 15), getRecipesID()));
+	}
+
+	private String getRecipesID() {
+		return "laminator";
+	}
+	@Override
+    public void loadCraftingRecipes(String outputId, Object... results) {
+    
+        if (outputId.equals(getRecipesID())) {
+            for (Laminator_Recipe recipe : Laminator_Recipe.recipes)
+                recipes.add(recipe);
+        }  else super.loadCraftingRecipes(outputId, results);
+    }
 
 	@Override
 	public void loadCraftingRecipes(ItemStack result)

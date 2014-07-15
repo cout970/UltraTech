@@ -1,20 +1,21 @@
 package common.cout970.UltraTech.blocks.common;
 
 import common.cout970.UltraTech.TileEntities.electric.ChargeStationEntity;
-import common.cout970.UltraTech.core.UltraTech;
+import common.cout970.UltraTech.managers.UT_Tabs;
+import common.cout970.UltraTech.managers.UltraTech;
+import common.cout970.UltraTech.util.power.BlockConductor;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-import api.cout970.UltraTech.MeVpower.BlockConductor;
 
 public class ChargeStation extends BlockConductor{
 
 	public ChargeStation(Material m) {
 		super(m);
-		setCreativeTab(UltraTech.techTab);
+		setCreativeTab(UT_Tabs.techTab);
 		setHardness(2f);
 		setStepSound(soundTypeMetal);
 		setBlockName("ChargeStation");

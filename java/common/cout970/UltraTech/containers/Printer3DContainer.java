@@ -2,7 +2,7 @@ package common.cout970.UltraTech.containers;
 
 
 import common.cout970.UltraTech.TileEntities.utility.Painter3DEntity;
-import common.cout970.UltraTech.lib.UT_Utils;
+import common.cout970.UltraTech.util.UT_Utils;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;

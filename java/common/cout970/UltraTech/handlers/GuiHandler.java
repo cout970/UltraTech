@@ -4,7 +4,6 @@ package common.cout970.UltraTech.handlers;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import api.cout970.UltraTech.MeVpower.Machine;
 import common.cout970.UltraTech.TileEntities.electric.ChargeStationEntity;
 import common.cout970.UltraTech.TileEntities.electric.ClimateEntity;
 import common.cout970.UltraTech.TileEntities.electric.FermenterEntity;
@@ -14,7 +13,6 @@ import common.cout970.UltraTech.TileEntities.electric.MolecularAssemblyEntity;
 import common.cout970.UltraTech.TileEntities.electric.StorageTier1;
 import common.cout970.UltraTech.TileEntities.electric.StorageTier2;
 import common.cout970.UltraTech.TileEntities.electric.StorageTier3;
-import common.cout970.UltraTech.TileEntities.electric.TesseractEntity;
 import common.cout970.UltraTech.TileEntities.electric.tiers.ChemicalPlant_Entity;
 import common.cout970.UltraTech.TileEntities.electric.tiers.ChemicalVaporDesintegrationT1_Entity;
 import common.cout970.UltraTech.TileEntities.electric.tiers.CoalGeneratorEntityT1_Entity;
@@ -23,6 +21,7 @@ import common.cout970.UltraTech.TileEntities.electric.tiers.FurnaceT1_Entity;
 import common.cout970.UltraTech.TileEntities.electric.tiers.Heater_Entity;
 import common.cout970.UltraTech.TileEntities.electric.tiers.LaminatorT1_Entity;
 import common.cout970.UltraTech.TileEntities.electric.tiers.PurifierT1_Entity;
+import common.cout970.UltraTech.TileEntities.electric.tiers.Tesseract_Entity;
 import common.cout970.UltraTech.TileEntities.fluid.BoilerEntity;
 import common.cout970.UltraTech.TileEntities.intermod.DynamoEntity;
 import common.cout970.UltraTech.TileEntities.intermod.EngineEntity;
@@ -31,6 +30,31 @@ import common.cout970.UltraTech.TileEntities.utility.HologramEmiterEntity;
 import common.cout970.UltraTech.TileEntities.utility.Painter3DEntity;
 import common.cout970.UltraTech.TileEntities.utility.ReactorControllerEntity;
 import common.cout970.UltraTech.TileEntities.utility.ReactorEntity;
+import common.cout970.UltraTech.client.gui.Boiler_Gui;
+import common.cout970.UltraTech.client.gui.CVD_Gui;
+import common.cout970.UltraTech.client.gui.ChargeStation_Gui;
+import common.cout970.UltraTech.client.gui.Chemical_Gui;
+import common.cout970.UltraTech.client.gui.ClimateStation_Gui;
+import common.cout970.UltraTech.client.gui.ControllerGui;
+import common.cout970.UltraTech.client.gui.Crafter_Gui;
+import common.cout970.UltraTech.client.gui.Cutter_Gui;
+import common.cout970.UltraTech.client.gui.Dynamo_Gui;
+import common.cout970.UltraTech.client.gui.EngineGui;
+import common.cout970.UltraTech.client.gui.Fermenter_Gui;
+import common.cout970.UltraTech.client.gui.FluidGenGui;
+import common.cout970.UltraTech.client.gui.Furnace_Gui;
+import common.cout970.UltraTech.client.gui.Generator_Gui;
+import common.cout970.UltraTech.client.gui.Heater_Gui;
+import common.cout970.UltraTech.client.gui.HologramEmiterGui;
+import common.cout970.UltraTech.client.gui.Laminator_Gui;
+import common.cout970.UltraTech.client.gui.MAssemblyGui;
+import common.cout970.UltraTech.client.gui.MinerGui;
+import common.cout970.UltraTech.client.gui.Printer3D_Gui;
+import common.cout970.UltraTech.client.gui.Purifier_Gui;
+import common.cout970.UltraTech.client.gui.ReactorGui;
+import common.cout970.UltraTech.client.gui.Refinery_Gui;
+import common.cout970.UltraTech.client.gui.Storage_Gui;
+import common.cout970.UltraTech.client.gui.TesseractGui;
 import common.cout970.UltraTech.containers.BoilerContainer;
 import common.cout970.UltraTech.containers.CVDcontainer;
 import common.cout970.UltraTech.containers.ChargeStationContainer;
@@ -57,32 +81,8 @@ import common.cout970.UltraTech.containers.RefineryContainer;
 import common.cout970.UltraTech.containers.StorageContainer;
 import common.cout970.UltraTech.containers.TabletContainer;
 import common.cout970.UltraTech.containers.TesseractContainer;
-import common.cout970.UltraTech.gui.Boiler_Gui;
-import common.cout970.UltraTech.gui.CVD_Gui;
-import common.cout970.UltraTech.gui.ChargeStation_Gui;
-import common.cout970.UltraTech.gui.Chemical_Gui;
-import common.cout970.UltraTech.gui.ClimateStation_Gui;
-import common.cout970.UltraTech.gui.ControllerGui;
-import common.cout970.UltraTech.gui.Crafter_Gui;
-import common.cout970.UltraTech.gui.Cutter_Gui;
-import common.cout970.UltraTech.gui.Dynamo_Gui;
-import common.cout970.UltraTech.gui.EngineGui;
-import common.cout970.UltraTech.gui.Fermenter_Gui;
-import common.cout970.UltraTech.gui.FluidGenGui;
-import common.cout970.UltraTech.gui.Generator_Gui;
-import common.cout970.UltraTech.gui.Heater_Gui;
-import common.cout970.UltraTech.gui.HologramEmiterGui;
-import common.cout970.UltraTech.gui.Laminator_Gui;
-import common.cout970.UltraTech.gui.MAssemblyGui;
-import common.cout970.UltraTech.gui.MinerGui;
-import common.cout970.UltraTech.gui.Printer3D_Gui;
-import common.cout970.UltraTech.gui.Purifier_Gui;
-import common.cout970.UltraTech.gui.ReactorGui;
-import common.cout970.UltraTech.gui.Refinery_Gui;
-import common.cout970.UltraTech.gui.Storage_Gui;
-import common.cout970.UltraTech.gui.TesseractGui;
-import common.cout970.UltraTech.gui.Furnace_Gui;
 import common.cout970.UltraTech.multiblocks.refinery.RefineryBase;
+import common.cout970.UltraTech.util.power.Machine;
 import common.cout970.UltraTech.wiki.TabletGui;
 import cpw.mods.fml.common.network.IGuiHandler;
 
@@ -148,8 +148,8 @@ public class GuiHandler implements IGuiHandler{
 			return new CrafterContainer(player.inventory, (CrafterEntity) tileEntity);
 		}
 		//Tesseract
-		if(tileEntity instanceof TesseractEntity){
-			return new TesseractContainer(player.inventory, (TesseractEntity) tileEntity);
+		if(tileEntity instanceof Tesseract_Entity){
+			return new TesseractContainer(player.inventory, (Tesseract_Entity) tileEntity);
 		}
 		//Fermenter
 		if(tileEntity instanceof FermenterEntity){
@@ -262,8 +262,8 @@ public class GuiHandler implements IGuiHandler{
 			return new Crafter_Gui(new CrafterContainer(player.inventory, (CrafterEntity) tileEntity), player.inventory, (CrafterEntity) tileEntity);
 		}
 		//Tesseract
-		if(tileEntity instanceof TesseractEntity){
-			return new TesseractGui(new TesseractContainer(player.inventory, (TesseractEntity) tileEntity), player.inventory, (TesseractEntity) tileEntity);
+		if(tileEntity instanceof Tesseract_Entity){
+			return new TesseractGui(new TesseractContainer(player.inventory, (Tesseract_Entity) tileEntity), player.inventory, (Tesseract_Entity) tileEntity);
 		}
 		//Fermenter
 		if(tileEntity instanceof FermenterEntity){

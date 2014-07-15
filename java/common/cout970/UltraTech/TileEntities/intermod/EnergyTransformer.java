@@ -1,6 +1,6 @@
 package common.cout970.UltraTech.TileEntities.intermod;
 
-import api.cout970.UltraTech.MeVpower.Machine;
+import common.cout970.UltraTech.util.power.Machine;
 
 public class EnergyTransformer extends Machine{
 

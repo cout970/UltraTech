@@ -1,37 +1,27 @@
 package common.cout970.UltraTech.TileEntities.electric;
 
-import java.util.ArrayList;
-import java.util.Deque;
 import java.util.LinkedList;
-import java.util.List;
-import java.util.TreeMap;
 
-import common.cout970.UltraTech.lib.CostData;
-import common.cout970.UltraTech.lib.EnergyCosts;
-import common.cout970.UltraTech.lib.UT_Utils;
-import common.cout970.UltraTech.managers.FluidManager;
-import common.cout970.UltraTech.misc.BlockPos;
-import common.cout970.UltraTech.misc.IUpdatedEntity;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockStaticLiquid;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.common.util.ForgeDirection;
-import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
-import api.cout970.UltraTech.MeVpower.CableType;
-import api.cout970.UltraTech.MeVpower.Machine;
-import api.cout970.UltraTech.MeVpower.StorageInterface.MachineTipe;
-import api.cout970.UltraTech.fluids.TankConection;
-import api.cout970.UltraTech.fluids.UT_Tank;
+import ultratech.api.power.StorageInterface.PowerIO;
+
+import common.cout970.UltraTech.managers.MachineData;
+import common.cout970.UltraTech.misc.IUpdatedEntity;
+import common.cout970.UltraTech.util.BlockPos;
+import common.cout970.UltraTech.util.fluids.UT_Tank;
+import common.cout970.UltraTech.util.power.Machine;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class PumpEntity extends Machine implements IFluidHandler,IUpdatedEntity{
 
@@ -48,7 +38,7 @@ public class PumpEntity extends Machine implements IFluidHandler,IUpdatedEntity{
 	
 	
 	public PumpEntity(){
-		super(3200,2,MachineTipe.Nothing,true);
+		super(3200,2,PowerIO.Nothing,true);
 		height = yCoord-3;
 	}
 	
@@ -63,15 +53,15 @@ public class PumpEntity extends Machine implements IFluidHandler,IUpdatedEntity{
 		if(worldObj.getTotalWorldTime()% 10 != 0)return;
 		if(FluidUpdate && worldObj.getTotalWorldTime()% 40 == 0){
 			FluidUpdate = false;
-			Sync();
+			sendNetworkUpdate();
 		}
-		if(getEnergy() >= CostData.Pump.use){
+		if(getCharge() >= MachineData.Pump.use){
 			if(layer.isEmpty() && worldObj.getTotalWorldTime()% 40 == 0){
 				if(height<=0)height = yCoord-3;
 				for(;height>0;){
 					if(worldObj.isAirBlock(xCoord, height, zCoord) || getFluid(worldObj.getBlock(xCoord, height, zCoord), 0) != null){
 						if(layer.isEmpty()){
-							loadLayer();
+							loadLayer(getFluid(worldObj.getBlock(xCoord, height, zCoord), 0));
 							if(layer.isEmpty())height -= 1;
 							else break;
 						}else break;
@@ -86,10 +76,10 @@ public class PumpEntity extends Machine implements IFluidHandler,IUpdatedEntity{
 					if(b != null){
 						Fluid f = getFluid(worldObj.getBlock(b.x, b.y, b.z), worldObj.getBlockMetadata(b.x, b.y, b.z));
 						if(f != null){
-							if(b.x != xCoord || b.z != zCoord)worldObj.setBlock(b.x, b.y, b.z, Blocks.stone, 0, 6);
+							if((b.x != xCoord || b.z != zCoord) && f == FluidRegistry.LAVA)worldObj.setBlock(b.x, b.y, b.z, Blocks.stone, 0, 6);
 							else worldObj.setBlockToAir(b.x, b.y, b.z);
 							this.fill(null,new FluidStack(f, 1000), true);
-							removeEnergy(CostData.Pump.use);
+							removeCharge(MachineData.Pump.use);
 							break;
 						}
 					}
@@ -98,12 +88,12 @@ public class PumpEntity extends Machine implements IFluidHandler,IUpdatedEntity{
 		}
 	}
 
-	private void loadLayer() {
+	private void loadLayer(Fluid d) {
 		layer.clear();
 		if(getFluid(worldObj.getBlock(xCoord, height, zCoord), 0)!= null)
 			for(int x=-100;x<100;x++){for(int z=-100;z<100;z++){
 				Fluid f = getFluid(worldObj.getBlock(xCoord+x, height, zCoord+z), worldObj.getBlockMetadata(xCoord+x, height, zCoord+z));
-				if(f != null && (getTank().getFluid() == null || getTank().getFluid().getFluid() == f)){
+				if(f != null && f == d &&(getTank().getFluid() == null  || getTank().getFluid().getFluid() == f)){
 					layer.add(new BlockPos(xCoord+x, height, zCoord+z));
 					if(layer.size() > 1000)break;
 				}
@@ -173,7 +163,6 @@ public class PumpEntity extends Machine implements IFluidHandler,IUpdatedEntity{
 
 	@Override
 	public void onNeigUpdate() {
-		// TODO Auto-generated method stub
 		
 	}
 	

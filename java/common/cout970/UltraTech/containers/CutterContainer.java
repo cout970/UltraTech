@@ -6,9 +6,8 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-
 import common.cout970.UltraTech.TileEntities.electric.tiers.CutterT1_Entity;
-import common.cout970.UltraTech.lib.recipes.Cutter_Recipe;
+import common.cout970.UltraTech.recipes.Cutter_Recipe;
 
 public class CutterContainer extends Container{
 

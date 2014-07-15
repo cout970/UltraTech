@@ -86,7 +86,7 @@ public abstract class Schematic {
 			}
 
 			if (stack.getItemDamage() >= stack.getMaxDamage()) {
-				slot.decreaseStackInSlot();
+				slot.decreaseStackInSlot(1);
 			}
 		} else {
 			if (stack.stackSize >= req.stackSize) {
@@ -187,8 +187,10 @@ public abstract class Schematic {
 	public double getEnergyRequirement(LinkedList<ItemStack> stacksUsed) {
 		double result = 0;
 
-		for (ItemStack s : stacksUsed) {
-			result += s.stackSize * SchematicRegistry.BUILD_ENERGY;
+		if (stacksUsed != null) {
+			for (ItemStack s : stacksUsed) {
+				result += s.stackSize * SchematicRegistry.BUILD_ENERGY;
+			}
 		}
 
 		return result;

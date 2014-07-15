@@ -2,7 +2,7 @@ package common.cout970.UltraTech.blocks;
 
 import java.util.List;
 
-import common.cout970.UltraTech.core.UltraTech;
+import common.cout970.UltraTech.managers.UT_Tabs;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -21,7 +21,7 @@ public class ChasisBlock extends Block{
 
 	public ChasisBlock(Material par2Material) {
 		super(par2Material);
-		setCreativeTab(UltraTech.techTab);
+		setCreativeTab(UT_Tabs.techTab);
 		setHardness(2.5f);
 		setStepSound(soundTypeMetal);
 		setResistance(25);

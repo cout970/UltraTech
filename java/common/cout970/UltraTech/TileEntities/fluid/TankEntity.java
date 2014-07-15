@@ -1,8 +1,9 @@
 package common.cout970.UltraTech.TileEntities.fluid;
 
-import api.cout970.UltraTech.fluids.UT_Tank;
-import api.cout970.UltraTech.network.Net_Utils;
-import api.cout970.UltraTech.network.SyncTile;
+import common.cout970.UltraTech.network.Net_Utils;
+import common.cout970.UltraTech.network.SyncTile;
+import common.cout970.UltraTech.util.LogHelper;
+import common.cout970.UltraTech.util.fluids.UT_Tank;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -24,15 +25,16 @@ public class TankEntity extends SyncTile implements IFluidHandler{
 	public void updateEntity(){
 		if(worldObj.getTotalWorldTime()%20 == 0 && FluidChange){
 			FluidChange = false;
-			Sync();
+			sendNetworkUpdate();
 		}
 	}
 
 	@Override
 	public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
 		int f = getTank().fill(resource, doFill);
-		if(f > 0)
+		if(f > 0){
 			FluidChange = true;
+		}
 		return f;
 	}
 
@@ -46,7 +48,7 @@ public class TankEntity extends SyncTile implements IFluidHandler{
 	@Override
 	public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain) {
 		FluidStack f = getTank().drain(maxDrain, doDrain);
-		if(f != null && f.amount > 0){
+		if(f != null && f.amount > 0 && doDrain){
 			FluidChange = true;
 		}
 		return f;

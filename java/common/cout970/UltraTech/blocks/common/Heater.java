@@ -7,10 +7,11 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-import api.cout970.UltraTech.MeVpower.BlockConductor;
 import common.cout970.UltraTech.TileEntities.electric.tiers.Heater_Entity;
-import common.cout970.UltraTech.core.UltraTech;
+import common.cout970.UltraTech.managers.UT_Tabs;
+import common.cout970.UltraTech.managers.UltraTech;
 import common.cout970.UltraTech.misc.IUpdatedEntity;
+import common.cout970.UltraTech.util.power.BlockConductor;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -20,7 +21,7 @@ public class Heater extends BlockConductor{
 
 	public Heater(Material m) {
 		super(m);
-		setCreativeTab(UltraTech.techTab);
+		setCreativeTab(UT_Tabs.techTab);
 		setHardness(2f);
 		setStepSound(soundTypeMetal);
 		setBlockName("Heater");

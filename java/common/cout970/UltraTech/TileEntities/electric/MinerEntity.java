@@ -3,28 +3,25 @@ package common.cout970.UltraTech.TileEntities.electric;
 import java.util.ArrayList;
 import java.util.List;
 
-import api.cout970.UltraTech.MeVpower.Machine;
-import buildcraft.api.transport.IPipeTile;
-import buildcraft.api.transport.IPipeTile.PipeType;
-import common.cout970.UltraTech.containers.MinerContainer;
-import common.cout970.UltraTech.lib.Control;
-import common.cout970.UltraTech.lib.CostData;
-import common.cout970.UltraTech.lib.EnergyCosts;
-import common.cout970.UltraTech.misc.MachineWithInventory;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.oredict.OreDictionary;
+import buildcraft.api.transport.IPipeTile;
+import buildcraft.api.transport.IPipeTile.PipeType;
+
+import common.cout970.UltraTech.containers.MinerContainer;
+import common.cout970.UltraTech.managers.InformationManager;
+import common.cout970.UltraTech.managers.MachineData;
+import common.cout970.UltraTech.util.MachineWithInventory;
 
 public class MinerEntity extends MachineWithInventory implements IInventory{
 
@@ -55,7 +52,7 @@ public class MinerEntity extends MachineWithInventory implements IInventory{
 	
  	
 	public MinerEntity(){
-		super(52,"Miner",CostData.Miner);
+		super(52,"Miner",MachineData.Miner);
 	}
 	
 
@@ -77,7 +74,7 @@ public class MinerEntity extends MachineWithInventory implements IInventory{
 				hasMine = true;
 			}
 			if(!hasEnergy){
-				hasEnergy = this.getEnergy() >= CostData.Miner.use || Control.debug;
+				hasEnergy = this.getCharge() >= MachineData.Miner.use || InformationManager.debug;
 			}
 			boolean changes = false;
 			
@@ -91,7 +88,7 @@ public class MinerEntity extends MachineWithInventory implements IInventory{
 					
 				}
 			}
-			if(Control.debug){
+			if(InformationManager.debug){
 				for(int i = 0;i<25;i++)BreakNextBlock();
 			}
 
@@ -119,7 +116,7 @@ public class MinerEntity extends MachineWithInventory implements IInventory{
 				int y = mining.get(current)[1];
 				int z = mining.get(current)[2];
 				if(canBreak(worldObj.getBlock(x, y, z))){
-					removeEnergy(CostData.Miner.use);
+					removeCharge(MachineData.Miner.use);
 					ArrayList<ItemStack> items = new ArrayList<ItemStack>();
 					Block id = worldObj.getBlock(x, y, z);
 					int meta = worldObj.getBlockMetadata(x, y, z);

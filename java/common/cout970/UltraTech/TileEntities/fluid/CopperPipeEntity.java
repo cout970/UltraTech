@@ -3,7 +3,11 @@ package common.cout970.UltraTech.TileEntities.fluid;
 import java.util.ArrayList;
 import java.util.List;
 
-import common.cout970.UltraTech.lib.UT_Utils;
+import common.cout970.UltraTech.util.LogHelper;
+import common.cout970.UltraTech.util.UT_Utils;
+import common.cout970.UltraTech.util.fluids.IFluidTransport;
+import common.cout970.UltraTech.util.fluids.Pipe;
+import common.cout970.UltraTech.util.fluids.TankConection;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -11,9 +15,6 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
-import api.cout970.UltraTech.fluids.IFluidTransport;
-import api.cout970.UltraTech.fluids.Pipe;
-import api.cout970.UltraTech.fluids.TankConection;
 
 public class CopperPipeEntity extends Pipe implements IFluidHandler{
 
@@ -22,10 +23,15 @@ public class CopperPipeEntity extends Pipe implements IFluidHandler{
 	public boolean mode;//false out, true in
 	public boolean up;
 	public boolean lock;
+	public boolean hasChanged;
 	
 	public void updateEntity(){
 		super.updateEntity();
 		if(worldObj.isRemote)return;
+//		if(hasChanged && worldObj.getWorldTime()%20 == 0){
+//			hasChanged = false;
+//			Sync();
+//		}
 		if(!up){onNeighUpdate(); up = true;}
 		if(connections.size() == 0 || getNetwork() == null)return;
 		if(!mode){
@@ -47,6 +53,7 @@ public class CopperPipeEntity extends Pipe implements IFluidHandler{
 					if(toD >0){
 						FluidStack c = t.tank.drain(t.side, toD, true);
 						this.fill(null, c, true);
+						hasChanged = true;
 					}
 				}
 			}
@@ -67,7 +74,7 @@ public class CopperPipeEntity extends Pipe implements IFluidHandler{
 		}
 		if(!lock){
 			mode = worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord);
-			Sync();
+			sendNetworkUpdate();
 		}
 	}
 
@@ -111,7 +118,14 @@ public class CopperPipeEntity extends Pipe implements IFluidHandler{
 	
 	public void readFromNBT(NBTTagCompound p_145839_1_)
     {
-        super.readFromNBT(p_145839_1_);
+		super.readFromNBT(p_145839_1_);
+//		if(getNetwork() != null){
+////			if(!getNetwork().alreadyLoad){			
+//				LogHelper.log("loaded liquid: "+getNetwork().getBuffer().getFluidAmount());
+//				getNetwork().getBuffer().readFromNBT(p_145839_1_, "net");
+////				getNetwork().alreadyLoad = true;
+////			}
+//		}
         mode = p_145839_1_.getBoolean("mode");
         lock = p_145839_1_.getBoolean("lock");
     }
@@ -119,6 +133,9 @@ public class CopperPipeEntity extends Pipe implements IFluidHandler{
     public void writeToNBT(NBTTagCompound p_145841_1_)
     {
     	super.writeToNBT(p_145841_1_);
+//    	if(getNetwork() != null && getNetwork().getBuffer().getFluidAmount() > 0){
+//    		getNetwork().getBuffer().writeToNBT(p_145841_1_,"net");
+//    	}
     	p_145841_1_.setBoolean("mode", mode);
     	p_145841_1_.setBoolean("lock", lock);
     }

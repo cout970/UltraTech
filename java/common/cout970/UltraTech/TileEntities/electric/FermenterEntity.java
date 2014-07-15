@@ -10,16 +10,16 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
-import api.cout970.UltraTech.fluids.UT_Tank;
-import common.cout970.UltraTech.lib.CostData;
-import common.cout970.UltraTech.lib.recipes.Fermenter_Recipes;
 import common.cout970.UltraTech.managers.FluidManager;
-import common.cout970.UltraTech.misc.MachineWithInventory;
+import common.cout970.UltraTech.managers.MachineData;
+import common.cout970.UltraTech.recipes.Fermenter_Recipes;
+import common.cout970.UltraTech.util.MachineWithInventory;
+import common.cout970.UltraTech.util.fluids.UT_Tank;
 
 public class FermenterEntity extends MachineWithInventory implements  IFluidHandler{
 
 	public FermenterEntity() {
-		super(1, "Fermenter",CostData.Fermenter);
+		super(1, "Fermenter",MachineData.Fermenter);
 	}
 
 	public UT_Tank water = null;
@@ -40,11 +40,11 @@ public class FermenterEntity extends MachineWithInventory implements  IFluidHand
 			}
 		}
 		if(progres > 0){
-			if(juice.getFluidAmount() + 5 <= juice.getCapacity() && water.getFluidAmount() >= 10 && getEnergy() >= CostData.Fermenter.use){
+			if(juice.getFluidAmount() + 5 <= juice.getCapacity() && water.getFluidAmount() >= 10 && getCharge() >= MachineData.Fermenter.use){
 				progres--;
 				juice.fill(new FluidStack(FluidManager.Juice, 5), true);
 				water.drain(10, true);
-				removeEnergy(CostData.Fermenter.use*5);
+				removeCharge(MachineData.Fermenter.use*5);
 			}
 		}
 	}

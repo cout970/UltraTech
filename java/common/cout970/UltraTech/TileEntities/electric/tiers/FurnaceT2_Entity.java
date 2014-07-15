@@ -5,9 +5,9 @@ import net.minecraft.inventory.ICrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
-import common.cout970.UltraTech.lib.CostData;
-import common.cout970.UltraTech.lib.recipes.Cutter_Recipe;
+import common.cout970.UltraTech.managers.MachineData;
 import common.cout970.UltraTech.misc.ISpeeded;
+import common.cout970.UltraTech.recipes.Cutter_Recipe;
 
 public class FurnaceT2_Entity extends FurnaceT1_Entity implements ISpeeded{
 
@@ -25,12 +25,12 @@ public class FurnaceT2_Entity extends FurnaceT1_Entity implements ISpeeded{
 		boolean changes = false;
 		if(Progres > 0){
 			double extract;
-			if(maxProgres > 0)extract = CostData.Furnace.use/maxProgres;
-			else extract = CostData.Furnace.use;
-			removeEnergy(extract);
+			if(maxProgres > 0)extract = MachineData.Furnace.use/maxProgres;
+			else extract = MachineData.Furnace.use;
+			removeCharge(extract);
 		}
 		if(!hasEnergy && shouldWork()){
-			hasEnergy = this.getEnergy() >= CostData.Furnace.use;
+			hasEnergy = this.getCharge() >= MachineData.Furnace.use;
 		}
 		if(hasEnergy && canSmelt()){
 			Progres++;

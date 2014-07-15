@@ -2,7 +2,8 @@ package common.cout970.UltraTech.TileEntities.utility;
 
 import java.util.HashMap;
 
-import api.cout970.UltraTech.network.SyncTile;
+import common.cout970.UltraTech.network.SyncTile;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -83,7 +84,7 @@ public class ObaltiChest extends SyncTile implements IInventory{
 		if (itemStack != null && itemStack.stackSize > this.getInventoryStackLimit()) {
 			itemStack.stackSize = this.getInventoryStackLimit();
 		}
-		Sync();
+		sendNetworkUpdate();
 	}
 
 	@Override

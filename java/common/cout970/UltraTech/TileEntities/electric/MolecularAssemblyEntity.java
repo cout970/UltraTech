@@ -1,19 +1,16 @@
 package common.cout970.UltraTech.TileEntities.electric;
 
 
-import api.cout970.UltraTech.MeVpower.Machine;
-import common.cout970.UltraTech.lib.EnergyCosts;
-import common.cout970.UltraTech.lib.CostData;
-import common.cout970.UltraTech.lib.recipes.Assembly_Recipes;
-import common.cout970.UltraTech.misc.MachineWithInventory;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.oredict.OreDictionary;
+
+import common.cout970.UltraTech.managers.MachineData;
+import common.cout970.UltraTech.recipes.Assembly_Recipes;
+import common.cout970.UltraTech.util.MachineWithInventory;
 
 public class MolecularAssemblyEntity extends MachineWithInventory implements IInventory{
 
@@ -23,7 +20,7 @@ public class MolecularAssemblyEntity extends MachineWithInventory implements IIn
 	private boolean hasEnergy;
 	
 	public MolecularAssemblyEntity(){
-		super(11,"Molecular Assembly",CostData.MA);
+		super(11,"Molecular Assembly",MachineData.MA);
 	}
 
 	public void updateEntity(){
@@ -31,11 +28,11 @@ public class MolecularAssemblyEntity extends MachineWithInventory implements IIn
 		boolean flag = false;
 
 		if(!hasEnergy){
-			hasEnergy = getEnergy() >= CostData.MA.use;
+			hasEnergy = getCharge() >= MachineData.MA.use;
 		}
 
 		if(progres > 0){
-			removeEnergy(CostData.MA.use*speed/1000);
+			removeCharge(MachineData.MA.use*speed/1000);
 		}
 		if (hasEnergy && hasrecipe && (getStackInSlot(9) == null || OreDictionary.itemMatches(getStackInSlot(9), getStackInSlot(10), true))){
 			this.progres += speed;
@@ -50,7 +47,7 @@ public class MolecularAssemblyEntity extends MachineWithInventory implements IIn
 			this.progres = 0;
 		}
 		if (flag){
-			this.Sync();		
+			this.sendNetworkUpdate();		
 		}
 		if(!hasrecipe){
 			if(Assembly_Recipes.matches(this)){

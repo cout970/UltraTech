@@ -5,22 +5,19 @@ import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntityFurnace;
-import common.cout970.UltraTech.lib.CostData;
-import common.cout970.UltraTech.lib.EnergyCosts;
-import common.cout970.UltraTech.lib.recipes.CVD_Recipe;
-import common.cout970.UltraTech.misc.ISpeeded;
-import common.cout970.UltraTech.misc.IUpdatedEntity;
-import common.cout970.UltraTech.misc.MachineWithInventory;
 
-public class ChemicalVaporDesintegrationT1_Entity extends ConfigurableMachine implements ISidedInventory{
+import common.cout970.UltraTech.managers.MachineData;
+import common.cout970.UltraTech.recipes.CVD_Recipe;
+import common.cout970.UltraTech.util.ConfigurableMachineWithInventory;
+
+public class ChemicalVaporDesintegrationT1_Entity extends ConfigurableMachineWithInventory implements ISidedInventory{
 
 	public float Progres = 0;
 	public int maxProgres = 80;
 	public boolean hasEnergy;
 
 	public ChemicalVaporDesintegrationT1_Entity(){
-		super(3,"CVD",CostData.CVD);
+		super(3,"CVD",MachineData.CVD);
 	}
 
 	@Override
@@ -29,12 +26,12 @@ public class ChemicalVaporDesintegrationT1_Entity extends ConfigurableMachine im
 		boolean changes = false;
 		if(Progres > 0){
 			double extract;
-			if(maxProgres > 0)extract = CostData.CVD.use/maxProgres;
-			else extract = CostData.CVD.use;
-			removeEnergy(extract);
+			if(maxProgres > 0)extract = MachineData.CVD.use/maxProgres;
+			else extract = MachineData.CVD.use;
+			removeCharge(extract);
 		}
 		if(!hasEnergy && shouldWork()){
-			hasEnergy = this.getEnergy() >= CostData.CVD.use;
+			hasEnergy = this.getCharge() >= MachineData.CVD.use;
 		}
 		if(hasEnergy && CVD_Recipe.INSTANCE.matches(this)){
 			Progres++;

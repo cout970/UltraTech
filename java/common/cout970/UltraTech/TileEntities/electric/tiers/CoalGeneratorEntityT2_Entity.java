@@ -1,23 +1,11 @@
 package common.cout970.UltraTech.TileEntities.electric.tiers;
 
 
-import api.cout970.UltraTech.MeVpower.Machine;
-import api.cout970.UltraTech.MeVpower.StorageInterface;
-import api.cout970.UltraTech.MeVpower.StorageInterface.MachineTipe;
-import api.cout970.UltraTech.network.Net_Utils;
-import common.cout970.UltraTech.lib.EnergyCosts;
-import common.cout970.UltraTech.lib.CostData;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntityFurnace;
+
 import common.cout970.UltraTech.misc.ISpeeded;
 import common.cout970.UltraTech.misc.IUpdatedEntity;
-import common.cout970.UltraTech.misc.MachineWithInventory;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.ICrafting;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
-import net.minecraft.tileentity.TileEntityFurnace;
 
 public class CoalGeneratorEntityT2_Entity extends CoalGeneratorEntityT1_Entity implements ISpeeded,IUpdatedEntity{
 
@@ -36,11 +24,11 @@ public class CoalGeneratorEntityT2_Entity extends CoalGeneratorEntityT1_Entity i
 		if(Progres > 0){
 			double extract = production();
 			if(Progres - extract < 0){
-				addEnergy(EnergyCosts.toEnergy(Progres));
+				addCharge(pe.FTtoMev(Progres));
 				Progres = 0;
 			}else{
 				Progres -= extract*2;
-				addEnergy(extract);
+				addCharge(extract);
 			}
 			if(heat < maxHeat)heat+=1.2-heat/maxHeat;
 		}else{
@@ -50,7 +38,7 @@ public class CoalGeneratorEntityT2_Entity extends CoalGeneratorEntityT1_Entity i
 		if(Progres <= 0){
 			if(inventory[0] != null && shouldWork()){
 				int fuel = TileEntityFurnace.getItemBurnTime(inventory[0]);
-				if(fuel > 0 && (getEnergy()+EnergyCosts.toEnergy(fuel) <= maxEnergy() || (EnergyCosts.toEnergy(fuel) > maxEnergy()&& getEnergy() < maxEnergy()))){
+				if(fuel > 0 && (getCharge()+pe.FTtoMev(fuel) <= getCapacity() || (pe.FTtoMev(fuel) > getCapacity()&& getCharge() < getCapacity()))){
 						Progres = fuel;
 						maxProgres = fuel;
 						if(inventory[0] != null){

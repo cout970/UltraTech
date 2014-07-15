@@ -2,8 +2,6 @@ package common.cout970.UltraTech.proxy;
 
 import net.minecraft.item.Item;
 import net.minecraftforge.client.MinecraftForgeClient;
-import api.cout970.UltraTech.microparts.CableEntity;
-import api.cout970.UltraTech.microparts.RenderCableBig;
 import common.cout970.UltraTech.TileEntities.electric.PumpEntity;
 import common.cout970.UltraTech.TileEntities.electric.SolarPanelEntity;
 import common.cout970.UltraTech.TileEntities.electric.SteamTurbineEntity;
@@ -11,6 +9,7 @@ import common.cout970.UltraTech.TileEntities.electric.StorageTier1;
 import common.cout970.UltraTech.TileEntities.electric.StorageTier2;
 import common.cout970.UltraTech.TileEntities.electric.StorageTier3;
 import common.cout970.UltraTech.TileEntities.electric.WindMillEntity;
+import common.cout970.UltraTech.TileEntities.electric.tiers.Tesseract_Entity;
 import common.cout970.UltraTech.TileEntities.fluid.BoilerEntity;
 import common.cout970.UltraTech.TileEntities.fluid.CopperPipeEntity;
 import common.cout970.UltraTech.TileEntities.fluid.TankEntity;
@@ -19,33 +18,37 @@ import common.cout970.UltraTech.TileEntities.intermod.EnergyTransformer;
 import common.cout970.UltraTech.TileEntities.intermod.EngineEntity;
 import common.cout970.UltraTech.TileEntities.utility.HologramEmiterEntity;
 import common.cout970.UltraTech.TileEntities.utility.ReactorTankEntity;
-import common.cout970.UltraTech.machines.renders.DecoBlocksRender;
-import common.cout970.UltraTech.machines.renders.ReactorTankRender;
-import common.cout970.UltraTech.machines.renders.RenderBattery;
-import common.cout970.UltraTech.machines.renders.RenderBoiler;
-import common.cout970.UltraTech.machines.renders.RenderDynamo;
-import common.cout970.UltraTech.machines.renders.RenderEngine;
-import common.cout970.UltraTech.machines.renders.RenderHologram;
-import common.cout970.UltraTech.machines.renders.RenderPipe;
-import common.cout970.UltraTech.machines.renders.RenderPump;
-import common.cout970.UltraTech.machines.renders.RenderSolarPanel;
-import common.cout970.UltraTech.machines.renders.RenderTank;
-import common.cout970.UltraTech.machines.renders.RenderTransformer;
-import common.cout970.UltraTech.machines.renders.RenderTurbine;
-import common.cout970.UltraTech.machines.renders.RenderWindMill;
-import common.cout970.UltraTech.machines.renders.items.RenderBatteryItem;
-import common.cout970.UltraTech.machines.renders.items.RenderBoilerItem;
-import common.cout970.UltraTech.machines.renders.items.RenderDynamoItem;
-import common.cout970.UltraTech.machines.renders.items.RenderEngineItem;
-import common.cout970.UltraTech.machines.renders.items.RenderPipeItem;
-import common.cout970.UltraTech.machines.renders.items.RenderPumpItem;
-import common.cout970.UltraTech.machines.renders.items.RenderSolarItem;
-import common.cout970.UltraTech.machines.renders.items.RenderSwordItem;
-import common.cout970.UltraTech.machines.renders.items.RenderTankItem;
-import common.cout970.UltraTech.machines.renders.items.RenderTurbineItem;
-import common.cout970.UltraTech.machines.renders.items.RenderWindMillItem;
+import common.cout970.UltraTech.client.renderItems.RenderBatteryItem;
+import common.cout970.UltraTech.client.renderItems.RenderBoilerItem;
+import common.cout970.UltraTech.client.renderItems.RenderDynamoItem;
+import common.cout970.UltraTech.client.renderItems.RenderEngineItem;
+import common.cout970.UltraTech.client.renderItems.RenderPipeItem;
+import common.cout970.UltraTech.client.renderItems.RenderPumpItem;
+import common.cout970.UltraTech.client.renderItems.RenderSolarItem;
+import common.cout970.UltraTech.client.renderItems.RenderSwordItem;
+import common.cout970.UltraTech.client.renderItems.RenderTankItem;
+import common.cout970.UltraTech.client.renderItems.RenderTesseractItem;
+import common.cout970.UltraTech.client.renderItems.RenderTurbineItem;
+import common.cout970.UltraTech.client.renderItems.RenderWindMillItem;
+import common.cout970.UltraTech.client.renders.DecoBlocksRender;
+import common.cout970.UltraTech.client.renders.ReactorTankRender;
+import common.cout970.UltraTech.client.renders.RenderBattery;
+import common.cout970.UltraTech.client.renders.RenderBoiler;
+import common.cout970.UltraTech.client.renders.RenderDynamo;
+import common.cout970.UltraTech.client.renders.RenderEngine;
+import common.cout970.UltraTech.client.renders.RenderHologram;
+import common.cout970.UltraTech.client.renders.RenderPipe;
+import common.cout970.UltraTech.client.renders.RenderPump;
+import common.cout970.UltraTech.client.renders.RenderSolarPanel;
+import common.cout970.UltraTech.client.renders.RenderTank;
+import common.cout970.UltraTech.client.renders.RenderTesseract;
+import common.cout970.UltraTech.client.renders.RenderTransformer;
+import common.cout970.UltraTech.client.renders.RenderTurbine;
+import common.cout970.UltraTech.client.renders.RenderWindMill;
 import common.cout970.UltraTech.managers.BlockManager;
 import common.cout970.UltraTech.managers.ItemManager;
+import common.cout970.UltraTech.microparts.Cable_Entity;
+import common.cout970.UltraTech.microparts.RenderCableWithoutMP;
 import common.cout970.UltraTech.multiblocks.refinery.RefineryCore;
 import common.cout970.UltraTech.multiblocks.refinery.RenderRefinery;
 import cpw.mods.fml.client.registry.ClientRegistry;
@@ -65,10 +68,11 @@ public class ClientProxy extends CommonProxy{
 	public static int dynamoRenderPass;
 	public static int pumpRenderPass;
 	public static int pipeRenderPass;
+	public static int tesseractRenderPass;
 
 	@Override
 	public void registerRenders() {
-		ClientRegistry.bindTileEntitySpecialRenderer(SolarPanelEntity.class, new RenderSolarPanel());
+//		ClientRegistry.bindTileEntitySpecialRenderer(SolarPanelEntity.class, new RenderSolarPanel());
 		ClientRegistry.bindTileEntitySpecialRenderer(ReactorTankEntity.class, new ReactorTankRender());
 		ClientRegistry.bindTileEntitySpecialRenderer(WindMillEntity.class, new RenderWindMill());
 		ClientRegistry.bindTileEntitySpecialRenderer(EngineEntity.class, new RenderEngine());
@@ -84,7 +88,9 @@ public class ClientProxy extends CommonProxy{
 		ClientRegistry.bindTileEntitySpecialRenderer(StorageTier3.class, new RenderBattery());
 		ClientRegistry.bindTileEntitySpecialRenderer(DynamoEntity.class, new RenderDynamo());
 		ClientRegistry.bindTileEntitySpecialRenderer(PumpEntity.class, new RenderPump());
-		ClientRegistry.bindTileEntitySpecialRenderer(CableEntity.class, new RenderCableBig());
+		ClientRegistry.bindTileEntitySpecialRenderer(Cable_Entity.class, new RenderCableWithoutMP());
+		ClientRegistry.bindTileEntitySpecialRenderer(Tesseract_Entity.class, new RenderTesseract());
+		
 		setCustomRenderers();
 	}
 	
@@ -123,7 +129,9 @@ public class ClientProxy extends CommonProxy{
 		//pipe
 		  pipeRenderPass = RenderingRegistry.getNextAvailableRenderId();
 		  MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockManager.CopperPipe), new RenderPipeItem());
-		  
+		//tesseract
+		  tesseractRenderPass = RenderingRegistry.getNextAvailableRenderId();
+		  MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockManager.Tesseract), new RenderTesseractItem());
 		  
 		  //Items
 		  

@@ -1,32 +1,25 @@
 package common.cout970.UltraTech.TileEntities.electric.tiers;
 
 
-import api.cout970.UltraTech.MeVpower.Machine;
-import api.cout970.UltraTech.MeVpower.StorageInterface;
-import api.cout970.UltraTech.MeVpower.StorageInterface.MachineTipe;
-import api.cout970.UltraTech.network.Net_Utils;
-import common.cout970.UltraTech.lib.EnergyCosts;
-import common.cout970.UltraTech.lib.CostData;
-import common.cout970.UltraTech.misc.IUpdatedEntity;
-import common.cout970.UltraTech.misc.MachineWithInventory;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntityFurnace;
+import common.cout970.UltraTech.managers.MachineData;
+import common.cout970.UltraTech.misc.IUpdatedEntity;
+import common.cout970.UltraTech.misc.PowerExchange;
+import common.cout970.UltraTech.util.ConfigurableMachineWithInventory;
 
-public class CoalGeneratorEntityT1_Entity extends ConfigurableMachine implements IUpdatedEntity{
+public class CoalGeneratorEntityT1_Entity extends ConfigurableMachineWithInventory implements IUpdatedEntity{
 
 	public float Progres = 0;
 	public int maxProgres;
 	public float heat = 25;
 	public float maxHeat = 400;
+	public PowerExchange pe = new PowerExchange();
 
 	public CoalGeneratorEntityT1_Entity(){
-		super(1,"Generator",CostData.Generator);
+		super(1,"Generator",MachineData.Generator);
 	}
 	
 	public double production(){
@@ -44,11 +37,11 @@ public class CoalGeneratorEntityT1_Entity extends ConfigurableMachine implements
 		if(Progres > 0){
 			double extract = production();
 			if(Progres - extract < 0){
-				addEnergy(EnergyCosts.toEnergy(Progres));
+				addCharge(pe.FTtoMev(Progres));
 				Progres = 0;
 			}else{
 				Progres -= extract*2;
-				addEnergy(extract);
+				addCharge(extract);
 			}
 			if(heat < maxHeat)heat+=1.2-heat/maxHeat;
 		}else{
@@ -57,7 +50,7 @@ public class CoalGeneratorEntityT1_Entity extends ConfigurableMachine implements
 		if(Progres <= 0){
 			if(inventory[0] != null && shouldWork()){
 				int fuel = TileEntityFurnace.getItemBurnTime(inventory[0]);
-				if(fuel > 0 && ((int)(getEnergy()+EnergyCosts.toEnergy(fuel)) <= maxEnergy() || (EnergyCosts.toEnergy(fuel) > maxEnergy()&& getEnergy() < maxEnergy()))){
+				if(fuel > 0 && ((int)(getCharge()+pe.FTtoMev(fuel)) <= getCapacity() || (pe.FTtoMev(fuel) > getCapacity()&& getCharge() < getCapacity()))){
 						Progres = fuel;
 						maxProgres = fuel;
 						if(inventory[0] != null){

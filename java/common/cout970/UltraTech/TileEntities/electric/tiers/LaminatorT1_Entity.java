@@ -5,18 +5,19 @@ import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import common.cout970.UltraTech.lib.CostData;
-import common.cout970.UltraTech.lib.recipes.CVD_Recipe;
-import common.cout970.UltraTech.lib.recipes.Laminator_Recipe;
+import common.cout970.UltraTech.managers.MachineData;
+import common.cout970.UltraTech.recipes.CVD_Recipe;
+import common.cout970.UltraTech.recipes.Laminator_Recipe;
+import common.cout970.UltraTech.util.ConfigurableMachineWithInventory;
 
-public class LaminatorT1_Entity extends ConfigurableMachine implements ISidedInventory{
+public class LaminatorT1_Entity extends ConfigurableMachineWithInventory implements ISidedInventory{
 
 	public float Progres = 0;
 	public int maxProgres = 80;
 	public boolean hasEnergy;
 
 	public LaminatorT1_Entity() {
-		super(2, "Laminator", CostData.Laminator);
+		super(2, "Laminator", MachineData.Laminator);
 	}
 
 	@Override
@@ -26,12 +27,12 @@ public class LaminatorT1_Entity extends ConfigurableMachine implements ISidedInv
 		boolean changes = false;
 		if(Progres > 0){
 			double extract;
-			if(maxProgres > 0)extract = CostData.Laminator.use/maxProgres;
-			else extract = CostData.Laminator.use;
-			removeEnergy(extract);
+			if(maxProgres > 0)extract = MachineData.Laminator.use/maxProgres;
+			else extract = MachineData.Laminator.use;
+			removeCharge(extract);
 		}
 		if(!hasEnergy){
-			hasEnergy = this.getEnergy() >= CostData.Laminator.use;
+			hasEnergy = this.getCharge() >= MachineData.Laminator.use;
 		}
 		if(hasEnergy && Laminator_Recipe.INSTANCE.matches(this)){
 			Progres++;

@@ -3,14 +3,14 @@ package common.cout970.UltraTech.multiblocks.refinery;
 import java.util.ArrayList;
 import java.util.List;
 
-import api.cout970.UltraTech.fluids.UT_Tank;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.IFluidHandler;
-import common.cout970.UltraTech.lib.recipes.Cooling_Recipes;
+import common.cout970.UltraTech.recipes.Cooling_Recipes;
+import common.cout970.UltraTech.util.fluids.UT_Tank;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

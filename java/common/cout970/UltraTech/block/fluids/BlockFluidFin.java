@@ -1,6 +1,6 @@
 package common.cout970.UltraTech.block.fluids;
 
-import common.cout970.UltraTech.core.UltraTech;
+import common.cout970.UltraTech.managers.UT_Tabs;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.material.Material;
@@ -19,7 +19,7 @@ public class BlockFluidFin extends BlockFluidFinite{
 	
 	public BlockFluidFin(Fluid fluid) {
 		super(fluid, Material.water);
-		this.setCreativeTab(UltraTech.ResourceTab);
+		this.setCreativeTab(UT_Tabs.ResourceTab);
 	}
 	
 	@Override

@@ -1,28 +1,20 @@
 package common.cout970.UltraTech.TileEntities.fluid;
 
-import api.cout970.UltraTech.MeVpower.CableType;
-import api.cout970.UltraTech.MeVpower.IPowerConductor;
-import api.cout970.UltraTech.MeVpower.Machine;
-import api.cout970.UltraTech.MeVpower.PowerInterface;
-import api.cout970.UltraTech.MeVpower.StorageInterface;
-import api.cout970.UltraTech.MeVpower.StorageInterface.MachineTipe;
-import api.cout970.UltraTech.fluids.UT_Tank;
-import api.cout970.UltraTech.network.SyncTile;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
-import common.cout970.UltraTech.TileEntities.electric.tiers.Heater_Entity;
-import common.cout970.UltraTech.lib.EnergyCosts;
-import common.cout970.UltraTech.lib.CostData;
-import common.cout970.UltraTech.lib.UT_Utils;
-import common.cout970.UltraTech.lib.recipes.Boiler_Recipes;
+import ultratech.api.power.CableType;
+
 import common.cout970.UltraTech.misc.IUpdatedEntity;
+import common.cout970.UltraTech.misc.PowerExchange;
+import common.cout970.UltraTech.network.SyncTile;
+import common.cout970.UltraTech.recipes.Boiler_Recipes;
+import common.cout970.UltraTech.util.fluids.UT_Tank;
 
 public class BoilerEntity extends SyncTile implements IFluidHandler,IUpdatedEntity{
 
@@ -36,14 +28,18 @@ public class BoilerEntity extends SyncTile implements IFluidHandler,IUpdatedEnti
 		if(storage == null)storage = new UT_Tank(8000, worldObj, xCoord, yCoord, zCoord);
 		if(worldObj.isRemote)return;
 
-		if(heat >= 101 && storage != null){
-			if(storage.getFluidAmount() >= 1 && result.getFluidAmount()+10 <= result.getCapacity()){
-				Fluid s = Boiler_Recipes.getResult(storage.getFluid());
-				if(s != null){
-					storage.drain(1, true);
-					FluidStack t = new FluidStack(s,10);
-					result.fill(t, true);
-					heat -= 0.5f;
+		if(storage != null){
+			float exces = heat-99;
+			int toBoil = (int) exces;
+			if(toBoil >= 1){
+				if(storage.getFluidAmount() >= toBoil && result.getFluidAmount()+toBoil*10 <= result.getCapacity()){
+					Fluid s = Boiler_Recipes.getResult(storage.getFluid());
+					if(s != null){
+						storage.drain(toBoil, true);
+						FluidStack t = new FluidStack(s,toBoil*10);
+						result.fill(t, true);
+						heat -= PowerExchange.HeatPerFluid(toBoil)*10;
+					}
 				}
 			}
 		}

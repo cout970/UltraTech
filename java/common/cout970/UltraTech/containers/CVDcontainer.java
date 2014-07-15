@@ -6,7 +6,7 @@ import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import common.cout970.UltraTech.TileEntities.electric.tiers.ChemicalVaporDesintegrationT1_Entity;
-import common.cout970.UltraTech.lib.recipes.CVD_Recipe;
+import common.cout970.UltraTech.recipes.CVD_Recipe;
 
 
 public class CVDcontainer extends UT_Container{

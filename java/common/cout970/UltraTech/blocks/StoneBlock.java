@@ -2,7 +2,7 @@ package common.cout970.UltraTech.blocks;
 
 import java.util.List;
 
-import common.cout970.UltraTech.core.UltraTech;
+import common.cout970.UltraTech.managers.UT_Tabs;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -22,7 +22,7 @@ public class StoneBlock extends Block{
 
 	public StoneBlock(Material par2Material) {
 		super(par2Material);
-		setCreativeTab(UltraTech.DecoTab);
+		setCreativeTab(UT_Tabs.DecoTab);
 		setHardness(1.0f);
 		setStepSound(soundTypeStone);
 		setResistance(30);

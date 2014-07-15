@@ -40,7 +40,7 @@ public class ItemManager {
 	public static List<Item> UT_Items = new ArrayList<Item>();
 	public static Map<String,Item> ItemName = new HashMap<String,Item>();
 
-	public static void Registry(){
+	public static void InitItems(){
 
 		//ingot
 		Reg("Ingot", "Ingot", false);
@@ -97,11 +97,6 @@ public class ItemManager {
 		Reg("Rubber_bulcanized","Vulcanized Rubber",true);
 		Reg("Dynamo","Dynamo",true);
 		Reg("AluminumGear","Aluminum Gear",true);
-	}
-
-	public static void LoadConfigItems(Configuration c){
-
-		Registry();
 	}
 
 	public static void RegisterItems(){

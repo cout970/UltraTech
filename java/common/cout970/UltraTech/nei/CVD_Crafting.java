@@ -1,5 +1,6 @@
 package common.cout970.UltraTech.nei;
 
+import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +9,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.TemplateRecipeHandler;
-import common.cout970.UltraTech.lib.recipes.CVD_Recipe;
+import codechicken.nei.recipe.TemplateRecipeHandler.RecipeTransferRect;
+import common.cout970.UltraTech.recipes.CVD_Recipe;
+import common.cout970.UltraTech.recipes.Purifier_Recipe;
 
 public class CVD_Crafting extends TemplateRecipeHandler {
 
@@ -24,6 +27,24 @@ public class CVD_Crafting extends TemplateRecipeHandler {
 		return "nei:textures/gui/cvd.png";
 	}
 
+	@Override
+	public void loadTransferRects() {
+
+		transferRects.add(new RecipeTransferRect(new Rectangle(108, 20, 24, 15), getRecipesID()));
+	}
+
+	private String getRecipesID() {
+		return "cvd";
+	}
+	
+	@Override
+    public void loadCraftingRecipes(String outputId, Object... results) {
+    
+        if (outputId.equals(getRecipesID())) {
+            for (CVD_Recipe recipe : CVD_Recipe.recipes)
+                recipes.add(recipe);
+        }  else super.loadCraftingRecipes(outputId, results);
+    }
 
 	@Override
 	public void loadCraftingRecipes(ItemStack result)

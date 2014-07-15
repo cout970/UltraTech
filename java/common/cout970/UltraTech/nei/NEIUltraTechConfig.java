@@ -2,7 +2,7 @@ package common.cout970.UltraTech.nei;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
-import common.cout970.UltraTech.gui.Crafter_Gui;
+import common.cout970.UltraTech.client.gui.Crafter_Gui;
 import codechicken.nei.api.API;
 import codechicken.nei.api.IConfigureNEI;
 
@@ -15,12 +15,16 @@ public class NEIUltraTechConfig implements IConfigureNEI{
 		API.registerRecipeHandler(new CVD_Crafting());
 		API.registerRecipeHandler(new AssemblyCrafting());
 		API.registerRecipeHandler(new LaminatorCrafting());
+		API.registerRecipeHandler(new ChemicalCrafting());
+		API.registerRecipeHandler(new RefineryCrafting());
+		
 		API.registerUsageHandler(new PurifierCrafting());
 		API.registerUsageHandler(new CutterCrafting());
 		API.registerUsageHandler(new CVD_Crafting());
 		API.registerUsageHandler(new AssemblyCrafting());
 		API.registerUsageHandler(new FermenterCrafting());
 		API.registerUsageHandler(new LaminatorCrafting());
+		API.registerUsageHandler(new RefineryCrafting());
 		API.registerGuiOverlayHandler(Crafter_Gui.class, new CrafterOverlayHandler(), "crafting");
 	}
 

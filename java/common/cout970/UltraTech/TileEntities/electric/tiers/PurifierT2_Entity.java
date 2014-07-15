@@ -4,11 +4,11 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import common.cout970.UltraTech.lib.CostData;
-import common.cout970.UltraTech.lib.recipes.CVD_Recipe;
-import common.cout970.UltraTech.lib.recipes.Laminator_Recipe;
-import common.cout970.UltraTech.lib.recipes.Purifier_Recipe;
+import common.cout970.UltraTech.managers.MachineData;
 import common.cout970.UltraTech.misc.ISpeeded;
+import common.cout970.UltraTech.recipes.CVD_Recipe;
+import common.cout970.UltraTech.recipes.Laminator_Recipe;
+import common.cout970.UltraTech.recipes.Purifier_Recipe;
 
 public class PurifierT2_Entity extends PurifierT1_Entity implements ISpeeded{
 
@@ -26,12 +26,12 @@ public class PurifierT2_Entity extends PurifierT1_Entity implements ISpeeded{
 		boolean changes = false;
 		if(Progres > 0){
 			double extract;
-			if(maxProgres > 0)extract = CostData.Purifier.use/maxProgres;
-			else extract = CostData.Purifier.use;
-			removeEnergy(extract);
+			if(maxProgres > 0)extract = MachineData.Purifier.use/maxProgres;
+			else extract = MachineData.Purifier.use;
+			removeCharge(extract);
 		}
 		if(!hasEnergy && shouldWork()){
-			hasEnergy = this.getEnergy() >= CostData.Purifier.use;
+			hasEnergy = this.getCharge() >= MachineData.Purifier.use;
 		}
 		if(hasEnergy && Purifier_Recipe.INSTANCE.matches(this)){
 			Progres++;

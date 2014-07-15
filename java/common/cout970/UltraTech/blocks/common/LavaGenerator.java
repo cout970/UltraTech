@@ -1,8 +1,9 @@
 package common.cout970.UltraTech.blocks.common;
 
 import common.cout970.UltraTech.TileEntities.electric.LavaGeneratorEntity;
-import common.cout970.UltraTech.core.UltraTech;
-import common.cout970.UltraTech.lib.RenderUtil;
+import common.cout970.UltraTech.managers.UT_Tabs;
+import common.cout970.UltraTech.util.RenderUtil;
+import common.cout970.UltraTech.util.power.BlockConductor;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.material.Material;
@@ -12,7 +13,6 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
-import api.cout970.UltraTech.MeVpower.BlockConductor;
 
 public class LavaGenerator extends BlockConductor{
 
@@ -20,7 +20,7 @@ public class LavaGenerator extends BlockConductor{
 
 	public LavaGenerator(Material m) {
 		super(m);
-		setCreativeTab(UltraTech.techTab);
+		setCreativeTab(UT_Tabs.techTab);
 		setStepSound(soundTypeMetal);
 		setResistance(50);
 		setHardness(2.5f);

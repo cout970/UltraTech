@@ -10,13 +10,14 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 import net.minecraftforge.oredict.OreDictionary;
-import common.cout970.UltraTech.lib.CostData;
 import common.cout970.UltraTech.managers.ItemManager;
-import common.cout970.UltraTech.misc.MachineWithInventory;
-import api.cout970.UltraTech.MeVpower.Machine;
-import api.cout970.UltraTech.fluids.UT_Tank;
+import common.cout970.UltraTech.managers.MachineData;
+import common.cout970.UltraTech.util.ConfigurableMachineWithInventory;
+import common.cout970.UltraTech.util.MachineWithInventory;
+import common.cout970.UltraTech.util.fluids.UT_Tank;
+import common.cout970.UltraTech.util.power.Machine;
 
-public class ChemicalPlant_Entity extends ConfigurableMachine implements IFluidHandler{
+public class ChemicalPlant_Entity extends ConfigurableMachineWithInventory implements IFluidHandler{
 
 	public UT_Tank tank;
 	public int Progres = 0;
@@ -24,7 +25,7 @@ public class ChemicalPlant_Entity extends ConfigurableMachine implements IFluidH
 	public int maxProgres = 100;
 	
 	public ChemicalPlant_Entity() {
-		super(3, "Chemical Plant", CostData.ChemicalPlant);
+		super(3, "Chemical Plant", MachineData.ChemicalPlant);
 	}
 	
 	public void updateEntity(){
@@ -32,11 +33,17 @@ public class ChemicalPlant_Entity extends ConfigurableMachine implements IFluidH
 		if(!fuel){
 			FluidStack f = getTank().getFluid();
 			if(f != null && FluidRegistry.getFluid("plastic") == f.getFluid() && f.amount >= 1000){
-				if(getEnergy() >= CostData.ChemicalPlant.use && shouldWork())fuel = true;
+				if(getCharge() >= MachineData.ChemicalPlant.use && shouldWork())
+					if(getStackInSlot(0) == null || getStackInSlot(0).stackSize+2 <= 64)
+						if(getStackInSlot(1) == null || getStackInSlot(1).stackSize+2 <= 64)
+							if(getStackInSlot(2) == null || getStackInSlot(2).stackSize+1 <= 64)fuel = true;
 			}
 		}
-		if(fuel)Progres +=1;
-		if(Progres == maxProgres){
+		if(fuel){
+			Progres +=1;
+			removeCharge(MachineData.ChemicalPlant.use/maxProgres);
+		}
+		if(Progres >= maxProgres){
 			Progres = 0;
 			fuel = false;
 			craft();

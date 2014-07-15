@@ -3,7 +3,7 @@ package common.cout970.UltraTech.blocks.models;
 import buildcraft.api.tools.IToolWrench;
 import common.cout970.UltraTech.TileEntities.fluid.CopperPipeEntity;
 import common.cout970.UltraTech.TileEntities.intermod.EngineEntity;
-import common.cout970.UltraTech.core.UltraTech;
+import common.cout970.UltraTech.managers.UltraTech;
 import common.cout970.UltraTech.proxy.ClientProxy;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -29,7 +29,7 @@ public class CopperPipe extends FluidPipeBlock{
 			if(p.getCurrentEquippedItem() != null && p.getCurrentEquippedItem().getItem() instanceof IToolWrench){
 				e.mode = !e.mode;
 				e.lock = e.mode;
-				e.Sync();
+				e.sendNetworkUpdate();
 			}
 		}
 		return false;

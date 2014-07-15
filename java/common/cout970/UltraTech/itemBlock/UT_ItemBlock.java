@@ -7,9 +7,12 @@ import net.minecraft.item.ItemStack;
 
 public class UT_ItemBlock extends ItemBlock{
 
-	public UT_ItemBlock(Block b) {
+	private String name;
+
+	public UT_ItemBlock(Block b,String name) {
 		super(b);
 		setHasSubtypes(true);
+		this.name = name;
 	}
 
 	@Override
@@ -18,7 +21,7 @@ public class UT_ItemBlock extends ItemBlock{
 	}
 	
 	public String getUnlocalizedName(ItemStack itemstack) {
-		return getUnlocalizedName() + "." + "chasis"+itemstack.getItemDamage();
+		return getUnlocalizedName() + "." +name+itemstack.getItemDamage();
 	}
 
 }

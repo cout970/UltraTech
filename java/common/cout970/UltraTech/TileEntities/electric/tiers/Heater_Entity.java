@@ -11,12 +11,14 @@ import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraftforge.common.util.ForgeDirection;
 import common.cout970.UltraTech.TileEntities.fluid.BoilerEntity;
 import common.cout970.UltraTech.blocks.models.Boiler;
-import common.cout970.UltraTech.lib.CostData;
-import common.cout970.UltraTech.lib.UT_Utils;
+import common.cout970.UltraTech.managers.MachineData;
 import common.cout970.UltraTech.misc.HeaterInteraction;
 import common.cout970.UltraTech.misc.HeaterInteraction.Interaction;
+import common.cout970.UltraTech.misc.PowerExchange;
+import common.cout970.UltraTech.util.ConfigurableMachineWithInventory;
+import common.cout970.UltraTech.util.UT_Utils;
 
-public class Heater_Entity extends ConfigurableMachine{
+public class Heater_Entity extends ConfigurableMachineWithInventory{
 
 	public int Progres;
 	public int maxProgres;
@@ -26,7 +28,7 @@ public class Heater_Entity extends ConfigurableMachine{
 	public List<HeaterInteraction> inter;
 
 	public Heater_Entity() {
-		super(1, "Heater", CostData.Heater);
+		super(1, "Heater", MachineData.Heater);
 	}
 
 	public void updateEntity(){
@@ -34,9 +36,8 @@ public class Heater_Entity extends ConfigurableMachine{
 		if(worldObj.isRemote)return;
 		if(Progres > 0){
 			if(Heat <= maxHeat){
-				Heat += 0.2;
-				Progres-=2;
-				
+				Heat += PowerExchange.FTtoHeat(10);
+				Progres-=10;
 				if(Progres <= 0)change = true;
 			}
 		}
@@ -55,10 +56,10 @@ public class Heater_Entity extends ConfigurableMachine{
 					change = true;
 					markDirty();
 				}
-			}else if(getEnergy() >= CostData.Heater.use){
+			}else if(getCharge() >= MachineData.Heater.use){
 				Progres = 200;
 				maxProgres = 200;
-				removeEnergy(CostData.Heater.use);
+				removeCharge(MachineData.Heater.use);
 				change = true;
 			}
 			if(Progres <= 0 && Heat > 25){

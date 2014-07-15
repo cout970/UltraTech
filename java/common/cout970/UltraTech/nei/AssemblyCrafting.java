@@ -6,7 +6,7 @@ import java.util.List;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import common.cout970.UltraTech.lib.recipes.Assembly_Recipes;
+import common.cout970.UltraTech.recipes.Assembly_Recipes;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.TemplateRecipeHandler;
 

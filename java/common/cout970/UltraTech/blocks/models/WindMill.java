@@ -1,13 +1,13 @@
 package common.cout970.UltraTech.blocks.models;
 
-import api.cout970.UltraTech.MeVpower.BlockConductor;
-import api.cout970.UltraTech.MeVpower.Machine;
 import buildcraft.api.tools.IToolWrench;
 import common.cout970.UltraTech.TileEntities.electric.WindMillEntity;
 import common.cout970.UltraTech.TileEntities.utility.hitBoxEntity;
-import common.cout970.UltraTech.core.UltraTech;
 import common.cout970.UltraTech.managers.BlockManager;
+import common.cout970.UltraTech.managers.UT_Tabs;
 import common.cout970.UltraTech.proxy.ClientProxy;
+import common.cout970.UltraTech.util.power.BlockConductor;
+import common.cout970.UltraTech.util.power.Machine;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -22,7 +22,7 @@ public class WindMill extends BlockConductor{
 
 	public WindMill(Material par2Material) {
 		super(par2Material);
-		setCreativeTab(UltraTech.techTab);
+		setCreativeTab(UT_Tabs.techTab);
 		setHardness(2.5f);
 		setStepSound(soundTypeMetal);
 		setResistance(20);

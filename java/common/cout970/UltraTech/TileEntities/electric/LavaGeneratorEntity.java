@@ -7,11 +7,11 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
-import common.cout970.UltraTech.lib.CostData;
+import common.cout970.UltraTech.managers.MachineData;
+import common.cout970.UltraTech.util.fluids.UT_Tank;
+import common.cout970.UltraTech.util.power.Machine;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import api.cout970.UltraTech.MeVpower.Machine;
-import api.cout970.UltraTech.fluids.UT_Tank;
 
 public class LavaGeneratorEntity extends Machine implements IFluidHandler{
 
@@ -19,7 +19,7 @@ public class LavaGeneratorEntity extends Machine implements IFluidHandler{
 	private int Proces;
 	
 	public LavaGeneratorEntity() {
-		super(CostData.LavaGenerator);
+		super(MachineData.LavaGenerator);
 	}
 	
 	public void updateEntity(){
@@ -30,10 +30,10 @@ public class LavaGeneratorEntity extends Machine implements IFluidHandler{
 			getTank().drain(100, true);
 		}
 		if(Proces > 0){
-			double space = maxEnergy()-getEnergy();
-			if(space >= CostData.LavaGenerator.use*5){
+			double space = getCapacity()-getCharge();
+			if(space >= MachineData.LavaGenerator.use*5){
 				Proces--;
-				addEnergy(CostData.LavaGenerator.use*5);
+				addCharge(MachineData.LavaGenerator.use*5);
 			}
 		}
 	}

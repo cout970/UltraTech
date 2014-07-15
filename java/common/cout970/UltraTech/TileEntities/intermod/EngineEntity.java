@@ -1,9 +1,11 @@
 package common.cout970.UltraTech.TileEntities.intermod;
 
-import common.cout970.UltraTech.lib.EnergyCosts;
-import common.cout970.UltraTech.lib.UT_Utils;
-import api.cout970.UltraTech.MeVpower.Machine;
-import api.cout970.UltraTech.network.Net_Utils;
+import net.minecraft.inventory.Container;
+import net.minecraft.inventory.ICrafting;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 import buildcraft.api.mj.IBatteryObject;
 import buildcraft.api.mj.MjAPI;
 import buildcraft.api.power.IPowerEmitter;
@@ -11,12 +13,10 @@ import buildcraft.api.power.IPowerReceptor;
 import buildcraft.api.power.PowerHandler;
 import buildcraft.api.power.PowerHandler.PowerReceiver;
 import buildcraft.api.power.PowerHandler.Type;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.ICrafting;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
+import common.cout970.UltraTech.network.Net_Utils;
+import common.cout970.UltraTech.util.LogHelper;
+import common.cout970.UltraTech.util.UT_Utils;
+import common.cout970.UltraTech.util.power.Machine;
 
 public class EngineEntity extends Machine implements IPowerReceptor, IPowerEmitter{
 
@@ -27,6 +27,9 @@ public class EngineEntity extends Machine implements IPowerReceptor, IPowerEmitt
 	public PowerHandler power;
 	public long oldTime;
 	public boolean update;
+	public float animation;
+	public boolean animationUp = true;
+	public double animationTime;
 
 	public EngineEntity(){
 		super(2400,2);
@@ -40,18 +43,11 @@ public class EngineEntity extends Machine implements IPowerReceptor, IPowerEmitt
 		}
 		if(worldObj.isRemote)return;
 
-		for(int v = 0;v<EnergyCosts.Engine_MJ_Produced;v++){
-		if(getEnergy() >= EnergyCosts.Engine_EnergyConsume && power.getEnergyStored()+1 <= power.getMaxEnergyStored()){
-			if(!engOn)Net_Utils.sendUpdate(this);
-			engOn = true;
-		}else{
-			if(engOn)Net_Utils.sendUpdate(this);
-			engOn = false;
-		}
-		if(engOn){
-			this.removeEnergy(EnergyCosts.Engine_EnergyConsume);
-			power.addEnergy(1);
-		}
+		int powerSpace = (int) (power.getMaxEnergyStored()-power.getEnergyStored());
+		int toChange = (int) Math.min(32, Math.min(getCharge(), powerSpace));
+		if(toChange > 0){
+			this.removeCharge(toChange);
+			power.addEnergy(toChange);
 		}
 		if(!update){
 			update = true;
@@ -72,16 +68,18 @@ public class EngineEntity extends Machine implements IPowerReceptor, IPowerEmitt
 		TileEntity tile = UT_Utils.getRelative(this, direction);
 		if (isPoweredTile(tile, direction)) {
 			double extracted = power.useEnergy(50, 200, false);
-			if (tile instanceof IPowerReceptor) {
+
+			if (MjAPI.getMjBattery(tile, MjAPI.DEFAULT_POWER_FRAMEWORK, direction.getOpposite()) != null) {
+				IBatteryObject battery = MjAPI.getMjBattery(tile, MjAPI.DEFAULT_POWER_FRAMEWORK, direction.getOpposite());
+				double a = battery.addEnergy(extracted);
+				power.useEnergy(0, a, true);
+			} 
+			if(tile instanceof IPowerReceptor){
 				PowerReceiver receptor = ((IPowerReceptor) tile).getPowerReceiver(direction.getOpposite());
 				if (extracted > 0) {
 					double needed = receptor.receiveEnergy(PowerHandler.Type.ENGINE, extracted, direction.getOpposite());
 					power.useEnergy(0, needed, true);
 				}
-			} else {
-				IBatteryObject battery = MjAPI.getMjBattery(tile, MjAPI.DEFAULT_POWER_FRAMEWORK, direction.getOpposite());
-				double a = battery.addEnergy(extracted);
-				power.useEnergy(0, a, true);
 			}
 		}
 	}

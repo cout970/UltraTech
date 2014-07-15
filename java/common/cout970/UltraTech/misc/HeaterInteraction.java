@@ -2,7 +2,7 @@ package common.cout970.UltraTech.misc;
 
 import common.cout970.UltraTech.TileEntities.electric.tiers.Heater_Entity;
 import common.cout970.UltraTech.TileEntities.fluid.BoilerEntity;
-import common.cout970.UltraTech.lib.UT_Utils;
+import common.cout970.UltraTech.util.UT_Utils;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.crafting.FurnaceRecipes;
@@ -40,9 +40,7 @@ public class HeaterInteraction {
 					}
 				}
 			}
-			float dif = heat-own;
-			if(dif < 0)dif = 0;
-			float change = dif/2;
+			float change = change(heat, own);
 			change = Math.min(change, heat-25);
 			own += change;
 			return change;
@@ -51,6 +49,7 @@ public class HeaterInteraction {
 				if(target instanceof Block){
 					if(target == Blocks.water){
 						src.getWorldObj().setBlock(src.xCoord+side.offsetX, src.yCoord+side.offsetY, src.zCoord+side.offsetZ, FluidRegistry.getFluid("steam").getBlock());
+						return 10f;
 					}
 				}
 			}
@@ -59,9 +58,7 @@ public class HeaterInteraction {
 			if(target == null)target = UT_Utils.getRelative(src, side);
 			if(target instanceof BoilerEntity){
 				BoilerEntity b = (BoilerEntity) target;
-				float dif = heat-b.heat;
-				if(dif < 0)dif = 0;
-				float change = dif/2;
+				float change = change(heat, b.heat);
 				change = Math.min(change, heat-25);
 				b.heat += change;
 				return change;
@@ -71,14 +68,25 @@ public class HeaterInteraction {
 			if(target == null)target = UT_Utils.getRelative(src, side);
 			if(target instanceof TileEntityFurnace){
 				TileEntityFurnace tf = (TileEntityFurnace) target;
-				if(tf.currentItemBurnTime < heat)tf.currentItemBurnTime = (int) heat;
-				if(heat >= 100 && tf.furnaceBurnTime < heat){
-					tf.furnaceBurnTime += (int) 4;
-					return 0.2f;
+				if(tf.currentItemBurnTime <= heat)tf.currentItemBurnTime = (int) heat;
+				if(tf.furnaceBurnTime < heat){
+					int g = (int) (heat-99);
+					g = Math.min(g, tf.currentItemBurnTime-tf.furnaceBurnTime);
+					tf.furnaceBurnTime += g;
+					tf.updateEntity();
+					tf.updateEntity();
+					tf.updateEntity();
+					return PowerExchange.FTtoHeat(g);
 				}
 			}
 		}
-		return 0.1f;
+		return 0f;
+	}
+	
+	public static float change(float a, float b){
+		float dif = a-b;
+		float change = dif/2;
+		return change;
 	}
 
 	public static Interaction isInteresting(Heater_Entity h, ForgeDirection d) {

@@ -3,8 +3,6 @@ package common.cout970.UltraTech.blocks;
 import java.util.List;
 import java.util.Random;
 
-import api.cout970.UltraTech.MeVpower.BlockConductor;
-import api.cout970.UltraTech.MeVpower.Machine;
 import buildcraft.api.tools.IToolWrench;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -23,21 +21,24 @@ import net.minecraft.world.World;
 import common.cout970.UltraTech.TileEntities.electric.ClimateEntity;
 import common.cout970.UltraTech.TileEntities.electric.MinerEntity;
 import common.cout970.UltraTech.TileEntities.electric.MolecularAssemblyEntity;
-import common.cout970.UltraTech.TileEntities.electric.TesseractEntity;
+import common.cout970.UltraTech.TileEntities.electric.tiers.Tesseract_Entity;
 import common.cout970.UltraTech.TileEntities.utility.HologramEmiterEntity;
-import common.cout970.UltraTech.core.UltraTech;
 import common.cout970.UltraTech.managers.ItemManager;
+import common.cout970.UltraTech.managers.UT_Tabs;
+import common.cout970.UltraTech.managers.UltraTech;
+import common.cout970.UltraTech.util.power.BlockConductor;
+import common.cout970.UltraTech.util.power.Machine;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class Tier3Block extends BlockConductor{
 
 	public IIcon icons[];
-	public int numBlocks = 5;
+	public int numBlocks = 4;
 	
 	public Tier3Block(Material par2Material) {
 		super(par2Material);
-		setCreativeTab(UltraTech.techTab);
+		setCreativeTab(UT_Tabs.techTab);
 		setStepSound(soundTypeMetal);
 		setResistance(50);
 		setHardness(2.5f);
@@ -64,7 +65,6 @@ public class Tier3Block extends BlockConductor{
 		if(metadata == 1)return new HologramEmiterEntity();
 		if(metadata == 2)return new MolecularAssemblyEntity();
 		if(metadata == 3)return new ClimateEntity();
-		if(metadata == 4)return new TesseractEntity();
 		return null;
 	}
 
@@ -128,8 +128,8 @@ public class Tier3Block extends BlockConductor{
 		if(te instanceof ClimateEntity){
 			((ClimateEntity) te).restoneUpdate(w.isBlockIndirectlyGettingPowered(x, y, z));
 		}
-		if(te instanceof TesseractEntity){
-			TesseractEntity.tes.clear();
+		if(te instanceof Tesseract_Entity){
+			Tesseract_Entity.tes.clear();
 		}
 	}
 

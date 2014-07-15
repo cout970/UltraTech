@@ -2,12 +2,12 @@ package common.cout970.UltraTech.items;
 
 import java.util.List;
 
-import api.cout970.UltraTech.MeVpower.IStorageItem;
-import api.cout970.UltraTech.MeVpower.ItemPower;
+import ultratech.api.power.IStorageItem;
+import ultratech.api.power.ItemPower;
 
 import com.google.common.collect.Multimap;
 
-import common.cout970.UltraTech.core.UltraTech;
+import common.cout970.UltraTech.managers.UT_Tabs;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -26,7 +26,7 @@ public class LasserSword extends ItemPower{
 
 	public LasserSword(String name){
 		super(16000);
-		setCreativeTab(UltraTech.ResourceTab);
+		setCreativeTab(UT_Tabs.ResourceTab);
 		setUnlocalizedName("LasserSword");
 	}
 

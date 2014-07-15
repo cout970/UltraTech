@@ -1,7 +1,7 @@
 package common.cout970.UltraTech.blocks.models;
 
 import common.cout970.UltraTech.TileEntities.fluid.TankEntity;
-import common.cout970.UltraTech.core.UltraTech;
+import common.cout970.UltraTech.managers.UT_Tabs;
 import common.cout970.UltraTech.proxy.ClientProxy;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -19,7 +19,7 @@ public class FluidTank extends BlockContainer{
 
 	public FluidTank(Material par2Material) {
 		super(par2Material);
-		setCreativeTab(UltraTech.techTab);
+		setCreativeTab(UT_Tabs.techTab);
 		setHardness(2.5f);
 		setStepSound(soundTypeMetal);
 		setResistance(20);

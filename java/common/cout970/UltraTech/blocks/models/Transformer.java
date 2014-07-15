@@ -1,9 +1,9 @@
 package common.cout970.UltraTech.blocks.models;
 
-import api.cout970.UltraTech.MeVpower.BlockConductor;
-import api.cout970.UltraTech.MeVpower.Machine;
 import common.cout970.UltraTech.TileEntities.intermod.EnergyTransformer;
-import common.cout970.UltraTech.core.UltraTech;
+import common.cout970.UltraTech.managers.UT_Tabs;
+import common.cout970.UltraTech.util.power.BlockConductor;
+import common.cout970.UltraTech.util.power.Machine;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.BlockContainer;
@@ -16,7 +16,7 @@ public class Transformer extends BlockConductor{
 
 	public Transformer(int par1, Material par2Material) {
 		super(par2Material);
-		setCreativeTab(UltraTech.techTab);
+		setCreativeTab(UT_Tabs.techTab);
 		setHardness(2.5f);
 		setStepSound(soundTypeMetal);
 		setResistance(20);

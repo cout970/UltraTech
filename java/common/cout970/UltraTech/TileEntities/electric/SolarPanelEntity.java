@@ -1,22 +1,17 @@
 package common.cout970.UltraTech.TileEntities.electric;
 
-import api.cout970.UltraTech.MeVpower.CableType;
-import api.cout970.UltraTech.MeVpower.IPowerConductor;
-import api.cout970.UltraTech.MeVpower.Machine;
-import api.cout970.UltraTech.MeVpower.PowerInterface;
-import api.cout970.UltraTech.MeVpower.StorageInterface;
-import api.cout970.UltraTech.MeVpower.StorageInterface.MachineTipe;
-import api.cout970.UltraTech.network.SyncTile;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.ForgeDirection;
-import common.cout970.UltraTech.lib.CostData;
-import common.cout970.UltraTech.lib.EnergyCosts;
+import ultratech.api.power.CableType;
+import ultratech.api.power.IPowerConductor;
+
+import common.cout970.UltraTech.managers.MachineData;
+import common.cout970.UltraTech.util.power.Machine;
 
 
 public class SolarPanelEntity extends Machine implements IPowerConductor{
 
 	public SolarPanelEntity(){
-		super(CostData.Solar_Panel,true);
+		super(MachineData.Solar_Panel,true);
 	}
 	
 	public boolean isConnectableSide(ForgeDirection side, CableType conection) {
@@ -32,7 +27,7 @@ public class SolarPanelEntity extends Machine implements IPowerConductor{
 		if(worldObj.canBlockSeeTheSky(xCoord, yCoord + 1, zCoord)){
 			if(worldObj.provider.hasNoSky)return;
 			if(worldObj.isDaytime() && !(worldObj.getWorldChunkManager().getBiomeGenAt(xCoord, zCoord).getIntRainfall() > 0 && (worldObj.isRaining() || worldObj.isThundering()))){
-				cond.addCharge(CostData.Solar_Panel.use);
+				cond.addCharge(MachineData.Solar_Panel.use);
 			}
 		}
 	}

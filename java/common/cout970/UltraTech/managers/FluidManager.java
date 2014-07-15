@@ -1,7 +1,10 @@
 package common.cout970.UltraTech.managers;
 
+import org.apache.logging.log4j.Level;
+
 import common.cout970.UltraTech.block.fluids.BlockFluidBase;
 import common.cout970.UltraTech.block.fluids.BlockFluidFin;
+import common.cout970.UltraTech.util.LogHelper;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -109,7 +112,7 @@ public class FluidManager{
 		GameRegistry.registerBlock(PlasticBlock, "ultratech_"+"plastic");
 		GameRegistry.registerBlock(FuelBlock, "ultratech_"+"fuel");
 		GameRegistry.registerBlock(AcidBlock, "ultratech_"+"sulfuric_acid");
-		
+
 		FluidContainerRegistry.registerFluidContainer(Acid, new ItemStack(ItemManager.ItemName.get("SulfuricAcid"),1), new ItemStack(Items.potionitem,1,0));
 		for(int x=0;x<fluids.length;x++){
 			FluidContainerRegistry.registerFluidContainer(fluids[x], new ItemStack(ItemManager.ItemName.get("Bottle"),1,x+1), new ItemStack(ItemManager.ItemName.get("Bottle"),1,0));

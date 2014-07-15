@@ -6,17 +6,18 @@ import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
-import common.cout970.UltraTech.lib.CostData;
-import common.cout970.UltraTech.lib.recipes.Cutter_Recipe;
+import common.cout970.UltraTech.managers.MachineData;
+import common.cout970.UltraTech.recipes.Cutter_Recipe;
+import common.cout970.UltraTech.util.ConfigurableMachineWithInventory;
 
-public class FurnaceT1_Entity extends ConfigurableMachine implements ISidedInventory{
+public class FurnaceT1_Entity extends ConfigurableMachineWithInventory implements ISidedInventory{
 
 	public float Progres = 0;
 	public int maxProgres = 80;
 	public boolean hasEnergy;
 
 	public FurnaceT1_Entity() {
-		super(2, "Furnace", CostData.Furnace);
+		super(2, "Furnace", MachineData.Furnace);
 	}
 
 	@Override
@@ -26,12 +27,12 @@ public class FurnaceT1_Entity extends ConfigurableMachine implements ISidedInven
 		boolean changes = false;
 		if(Progres > 0){
 			double extract;
-			if(maxProgres > 0)extract = CostData.Furnace.use/maxProgres;
-			else extract = CostData.Furnace.use;
-			removeEnergy(extract);
+			if(maxProgres > 0)extract = MachineData.Furnace.use/maxProgres;
+			else extract = MachineData.Furnace.use;
+			removeCharge(extract);
 		}
 		if(!hasEnergy && shouldWork()){
-			hasEnergy = this.getEnergy() >= CostData.Furnace.use;
+			hasEnergy = this.getCharge() >= MachineData.Furnace.use;
 		}
 		if(hasEnergy && canSmelt()){
 			Progres++;

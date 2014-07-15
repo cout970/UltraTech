@@ -1,6 +1,6 @@
 package common.cout970.UltraTech.containers;
 
-import api.cout970.UltraTech.MeVpower.Machine;
+import common.cout970.UltraTech.util.power.Machine;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;

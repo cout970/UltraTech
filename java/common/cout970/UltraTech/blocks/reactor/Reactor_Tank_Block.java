@@ -1,0 +1,29 @@
+package common.cout970.UltraTech.blocks.reactor;
+
+import net.minecraft.block.material.Material;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
+import common.cout970.UltraTech.TileEntities.multiblocks.Reactor_Tank_Entity;
+
+public class Reactor_Tank_Block extends ReactorPartBase{
+
+	public Reactor_Tank_Block(Material m) {
+		super(m, "tank");
+		
+	}
+
+	@Override
+	public TileEntity createNewTileEntity(World p_149915_1_, int p_149915_2_) {
+		return new Reactor_Tank_Entity();
+	}
+
+	public boolean isOpaqueCube()
+	{
+		return false;
+	}
+	
+	@Override
+	public int getLayer() {
+		return 2;
+	}
+}

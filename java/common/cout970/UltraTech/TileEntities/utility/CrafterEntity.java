@@ -19,15 +19,15 @@ import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidHandler;
 import net.minecraftforge.oredict.OreDictionary;
-import api.cout970.UltraTech.fluids.FluidUtils;
-import api.cout970.UltraTech.fluids.TankConection;
-import api.cout970.UltraTech.network.SyncTile;
 import common.cout970.UltraTech.containers.CrafterContainer;
-import common.cout970.UltraTech.lib.UT_Utils;
 import common.cout970.UltraTech.misc.Craft;
 import common.cout970.UltraTech.misc.CrafterRecipe;
 import common.cout970.UltraTech.misc.IRedstoneControl;
 import common.cout970.UltraTech.misc.InventoryCrafter;
+import common.cout970.UltraTech.network.SyncTile;
+import common.cout970.UltraTech.util.UT_Utils;
+import common.cout970.UltraTech.util.fluids.FluidUtils;
+import common.cout970.UltraTech.util.fluids.TankConection;
 import cpw.mods.fml.common.FMLCommonHandler;
 
 public class CrafterEntity extends SyncTile implements IInventory,IRedstoneControl{
@@ -52,7 +52,7 @@ public class CrafterEntity extends SyncTile implements IInventory,IRedstoneContr
 		result = CraftingManager.getInstance().findMatchingRecipe(craft, worldObj);
 		canCraft();
 		this.markDirty();
-		Sync();
+		sendNetworkUpdate();
 	}
 
 	public void canCraft(){
@@ -118,7 +118,7 @@ public class CrafterEntity extends SyncTile implements IInventory,IRedstoneContr
 		}
 		if(!allFound() && hasFluidInCraft()){
 			
-			List<TankConection> tanks = FluidUtils.getConections(this);
+			List<TankConection> tanks = FluidUtils.getTankConections(this);
 			Map<Integer,Integer> liq = new HashMap<Integer,Integer>();
 			
 			for(int c = 0; c < 9;c++){
@@ -203,7 +203,6 @@ public class CrafterEntity extends SyncTile implements IInventory,IRedstoneContr
 					List<IInventory> in = new ArrayList<IInventory>();
 					for(TileEntity tile : t)if(tile instanceof IInventory)in.add((IInventory) tile);
 					for(IInventory inv : in){
-						System.out.println("used 2");
 						for(int i = 0; i < inv.getSizeInventory();i++){
 							if(equal(inv.getStackInSlot(i),craft.getStackInSlot(c),c)){
 								useItemToCraft(inv, i);
@@ -217,7 +216,7 @@ public class CrafterEntity extends SyncTile implements IInventory,IRedstoneContr
 					if(!used && hasFluidInCraft()){
 						if(FluidContainerRegistry.isContainer(craft.getStackInSlot(c))){
 
-							List<TankConection> tanks = FluidUtils.getConections(this);
+							List<TankConection> tanks = FluidUtils.getTankConections(this);
 
 							FluidStack f = FluidContainerRegistry.getFluidForFilledItem(craft.getStackInSlot(c));
 							if(f != null){

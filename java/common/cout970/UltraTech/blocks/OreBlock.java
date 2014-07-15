@@ -3,22 +3,21 @@ package common.cout970.UltraTech.blocks;
 import java.util.List;
 import java.util.Random;
 
-import common.cout970.UltraTech.core.UltraTech;
-import common.cout970.UltraTech.itemBlock.UT_ItemBlockOre;
-import common.cout970.UltraTech.managers.ItemManager;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import common.cout970.UltraTech.itemBlock.ItemBlock_Ores;
+import common.cout970.UltraTech.managers.ItemManager;
+import common.cout970.UltraTech.managers.UT_Tabs;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class OreBlock extends Block{
 
@@ -26,7 +25,7 @@ public class OreBlock extends Block{
 	
 	public OreBlock(Material par2Material) {
 		super(par2Material);
-		setCreativeTab(UltraTech.ResourceTab);
+		setCreativeTab(UT_Tabs.ResourceTab);
 		setHardness(1.0f);
 		setStepSound(soundTypeStone);
 		setResistance(30);
@@ -95,7 +94,7 @@ public class OreBlock extends Block{
 	@SideOnly(Side.CLIENT)
     public void getSubBlocks(Item unknown, CreativeTabs tab, List subItems)
     {
-		for (int ix = 0; ix < UT_ItemBlockOre.subNames.length; ix++) {
+		for (int ix = 0; ix < ItemBlock_Ores.subNames.length; ix++) {
 			subItems.add(new ItemStack(this, 1, ix));
 		}
 	}

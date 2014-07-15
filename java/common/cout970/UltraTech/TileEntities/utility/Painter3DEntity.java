@@ -1,10 +1,9 @@
 package common.cout970.UltraTech.TileEntities.utility;
 
-import api.cout970.UltraTech.network.Net_Utils;
-
-import common.cout970.UltraTech.itemBlock.UT_ItemBlockDeco;
-import common.cout970.UltraTech.misc.Inventory;
+import common.cout970.UltraTech.itemBlock.ItemBlock_Deco;
+import common.cout970.UltraTech.network.Net_Utils;
 import common.cout970.UltraTech.packets.PacketPainter;
+import common.cout970.UltraTech.util.Inventory;
 
 public class Painter3DEntity extends Inventory{
 
@@ -12,7 +11,7 @@ public class Painter3DEntity extends Inventory{
 	public boolean update;
 	
 	public Painter3DEntity(){
-		super(1,"3D Printer");
+		super(1,"3D Painter");
 	}
 	
 	//needs client - server sync
@@ -20,9 +19,9 @@ public class Painter3DEntity extends Inventory{
 	public void updateEntity(){
 		if(update){
 			update = false;
-			if(inventory[0] != null && inventory[0].getItem() instanceof UT_ItemBlockDeco)
+			if(inventory[0] != null && inventory[0].getItem() instanceof ItemBlock_Deco)
 			inventory[0].setItemDamage(color);
-			Sync();
+			sendNetworkUpdate();
 		}
 	}
 

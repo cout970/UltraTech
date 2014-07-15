@@ -1,10 +1,10 @@
 package common.cout970.UltraTech.nei;
 
-import api.cout970.UltraTech.network.Net_Utils;
 import common.cout970.UltraTech.TileEntities.utility.CrafterEntity;
-import common.cout970.UltraTech.gui.Crafter_Gui;
-import common.cout970.UltraTech.lib.UT_Utils;
+import common.cout970.UltraTech.client.gui.Crafter_Gui;
+import common.cout970.UltraTech.network.Net_Utils;
 import common.cout970.UltraTech.packets.PacketCrafter;
+import common.cout970.UltraTech.util.UT_Utils;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.item.ItemStack;
 import codechicken.nei.api.IOverlayHandler;

@@ -1,7 +1,7 @@
 package common.cout970.UltraTech.TileEntities.utility;
 
+import common.cout970.UltraTech.TileEntities.multiblocks.TileReactorPart;
 import common.cout970.UltraTech.containers.ControllerContainer;
-import common.cout970.UltraTech.multiblocks.TileReactorPart;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.nbt.NBTTagCompound;
 

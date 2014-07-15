@@ -4,13 +4,6 @@ package common.cout970.UltraTech.TileEntities.utility;
 import java.util.ArrayList;
 import java.util.List;
 
-import api.cout970.UltraTech.MeVpower.Machine;
-import api.cout970.UltraTech.network.Net_Utils;
-import common.cout970.UltraTech.lib.EnergyCosts;
-import common.cout970.UltraTech.lib.UT_Utils;
-import common.cout970.UltraTech.managers.ItemManager;
-import common.cout970.UltraTech.misc.IReactorPart;
-import common.cout970.UltraTech.multiblocks.TileReactorPart;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -22,6 +15,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
+import common.cout970.UltraTech.TileEntities.multiblocks.TileReactorPart;
+import common.cout970.UltraTech.managers.InformationManager;
+import common.cout970.UltraTech.managers.ItemManager;
+import common.cout970.UltraTech.misc.IReactorPart;
+import common.cout970.UltraTech.network.Net_Utils;
+import common.cout970.UltraTech.util.UT_Utils;
+import common.cout970.UltraTech.util.power.Machine;
 
 
 public class ReactorEntity extends TileReactorPart implements IInventory{
@@ -102,8 +102,8 @@ public class ReactorEntity extends TileReactorPart implements IInventory{
 		if(heat > 101)
 			for(ReactorTankEntity t : tanks){
 				if(t.getFluidAmount() > 0){
-					t.drain((int) (EnergyCosts.ReactorWaterCost*heat/maxHeat), true);
-					this.steam += (EnergyCosts.ReactorSteamProduct*heat/maxHeat);//20steam/tick
+					t.drain((int) (InformationManager.ReactorWaterCost*heat/maxHeat), true);
+					this.steam += (InformationManager.ReactorSteamProduct*heat/maxHeat);//20steam/tick
 					heat -= (heat/maxHeat);
 					return true;
 				}
@@ -363,7 +363,7 @@ public class ReactorEntity extends TileReactorPart implements IInventory{
 			itemStack.stackSize = this.getInventoryStackLimit();
 		}
 		
-		Sync();
+		sendNetworkUpdate();
 	}
 
 	@Override

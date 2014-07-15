@@ -2,8 +2,8 @@ package common.cout970.UltraTech.blocks;
 
 import java.util.Random;
 
-import common.cout970.UltraTech.core.UltraTech;
-import common.cout970.UltraTech.lib.RenderUtil;
+import common.cout970.UltraTech.managers.UT_Tabs;
+import common.cout970.UltraTech.util.RenderUtil;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.BlockBreakable;
@@ -19,7 +19,7 @@ public class CovedGlass extends BlockBreakable{
 	public CovedGlass(Material par3Material,
 			boolean par4) {
 		super("CovedGlass", par3Material, par4);
-		setCreativeTab(UltraTech.DecoTab);
+		setCreativeTab(UT_Tabs.DecoTab);
 		setHardness(0.2f);
 		setStepSound(soundTypeGlass);
 		setResistance(200);

@@ -6,6 +6,9 @@ import cpw.mods.fml.common.IFuelHandler;
 
 public class FuelHandler implements IFuelHandler{
 
+	/**
+	 * only for the sulfur (2400)
+	 */
 	@Override
 	public int getBurnTime(ItemStack fuel) {
 		if(fuel == null)return 0;

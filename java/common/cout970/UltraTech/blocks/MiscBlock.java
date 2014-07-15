@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.Random;
 
 import common.cout970.UltraTech.TileEntities.utility.hitBoxEntity;
-import common.cout970.UltraTech.core.UltraTech;
 import common.cout970.UltraTech.managers.BlockManager;
+import common.cout970.UltraTech.managers.UT_Tabs;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -26,7 +26,7 @@ public class MiscBlock extends BlockContainer{
 
 	public MiscBlock(Material par2Material) {
 		super(par2Material);
-		setCreativeTab(UltraTech.techTab);
+		setCreativeTab(UT_Tabs.techTab);
 		setBlockName("Misc");
 		setStepSound(soundTypeMetal);
 		setResistance(10);

@@ -1,15 +1,15 @@
 package common.cout970.UltraTech.packets;
 
-import api.cout970.UltraTech.network.PacketBase;
 import common.cout970.UltraTech.TileEntities.electric.ClimateEntity;
 import common.cout970.UltraTech.TileEntities.utility.Painter3DEntity;
+import common.cout970.UltraTech.network.AbstractPacket;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntity;
 
-public class PacketClimateStation extends PacketBase{
+public class PacketClimateStation extends AbstractPacket{
 
 	public PacketClimateStation(){}
 	

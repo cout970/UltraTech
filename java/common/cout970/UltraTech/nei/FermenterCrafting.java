@@ -13,9 +13,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidRegistry;
-import common.cout970.UltraTech.lib.RenderUtil;
-import common.cout970.UltraTech.lib.recipes.Fermenter_Recipes;
 import common.cout970.UltraTech.managers.FluidManager;
+import common.cout970.UltraTech.recipes.Fermenter_Recipes;
+import common.cout970.UltraTech.util.RenderUtil;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.TemplateRecipeHandler;
 

@@ -1,10 +1,11 @@
 package common.cout970.UltraTech.blocks.models;
 
-import api.cout970.UltraTech.MeVpower.BlockConductor;
 import buildcraft.api.tools.IToolWrench;
 import common.cout970.UltraTech.TileEntities.intermod.EngineEntity;
-import common.cout970.UltraTech.core.UltraTech;
+import common.cout970.UltraTech.managers.UT_Tabs;
+import common.cout970.UltraTech.managers.UltraTech;
 import common.cout970.UltraTech.proxy.ClientProxy;
+import common.cout970.UltraTech.util.power.BlockConductor;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -19,7 +20,7 @@ public class Engine extends BlockConductor{
 
 	public Engine(Material par2Material) {
 		super(par2Material);
-		setCreativeTab(UltraTech.techTab);
+		setCreativeTab(UT_Tabs.techTab);
 		setHardness(2.5f);
 		setStepSound(soundTypeMetal);
 		setResistance(20);

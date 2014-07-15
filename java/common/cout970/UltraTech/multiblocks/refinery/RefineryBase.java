@@ -3,9 +3,9 @@ package common.cout970.UltraTech.multiblocks.refinery;
 import java.util.ArrayList;
 import java.util.List;
 
-import api.cout970.UltraTech.fluids.UT_Tank;
-import common.cout970.UltraTech.lib.recipes.Cooling_Recipes;
 import common.cout970.UltraTech.managers.BlockManager;
+import common.cout970.UltraTech.recipes.Cooling_Recipes;
+import common.cout970.UltraTech.util.fluids.UT_Tank;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;

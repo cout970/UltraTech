@@ -9,7 +9,8 @@ import common.cout970.UltraTech.TileEntities.utility.ReactorTankEntity;
 import common.cout970.UltraTech.TileEntities.utility.ReactorWallEntity;
 import common.cout970.UltraTech.TileEntities.utility.SteamExtractorEntity;
 import common.cout970.UltraTech.TileEntities.utility.WaterBlockEntity;
-import common.cout970.UltraTech.core.UltraTech;
+import common.cout970.UltraTech.managers.UT_Tabs;
+import common.cout970.UltraTech.managers.UltraTech;
 import common.cout970.UltraTech.misc.IReactorPart;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -36,7 +37,7 @@ public class ReactorMultiblock extends BlockContainer{
 	
 	public ReactorMultiblock(Material par2Material) {
 		super(par2Material);
-		setCreativeTab(UltraTech.techTab);
+		setCreativeTab(UT_Tabs.techTab);
 		setStepSound(soundTypeMetal);
 		setResistance(50);
 		setHardness(2.5f);

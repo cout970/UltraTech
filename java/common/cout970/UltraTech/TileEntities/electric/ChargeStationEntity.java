@@ -1,23 +1,16 @@
 package common.cout970.UltraTech.TileEntities.electric;
 
-import common.cout970.UltraTech.lib.CostData;
-import common.cout970.UltraTech.lib.EnergyCosts;
-import common.cout970.UltraTech.misc.MachineWithInventory;
-import api.cout970.UltraTech.MeVpower.IPowerConductor;
-import api.cout970.UltraTech.MeVpower.IStorageItem;
-import api.cout970.UltraTech.MeVpower.PowerInterface;
-import api.cout970.UltraTech.MeVpower.StorageInterface;
-import api.cout970.UltraTech.MeVpower.StorageInterface.MachineTipe;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
+import ultratech.api.power.IPowerConductor;
+import ultratech.api.power.IStorageItem;
+import ultratech.api.power.PowerInterface;
+
+import common.cout970.UltraTech.managers.MachineData;
+import common.cout970.UltraTech.util.MachineWithInventory;
 
 public class ChargeStationEntity extends MachineWithInventory implements IPowerConductor{
 
 	public ChargeStationEntity(){
-		super(6,"Charge station",CostData.Charge_Station);
+		super(6,"Charge station",MachineData.Charge_Station);
 	}
 	
 	public void updateEntity(){
@@ -27,11 +20,11 @@ public class ChargeStationEntity extends MachineWithInventory implements IPowerC
 				if(inventory[u].getItem() instanceof IStorageItem){
 					IStorageItem b = ((IStorageItem)inventory[u].getItem());
 					int space = b.getMaxPower()-b.getPower(inventory[u]);
-					int flow = (int) Math.min(CostData.Charge_Station.use, space);
-					int drain = (int) Math.min(flow, getEnergy());
+					int flow = (int) Math.min(MachineData.Charge_Station.use, space);
+					int drain = (int) Math.min(flow, getCharge());
 					if(drain >= 1){
 						b.addPower(inventory[u], drain);
-						this.removeEnergy(drain);
+						this.removeCharge(drain);
 					}
 				}
 			}
@@ -41,11 +34,11 @@ public class ChargeStationEntity extends MachineWithInventory implements IPowerC
 			if(inventory[u] != null){
 				if(inventory[u].getItem() instanceof IStorageItem){
 					IStorageItem b = ((IStorageItem)inventory[u].getItem());
-					double space = maxEnergy() - getEnergy();
-					int flow = (int) Math.min(CostData.Charge_Station.use,space);
+					double space = getCapacity() - getCharge();
+					int flow = (int) Math.min(MachineData.Charge_Station.use,space);
 					int fill = Math.min(flow, b.getPower(inventory[u]));
 					if(fill >= 1){
-						addEnergy(fill);
+						addCharge(fill);
 						b.removePower(inventory[u],fill);
 					}
 				}

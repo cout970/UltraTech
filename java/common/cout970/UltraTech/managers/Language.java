@@ -19,8 +19,9 @@ import static common.cout970.UltraTech.managers.BlockManager.*;
 
 import org.apache.commons.io.output.WriterOutputStream;
 
+import ultratech.api.power.multipart.MicroPartUtil;
+import common.cout970.UltraTech.TileEntities.electric.tiers.Tesseract_Entity;
 import common.cout970.UltraTech.blocks.Deco_Block;
-import common.cout970.UltraTech.lib.Control;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -43,7 +44,7 @@ public class Language {
 		}else if(obj instanceof Fluid){
 			Language.put(((Fluid) obj).getUnlocalizedName(), name);
 		}else{
-			System.out.println("Exception: tipe not found in "+obj+" with name "+name);
+			System.out.println("Exception: configIO not found in "+obj+" with name "+name);
 		}
 	}
 	
@@ -53,7 +54,7 @@ public class Language {
 	}
 
 	public static void setupLangFile(){
-		File f = new File("I:/Development/Minecraft Mod 1.7.2/gradle/src/main/resources/assets/ultratech/lang/en_US.lang");
+		File f = new File("I:/Development/Minecraft Mod 1.7.10/gradle/src/main/resources/assets/ultratech/lang/en_US.lang");
 		Writer w;
 		try {
 			w = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(f)));
@@ -80,12 +81,12 @@ public class Language {
 		Language.addName(new ItemStack(stoneblock,1,2), "Stone Block White");
 		Language.addName(new ItemStack(stoneblock,1,3), "Stone Bricks White");
 		
-		Language.addName(new ItemStack(Reactor,1,0), "Reactor Core");
-		Language.addName(new ItemStack(Reactor,1,1), "Reactor Wall");
-		Language.addName(new ItemStack(Reactor,1,2), "Reactor Tank");
-		Language.addName(new ItemStack(Reactor,1,3), "Reactor Controller");
-		Language.addName(new ItemStack(Reactor,1,4), "Reactor Water Provider");
-		Language.addName(new ItemStack(Reactor,1,5), "Reactor Steam Extractor");
+//		Language.addName(new ItemStack(Reactor,1,0), "Reactor Core");
+//		Language.addName(new ItemStack(Reactor,1,1), "Reactor Wall");
+//		Language.addName(new ItemStack(Reactor,1,2), "Reactor Tank");
+//		Language.addName(new ItemStack(Reactor,1,3), "Reactor Controller");
+//		Language.addName(new ItemStack(Reactor,1,4), "Reactor Water Provider");
+//		Language.addName(new ItemStack(Reactor,1,5), "Reactor Steam Extractor");
 
 		Language.addName(new ItemStack(Ores,1,0), "Radionite Ore");
 		Language.addName(new ItemStack(Ores,1,1), "Aluminum Ore");
@@ -120,7 +121,7 @@ public class Language {
 		Language.addName(new ItemStack(Tier3,1,1), "Hologram Emiter");
 		Language.addName(new ItemStack(Tier3,1,2), "Precision Crafter");
 		Language.addName(new ItemStack(Tier3,1,3), "Climate Station");
-		Language.addName(new ItemStack(Tier3,1,4), "Energy Tesseract");
+		Language.addName(new ItemStack(Tesseract,1), "Energy Tesseract");
 		
 		Language.addName(new ItemStack(Storage,1,0), "Battery Tier1");
 		Language.addName(new ItemStack(Storage,1,1), "Battery Tier2");
@@ -157,7 +158,7 @@ public class Language {
 		Language.addName(Heater, "Heater");
 		Language.addName(AlienBlock, "Alien Block");
 		
-		if(!Control.isMicroPartActived)Language.addName(CableBlock, "Cable");
+		if(!MicroPartUtil.isMicroPartActived)Language.addName(CableBlock, "Cable");
 	}
 
 }

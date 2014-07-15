@@ -1,11 +1,11 @@
 package common.cout970.UltraTech.TileEntities.utility;
 
 
-import api.cout970.UltraTech.network.Net_Utils;
-import api.cout970.UltraTech.network.SyncTile;
+import common.cout970.UltraTech.TileEntities.multiblocks.TileReactorPart;
 import common.cout970.UltraTech.managers.BlockManager;
 import common.cout970.UltraTech.misc.IReactorPart;
-import common.cout970.UltraTech.multiblocks.TileReactorPart;
+import common.cout970.UltraTech.network.Net_Utils;
+import common.cout970.UltraTech.network.SyncTile;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;

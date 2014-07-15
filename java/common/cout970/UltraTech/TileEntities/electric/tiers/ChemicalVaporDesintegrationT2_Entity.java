@@ -1,16 +1,10 @@
 package common.cout970.UltraTech.TileEntities.electric.tiers;
 
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.ICrafting;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntityFurnace;
-import common.cout970.UltraTech.lib.CostData;
-import common.cout970.UltraTech.lib.EnergyCosts;
-import common.cout970.UltraTech.lib.recipes.CVD_Recipe;
+
+import common.cout970.UltraTech.managers.MachineData;
 import common.cout970.UltraTech.misc.ISpeeded;
-import common.cout970.UltraTech.misc.IUpdatedEntity;
-import common.cout970.UltraTech.misc.MachineWithInventory;
+import common.cout970.UltraTech.recipes.CVD_Recipe;
 
 public class ChemicalVaporDesintegrationT2_Entity extends ChemicalVaporDesintegrationT1_Entity implements ISpeeded{
 
@@ -28,12 +22,12 @@ public class ChemicalVaporDesintegrationT2_Entity extends ChemicalVaporDesintegr
 		boolean changes = false;
 		if(Progres > 0){
 			double extract;
-			if(maxProgres > 0)extract = CostData.CVD.use/maxProgres;
-			else extract = CostData.CVD.use;
-			removeEnergy(extract);
+			if(maxProgres > 0)extract = MachineData.CVD.use/maxProgres;
+			else extract = MachineData.CVD.use;
+			removeCharge(extract);
 		}
 		if(!hasEnergy && shouldWork()){
-			hasEnergy = this.getEnergy() >= CostData.CVD.use;
+			hasEnergy = this.getCharge() >= MachineData.CVD.use;
 		}
 		if(hasEnergy && CVD_Recipe.INSTANCE.matches(this)){
 			Progres++;

@@ -1,14 +1,13 @@
 package common.cout970.UltraTech.TileEntities.electric;
 
-import api.cout970.UltraTech.MeVpower.Machine;
-import api.cout970.UltraTech.MeVpower.StorageInterface;
-import api.cout970.UltraTech.MeVpower.StorageInterface.MachineTipe;
-import api.cout970.UltraTech.network.Net_Utils;
-import common.cout970.UltraTech.lib.CostData;
-import common.cout970.UltraTech.lib.EnergyCosts;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.common.util.ForgeDirection;
+
+import common.cout970.UltraTech.managers.MachineData;
+import common.cout970.UltraTech.network.Net_Utils;
+import common.cout970.UltraTech.util.power.Machine;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -24,7 +23,7 @@ public class WindMillEntity extends Machine{
 	public ForgeDirection facing = ForgeDirection.NORTH;
 
 	public WindMillEntity(){
-		super(CostData.WindMill);
+		super(MachineData.WindMill);
 	}
 	
 	public void updateEntity()
@@ -56,7 +55,7 @@ public class WindMillEntity extends Machine{
 		}
 		
 		if(worldObj.isRemote)return;
-		addEnergy(speed*CostData.WindMill.use);
+		addCharge(speed*MachineData.WindMill.use);
 		
 	}
 
@@ -112,8 +111,6 @@ public class WindMillEntity extends Machine{
     public AxisAlignedBB getRenderBoundingBox()
     {
         AxisAlignedBB bb = INFINITE_EXTENT_AABB;
-            bb = AxisAlignedBB.getAABBPool().getAABB(xCoord - 1, yCoord, zCoord - 1, xCoord + 2, yCoord + 2+5, zCoord + 2);
-        
         return bb;
     }
 }

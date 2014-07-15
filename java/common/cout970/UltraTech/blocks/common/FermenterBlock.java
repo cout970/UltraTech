@@ -7,9 +7,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-
 import common.cout970.UltraTech.TileEntities.electric.FermenterEntity;
-import common.cout970.UltraTech.core.UltraTech;
+import common.cout970.UltraTech.managers.UT_Tabs;
+import common.cout970.UltraTech.managers.UltraTech;
 
 public class FermenterBlock extends BlockContainer{
 
@@ -18,7 +18,7 @@ public class FermenterBlock extends BlockContainer{
 
 	public FermenterBlock(Material m) {
 		super(m);
-		setCreativeTab(UltraTech.techTab);
+		setCreativeTab(UT_Tabs.techTab);
 		setHardness(2f);
 		setStepSound(soundTypeMetal);
 		setBlockName("Fermenter");

@@ -5,19 +5,20 @@ import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import common.cout970.UltraTech.lib.CostData;
-import common.cout970.UltraTech.lib.recipes.CVD_Recipe;
-import common.cout970.UltraTech.lib.recipes.Laminator_Recipe;
-import common.cout970.UltraTech.lib.recipes.Purifier_Recipe;
+import common.cout970.UltraTech.managers.MachineData;
+import common.cout970.UltraTech.recipes.CVD_Recipe;
+import common.cout970.UltraTech.recipes.Laminator_Recipe;
+import common.cout970.UltraTech.recipes.Purifier_Recipe;
+import common.cout970.UltraTech.util.ConfigurableMachineWithInventory;
 
-public class PurifierT1_Entity extends ConfigurableMachine implements ISidedInventory{
+public class PurifierT1_Entity extends ConfigurableMachineWithInventory implements ISidedInventory{
 
 	public float Progres = 0;
 	public int maxProgres = 80;
 	public boolean hasEnergy;
 
 	public PurifierT1_Entity() {
-		super(2, "purifier", CostData.Purifier);
+		super(2, "purifier", MachineData.Purifier);
 	}
 
 	@Override
@@ -27,12 +28,12 @@ public class PurifierT1_Entity extends ConfigurableMachine implements ISidedInve
 		boolean changes = false;
 		if(Progres > 0){
 			double extract;
-			if(maxProgres > 0)extract = CostData.Purifier.use/maxProgres;
-			else extract = CostData.Purifier.use;
-			removeEnergy(extract);
+			if(maxProgres > 0)extract = MachineData.Purifier.use/maxProgres;
+			else extract = MachineData.Purifier.use;
+			removeCharge(extract);
 		}
 		if(!hasEnergy && shouldWork()){
-			hasEnergy = this.getEnergy() >= CostData.Purifier.use;
+			hasEnergy = this.getCharge() >= MachineData.Purifier.use;
 		}
 		if(hasEnergy && Purifier_Recipe.INSTANCE.matches(this)){
 			Progres++;

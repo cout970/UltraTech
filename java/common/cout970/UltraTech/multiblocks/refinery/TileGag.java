@@ -1,6 +1,7 @@
 package common.cout970.UltraTech.multiblocks.refinery;
 
-import api.cout970.UltraTech.network.SyncTile;
+import common.cout970.UltraTech.network.SyncTile;
+
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 

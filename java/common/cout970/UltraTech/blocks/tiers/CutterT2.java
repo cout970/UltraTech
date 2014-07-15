@@ -8,9 +8,10 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import common.cout970.UltraTech.TileEntities.electric.tiers.CutterT2_Entity;
-import common.cout970.UltraTech.core.UltraTech;
+import common.cout970.UltraTech.managers.UT_Tabs;
+import common.cout970.UltraTech.managers.UltraTech;
 import common.cout970.UltraTech.misc.IUpdatedEntity;
-import api.cout970.UltraTech.MeVpower.BlockConductor;
+import common.cout970.UltraTech.util.power.BlockConductor;
 
 public class CutterT2 extends BlockConductor{
 
@@ -18,7 +19,7 @@ public class CutterT2 extends BlockConductor{
 	
 	public CutterT2(Material m) {
 		super(m);
-		setCreativeTab(UltraTech.techTab);
+		setCreativeTab(UT_Tabs.techTab);
 		setHardness(2f);
 		setStepSound(soundTypeMetal);
 		setBlockName("CutterT2");

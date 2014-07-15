@@ -2,8 +2,8 @@ package common.cout970.UltraTech.blocks;
 
 import java.util.Random;
 
-import common.cout970.UltraTech.core.UltraTech;
-import common.cout970.UltraTech.lib.RenderUtil;
+import common.cout970.UltraTech.managers.UT_Tabs;
+import common.cout970.UltraTech.util.RenderUtil;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -18,7 +18,7 @@ public class AlienBlock extends Block{
 
 	public AlienBlock(Material p_i45394_1_) {
 		super(p_i45394_1_);
-		setCreativeTab(UltraTech.DecoTab);
+		setCreativeTab(UT_Tabs.DecoTab);
 		setHardness(2f);
 		setStepSound(soundTypeMetal);
 		setResistance(5000);

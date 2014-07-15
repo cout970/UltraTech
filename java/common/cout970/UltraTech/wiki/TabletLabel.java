@@ -1,7 +1,6 @@
 package common.cout970.UltraTech.wiki;
 
-import common.cout970.UltraTech.lib.UT_Utils;
-
+import common.cout970.UltraTech.util.UT_Utils;
 import net.minecraft.client.renderer.texture.TextureManager;
 
 public class TabletLabel {

@@ -1,19 +1,16 @@
 package common.cout970.UltraTech.TileEntities.electric;
 
-import api.cout970.UltraTech.MeVpower.CableType;
-import api.cout970.UltraTech.MeVpower.Machine;
-import api.cout970.UltraTech.MeVpower.StorageInterface;
-import api.cout970.UltraTech.MeVpower.StorageInterface.MachineTipe;
-import api.cout970.UltraTech.fluids.UT_Tank;
-import api.cout970.UltraTech.network.Net_Utils;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
-import common.cout970.UltraTech.lib.CostData;
-import common.cout970.UltraTech.lib.EnergyCosts;
+import ultratech.api.power.CableType;
+
+import common.cout970.UltraTech.managers.MachineData;
+import common.cout970.UltraTech.util.fluids.UT_Tank;
+import common.cout970.UltraTech.util.power.Machine;
 
 public class SteamTurbineEntity extends Machine implements IFluidHandler{
 
@@ -29,7 +26,7 @@ public class SteamTurbineEntity extends Machine implements IFluidHandler{
 	
 	
 	public SteamTurbineEntity(){
-		super(CostData.Turbine,true);
+		super(MachineData.Turbine,true);
 	}
 	
 	public CableType getConection(ForgeDirection side) {
@@ -43,9 +40,16 @@ public class SteamTurbineEntity extends Machine implements IFluidHandler{
 			tank = new UT_Tank(16000, this);
 		}
 		if(!worldObj.isRemote){
-			if(tank.getFluidAmount() >= 80 && getEnergy()+CostData.Turbine.use <= maxEnergy()){
-				tank.drain(80, true);
-				this.addEnergy(CostData.Turbine.use);
+			
+			if(tank.getFluidAmount() >= 100 && getCharge()+MachineData.Turbine.use*100 <= getCapacity()){
+				tank.drain(100, true);
+				this.addCharge(MachineData.Turbine.use*100);
+			}else if(tank.getFluidAmount() >= 10 && getCharge()+MachineData.Turbine.use*10 <= getCapacity()){
+				tank.drain(10, true);
+				this.addCharge(MachineData.Turbine.use*10);
+			}else if(tank.getFluidAmount() >= 1 && getCharge()+MachineData.Turbine.use <= getCapacity()){
+				tank.drain(1, true);
+				this.addCharge(MachineData.Turbine.use);
 			}
 		}
 	}

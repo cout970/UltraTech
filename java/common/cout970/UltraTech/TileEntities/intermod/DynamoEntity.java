@@ -1,49 +1,50 @@
 package common.cout970.UltraTech.TileEntities.intermod;
 
+import ultratech.api.power.CableType;
+import ultratech.api.power.IPowerConductor;
+import ultratech.api.power.PowerInterface;
+import ultratech.api.power.StorageInterface;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
-import api.cout970.UltraTech.MeVpower.CableType;
-import api.cout970.UltraTech.MeVpower.IPowerConductor;
-import api.cout970.UltraTech.MeVpower.Machine;
-import api.cout970.UltraTech.MeVpower.PowerInterface;
-import api.cout970.UltraTech.MeVpower.StorageInterface;
-import api.cout970.UltraTech.network.Net_Utils;
-import api.cout970.UltraTech.network.SyncTile;
 import cofh.api.energy.EnergyStorage;
 import cofh.api.energy.IEnergyHandler;
-import common.cout970.UltraTech.lib.CostData;
-import common.cout970.UltraTech.lib.UT_Utils;
+import common.cout970.UltraTech.managers.MachineData;
 import common.cout970.UltraTech.misc.IUpdatedEntity;
+import common.cout970.UltraTech.misc.PowerExchange;
+import common.cout970.UltraTech.network.Net_Utils;
+import common.cout970.UltraTech.network.SyncTile;
+import common.cout970.UltraTech.util.UT_Utils;
+import common.cout970.UltraTech.util.power.Machine;
 
 public class DynamoEntity extends SyncTile implements IPowerConductor, IEnergyHandler, IUpdatedEntity{
 
 	public ForgeDirection facing = ForgeDirection.UP;
 	protected EnergyStorage storage;//RF
 	protected StorageInterface inter;//Mev
-	public static final int RF = 20;//RF => MeV
+	public static PowerExchange pe = new PowerExchange();
 	public boolean on = false;
 	public IEnergyHandler recep = null;
 
 	public DynamoEntity(){
 		super();
-		storage = new EnergyStorage((int) (CostData.Dynamo.cap*RF));
-		inter = new StorageInterface(this,CostData.Dynamo.cap,2);
+		storage = new EnergyStorage((int) (pe.MeVtoRF(MachineData.Dynamo.cap)));
+		inter = new StorageInterface(this,MachineData.Dynamo.cap,2);
 	}
 
 	public void updateEntity(){
 		super.updateEntity();
 		if(worldObj.isRemote)return;
-		if(inter.getCharge() >= 4 && storage.getMaxEnergyStored()-storage.getEnergyStored() >= RF*4){
+		if(inter.getCharge() >= 4 && storage.getMaxEnergyStored()-storage.getEnergyStored() >= pe.MeVtoRF(4)){
 			inter.removeCharge(4d);
-			storage.receiveEnergy(RF*4, false);
-		}else if(inter.getCharge() >= 1 && storage.getMaxEnergyStored()-storage.getEnergyStored() >= RF){
+			storage.receiveEnergy(pe.MeVtoRF(4), false);
+		}else if(inter.getCharge() >= 1 && storage.getMaxEnergyStored()-storage.getEnergyStored() >= pe.MeVtoRF(1)){
 			inter.removeCharge(1d);
-			storage.receiveEnergy(RF, false);
-		}else if(inter.getCharge() >= 1d/RF && storage.getMaxEnergyStored()-storage.getEnergyStored() >= 1){
-			inter.removeCharge(1d/RF);
+			storage.receiveEnergy(pe.MeVtoRF(1), false);
+		}else if(inter.getCharge() >= pe.RFtoMev(1) && storage.getMaxEnergyStored()-storage.getEnergyStored() >= 1){
+			inter.removeCharge(pe.RFtoMev(1));
 			storage.receiveEnergy(1, false);
 		}
 		if(recep != null){

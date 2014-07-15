@@ -4,7 +4,10 @@ import java.util.List;
 
 
 
-import common.cout970.UltraTech.core.UltraTech;
+
+
+
+import common.cout970.UltraTech.managers.UT_Tabs;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -26,7 +29,7 @@ public class UT_Dust extends Item{
 		super();
 		setHasSubtypes(true);
 		setUnlocalizedName("UT_Dust");
-		setCreativeTab(UltraTech.ResourceTab);
+		setCreativeTab(UT_Tabs.ResourceTab);
 		setMaxStackSize(64);
 	}
 	

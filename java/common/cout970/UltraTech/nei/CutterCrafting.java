@@ -1,5 +1,6 @@
 package common.cout970.UltraTech.nei;
 
+import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +10,7 @@ import net.minecraft.util.ResourceLocation;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.TemplateRecipeHandler;
 
-import common.cout970.UltraTech.lib.recipes.Cutter_Recipe;
+import common.cout970.UltraTech.recipes.Cutter_Recipe;
 
 public class CutterCrafting extends TemplateRecipeHandler {
 
@@ -24,6 +25,27 @@ public class CutterCrafting extends TemplateRecipeHandler {
 	public String getGuiTexture() {
 		return "nei:textures/gui/cuter.png";
 	}
+
+	@Override
+	public void loadTransferRects() {
+
+		transferRects.add(new RecipeTransferRect(new Rectangle(80, 20, 24, 15), getRecipesID()));
+	}
+
+	private String getRecipesID() {
+		return "cutter";
+	}
+
+	
+	
+	@Override
+    public void loadCraftingRecipes(String outputId, Object... results) {
+    
+        if (outputId.equals(getRecipesID())) {
+            for (Cutter_Recipe recipe : Cutter_Recipe.recipes)
+                recipes.add(recipe);
+        }  else super.loadCraftingRecipes(outputId, results);
+    }
 
 	@Override
 	public void loadCraftingRecipes(ItemStack result)

@@ -1,7 +1,8 @@
 package common.cout970.UltraTech.blocks.common;
 
 import common.cout970.UltraTech.TileEntities.utility.Painter3DEntity;
-import common.cout970.UltraTech.core.UltraTech;
+import common.cout970.UltraTech.managers.UT_Tabs;
+import common.cout970.UltraTech.managers.UltraTech;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -16,7 +17,7 @@ public class Painter3D extends BlockContainer{
 
 	public Painter3D(Material m) {
 		super(m);
-		setCreativeTab(UltraTech.techTab);
+		setCreativeTab(UT_Tabs.techTab);
 		setHardness(2f);
 		setStepSound(soundTypeMetal);
 		setBlockName("Painter");
