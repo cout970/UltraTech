@@ -77,6 +77,7 @@ import common.cout970.UltraTech.containers.MinerContainer;
 import common.cout970.UltraTech.containers.Printer3DContainer;
 import common.cout970.UltraTech.containers.PurifierContainer;
 import common.cout970.UltraTech.containers.ReactorContainer;
+import common.cout970.UltraTech.containers.Reactor_Container;
 import common.cout970.UltraTech.containers.RefineryContainer;
 import common.cout970.UltraTech.containers.StorageContainer;
 import common.cout970.UltraTech.containers.TabletContainer;
@@ -125,7 +126,7 @@ public class GuiHandler implements IGuiHandler{
 		}
 		//Reactor
 		if(tileEntity instanceof ReactorEntity){
-			return new ReactorContainer(player.inventory, (ReactorEntity) tileEntity);
+			return new Reactor_Container(player.inventory, tileEntity);
 		}
 		//MAssembly
 		if(tileEntity instanceof MolecularAssemblyEntity){
