@@ -20,7 +20,7 @@ public class MolecularAssemblyEntity extends MachineWithInventory implements IIn
 	private boolean hasEnergy;
 	
 	public MolecularAssemblyEntity(){
-		super(11,"Molecular Assembly",MachineData.MA);
+		super(11,"Molecular Assembly",MachineData.MAssembly);
 	}
 
 	public void updateEntity(){
@@ -28,11 +28,11 @@ public class MolecularAssemblyEntity extends MachineWithInventory implements IIn
 		boolean flag = false;
 
 		if(!hasEnergy){
-			hasEnergy = getCharge() >= MachineData.MA.use;
+			hasEnergy = getCharge() >= MachineData.MAssembly.use;
 		}
 
 		if(progres > 0){
-			removeCharge(MachineData.MA.use*speed/1000);
+			removeCharge(MachineData.MAssembly.use*speed/1000);
 		}
 		if (hasEnergy && hasrecipe && (getStackInSlot(9) == null || OreDictionary.itemMatches(getStackInSlot(9), getStackInSlot(10), true))){
 			this.progres += speed;

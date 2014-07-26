@@ -8,13 +8,17 @@ import java.util.List;
 import java.util.Random;
 
 import common.cout970.UltraTech.TileEntities.utility.CrafterEntity;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockLiquid;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class UT_Utils {
@@ -105,5 +109,16 @@ public class UT_Utils {
 			}
 		}
 	}
-
+	
+	public static boolean canBreak(Block block,World w, int x, int y,int z){
+		if(block == Blocks.air)return false;
+		if(block instanceof BlockLiquid)return false;
+		if(block instanceof BlockFluidBase)return false;
+		if(Block.isEqualTo(block,Blocks.mob_spawner))return false;
+		if(block == Blocks.portal)return false;
+		if(block == Blocks.end_portal)return false;
+		if(block == Blocks.end_portal_frame)return false;
+		if(block.getBlockHardness(w, x, y, z) == -1)return false;
+		return true;
+	}
 }

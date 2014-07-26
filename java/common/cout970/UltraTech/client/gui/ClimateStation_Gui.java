@@ -3,18 +3,20 @@ package common.cout970.UltraTech.client.gui;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.lwjgl.opengl.GL11;
-
-import ultratech.api.power.IPower;
-import common.cout970.UltraTech.TileEntities.electric.ClimateEntity;
-import common.cout970.UltraTech.network.Net_Utils;
-import common.cout970.UltraTech.packets.PacketClimateStation;
-import common.cout970.UltraTech.util.UT_Utils;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.inventory.Container;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
+
+import org.lwjgl.opengl.GL11;
+
+import ultratech.api.power.IPower;
+
+import common.cout970.UltraTech.TileEntities.electric.ClimateEntity;
+import common.cout970.UltraTech.network.Net_Utils;
+import common.cout970.UltraTech.network.messages.MessageClimateStation;
+import common.cout970.UltraTech.util.UT_Utils;
 
 public class ClimateStation_Gui extends GuiContainer{
 
@@ -64,15 +66,15 @@ public class ClimateStation_Gui extends GuiContainer{
 		int xStart = (width - xSize) / 2;
 		int yStart = (height - ySize) / 2;
 		if(isIn(par1, par2, xStart+15, yStart+11, 25, 25)){
-			Net_Utils.PipeLine.sendToServer(new PacketClimateStation(entity, 0));
+			Net_Utils.INSTANCE.sendToServer(new MessageClimateStation(entity, 0));
 			entity.setClimate(0);
 		}
 		if(isIn(par1, par2, xStart+15, yStart+45, 25, 25)){
-			Net_Utils.PipeLine.sendToServer(new PacketClimateStation(entity, 1));
+			Net_Utils.INSTANCE.sendToServer(new MessageClimateStation(entity, 1));
 			entity.setClimate(1);
 		}
 		if(isIn(par1, par2, xStart+48, yStart+11, 25, 25)){
-			Net_Utils.PipeLine.sendToServer(new PacketClimateStation(entity, 2));
+			Net_Utils.INSTANCE.sendToServer(new MessageClimateStation(entity, 2));
 			entity.setClimate(2);
 		}
 	}

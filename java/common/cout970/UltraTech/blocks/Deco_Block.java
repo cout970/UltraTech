@@ -2,6 +2,7 @@ package common.cout970.UltraTech.blocks;
 
 import java.util.List;
 
+import common.cout970.UltraTech.client.textures.Block_Textures;
 import common.cout970.UltraTech.managers.UT_Tabs;
 import common.cout970.UltraTech.proxy.ClientProxy;
 import cpw.mods.fml.relauncher.Side;
@@ -41,9 +42,9 @@ public class Deco_Block extends Block{
     }
 	
 	public void registerBlockIcons(IIconRegister iconRegister){
-		Base = iconRegister.registerIcon("ultratech:deco_white/base");
-		this.blockIcon = iconRegister.registerIcon("ultratech:deco_"+((!black) ? "white" : "black")+"/deco"+number);
-		this.blockIconIn = iconRegister.registerIcon("ultratech:deco_white/deco_in_"+number);
+		Base = iconRegister.registerIcon(Block_Textures.DECO_BASE);
+		this.blockIcon = iconRegister.registerIcon(Block_Textures.DECO_PREFIX+((!black) ? "white" : "black")+"/deco"+number);
+		this.blockIconIn = iconRegister.registerIcon(Block_Textures.DECO_PREFIX+"white/deco_in_"+number);
 	}
 	
 	@SideOnly(Side.CLIENT)

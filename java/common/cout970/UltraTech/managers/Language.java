@@ -19,7 +19,7 @@ import static common.cout970.UltraTech.managers.BlockManager.*;
 
 import org.apache.commons.io.output.WriterOutputStream;
 
-import ultratech.api.power.multipart.MicroPartUtil;
+import ultratech.api.power.multipart.MultipartReference;
 import common.cout970.UltraTech.TileEntities.electric.tiers.Tesseract_Entity;
 import common.cout970.UltraTech.blocks.Deco_Block;
 import net.minecraft.block.Block;
@@ -158,7 +158,7 @@ public class Language {
 		Language.addName(Heater, "Heater");
 		Language.addName(AlienBlock, "Alien Block");
 		
-		if(!MicroPartUtil.isMicroPartActived)Language.addName(CableBlock, "Cable");
+		if(!MultipartReference.isMicroPartActived)Language.addName(CableBlock, "Cable");
 	}
 
 }

@@ -11,6 +11,9 @@ import ultratech.api.power.IPowerConductor;
 import ultratech.api.power.PowerInterface;
 import ultratech.api.power.PowerUtils;
 import ultratech.api.power.multipart.MicroPartUtil;
+import common.cout970.UltraTech.misc.IUpdatedEntity;
+import common.cout970.UltraTech.network.Net_Utils;
+import common.cout970.UltraTech.network.messages.MessageMicroPartUpdate;
 import common.cout970.UltraTech.util.UT_Utils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -31,7 +34,7 @@ import codechicken.multipart.TMultiPart;
 import codechicken.multipart.TSlottedPart;
 import codechicken.multipart.TileMultipart;
 
-public class MicroCableBig extends TMultiPart implements IPowerConductor, JNormalOcclusion, ISidedHollowConnect{
+public class MicroCableBig extends TMultiPart implements IPowerConductor, JNormalOcclusion, ISidedHollowConnect, IUpdatedEntity{
 
 	public static Cuboid6[]boundingBoxes = new Cuboid6[7];
 	public Map<ForgeDirection,Boolean> conn = new HashMap<ForgeDirection,Boolean>();
@@ -41,7 +44,7 @@ public class MicroCableBig extends TMultiPart implements IPowerConductor, JNorma
 		boundingBoxes[6] = new Cuboid6(0.5-w,0.5-w,0.5-w,0.5+w,0.5+w,0.5+w);//base
 		boundingBoxes[0] = new Cuboid6(0.5-w, 0, 0.5-w, 0.5+w, 0.5-w, 0.5+w);//up
 		boundingBoxes[1] = new Cuboid6(0.5-w, 0.5+w, 0.5-w, 0.5+w, 1, 0.5+w);//down
-		boundingBoxes[2] = new Cuboid6(0.5-w, 0.5-w, 0.5-w,0.5+w, 0.5+w, 0);//north
+		boundingBoxes[2] = new Cuboid6(0.5-w, 0.5-w, 0.5-w, 0.5+w, 0.5+w, 0);//north
 		boundingBoxes[3] = new Cuboid6(0.5-w, 0.5-w, 0.5+w, 0.5+w, 0.5+w, 1);//south
 		boundingBoxes[4] = new Cuboid6(0, 0.5-w, 0.5-w, 0.5-w, 0.5+w, 0.5+w);//west
 		boundingBoxes[5] = new Cuboid6(1, 0.5-w, 0.5-w, 0.5+w, 0.5+w, 0.5+w);//east
@@ -115,10 +118,6 @@ public class MicroCableBig extends TMultiPart implements IPowerConductor, JNorma
 		return 8;
 	}
 
-//	@Override
-//	public int getSlotMask() {
-//		return 6;
-//	}
 
 	//power
 	public PowerInterface cond = null;
@@ -154,22 +153,32 @@ public class MicroCableBig extends TMultiPart implements IPowerConductor, JNorma
 	public void update() {
 		super.update();
 		getPower().MachineUpdate();	
+		
+		double w = 0.25;
+		boundingBoxes[6] = new Cuboid6(0.5-w,0.5-w,0.5-w,0.5+w,0.5+w,0.5+w);//base
+		boundingBoxes[0] = new Cuboid6(0.5-w, 0, 0.5-w, 0.5+w, 0.5-w, 0.5+w);//up
+		boundingBoxes[1] = new Cuboid6(0.5-w, 0.5+w, 0.5-w, 0.5+w, 1, 0.5+w);//down
+		boundingBoxes[2] = new Cuboid6(0.5-w, 0.5-w, 0, 0.5+w, 0.5+w, 0.5-w);//north
+		boundingBoxes[3] = new Cuboid6(0.5-w, 0.5-w, 0.5+w, 0.5+w, 0.5+w, 1);//south
+		boundingBoxes[4] = new Cuboid6(0, 0.5-w, 0.5-w, 0.5-w, 0.5+w, 0.5+w);//west
+		boundingBoxes[5] = new Cuboid6(0.5+w, 0.5-w, 0.5-w, 1, 0.5+w, 0.5+w);//east
 	}
 
 	@Override
 	public void onNeighborChanged() {
+		if(!world().isRemote)Net_Utils.INSTANCE.sendToAll(new MessageMicroPartUpdate(this));
 		updateConnections();
 	}
 
 	@Override
 	public void onPartChanged(TMultiPart part) {
-		updateConnections();
+		onNeighborChanged();
 	}
 
 	@Override
 	public void onAdded() {
 		getPower().iterate();
-		updateConnections();
+		onNeighborChanged();
 	}
 
 	@Override
@@ -189,6 +198,11 @@ public class MicroCableBig extends TMultiPart implements IPowerConductor, JNorma
 			if (render == null) render = new RenderCableBig();
 			render.render(this, pos);
 		}
+	}
+
+	@Override
+	public void onNeigUpdate() {
+		onNeighborChanged();
 	}
 
 }

@@ -8,8 +8,8 @@ import net.minecraftforge.common.util.ForgeDirection;
 import org.lwjgl.opengl.GL11;
 
 import ultratech.api.power.PowerUtils;
-import common.cout970.UltraTech.util.RenderUtil;
 import common.cout970.UltraTech.util.UT_Utils;
+import common.cout970.UltraTech.util.render.RenderUtil;
 import cpw.mods.fml.common.Optional;
 
 public class RenderCableWithoutMP extends TileEntitySpecialRenderer{

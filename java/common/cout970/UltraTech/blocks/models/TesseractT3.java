@@ -7,6 +7,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import common.cout970.UltraTech.TileEntities.electric.tiers.Tesseract_Entity;
 import common.cout970.UltraTech.blocks.UT_TileBlock;
+import common.cout970.UltraTech.client.textures.Block_Textures;
 import common.cout970.UltraTech.proxy.ClientProxy;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -20,7 +21,7 @@ public class TesseractT3 extends UT_TileBlock{
 
 	public void registerBlockIcons(IIconRegister IR){
 		icons = new IIcon[1];
-		icons[0] = IR.registerIcon("ultratech:void");
+		icons[0] = IR.registerIcon(Block_Textures.VOID);
 	}
 	
 	@Override

@@ -12,8 +12,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidRegistry;
 import common.cout970.UltraTech.recipes.Chemical_Recipe;
 import common.cout970.UltraTech.recipes.Cooling_Recipes;
-import common.cout970.UltraTech.util.RenderUtil;
 import common.cout970.UltraTech.util.UT_Utils;
+import common.cout970.UltraTech.util.render.RenderUtil;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.TemplateRecipeHandler;
 

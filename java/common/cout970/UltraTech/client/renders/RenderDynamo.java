@@ -5,7 +5,7 @@ import org.lwjgl.opengl.GL11;
 import common.cout970.UltraTech.TileEntities.intermod.DynamoEntity;
 import common.cout970.UltraTech.TileEntities.intermod.EngineEntity;
 import common.cout970.UltraTech.client.models.ModelDynamo;
-import common.cout970.UltraTech.util.RenderUtil;
+import common.cout970.UltraTech.util.render.RenderUtil;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;

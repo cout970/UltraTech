@@ -81,9 +81,9 @@ public class RenderPipeItem implements IItemRenderer{
 		FMLClientHandler.instance().getClient().renderEngine.bindTexture(new ResourceLocation("ultratech:textures/misc/fluids/pipebaseitem.png"));
 		model.render(0.0625f,a);
 		//render in
-//		FMLClientHandler.instance().getClient().renderEngine.bindTexture(new ResourceLocation("ultratech:textures/misc/fluids/base.png"));
-//		GL11.glColor3f(0.7f, 0.7f, 0.7f);
-//		in.render(0.0625F,a);
+		FMLClientHandler.instance().getClient().renderEngine.bindTexture(new ResourceLocation("ultratech:textures/misc/fluids/pipein.png"));
+		GL11.glColor3f(0.7f, 0.7f, 0.7f);
+		in.render(0.0625F,a);
 
 		GL11.glEnable(GL11.GL_LIGHTING);
 		GL11.glPopMatrix();

@@ -4,6 +4,7 @@ import buildcraft.api.tools.IToolWrench;
 import common.cout970.UltraTech.TileEntities.fluid.BoilerEntity;
 import common.cout970.UltraTech.TileEntities.intermod.DynamoEntity;
 import common.cout970.UltraTech.TileEntities.intermod.EngineEntity;
+import common.cout970.UltraTech.client.textures.Block_Textures;
 import common.cout970.UltraTech.managers.UT_Tabs;
 import common.cout970.UltraTech.managers.UltraTech;
 import common.cout970.UltraTech.misc.IUpdatedEntity;
@@ -61,7 +62,7 @@ public class Dynamo extends BlockConductor{
 	}
 
 	public void registerBlockIcons(IIconRegister iconRegister){
-		this.blockIcon = iconRegister.registerIcon("ultratech:chasis1");
+		this.blockIcon = iconRegister.registerIcon(Block_Textures.CHASIS_T2);
 	}
 	
 	public boolean isOpaqueCube()

@@ -2,8 +2,8 @@ package common.cout970.UltraTech.proxy;
 
 import net.minecraft.item.Item;
 import net.minecraftforge.client.MinecraftForgeClient;
+
 import common.cout970.UltraTech.TileEntities.electric.PumpEntity;
-import common.cout970.UltraTech.TileEntities.electric.SolarPanelEntity;
 import common.cout970.UltraTech.TileEntities.electric.SteamTurbineEntity;
 import common.cout970.UltraTech.TileEntities.electric.StorageTier1;
 import common.cout970.UltraTech.TileEntities.electric.StorageTier2;
@@ -16,8 +16,8 @@ import common.cout970.UltraTech.TileEntities.fluid.TankEntity;
 import common.cout970.UltraTech.TileEntities.intermod.DynamoEntity;
 import common.cout970.UltraTech.TileEntities.intermod.EnergyTransformer;
 import common.cout970.UltraTech.TileEntities.intermod.EngineEntity;
+import common.cout970.UltraTech.TileEntities.multiblocks.Reactor_Tank_Entity;
 import common.cout970.UltraTech.TileEntities.utility.HologramEmiterEntity;
-import common.cout970.UltraTech.TileEntities.utility.ReactorTankEntity;
 import common.cout970.UltraTech.client.renderItems.RenderBatteryItem;
 import common.cout970.UltraTech.client.renderItems.RenderBoilerItem;
 import common.cout970.UltraTech.client.renderItems.RenderDynamoItem;
@@ -39,7 +39,6 @@ import common.cout970.UltraTech.client.renders.RenderEngine;
 import common.cout970.UltraTech.client.renders.RenderHologram;
 import common.cout970.UltraTech.client.renders.RenderPipe;
 import common.cout970.UltraTech.client.renders.RenderPump;
-import common.cout970.UltraTech.client.renders.RenderSolarPanel;
 import common.cout970.UltraTech.client.renders.RenderTank;
 import common.cout970.UltraTech.client.renders.RenderTesseract;
 import common.cout970.UltraTech.client.renders.RenderTransformer;
@@ -51,6 +50,7 @@ import common.cout970.UltraTech.microparts.Cable_Entity;
 import common.cout970.UltraTech.microparts.RenderCableWithoutMP;
 import common.cout970.UltraTech.multiblocks.refinery.RefineryCore;
 import common.cout970.UltraTech.multiblocks.refinery.RenderRefinery;
+
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 
@@ -72,8 +72,7 @@ public class ClientProxy extends CommonProxy{
 
 	@Override
 	public void registerRenders() {
-//		ClientRegistry.bindTileEntitySpecialRenderer(SolarPanelEntity.class, new RenderSolarPanel());
-		ClientRegistry.bindTileEntitySpecialRenderer(ReactorTankEntity.class, new ReactorTankRender());
+		ClientRegistry.bindTileEntitySpecialRenderer(Reactor_Tank_Entity.class, new ReactorTankRender());
 		ClientRegistry.bindTileEntitySpecialRenderer(WindMillEntity.class, new RenderWindMill());
 		ClientRegistry.bindTileEntitySpecialRenderer(EngineEntity.class, new RenderEngine());
 		ClientRegistry.bindTileEntitySpecialRenderer(HologramEmiterEntity.class, new RenderHologram());

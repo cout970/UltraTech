@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ultratech.api.power.multipart.MicroPartUtil;
+import ultratech.api.power.multipart.MultipartReference;
 import common.cout970.UltraTech.managers.UltraTech;
 import common.cout970.UltraTech.util.UT_Utils;
 import net.minecraft.tileentity.TileEntity;
@@ -84,7 +85,7 @@ public class PowerNetwork {
 
 	public void excludeAndRecalculate(IPowerConductor p) {
 		try{
-			if(MicroPartUtil.isMicroPartActived){
+			if(MultipartReference.isMicroPartActived){
 				MicroPartUtil.excludeAndRecalculate(p);
 			}else{
 				for(TileEntity t : UT_Utils.getTiles(p.getPower().getParent())){

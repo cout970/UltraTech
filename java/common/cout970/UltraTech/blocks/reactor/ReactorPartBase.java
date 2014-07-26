@@ -10,6 +10,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import common.cout970.UltraTech.TileEntities.multiblocks.ReactorMultiblockTweak;
+import common.cout970.UltraTech.client.textures.Block_Textures;
 import common.cout970.UltraTech.managers.UT_Tabs;
 import common.cout970.UltraTech.managers.UltraTech;
 import common.cout970.UltraTech.misc.IUpdatedEntity;
@@ -31,8 +32,8 @@ public abstract class ReactorPartBase extends BlockContainer implements IReactor
 	
 	public void registerBlockIcons(IIconRegister IR){
 		icons = new IIcon[2];
-		icons[0] = IR.registerIcon("ultratech:reactor/"+name.toLowerCase()+"_off");
-		icons[1] = IR.registerIcon("ultratech:reactor/"+name.toLowerCase()+"_on");
+		icons[0] = IR.registerIcon(Block_Textures.REACTOR_PREFIX+name.toLowerCase()+"_off");
+		icons[1] = IR.registerIcon(Block_Textures.REACTOR_PREFIX+name.toLowerCase()+"_on");
 	}
 	
 	public IIcon getIcon(int side, int meta){

@@ -2,6 +2,7 @@ package common.cout970.UltraTech.blocks;
 
 import java.util.List;
 
+import common.cout970.UltraTech.client.textures.Block_Textures;
 import common.cout970.UltraTech.managers.UT_Tabs;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -31,10 +32,10 @@ public class StoneBlock extends Block{
 
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister iconRegister){
-		this.blockIcon = iconRegister.registerIcon("ultratech:deco_black/stoneblock");
-		this.blockIcon1 = iconRegister.registerIcon("ultratech:deco_black/stoneblockbrick");
-		this.blockIcon2 = iconRegister.registerIcon("ultratech:deco_white/stoneblock");
-		this.blockIcon3 = iconRegister.registerIcon("ultratech:deco_white/stoneblockbrick");
+		this.blockIcon = iconRegister.registerIcon(Block_Textures.STONE_BLOCK_BLACK);
+		this.blockIcon1 = iconRegister.registerIcon(Block_Textures.STONE_BRICK_BLACK);
+		this.blockIcon2 = iconRegister.registerIcon(Block_Textures.STONE_BLOCK_WHITE);
+		this.blockIcon3 = iconRegister.registerIcon(Block_Textures.STONE_BRICK_WHITE);
 	}
 	
 	@SideOnly(Side.CLIENT)

@@ -5,20 +5,14 @@ import common.cout970.UltraTech.util.LogHelper;
 import ultratech.api.reactor.IReactorBlock;
 import ultratech.api.reactor.IReactorComponent;
 import ultratech.api.reactor.IReactorCoreBlock;
+import ultratech.api.reactor.IReactorCoreEntity;
 import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 public class ReactorMultiblockTweak {
 
-	public static void onBlockUpdate(TileEntity r) {
-		if(r instanceof IReactorComponent){
-			IReactorComponent c = (IReactorComponent) r;
-			if(c.getCore() != null){
-				
-			}
-		}
-	}
+	public static void onBlockUpdate(TileEntity r) {}
 	
 	public static int checkStructure(World w,int x,int y,int z){
 		if(!(w.getBlock(x, y, z) instanceof IReactorCoreBlock))return 0;
@@ -123,8 +117,11 @@ public class ReactorMultiblockTweak {
 				}
 			}
 		}
-		Reactor_Core_Entity c = (Reactor_Core_Entity) w.getTileEntity(x, y, z);
-		Reactor_Core_Entity.size = (byte) size;
+		if(size > 0){
+			IReactorCoreEntity c = (IReactorCoreEntity) w.getTileEntity(x, y, z);
+			c.setSize(size);
+			c.updateComponents();
+		}
 	}
 	
 	public static void removeStructure(World w,int x,int y,int z){
@@ -193,5 +190,7 @@ public class ReactorMultiblockTweak {
 			}
 		}
 	}
+	
+	
 
 }

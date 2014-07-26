@@ -1,6 +1,7 @@
 package common.cout970.UltraTech.blocks.models;
 
 import common.cout970.UltraTech.TileEntities.fluid.BoilerEntity;
+import common.cout970.UltraTech.client.textures.Block_Textures;
 import common.cout970.UltraTech.managers.UT_Tabs;
 import common.cout970.UltraTech.managers.UltraTech;
 import common.cout970.UltraTech.misc.IUpdatedEntity;
@@ -50,7 +51,7 @@ public class Boiler extends BlockConductor{
 	}
 
 	public void registerBlockIcons(IIconRegister iconRegister){
-		this.blockIcon = iconRegister.registerIcon("ultratech:chasis0");
+		this.blockIcon = iconRegister.registerIcon(Block_Textures.PARTICLE_COPPER);
 	}
 	
 	public boolean isOpaqueCube()

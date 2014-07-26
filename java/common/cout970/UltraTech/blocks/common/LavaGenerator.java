@@ -1,11 +1,14 @@
 package common.cout970.UltraTech.blocks.common;
 
 import common.cout970.UltraTech.TileEntities.electric.LavaGeneratorEntity;
+import common.cout970.UltraTech.client.textures.Block_Textures;
 import common.cout970.UltraTech.managers.UT_Tabs;
-import common.cout970.UltraTech.util.RenderUtil;
+import common.cout970.UltraTech.misc.IUpdatedEntity;
 import common.cout970.UltraTech.util.power.BlockConductor;
+import common.cout970.UltraTech.util.render.RenderUtil;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.tileentity.TileEntity;
@@ -35,15 +38,19 @@ public class LavaGenerator extends BlockConductor{
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister IR){
-		blockIcon = IR.registerIcon("ultratech:lavagen");
-		blockIcon2 = IR.registerIcon("ultratech:chasis1");
+		blockIcon = IR.registerIcon(Block_Textures.LAVA_GENERATOR);
+		blockIcon2 = IR.registerIcon(Block_Textures.CHASIS_T2);
 	}
 	
 	@SideOnly(Side.CLIENT)
-    public IIcon getIcon(int side, int meta)
-    {
+    public IIcon getIcon(int side, int meta){
 		if(side == 0 || side == 1)return blockIcon2;
     	return blockIcon;
     }
+	
+	public void onNeighborBlockChange(World w, int x, int y, int z, Block b) {
+		IUpdatedEntity i = (IUpdatedEntity) w.getTileEntity(x, y, z);
+		i.onNeigUpdate();
+	}
 
 }

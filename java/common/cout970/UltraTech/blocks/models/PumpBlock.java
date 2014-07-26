@@ -2,6 +2,7 @@ package common.cout970.UltraTech.blocks.models;
 
 import common.cout970.UltraTech.TileEntities.electric.PumpEntity;
 import common.cout970.UltraTech.TileEntities.utility.hitBoxEntity;
+import common.cout970.UltraTech.client.textures.Block_Textures;
 import common.cout970.UltraTech.managers.BlockManager;
 import common.cout970.UltraTech.managers.UT_Tabs;
 import common.cout970.UltraTech.misc.IReactorPart;
@@ -29,7 +30,7 @@ public class PumpBlock extends BlockConductor{
 	}
 	
 	public void registerBlockIcons(IIconRegister iconRegister){
-		this.blockIcon = iconRegister.registerIcon("ultratech:chasis");
+		this.blockIcon = iconRegister.registerIcon(Block_Textures.PARTICLE_COPPER);
 	}
 	
 	public void onNeighborBlockChange(World w, int x, int y, int z, Block side){

@@ -3,6 +3,7 @@ package common.cout970.UltraTech.blocks.models;
 import buildcraft.api.tools.IToolWrench;
 import common.cout970.UltraTech.TileEntities.fluid.CopperPipeEntity;
 import common.cout970.UltraTech.TileEntities.intermod.EngineEntity;
+import common.cout970.UltraTech.client.textures.Block_Textures;
 import common.cout970.UltraTech.managers.UltraTech;
 import common.cout970.UltraTech.proxy.ClientProxy;
 import cpw.mods.fml.relauncher.Side;
@@ -36,7 +37,7 @@ public class CopperPipe extends FluidPipeBlock{
 	}
 
 	public void registerBlockIcons(IIconRegister iconRegister){
-		this.blockIcon = iconRegister.registerIcon("ultratech:chasis0");
+		this.blockIcon = iconRegister.registerIcon(Block_Textures.PARTICLE_COPPER);
 	}
 
 	public void onNeighborBlockChange(World w, int x, int y, int z, Block side){

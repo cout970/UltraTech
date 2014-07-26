@@ -8,11 +8,11 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import common.cout970.UltraTech.TileEntities.electric.FermenterEntity;
+import common.cout970.UltraTech.client.textures.Block_Textures;
 import common.cout970.UltraTech.managers.UT_Tabs;
 import common.cout970.UltraTech.managers.UltraTech;
 
 public class FermenterBlock extends BlockContainer{
-
 
 	private IIcon[] icons;
 
@@ -31,8 +31,8 @@ public class FermenterBlock extends BlockContainer{
 	
 	public void registerBlockIcons(IIconRegister IR){
 		icons = new IIcon[2];
-		icons[0] = IR.registerIcon("ultratech:chasis");
-		icons[1] = IR.registerIcon("ultratech:fermenter");	
+		icons[0] = IR.registerIcon(Block_Textures.CHASIS_T1);
+		icons[1] = IR.registerIcon(Block_Textures.FERMENTER);	
 		}
 	
 	public IIcon getIcon(int side, int meta){

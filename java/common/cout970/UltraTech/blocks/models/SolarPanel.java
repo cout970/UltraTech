@@ -1,6 +1,7 @@
 package common.cout970.UltraTech.blocks.models;
 
 import common.cout970.UltraTech.TileEntities.electric.SolarPanelEntity;
+import common.cout970.UltraTech.client.textures.Block_Textures;
 import common.cout970.UltraTech.managers.UT_Tabs;
 import common.cout970.UltraTech.proxy.ClientProxy;
 import common.cout970.UltraTech.util.power.BlockConductor;
@@ -40,9 +41,9 @@ public class SolarPanel extends BlockConductor{
 	}
 
 	public void registerBlockIcons(IIconRegister iconRegister){
-		this.blockIcon = iconRegister.registerIcon("ultratech:machines/solar_up");
-		this.blockIcon1 = iconRegister.registerIcon("ultratech:machines/solar_down");
-		this.blockIcon2 = iconRegister.registerIcon("ultratech:machines/solar_side");
+		this.blockIcon = iconRegister.registerIcon(Block_Textures.SOLAR_PANEL_UP);
+		this.blockIcon1 = iconRegister.registerIcon(Block_Textures.SOLAR_PANEL_DOWN);
+		this.blockIcon2 = iconRegister.registerIcon(Block_Textures.SOLAR_PANEL_SIDE);
 	}
 	
 	public IIcon getIcon(int side, int meta){

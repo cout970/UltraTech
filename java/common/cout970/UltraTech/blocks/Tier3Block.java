@@ -23,6 +23,7 @@ import common.cout970.UltraTech.TileEntities.electric.MinerEntity;
 import common.cout970.UltraTech.TileEntities.electric.MolecularAssemblyEntity;
 import common.cout970.UltraTech.TileEntities.electric.tiers.Tesseract_Entity;
 import common.cout970.UltraTech.TileEntities.utility.HologramEmiterEntity;
+import common.cout970.UltraTech.client.textures.Block_Textures;
 import common.cout970.UltraTech.managers.ItemManager;
 import common.cout970.UltraTech.managers.UT_Tabs;
 import common.cout970.UltraTech.managers.UltraTech;
@@ -49,14 +50,14 @@ public class Tier3Block extends BlockConductor{
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister IR){
 		icons = new IIcon[9];
-		icons[0] = IR.registerIcon("ultratech:chasis2");
-		icons[1] = IR.registerIcon("ultratech:miner");
-		icons[2] = IR.registerIcon("ultratech:hologram");
-		icons[3] = IR.registerIcon("ultratech:assembly");
-		icons[4] = IR.registerIcon("ultratech:climate1");
-		icons[5] = IR.registerIcon("ultratech:climate2");
-		icons[6] = IR.registerIcon("ultratech:climate3");
-		icons[7] = IR.registerIcon("ultratech:tesseract");
+		icons[0] = IR.registerIcon(Block_Textures.CHASIS_T3);
+		icons[1] = IR.registerIcon(Block_Textures.MINER);
+		icons[2] = IR.registerIcon(Block_Textures.HOLOGRAM_EMITER);
+		icons[3] = IR.registerIcon(Block_Textures.ASSEMBLY);
+		icons[4] = IR.registerIcon(Block_Textures.CLIMATE_STATION+"1");
+		icons[5] = IR.registerIcon(Block_Textures.CLIMATE_STATION+"2");
+		icons[6] = IR.registerIcon(Block_Textures.CLIMATE_STATION+"3");
+		icons[7] = IR.registerIcon(Block_Textures.TESSERACT);
 	}
 
 	@Override

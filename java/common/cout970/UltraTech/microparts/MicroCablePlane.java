@@ -33,25 +33,28 @@ import codechicken.multipart.TFacePart;
 import codechicken.multipart.TMultiPart;
 import codechicken.multipart.TSlottedPart;
 import codechicken.multipart.TileMultipart;
-import common.cout970.UltraTech.util.RenderUtil;
+import common.cout970.UltraTech.misc.IUpdatedEntity;
+import common.cout970.UltraTech.network.Net_Utils;
+import common.cout970.UltraTech.network.messages.MessageMicroPartUpdate;
 import common.cout970.UltraTech.util.UT_Utils;
+import common.cout970.UltraTech.util.render.RenderUtil;
 
-public class MicroCablePlane extends TMultiPart implements IPowerConductor, JNormalOcclusion, TFacePart{
+public class MicroCablePlane extends TMultiPart implements IPowerConductor, JNormalOcclusion, TFacePart, IUpdatedEntity{
 
 	public PowerInterface cond = null;
 	public Map<ForgeDirection,Boolean> conn = new HashMap<ForgeDirection,Boolean>();
 
 	//boxes
-	public static Cuboid6[]boundingBoxes = new Cuboid6[6];
+	public static Cuboid6[] boundingBoxes = new Cuboid6[6];
 
 	static {
 		double w = 0.125;
 		float h = 0.0625f*3;
-		boundingBoxes[0] = new Cuboid6(0.5-w, 0,  0.5-w, 0.5+w, h, 0.5+w);//base
-		boundingBoxes[2] = new Cuboid6(0.5-w, 0,  0,     0.5+w, h, 0.5-w);//north 2
-		boundingBoxes[3] = new Cuboid6(0.5-w, 0,  0.5+w, 0.5+w, h, 1    );//south 3
-		boundingBoxes[4] = new Cuboid6(0,     0,  0.5-w, 0.5-w, h, 0.5+w);//west 4
-		boundingBoxes[5] = new Cuboid6(0.5+w, 0,  0.5-w, 1,     h, 0.5+w);//east 5
+		boundingBoxes[0] = new Cuboid6(0.5-w, 0,  0.5-w, 0.5+w, h, 0.5+w);	//base
+		boundingBoxes[2] = new Cuboid6(0.5-w, 0,  0,     0.5+w, h, 0.5-w);	//north 2
+		boundingBoxes[3] = new Cuboid6(0.5-w, 0,  0.5+w, 0.5+w, h, 1);		//south 3
+		boundingBoxes[4] = new Cuboid6(0,     0,  0.5-w, 0.5-w, h, 0.5+w);	//west 4
+		boundingBoxes[5] = new Cuboid6(0.5+w, 0,  0.5-w, 1,     h, 0.5+w);	//east 5
 	}
 
 
@@ -141,10 +144,12 @@ public class MicroCablePlane extends TMultiPart implements IPowerConductor, JNor
 	public void update() {
 		super.update();
 		getPower().MachineUpdate();
+		updateConnections();
 	}
 
 	@Override
 	public void onNeighborChanged() {
+		if(!world().isRemote)Net_Utils.INSTANCE.sendToAll(new MessageMicroPartUpdate(this));
 		updateConnections();
 	}
 
@@ -203,6 +208,14 @@ public class MicroCablePlane extends TMultiPart implements IPowerConductor, JNor
 			if (render == null) render = new RenderCablePlane();
 			render.render(this, pos);
 		}
+		GL11.glPushMatrix();
+		GL11.glTranslated(pos.x, pos.y, pos.z);
+//		RenderUtils.drawCuboidOutline(boundingBoxes[0]);
+//		RenderUtils.drawCuboidOutline(boundingBoxes[2]);
+//		RenderUtils.drawCuboidOutline(boundingBoxes[3]);
+//		RenderUtils.drawCuboidOutline(boundingBoxes[4]);
+//		RenderUtils.drawCuboidOutline(boundingBoxes[5]);
+		GL11.glPopMatrix();
 	}
 
 	@Override
@@ -213,5 +226,10 @@ public class MicroCablePlane extends TMultiPart implements IPowerConductor, JNor
 	@Override
 	public boolean solid(int arg0) {
 		return false;
+	}
+
+	@Override
+	public void onNeigUpdate() {
+		onNeighborChanged();
 	}
 }

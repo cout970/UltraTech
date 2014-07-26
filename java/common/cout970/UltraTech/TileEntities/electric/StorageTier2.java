@@ -6,6 +6,6 @@ import common.cout970.UltraTech.util.power.Machine;
 public class StorageTier2 extends Machine{
 
 	public StorageTier2(){
-		super(MachineData.Storage_2);
+		super(MachineData.Battery_T2);
 	}
 }

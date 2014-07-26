@@ -1,11 +1,17 @@
 package common.cout970.UltraTech.TileEntities.multiblocks;
 
+import common.cout970.UltraTech.network.Net_Utils;
+import common.cout970.UltraTech.util.LogHelper;
+import common.cout970.UltraTech.util.UT_Utils;
+import common.cout970.UltraTech.util.fluids.FluidUtils;
+import common.cout970.UltraTech.util.fluids.TankConection;
 import common.cout970.UltraTech.util.fluids.UT_Tank;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -15,59 +21,63 @@ import net.minecraftforge.fluids.IFluidHandler;
 
 public class Reactor_IO_Entity extends Reactor_Entity_Base implements IFluidHandler,IInventory{
 
-	public ItemStack[] inventory;
 	public UT_Tank tank;
+	public int mode = 1;//0 water in, 1 steam out, 2 material in,3 material out
 	
 	public Reactor_IO_Entity(){
 		super();
-		inventory = new ItemStack[2];
 	}
 	
-	public UT_Tank getTank(){
-		if(tank == null)tank = new UT_Tank(1000, this);
-		return tank;
+	public void updateEntity(){
+		if(mode == 1 && getCore() != null){
+			if(getCore().getTank(1).getFluidAmount() > 0){
+				int toDrain = Math.min(getCore().getTank(1).getFluidAmount(), 500);
+				for(TankConection tc : FluidUtils.getTankConections(this)){
+					int tr = tc.tank.fill(tc.side, new FluidStack(FluidRegistry.getFluid("steam"), toDrain), false);
+					if(tr > 0){
+						int trans = Math.min(toDrain, tr);
+						tc.tank.fill(tc.side, new FluidStack(FluidRegistry.getFluid("steam"), trans), true);
+						getCore().getTank(1).drain(trans, true);
+					}
+				}
+			}
+		}
+	}
+	
+	@Override
+	public void onNeigUpdate() {
+		super.onNeigUpdate();
+		if(worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord))mode = 0;
+		else mode = 1;
 	}
 	
 	@Override
 	public int getSizeInventory() {
-		return inventory.length;
+		if(getCore() != null)return ((IInventory) getCore()).getSizeInventory();
+		return 0;
 	}
 
 	@Override
 	public ItemStack getStackInSlot(int var1) {
-		return inventory[var1];
+		if(getCore() != null)return ((IInventory) getCore()).getStackInSlot(var1);
+		return null;
 	}
 
 	@Override
 	public ItemStack decrStackSize(int slot, int amount) {
-		ItemStack itemStack = getStackInSlot(slot);
-		if (itemStack != null) {
-			if (itemStack.stackSize <= amount) {
-				setInventorySlotContents(slot, null);
-			}
-			else {
-				itemStack = itemStack.splitStack(amount);
-				if (itemStack.stackSize == 0) {
-					setInventorySlotContents(slot, null);
-				}
-			}
-		}
-		return itemStack;
+		if(getCore() != null)return ((IInventory) getCore()).decrStackSize(slot, amount);
+		return null;
 	}
 
 	@Override
 	public ItemStack getStackInSlotOnClosing(int var1) {
-		return inventory[var1];
+		if(getCore() != null)return ((IInventory) getCore()).getStackInSlotOnClosing(var1);
+		return null;
 	}
 
 	@Override
 	public void setInventorySlotContents(int slot, ItemStack itemStack) {
-		inventory[slot] = itemStack;
-
-		if (itemStack != null && itemStack.stackSize > this.getInventoryStackLimit()) {
-			itemStack.stackSize = this.getInventoryStackLimit();
-		}
-		markDirty();
+		if(getCore() != null)((IInventory) getCore()).setInventorySlotContents(slot, itemStack);
 	}
 
 	@Override
@@ -103,8 +113,12 @@ public class Reactor_IO_Entity extends Reactor_Entity_Base implements IFluidHand
 
 	@Override
 	public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
-		if(resource != null && resource.isFluidEqual(new FluidStack(FluidRegistry.WATER,1))){
-			return getTank().fill(resource, doFill);
+		if(resource != null && resource.fluidID == FluidRegistry.WATER.getID()){
+			if(getCore() != null){
+				int f = getCore().getTank(0).fill(resource, doFill);
+				if(f > 0 && doFill)Net_Utils.sendUpdate((TileEntity) getCore());
+				return f;
+			}
 		}
 		return 0;
 	}
@@ -117,7 +131,10 @@ public class Reactor_IO_Entity extends Reactor_Entity_Base implements IFluidHand
 
 	@Override
 	public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain) {
-		return getTank().drain(maxDrain, doDrain);
+		if(getCore() != null){
+			 return getCore().getTank(1).drain(maxDrain, doDrain);
+		}
+		return null;
 	}
 
 	@Override
@@ -132,38 +149,16 @@ public class Reactor_IO_Entity extends Reactor_Entity_Base implements IFluidHand
 
 	@Override
 	public FluidTankInfo[] getTankInfo(ForgeDirection from) {
-		return new FluidTankInfo[]{getTank().getInfo()};
+		return new FluidTankInfo[]{};
 	}
 
 	@Override
 	public void readFromNBT(NBTTagCompound nbtTagCompound) {
-
 		super.readFromNBT(nbtTagCompound);
-		getTank().readFromNBT(nbtTagCompound, "water");
-		NBTTagList tagList = nbtTagCompound.getTagList("Inventory", 10);
-		inventory = new ItemStack[this.getSizeInventory()];
-		for (int i = 0; i < tagList.tagCount(); ++i) {
-			NBTTagCompound tagCompound = (NBTTagCompound) tagList.getCompoundTagAt(i);
-			byte slot = tagCompound.getByte("Slot");
-			if (slot >= 0 && slot < inventory.length) {
-				inventory[slot] = ItemStack.loadItemStackFromNBT(tagCompound);
-			}
-		}
 	}
 
 	@Override
 	public void writeToNBT(NBTTagCompound nbtTagCompound) {
 		super.writeToNBT(nbtTagCompound);
-		getTank().writeToNBT(nbtTagCompound, "water");
-		NBTTagList list = new NBTTagList();
-		for (int currentIndex = 0; currentIndex < inventory.length; ++currentIndex) {
-			if (inventory[currentIndex] != null) {
-				NBTTagCompound nbt = new NBTTagCompound();
-				nbt.setByte("Slot", (byte) currentIndex);
-				inventory[currentIndex].writeToNBT(nbt);
-				list.appendTag(nbt);
-			}
-		}
-		nbtTagCompound.setTag("Inventory", list);
 	}
 }

@@ -1,10 +1,9 @@
 package common.cout970.UltraTech.client.gui;
 
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.text.html.HTMLDocument.HTMLReader.IsindexAction;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.Container;
+import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
@@ -13,14 +12,11 @@ import common.cout970.UltraTech.TileEntities.electric.StorageTier1;
 import common.cout970.UltraTech.TileEntities.electric.StorageTier2;
 import common.cout970.UltraTech.TileEntities.electric.StorageTier3;
 import common.cout970.UltraTech.network.Net_Utils;
-import common.cout970.UltraTech.packets.PacketMachineMode;
+import common.cout970.UltraTech.network.SyncTile;
+import common.cout970.UltraTech.network.messages.MessageMachineMode;
+import common.cout970.UltraTech.util.LogHelper;
 import common.cout970.UltraTech.util.UT_Utils;
 import common.cout970.UltraTech.util.power.Machine;
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
-import net.minecraft.util.ResourceLocation;
 
 public class Storage_Gui extends MachineGuiBase{
 
@@ -87,7 +83,7 @@ public class Storage_Gui extends MachineGuiBase{
 			if(m == 0)m = 2;
 			else if(m == 2)m = 3;
 			else if(m == 3)m = 0;
-			Net_Utils.PipeLine.sendToServer(new PacketMachineMode(entity, m));
+			Net_Utils.INSTANCE.sendToServer(new MessageMachineMode((SyncTile) entity, m));
 		}
 	}
 }

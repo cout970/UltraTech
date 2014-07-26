@@ -32,7 +32,10 @@ public class BoilerEntity extends SyncTile implements IFluidHandler,IUpdatedEnti
 			float exces = heat-99;
 			int toBoil = (int) exces;
 			if(toBoil >= 1){
-				if(storage.getFluidAmount() >= toBoil && result.getFluidAmount()+toBoil*10 <= result.getCapacity()){
+				int canBoil = Math.min(storage.getFluidAmount(), toBoil);
+				int canAccept = Math.min(result.getCapacity()-result.getFluidAmount(), canBoil*10);
+				canBoil = Math.min(canBoil, canAccept/10);
+				if(canBoil > 0){
 					Fluid s = Boiler_Recipes.getResult(storage.getFluid());
 					if(s != null){
 						storage.drain(toBoil, true);

@@ -6,7 +6,7 @@ import common.cout970.UltraTech.TileEntities.electric.PumpEntity;
 import common.cout970.UltraTech.client.models.ModelBoiler;
 import common.cout970.UltraTech.client.models.ModelPump;
 import common.cout970.UltraTech.misc.IconFactory;
-import common.cout970.UltraTech.util.Renderer_Util;
+import common.cout970.UltraTech.util.render.Renderer_Util;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;

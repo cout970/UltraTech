@@ -6,9 +6,10 @@ public enum MachineData {
 	/**
 	 * 2 burning tick = 1MeV
 	 */
-	Generator		( 3200d	,1	,1d			,1),//1coal => 800Mev
+	Generator_T1	( 3200d	,1	,1d			,1),//1coal => 800Mev
+	Generator_T2	( 3200d	,1	,1d			,1),
 	Solar_Panel		(   10d	,1	,0.2d		,1),//1Mev => 5 ticks
-	Fluid_Generator (  800d	,2	,1d			,1),//Wip
+//	Fluid_Generator (  800d	,2	,1d			,1),//Wip
 	Turbine			(  800d	,2	,0.1d		,1),//per mb
 	LavaGenerator   (  800d	,2	,10d	   		,1),//MeV per 1mb
 	WindMill		(  400d ,2	,1.5d		,1),//idk (I don't know)
@@ -20,7 +21,7 @@ public enum MachineData {
 	Laminator		( 1000d ,1	,100d		,0),
 	
 	Miner    		(32000d	,3	,100d		,0),//per block
-	MA				( 1600d ,3	,100d		,0),
+	MAssembly		( 1600d ,3	,100d		,0),
 	Charge_Station	( 3200d	,1	,200d		,2),//per tick
 	Climate_Station(200000d	,3	,200000d	,0),
 	Fermenter		(  800d	,1	,10d		,0),//Mev per mb
@@ -31,9 +32,9 @@ public enum MachineData {
 	
 	Dynamo     		( 1600d	,2	,1d			,0),
 	
-	Storage_1		(    64000d	,1	,0			,2),
-	Storage_2		(   500000d	,2	,0			,2),
-	Storage_3		(  8000000d	,3	,0			,2);
+	Battery_T1		(    64000d	,1	,0			,2),
+	Battery_T2		(   500000d	,2	,0			,2),
+	Battery_T3		(  8000000d	,3	,0			,2);
 	
 	public double cap,use;
 	public int tier;

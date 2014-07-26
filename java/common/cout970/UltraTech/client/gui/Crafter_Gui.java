@@ -1,16 +1,16 @@
 package common.cout970.UltraTech.client.gui;
 
-import org.lwjgl.opengl.GL11;
-
-import common.cout970.UltraTech.TileEntities.utility.CrafterEntity;
-import common.cout970.UltraTech.network.Net_Utils;
-import common.cout970.UltraTech.packets.PacketCrafter;
-import common.cout970.UltraTech.util.UT_Utils;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+
+import org.lwjgl.opengl.GL11;
+
+import common.cout970.UltraTech.TileEntities.utility.CrafterEntity;
+import common.cout970.UltraTech.network.Net_Utils;
+import common.cout970.UltraTech.network.messages.MessageCrafter;
 
 public class Crafter_Gui extends GuiContainer{
 
@@ -66,29 +66,29 @@ public class Crafter_Gui extends GuiContainer{
 		entity.update();
 		if(entity.getStackInSlot(-1) != null){//save buttom
 			if(isIn(mx,my, xStart+71, yStart+28, 15, 10)){
-				Net_Utils.PipeLine.sendToServer(new PacketCrafter(entity,0,0));
+				Net_Utils.INSTANCE.sendToServer(new MessageCrafter(entity,0,0));
 			}
 		}
 		if(isIn(mx,my, xStart+89, yStart+28, 15, 10)){//mode buttom
-			Net_Utils.PipeLine.sendToServer(new PacketCrafter(entity,4,!entity.restrictMode));
+			Net_Utils.INSTANCE.sendToServer(new MessageCrafter(entity,4,!entity.restrictMode));
 		}
 		
 		for(int d =0;d<9;d++){//saves
 			if(isIn(mx, my, xStart+8 + d * 18, yStart+6, 18,18))if(entity.saves.getStackInSlot(d) != null){
 				if(b == 0){
-					Net_Utils.PipeLine.sendToServer(new PacketCrafter(entity,1,d));
+					Net_Utils.INSTANCE.sendToServer(new MessageCrafter(entity,1,d));
 				}
 				if(b == 1){
-					Net_Utils.PipeLine.sendToServer(new PacketCrafter(entity,2,d));
+					Net_Utils.INSTANCE.sendToServer(new MessageCrafter(entity,2,d));
 				}
 			}
 		}
 		
 		if(isIn(mx,my,xStart+80, yStart+43,18,18)){//craft
 			if(b == 0){
-				Net_Utils.PipeLine.sendToServer(new PacketCrafter(entity,true));//craft item
+				Net_Utils.INSTANCE.sendToServer(new MessageCrafter(entity,true));//craft item
 			}else if(b == 1){
-				Net_Utils.PipeLine.sendToServer(new PacketCrafter(entity,false));//clear craft grid
+				Net_Utils.INSTANCE.sendToServer(new MessageCrafter(entity,false));//clear craft grid
 			}
 		}
 		ItemStack i = null;
@@ -99,8 +99,8 @@ public class Crafter_Gui extends GuiContainer{
 		for(int x=0;x<3;x++){//grid
 			for(int y=0;y<3;y++){
 				if(isIn(mx,my,xStart+12+x*18, yStart+25+y*18,18,18)){
-					if(b == 0)Net_Utils.PipeLine.sendToServer(new PacketCrafter(entity,i,x+y*3));
-					if(b == 1)Net_Utils.PipeLine.sendToServer(new PacketCrafter(entity,null,x+y*3));
+					if(b == 0)Net_Utils.INSTANCE.sendToServer(new MessageCrafter(entity,i,x+y*3));
+					if(b == 1)Net_Utils.INSTANCE.sendToServer(new MessageCrafter(entity,null,x+y*3));
 				}
 			}
 		}

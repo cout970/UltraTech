@@ -13,6 +13,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import common.cout970.UltraTech.client.textures.Block_Textures;
 import common.cout970.UltraTech.itemBlock.ItemBlock_Ores;
 import common.cout970.UltraTech.managers.ItemManager;
 import common.cout970.UltraTech.managers.UT_Tabs;
@@ -35,13 +36,13 @@ public class OreBlock extends Block{
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister iconRegister){
 		blockIcons = new IIcon[7];
-		blockIcons[0] = iconRegister.registerIcon("ultratech:metal/radionite");
-		blockIcons[1] = iconRegister.registerIcon("ultratech:metal/aluminum");
-		blockIcons[2] = iconRegister.registerIcon("ultratech:metal/copper");
-		blockIcons[3] = iconRegister.registerIcon("ultratech:metal/tin");
-		blockIcons[4] = iconRegister.registerIcon("ultratech:metal/lead");
-		blockIcons[5] = iconRegister.registerIcon("ultratech:metal/silver");
-		blockIcons[6] = iconRegister.registerIcon("ultratech:metal/sulfur");
+		blockIcons[0] = iconRegister.registerIcon(Block_Textures.RADIONITE_ORE);
+		blockIcons[1] = iconRegister.registerIcon(Block_Textures.ALUMINUM_ORE);
+		blockIcons[2] = iconRegister.registerIcon(Block_Textures.COPPER_ORE);
+		blockIcons[3] = iconRegister.registerIcon(Block_Textures.TIN_ORE);
+		blockIcons[4] = iconRegister.registerIcon(Block_Textures.LEAD_ORE);
+		blockIcons[5] = iconRegister.registerIcon(Block_Textures.SILVER_ORE);
+		blockIcons[6] = iconRegister.registerIcon(Block_Textures.SULFUR_ORE);
 	}
 	
 	@SideOnly(Side.CLIENT)

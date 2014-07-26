@@ -15,7 +15,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidRegistry;
 import common.cout970.UltraTech.managers.FluidManager;
 import common.cout970.UltraTech.recipes.Fermenter_Recipes;
-import common.cout970.UltraTech.util.RenderUtil;
+import common.cout970.UltraTech.util.render.RenderUtil;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.TemplateRecipeHandler;
 

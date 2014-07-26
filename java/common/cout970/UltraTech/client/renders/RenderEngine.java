@@ -6,7 +6,7 @@ import common.cout970.UltraTech.TileEntities.intermod.EngineEntity;
 import common.cout970.UltraTech.client.models.ModelEngine_FT;
 import common.cout970.UltraTech.client.models.NewEngine;
 import common.cout970.UltraTech.misc.IconFactory;
-import common.cout970.UltraTech.util.Renderer_Util;
+import common.cout970.UltraTech.util.render.Renderer_Util;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.Entity;

@@ -3,6 +3,7 @@ package common.cout970.UltraTech.blocks.models;
 import buildcraft.api.tools.IToolWrench;
 import common.cout970.UltraTech.TileEntities.electric.WindMillEntity;
 import common.cout970.UltraTech.TileEntities.utility.hitBoxEntity;
+import common.cout970.UltraTech.client.textures.Block_Textures;
 import common.cout970.UltraTech.managers.BlockManager;
 import common.cout970.UltraTech.managers.UT_Tabs;
 import common.cout970.UltraTech.proxy.ClientProxy;
@@ -54,7 +55,7 @@ public class WindMill extends BlockConductor{
 	}
 
 	public void registerBlockIcons(IIconRegister iconRegister){
-		this.blockIcon = iconRegister.registerIcon("ultratech:chasis1");
+		this.blockIcon = iconRegister.registerIcon(Block_Textures.CHASIS_T2);
 	}
 	
 	@Override

@@ -9,6 +9,7 @@ import common.cout970.UltraTech.TileEntities.multiblocks.Reactor_Core_Entity;
 import common.cout970.UltraTech.TileEntities.utility.ReactorControllerEntity;
 import common.cout970.UltraTech.managers.UltraTech;
 import common.cout970.UltraTech.misc.IReactorPart;
+import common.cout970.UltraTech.util.LogHelper;
 
 public class Reactor_Control_Block extends ReactorPartBase{
 
@@ -30,7 +31,7 @@ public class Reactor_Control_Block extends ReactorPartBase{
 				Reactor_Control_Entity th = (Reactor_Control_Entity) tl;
 				if(th.getCore() != null && th.isFormed()){
 					Reactor_Core_Entity ce = (Reactor_Core_Entity) th.getCore();
-					entityplayer.openGui(UltraTech.instance, 97, world, ce.xCoord, ce.yCoord, ce.xCoord);
+					entityplayer.openGui(UltraTech.instance, 97, world, ce.xCoord, ce.yCoord, ce.zCoord);
 				}
 			}
 		}

@@ -2,7 +2,7 @@ package common.cout970.UltraTech.managers;
 
 import static common.cout970.UltraTech.managers.BlockManager.*;
 import static common.cout970.UltraTech.managers.ItemManager.ItemName;
-import ultratech.api.power.multipart.MicroPartUtil;
+import ultratech.api.power.multipart.MultipartReference;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -119,7 +119,7 @@ public class CraftManager {
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("FortuneUpgrade"),1),new Object[]{"iii","ici","iii",'i',"plateDiamond",'c',ItemName.get("UpgradeBase")}));									//fortune upgrade
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("SilkTouchUpgrade"),1),new Object[]{"iui","ucu","iui",'i',Items.diamond,'u',Items.emerald,'c',ItemName.get("UpgradeBase")}));					//silktouch upgrade
 
-		if(!MicroPartUtil.isMicroPartActived){
+		if(!MultipartReference.isMicroPartActived){
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(CableBlock,6), new Object[]{"sss","lll","sss",'s',Items.string,'l',ItemName.get("SilverCable")}));
 		}else{
 			//cables

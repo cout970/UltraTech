@@ -8,6 +8,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import common.cout970.UltraTech.TileEntities.electric.tiers.Heater_Entity;
+import common.cout970.UltraTech.client.textures.Block_Textures;
 import common.cout970.UltraTech.managers.UT_Tabs;
 import common.cout970.UltraTech.managers.UltraTech;
 import common.cout970.UltraTech.misc.IUpdatedEntity;
@@ -33,8 +34,8 @@ public class Heater extends BlockConductor{
 	}
 	
 	public void registerBlockIcons(IIconRegister iconRegister){
-		this.blockIcon = iconRegister.registerIcon("ultratech:heater");
-		this.blockIcon1 = iconRegister.registerIcon("ultratech:heater_on");
+		this.blockIcon = iconRegister.registerIcon(Block_Textures.HEATER);
+		this.blockIcon1 = iconRegister.registerIcon(Block_Textures.HEATER+"_on");
 	}
 
 	@SideOnly(Side.CLIENT)

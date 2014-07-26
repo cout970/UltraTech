@@ -1,6 +1,7 @@
 package common.cout970.UltraTech.blocks.common;
 
 import common.cout970.UltraTech.TileEntities.electric.tiers.ChemicalPlant_Entity;
+import common.cout970.UltraTech.client.textures.Block_Textures;
 import common.cout970.UltraTech.managers.UT_Tabs;
 import common.cout970.UltraTech.managers.UltraTech;
 import common.cout970.UltraTech.misc.IUpdatedEntity;
@@ -32,8 +33,8 @@ public class ChemicalPlant extends BlockConductor {
 	}
 	
 	public void registerBlockIcons(IIconRegister iconRegister){
-		this.blockIcon = iconRegister.registerIcon("ultratech:chemical");
-		up = iconRegister.registerIcon("ultratech:chasis1");
+		this.blockIcon = iconRegister.registerIcon(Block_Textures.CHEMICAL_PLANT);
+		up = iconRegister.registerIcon(Block_Textures.CHASIS_T2);
 	}
 	
 	@Override

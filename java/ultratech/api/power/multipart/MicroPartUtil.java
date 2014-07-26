@@ -16,8 +16,6 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 public class MicroPartUtil {
 	
-	public static boolean isMicroPartActived = false;
-	
 	public static void list(PowerInterface t, PowerPathfinder p) {
 		for(ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS){
 			if(t.getConnectionType(dir) != CableType.NOTHING){
@@ -92,6 +90,7 @@ public class MicroPartUtil {
 				for(TMultiPart s : tm.jPartList()){
 					if(s instanceof IPowerConductor){
 						((IPowerConductor) s).getPower().getNetwork().refresh();
+						s.onNeighborChanged();
 					}
 				}
 			}

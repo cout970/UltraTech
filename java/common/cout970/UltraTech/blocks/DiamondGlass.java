@@ -3,7 +3,7 @@ package common.cout970.UltraTech.blocks;
 import java.util.Random;
 
 import common.cout970.UltraTech.managers.UT_Tabs;
-import common.cout970.UltraTech.util.RenderUtil;
+import common.cout970.UltraTech.util.render.RenderUtil;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.BlockBreakable;

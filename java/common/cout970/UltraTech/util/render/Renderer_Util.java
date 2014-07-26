@@ -1,4 +1,4 @@
-package common.cout970.UltraTech.util;
+package common.cout970.UltraTech.util.render;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,7 +17,7 @@ public class Renderer_Util {
 	float[] dims = new float[3];
 	int[] excluded;
 	int listNumber;
-	boolean isCompiled;
+	public boolean isCompiled;
 	
 	public  void renderBox(IIcon i,float width,float height, float deep){
 		if(i == null)return;

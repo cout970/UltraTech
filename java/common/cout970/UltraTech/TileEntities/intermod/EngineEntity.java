@@ -49,11 +49,12 @@ public class EngineEntity extends Machine implements IPowerReceptor, IPowerEmitt
 			this.removeCharge(toChange);
 			power.addEnergy(toChange);
 		}
+		
 		if(!update){
 			update = true;
 			if (!isOrientationValid()){
 				switchOrientation();
-				worldObj.notifyBlockOfNeighborChange(xCoord, yCoord, zCoord, worldObj.getBlock(xCoord, yCoord, zCoord));
+//				worldObj.notifyBlockOfNeighborChange(xCoord, yCoord, zCoord, worldObj.getBlock(xCoord, yCoord, zCoord));
 			}
 			TileEntity a = getTile(direction);
 		}

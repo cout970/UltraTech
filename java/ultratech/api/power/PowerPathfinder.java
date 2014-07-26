@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ultratech.api.power.multipart.MicroPartUtil;
+import ultratech.api.power.multipart.MultipartReference;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 /**
@@ -24,7 +25,7 @@ public class PowerPathfinder {
 	}
 
 	public void list(PowerInterface t){
-		if(MicroPartUtil.isMicroPartActived)MicroPartUtil.list(t,this);
+		if(MultipartReference.isMicroPartActived)MicroPartUtil.list(t,this);
 		else{
 			for(ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS){
 				if(t.getConnectionType(dir) != CableType.NOTHING){

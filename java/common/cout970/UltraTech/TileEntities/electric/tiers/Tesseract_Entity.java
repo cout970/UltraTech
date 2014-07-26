@@ -1,22 +1,15 @@
 package common.cout970.UltraTech.TileEntities.electric.tiers;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import ultratech.api.power.IPowerConductor;
-import ultratech.api.power.PowerUtils;
-import ultratech.api.power.StorageInterface;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.nbt.NBTTagCompound;
-import common.cout970.UltraTech.managers.MachineData;
-import common.cout970.UltraTech.network.Net_Utils;
-import common.cout970.UltraTech.packets.PacketTesseract;
-import common.cout970.UltraTech.util.ConfigurableMachine;
+import ultratech.api.power.IPowerConductor;
+import ultratech.api.power.StorageInterface;
+
 import common.cout970.UltraTech.util.ConfigurableTile;
-import common.cout970.UltraTech.util.power.Machine;
 
 public class Tesseract_Entity extends ConfigurableTile{
 	

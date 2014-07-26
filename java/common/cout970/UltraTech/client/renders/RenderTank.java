@@ -4,7 +4,7 @@ import org.lwjgl.opengl.GL11;
 
 import common.cout970.UltraTech.TileEntities.fluid.TankEntity;
 import common.cout970.UltraTech.client.models.ModelFluidTank;
-import common.cout970.UltraTech.util.Renderer_Util;
+import common.cout970.UltraTech.util.render.Renderer_Util;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -50,9 +50,11 @@ public class RenderTank  extends TileEntitySpecialRenderer{
 		if(i == null)return;
 		float h = ((float) te.getTank().getFluidAmount())/((float) te.getTank().getCapacity());
 		if(h<0.01)h = 0;
+		if(h > 0){
 		GL11.glTranslatef(-0.5F, -1.5F, -0.5F);
 		GL11.glTranslatef(k, 0.01f, k);
 		FR.renderBox(i, 1f-k*2, h-0.02f, 1f-k*2);
+		}
 	}
 
 }

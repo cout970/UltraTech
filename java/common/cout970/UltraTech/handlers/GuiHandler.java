@@ -4,6 +4,7 @@ package common.cout970.UltraTech.handlers;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+
 import common.cout970.UltraTech.TileEntities.electric.ChargeStationEntity;
 import common.cout970.UltraTech.TileEntities.electric.ClimateEntity;
 import common.cout970.UltraTech.TileEntities.electric.FermenterEntity;
@@ -25,17 +26,16 @@ import common.cout970.UltraTech.TileEntities.electric.tiers.Tesseract_Entity;
 import common.cout970.UltraTech.TileEntities.fluid.BoilerEntity;
 import common.cout970.UltraTech.TileEntities.intermod.DynamoEntity;
 import common.cout970.UltraTech.TileEntities.intermod.EngineEntity;
+import common.cout970.UltraTech.TileEntities.multiblocks.Reactor_Core_Entity;
 import common.cout970.UltraTech.TileEntities.utility.CrafterEntity;
 import common.cout970.UltraTech.TileEntities.utility.HologramEmiterEntity;
 import common.cout970.UltraTech.TileEntities.utility.Painter3DEntity;
 import common.cout970.UltraTech.TileEntities.utility.ReactorControllerEntity;
-import common.cout970.UltraTech.TileEntities.utility.ReactorEntity;
 import common.cout970.UltraTech.client.gui.Boiler_Gui;
 import common.cout970.UltraTech.client.gui.CVD_Gui;
 import common.cout970.UltraTech.client.gui.ChargeStation_Gui;
 import common.cout970.UltraTech.client.gui.Chemical_Gui;
 import common.cout970.UltraTech.client.gui.ClimateStation_Gui;
-import common.cout970.UltraTech.client.gui.ControllerGui;
 import common.cout970.UltraTech.client.gui.Crafter_Gui;
 import common.cout970.UltraTech.client.gui.Cutter_Gui;
 import common.cout970.UltraTech.client.gui.Dynamo_Gui;
@@ -51,7 +51,7 @@ import common.cout970.UltraTech.client.gui.MAssemblyGui;
 import common.cout970.UltraTech.client.gui.MinerGui;
 import common.cout970.UltraTech.client.gui.Printer3D_Gui;
 import common.cout970.UltraTech.client.gui.Purifier_Gui;
-import common.cout970.UltraTech.client.gui.ReactorGui;
+import common.cout970.UltraTech.client.gui.Reactor_Gui;
 import common.cout970.UltraTech.client.gui.Refinery_Gui;
 import common.cout970.UltraTech.client.gui.Storage_Gui;
 import common.cout970.UltraTech.client.gui.TesseractGui;
@@ -76,7 +76,6 @@ import common.cout970.UltraTech.containers.MAssemblyContainer;
 import common.cout970.UltraTech.containers.MinerContainer;
 import common.cout970.UltraTech.containers.Printer3DContainer;
 import common.cout970.UltraTech.containers.PurifierContainer;
-import common.cout970.UltraTech.containers.ReactorContainer;
 import common.cout970.UltraTech.containers.Reactor_Container;
 import common.cout970.UltraTech.containers.RefineryContainer;
 import common.cout970.UltraTech.containers.StorageContainer;
@@ -85,6 +84,7 @@ import common.cout970.UltraTech.containers.TesseractContainer;
 import common.cout970.UltraTech.multiblocks.refinery.RefineryBase;
 import common.cout970.UltraTech.util.power.Machine;
 import common.cout970.UltraTech.wiki.TabletGui;
+
 import cpw.mods.fml.common.network.IGuiHandler;
 
 public class GuiHandler implements IGuiHandler{
@@ -125,7 +125,7 @@ public class GuiHandler implements IGuiHandler{
 			return new MinerContainer(player.inventory, (MinerEntity) tileEntity);
 		}
 		//Reactor
-		if(tileEntity instanceof ReactorEntity){
+		if(tileEntity instanceof Reactor_Core_Entity){
 			return new Reactor_Container(player.inventory, tileEntity);
 		}
 		//MAssembly
@@ -239,8 +239,8 @@ public class GuiHandler implements IGuiHandler{
 			return new MinerGui(new MinerContainer(player.inventory, (MinerEntity) tileEntity), player.inventory, (MinerEntity) tileEntity);
 		}
 		//Reactor
-		if(tileEntity instanceof ReactorEntity){
-			return new ReactorGui(new ReactorContainer(player.inventory, (ReactorEntity) tileEntity), player.inventory, (ReactorEntity) tileEntity);
+		if(tileEntity instanceof Reactor_Core_Entity){
+			return new Reactor_Gui(new Reactor_Container(player.inventory, tileEntity), player.inventory, tileEntity);
 		}
 		//MAssembly
 		if(tileEntity instanceof MolecularAssemblyEntity){
@@ -277,10 +277,6 @@ public class GuiHandler implements IGuiHandler{
 		//Boiler
 		if(tileEntity instanceof BoilerEntity){
 			return new Boiler_Gui(new BoilerContainer(player.inventory, (BoilerEntity) tileEntity), (BoilerEntity) tileEntity);
-		}
-		//Controller
-		if(tileEntity instanceof ReactorControllerEntity){
-			return new ControllerGui(new ControllerContainer(player.inventory, (ReactorControllerEntity) tileEntity), player.inventory, (ReactorControllerEntity) tileEntity);
 		}
 		//Climate
 		if(tileEntity instanceof ClimateEntity){

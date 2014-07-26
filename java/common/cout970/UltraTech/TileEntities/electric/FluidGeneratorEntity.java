@@ -29,7 +29,7 @@ public class FluidGeneratorEntity extends Machine implements IFluidHandler{
 	}
 	
 	public FluidGeneratorEntity(){
-		super(MachineData.Fluid_Generator);
+		super(MachineData.Dynamo);
 	}
 	
 	public void updateEntity(){

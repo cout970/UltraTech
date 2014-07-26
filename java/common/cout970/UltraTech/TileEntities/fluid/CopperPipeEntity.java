@@ -73,8 +73,9 @@ public class CopperPipeEntity extends Pipe implements IFluidHandler{
 			}
 		}
 		if(!lock){
+			boolean last = mode;
 			mode = worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord);
-			sendNetworkUpdate();
+			if(mode != last)sendNetworkUpdate();
 		}
 	}
 

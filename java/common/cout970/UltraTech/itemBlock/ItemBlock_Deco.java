@@ -2,11 +2,13 @@ package common.cout970.UltraTech.itemBlock;
 
 import java.util.List;
 
+import common.cout970.UltraTech.wiki.WikiResources;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 
 public class ItemBlock_Deco extends UT_ItemBlock{
 
@@ -16,6 +18,10 @@ public class ItemBlock_Deco extends UT_ItemBlock{
 	
 	public ItemBlock_Deco(Block b) {
 		super(b, "deco");
+		for(int v=1;v<9;v++){
+			WikiResources.decoblack[v-1] = new ResourceLocation("ultratech","textures/blocks/deco_black/deco"+v+".png");
+			WikiResources.decowhite[v-1] = new ResourceLocation("ultratech","textures/blocks/deco_white/deco"+v+".png");
+		}
 	}
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })

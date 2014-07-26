@@ -14,7 +14,12 @@ public abstract class Page implements IPage{
 	public List<TabletButtom> bott = new ArrayList<TabletButtom>();//buttoms in page
 	public List<TabletLabel> labb = new ArrayList<TabletLabel>();//labels in page
 	private static double zLevel;
+	public TabletGui cont;
 
+	public Page(TabletGui c){
+		cont = c;
+	}
+	
 	@Override
 	public TabletButtom[] getButtoms() {
 		TabletButtom[] a = (TabletButtom[]) bott.toArray();

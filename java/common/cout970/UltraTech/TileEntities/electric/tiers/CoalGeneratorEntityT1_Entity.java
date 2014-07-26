@@ -19,7 +19,7 @@ public class CoalGeneratorEntityT1_Entity extends ConfigurableMachineWithInvento
 	public PowerExchange pe = new PowerExchange();
 
 	public CoalGeneratorEntityT1_Entity(){
-		super(1,"Generator",MachineData.Generator);
+		super(1,"Generator",MachineData.Generator_T1);
 	}
 	
 	public double production(){

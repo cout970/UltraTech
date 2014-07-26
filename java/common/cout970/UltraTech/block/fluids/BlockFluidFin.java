@@ -1,5 +1,6 @@
 package common.cout970.UltraTech.block.fluids;
 
+import common.cout970.UltraTech.client.textures.Block_Textures;
 import common.cout970.UltraTech.managers.UT_Tabs;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -30,10 +31,9 @@ public class BlockFluidFin extends BlockFluidFinite{
 	@SideOnly(Side.CLIENT)
     @Override
     public void registerBlockIcons(IIconRegister register) {
-            stillIcon = register.registerIcon("ultratech:fluids/fluidstill_"+fluidName.toLowerCase());
-            flowingIcon = stillIcon;
+            stillIcon = register.registerIcon(Block_Textures.FLUID+"fluidstill_"+fluidName.toLowerCase());
+            flowingIcon = register.registerIcon(Block_Textures.FLUID+"fluidflowing_"+fluidName);
             FluidRegistry.getFluid(fluidName).setIcons(stillIcon, flowingIcon);
-//            flowingIcon = register.registerIcon("ultratech:fluids/fluidflowing_"+fluidName);
     }
 
 }

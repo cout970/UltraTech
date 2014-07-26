@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Random;
 
 import common.cout970.UltraTech.TileEntities.utility.hitBoxEntity;
+import common.cout970.UltraTech.client.textures.Block_Textures;
 import common.cout970.UltraTech.managers.BlockManager;
 import common.cout970.UltraTech.managers.UT_Tabs;
 import cpw.mods.fml.relauncher.Side;
@@ -47,9 +48,9 @@ public class MiscBlock extends BlockContainer{
 	
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister iconRegister){
-		this.blockIconLast = iconRegister.registerIcon("ultratech:void");
-		this.blockIcon = iconRegister.registerIcon("ultratech:radioniteblock");
-		this.blockIcon1 = iconRegister.registerIcon("ultratech:grafeno");
+		this.blockIconLast = iconRegister.registerIcon(Block_Textures.VOID);
+		this.blockIcon = iconRegister.registerIcon(Block_Textures.RADIONITE_BLOCK);
+		this.blockIcon1 = iconRegister.registerIcon(Block_Textures.GRAFENO_BLOCK);
 	}
 	
 	public void breakBlock(World world, int x, int y, int z, Block par5, int par6)

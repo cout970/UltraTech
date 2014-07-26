@@ -1,6 +1,5 @@
 package common.cout970.UltraTech.network;
 
-import buildcraft.core.utils.Utils;
 import common.cout970.UltraTech.util.LogHelper;
 import ultratech.api.power.IPowerConductor;
 import ultratech.api.power.StorageInterface;
@@ -21,13 +20,8 @@ public class SyncTile extends TileEntity{
 	
 	public void sendNetworkUpdate(){
 		if(!this.worldObj.isRemote){
-			Net_Utils.PipeLine.sendToAll(getUpdatePacket());
-			LogHelper.log(this);
+			Net_Utils.sendUpdate(this);
 		}
-	}
-	
-	private AbstractPacket getUpdatePacket() {
-		return new PacketUpdate(this);
 	}
 
 	public Packet getDescriptionPacket(){
@@ -51,6 +45,7 @@ public class SyncTile extends TileEntity{
 			int deci = (int) (d*10);
 			c.sendProgressBarUpdate(cont, -1, deci);
 		}
+		this.sendNetworkUpdate();
 	}
 
 	public void getGUINetworkData(int id, int value) {

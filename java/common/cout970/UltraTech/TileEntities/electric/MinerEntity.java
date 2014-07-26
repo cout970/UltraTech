@@ -49,6 +49,7 @@ public class MinerEntity extends MachineWithInventory implements IInventory{
 	private boolean mineFinish;
 	private int mineSize;
 	public boolean hasSilkUpgrade;
+	private int cooldown;
 	
  	
 	public MinerEntity(){
@@ -215,15 +216,22 @@ public class MinerEntity extends MachineWithInventory implements IInventory{
 					}
 				}
 			}
-			if(b != null)for(ForgeDirection d : ForgeDirection.VALID_DIRECTIONS){
-				TileEntity t = worldObj.getTileEntity(xCoord+d.offsetX, yCoord+d.offsetY, zCoord+d.offsetZ);
-				if(t instanceof IPipeTile){
-					IPipeTile a = (IPipeTile) t;
-					if(a.getPipeType() == PipeType.ITEM){
-						a.injectItem(b, true, d.getOpposite());
-						return;
+			if(cooldown <= 0){
+				if(b != null){
+					for(ForgeDirection d : ForgeDirection.VALID_DIRECTIONS){
+						TileEntity t = worldObj.getTileEntity(xCoord+d.offsetX, yCoord+d.offsetY, zCoord+d.offsetZ);
+						if(t instanceof IPipeTile){
+							IPipeTile a = (IPipeTile) t;
+							if(a.getPipeType() == PipeType.ITEM){
+								a.injectItem(b, true, d.getOpposite());
+								cooldown = 1;
+								return;
+							}
+						}
 					}
 				}
+			}else{
+				cooldown--;
 			}
 			this.addItemStack(b);
 		}

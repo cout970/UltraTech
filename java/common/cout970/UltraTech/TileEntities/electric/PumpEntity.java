@@ -113,7 +113,7 @@ public class PumpEntity extends Machine implements IFluidHandler,IUpdatedEntity{
 	@Override
 	public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
 		int f = getTank().fill(resource, doFill);
-		if(f > 0)
+		if(f > 0 && doFill)
 			FluidUpdate = true;
 		return f;
 	}
@@ -128,7 +128,7 @@ public class PumpEntity extends Machine implements IFluidHandler,IUpdatedEntity{
 	@Override
 	public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain) {
 		FluidStack f = getTank().drain(maxDrain, doDrain);
-		if(f != null && f.amount > 0){
+		if(f != null && f.amount > 0 && doDrain){
 			FluidUpdate = true;
 		}
 		return f;

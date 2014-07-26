@@ -3,6 +3,7 @@ package common.cout970.UltraTech.blocks;
 import java.util.Random;
 
 import common.cout970.UltraTech.TileEntities.electric.MinerEntity;
+import common.cout970.UltraTech.client.textures.Block_Textures;
 import common.cout970.UltraTech.managers.ItemManager;
 import common.cout970.UltraTech.managers.UT_Tabs;
 import common.cout970.UltraTech.managers.UltraTech;
@@ -36,7 +37,7 @@ public abstract class UT_TileBlock extends BlockContainer{
 	
 	public void registerBlockIcons(IIconRegister IR){
 		icons = new IIcon[1];
-		icons[0] = IR.registerIcon("ultratech:"+name);
+		icons[0] = IR.registerIcon(Block_Textures.MOD_FOLDER+name);
 	}
 	
 	@Override

@@ -1,6 +1,7 @@
 package common.cout970.UltraTech.blocks.common;
 
 import common.cout970.UltraTech.TileEntities.utility.Painter3DEntity;
+import common.cout970.UltraTech.client.textures.Block_Textures;
 import common.cout970.UltraTech.managers.UT_Tabs;
 import common.cout970.UltraTech.managers.UltraTech;
 import net.minecraft.block.BlockContainer;
@@ -30,8 +31,9 @@ public class Painter3D extends BlockContainer{
 	
 	public void registerBlockIcons(IIconRegister IR){
 		icons = new IIcon[2];
-		icons[0] = IR.registerIcon("ultratech:chasis");
-		icons[1] = IR.registerIcon("ultratech:painter");	}
+		icons[0] = IR.registerIcon(Block_Textures.CHASIS_T1);
+		icons[1] = IR.registerIcon(Block_Textures.PAINTER);
+		}
 	
 	public IIcon getIcon(int side, int meta){
 		if(side == 0 || side == 1)return icons[0];

@@ -2,6 +2,7 @@ package common.cout970.UltraTech.blocks;
 
 import java.util.List;
 
+import common.cout970.UltraTech.client.textures.Block_Textures;
 import common.cout970.UltraTech.managers.UT_Tabs;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -31,9 +32,9 @@ public class ChasisBlock extends Block{
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister iconRegister)
 	{
-		this.blockIcon = iconRegister.registerIcon("ultratech:chasis");
-		this.blockIcon1 = iconRegister.registerIcon("ultratech:chasis1");
-		this.blockIcon2 = iconRegister.registerIcon("ultratech:chasis2");
+		this.blockIcon = iconRegister.registerIcon(Block_Textures.CHASIS_T1);
+		this.blockIcon1 = iconRegister.registerIcon(Block_Textures.CHASIS_T2);
+		this.blockIcon2 = iconRegister.registerIcon(Block_Textures.CHASIS_T3);
 	}
 
 	@SideOnly(Side.CLIENT)

@@ -8,6 +8,7 @@ import ultratech.api.power.StorageInterface;
 import common.cout970.UltraTech.TileEntities.electric.StorageTier1;
 import common.cout970.UltraTech.TileEntities.electric.StorageTier2;
 import common.cout970.UltraTech.TileEntities.electric.StorageTier3;
+import common.cout970.UltraTech.client.textures.Block_Textures;
 import common.cout970.UltraTech.managers.UT_Tabs;
 import common.cout970.UltraTech.managers.UltraTech;
 import common.cout970.UltraTech.proxy.ClientProxy;
@@ -58,7 +59,7 @@ public class StorageBlock extends BlockConductor{
 
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister iconRegister){
-		this.blockIcon = iconRegister.registerIcon("ultratech:chasis1");
+		this.blockIcon = iconRegister.registerIcon(Block_Textures.CHASIS_T2);
 	}
 	
 	@SuppressWarnings("unchecked")

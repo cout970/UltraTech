@@ -18,6 +18,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import common.cout970.UltraTech.client.textures.Block_Textures;
 import common.cout970.UltraTech.managers.BlockManager;
 import common.cout970.UltraTech.managers.UT_Tabs;
 import common.cout970.UltraTech.managers.UltraTech;
@@ -121,14 +122,14 @@ public class RefineryBlock extends BlockContainer{
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister IR){
 		icons = new IIcon[8];
-		icons[0] = IR.registerIcon("ultratech:chasis1");
-		icons[1] = IR.registerIcon("ultratech:refinery/struc");
-		icons[2] = IR.registerIcon("ultratech:refinery/base");
-		icons[3] = IR.registerIcon("ultratech:void");
-		icons[4] = IR.registerIcon("ultratech:refinery/in");
-		icons[5] = IR.registerIcon("ultratech:refinery/out");
-		icons[6] = IR.registerIcon("ultratech:refinery/out2");
-		icons[7] = IR.registerIcon("ultratech:refinery/out3");
+		icons[0] = IR.registerIcon(Block_Textures.CHASIS_T2);
+		icons[1] = IR.registerIcon(Block_Textures.REFINERY_STRUCTURE);
+		icons[2] = IR.registerIcon(Block_Textures.REFINERY_BASE);
+		icons[3] = IR.registerIcon(Block_Textures.VOID);
+		icons[4] = IR.registerIcon(Block_Textures.REFINERY_INPUT);
+		icons[5] = IR.registerIcon(Block_Textures.REFINERY_OUTPUT_1);
+		icons[6] = IR.registerIcon(Block_Textures.REFINERY_OUTPUT_2);
+		icons[7] = IR.registerIcon(Block_Textures.REFINERY_OUTPUT_3);
 	}
 
 	@Override

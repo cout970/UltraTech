@@ -34,4 +34,9 @@ public abstract class TabletButtom {
 	}
 	
 	public abstract void drawButtom(TextureManager t, int x, int y);
+	
+	public void renderBack(TextureManager t, int x, int y){
+		t.bindTexture(WikiResources.butt);
+		Page.drawTextureBox(x+posX, y+posY, Xsize, Ysize);
+	}
 }

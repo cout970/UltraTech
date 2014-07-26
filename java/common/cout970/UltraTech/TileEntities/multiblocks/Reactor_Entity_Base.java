@@ -1,13 +1,14 @@
 package common.cout970.UltraTech.TileEntities.multiblocks;
 
 import common.cout970.UltraTech.misc.IUpdatedEntity;
-
+import common.cout970.UltraTech.network.SyncTile;
 import ultratech.api.reactor.IReactorComponent;
+import ultratech.api.reactor.IReactorCoreEntity;
 import net.minecraft.tileentity.TileEntity;
 
-public class Reactor_Entity_Base extends TileEntity implements IReactorComponent,IUpdatedEntity{
+public class Reactor_Entity_Base extends SyncTile implements IReactorComponent,IUpdatedEntity{
 
-	public IReactorComponent core;
+	public IReactorCoreEntity core;
 	
 	@Override
 	public void RestaureBlock(){
@@ -20,12 +21,12 @@ public class Reactor_Entity_Base extends TileEntity implements IReactorComponent
 	}
 
 	@Override
-	public IReactorComponent getCore() {
+	public IReactorCoreEntity getCore() {
 		return core;
 	}
 
 	@Override
-	public void setCore(IReactorComponent c) {
+	public void setCore(IReactorCoreEntity c) {
 		core = c;
 	}
 

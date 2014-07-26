@@ -1,22 +1,12 @@
 package common.cout970.UltraTech.managers;
 
 
-import java.util.logging.Level;
-
-import net.minecraftforge.common.config.Configuration;
-import ultratech.api.power.multipart.MicroPartUtil;
+import ultratech.api.power.multipart.MultipartReference;
 import common.cout970.UltraTech.handlers.FuelHandler;
 import common.cout970.UltraTech.handlers.GuiHandler;
 import common.cout970.UltraTech.handlers.WorldGen;
 import common.cout970.UltraTech.microparts.MicroRegistry;
 import common.cout970.UltraTech.network.Net_Utils;
-import common.cout970.UltraTech.network.PacketUpdate;
-import common.cout970.UltraTech.packets.PacketClimateStation;
-import common.cout970.UltraTech.packets.PacketController;
-import common.cout970.UltraTech.packets.PacketCrafter;
-import common.cout970.UltraTech.packets.PacketMachineMode;
-import common.cout970.UltraTech.packets.PacketPainter;
-import common.cout970.UltraTech.packets.PacketTesseract;
 import common.cout970.UltraTech.proxy.CommonProxy;
 import common.cout970.UltraTech.util.LogHelper;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -51,7 +41,8 @@ public class UltraTech {
 		FMLCommonHandler.instance().bus().register(new ConfigManager());
 		
 		if (Loader.isModLoaded("ForgeMultipart") && Loader.isModLoaded("CodeChickenCore")){
-			MicroPartUtil.isMicroPartActived = true;
+			MultipartReference.isMicroPartActived = true;
+			LogHelper.log("Activating Forge Multipart Compatibility");
 		}
 		ItemManager.InitItems();
 		ItemManager.RegisterItems();
@@ -69,11 +60,10 @@ public class UltraTech {
 	@EventHandler
 	public void load(FMLInitializationEvent event){
 		LogHelper.log("Starting Init");
-		Net_Utils.PipeLine.channels = NetworkRegistry.INSTANCE.newChannel("UltraTech", Net_Utils.PipeLine);
-		Net_Utils.PipeLine.RegisterPackets();
+		Net_Utils.initMessages();
 		
 		NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
-		if(MicroPartUtil.isMicroPartActived) new MicroRegistry().load();
+		if(MultipartReference.isMicroPartActived) new MicroRegistry().load();
 		CompatibilityManager.initCompatibilitys();
 		GameRegistry.registerFuelHandler(new FuelHandler());
 		CraftManager.registerCraft();
@@ -83,7 +73,5 @@ public class UltraTech {
 	}
 
 	@EventHandler
-	public void postInit(FMLPostInitializationEvent event){
-		Net_Utils.PipeLine.postInitialise();
-	}
+	public void postInit(FMLPostInitializationEvent event){}
 }

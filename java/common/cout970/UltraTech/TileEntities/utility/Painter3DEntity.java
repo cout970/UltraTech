@@ -2,7 +2,7 @@ package common.cout970.UltraTech.TileEntities.utility;
 
 import common.cout970.UltraTech.itemBlock.ItemBlock_Deco;
 import common.cout970.UltraTech.network.Net_Utils;
-import common.cout970.UltraTech.packets.PacketPainter;
+import common.cout970.UltraTech.network.messages.MessagePainter;
 import common.cout970.UltraTech.util.Inventory;
 
 public class Painter3DEntity extends Inventory{
@@ -14,7 +14,6 @@ public class Painter3DEntity extends Inventory{
 		super(1,"3D Painter");
 	}
 	
-	//needs client - server sync
 	
 	public void updateEntity(){
 		if(update){
@@ -26,7 +25,7 @@ public class Painter3DEntity extends Inventory{
 	}
 
 	public void sendUpdate() {
-		Net_Utils.PipeLine.sendToServer(new PacketPainter(this, color));
+		Net_Utils.INSTANCE.sendToServer(new MessagePainter(this, color));
 	}
 
 }

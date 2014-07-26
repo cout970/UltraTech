@@ -1,6 +1,7 @@
 package common.cout970.UltraTech.blocks.common;
 
 import common.cout970.UltraTech.TileEntities.utility.CrafterEntity;
+import common.cout970.UltraTech.client.textures.Block_Textures;
 import common.cout970.UltraTech.managers.UT_Tabs;
 import common.cout970.UltraTech.managers.UltraTech;
 import common.cout970.UltraTech.util.UT_Utils;
@@ -38,8 +39,8 @@ public class CrafterBlock extends BlockContainer{
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister IR){
-		blockIcon = IR.registerIcon("ultratech:chasis");
-		blockIcon1 = IR.registerIcon("ultratech:crafter");
+		blockIcon = IR.registerIcon(Block_Textures.CHASIS_T1);
+		blockIcon1 = IR.registerIcon(Block_Textures.CRAFTER);
 	}
 
 	@Override

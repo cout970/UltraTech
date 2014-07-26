@@ -3,9 +3,9 @@ package common.cout970.UltraTech.managers;
 import java.util.ArrayList;
 import java.util.List;
 
+import ultratech.api.power.multipart.MultipartReference;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import ultratech.api.power.multipart.MicroPartUtil;
 import common.cout970.UltraTech.TileEntities.electric.ChargeStationEntity;
 import common.cout970.UltraTech.TileEntities.electric.ClimateEntity;
 import common.cout970.UltraTech.TileEntities.electric.FermenterEntity;
@@ -226,7 +226,7 @@ public class BlockManager {
 		Dynamo = new Dynamo(Material.iron);
 		MultiTank = new MultiTank(Material.iron);
 		Pump = new PumpBlock(Material.iron);
-		if(!MicroPartUtil.isMicroPartActived)CableBlock = new CableBlock(Material.iron);
+		if(!MultipartReference.isMicroPartActived)CableBlock = new CableBlock(Material.iron);
 		
 		//decotab
 		Ores = new OreBlock(Material.rock);
@@ -318,7 +318,7 @@ public class BlockManager {
 		GameRegistry.registerBlock(Reactor_Water, 	"Water");
 		GameRegistry.registerBlock(Reactor_Chamber, "Chamber");
 
-		if(!MicroPartUtil.isMicroPartActived)GameRegistry.registerBlock(CableBlock, "UT_CableBlock");
+		if(!MultipartReference.isMicroPartActived)GameRegistry.registerBlock(CableBlock, "UT_CableBlock");
 		//TileEntities
 
 		GameRegistry.registerTileEntity(Machine.class, "Energy_UT");
@@ -360,7 +360,7 @@ public class BlockManager {
 		GameRegistry.registerTileEntity(DynamoEntity.class, "Dynamo_UT");
 		GameRegistry.registerTileEntity(PumpEntity.class, "Pump_UT");
 		GameRegistry.registerTileEntity(LavaGeneratorEntity.class, "LavaGenerator_UT");
-		if(!MicroPartUtil.isMicroPartActived)GameRegistry.registerTileEntity(Cable_Entity.class, "Cable_UT");
+		if(!MultipartReference.isMicroPartActived)GameRegistry.registerTileEntity(Cable_Entity.class, "Cable_UT");
 		GameRegistry.registerTileEntity(ChemicalPlant_Entity.class, "ChemicalPlant_UT");
 		GameRegistry.registerTileEntity(Heater_Entity.class, "Heater_UT");
 		//tiers

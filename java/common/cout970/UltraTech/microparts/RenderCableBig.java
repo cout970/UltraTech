@@ -12,8 +12,8 @@ import org.lwjgl.opengl.GL11;
 
 import ultratech.api.power.PowerUtils;
 import ultratech.api.power.multipart.MicroPartUtil;
-import common.cout970.UltraTech.util.RenderUtil;
 import common.cout970.UltraTech.util.UT_Utils;
+import common.cout970.UltraTech.util.render.RenderUtil;
 import codechicken.lib.render.RenderUtils;
 import codechicken.lib.vec.Cuboid6;
 import codechicken.lib.vec.Vector3;

@@ -1,6 +1,7 @@
 package common.cout970.UltraTech.blocks.models;
 
 import common.cout970.UltraTech.TileEntities.fluid.TankEntity;
+import common.cout970.UltraTech.client.textures.Block_Textures;
 import common.cout970.UltraTech.managers.UT_Tabs;
 import common.cout970.UltraTech.proxy.ClientProxy;
 import cpw.mods.fml.relauncher.Side;
@@ -27,7 +28,7 @@ public class FluidTank extends BlockContainer{
 	}
 	
 	public void registerBlockIcons(IIconRegister iconRegister){
-		this.blockIcon = iconRegister.registerIcon("ultratech:chasis0");
+		this.blockIcon = iconRegister.registerIcon(Block_Textures.PARTICLE_COPPER);
 	}
 	
 	public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int par6, float par7, float par8, float par9)
