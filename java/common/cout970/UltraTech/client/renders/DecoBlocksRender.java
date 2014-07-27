@@ -2,7 +2,7 @@ package common.cout970.UltraTech.client.renders;
 
 import org.lwjgl.opengl.GL11;
 
-import common.cout970.UltraTech.blocks.Deco_Block;
+import common.cout970.UltraTech.blocknormal.Deco_Block;
 import common.cout970.UltraTech.proxy.ClientProxy;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;

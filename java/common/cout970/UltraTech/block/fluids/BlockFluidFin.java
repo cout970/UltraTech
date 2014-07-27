@@ -32,7 +32,7 @@ public class BlockFluidFin extends BlockFluidFinite{
     @Override
     public void registerBlockIcons(IIconRegister register) {
             stillIcon = register.registerIcon(Block_Textures.FLUID+"fluidstill_"+fluidName.toLowerCase());
-            flowingIcon = register.registerIcon(Block_Textures.FLUID+"fluidflowing_"+fluidName);
+            flowingIcon = register.registerIcon(Block_Textures.FLUID+"fluidflow_"+fluidName);
             FluidRegistry.getFluid(fluidName).setIcons(stillIcon, flowingIcon);
     }
 

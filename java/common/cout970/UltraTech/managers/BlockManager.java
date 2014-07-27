@@ -57,24 +57,25 @@ import common.cout970.UltraTech.TileEntities.utility.ReactorTankEntity;
 import common.cout970.UltraTech.TileEntities.utility.ReactorWallEntity;
 import common.cout970.UltraTech.TileEntities.utility.SteamExtractorEntity;
 import common.cout970.UltraTech.TileEntities.utility.hitBoxEntity;
-import common.cout970.UltraTech.blocks.AlienBlock;
-import common.cout970.UltraTech.blocks.ChasisBlock;
-import common.cout970.UltraTech.blocks.CovedGlass;
-import common.cout970.UltraTech.blocks.Deco_Block;
-import common.cout970.UltraTech.blocks.DiamondGlass;
-import common.cout970.UltraTech.blocks.MiscBlock;
-import common.cout970.UltraTech.blocks.MultiTank;
-import common.cout970.UltraTech.blocks.OreBlock;
-import common.cout970.UltraTech.blocks.StoneBlock;
-import common.cout970.UltraTech.blocks.Tier3Block;
+import common.cout970.UltraTech.blocknormal.AlienBlock;
+import common.cout970.UltraTech.blocknormal.ChasisBlock;
+import common.cout970.UltraTech.blocknormal.CovedGlass;
+import common.cout970.UltraTech.blocknormal.Deco_Block;
+import common.cout970.UltraTech.blocknormal.DiamondGlass;
+import common.cout970.UltraTech.blocknormal.MiscBlock;
+import common.cout970.UltraTech.blocknormal.OreBlock;
+import common.cout970.UltraTech.blocknormal.StoneBlockBlack;
+import common.cout970.UltraTech.blocknormal.StoneBlockWhite;
 import common.cout970.UltraTech.blocks.common.ChargeStation;
 import common.cout970.UltraTech.blocks.common.ChemicalPlant;
 import common.cout970.UltraTech.blocks.common.CrafterBlock;
 import common.cout970.UltraTech.blocks.common.FermenterBlock;
 import common.cout970.UltraTech.blocks.common.Heater;
 import common.cout970.UltraTech.blocks.common.LavaGenerator;
+import common.cout970.UltraTech.blocks.common.MultiTank;
 import common.cout970.UltraTech.blocks.common.Painter3D;
 import common.cout970.UltraTech.blocks.common.RefineryBlock;
+import common.cout970.UltraTech.blocks.common.Tier3Block;
 import common.cout970.UltraTech.blocks.models.Boiler;
 import common.cout970.UltraTech.blocks.models.CopperPipe;
 import common.cout970.UltraTech.blocks.models.Dynamo;
@@ -126,7 +127,8 @@ public class BlockManager {
 	//blocks	
 	public static List<Deco_Block> deco = new ArrayList<Deco_Block>();
 
-	public static  Block stoneblock;
+	public static  Block stoneblockblack;
+	public static  Block stoneblockwhite;
 	public static  Block Chasis;
 	public static  Block Ores;
 	
@@ -254,7 +256,8 @@ public class BlockManager {
 		deco.add(new Deco_Block(7,false));
 		deco.add(new Deco_Block(8,false));
 
-		stoneblock = new StoneBlock(Material.rock);
+		stoneblockblack = new StoneBlockBlack(Material.rock);
+		stoneblockwhite = new StoneBlockWhite(Material.rock);
 	}
 
 
@@ -270,7 +273,8 @@ public class BlockManager {
 		GameRegistry.registerBlock(Storage, ItemBlock_Storage.class ,"Storage_UT");
 		GameRegistry.registerBlock(Misc, ItemBlock_Misc.class, "Misc_UT");//will be removed
 		GameRegistry.registerBlock(Refinery, ItemBlock_Refinery.class, "Refinery_UT");
-		GameRegistry.registerBlock(stoneblock, ItemBlock_Stone.class, "StoneBlock");
+		GameRegistry.registerBlock(stoneblockblack, ItemBlock_Stone.class, "StoneBlockBlack");
+		GameRegistry.registerBlock(stoneblockwhite, ItemBlock_Stone.class, "StoneBlockWhite");
 
 		GameRegistry.registerBlock(SolarPanel, "SolarPanel");
 		GameRegistry.registerBlock(WindMill, "WindMill");

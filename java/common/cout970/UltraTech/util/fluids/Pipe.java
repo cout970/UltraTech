@@ -1,13 +1,19 @@
 package common.cout970.UltraTech.util.fluids;
 
 import common.cout970.UltraTech.network.SyncTile;
+import common.cout970.UltraTech.util.LogHelper;
 import common.cout970.UltraTech.util.UT_Utils;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.IFluidTank;
 
 public class Pipe extends SyncTile implements IFluidTransport{
 
 	private FluidNetwork net;
+	public  UT_Tank      buffer;
+	
 	
 	public void updateEntity(){
 		if(worldObj.isRemote)return;
@@ -35,6 +41,7 @@ public class Pipe extends SyncTile implements IFluidTransport{
 			}
 			te.getNetwork().refresh();
 		}
+//		LogHelper.log(getNetwork().getFluidAmount()+" / "+getNetwork().getCapacity());
 	}
 
 
@@ -54,6 +61,27 @@ public class Pipe extends SyncTile implements IFluidTransport{
 	@Override
 	public FluidNetwork getNetwork() {
 		return net;
+	}
+	
+	public void readFromNBT(NBTTagCompound p_145839_1_)
+	{
+		super.readFromNBT(p_145839_1_);
+		((UT_Tank) getTank()).readFromNBT(p_145839_1_, "net");
+		if(net != null && net.fluid == null){
+			if(getTank().getFluid() != null)net.fluid = getTank().getFluid().getFluid();
+		}
+	}
+
+    public void writeToNBT(NBTTagCompound p_145841_1_)
+    {
+    	super.writeToNBT(p_145841_1_);
+    	((UT_Tank) getTank()).writeToNBT(p_145841_1_, "net");
+    }
+
+
+	public IFluidTank getTank() {
+		if(buffer == null)buffer = new UT_Tank(100, this);
+		return buffer;
 	}
 
 }

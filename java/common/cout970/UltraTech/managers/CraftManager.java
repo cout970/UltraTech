@@ -134,29 +134,29 @@ public class CraftManager {
 		//deco
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(CovedGlass,4),new Object[]{"oo","oo",'o',"plateSilicon"}));																								//coved glass
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(DiamondGlass,6),new Object[]{"xx","xx",'x',"plateDiamond"}));																								//diamond glass
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(BlockManager.stoneblock,4,1),new Object[]{"ii","ii",'i',new ItemStack(BlockManager.stoneblock,4,0)}));														//stoneblock black bricks
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(BlockManager.stoneblock,4,3),new Object[]{"ii","ii",'i',new ItemStack(BlockManager.stoneblock,4,2)}));														//stoneblock white bricks
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(BlockManager.stoneblockblack,4,1),new Object[]{"ii","ii",'i',new ItemStack(BlockManager.stoneblockblack,4,0)}));														//stoneblock black bricks
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(BlockManager.stoneblockblack,4,3),new Object[]{"ii","ii",'i',new ItemStack(BlockManager.stoneblockblack,4,2)}));														//stoneblock white bricks
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(MultiTank,4),new Object[]{"pgp","ggg","pgp",'p',"plateAluminum",'g',"blockGlass"}));																		//MultiTank
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(BlockManager.Misc,1,0),new Object[]{"iii","iii","iii",'i',ItemName.get("Radionite")}));																	//Radionite block
 		
 		//decoblocks
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(deco.get(0),9),new Object[]{"iii","isi","iii",'i',Blocks.stonebrick,'s',new ItemStack(stoneblock,1,0)}));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(deco.get(1),8),new Object[]{"iii","isi","iii",'s',Items.redstone,'i',new ItemStack(stoneblock,1,1)}));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(deco.get(2),9),new Object[]{"iii","isi","iii",'s',Blocks.stone,'i',new ItemStack(stoneblock,1,0)}));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(deco.get(3),8),new Object[]{"rir","isi","rir",'s',Items.redstone,'i',new ItemStack(stoneblock,1,0),'r',new ItemStack(stoneblock,1,1)}));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(deco.get(4),8),new Object[]{"rrr","isi","rrr",'i',Blocks.stone,'s',Items.redstone,'r',new ItemStack(stoneblock,1,1)}));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(deco.get(5),9),new Object[]{"rir","iii","rir",'r',Blocks.stone,'i',new ItemStack(stoneblock,1,0)}));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(deco.get(6),9),new Object[]{"rir","iii","rir",'i',Blocks.stone,'r',new ItemStack(stoneblock,1,0)}));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(deco.get(7),8),new Object[]{"iii","isi","iii",'s',Items.redstone,'i',new ItemStack(stoneblock,1,0)}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(deco.get(0),9),new Object[]{"iii","isi","iii",'i',Blocks.stonebrick,'s',new ItemStack(stoneblockblack,1,0)}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(deco.get(1),8),new Object[]{"iii","isi","iii",'s',Items.redstone,'i',new ItemStack(stoneblockblack,1,1)}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(deco.get(2),9),new Object[]{"iii","isi","iii",'s',Blocks.stone,'i',new ItemStack(stoneblockblack,1,0)}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(deco.get(3),8),new Object[]{"rir","isi","rir",'s',Items.redstone,'i',new ItemStack(stoneblockblack,1,0),'r',new ItemStack(stoneblockblack,1,1)}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(deco.get(4),8),new Object[]{"rrr","isi","rrr",'i',Blocks.stone,'s',Items.redstone,'r',new ItemStack(stoneblockblack,1,1)}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(deco.get(5),9),new Object[]{"rir","iii","rir",'r',Blocks.stone,'i',new ItemStack(stoneblockblack,1,0)}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(deco.get(6),9),new Object[]{"rir","iii","rir",'i',Blocks.stone,'r',new ItemStack(stoneblockblack,1,0)}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(deco.get(7),8),new Object[]{"iii","isi","iii",'s',Items.redstone,'i',new ItemStack(stoneblockblack,1,0)}));
 
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(deco.get(8),9),new Object[]{"iii","isi","iii",'i',Blocks.stonebrick,'s',new ItemStack(stoneblock,1,2)}));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(deco.get(9),8),new Object[]{"iii","isi","iii",'s',Items.redstone,'i',new ItemStack(stoneblock,1,3)}));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(deco.get(10),9),new Object[]{"iii","isi","iii",'s',Blocks.stone,'i',new ItemStack(stoneblock,1,2)}));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(deco.get(11),8),new Object[]{"rir","isi","rir",'s',Items.redstone,'i',new ItemStack(stoneblock,1,2),'r',new ItemStack(stoneblock,1,3)}));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(deco.get(12),8),new Object[]{"rrr","isi","rrr",'i',Blocks.stone,'s',Items.redstone,'r',new ItemStack(stoneblock,1,3)}));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(deco.get(13),9),new Object[]{"rir","iii","rir",'r',Blocks.stone,'i',new ItemStack(stoneblock,1,2)}));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(deco.get(14),9),new Object[]{"rir","iii","rir",'i',Blocks.stone,'r',new ItemStack(stoneblock,1,2)}));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(deco.get(15),8),new Object[]{"iii","isi","iii",'s',Items.redstone,'i',new ItemStack(stoneblock,1,2)}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(deco.get(8),9),new Object[]{"iii","isi","iii",'i',Blocks.stonebrick,'s',new ItemStack(stoneblockwhite,1,0)}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(deco.get(9),8),new Object[]{"iii","isi","iii",'s',Items.redstone,'i',new ItemStack(stoneblockwhite,1,1)}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(deco.get(10),9),new Object[]{"iii","isi","iii",'s',Blocks.stone,'i',new ItemStack(stoneblockwhite,1,0)}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(deco.get(11),8),new Object[]{"rir","isi","rir",'s',Items.redstone,'i',new ItemStack(stoneblockwhite,1,0),'r',new ItemStack(stoneblockwhite,1,1)}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(deco.get(12),8),new Object[]{"rrr","isi","rrr",'i',Blocks.stone,'s',Items.redstone,'r',new ItemStack(stoneblockwhite,1,1)}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(deco.get(13),9),new Object[]{"rir","iii","rir",'r',Blocks.stone,'i',new ItemStack(stoneblockwhite,1,0)}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(deco.get(14),9),new Object[]{"rir","iii","rir",'i',Blocks.stone,'r',new ItemStack(stoneblockwhite,1,0)}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(deco.get(15),8),new Object[]{"iii","isi","iii",'s',Items.redstone,'i',new ItemStack(stoneblockwhite,1,0)}));
 
 		
 		Smelting();//furnace recipes
@@ -225,7 +225,7 @@ public class CraftManager {
 		CVD_Recipe.addRecipe(new CVD_Recipe(new ItemStack(Items.iron_ingot), new ItemStack(Items.redstone),new ItemStack(ItemName.get("UnorganicPlate"),1,3)));//restone plate
 		CVD_Recipe.addRecipe(new CVD_Recipe(new ItemStack(ItemName.get("Radionite"),1), new ItemStack(ItemName.get("Radionite"),1),new ItemStack(ItemName.get("UnorganicPlate"),1,4)));//radionite plate
 		CVD_Recipe.addRecipe(new CVD_Recipe(new ItemStack(ItemName.get("GrafenoPlate")), new ItemStack(ItemName.get("GrafenoPlate")),new ItemStack(ItemName.get("Dust"),1,8)));//diamond dust
-		CVD_Recipe.addRecipe(new CVD_Recipe(new ItemStack(ItemName.get("Dust"),1,0), new ItemStack(stoneblock,1,0),new ItemStack(stoneblock,1,2)));
+		CVD_Recipe.addRecipe(new CVD_Recipe(new ItemStack(ItemName.get("Dust"),1,0), new ItemStack(stoneblockblack,1,0),new ItemStack(stoneblockblack,1,2)));
 		CVD_Recipe.addRecipe(new CVD_Recipe(new ItemStack(ItemName.get("Sulfur"),1,0), new ItemStack(ItemName.get("Rubber"),1,0),new ItemStack(ItemName.get("Rubber_bulcanized"),1,0)));
 		CVD_Recipe.addRecipe(new CVD_Recipe(new ItemStack(Blocks.obsidian,1,0), new ItemStack(Blocks.obsidian,1,0),new ItemStack(ItemName.get("UnorganicPlate"),2,5)));
 		CVD_Recipe.addRecipe(new CVD_Recipe(new ItemStack(ItemName.get("Dust"),1,9), new ItemStack(ItemName.get("Dust"),1,9),new ItemStack(ItemName.get("UnorganicPlate"),2,5)));
@@ -236,9 +236,9 @@ public class CraftManager {
 		Purifier_Recipe.addRecipe(new Purifier_Recipe(new ItemStack(Blocks.sand), new ItemStack(ItemName.get("RawSilicon"),1)));
 		Purifier_Recipe.addRecipe(new Purifier_Recipe(new ItemStack(Blocks.gravel), new ItemStack(Items.flint,1)));
 		Purifier_Recipe.addRecipe(new Purifier_Recipe(new ItemStack(Blocks.sandstone), new ItemStack(Blocks.sand,4)));
-		Purifier_Recipe.addRecipe(new Purifier_Recipe(new ItemStack(Blocks.stone), new ItemStack(stoneblock,1,0)));
-		Purifier_Recipe.addRecipe(new Purifier_Recipe(new ItemStack(Blocks.cobblestone), new ItemStack(stoneblock,1,0)));
-		Purifier_Recipe.addRecipe(new Purifier_Recipe(new ItemStack(Items.quartz), new ItemStack(stoneblock,1,2)));
+		Purifier_Recipe.addRecipe(new Purifier_Recipe(new ItemStack(Blocks.stone), new ItemStack(stoneblockblack,1,0)));
+		Purifier_Recipe.addRecipe(new Purifier_Recipe(new ItemStack(Blocks.cobblestone), new ItemStack(stoneblockblack,1,0)));
+		Purifier_Recipe.addRecipe(new Purifier_Recipe(new ItemStack(Items.quartz), new ItemStack(stoneblockblack,1,2)));
 		for(int r = 0;r <5;r++)//chunk to dust
 			Purifier_Recipe.addRecipe(new Purifier_Recipe(new ItemStack(ItemName.get("Chunk"),1,r),new ItemStack(ItemName.get("Dust"),1,r)));
 		Purifier_Recipe.addRecipe(new Purifier_Recipe(new ItemStack(ItemName.get("Chunk"),1,5),new ItemStack(ItemName.get("Dust"),1,6)));

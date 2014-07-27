@@ -21,7 +21,7 @@ import org.apache.commons.io.output.WriterOutputStream;
 
 import ultratech.api.power.multipart.MultipartReference;
 import common.cout970.UltraTech.TileEntities.electric.tiers.Tesseract_Entity;
-import common.cout970.UltraTech.blocks.Deco_Block;
+import common.cout970.UltraTech.blocknormal.Deco_Block;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -76,10 +76,10 @@ public class Language {
 		for(Deco_Block b : deco){
 			for(int meta=0;meta<14;meta++)Language.addName(new ItemStack(b,1,meta), "Deco Block "+colors[meta]);
 		}
-		Language.addName(new ItemStack(stoneblock,1,0), "Stone Block Black");
-		Language.addName(new ItemStack(stoneblock,1,1), "Stone Bricks Black");
-		Language.addName(new ItemStack(stoneblock,1,2), "Stone Block White");
-		Language.addName(new ItemStack(stoneblock,1,3), "Stone Bricks White");
+		Language.addName(new ItemStack(stoneblockblack,1,0), "Stone Block Black");
+		Language.addName(new ItemStack(stoneblockblack,1,1), "Stone Bricks Black");
+		Language.addName(new ItemStack(stoneblockblack,1,2), "Stone Block White");
+		Language.addName(new ItemStack(stoneblockblack,1,3), "Stone Bricks White");
 		
 //		Language.addName(new ItemStack(Reactor,1,0), "Reactor Core");
 //		Language.addName(new ItemStack(Reactor,1,1), "Reactor Wall");

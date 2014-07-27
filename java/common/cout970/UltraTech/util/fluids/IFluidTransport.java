@@ -1,6 +1,7 @@
 package common.cout970.UltraTech.util.fluids;
 
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.fluids.IFluidTank;
 
 public interface IFluidTransport {
 
@@ -11,5 +12,7 @@ public interface IFluidTransport {
 	void onNetworkUpdate();
 
 	FluidNetwork getNetwork();
+	
+	IFluidTank getTank();
 
 }

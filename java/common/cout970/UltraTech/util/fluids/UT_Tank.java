@@ -14,23 +14,14 @@ public class UT_Tank implements IFluidTank{
 
 	private FluidStack fluid;
 	private int capacity = 0;
-	private int x,y,z;
-	private World w; 
+	
 	
 	public UT_Tank(int cap ,World w,int x, int y, int z){
 		capacity = cap;
-		this.w = w;
-		this.x = x;
-		this.y = y;
-		this.z = z;
 	}
 	
 	public UT_Tank(int cap, TileEntity entity) {
 		capacity = cap;
-		this.w = entity.getWorldObj();
-		this.x = entity.xCoord;
-		this.y = entity.yCoord;
-		this.z = entity.zCoord;
 	}
 
 	@Override
@@ -69,8 +60,6 @@ public class UT_Tank implements IFluidTank{
 		if (fluid == null){
 			fluid = new FluidStack(resource, Math.min(capacity, resource.amount));
 			
-			if(w !=null)FluidEvent.fireEvent(new FluidEvent.FluidFillingEvent(fluid, this.w, this.x, this.y, this.z, this));
-
 			return fluid.amount;
 		}
 		if (!fluid.isFluidEqual(resource)){
@@ -84,8 +73,6 @@ public class UT_Tank implements IFluidTank{
 		}else{
 			fluid.amount = capacity;
 		}
-
-		if(w !=null) FluidEvent.fireEvent(new FluidEvent.FluidFillingEvent(fluid, this.w, this.x, this.y, this.z, this));
 		return filled;
 	}
 
@@ -103,7 +90,6 @@ public class UT_Tank implements IFluidTank{
 			if (fluid.amount <= 0){
 				fluid = null;
 			}
-			if(w !=null)FluidEvent.fireEvent(new FluidEvent.FluidDrainingEvent(fluid, this.w, this.x, this.y, this.z, this));
 		}
 		return stack;
 	}

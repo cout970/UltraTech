@@ -17,6 +17,7 @@ public class CoalGeneratorEntityT1_Entity extends ConfigurableMachineWithInvento
 	public float heat = 25;
 	public float maxHeat = 400;
 	public PowerExchange pe = new PowerExchange();
+	public boolean updated;//metadata true == working
 
 	public CoalGeneratorEntityT1_Entity(){
 		super(1,"Generator",MachineData.Generator_T1);
@@ -33,8 +34,12 @@ public class CoalGeneratorEntityT1_Entity extends ConfigurableMachineWithInvento
 	public void updateEntity(){
 		super.updateEntity();
 		if(worldObj.isRemote)return;
-		
+
 		if(Progres > 0){
+			if(!updated){
+				worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 1, 2);
+				updated = true;
+			}
 			double extract = production();
 			if(Progres - extract < 0){
 				addCharge(pe.FTtoMev(Progres));
@@ -51,18 +56,22 @@ public class CoalGeneratorEntityT1_Entity extends ConfigurableMachineWithInvento
 			if(inventory[0] != null && shouldWork()){
 				int fuel = TileEntityFurnace.getItemBurnTime(inventory[0]);
 				if(fuel > 0 && ((int)(getCharge()+pe.FTtoMev(fuel)) <= getCapacity() || (pe.FTtoMev(fuel) > getCapacity()&& getCharge() < getCapacity()))){
-						Progres = fuel;
-						maxProgres = fuel;
-						if(inventory[0] != null){
-							inventory[0].stackSize--;
-							if(inventory[0].stackSize <= 0){
-								inventory[0] = inventory[0].getItem().getContainerItem(inventory[0]);
-							}
+					Progres = fuel;
+					maxProgres = fuel;
+					if(inventory[0] != null){
+						inventory[0].stackSize--;
+						if(inventory[0].stackSize <= 0){
+							inventory[0] = inventory[0].getItem().getContainerItem(inventory[0]);
 						}
-						markDirty();
 					}
+					markDirty();
 				}
-			}			
+			}
+			if(Progres <= 0 && updated){
+				worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 0, 2);
+				updated = false;
+			}
+		}			
 	}
 
 	//Synchronization

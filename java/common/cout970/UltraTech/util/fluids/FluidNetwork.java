@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import common.cout970.UltraTech.misc.IUpdatedEntity;
-
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidHandler;
 
@@ -14,9 +14,9 @@ public class FluidNetwork{
 	private List<IFluidTransport> pipes = new ArrayList<IFluidTransport>();
 	private List<IFluidTransport> pipesExcluded = new ArrayList<IFluidTransport>();
 	private List<IFluidHandler> tanks = new ArrayList<IFluidHandler>();
-	public UT_Tank buffer;
 	public TileEntity tile;
-	public boolean alreadyLoad = false;
+	public Fluid fluid;
+	public FluidNetWorkManager manager = new FluidNetWorkManager(this);
 	
 	private FluidNetwork(){}
 
@@ -25,13 +25,7 @@ public class FluidNetwork{
 		net.pipes.add(base);
 		net.tile = tile;
 		return net;
-	}
-	
-	public UT_Tank getBuffer(){
-		if(buffer == null)buffer = new UT_Tank(2000, getTile());
-		return buffer;
-	}
-	
+	}	
 	
 	private TileEntity getTile() {
 		return tile;
@@ -92,5 +86,34 @@ public class FluidNetwork{
 	public void excludeAndRecalculate(IFluidTransport te) {
 		exclude(te);
 		refresh();
+	}
+
+	public int getFluidAmount() {
+		int amount = 0;
+		for(IFluidTransport t : pipes){
+			amount += t.getTank().getFluidAmount();
+		}
+		return amount;
+	}
+
+	public Fluid getFluid() {
+		if(fluid == null){
+			if(getFluidAmount() == 0)return null;
+			for(IFluidTransport t : pipes){
+				if(t.getTank().getFluidAmount() > 0){
+					fluid = t.getTank().getFluid().getFluid();
+					break;
+				}
+			}
+		}
+		return fluid;
+	}
+
+	public int getCapacity() {
+		int cap = 0;
+		for(IFluidTransport t : pipes){
+			cap += t.getTank().getCapacity();
+		}
+		return cap;
 	}
 }

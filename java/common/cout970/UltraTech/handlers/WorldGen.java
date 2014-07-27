@@ -27,8 +27,7 @@ public class WorldGen implements IWorldGenerator{
 		    break;
 		default:{
 			generateSurface(world, random, chunkX * 16, chunkZ * 16);
-//			generateShip(random, chunkX * 16, chunkZ * 16, world);
-			if(chunkX%16==0)if(chunkZ%16==0)generateOil(random, chunkX * 16, chunkZ * 16, world);
+			if(random.nextInt(1500) == 0)generateOil(random, chunkX * 16, chunkZ * 16, world);
 		}
 		}
 	}
