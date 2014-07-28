@@ -31,6 +31,7 @@ public class FluidNetWorkManager implements IFluidHandler{
 		int pipes = net.getPipes().size();//number of pipes
 		if(pipes <= 0)return 0;//error
 		int amount = Math.min(resource.amount,net.getCapacity()-net.getFluidAmount());
+		int initial = amount;
 		int temp = amount/pipes;//divided amount per tank
 
 		if(temp > 0){
@@ -49,8 +50,7 @@ public class FluidNetWorkManager implements IFluidHandler{
 				}
 			}
 		}
-		
-		return resource.amount-amount;
+		return initial-amount;
 	}
 
 	@Override

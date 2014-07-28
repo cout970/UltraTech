@@ -4,7 +4,7 @@ import org.lwjgl.opengl.GL11;
 
 import common.cout970.UltraTech.client.models.ModelBoiler;
 import common.cout970.UltraTech.misc.IconFactory;
-import common.cout970.UltraTech.util.render.Renderer_Util;
+import common.cout970.UltraTech.util.render.CubeRenderer_Util;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.Entity;

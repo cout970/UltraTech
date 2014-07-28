@@ -6,7 +6,7 @@ import common.cout970.UltraTech.TileEntities.electric.PumpEntity;
 import common.cout970.UltraTech.client.models.ModelBoiler;
 import common.cout970.UltraTech.client.models.ModelPump;
 import common.cout970.UltraTech.misc.IconFactory;
-import common.cout970.UltraTech.util.render.Renderer_Util;
+import common.cout970.UltraTech.util.render.CubeRenderer_Util;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -19,7 +19,7 @@ import net.minecraftforge.fluids.FluidStack;
 public class RenderPump extends TileEntitySpecialRenderer{
 
 	private ModelPump model;
-	private Renderer_Util FR = new Renderer_Util();
+	private CubeRenderer_Util FR = new CubeRenderer_Util();
 
 	public RenderPump(){
 		super();

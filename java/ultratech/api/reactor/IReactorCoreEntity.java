@@ -11,4 +11,8 @@ public interface IReactorCoreEntity {
 	public void updateComponents();
 
 	public int getSize();
+
+	public boolean isSlotinSpace(int g, int space);
+
+	public void upadateRedstoneSignal();
 }

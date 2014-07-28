@@ -5,6 +5,7 @@ import io.netty.util.NetUtil;
 import java.util.ArrayList;
 import java.util.List;
 
+import cofh.api.tileentity.IRedstoneControl.ControlMode;
 import common.cout970.UltraTech.misc.PowerExchange;
 import common.cout970.UltraTech.network.Net_Utils;
 import common.cout970.UltraTech.util.LogHelper;
@@ -38,6 +39,10 @@ public class Reactor_Core_Entity extends Reactor_Entity_Base implements IReactor
 	public ItemStack[] inv;
 	public float heat = 25;
 	public float maxheat = 100;
+	public boolean state = false;
+	public int production;
+	public ControlMode Mode = ControlMode.LOW;
+	public boolean redstoneSignal = false;
 	
 	public Reactor_Core_Entity(){
 		inv = new ItemStack[25];
@@ -54,18 +59,29 @@ public class Reactor_Core_Entity extends Reactor_Entity_Base implements IReactor
 		}
 		if(worldObj.isRemote)return;
 		boolean empty = true;
-		for(int p=0;p<getSizeInventory();p++){
-			if(inv[p] != null){
-				if(inv[p].getItem() instanceof IReactorFuel){
-					empty = false;
-					if(heat < maxheat)heat +=0.1;
-					if(heat >= 100){
-						FluidStack f = new FluidStack(FluidRegistry.getFluid("steam"),((IReactorFuel) inv[p].getItem()).getSteamPerTick());
-						getTank(1).fill(f, true);
-						if(worldObj.getTotalWorldTime()%20 == 0){
-							inv[p].setItemDamage(inv[p].getItemDamage()+1);
-							if(inv[p].getItemDamage() > inv[p].getMaxDamage()){
-								inv[p] = null;
+		if(state){
+			if(getTank(1).getCapacity()-getTank(1).getFluidAmount() < 1000)state = false;
+		}
+		production = 0;
+		if(state && shouldWork()){
+			for(int p=0;p<getSizeInventory();p++){
+				if(inv[p] != null){
+					if(inv[p].getItem() instanceof IReactorFuel){
+						empty = false;
+						if(heat < maxheat)heat +=0.1;
+						if(heat >= 100 ){
+							FluidStack f = new FluidStack(FluidRegistry.getFluid("steam"),((IReactorFuel) inv[p].getItem()).getSteamPerTick());
+							int toD =Math.min(1, f.amount/10);
+							if(getTank(0).getFluidAmount() >= toD){
+								getTank(1).fill(f, true);
+								getTank(0).drain(toD, true);
+								production += f.amount;
+								if(worldObj.getTotalWorldTime()%20 == 0){
+									inv[p].setItemDamage(inv[p].getItemDamage()+1);
+									if(inv[p].getItemDamage() > inv[p].getMaxDamage()){
+										inv[p] = null;
+									}
+								}
 							}
 						}
 					}
@@ -73,6 +89,13 @@ public class Reactor_Core_Entity extends Reactor_Entity_Base implements IReactor
 			}
 		}
 		if(empty && heat > 25)heat -= 0.1;
+	}
+	
+	public boolean shouldWork(){
+		if(Mode == ControlMode.DISABLED)return true;
+		if(Mode == ControlMode.LOW && !redstoneSignal)return true;
+		if(Mode == ControlMode.HIGH && redstoneSignal)return true;
+		return false;
 	}
 	
 	@Override
@@ -163,6 +186,10 @@ public class Reactor_Core_Entity extends Reactor_Entity_Base implements IReactor
 		}
 		c.sendProgressBarUpdate(cont, 3, size);
 		c.sendProgressBarUpdate(cont, 4, (int) heat);
+		c.sendProgressBarUpdate(cont, 5, state ? 1 : 0);
+		c.sendProgressBarUpdate(cont, 6, production);
+		c.sendProgressBarUpdate(cont, 7, Mode.ordinal());
+		c.sendProgressBarUpdate(cont, 8, redstoneSignal ? 1 : 0);
 	}
 
 	public void getGUINetworkData(int id, int value) {
@@ -171,6 +198,10 @@ public class Reactor_Core_Entity extends Reactor_Entity_Base implements IReactor
 		if(id == 2)getTank(0).setFluidAmount(value);
 		if(id == 3)size = (byte) value;
 		if(id == 4)heat = value;
+		if(id == 5)state = value == 1;
+		if(id == 6)production = value;
+		if(id == 7)Mode = ControlMode.values()[value];
+		if(id == 8)redstoneSignal = value == 1;
 	}
 
 	@Override
@@ -182,7 +213,7 @@ public class Reactor_Core_Entity extends Reactor_Entity_Base implements IReactor
 
 	@Override
 	public int getSizeInventory() {
-		return 25;
+		return inv.length;
 	}
 
 	@Override
@@ -249,12 +280,61 @@ public class Reactor_Core_Entity extends Reactor_Entity_Base implements IReactor
 	public void closeInventory() {}
 
 	@Override
-	public boolean isItemValidForSlot(int p_94041_1_, ItemStack p_94041_2_) {
+	public boolean isItemValidForSlot(int slot, ItemStack i) {
+		int space = 0;
+		if(size == 1)space = 1;
+		if(size == 2)space = 9;
+		if(size == 3)space = 25;
+		if(isSlotinSpace(slot,space)){
+			if(i != null){
+				if(i.getItem() instanceof IReactorFuel){
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	public boolean isSlotinSpace(int slot, int space) {
+		if(space == 1)if(slot == 12)return true;
+		if(space == 9){
+			if(slot == 6 || slot == 7 || slot == 8)return true;
+			if(slot == 11 || slot == 12 || slot == 13)return true;
+			if(slot == 16 || slot == 17 || slot == 18)return true;
+		}
+		if(space == 25)return true;
 		return false;
 	}
 
 	@Override
 	public int getSize() {	
 		return size;
+	}
+
+	public void applyConfig(int type, int value) {
+		if(type == 1){
+			if(value == 0)state = true;//on
+			if(value == 1)state = false;//off
+		}else if(type == 3){
+			if(value == 0)Mode = ControlMode.HIGH;
+			if(value == 1)Mode = ControlMode.DISABLED;
+			if(value == 2)Mode = ControlMode.LOW;
+		}
+	}
+
+	@Override
+	public void upadateRedstoneSignal() {
+		updateComponents();
+		boolean hasSignal = false;
+		for(IReactorComponent r : components){
+			if(r instanceof Reactor_IO_Entity){
+				Reactor_IO_Entity io = (Reactor_IO_Entity) r;
+				if(worldObj.isBlockIndirectlyGettingPowered(io.xCoord, io.yCoord, io.zCoord)){
+					hasSignal = true;
+				}
+			}
+		}
+		redstoneSignal = hasSignal;
+		
 	}
 }

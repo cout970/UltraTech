@@ -14,6 +14,6 @@ public class RadioniteCell extends UT_Item implements IReactorFuel{
 
 	@Override
 	public int getSteamPerTick() {
-		return 36;
+		return 40;
 	}
 }

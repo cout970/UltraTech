@@ -5,8 +5,11 @@ import java.util.List;
 
 import org.lwjgl.opengl.GL11;
 
+import cofh.api.tileentity.IRedstoneControl.ControlMode;
 import ultratech.api.power.IPower;
 import common.cout970.UltraTech.TileEntities.multiblocks.Reactor_Core_Entity;
+import common.cout970.UltraTech.network.Net_Utils;
+import common.cout970.UltraTech.network.messages.MessageReactorConfig;
 import common.cout970.UltraTech.util.LogHelper;
 import common.cout970.UltraTech.util.UT_Utils;
 import common.cout970.UltraTech.util.fluids.UT_Tank;
@@ -42,6 +45,48 @@ public class Reactor_Gui extends MachineGuiBase{
 		int h = (int) (tile.heat*58/tile.maxheat);
 		this.drawTexturedModalRect(xStart+9, yStart+39+(58-h), 176, 58-h, 5, h);
 		
+		if(!tile.state){
+			this.drawTexturedModalRect(xStart+8, yStart+10, 235, 0, 15, 22);
+			this.drawTexturedModalRect(xStart+24, yStart+10, 235, 69, 15, 22);
+		}else{
+			this.drawTexturedModalRect(xStart+8, yStart+10, 235, 23, 15, 22);
+			this.drawTexturedModalRect(xStart+24, yStart+10, 235, 46, 15, 22);
+		}
+		
+		if(tile.Mode == ControlMode.LOW){
+			this.drawTexturedModalRect(xStart+57, yStart+10, 235, 138, 15, 22);
+		}else if(tile.Mode == ControlMode.HIGH){
+			this.drawTexturedModalRect(xStart+57, yStart+10, 235, 115, 15, 22);
+		}else{
+			this.drawTexturedModalRect(xStart+57, yStart+10, 235, 92, 15, 22);
+		}
+		
+		//lock slots
+		if(tile.getSize() < 3){
+			for(int x=0;x<5;x++){
+				this.drawTexturedModalRect(xStart+78+x*18, yStart+10, 203, 0, 16, 16);	
+			}
+			for(int y=0;y<5;y++){
+				this.drawTexturedModalRect(xStart+78+y*18, yStart+82, 203, 0, 16, 16);	
+			}
+			for(int z=0;z<3;z++){
+				this.drawTexturedModalRect(xStart+78, yStart+28+z*18, 203, 0, 16, 16);	
+			}
+			for(int z=0;z<3;z++){
+				this.drawTexturedModalRect(xStart+150, yStart+28+z*18, 203, 0, 16, 16);	
+			}
+		}
+		if(tile.getSize() < 2){
+			for(int z=0;z<3;z++){
+				this.drawTexturedModalRect(xStart+96+z*18, yStart+28, 203, 0, 16, 16);	
+			}
+			for(int z=0;z<3;z++){
+				this.drawTexturedModalRect(xStart+96+z*18, yStart+64, 203, 0, 16, 16);	
+			}
+			this.drawTexturedModalRect(xStart+96, yStart+46, 203, 0, 16, 16);
+			this.drawTexturedModalRect(xStart+132, yStart+46, 203, 0, 16, 16);
+		}
+		
 		//draw fluids
 		if(tile.getTank(0).getFluidAmount() > 0){
 			UT_Tank t = tile.getTank(0);
@@ -74,6 +119,16 @@ public class Reactor_Gui extends MachineGuiBase{
         xStart = (width - xSize) / 2;
 		yStart = (height - ySize) / 2;
 		
+		String line1 = "Reactor State: ";
+		if(tile.state && tile.shouldWork()){
+			line1 += "Running";
+		}else{
+			line1 += "Stoped";
+		}
+		this.drawCenteredString(fontRendererObj, line1, 90, 105, UT_Utils.RGBtoInt(255, 255, 255));	
+		String line2 = "Reactor Production: "+tile.production+" mb/t";
+		this.drawCenteredString(fontRendererObj, line2, 90, 115, UT_Utils.RGBtoInt(255, 255, 255));	
+		
         if(UT_Utils.isIn(x, y, xStart+26, yStart+38, 20, 60)){
         	List<String> info = new ArrayList<String>();
         	info.add("Water: "+tile.getTank(0).getFluidAmount()+" / "+tile.getTank(0).getCapacity());
@@ -92,6 +147,29 @@ public class Reactor_Gui extends MachineGuiBase{
         	this.drawHoveringText(info, x-xStart, y-yStart, fontRendererObj);
         	RenderHelper.enableGUIStandardItemLighting();
         }
+	}
+	
+	@Override
+	protected void mouseClicked(int mx, int my, int b)
+	{
+		super.mouseClicked(mx, my, b);
+		
+		xStart = (width - xSize) / 2;
+		yStart = (height - ySize) / 2;
+		
+		if(UT_Utils.isIn(mx, my, xStart+8, yStart+10, 15, 22)){
+			
+			Net_Utils.INSTANCE.sendToServer(new MessageReactorConfig(tile,1,0));//on
+		}if(UT_Utils.isIn(mx, my, xStart+24, yStart+10, 15, 22)){
+			
+			Net_Utils.INSTANCE.sendToServer(new MessageReactorConfig(tile,1,1));//off
+		}if(UT_Utils.isIn(mx, my, xStart+41, yStart+10, 15, 22)){
+			
+			Net_Utils.INSTANCE.sendToServer(new MessageReactorConfig(tile,2,0));//off
+		}if(UT_Utils.isIn(mx, my, xStart+57, yStart+10, 15, 22)){
+			
+			Net_Utils.INSTANCE.sendToServer(new MessageReactorConfig(tile,3,tile.Mode.ordinal()));//off
+		}
 	}
 
 }

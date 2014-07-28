@@ -1,5 +1,8 @@
 package common.cout970.UltraTech.TileEntities.multiblocks;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import common.cout970.UltraTech.network.Net_Utils;
 import common.cout970.UltraTech.util.LogHelper;
 import common.cout970.UltraTech.util.UT_Utils;
@@ -8,6 +11,7 @@ import common.cout970.UltraTech.util.fluids.TankConection;
 import common.cout970.UltraTech.util.fluids.UT_Tank;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -19,7 +23,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 
-public class Reactor_IO_Entity extends Reactor_Entity_Base implements IFluidHandler,IInventory{
+public class Reactor_IO_Entity extends Reactor_Entity_Base implements IFluidHandler,IInventory,ISidedInventory{
 
 	public UT_Tank tank;
 	public int mode = 1;//0 water in, 1 steam out, 2 material in,3 material out
@@ -47,8 +51,11 @@ public class Reactor_IO_Entity extends Reactor_Entity_Base implements IFluidHand
 	@Override
 	public void onNeigUpdate() {
 		super.onNeigUpdate();
-		if(worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord))mode = 0;
-		else mode = 1;
+		if(worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord)){
+			mode = 0;
+		}else{
+			mode = 1;
+		}
 	}
 	
 	@Override
@@ -108,7 +115,8 @@ public class Reactor_IO_Entity extends Reactor_Entity_Base implements IFluidHand
 
 	@Override
 	public boolean isItemValidForSlot(int var1, ItemStack var2) {
-		return true;
+		if(getCore() != null)return ((IInventory) getCore()).isItemValidForSlot(var1, var2);
+		return false;
 	}
 
 	@Override
@@ -160,5 +168,45 @@ public class Reactor_IO_Entity extends Reactor_Entity_Base implements IFluidHand
 	@Override
 	public void writeToNBT(NBTTagCompound nbtTagCompound) {
 		super.writeToNBT(nbtTagCompound);
+	}
+
+	@Override
+	public int[] getAccessibleSlotsFromSide(int p_94128_1_) {
+		if(getCore() != null){
+			int size = getCore().getSize();
+			List<Integer> s = new ArrayList<Integer>();
+			int space = 0;
+			if(size == 1)space = 1;
+			if(size == 2)space = 9;
+			if(size == 3)space = 25;
+			for(int g=0;g<25;g++){
+				if(getCore().isSlotinSpace(g,space))s.add(g);
+			}
+			int[] h = new int[s.size()];
+			for(int j=0;j<h.length;j++){
+				h[j] = s.get(j);
+			}
+			return h;
+		}
+		return new int[]{};
+	}
+
+	@Override
+	public boolean canInsertItem(int slot, ItemStack item, int side){
+		if(getCore() != null){
+			int size = getCore().getSize();
+			int space = 0;
+			if(size == 1)space = 1;
+			if(size == 2)space = 9;
+			if(size == 3)space = 25;
+			if(getCore().isSlotinSpace(slot,space))	return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean canExtractItem(int slot, ItemStack item,
+			int side) {
+		return true;
 	}
 }

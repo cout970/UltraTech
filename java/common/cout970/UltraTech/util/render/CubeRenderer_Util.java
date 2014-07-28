@@ -10,7 +10,7 @@ import net.minecraft.util.IIcon;
 
 import org.lwjgl.opengl.GL11;
 
-public class Renderer_Util {
+public class CubeRenderer_Util {
 	
 	IIcon[] icons = new IIcon[6];
 	

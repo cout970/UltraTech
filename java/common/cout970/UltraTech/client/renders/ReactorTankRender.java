@@ -7,7 +7,7 @@ import ultratech.api.reactor.IReactorComponent;
 import common.cout970.UltraTech.TileEntities.multiblocks.Reactor_Core_Entity;
 import common.cout970.UltraTech.TileEntities.utility.ReactorTankEntity;
 import common.cout970.UltraTech.util.render.RenderUtil;
-import common.cout970.UltraTech.util.render.Renderer_Util;
+import common.cout970.UltraTech.util.render.CubeRenderer_Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -18,11 +18,11 @@ import net.minecraftforge.fluids.FluidRegistry;
 
 public class ReactorTankRender extends TileEntitySpecialRenderer{
 	
-	private Renderer_Util RF;
+	private CubeRenderer_Util RF;
 	
 	public ReactorTankRender(){
 		super();
-		RF = new Renderer_Util();
+		RF = new CubeRenderer_Util();
 	}
 
 	@Override

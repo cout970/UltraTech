@@ -12,7 +12,7 @@ import common.cout970.UltraTech.util.UT_Utils;
 import common.cout970.UltraTech.util.fluids.IFluidTransport;
 import common.cout970.UltraTech.util.fluids.TankConection;
 import common.cout970.UltraTech.util.fluids.UT_Tank;
-import common.cout970.UltraTech.util.render.Renderer_Util;
+import common.cout970.UltraTech.util.render.CubeRenderer_Util;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.Entity;
@@ -28,7 +28,7 @@ public class RenderPipe extends TileEntitySpecialRenderer{
 	private ModelPipe model;
 	private ModelPipeIn in;
 	private ModelCenterPipe base;
-	private Renderer_Util FR = new Renderer_Util();
+	private CubeRenderer_Util FR = new CubeRenderer_Util();
 
 	public RenderPipe(){
 		super();

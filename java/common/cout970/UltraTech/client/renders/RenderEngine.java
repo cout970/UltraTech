@@ -6,7 +6,7 @@ import common.cout970.UltraTech.TileEntities.intermod.EngineEntity;
 import common.cout970.UltraTech.client.models.ModelEngine_FT;
 import common.cout970.UltraTech.client.models.NewEngine;
 import common.cout970.UltraTech.misc.IconFactory;
-import common.cout970.UltraTech.util.render.Renderer_Util;
+import common.cout970.UltraTech.util.render.CubeRenderer_Util;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.Entity;
@@ -17,7 +17,7 @@ import net.minecraft.util.ResourceLocation;
 public class RenderEngine extends TileEntitySpecialRenderer{
 
 	private ModelEngine_FT model;
-	private Renderer_Util FR = new Renderer_Util();
+	private CubeRenderer_Util FR = new CubeRenderer_Util();
 	private ResourceLocation texture = new ResourceLocation("ultratech:textures/misc/ftengine.png");
 	
 	public RenderEngine() {

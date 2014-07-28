@@ -9,6 +9,7 @@ import common.cout970.UltraTech.network.messages.MessageCrafter;
 import common.cout970.UltraTech.network.messages.MessageMachineMode;
 import common.cout970.UltraTech.network.messages.MessageMicroPartUpdate;
 import common.cout970.UltraTech.network.messages.MessagePainter;
+import common.cout970.UltraTech.network.messages.MessageReactorConfig;
 import common.cout970.UltraTech.network.messages.MessageTesseract;
 import common.cout970.UltraTech.network.messages.MessageUpdate;
 import common.cout970.UltraTech.util.LogHelper;
@@ -31,6 +32,7 @@ public class Net_Utils {
 		INSTANCE.registerMessage(MessageTesseract.class, MessageTesseract.class, 5, Side.SERVER);
 		if(MultipartReference.isMicroPartActived)
 		INSTANCE.registerMessage(MessageMicroPartUpdate.class, MessageMicroPartUpdate.class, 6, Side.CLIENT);
+		INSTANCE.registerMessage(MessageReactorConfig.class, MessageReactorConfig.class, 7, Side.SERVER);
 	}
 	
 	public static void sendUpdate(TileEntity t){

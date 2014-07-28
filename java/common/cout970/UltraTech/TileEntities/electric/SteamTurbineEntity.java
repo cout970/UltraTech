@@ -3,12 +3,13 @@ package common.cout970.UltraTech.TileEntities.electric;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 import ultratech.api.power.CableType;
-
 import common.cout970.UltraTech.managers.MachineData;
+import common.cout970.UltraTech.util.LogHelper;
 import common.cout970.UltraTech.util.fluids.UT_Tank;
 import common.cout970.UltraTech.util.power.Machine;
 
@@ -36,6 +37,7 @@ public class SteamTurbineEntity extends Machine implements IFluidHandler{
 	
 	public void updateEntity(){
 		super.updateEntity();
+		
 		if(tank == null){
 			tank = new UT_Tank(16000, this);
 		}
@@ -51,7 +53,7 @@ public class SteamTurbineEntity extends Machine implements IFluidHandler{
 	@Override
 	public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
 		if(tank == null)return 0;
-		if(from != facing && from != null)return 0;
+		if(resource.fluidID != FluidRegistry.getFluidID("steam"))return 0;
 		return tank.fill(resource, doFill);
 	}
 

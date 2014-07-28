@@ -4,7 +4,7 @@ import org.lwjgl.opengl.GL11;
 
 import common.cout970.UltraTech.TileEntities.fluid.TankEntity;
 import common.cout970.UltraTech.client.models.ModelFluidTank;
-import common.cout970.UltraTech.util.render.Renderer_Util;
+import common.cout970.UltraTech.util.render.CubeRenderer_Util;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -17,7 +17,7 @@ public class RenderTank  extends TileEntitySpecialRenderer{
 
 	private ModelFluidTank model;
 	public float k = 0.063f;
-	private Renderer_Util FR = new Renderer_Util();
+	private CubeRenderer_Util FR = new CubeRenderer_Util();
 
 	public RenderTank() {
 		this.model = new ModelFluidTank();

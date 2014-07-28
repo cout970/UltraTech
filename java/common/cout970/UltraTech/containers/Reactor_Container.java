@@ -19,13 +19,13 @@ public class Reactor_Container extends UT_Container{
 	public Reactor_Container(InventoryPlayer inventoryPlayer, TileEntity t) {
 		super(inventoryPlayer, t);
 		tile = (SyncTile) t;		
-		this.bindPlayerInventorywithheight(inventoryPlayer);
 		int pos = 0;
-		for (int i = 0; i < 5; i++) {
-			for (int j = 0; j < 5; j++) {
+		for (int j = 0; j < 5; j++) {
+			for (int i = 0; i < 5; i++) {
 				this.addSlotToContainer(new SlotPhantom((IInventory) t,pos++,114+i*18-36,46+j*18-36));
 			}
-		}
+		}		
+		this.bindPlayerInventorywithheight(inventoryPlayer);
 	}
 	
 	public void bindPlayerInventorywithheight(InventoryPlayer inventoryPlayer) {
