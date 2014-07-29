@@ -7,7 +7,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Facing;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import common.cout970.UltraTech.TileEntities.multiblocks.Reactor_Tank_Entity;
+import common.cout970.UltraTech.TileEntities.multiblocks.reactor.Reactor_Tank_Entity;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

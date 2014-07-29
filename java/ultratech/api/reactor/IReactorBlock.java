@@ -2,5 +2,11 @@ package ultratech.api.reactor;
 
 public interface IReactorBlock {
 
-	public int getLayer();//0 only in, 1 in or out,2 only on the surface
+	/**
+	 * 0 only can go inside the structure
+	 * 1 can go in or out
+	 * 2 only can go on the surface
+	 * @return
+	 */
+	public int getLayer();
 }

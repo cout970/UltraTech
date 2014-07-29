@@ -4,12 +4,10 @@ import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import common.cout970.UltraTech.TileEntities.multiblocks.Reactor_Control_Entity;
-import common.cout970.UltraTech.TileEntities.multiblocks.Reactor_Core_Entity;
-import common.cout970.UltraTech.TileEntities.utility.ReactorControllerEntity;
+
+import common.cout970.UltraTech.TileEntities.multiblocks.reactor.Reactor_Control_Entity;
+import common.cout970.UltraTech.TileEntities.multiblocks.reactor.Reactor_Core_Entity;
 import common.cout970.UltraTech.managers.UltraTech;
-import common.cout970.UltraTech.misc.IReactorPart;
-import common.cout970.UltraTech.util.LogHelper;
 
 public class Reactor_Control_Block extends ReactorPartBase{
 

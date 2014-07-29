@@ -1,4 +1,4 @@
-package common.cout970.UltraTech.TileEntities.multiblocks;
+package common.cout970.UltraTech.TileEntities.multiblocks.reactor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +33,7 @@ public class Reactor_IO_Entity extends Reactor_Entity_Base implements IFluidHand
 	}
 	
 	public void updateEntity(){
+		super.updateEntity();
 		if(mode == 1 && getCore() != null){
 			if(getCore().getTank(1).getFluidAmount() > 0){
 				int toDrain = Math.min(getCore().getTank(1).getFluidAmount(), 500);

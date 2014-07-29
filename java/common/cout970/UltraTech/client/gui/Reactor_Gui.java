@@ -7,7 +7,7 @@ import org.lwjgl.opengl.GL11;
 
 import cofh.api.tileentity.IRedstoneControl.ControlMode;
 import ultratech.api.power.IPower;
-import common.cout970.UltraTech.TileEntities.multiblocks.Reactor_Core_Entity;
+import common.cout970.UltraTech.TileEntities.multiblocks.reactor.Reactor_Core_Entity;
 import common.cout970.UltraTech.network.Net_Utils;
 import common.cout970.UltraTech.network.messages.MessageReactorConfig;
 import common.cout970.UltraTech.util.LogHelper;
@@ -59,6 +59,12 @@ public class Reactor_Gui extends MachineGuiBase{
 			this.drawTexturedModalRect(xStart+57, yStart+10, 235, 115, 15, 22);
 		}else{
 			this.drawTexturedModalRect(xStart+57, yStart+10, 235, 92, 15, 22);
+		}
+		
+		if(tile.automation){
+			this.drawTexturedModalRect(xStart+41, yStart+10, 235, 184, 15, 22);
+		}else{
+			this.drawTexturedModalRect(xStart+41, yStart+10, 235, 161, 15, 22);
 		}
 		
 		//lock slots
@@ -125,9 +131,17 @@ public class Reactor_Gui extends MachineGuiBase{
 		}else{
 			line1 += "Stoped";
 		}
-		this.drawCenteredString(fontRendererObj, line1, 90, 105, UT_Utils.RGBtoInt(255, 255, 255));	
+
+		this.drawString(fontRendererObj, line1, 10, 105, UT_Utils.RGBtoInt(255, 255, 255));	
 		String line2 = "Reactor Production: "+tile.production+" mb/t";
-		this.drawCenteredString(fontRendererObj, line2, 90, 115, UT_Utils.RGBtoInt(255, 255, 255));	
+		this.drawString(fontRendererObj, line2, 10, 117, UT_Utils.RGBtoInt(255, 255, 255));	
+		
+		String line3 = "Redstone input: "+tile.redstoneSignal;
+		this.drawString(fontRendererObj, line3, 10, 129, UT_Utils.RGBtoInt(255, 255, 255));	
+	
+		String line4 = "Automatic start and stop: "+tile.automation;
+		this.drawString(fontRendererObj, line4, 10, 141, UT_Utils.RGBtoInt(255, 255, 255));	
+	
 		
         if(UT_Utils.isIn(x, y, xStart+26, yStart+38, 20, 60)){
         	List<String> info = new ArrayList<String>();

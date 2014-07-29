@@ -1,4 +1,4 @@
-package common.cout970.UltraTech.TileEntities.multiblocks;
+package common.cout970.UltraTech.TileEntities.multiblocks.reactor;
 
 import common.cout970.UltraTech.blocks.reactor.Reactor_Chamber_Block;
 import common.cout970.UltraTech.util.LogHelper;
@@ -92,11 +92,14 @@ public class ReactorMultiblockTweak {
 	}
 	
 	public static void setStructure(World w,int x,int y,int z,int size){
+		
 		if(size == 1){
 			for(int i=0;i<3;i++){
 				for(int j=0;j<3;j++){
 					for(int k=0;k<3;k++){
 						w.setBlockMetadataWithNotify(x+i-1, y+j-1, z+k-1, 1, 2);
+						TileEntity t = w.getTileEntity(x+i-1, y+j-1, z+k-1);
+						if(t instanceof IReactorComponent)((IReactorComponent) t).setCoreCoords(x,y,z);
 					}
 				}
 			}
@@ -105,6 +108,8 @@ public class ReactorMultiblockTweak {
 				for(int j=0;j<5;j++){
 					for(int k=0;k<5;k++){
 						w.setBlockMetadataWithNotify(x+i-2, y+j-2, z+k-2, 1, 2);
+						TileEntity t = w.getTileEntity(x+i-2, y+j-2, z+k-2);
+						if(t instanceof IReactorComponent)((IReactorComponent) t).setCoreCoords(x,y,z);
 					}
 				}
 			}
@@ -113,6 +118,8 @@ public class ReactorMultiblockTweak {
 				for(int j=0;j<7;j++){
 					for(int k=0;k<7;k++){
 						w.setBlockMetadataWithNotify(x+i-3, y+j-3, z+k-3, 1, 2);
+						TileEntity t = w.getTileEntity(x+i-3, y+j-3, z+k-3);
+						if(t instanceof IReactorComponent)((IReactorComponent) t).setCoreCoords(x,y,z);
 					}
 				}
 			}

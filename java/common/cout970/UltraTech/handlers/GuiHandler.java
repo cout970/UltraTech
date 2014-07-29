@@ -26,11 +26,10 @@ import common.cout970.UltraTech.TileEntities.electric.tiers.Tesseract_Entity;
 import common.cout970.UltraTech.TileEntities.fluid.BoilerEntity;
 import common.cout970.UltraTech.TileEntities.intermod.DynamoEntity;
 import common.cout970.UltraTech.TileEntities.intermod.EngineEntity;
-import common.cout970.UltraTech.TileEntities.multiblocks.Reactor_Core_Entity;
+import common.cout970.UltraTech.TileEntities.multiblocks.reactor.Reactor_Core_Entity;
 import common.cout970.UltraTech.TileEntities.utility.CrafterEntity;
 import common.cout970.UltraTech.TileEntities.utility.HologramEmiterEntity;
 import common.cout970.UltraTech.TileEntities.utility.Painter3DEntity;
-import common.cout970.UltraTech.TileEntities.utility.ReactorControllerEntity;
 import common.cout970.UltraTech.client.gui.Boiler_Gui;
 import common.cout970.UltraTech.client.gui.CVD_Gui;
 import common.cout970.UltraTech.client.gui.ChargeStation_Gui;
@@ -60,7 +59,6 @@ import common.cout970.UltraTech.containers.CVDcontainer;
 import common.cout970.UltraTech.containers.ChargeStationContainer;
 import common.cout970.UltraTech.containers.Chemical_Container;
 import common.cout970.UltraTech.containers.ClimateStationContainer;
-import common.cout970.UltraTech.containers.ControllerContainer;
 import common.cout970.UltraTech.containers.CrafterContainer;
 import common.cout970.UltraTech.containers.CutterContainer;
 import common.cout970.UltraTech.containers.Dynamo_Container;
@@ -163,10 +161,6 @@ public class GuiHandler implements IGuiHandler{
 		//Boiler
 		if(tileEntity instanceof BoilerEntity){
 			return new BoilerContainer(player.inventory, (BoilerEntity) tileEntity);
-		}
-		//Controller
-		if(tileEntity instanceof ReactorControllerEntity){
-			return new ControllerContainer(player.inventory, (ReactorControllerEntity) tileEntity);
 		}
 		//climate
 		if(tileEntity instanceof ClimateEntity){

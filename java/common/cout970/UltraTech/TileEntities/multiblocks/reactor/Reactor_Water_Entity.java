@@ -1,4 +1,4 @@
-package common.cout970.UltraTech.TileEntities.multiblocks;
+package common.cout970.UltraTech.TileEntities.multiblocks.reactor;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,6 +25,7 @@ public class Reactor_Water_Entity extends Reactor_Entity_Base implements IFluidH
 	}
 
 	public void updateEntity(){
+		super.updateEntity();
 		if(worldObj.isRemote)return;
 		if(tanks == null)updateTanks();
 		if(FluidRegistry.WATER != null)

@@ -1,7 +1,6 @@
 package common.cout970.UltraTech.blocks.reactor;
 
-import common.cout970.UltraTech.TileEntities.multiblocks.Reactor_Chamber_Entity;
-
+import common.cout970.UltraTech.TileEntities.multiblocks.reactor.Reactor_Chamber_Entity;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;

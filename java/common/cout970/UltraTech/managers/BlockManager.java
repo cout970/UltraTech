@@ -3,9 +3,10 @@ package common.cout970.UltraTech.managers;
 import java.util.ArrayList;
 import java.util.List;
 
-import ultratech.api.power.multipart.MultipartReference;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import ultratech.api.power.multipart.MultipartReference;
+
 import common.cout970.UltraTech.TileEntities.electric.ChargeStationEntity;
 import common.cout970.UltraTech.TileEntities.electric.ClimateEntity;
 import common.cout970.UltraTech.TileEntities.electric.FermenterEntity;
@@ -41,21 +42,17 @@ import common.cout970.UltraTech.TileEntities.fluid.TankEntity;
 import common.cout970.UltraTech.TileEntities.intermod.DynamoEntity;
 import common.cout970.UltraTech.TileEntities.intermod.EnergyTransformer;
 import common.cout970.UltraTech.TileEntities.intermod.EngineEntity;
-import common.cout970.UltraTech.TileEntities.multiblocks.Reactor_Chamber_Entity;
-import common.cout970.UltraTech.TileEntities.multiblocks.Reactor_Control_Entity;
-import common.cout970.UltraTech.TileEntities.multiblocks.Reactor_Core_Entity;
-import common.cout970.UltraTech.TileEntities.multiblocks.Reactor_IO_Entity;
-import common.cout970.UltraTech.TileEntities.multiblocks.Reactor_Tank_Entity;
-import common.cout970.UltraTech.TileEntities.multiblocks.Reactor_Wall_Entity;
-import common.cout970.UltraTech.TileEntities.multiblocks.Reactor_Water_Entity;
+import common.cout970.UltraTech.TileEntities.multiblocks.reactor.Reactor_Chamber_Entity;
+import common.cout970.UltraTech.TileEntities.multiblocks.reactor.Reactor_Control_Entity;
+import common.cout970.UltraTech.TileEntities.multiblocks.reactor.Reactor_Core_Entity;
+import common.cout970.UltraTech.TileEntities.multiblocks.reactor.Reactor_IO_Entity;
+import common.cout970.UltraTech.TileEntities.multiblocks.reactor.Reactor_Redstone_Entity;
+import common.cout970.UltraTech.TileEntities.multiblocks.reactor.Reactor_Tank_Entity;
+import common.cout970.UltraTech.TileEntities.multiblocks.reactor.Reactor_Wall_Entity;
+import common.cout970.UltraTech.TileEntities.multiblocks.reactor.Reactor_Water_Entity;
 import common.cout970.UltraTech.TileEntities.utility.CrafterEntity;
 import common.cout970.UltraTech.TileEntities.utility.HologramEmiterEntity;
 import common.cout970.UltraTech.TileEntities.utility.Painter3DEntity;
-import common.cout970.UltraTech.TileEntities.utility.ReactorControllerEntity;
-import common.cout970.UltraTech.TileEntities.utility.ReactorEntity;
-import common.cout970.UltraTech.TileEntities.utility.ReactorTankEntity;
-import common.cout970.UltraTech.TileEntities.utility.ReactorWallEntity;
-import common.cout970.UltraTech.TileEntities.utility.SteamExtractorEntity;
 import common.cout970.UltraTech.TileEntities.utility.hitBoxEntity;
 import common.cout970.UltraTech.blocknormal.AlienBlock;
 import common.cout970.UltraTech.blocknormal.ChasisBlock;
@@ -90,6 +87,7 @@ import common.cout970.UltraTech.blocks.reactor.Reactor_Chamber_Block;
 import common.cout970.UltraTech.blocks.reactor.Reactor_Control_Block;
 import common.cout970.UltraTech.blocks.reactor.Reactor_Core_Block;
 import common.cout970.UltraTech.blocks.reactor.Reactor_IO_Block;
+import common.cout970.UltraTech.blocks.reactor.Reactor_Redstone_Control_Block;
 import common.cout970.UltraTech.blocks.reactor.Reactor_Tank_Block;
 import common.cout970.UltraTech.blocks.reactor.Reactor_Wall_Block;
 import common.cout970.UltraTech.blocks.reactor.Reactor_Water_Block;
@@ -120,6 +118,7 @@ import common.cout970.UltraTech.multiblocks.refinery.RefineryBase;
 import common.cout970.UltraTech.multiblocks.refinery.RefineryCore;
 import common.cout970.UltraTech.multiblocks.refinery.TileGag;
 import common.cout970.UltraTech.util.power.Machine;
+
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class BlockManager {
@@ -139,6 +138,7 @@ public class BlockManager {
 	public static  Block Reactor_Tank;
 	public static  Block Reactor_Water;
 	public static  Block Reactor_Chamber;
+	public static  Block Reactor_Redstone;
 	
 	public static  Block SolarPanel;
 	public static  Block WindMill;
@@ -214,6 +214,7 @@ public class BlockManager {
 		Reactor_Tank = new Reactor_Tank_Block(m);
 		Reactor_Water = new Reactor_Water_Block(m);
 		Reactor_Chamber = new Reactor_Chamber_Block(m);
+		Reactor_Redstone = new Reactor_Redstone_Control_Block(m);
 		
 		Refinery = new RefineryBlock(m);
 		Misc = new MiscBlock(m);
@@ -321,6 +322,7 @@ public class BlockManager {
 		GameRegistry.registerBlock(Reactor_Tank, 	"Tank");
 		GameRegistry.registerBlock(Reactor_Water, 	"Water");
 		GameRegistry.registerBlock(Reactor_Chamber, "Chamber");
+		GameRegistry.registerBlock(Reactor_Redstone, "Redstone");
 
 		if(!MultipartReference.isMicroPartActived)GameRegistry.registerBlock(CableBlock, "UT_CableBlock");
 		//TileEntities
@@ -340,6 +342,7 @@ public class BlockManager {
 		GameRegistry.registerTileEntity(Reactor_Water_Entity.class, "Reactor_Water_UT");
 		GameRegistry.registerTileEntity(Reactor_Core_Entity.class, "Reactor_Core_UT");
 		GameRegistry.registerTileEntity(Reactor_Control_Entity.class, "Reactor_Control_UT");
+		GameRegistry.registerTileEntity(Reactor_Redstone_Entity.class, "Reactor_Redstone_UT");
 
 		GameRegistry.registerTileEntity(MolecularAssemblyEntity.class, "MolecularAssembly_UT");
 		GameRegistry.registerTileEntity(ChargeStationEntity.class, "ChargeStation_UT");

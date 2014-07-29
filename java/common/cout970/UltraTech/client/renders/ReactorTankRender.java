@@ -1,20 +1,19 @@
 package common.cout970.UltraTech.client.renders;
 
 
-import org.lwjgl.opengl.GL11;
-
-import ultratech.api.reactor.IReactorComponent;
-import common.cout970.UltraTech.TileEntities.multiblocks.Reactor_Core_Entity;
-import common.cout970.UltraTech.TileEntities.utility.ReactorTankEntity;
-import common.cout970.UltraTech.util.render.RenderUtil;
-import common.cout970.UltraTech.util.render.CubeRenderer_Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidRegistry;
+
+import org.lwjgl.opengl.GL11;
+
+import ultratech.api.reactor.IReactorComponent;
+
+import common.cout970.UltraTech.TileEntities.multiblocks.reactor.Reactor_Core_Entity;
+import common.cout970.UltraTech.util.render.CubeRenderer_Util;
 
 public class ReactorTankRender extends TileEntitySpecialRenderer{
 	

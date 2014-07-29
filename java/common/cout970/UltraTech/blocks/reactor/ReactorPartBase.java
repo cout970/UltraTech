@@ -9,7 +9,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-import common.cout970.UltraTech.TileEntities.multiblocks.ReactorMultiblockTweak;
+import common.cout970.UltraTech.TileEntities.multiblocks.reactor.ReactorMultiblockTweak;
 import common.cout970.UltraTech.client.textures.Block_Textures;
 import common.cout970.UltraTech.managers.UT_Tabs;
 import common.cout970.UltraTech.managers.UltraTech;

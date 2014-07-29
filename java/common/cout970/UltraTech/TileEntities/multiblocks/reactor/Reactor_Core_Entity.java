@@ -1,4 +1,4 @@
-package common.cout970.UltraTech.TileEntities.multiblocks;
+package common.cout970.UltraTech.TileEntities.multiblocks.reactor;
 
 import io.netty.util.NetUtil;
 
@@ -43,6 +43,7 @@ public class Reactor_Core_Entity extends Reactor_Entity_Base implements IReactor
 	public int production;
 	public ControlMode Mode = ControlMode.LOW;
 	public boolean redstoneSignal = false;
+	public boolean automation = false;
 	
 	public Reactor_Core_Entity(){
 		inv = new ItemStack[25];
@@ -59,8 +60,12 @@ public class Reactor_Core_Entity extends Reactor_Entity_Base implements IReactor
 		}
 		if(worldObj.isRemote)return;
 		boolean empty = true;
-		if(state){
-			if(getTank(1).getCapacity()-getTank(1).getFluidAmount() < 1000)state = false;
+		if(automation){
+			if(getTank(1).getCapacity()-getTank(1).getFluidAmount() < 100){
+				state = false;
+			}else{
+				state = true;
+			}
 		}
 		production = 0;
 		if(state && shouldWork()){
@@ -190,6 +195,7 @@ public class Reactor_Core_Entity extends Reactor_Entity_Base implements IReactor
 		c.sendProgressBarUpdate(cont, 6, production);
 		c.sendProgressBarUpdate(cont, 7, Mode.ordinal());
 		c.sendProgressBarUpdate(cont, 8, redstoneSignal ? 1 : 0);
+		c.sendProgressBarUpdate(cont, 9, automation ? 1 : 0);
 	}
 
 	public void getGUINetworkData(int id, int value) {
@@ -202,6 +208,7 @@ public class Reactor_Core_Entity extends Reactor_Entity_Base implements IReactor
 		if(id == 6)production = value;
 		if(id == 7)Mode = ControlMode.values()[value];
 		if(id == 8)redstoneSignal = value == 1;
+		if(id == 9)automation = value == 1;
 	}
 
 	@Override
@@ -315,6 +322,8 @@ public class Reactor_Core_Entity extends Reactor_Entity_Base implements IReactor
 		if(type == 1){
 			if(value == 0)state = true;//on
 			if(value == 1)state = false;//off
+		}else if(type == 2){
+			automation = !automation;
 		}else if(type == 3){
 			if(value == 0)Mode = ControlMode.HIGH;
 			if(value == 1)Mode = ControlMode.DISABLED;
@@ -327,8 +336,8 @@ public class Reactor_Core_Entity extends Reactor_Entity_Base implements IReactor
 		updateComponents();
 		boolean hasSignal = false;
 		for(IReactorComponent r : components){
-			if(r instanceof Reactor_IO_Entity){
-				Reactor_IO_Entity io = (Reactor_IO_Entity) r;
+			if(r instanceof Reactor_Redstone_Entity){
+				Reactor_Redstone_Entity io = (Reactor_Redstone_Entity) r;
 				if(worldObj.isBlockIndirectlyGettingPowered(io.xCoord, io.yCoord, io.zCoord)){
 					hasSignal = true;
 				}

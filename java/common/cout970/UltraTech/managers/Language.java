@@ -76,17 +76,34 @@ public class Language {
 		for(Deco_Block b : deco){
 			for(int meta=0;meta<14;meta++)Language.addName(new ItemStack(b,1,meta), "Deco Block "+colors[meta]);
 		}
-		Language.addName(new ItemStack(stoneblockblack,1,0), "Stone Block Black");
-		Language.addName(new ItemStack(stoneblockblack,1,1), "Stone Bricks Black");
-		Language.addName(new ItemStack(stoneblockblack,1,2), "Stone Block White");
-		Language.addName(new ItemStack(stoneblockblack,1,3), "Stone Bricks White");
+		Language.addName(new ItemStack(stoneblockblack,1,0), "Black Stone Block");
+		Language.addName(new ItemStack(stoneblockblack,1,1), "Black Stone Bricks");
+		Language.addName(new ItemStack(stoneblockblack,1,2), "Black Stone Creeper Bricks");
+		Language.addName(new ItemStack(stoneblockblack,1,3), "Black Stone Chiseled Bricks");
+		Language.addName(new ItemStack(stoneblockblack,1,4), "Black Stone Circle");
+		Language.addName(new ItemStack(stoneblockblack,1,5), "Black Stone Clay Bricks");
+		Language.addName(new ItemStack(stoneblockblack,1,6), "Black Stone Pillar");
+		Language.addName(new ItemStack(stoneblockblack,1,7), "Black Stone Sandstone");
+		Language.addName(new ItemStack(stoneblockblack,1,8), "Black Stone Smooth");
 		
-//		Language.addName(new ItemStack(Reactor,1,0), "Reactor Core");
-//		Language.addName(new ItemStack(Reactor,1,1), "Reactor Wall");
-//		Language.addName(new ItemStack(Reactor,1,2), "Reactor Tank");
-//		Language.addName(new ItemStack(Reactor,1,3), "Reactor Controller");
-//		Language.addName(new ItemStack(Reactor,1,4), "Reactor Water Provider");
-//		Language.addName(new ItemStack(Reactor,1,5), "Reactor Steam Extractor");
+		Language.addName(new ItemStack(stoneblockwhite,1,0), "White Stone Block");
+		Language.addName(new ItemStack(stoneblockwhite,1,1), "White Stone Bricks");
+		Language.addName(new ItemStack(stoneblockwhite,1,2), "White Stone Creeper Bricks");
+		Language.addName(new ItemStack(stoneblockwhite,1,3), "White Stone Chiseled Bricks");
+		Language.addName(new ItemStack(stoneblockwhite,1,4), "White Stone Circle");
+		Language.addName(new ItemStack(stoneblockwhite,1,5), "White Stone Clay Bricks");
+		Language.addName(new ItemStack(stoneblockwhite,1,6), "White Stone Pillar");
+		Language.addName(new ItemStack(stoneblockwhite,1,7), "White Stone Sandstone");
+		Language.addName(new ItemStack(stoneblockwhite,1,8), "White Stone Smooth");
+		
+		Language.addName(new ItemStack(Reactor_Core,1,0), "Reactor Core");
+		Language.addName(new ItemStack(Reactor_Wall,1,0), "Reactor Wall");
+		Language.addName(new ItemStack(Reactor_IO,1,0), "Reactor IO");
+		Language.addName(new ItemStack(Reactor_Chamber,1,0), "Reactor Chamber");
+		Language.addName(new ItemStack(Reactor_Control,1,0), "Reactor Controller");
+		Language.addName(new ItemStack(Reactor_Redstone,1,0), "Reactor Redstone Control");
+		Language.addName(new ItemStack(Reactor_Tank,1,0), "Reactor Tank");
+		Language.addName(new ItemStack(Reactor_Water,1,0), "Reactor Water Provider");
 
 		Language.addName(new ItemStack(Ores,1,0), "Radionite Ore");
 		Language.addName(new ItemStack(Ores,1,1), "Aluminum Ore");
