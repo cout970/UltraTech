@@ -46,6 +46,7 @@ public class RenderTesseract extends TileEntitySpecialRenderer{
 		GL11.glRotatef((float) t.rotation%360, 0, 1f, 0);
 		GL11.glTranslatef(0f,t.animation,0f);
 		model.renderBall(0.0625F);
+		GL11.glEnable(GL11.GL_LIGHTING);
 		GL11.glPopMatrix();
 	}
 }

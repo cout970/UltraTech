@@ -1,8 +1,7 @@
 package common.cout970.UltraTech.network;
 
+import net.minecraft.tileentity.TileEntity;
 import ultratech.api.power.multipart.MultipartReference;
-
-import com.pahimar.ee3.network.message.MessageTileEntityEE;
 
 import common.cout970.UltraTech.network.messages.MessageClimateStation;
 import common.cout970.UltraTech.network.messages.MessageCrafter;
@@ -12,12 +11,10 @@ import common.cout970.UltraTech.network.messages.MessagePainter;
 import common.cout970.UltraTech.network.messages.MessageReactorConfig;
 import common.cout970.UltraTech.network.messages.MessageTesseract;
 import common.cout970.UltraTech.network.messages.MessageUpdate;
-import common.cout970.UltraTech.util.LogHelper;
+
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.relauncher.Side;
-import net.minecraft.network.Packet;
-import net.minecraft.tileentity.TileEntity;
 
 public class Net_Utils {
 	

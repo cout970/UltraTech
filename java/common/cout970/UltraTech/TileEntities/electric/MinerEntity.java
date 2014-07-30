@@ -61,7 +61,6 @@ public class MinerEntity extends MachineWithInventory implements IInventory{
 	public void updateEntity(){
 		super.updateEntity();
 		if(this.worldObj.isRemote)return;
-		ex_Inv=null;
 		if(ex_Inv == null){
 			searchInventories();
 		}
@@ -125,7 +124,7 @@ public class MinerEntity extends MachineWithInventory implements IInventory{
 					if(!hasSilkUpgrade){
 						items = id.getDrops(worldObj, x, y, z, meta, fortuneUpgrades);
 					}else{
-						if(id.canSilkHarvest(worldObj, Minecraft.getMinecraft().thePlayer , x, y, z, meta)){
+						if(id.renderAsNormalBlock() && !id.hasTileEntity( meta)){//id.canSilkHarvest(worldObj, Minecraft.getMinecraft().thePlayer , x, y, z, meta)
 							items.add(new ItemStack(id,1,meta));//Block.blocksList[id].damageDropped(Block.blocksList[id].getDamageValue(worldObj, x, y, z))));
 						}else{
 							items = id.getDrops(worldObj, x, y, z, meta, fortuneUpgrades);

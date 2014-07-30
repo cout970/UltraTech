@@ -28,6 +28,7 @@ public class SolarPanel extends BlockConductor{
 		setResistance(20);
 		setBlockName("SolarPanel");
 		setBlockBounds(0f, 0f, 0f, 1f, 0.250f, 1f);
+		setLightOpacity(0);
 	}
 
 	@Override
@@ -61,10 +62,5 @@ public class SolarPanel extends BlockConductor{
 //	{
 //		return false;
 //	}
-//
-//	@SideOnly(Side.CLIENT)
-//	@Override
-//	public int getRenderType() {
-//		return ClientProxy.solarRenderPass;
-//	}
+
 }

@@ -9,7 +9,9 @@ import codechicken.multipart.TMultiPart;
 import common.cout970.UltraTech.client.renderItems.RenderPumpItem;
 import common.cout970.UltraTech.managers.BlockManager;
 import common.cout970.UltraTech.managers.Language;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
 
 public class MicroRegistry{
 
@@ -21,12 +23,15 @@ public class MicroRegistry{
 		MicroRegistry.PlaneCable = new ItemPlaneCableMultipart();
 		GameRegistry.registerItem(PlaneCable, "UT_Cable_Plane");
 		MultiPartRegistry.registerParts(new PlaneCable(), new String[]{MicroRegistry.PlaneCable.getUnlocalizedName()});
-		MinecraftForgeClient.registerItemRenderer(PlaneCable, new RenderCablePlaneItem());
 		
 		MicroRegistry.BigCable = new ItemBigCableMultipart();
 		GameRegistry.registerItem(BigCable, "UT_Cable_Big");
 		MultiPartRegistry.registerParts(new BigCable(), new String[]{MicroRegistry.BigCable.getUnlocalizedName()});
-		MinecraftForgeClient.registerItemRenderer(BigCable, new RenderCableBigItem());
+
+		if(FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT){
+			MinecraftForgeClient.registerItemRenderer(PlaneCable, new RenderCablePlaneItem());
+			MinecraftForgeClient.registerItemRenderer(BigCable, new RenderCableBigItem());
+		}
 		
 		Language.addName(PlaneCable, "Ribbon Cable");
 		Language.addName(BigCable, "Big Cable");
