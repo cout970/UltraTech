@@ -66,7 +66,7 @@ public class FluidManager{
 	private static void setupFluids(){
 		//liquid
 			if(!FluidRegistry.registerFluid(Juice)){Juice = FluidRegistry.getFluid("juice");}
-			if(!FluidRegistry.registerFluid(Ethanol)){Ethanol = FluidRegistry.getFluid("bioEthanol");}
+			if(!FluidRegistry.registerFluid(Ethanol)){Ethanol = FluidRegistry.getFluid("bioethanol");}
 			if(!FluidRegistry.registerFluid(Gasoline)){Gasoline = FluidRegistry.getFluid("gasoline");}
 			if(!FluidRegistry.registerFluid(Oil)){Oil = FluidRegistry.getFluid("oil");}
 			if(!FluidRegistry.registerFluid(Plastic)){Plastic = FluidRegistry.getFluid("plastic");}
@@ -90,32 +90,68 @@ public class FluidManager{
 			if(!FluidRegistry.registerFluid(Gas_Oil)){Gas_Oil = FluidRegistry.getFluid("gas_oil");}
 			
 			//blocks
-			SteamBlock = new BlockFluidFin(Steam).setBlockName("steam");
-			JuiceBlock = new BlockFluidBase(Juice).setBlockName("juice");
-			EthanolBlock = new BlockFluidBase(Ethanol).setBlockName("bioEthanol");
-			Gas_EthanolBlock = new BlockFluidFin(Gas_Ethanol).setBlockName("gas_ethanol");
-			Gas_OilBlock = new BlockFluidFin(Gas_Oil).setBlockName("gas_oil");
-			GasolineBlock = new BlockFluidBase(Gasoline).setBlockName("gasoline");
-			OilBlock = new BlockFluidBase(Oil).setBlockName("oil");
-			PlasticBlock = new BlockFluidBase(Plastic).setBlockName("plastic");
-			FuelBlock = new BlockFluidBase(Fuel).setBlockName("fuel");
-			AcidBlock = new BlockFluidBase(Acid).setBlockName("sulfuric_acid");
+			if(FluidRegistry.getFluid("steam").getBlock() == null){
+				SteamBlock = new BlockFluidFin(Steam).setBlockName("steam");
+				GameRegistry.registerBlock(SteamBlock, "ultratech_"+"steam");
+			}else{SteamBlock = FluidRegistry.getFluid("steam").getBlock();}
+			
+			if(FluidRegistry.getFluid("juice").getBlock() == null){
+				JuiceBlock = new BlockFluidBase(Juice).setBlockName("juice");
+				GameRegistry.registerBlock(JuiceBlock, "ultratech_"+"juice");
+			}
+			else{JuiceBlock = FluidRegistry.getFluid("juice").getBlock();}
+			
+			if(FluidRegistry.getFluid("bioethanol").getBlock() == null){
+				EthanolBlock = new BlockFluidBase(Ethanol).setBlockName("bioethanol");
+				GameRegistry.registerBlock(EthanolBlock, "ultratech_"+"ethanol");
+			}
+			else{EthanolBlock = FluidRegistry.getFluid("bioethanol").getBlock();}
+			
+			if(FluidRegistry.getFluid("gas_ethanol").getBlock() == null){
+				Gas_EthanolBlock = new BlockFluidFin(Gas_Ethanol).setBlockName("gas_ethanol");
+				GameRegistry.registerBlock(Gas_EthanolBlock, "ultratech_"+"gas_ethanol");
+			}
+			else{Gas_EthanolBlock = FluidRegistry.getFluid("gas_ethanol").getBlock();}
+			
+			if(FluidRegistry.getFluid("gas_oil").getBlock() == null){
+				Gas_OilBlock = new BlockFluidFin(Gas_Oil).setBlockName("gas_oil");
+				GameRegistry.registerBlock(Gas_OilBlock, "ultratech_"+"gas_oil");
+			}
+			else{Gas_OilBlock = FluidRegistry.getFluid("gas_oil").getBlock();}
+			
+			if(FluidRegistry.getFluid("gasoline").getBlock() == null){
+				GasolineBlock = new BlockFluidBase(Gasoline).setBlockName("gasoline");
+				GameRegistry.registerBlock(GasolineBlock, "ultratech_"+"gasoline");
+			}
+			else{GasolineBlock = FluidRegistry.getFluid("gasoline").getBlock();}
+			
+			if(FluidRegistry.getFluid("oil").getBlock() == null){
+				OilBlock = new BlockFluidBase(Oil).setBlockName("oil");
+				GameRegistry.registerBlock(OilBlock, "ultratech_"+"oil");
+			}
+			else{OilBlock = FluidRegistry.getFluid("oil").getBlock();}
+			
+			if(FluidRegistry.getFluid("plastic").getBlock() == null){
+				PlasticBlock = new BlockFluidBase(Plastic).setBlockName("plastic");
+				GameRegistry.registerBlock(PlasticBlock, "ultratech_"+"plastic");
+			}
+			else{PlasticBlock = FluidRegistry.getFluid("plastic").getBlock();}
+			
+			if(FluidRegistry.getFluid("fuel").getBlock() == null){
+				FuelBlock = new BlockFluidBase(Fuel).setBlockName("fuel");
+				GameRegistry.registerBlock(FuelBlock, "ultratech_"+"fuel");
+			}
+			else{FuelBlock = FluidRegistry.getFluid("fuel").getBlock();}
+			
+			if(FluidRegistry.getFluid("sulfuric_acid").getBlock() == null){
+				AcidBlock = new BlockFluidBase(Acid).setBlockName("sulfuric_acid");
+				GameRegistry.registerBlock(AcidBlock, "ultratech_"+"sulfuric_acid");
+			}
+			else{AcidBlock = FluidRegistry.getFluid("sulfuric_acid").getBlock();}
 	}
 
 	public static void RegisterFluids() {
 		
-		//blocks
-		GameRegistry.registerBlock(SteamBlock, "ultratech_"+"steam");
-		GameRegistry.registerBlock(JuiceBlock, "ultratech_"+"juice");
-		GameRegistry.registerBlock(Gas_EthanolBlock, "ultratech_"+"gas_ethanol");
-		GameRegistry.registerBlock(Gas_OilBlock, "ultratech_"+"gas_oil");
-		GameRegistry.registerBlock(EthanolBlock, "ultratech_"+"ethanol");
-		GameRegistry.registerBlock(GasolineBlock, "ultratech_"+"gasoline");
-		GameRegistry.registerBlock(OilBlock, "ultratech_"+"oil");
-		GameRegistry.registerBlock(PlasticBlock, "ultratech_"+"plastic");
-		GameRegistry.registerBlock(FuelBlock, "ultratech_"+"fuel");
-		GameRegistry.registerBlock(AcidBlock, "ultratech_"+"sulfuric_acid");
-
 		FluidContainerRegistry.registerFluidContainer(Acid, new ItemStack(ItemManager.ItemName.get("SulfuricAcid"),1), new ItemStack(Items.potionitem,1,0));
 		for(int x=0;x<fluids.length;x++){
 			FluidContainerRegistry.registerFluidContainer(fluids[x], new ItemStack(ItemManager.ItemName.get("Bottle"),1,x+1), new ItemStack(ItemManager.ItemName.get("Bottle"),1,0));
