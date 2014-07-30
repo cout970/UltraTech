@@ -60,43 +60,46 @@ public class FluidManager{
 		
 		setupFluids();
 		
-		SteamBlock = new BlockFluidFin(Steam).setBlockName("steam");
-		JuiceBlock = new BlockFluidBase(Juice).setBlockName("juice");
-		EthanolBlock = new BlockFluidBase(Ethanol).setBlockName("bioEthanol");
-		Gas_EthanolBlock = new BlockFluidFin(Gas_Ethanol).setBlockName("gas_ethanol");
-		Gas_OilBlock = new BlockFluidFin(Gas_Oil).setBlockName("gas_oil");
-		GasolineBlock = new BlockFluidBase(Gasoline).setBlockName("gasoline");
-		OilBlock = new BlockFluidBase(Oil).setBlockName("oil");
-		PlasticBlock = new BlockFluidBase(Plastic).setBlockName("plastic");
-		FuelBlock = new BlockFluidBase(Fuel).setBlockName("fuel");
-		AcidBlock = new BlockFluidBase(Acid).setBlockName("sulfuric_acid");
+		
 	}
 	
 	private static void setupFluids(){
 		//liquid
-			FluidRegistry.registerFluid(FluidManager.Juice);
-			FluidRegistry.registerFluid(FluidManager.Ethanol);
-			FluidRegistry.registerFluid(FluidManager.Gasoline);
-			FluidRegistry.registerFluid(FluidManager.Oil);
-			FluidRegistry.registerFluid(Plastic);
-			FluidRegistry.registerFluid(Fuel);
-			FluidRegistry.registerFluid(Acid);
+			if(!FluidRegistry.registerFluid(Juice)){Juice = FluidRegistry.getFluid("juice");}
+			if(!FluidRegistry.registerFluid(Ethanol)){Ethanol = FluidRegistry.getFluid("bioEthanol");}
+			if(!FluidRegistry.registerFluid(Gasoline)){Gasoline = FluidRegistry.getFluid("gasoline");}
+			if(!FluidRegistry.registerFluid(Oil)){Oil = FluidRegistry.getFluid("oil");}
+			if(!FluidRegistry.registerFluid(Plastic)){Plastic = FluidRegistry.getFluid("plastic");}
+			if(!FluidRegistry.registerFluid(Fuel)){Fuel = FluidRegistry.getFluid("fuel");}
+			if(!FluidRegistry.registerFluid(Acid)){Acid = FluidRegistry.getFluid("sulfuric_acid");}
 			
-		//gas
+			//gas
 			Steam.setDensity(-5000);
 			Steam.setViscosity(1000);
 			Steam.setTemperature(373);
 			Steam.setGaseous(true);
-			FluidRegistry.registerFluid(Steam);
+			if(!FluidRegistry.registerFluid(Steam)){Steam = FluidRegistry.getFluid("steam");}
 			Gas_Ethanol.setDensity(-5000);
 			Gas_Ethanol.setViscosity(1000);
 			Gas_Ethanol.setGaseous(true);
-			FluidRegistry.registerFluid(Gas_Ethanol);
+			if(!FluidRegistry.registerFluid(Gas_Ethanol)){Gas_Ethanol = FluidRegistry.getFluid("gas_ethanol");}
 			Gas_Oil.setDensity(-5000);
 			Gas_Oil.setTemperature(524);
 			Gas_Oil.setViscosity(1000);
 			Gas_Oil.setGaseous(true);
-			FluidRegistry.registerFluid(Gas_Oil);
+			if(!FluidRegistry.registerFluid(Gas_Oil)){Gas_Oil = FluidRegistry.getFluid("gas_oil");}
+			
+			//blocks
+			SteamBlock = new BlockFluidFin(Steam).setBlockName("steam");
+			JuiceBlock = new BlockFluidBase(Juice).setBlockName("juice");
+			EthanolBlock = new BlockFluidBase(Ethanol).setBlockName("bioEthanol");
+			Gas_EthanolBlock = new BlockFluidFin(Gas_Ethanol).setBlockName("gas_ethanol");
+			Gas_OilBlock = new BlockFluidFin(Gas_Oil).setBlockName("gas_oil");
+			GasolineBlock = new BlockFluidBase(Gasoline).setBlockName("gasoline");
+			OilBlock = new BlockFluidBase(Oil).setBlockName("oil");
+			PlasticBlock = new BlockFluidBase(Plastic).setBlockName("plastic");
+			FuelBlock = new BlockFluidBase(Fuel).setBlockName("fuel");
+			AcidBlock = new BlockFluidBase(Acid).setBlockName("sulfuric_acid");
 	}
 
 	public static void RegisterFluids() {

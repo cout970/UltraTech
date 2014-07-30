@@ -58,9 +58,4 @@ public class SolarPanel extends BlockConductor{
 		return false;
 	}
 
-//	public boolean renderAsNormalBlock()
-//	{
-//		return false;
-//	}
-
 }
