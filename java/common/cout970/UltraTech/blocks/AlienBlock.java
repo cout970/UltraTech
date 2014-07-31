@@ -1,31 +1,31 @@
-package common.cout970.UltraTech.blocknormal;
+package common.cout970.UltraTech.blocks;
 
 import java.util.Random;
 
 import common.cout970.UltraTech.managers.UT_Tabs;
+import common.cout970.UltraTech.proxy.ClientProxy;
 import common.cout970.UltraTech.util.render.RenderUtil;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.BlockBreakable;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 
-public class DiamondGlass extends BlockBreakable{
+public class AlienBlock extends Block{
 
-	public IIcon[] i;
-	
-	public DiamondGlass(Material par3Material,
-			boolean par4) {
-		super("DiamondGlass", par3Material, par4);
+	private IIcon[] i;
+
+	public AlienBlock(Material p_i45394_1_) {
+		super(p_i45394_1_);
 		setCreativeTab(UT_Tabs.DecoTab);
-		setHardness(0.2f);
-		setStepSound(soundTypeGlass);
+		setHardness(2f);
+		setStepSound(soundTypeMetal);
 		setResistance(5000);
-		setBlockName("DiamondGlass");
-	}
-	
+		setBlockName("AlienBlock");
+		}
+
 	@SideOnly(Side.CLIENT)
     public IIcon getIcon(IBlockAccess BA, int x, int y, int z, int side)
     {
@@ -34,10 +34,10 @@ public class DiamondGlass extends BlockBreakable{
 	
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister iconRegister){
-		String d = "dglass/base";
+		String d = "alien/base";
 		i = new IIcon[21];
 		i[0] = iconRegister.registerIcon("ultratech:"+d);
-		i[1] = iconRegister.registerIcon("ultratech:void");
+		i[1] = iconRegister.registerIcon("ultratech:"+d+"0");
 		i[2] = iconRegister.registerIcon("ultratech:"+d+2);
 		i[3] = iconRegister.registerIcon("ultratech:"+d+3);
 		i[4] = iconRegister.registerIcon("ultratech:"+d+4);
@@ -59,40 +59,4 @@ public class DiamondGlass extends BlockBreakable{
 		i[20] = iconRegister.registerIcon("ultratech:"+d+20);
 		this.blockIcon = i[0];
 	}
-	
-	/**
-     * Returns the quantity of items to drop on block destruction.
-     */
-    public int quantityDropped(Random par1Random)
-    {
-        return 1;
-    }
-
-    @SideOnly(Side.CLIENT)
-
-    /**
-     * Returns which pass should this block be rendered on. 0 for solids and 1 for alpha
-     */
-    public int getRenderBlockPass()
-    {
-        return 1;
-    }
-
-    /**
-     * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
-     * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
-     */
-    public boolean isOpaqueCube()
-    {
-        return false;
-    }
-
-    /**
-     * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
-     */
-    public boolean renderAsNormalBlock()
-    {
-        return false;
-    }
-
 }

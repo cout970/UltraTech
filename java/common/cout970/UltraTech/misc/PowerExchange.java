@@ -24,15 +24,15 @@ public class PowerExchange {
 		return h*50;
 	}
 
-	public int MeVtoRF(double cap) {
+	public static int MeVtoRF(double cap) {
 		return (int) (cap*MeVtoRF);
 	}
 
-	public double RFtoMev(int i) {
+	public static double RFtoMev(int i) {
 		return i/MeVtoRF;
 	}
 
-	public double FTtoMev(float progres) {
+	public static double FTtoMev(float progres) {
 		return progres/2;
 	}
 }

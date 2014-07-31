@@ -8,6 +8,7 @@ import common.cout970.UltraTech.TileEntities.electric.StorageTier1;
 import common.cout970.UltraTech.TileEntities.electric.StorageTier2;
 import common.cout970.UltraTech.TileEntities.electric.StorageTier3;
 import common.cout970.UltraTech.TileEntities.electric.WindMillEntity;
+import common.cout970.UltraTech.TileEntities.electric.tiers.SolarPanelEntity_T1;
 import common.cout970.UltraTech.TileEntities.electric.tiers.Tesseract_Entity;
 import common.cout970.UltraTech.TileEntities.fluid.BoilerEntity;
 import common.cout970.UltraTech.TileEntities.fluid.CopperPipeEntity;
@@ -38,6 +39,7 @@ import common.cout970.UltraTech.client.renders.RenderEngine;
 import common.cout970.UltraTech.client.renders.RenderHologram;
 import common.cout970.UltraTech.client.renders.RenderPipe;
 import common.cout970.UltraTech.client.renders.RenderPump;
+import common.cout970.UltraTech.client.renders.RenderSolarPanel;
 import common.cout970.UltraTech.client.renders.RenderTank;
 import common.cout970.UltraTech.client.renders.RenderTesseract;
 import common.cout970.UltraTech.client.renders.RenderTransformer;
@@ -70,6 +72,7 @@ public class ClientProxy extends CommonProxy{
 
 	@Override
 	public void registerRenders() {
+		ClientRegistry.bindTileEntitySpecialRenderer(SolarPanelEntity_T1.class, new RenderSolarPanel());
 		ClientRegistry.bindTileEntitySpecialRenderer(Reactor_Tank_Entity.class, new ReactorTankRender());
 		ClientRegistry.bindTileEntitySpecialRenderer(WindMillEntity.class, new RenderWindMill());
 		ClientRegistry.bindTileEntitySpecialRenderer(EngineEntity.class, new RenderEngine());
@@ -101,7 +104,8 @@ public class ClientProxy extends CommonProxy{
 		  MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockManager.Engine), new RenderEngineItem());
 		  //solar panel
 		  solarRenderPass = RenderingRegistry.getNextAvailableRenderId();
-		  MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockManager.SolarPanel), new RenderSolarItem());
+		  MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockManager.SolarPanel_T1), new RenderSolarItem());
+		  MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockManager.SolarPanel_T2), new RenderSolarItem());
 		  //windmill
 		  windmillRenderPass = RenderingRegistry.getNextAvailableRenderId();
 		  MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockManager.WindMill), new RenderWindMillItem());

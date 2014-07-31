@@ -1,4 +1,4 @@
-package common.cout970.UltraTech.blocknormal;
+package common.cout970.UltraTech.blocks;
 
 import java.util.Random;
 
@@ -12,24 +12,29 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 
-public class CovedGlass extends BlockBreakable{
+public class DiamondGlass extends BlockBreakable{
 
 	public IIcon[] i;
 	
-	public CovedGlass(Material par3Material,
+	public DiamondGlass(Material par3Material,
 			boolean par4) {
-		super("CovedGlass", par3Material, par4);
+		super("DiamondGlass", par3Material, par4);
 		setCreativeTab(UT_Tabs.DecoTab);
 		setHardness(0.2f);
 		setStepSound(soundTypeGlass);
-		setResistance(200);
-		setBlockName("CovedGlass");		
+		setResistance(5000);
+		setBlockName("DiamondGlass");
 	}
 	
 	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister iconRegister)
-	{
-		String d = "coved/base";
+    public IIcon getIcon(IBlockAccess BA, int x, int y, int z, int side)
+    {
+    	return i[RenderUtil.getConectedTexturesIcon(BA,x,y,z,side)];
+    }
+	
+	@SideOnly(Side.CLIENT)
+	public void registerBlockIcons(IIconRegister iconRegister){
+		String d = "dglass/base";
 		i = new IIcon[21];
 		i[0] = iconRegister.registerIcon("ultratech:"+d);
 		i[1] = iconRegister.registerIcon("ultratech:void");
@@ -70,7 +75,7 @@ public class CovedGlass extends BlockBreakable{
      */
     public int getRenderBlockPass()
     {
-        return 0;
+        return 1;
     }
 
     /**
@@ -90,9 +95,4 @@ public class CovedGlass extends BlockBreakable{
         return false;
     }
 
-    @SideOnly(Side.CLIENT)
-    public IIcon getIcon(IBlockAccess BA, int x, int y, int z, int side)
-    {
-    	return i[RenderUtil.getConectedTexturesIcon(BA,x,y,z,side)];
-    }
 }

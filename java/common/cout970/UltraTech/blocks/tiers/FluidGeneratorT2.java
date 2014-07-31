@@ -7,38 +7,42 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-import common.cout970.UltraTech.TileEntities.electric.tiers.CutterT1_Entity;
+
+import common.cout970.UltraTech.TileEntities.electric.tiers.FluidGeneratorT2_Entity;
+import common.cout970.UltraTech.client.textures.Block_Textures;
 import common.cout970.UltraTech.managers.UT_Tabs;
 import common.cout970.UltraTech.managers.UltraTech;
 import common.cout970.UltraTech.misc.IUpdatedEntity;
 import common.cout970.UltraTech.util.power.BlockConductor;
 
-public class CutterT1 extends BlockConductor{
+public class FluidGeneratorT2 extends BlockConductor{
 
-	public IIcon[] icons;
+public IIcon[] icons;
 	
-	public CutterT1(Material m) {
+	public FluidGeneratorT2(Material m) {
 		super(m);
 		setCreativeTab(UT_Tabs.techTab);
 		setHardness(2f);
 		setStepSound(soundTypeMetal);
-		setBlockName("CutterT1");
+		setBlockName("FluidGeneratorT2");
 	}
 
 	@Override
 	public TileEntity createNewTileEntity(World var1, int var2) {
-		return new CutterT1_Entity();
+		return new FluidGeneratorT2_Entity();
 	}
 	
 	public void registerBlockIcons(IIconRegister IR){
-		icons = new IIcon[2];
-		icons[0] = IR.registerIcon("ultratech:chasis");
-		icons[1] = IR.registerIcon("ultratech:machines/cutter_off");
+		icons = new IIcon[3];
+		icons[0] = IR.registerIcon(Block_Textures.CHASIS_T2);
+		icons[1] = IR.registerIcon("ultratech:machines/fluidgenerator_off_2");
+		icons[2] = IR.registerIcon("ultratech:machines/fluidgenerator_on_2");
 	}
 	
 	public IIcon getIcon(int side, int meta){
 		if(side == 0 || side == 1)return icons[0];
-		return icons[1];
+		if(meta == 0)return icons[1];
+		return icons[2];
 	}
 	
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer p, int a, float b, float c, float d){

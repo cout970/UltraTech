@@ -8,8 +8,8 @@ public enum MachineData {
 	 */
 	Generator_T1	( 3200d	,1	,1d			,1),//1coal => 800Mev
 	Generator_T2	( 3200d	,1	,1d			,1),
-	Solar_Panel		(   10d	,1	,0.2d		,1),//1Mev => 5 ticks
-//	Fluid_Generator (  800d	,2	,1d			,1),//Wip
+	Solar_Panel	(   10d	,1	,0.2d		,1),//1Mev => 5 ticks
+	Fluid_Generator (  800d	,2	,1d			,1),//Wip
 	Turbine			(  800d	,2	,0.1d		,1),//per mb
 	LavaGenerator   (  800d	,2	,10d	   		,1),//MeV per 1mb
 	WindMill		(  400d ,2	,1.5d		,1),//idk (I don't know)

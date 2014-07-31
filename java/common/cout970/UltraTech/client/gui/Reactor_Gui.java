@@ -100,6 +100,7 @@ public class Reactor_Gui extends MachineGuiBase{
 			this.mc.renderEngine.bindTexture(TextureMap.locationBlocksTexture);
 			IIcon i1 = FluidRegistry.WATER.getIcon();
 			int p = t.getFluidAmount()*60/t.getCapacity();
+			if(p>=60)p=60;
 			this.drawTexturedModelRectFromIcon(xStart+26, yStart+38+(60-p), i1, 20, p);
 			this.mc.renderEngine.bindTexture(new ResourceLocation("ultratech:textures/gui/reactor.png"));
 			this.drawTexturedModalRect(xStart+26, yStart+37, 182, 0, 20, 60);
@@ -111,6 +112,7 @@ public class Reactor_Gui extends MachineGuiBase{
 			this.mc.renderEngine.bindTexture(TextureMap.locationBlocksTexture);
 			IIcon i1 = FluidRegistry.getFluid("steam").getIcon();
 			int p = t.getFluidAmount()*60/t.getCapacity();
+			if(p>=60)p=60;
 			this.drawTexturedModelRectFromIcon(xStart+52, yStart+38+(60-p), i1, 20, p);
 			this.mc.renderEngine.bindTexture(new ResourceLocation("ultratech:textures/gui/reactor.png"));
 			this.drawTexturedModalRect(xStart+52, yStart+37, 182, 0, 20, 60);

@@ -67,9 +67,9 @@ public class Block_Textures {
 	public static final String REFINERY_OUTPUT_2 			= MOD_FOLDER+"refinery/out2";
 	public static final String REFINERY_OUTPUT_3 			= MOD_FOLDER+"refinery/out3";
 	public static final String PARTICLE_COPPER 				= MOD_FOLDER+"chasis0";
-	public static final String SOLAR_PANEL_UP 				= MOD_FOLDER+"machines/solar_up";
-	public static final String SOLAR_PANEL_DOWN 			= MOD_FOLDER+"machines/solar_down";
-	public static final String SOLAR_PANEL_SIDE 			= MOD_FOLDER+"machines/solar_side";
 	public static final String REACTOR_PREFIX 				= MOD_FOLDER+"reactor/";
+	//models
+	public static final String SOLAR_PANEL_UP_T1 			= MOD_FOLDER+"machines/solar_up";
+
 }
 

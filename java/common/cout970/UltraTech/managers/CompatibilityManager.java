@@ -1,6 +1,10 @@
 package common.cout970.UltraTech.managers;
 
 
+import common.cout970.UltraTech.util.LogHelper;
+
+import buildcraft.api.fuels.IronEngineFuel;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
@@ -9,8 +13,19 @@ public class CompatibilityManager {
 		
 	public static void initCompatibilitys(){
 		OreDictionary();
+		BuildcraftFuel();
 	}
 	
+	private static void BuildcraftFuel() {
+		IronEngineFuel.addFuel("gasoline", 10, 25000);
+		IronEngineFuel.addFuel("bioethanol", 4, 15000);
+		if(!Loader.isModLoaded("BuildCraft")){
+			LogHelper.log("Buildcraft not loaded");
+			IronEngineFuel.addFuel("oil", 3, 5000);
+			IronEngineFuel.addFuel("fuel", 6, 25000);
+		}
+	}
+
 	public static void OreDictionary(){
 		//ores
 		OreDictionary.registerOre("oreRadionite", new ItemStack(BlockManager.Ores,1,0));

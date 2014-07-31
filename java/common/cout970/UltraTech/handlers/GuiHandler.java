@@ -4,11 +4,9 @@ package common.cout970.UltraTech.handlers;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-
 import common.cout970.UltraTech.TileEntities.electric.ChargeStationEntity;
 import common.cout970.UltraTech.TileEntities.electric.ClimateEntity;
 import common.cout970.UltraTech.TileEntities.electric.FermenterEntity;
-import common.cout970.UltraTech.TileEntities.electric.FluidGeneratorEntity;
 import common.cout970.UltraTech.TileEntities.electric.MinerEntity;
 import common.cout970.UltraTech.TileEntities.electric.MolecularAssemblyEntity;
 import common.cout970.UltraTech.TileEntities.electric.StorageTier1;
@@ -18,6 +16,7 @@ import common.cout970.UltraTech.TileEntities.electric.tiers.ChemicalPlant_Entity
 import common.cout970.UltraTech.TileEntities.electric.tiers.ChemicalVaporDesintegrationT1_Entity;
 import common.cout970.UltraTech.TileEntities.electric.tiers.CoalGeneratorEntityT1_Entity;
 import common.cout970.UltraTech.TileEntities.electric.tiers.CutterT1_Entity;
+import common.cout970.UltraTech.TileEntities.electric.tiers.FluidGeneratorT1_Entity;
 import common.cout970.UltraTech.TileEntities.electric.tiers.FurnaceT1_Entity;
 import common.cout970.UltraTech.TileEntities.electric.tiers.Heater_Entity;
 import common.cout970.UltraTech.TileEntities.electric.tiers.LaminatorT1_Entity;
@@ -82,7 +81,6 @@ import common.cout970.UltraTech.containers.TesseractContainer;
 import common.cout970.UltraTech.multiblocks.refinery.RefineryBase;
 import common.cout970.UltraTech.util.power.Machine;
 import common.cout970.UltraTech.wiki.TabletGui;
-
 import cpw.mods.fml.common.network.IGuiHandler;
 
 public class GuiHandler implements IGuiHandler{
@@ -167,7 +165,7 @@ public class GuiHandler implements IGuiHandler{
 			return new ClimateStationContainer(player.inventory, (ClimateEntity) tileEntity);
 		}
 		//FluidGenerator
-		if(tileEntity instanceof FluidGeneratorEntity){
+		if(tileEntity instanceof FluidGeneratorT1_Entity){
 			return new FluidGenContainer(player.inventory, tileEntity);
 		}
 		//Refinery
@@ -277,8 +275,8 @@ public class GuiHandler implements IGuiHandler{
 			return new ClimateStation_Gui(new ClimateStationContainer(player.inventory, (ClimateEntity) tileEntity), (ClimateEntity) tileEntity);
 		}
 		//FluidGenerator
-		if(tileEntity instanceof FluidGeneratorEntity){
-			return new FluidGenGui(new FluidGenContainer(player.inventory, tileEntity), (FluidGeneratorEntity) tileEntity);
+		if(tileEntity instanceof FluidGeneratorT1_Entity){
+			return new FluidGenGui(new FluidGenContainer(player.inventory, tileEntity), (FluidGeneratorT1_Entity) tileEntity);
 		}
 		//Refinery
 		if(tileEntity instanceof RefineryBase){

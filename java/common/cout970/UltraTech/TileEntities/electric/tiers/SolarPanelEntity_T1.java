@@ -1,4 +1,4 @@
-package common.cout970.UltraTech.TileEntities.electric;
+package common.cout970.UltraTech.TileEntities.electric.tiers;
 
 import net.minecraftforge.common.util.ForgeDirection;
 import ultratech.api.power.CableType;
@@ -8,9 +8,9 @@ import common.cout970.UltraTech.managers.MachineData;
 import common.cout970.UltraTech.util.power.Machine;
 
 
-public class SolarPanelEntity extends Machine implements IPowerConductor{
+public class SolarPanelEntity_T1 extends Machine implements IPowerConductor{
 
-	public SolarPanelEntity(){
+	public SolarPanelEntity_T1(){
 		super(MachineData.Solar_Panel,true);
 	}
 	

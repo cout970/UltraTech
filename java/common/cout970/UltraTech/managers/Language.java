@@ -21,7 +21,7 @@ import org.apache.commons.io.output.WriterOutputStream;
 
 import ultratech.api.power.multipart.MultipartReference;
 import common.cout970.UltraTech.TileEntities.electric.tiers.Tesseract_Entity;
-import common.cout970.UltraTech.blocknormal.Deco_Block;
+import common.cout970.UltraTech.blocks.Deco_Block;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -159,7 +159,7 @@ public class Language {
 		
 		Language.addName(CopperPipe, "Copper Pipe");
 		
-		Language.addName(SolarPanel, "Solar Panel");
+		Language.addName(SolarPanel_T1, "Solar Panel");
 		Language.addName(WindMill, "Wind Mill");
 		Language.addName(Engine, "Engine");
 

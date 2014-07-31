@@ -121,6 +121,13 @@ public class Machine extends SyncTile implements IPowerConductor,IPower,IEnergyH
 		return cond.getNetwork();
 	}
 
+	//util
+	
+	public boolean spaceForCharge(double charge){
+		if(getCapacity()-getCharge() >= charge)return true;
+		return false;
+	}
+	
 	//redstone flux
 
 	@Override

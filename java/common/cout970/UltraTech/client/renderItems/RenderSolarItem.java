@@ -7,6 +7,7 @@ import net.minecraftforge.client.IItemRenderer;
 import org.lwjgl.opengl.GL11;
 
 import common.cout970.UltraTech.client.models.ModelSolarPanel;
+import common.cout970.UltraTech.managers.BlockManager;
 import cpw.mods.fml.client.FMLClientHandler;
 
 public class RenderSolarItem implements IItemRenderer{
@@ -31,6 +32,11 @@ public class RenderSolarItem implements IItemRenderer{
 	
 	@Override
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
+		if(item.isItemEqual(new ItemStack(BlockManager.SolarPanel_T2))){
+			FMLClientHandler.instance().getClient().renderEngine.bindTexture(new ResourceLocation("ultratech:textures/misc/solarpanel2.png"));
+		}else{
+			FMLClientHandler.instance().getClient().renderEngine.bindTexture(texture);
+		}
 		switch (type) {
             case ENTITY: {
             	render(0.0F, -0.5F, 0.0F, 1.0F,false);
@@ -66,7 +72,6 @@ public class RenderSolarItem implements IItemRenderer{
         }
         GL11.glRotatef(180F, 0, 0, 1);
         GL11.glTranslatef(0, -1.5f, 0);
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(texture);
         model.render(null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
         GL11.glEnable(GL11.GL_LIGHTING);
         GL11.glPopMatrix();

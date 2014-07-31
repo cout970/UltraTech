@@ -9,7 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
-import common.cout970.UltraTech.TileEntities.electric.FluidGeneratorEntity;
+import common.cout970.UltraTech.TileEntities.electric.tiers.FluidGeneratorT1_Entity;
 import common.cout970.UltraTech.microparts.MicroRegistry;
 import common.cout970.UltraTech.recipes.Boiler_Recipes;
 import common.cout970.UltraTech.recipes.CVD_Recipe;
@@ -62,7 +62,8 @@ public class CraftManager {
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Tier3,1,4),new Object[]{"aga","gmg","aga",'m',new ItemStack(Chasis,1,2),'g',Items.ender_pearl,'a',ItemName.get("AdvCircuit")}));							//tesseract
 
 		//models
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(SolarPanel,1), new Object[]{"hhh","aaa","bbb",'h',"plateSilicon",'a',"plateSilver",'b', "plateGrafeno"}));													//solarPanel
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(SolarPanel_T1,1), new Object[]{"hhh","aaa","bbb",'h',"plateSilicon",'a',"plateSilver",'b', "plateGrafeno"}));												//solarPanel
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(SolarPanel_T2,1), new Object[]{"hhh","hah","hhh",'h',SolarPanel_T1,'a',"plateSilver"}));																	//solarPanel 2
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(WindMill,1),new Object[]{"dff","poo","coo",'d',ItemName.get("Dynamo"),'f',ItemName.get("Fan"),'p',"plateGrafeno",'c',new ItemStack(Chasis,1,1)}));			//windmil
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Engine,1),new Object[]{"sss","xlx","gpg",'p',Blocks.piston,'g',ItemName.get("AluminumGear"),'l',"blockGlass",'s',"plateSilver"}));							//engine
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(CopperPipe,8),new Object[]{"oao","aga","oao",'a',"plateCopper",'g',Blocks.glass_pane}));																	//copper pipe
@@ -202,9 +203,9 @@ public class CraftManager {
 		Cooling_Recipes.recipes.add(new Cooling_Recipes(FluidRegistry.getFluidStack("gas_oil", 100), FluidRegistry.getFluidStack("plastic", 40), FluidRegistry.getFluidStack("fuel", 60), FluidRegistry.getFluidStack("gasoline", 10)));
 		Cooling_Recipes.recipes.add(new Cooling_Recipes(FluidRegistry.getFluidStack("gas_ethanol", 100), FluidRegistry.getFluidStack("bioethanol", 80), FluidRegistry.getFluidStack("water", 9), FluidRegistry.getFluidStack("water", 1)));
 
-		FluidGeneratorEntity.fuels.put("fuel", 2);
-		FluidGeneratorEntity.fuels.put("gasoline", 3);
-		FluidGeneratorEntity.fuels.put("bioethanol", 1);
+//		FluidGeneratorEntity.fuels.put("fuel", 2);
+//		FluidGeneratorEntity.fuels.put("gasoline", 3);
+//		FluidGeneratorEntity.fuels.put("bioethanol", 1);
 		
 		Chemical_Recipe.INSTANCE.addRecipe(new Chemical_Recipe(FluidRegistry.getFluidStack("plastic", 1000), new ItemStack(ItemName.get("Sulfur")), new ItemStack(ItemName.get("Rubber")), new ItemStack(ItemName.get("Plastic"))));
 	}
@@ -305,7 +306,7 @@ public class CraftManager {
 		//assembly recipes
 		//		Assembly_Recipes.addRecipe(new Assembly_Recipes(new ItemStack(ItemName.get("Motor"),1), new Object[]{"rc ","iii","rc ",'c',ItemName.get("Coil"),'r', new ItemStack(ItemManager.ItemName.get("Plate"),1,4),'i',new ItemStack(ItemName.get("Plate"),1,6)}));
 		//		Assembly_Recipes.addRecipe(new Assembly_Recipes(new ItemStack(ItemName.get("Battery"),1), new Object[]{"hah","hah","hah",'h',new ItemStack(ItemName.get("Plate"),1,0),'a',new ItemStack(ItemName.get("Plate"),1,5)}));
-		//		Assembly_Recipes.addRecipe(new Assembly_Recipes(new ItemStack(SolarPanel,1), new Object[]{"hhh","aaa","bbb",'h',new ItemStack(ItemName.get("Plate"),1,10),'a',new ItemStack(ItemName.get("Plate"),1,5),'b', new ItemStack(ItemManager.ItemName.get("Plate"),1,4)}));
+		//		Assembly_Recipes.addRecipe(new Assembly_Recipes(new ItemStack(SolarPanel_T1,1), new Object[]{"hhh","aaa","bbb",'h',new ItemStack(ItemName.get("Plate"),1,10),'a',new ItemStack(ItemName.get("Plate"),1,5),'b', new ItemStack(ItemManager.ItemName.get("Plate"),1,4)}));
 		//		Assembly_Recipes.addRecipe(new Assembly_Recipes(new ItemStack(ItemName.get("AdvCircuit"),1), new Object[]{"hph","hah","hph",'h',new ItemStack(MicroRegistry.PlaneCable,1),'a',new ItemStack(ItemName.get("Plate"),1,10),'p',new ItemStack(ItemManager.ItemName.get("Plate"),1,8)}));
 		//		Assembly_Recipes.addRecipe(new Assembly_Recipes(new ItemStack(ItemName.get("Fan"),1), new Object[]{"opo","ppp","opo",'p',new ItemStack(ItemManager.ItemName.get("Plate"),1,9)}));
 		//		Assembly_Recipes.addRecipe(new Assembly_Recipes(new ItemStack(ItemName.get("Coil"),2), new Object[]{"rrr","ppp","rrr",'p',new ItemStack(ItemManager.ItemName.get("Plate"),1,6),'r',new ItemStack(ItemManager.ItemName.get("Plate"),1,11)}));
