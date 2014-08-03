@@ -45,8 +45,7 @@ public class EngineGui extends GuiContainer{
 		this.drawCenteredString(fontRendererObj, "Energy "+(int)entity.getCharge(), xStart+85, yStart+25, 16777215);
 		this.drawCenteredString(fontRendererObj, "BC MJ "+(int)entity.power.getEnergyStored(), xStart+87, yStart+37, 16777215);
 
-		
-		this.drawCenteredString(fontRendererObj, "FT Engine", xStart+85, yStart+6, UT_Utils.RGBtoInt(255, 255, 255));
+		this.drawCenteredString(fontRendererObj, "Engine", xStart+85, yStart+6, UT_Utils.RGBtoInt(255, 255, 255));
 
 	}
 

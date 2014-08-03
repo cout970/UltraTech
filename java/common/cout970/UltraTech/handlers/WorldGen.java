@@ -4,6 +4,7 @@ import java.util.Random;
 
 import common.cout970.UltraTech.managers.BlockManager;
 import common.cout970.UltraTech.managers.OreGeneration;
+import common.cout970.UltraTech.util.LogHelper;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
@@ -27,7 +28,12 @@ public class WorldGen implements IWorldGenerator{
 		    break;
 		default:{
 			generateSurface(world, random, chunkX * 16, chunkZ * 16);
-			if(random.nextInt(1500) == 0)generateOil(random, chunkX * 16, chunkZ * 16, world);
+			int prob = 1200;
+			if(world.getBiomeGenForCoords(chunkX * 16, chunkZ * 16).biomeName.equalsIgnoreCase("Desert"))prob = 150;
+			else if(world.getBiomeGenForCoords(chunkX * 16, chunkZ * 16).biomeName.equalsIgnoreCase("Deep Ocean"))prob = 150;
+			if(random.nextInt(1200) == 0){
+				generateOil(random, chunkX * 16, chunkZ * 16, world);
+			}
 		}
 		}
 	}
@@ -114,6 +120,10 @@ public class WorldGen implements IWorldGenerator{
 						w.setBlock(x+s, j+l, y+d,Blocks.stone);
 					}
 				}
+		}
+		int max = w.getHeightValue(x, y)+10;
+		for(int h=j;h<max;h++){
+			w.setBlock(x, h, y,FluidRegistry.getFluid("oil").getBlock());
 		}
 	}
 }

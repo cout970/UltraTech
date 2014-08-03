@@ -13,7 +13,7 @@ import common.cout970.UltraTech.items.AutoEjectUpgrade;
 import common.cout970.UltraTech.items.Bottle;
 import common.cout970.UltraTech.items.FortuneUpgrade;
 import common.cout970.UltraTech.items.Battery;
-import common.cout970.UltraTech.items.LasserSword;
+import common.cout970.UltraTech.items.LaserSword;
 import common.cout970.UltraTech.items.Linker;
 import common.cout970.UltraTech.items.MetalPlate;
 import common.cout970.UltraTech.items.MiningUpgrade;
@@ -77,7 +77,7 @@ public class ItemManager {
 		Reg("Linker", "Linker", false);
 		Reg("RadioniteCell", "Radionite Cell", false);
 		Reg("Battery", "Battery", false);
-		Reg("LasserSword", "Lasser Sword", false);
+		Reg("LaserSword", "Lasser Sword", false);
 		Reg("ProcesedFood", "Procesed Food", false);
 		Reg("Tablet", "Tablet", false);
 		
@@ -161,8 +161,8 @@ public class ItemManager {
 			return new RadioniteCell(i.name);
 		if(a=="Battery")
 			return new Battery(i.name);
-		if(a=="LasserSword")
-			return new LasserSword(i.name);
+		if(a=="LaserSword")
+			return new LaserSword(i.name);
 		if(a=="FortuneUpgrade")
 			return new FortuneUpgrade(i.name);
 		if(a=="ProcesedFood")

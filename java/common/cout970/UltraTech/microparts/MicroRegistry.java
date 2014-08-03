@@ -32,9 +32,6 @@ public class MicroRegistry{
 			MinecraftForgeClient.registerItemRenderer(PlaneCable, new RenderCablePlaneItem());
 			MinecraftForgeClient.registerItemRenderer(BigCable, new RenderCableBigItem());
 		}
-		
-		Language.addName(PlaneCable, "Ribbon Cable");
-		Language.addName(BigCable, "Big Cable");
 	}
 	
 	

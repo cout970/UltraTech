@@ -4,6 +4,7 @@ package common.cout970.UltraTech.handlers;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+
 import common.cout970.UltraTech.TileEntities.electric.ChargeStationEntity;
 import common.cout970.UltraTech.TileEntities.electric.ClimateEntity;
 import common.cout970.UltraTech.TileEntities.electric.FermenterEntity;
@@ -12,7 +13,9 @@ import common.cout970.UltraTech.TileEntities.electric.MolecularAssemblyEntity;
 import common.cout970.UltraTech.TileEntities.electric.StorageTier1;
 import common.cout970.UltraTech.TileEntities.electric.StorageTier2;
 import common.cout970.UltraTech.TileEntities.electric.StorageTier3;
-import common.cout970.UltraTech.TileEntities.electric.tiers.ChemicalPlant_Entity;
+import common.cout970.UltraTech.TileEntities.electric.StorageTier4;
+import common.cout970.UltraTech.TileEntities.electric.tiers.ChemicalPlantT1_Entity;
+import common.cout970.UltraTech.TileEntities.electric.tiers.ChemicalPlantT2_Entity;
 import common.cout970.UltraTech.TileEntities.electric.tiers.ChemicalVaporDesintegrationT1_Entity;
 import common.cout970.UltraTech.TileEntities.electric.tiers.CoalGeneratorEntityT1_Entity;
 import common.cout970.UltraTech.TileEntities.electric.tiers.CutterT1_Entity;
@@ -81,6 +84,7 @@ import common.cout970.UltraTech.containers.TesseractContainer;
 import common.cout970.UltraTech.multiblocks.refinery.RefineryBase;
 import common.cout970.UltraTech.util.power.Machine;
 import common.cout970.UltraTech.wiki.TabletGui;
+
 import cpw.mods.fml.common.network.IGuiHandler;
 
 public class GuiHandler implements IGuiHandler{
@@ -101,7 +105,7 @@ public class GuiHandler implements IGuiHandler{
 			return new FurnaceContainer(player.inventory, (FurnaceT1_Entity) tileEntity);
 		}
 		//storage
-		if(tileEntity instanceof StorageTier1 || tileEntity instanceof StorageTier2 || tileEntity instanceof StorageTier3){
+		if(tileEntity instanceof StorageTier1 || tileEntity instanceof StorageTier2 || tileEntity instanceof StorageTier3 || tileEntity instanceof StorageTier4){
 			return new StorageContainer(player.inventory, (Machine) tileEntity);
 		}
 		//cuter
@@ -181,8 +185,8 @@ public class GuiHandler implements IGuiHandler{
 			return new Heater_Container(player.inventory, (Heater_Entity) tileEntity);
 		}
 		//Chemical
-		if(tileEntity instanceof ChemicalPlant_Entity){
-			return new Chemical_Container(player.inventory, (ChemicalPlant_Entity) tileEntity);
+		if(tileEntity instanceof ChemicalPlantT1_Entity){
+			return new Chemical_Container(player.inventory, (ChemicalPlantT1_Entity) tileEntity);
 		}
 		//Dynamo
 		if(tileEntity instanceof DynamoEntity){
@@ -207,17 +211,13 @@ public class GuiHandler implements IGuiHandler{
 			return new Furnace_Gui(new FurnaceContainer(player.inventory, (FurnaceT1_Entity) tileEntity),player.inventory, (FurnaceT1_Entity) tileEntity);
 		}
 		//storage
-		if(tileEntity instanceof StorageTier1 || tileEntity instanceof StorageTier2 || tileEntity instanceof StorageTier3){
+		if(tileEntity instanceof StorageTier1 || tileEntity instanceof StorageTier2 || tileEntity instanceof StorageTier3 || tileEntity instanceof StorageTier4){
 			return new Storage_Gui(new StorageContainer(player.inventory, (Machine) tileEntity), player.inventory, (Machine) tileEntity);
 		}
 		//cuter
 		if(tileEntity instanceof CutterT1_Entity){
 			return new Cutter_Gui(new CutterContainer(player.inventory, (CutterT1_Entity) tileEntity),player.inventory, (CutterT1_Entity) tileEntity);
 		}
-		//presurechamber
-//		if(tileEntity instanceof PresuricerEntity){
-//			return new PresuricerGui(new PresuricerContaner(player.inventory, (PresuricerEntity) tileEntity),player.inventory, (PresuricerEntity) tileEntity);
-//		}
 		//purifier
 		if(tileEntity instanceof PurifierT1_Entity){
 			return new Purifier_Gui(new PurifierContainer(player.inventory, (PurifierT1_Entity) tileEntity),player.inventory, (PurifierT1_Entity) tileEntity);
@@ -291,8 +291,8 @@ public class GuiHandler implements IGuiHandler{
 			return new Heater_Gui(new Heater_Container(player.inventory, (Heater_Entity) tileEntity),(Heater_Entity) tileEntity);
 		}
 		//Chemical
-		if(tileEntity instanceof ChemicalPlant_Entity){
-			return new Chemical_Gui(new Chemical_Container(player.inventory, (ChemicalPlant_Entity) tileEntity),(ChemicalPlant_Entity) tileEntity);
+		if(tileEntity instanceof ChemicalPlantT1_Entity){
+			return new Chemical_Gui(new Chemical_Container(player.inventory, (ChemicalPlantT1_Entity) tileEntity),(ChemicalPlantT1_Entity) tileEntity);
 		}
 		//Dynamo
 		if(tileEntity instanceof DynamoEntity){

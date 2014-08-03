@@ -21,7 +21,8 @@ import org.apache.commons.io.output.WriterOutputStream;
 
 import ultratech.api.power.multipart.MultipartReference;
 import common.cout970.UltraTech.TileEntities.electric.tiers.Tesseract_Entity;
-import common.cout970.UltraTech.blocks.Deco_Block;
+import common.cout970.UltraTech.blocks.decoration.Deco_Block;
+import common.cout970.UltraTech.util.LogHelper;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -43,8 +44,6 @@ public class Language {
 			Language.put(((Item) obj).getUnlocalizedName(), name);
 		}else if(obj instanceof Fluid){
 			Language.put(((Fluid) obj).getUnlocalizedName(), name);
-		}else{
-			System.out.println("Exception: configIO not found in "+obj+" with name "+name);
 		}
 	}
 	
@@ -143,6 +142,7 @@ public class Language {
 		Language.addName(new ItemStack(Storage,1,0), "Battery Tier1");
 		Language.addName(new ItemStack(Storage,1,1), "Battery Tier2");
 		Language.addName(new ItemStack(Storage,1,2), "Battery Tier3");
+		Language.addName(new ItemStack(Storage,1,3), "Battery Tier4");
 		
 		Language.addName(new ItemStack(Refinery,1,0), "Refinery Base");
 		Language.addName(new ItemStack(Refinery,1,1), "Refinery Structure Block");
@@ -159,7 +159,8 @@ public class Language {
 		
 		Language.addName(CopperPipe, "Copper Pipe");
 		
-		Language.addName(SolarPanel_T1, "Solar Panel");
+		Language.addName(SolarPanel_T1, "Solar Panel T1");
+		Language.addName(SolarPanel_T2, "Solar Panel T2");
 		Language.addName(WindMill, "Wind Mill");
 		Language.addName(Engine, "Engine");
 
@@ -167,15 +168,22 @@ public class Language {
 		Language.addName(Tank, "Tank");
 		Language.addName(Turbine, "Steam Turbine");
 		Language.addName(Pump, "Pump");
-		Language.addName(Dynamo, "FT Dynamo");
+		Language.addName(Dynamo, "Electric Dynamo");
 		Language.addName(MultiTank, "MultiTank WIP");
-		Language.addName(LavaGenerator, "Lava Generator");
-		Language.addName(ChemicalPlant, "Chemical Plant");
+		Language.addName(ChemicalPlant_T1, "Chemical Plant");
 		Language.addName(Crafter, "Crafter");
 		Language.addName(Heater, "Heater");
 		Language.addName(AlienBlock, "Alien Block");
+		Language.addName(ChemicalPlant_T1, "Chemical Plant T1");
+		Language.addName(ChemicalPlant_T2, "Chemical Plant T2");
+		Language.addName(LavaGenerator_T1, "Lava Generator T1");
+		Language.addName(LavaGenerator_T2, "Lava Generator T2");
+		Language.addName(FluidGenerator_T1, "Fluid Generator T1");
+		Language.addName(FluidGenerator_T2, "Fluid Generator T2");
 		
-		if(!MultipartReference.isMicroPartActived)Language.addName(CableBlock, "Cable");
+		Language.put("tile.CableBlock", "Cable");
+		Language.put("item.UT_Plane_cable", "Ribbon Cable");
+		Language.put("item.UT_Big_cable", "Big Cable");
 	}
 
 }

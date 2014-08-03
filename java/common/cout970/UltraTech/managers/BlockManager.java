@@ -6,10 +6,10 @@ import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import ultratech.api.power.multipart.MultipartReference;
+
 import common.cout970.UltraTech.TileEntities.electric.ChargeStationEntity;
 import common.cout970.UltraTech.TileEntities.electric.ClimateEntity;
 import common.cout970.UltraTech.TileEntities.electric.FermenterEntity;
-import common.cout970.UltraTech.TileEntities.electric.LavaGeneratorEntity;
 import common.cout970.UltraTech.TileEntities.electric.MinerEntity;
 import common.cout970.UltraTech.TileEntities.electric.MolecularAssemblyEntity;
 import common.cout970.UltraTech.TileEntities.electric.PumpEntity;
@@ -17,8 +17,10 @@ import common.cout970.UltraTech.TileEntities.electric.SteamTurbineEntity;
 import common.cout970.UltraTech.TileEntities.electric.StorageTier1;
 import common.cout970.UltraTech.TileEntities.electric.StorageTier2;
 import common.cout970.UltraTech.TileEntities.electric.StorageTier3;
+import common.cout970.UltraTech.TileEntities.electric.StorageTier4;
 import common.cout970.UltraTech.TileEntities.electric.WindMillEntity;
-import common.cout970.UltraTech.TileEntities.electric.tiers.ChemicalPlant_Entity;
+import common.cout970.UltraTech.TileEntities.electric.tiers.ChemicalPlantT1_Entity;
+import common.cout970.UltraTech.TileEntities.electric.tiers.ChemicalPlantT2_Entity;
 import common.cout970.UltraTech.TileEntities.electric.tiers.ChemicalVaporDesintegrationT1_Entity;
 import common.cout970.UltraTech.TileEntities.electric.tiers.ChemicalVaporDesintegrationT2_Entity;
 import common.cout970.UltraTech.TileEntities.electric.tiers.CoalGeneratorEntityT1_Entity;
@@ -32,6 +34,8 @@ import common.cout970.UltraTech.TileEntities.electric.tiers.FurnaceT2_Entity;
 import common.cout970.UltraTech.TileEntities.electric.tiers.Heater_Entity;
 import common.cout970.UltraTech.TileEntities.electric.tiers.LaminatorT1_Entity;
 import common.cout970.UltraTech.TileEntities.electric.tiers.LaminatorT2_Entity;
+import common.cout970.UltraTech.TileEntities.electric.tiers.LavaGeneratorT1_Entity;
+import common.cout970.UltraTech.TileEntities.electric.tiers.LavaGeneratorT2_Entity;
 import common.cout970.UltraTech.TileEntities.electric.tiers.PurifierT1_Entity;
 import common.cout970.UltraTech.TileEntities.electric.tiers.PurifierT2_Entity;
 import common.cout970.UltraTech.TileEntities.electric.tiers.SolarPanelEntity_T1;
@@ -55,25 +59,23 @@ import common.cout970.UltraTech.TileEntities.utility.CrafterEntity;
 import common.cout970.UltraTech.TileEntities.utility.HologramEmiterEntity;
 import common.cout970.UltraTech.TileEntities.utility.Painter3DEntity;
 import common.cout970.UltraTech.TileEntities.utility.hitBoxEntity;
-import common.cout970.UltraTech.blocks.AlienBlock;
-import common.cout970.UltraTech.blocks.ChasisBlock;
-import common.cout970.UltraTech.blocks.CovedGlass;
-import common.cout970.UltraTech.blocks.Deco_Block;
-import common.cout970.UltraTech.blocks.DiamondGlass;
-import common.cout970.UltraTech.blocks.MiscBlock;
-import common.cout970.UltraTech.blocks.OreBlock;
-import common.cout970.UltraTech.blocks.StoneBlockBlack;
-import common.cout970.UltraTech.blocks.StoneBlockWhite;
 import common.cout970.UltraTech.blocks.common.ChargeStation;
-import common.cout970.UltraTech.blocks.common.ChemicalPlant;
 import common.cout970.UltraTech.blocks.common.CrafterBlock;
 import common.cout970.UltraTech.blocks.common.FermenterBlock;
 import common.cout970.UltraTech.blocks.common.Heater;
-import common.cout970.UltraTech.blocks.common.LavaGenerator;
 import common.cout970.UltraTech.blocks.common.MultiTank;
 import common.cout970.UltraTech.blocks.common.Painter3D;
 import common.cout970.UltraTech.blocks.common.RefineryBlock;
 import common.cout970.UltraTech.blocks.common.Tier3Block;
+import common.cout970.UltraTech.blocks.decoration.AlienBlock;
+import common.cout970.UltraTech.blocks.decoration.ChasisBlock;
+import common.cout970.UltraTech.blocks.decoration.CovedGlass;
+import common.cout970.UltraTech.blocks.decoration.Deco_Block;
+import common.cout970.UltraTech.blocks.decoration.DiamondGlass;
+import common.cout970.UltraTech.blocks.decoration.MiscBlock;
+import common.cout970.UltraTech.blocks.decoration.OreBlock;
+import common.cout970.UltraTech.blocks.decoration.StoneBlockBlack;
+import common.cout970.UltraTech.blocks.decoration.StoneBlockWhite;
 import common.cout970.UltraTech.blocks.models.Boiler;
 import common.cout970.UltraTech.blocks.models.CopperPipe;
 import common.cout970.UltraTech.blocks.models.Dynamo;
@@ -91,6 +93,8 @@ import common.cout970.UltraTech.blocks.reactor.Reactor_Redstone_Control_Block;
 import common.cout970.UltraTech.blocks.reactor.Reactor_Tank_Block;
 import common.cout970.UltraTech.blocks.reactor.Reactor_Wall_Block;
 import common.cout970.UltraTech.blocks.reactor.Reactor_Water_Block;
+import common.cout970.UltraTech.blocks.tiers.ChemicalPlantT1;
+import common.cout970.UltraTech.blocks.tiers.ChemicalPlantT2;
 import common.cout970.UltraTech.blocks.tiers.ChemicalVaporDesintegrationT1;
 import common.cout970.UltraTech.blocks.tiers.ChemicalVaporDesintegrationT2;
 import common.cout970.UltraTech.blocks.tiers.CoalGeneratorT1;
@@ -103,6 +107,8 @@ import common.cout970.UltraTech.blocks.tiers.FurnaceT1;
 import common.cout970.UltraTech.blocks.tiers.FurnaceT2;
 import common.cout970.UltraTech.blocks.tiers.LaminatorT1;
 import common.cout970.UltraTech.blocks.tiers.LaminatorT2;
+import common.cout970.UltraTech.blocks.tiers.LavaGeneratorT1;
+import common.cout970.UltraTech.blocks.tiers.LavaGeneratorT2;
 import common.cout970.UltraTech.blocks.tiers.PurifierT1;
 import common.cout970.UltraTech.blocks.tiers.PurifierT2;
 import common.cout970.UltraTech.blocks.tiers.SolarPanelT1;
@@ -122,6 +128,7 @@ import common.cout970.UltraTech.multiblocks.refinery.RefineryBase;
 import common.cout970.UltraTech.multiblocks.refinery.RefineryCore;
 import common.cout970.UltraTech.multiblocks.refinery.TileGag;
 import common.cout970.UltraTech.util.power.Machine;
+
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class BlockManager {
@@ -161,8 +168,8 @@ public class BlockManager {
 	public static  Block MultiTank;
 	public static  Block Pump;
 	public static  Block AlienBlock;
-	public static  Block LavaGenerator;
-	public static  Block ChemicalPlant;
+	public static  Block ChemicalPlant_T1;
+	public static  Block ChemicalPlant_T2;
 	public static  Block Crafter;
 	public static  Block Painter;
 	public static  Block Fermenter;
@@ -183,6 +190,9 @@ public class BlockManager {
 	public static  Block Tesseract;
 	public static  Block FluidGenerator_T1;
 	public static  Block FluidGenerator_T2;
+	public static  Block LavaGenerator_T1;
+	public static  Block LavaGenerator_T2;
+
 
 	public static  Block CableBlock;
 
@@ -190,28 +200,31 @@ public class BlockManager {
 	public static void InitBlocks(){
 		Material m = Material.iron;
 		
-		Chasis = new ChasisBlock(Material.iron);
+		Chasis = new ChasisBlock(m);
+		//tier 1
+		Generator_T1 = new CoalGeneratorT1(m);
 		CVD_T1 = new ChemicalVaporDesintegrationT1(m);
 		Laminator_T1 = new LaminatorT1(m);
 		Purifier_T1 = new PurifierT1(m);
 		Cutter_T1 = new CutterT1(m);
 		Furnace_T1 = new FurnaceT1(m);
-		Generator_T1 = new CoalGeneratorT1(m);
+		ChemicalPlant_T1 = new ChemicalPlantT1(m);
+		LavaGenerator_T1 = new LavaGeneratorT1(m);
+		FluidGenerator_T1 = new FluidGeneratorT1(m);
+		Crafter = new CrafterBlock(m);
+		Painter = new Painter3D(m);
+		Fermenter = new FermenterBlock(m);
+		ChargeStation = new ChargeStation(m);
+		//tier 2
+		Generator_T2 = new CoalGeneratorT2(m);
 		CVD_T2 = new ChemicalVaporDesintegrationT2(m);
 		Laminator_T2 = new LaminatorT2(m);
 		Purifier_T2 = new PurifierT2(m);
 		Cutter_T2 = new CutterT2(m);
 		Furnace_T2 = new FurnaceT2(m);
-		Generator_T2 = new CoalGeneratorT2(m);
-		Crafter = new CrafterBlock(m);
-		Painter = new Painter3D(m);
-		Fermenter = new FermenterBlock(m);
-		Heater = new Heater(m);
-		ChargeStation = new ChargeStation(m);
-		LavaGenerator = new LavaGenerator(m);
-		ChemicalPlant = new ChemicalPlant(m);
-		Tesseract = new TesseractT3(m);
-		Tier3 = new Tier3Block(m);
+		ChemicalPlant_T2 = new ChemicalPlantT2(m);
+		LavaGenerator_T2 = new LavaGeneratorT2(m);
+		FluidGenerator_T2 = new FluidGeneratorT2(m);
 		
 		Reactor_Core = new Reactor_Core_Block(m);
 		Reactor_Wall = new Reactor_Wall_Block(m);
@@ -221,23 +234,26 @@ public class BlockManager {
 		Reactor_Water = new Reactor_Water_Block(m);
 		Reactor_Chamber = new Reactor_Chamber_Block(m);
 		Reactor_Redstone = new Reactor_Redstone_Control_Block(m);
-		
+		Storage = new StorageBlock(m);
+		Heater = new Heater(m);
+		Tesseract = new TesseractT3(m);
+		Tier3 = new Tier3Block(m);
 		Refinery = new RefineryBlock(m);
 		Misc = new MiscBlock(m);
 		SolarPanel_T1 = new SolarPanelT1(m);
 		SolarPanel_T2 = new SolarPanelT2(m);
 		WindMill = new WindMill(m);
 		Engine = new Engine(Material.piston);
-		Storage = new StorageBlock(Material.iron);
-		CopperPipe = new CopperPipe(Material.iron);
-		Boiler = new Boiler(Material.iron);
-		Tank = new FluidTank(Material.iron);
-		Turbine = new SteamTurbine(Material.iron);
-		Dynamo = new Dynamo(Material.iron);
-		MultiTank = new MultiTank(Material.iron);
-		Pump = new PumpBlock(Material.iron);
-		FluidGenerator_T1 = new FluidGeneratorT1(m);
-		FluidGenerator_T2 = new FluidGeneratorT2(m);
+		
+		CopperPipe = new CopperPipe(m);
+		Boiler = new Boiler(m);
+		Tank = new FluidTank(m);
+		Turbine = new SteamTurbine(m);
+		Dynamo = new Dynamo(m);
+		MultiTank = new MultiTank(m);
+		Pump = new PumpBlock(m);
+		
+		
 		if(!MultipartReference.isMicroPartActived)CableBlock = new CableBlock(Material.iron);
 		
 		//decotab
@@ -272,61 +288,42 @@ public class BlockManager {
 
 
 	public static void RegisterBlocks(){
-
+		
+		GameRegistry.registerBlock(stoneblockblack, ItemBlock_Stone.class, "StoneBlockBlack");
+		GameRegistry.registerBlock(stoneblockwhite, ItemBlock_Stone.class, "StoneBlockWhite");
 		for(Deco_Block b : deco)
 			GameRegistry.registerBlock(b, ItemBlock_Deco.class, "Deco_"+b.number+"_"+(b.black ? "w" : "b"));
 
-		//Blocks & Itemblocks
-		GameRegistry.registerBlock(Chasis, ItemBlock_Chasis.class ,"Chasis_UT");
+		//Blocks & Itemblocks		
+		
 		GameRegistry.registerBlock(Ores, ItemBlock_Ores.class ,"Ores_UT");
-		GameRegistry.registerBlock(Tier3, ItemBlock_Tier3.class ,"Tier3_UT");//will be removed
-		GameRegistry.registerBlock(Storage, ItemBlock_Storage.class ,"Storage_UT");
-		GameRegistry.registerBlock(Misc, ItemBlock_Misc.class, "Misc_UT");//will be removed
-		GameRegistry.registerBlock(Refinery, ItemBlock_Refinery.class, "Refinery_UT");
-		GameRegistry.registerBlock(stoneblockblack, ItemBlock_Stone.class, "StoneBlockBlack");
-		GameRegistry.registerBlock(stoneblockwhite, ItemBlock_Stone.class, "StoneBlockWhite");
-
-		GameRegistry.registerBlock(SolarPanel_T1, "SolarPanel_T1");
-		GameRegistry.registerBlock(SolarPanel_T2, "SolarPanel2");
-		GameRegistry.registerBlock(WindMill, "WindMill");
-		GameRegistry.registerBlock(Engine, "Engine");
-		GameRegistry.registerBlock(DiamondGlass, "Diamond_Glass");
-		GameRegistry.registerBlock(CovedGlass, "Coved_Glass");
-		GameRegistry.registerBlock(CopperPipe, "CopperPipe");
-		GameRegistry.registerBlock(Boiler, "Boiler");
-		GameRegistry.registerBlock(Tank, "FluidTank");
-		GameRegistry.registerBlock(Turbine, "SteamTurbine");
-		GameRegistry.registerBlock(Dynamo, "Dynamo");
-		GameRegistry.registerBlock(MultiTank, "MultiTank");
-		GameRegistry.registerBlock(Pump, "Pump");
-		GameRegistry.registerBlock(AlienBlock, "AlienBlock");
-		GameRegistry.registerBlock(LavaGenerator, "Lava Generator");
-		GameRegistry.registerBlock(ChemicalPlant, "ChemicalPlant");
-		GameRegistry.registerBlock(Heater, "Heater");
-		GameRegistry.registerBlock(ChargeStation, "Charge Station");
-		GameRegistry.registerBlock(Tesseract, "Tesseract");
-
-		//tiers
+		GameRegistry.registerBlock(Chasis, ItemBlock_Chasis.class ,"Chasis_UT");
+		//tier 1
+		GameRegistry.registerBlock(Generator_T1, "GeneratorT1");
 		GameRegistry.registerBlock(CVD_T1, "CVD_T1");
 		GameRegistry.registerBlock(Furnace_T1, "Furnace_T1");
 		GameRegistry.registerBlock(Cutter_T1, "Cutter_T1");
 		GameRegistry.registerBlock(Purifier_T1, "Purifier_T1");
 		GameRegistry.registerBlock(Laminator_T1, "Laminator_T1");
-		GameRegistry.registerBlock(Generator_T1, "Generator_T1");
-
+		GameRegistry.registerBlock(ChemicalPlant_T1, "ChemicalPlantT1");
+		GameRegistry.registerBlock(LavaGenerator_T1, "Lava Generator T1");
+		GameRegistry.registerBlock(FluidGenerator_T1, "FluidGenerator_T1");
+		GameRegistry.registerBlock(Crafter, "Crafter");
+		GameRegistry.registerBlock(Painter, "Painter");
+		GameRegistry.registerBlock(Fermenter, "Fermenter");
+		GameRegistry.registerBlock(ChargeStation, "Charge Station");
+		//tier 2
+		GameRegistry.registerBlock(Generator_T2, "Generator_T2");
 		GameRegistry.registerBlock(CVD_T2, "CVD_T2");
 		GameRegistry.registerBlock(Furnace_T2, "Furnace_T2");
 		GameRegistry.registerBlock(Cutter_T2, "Cutter_T2");
 		GameRegistry.registerBlock(Purifier_T2, "Purifier_T2");
 		GameRegistry.registerBlock(Laminator_T2, "Laminator_T2");
-		GameRegistry.registerBlock(Generator_T2, "Generator_T2");
-		GameRegistry.registerBlock(FluidGenerator_T1, "FluidGenerator_T1");
+		GameRegistry.registerBlock(ChemicalPlant_T2, "ChemicalPlantT2");
+		GameRegistry.registerBlock(LavaGenerator_T2, "Lava Generator T2");
 		GameRegistry.registerBlock(FluidGenerator_T2, "FluidGenerator_T2");
-		
-		GameRegistry.registerBlock(Crafter, "Crafter");
-		GameRegistry.registerBlock(Painter, "Painter");
-		GameRegistry.registerBlock(Fermenter, "Fermenter");
-		
+		GameRegistry.registerBlock(Heater, "Heater");
+		GameRegistry.registerBlock(Storage, ItemBlock_Storage.class ,"Storage_UT");
 		GameRegistry.registerBlock(Reactor_Core, 	"Core");
 		GameRegistry.registerBlock(Reactor_Wall, 	"Wall");
 		GameRegistry.registerBlock(Reactor_Control, "Control");
@@ -335,6 +332,25 @@ public class BlockManager {
 		GameRegistry.registerBlock(Reactor_Water, 	"Water");
 		GameRegistry.registerBlock(Reactor_Chamber, "Chamber");
 		GameRegistry.registerBlock(Reactor_Redstone, "Redstone");
+		GameRegistry.registerBlock(Tier3, ItemBlock_Tier3.class ,"Tier3_UT");//will be removed
+		GameRegistry.registerBlock(Tesseract, "Tesseract");
+		GameRegistry.registerBlock(SolarPanel_T1, "SolarPanel_T1");
+		GameRegistry.registerBlock(SolarPanel_T2, "SolarPanel2");
+		GameRegistry.registerBlock(WindMill, "WindMill");
+		GameRegistry.registerBlock(Engine, "Engine");
+		GameRegistry.registerBlock(CopperPipe, "CopperPipe");
+		GameRegistry.registerBlock(Boiler, "Boiler");
+		GameRegistry.registerBlock(Tank, "FluidTank");
+		GameRegistry.registerBlock(Pump, "Pump");
+		GameRegistry.registerBlock(Turbine, "SteamTurbine");
+		GameRegistry.registerBlock(Dynamo, "Dynamo");
+		
+		GameRegistry.registerBlock(Misc, ItemBlock_Misc.class, "Misc_UT");//will be removed
+		GameRegistry.registerBlock(Refinery, ItemBlock_Refinery.class, "Refinery_UT");
+		GameRegistry.registerBlock(DiamondGlass, "Diamond_Glass");
+		GameRegistry.registerBlock(CovedGlass, "Coved_Glass");
+		GameRegistry.registerBlock(MultiTank, "MultiTank");
+		GameRegistry.registerBlock(AlienBlock, "AlienBlock");
 
 		if(!MultipartReference.isMicroPartActived)GameRegistry.registerBlock(CableBlock, "UT_CableBlock");
 		//TileEntities
@@ -343,6 +359,7 @@ public class BlockManager {
 		GameRegistry.registerTileEntity(StorageTier1.class, "Storage1_UT");
 		GameRegistry.registerTileEntity(StorageTier2.class, "Storage2_UT");
 		GameRegistry.registerTileEntity(StorageTier3.class, "Storage3_UT");
+		GameRegistry.registerTileEntity(StorageTier4.class, "Storage4_UT");
 		GameRegistry.registerTileEntity(hitBoxEntity.class, "hitBox_UT");
 		GameRegistry.registerTileEntity(CoalGeneratorEntityT1_Entity.class, "generator_UT");
 		GameRegistry.registerTileEntity(MinerEntity.class, "miner_UT");
@@ -379,9 +396,11 @@ public class BlockManager {
 		GameRegistry.registerTileEntity(TileGag.class, "RefGag_UT");
 		GameRegistry.registerTileEntity(DynamoEntity.class, "Dynamo_UT");
 		GameRegistry.registerTileEntity(PumpEntity.class, "Pump_UT");
-		GameRegistry.registerTileEntity(LavaGeneratorEntity.class, "LavaGenerator_UT");
+		GameRegistry.registerTileEntity(LavaGeneratorT1_Entity.class, "LavaGeneratorT1_UT");
+		GameRegistry.registerTileEntity(LavaGeneratorT2_Entity.class, "LavaGeneratorT2_UT");
 		if(!MultipartReference.isMicroPartActived)GameRegistry.registerTileEntity(Cable_Entity.class, "Cable_UT");
-		GameRegistry.registerTileEntity(ChemicalPlant_Entity.class, "ChemicalPlant_UT");
+		GameRegistry.registerTileEntity(ChemicalPlantT1_Entity.class, "ChemicalPlant_T1_UT");
+		GameRegistry.registerTileEntity(ChemicalPlantT2_Entity.class, "ChemicalPlant_T2_UT");
 		GameRegistry.registerTileEntity(Heater_Entity.class, "Heater_UT");
 		//tiers
 		Class[] a = {ChemicalVaporDesintegrationT1_Entity.class,

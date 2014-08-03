@@ -21,13 +21,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
-public class LasserSword extends ItemPower{
+public class LaserSword extends ItemPower{
 	
 
-	public LasserSword(String name){
+	public LaserSword(String name){
 		super(16000);
 		setCreativeTab(UT_Tabs.ResourceTab);
-		setUnlocalizedName("LasserSword");
+		setUnlocalizedName("LaserSword");
 	}
 
 	public void registerIcons(IIconRegister iconRegister){

@@ -18,6 +18,7 @@ import common.cout970.UltraTech.network.Net_Utils;
 import common.cout970.UltraTech.network.SyncTile;
 import common.cout970.UltraTech.util.UT_Utils;
 import common.cout970.UltraTech.util.power.Machine;
+import cpw.mods.fml.common.Mod.Instance;
 
 public class DynamoEntity extends SyncTile implements IPowerConductor, IEnergyHandler, IUpdatedEntity{
 
@@ -27,6 +28,7 @@ public class DynamoEntity extends SyncTile implements IPowerConductor, IEnergyHa
 	public static PowerExchange pe = new PowerExchange();
 	public boolean on = false;
 	public IEnergyHandler recep = null;
+	public boolean redstone = false;
 
 	public DynamoEntity(){
 		super();
@@ -37,24 +39,39 @@ public class DynamoEntity extends SyncTile implements IPowerConductor, IEnergyHa
 	public void updateEntity(){
 		super.updateEntity();
 		if(worldObj.isRemote)return;
-		if(inter.getCharge() >= 4 && storage.getMaxEnergyStored()-storage.getEnergyStored() >= pe.MeVtoRF(4)){
-			inter.removeCharge(4d);
-			storage.receiveEnergy(pe.MeVtoRF(4), false);
-		}else if(inter.getCharge() >= 1 && storage.getMaxEnergyStored()-storage.getEnergyStored() >= pe.MeVtoRF(1)){
-			inter.removeCharge(1d);
-			storage.receiveEnergy(pe.MeVtoRF(1), false);
-		}else if(inter.getCharge() >= pe.RFtoMev(1) && storage.getMaxEnergyStored()-storage.getEnergyStored() >= 1){
-			inter.removeCharge(pe.RFtoMev(1));
-			storage.receiveEnergy(1, false);
+		boolean work = false;
+		if(shouldWork()){
+			if(inter.getCharge() >= 4 && storage.getMaxEnergyStored()-storage.getEnergyStored() >= pe.MeVtoRF(4)){
+				inter.removeCharge(4d);
+				storage.receiveEnergy(pe.MeVtoRF(4), false);
+				work = true;
+			}else if(inter.getCharge() >= 1 && storage.getMaxEnergyStored()-storage.getEnergyStored() >= pe.MeVtoRF(1)){
+				inter.removeCharge(1d);
+				storage.receiveEnergy(pe.MeVtoRF(1), false);
+				work = true;
+			}
+		}
+		if(worldObj.getTotalWorldTime()% 20 == 1){
+			if(!on && work){
+				on = true;
+				sendNetworkUpdate();
+			}
+			if(on && !work){
+				on = false;
+				sendNetworkUpdate();
+			}
 		}
 		if(recep != null){
 			int send = Math.min(400, storage.getEnergyStored());
 			int b = recep.receiveEnergy(facing.getOpposite(), send, false);
-			
 			if(b > 0){
 				int e = this.extractEnergy(facing, b, false);
 			}
 		}
+	}
+
+	private boolean shouldWork() {
+		return !redstone;
 	}
 
 	public boolean isWorking() {
@@ -113,7 +130,8 @@ public class DynamoEntity extends SyncTile implements IPowerConductor, IEnergyHa
 
 	public void switchOrientation() {
 		for(ForgeDirection d : ForgeDirection.VALID_DIRECTIONS){
-			if(UT_Utils.getRelative(this, d) instanceof IEnergyHandler){
+			TileEntity a = UT_Utils.getRelative(this, d);
+			if(a instanceof IEnergyHandler && !(a instanceof IPowerConductor)){
 				facing = d;
 				return;
 			}
@@ -137,8 +155,9 @@ public class DynamoEntity extends SyncTile implements IPowerConductor, IEnergyHa
 
 	@Override
 	public void onNeigUpdate() {
+		redstone = worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord);
 		TileEntity a = UT_Utils.getRelative(this, facing);
-		if(a instanceof IEnergyHandler)recep = (IEnergyHandler) a;
+		if(a instanceof IEnergyHandler && !(a instanceof IPowerConductor))recep = (IEnergyHandler) a;
 		switchOrientation();
 	}
 }

@@ -5,11 +5,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import codechicken.nei.ItemList;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
+import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
@@ -25,6 +27,7 @@ import common.cout970.UltraTech.misc.CrafterRecipe;
 import common.cout970.UltraTech.misc.IRedstoneControl;
 import common.cout970.UltraTech.misc.InventoryCrafter;
 import common.cout970.UltraTech.network.SyncTile;
+import common.cout970.UltraTech.util.LogHelper;
 import common.cout970.UltraTech.util.UT_Utils;
 import common.cout970.UltraTech.util.fluids.FluidUtils;
 import common.cout970.UltraTech.util.fluids.TankConection;
@@ -56,6 +59,7 @@ public class CrafterEntity extends SyncTile implements IInventory,IRedstoneContr
 	}
 
 	public void canCraft(){
+		
 		found = new boolean[9];
 		Map<Integer,Integer> already = new HashMap<Integer,Integer>();
 		for(int c = 0; c < 9;c++){//serach in own inv for crafting things
@@ -63,9 +67,9 @@ public class CrafterEntity extends SyncTile implements IInventory,IRedstoneContr
 				found[c] = true;
 			}else{
 				for(int i = 0; i < this.getSizeInventory();i++){//searching in this inventory
-					if(equal(this.getStackInSlot(i),craft.getStackInSlot(c),c)){//is item valid
+					if(equal(this.getStackInSlot(i),craft.getStackInSlot(c))){//is item valid
 						boolean cant;
-						if(already.containsKey(i)){//has enght
+						if(already.containsKey(i)){//has enought
 							cant = false;
 							int aux = already.get(i);
 							if(aux < getStackInSlot(i).stackSize){
@@ -93,7 +97,7 @@ public class CrafterEntity extends SyncTile implements IInventory,IRedstoneContr
 			for(int c = 0; c < 9;c++){//check the crafting grid
 				if(!found[c]){//if item is not found
 					for(int i = 0; i < inv.getSizeInventory();i++){//searching on inventorys
-						if(equal(inv.getStackInSlot(i),craft.getStackInSlot(c),c)){//is item valid
+						if(equal(inv.getStackInSlot(i),craft.getStackInSlot(c))){//is item valid
 							boolean cant = true;
 							if(alreadyInv.containsKey(i)){
 								cant = false;
@@ -158,12 +162,14 @@ public class CrafterEntity extends SyncTile implements IInventory,IRedstoneContr
 		return true;
 	}
 	
-	private boolean equal(ItemStack a, ItemStack b,int slot) {
+	private boolean equal(ItemStack a, ItemStack b) {
 		if(a == null && b == null)return true;
 		if(a != null && b == null)return false;
 		if(a == null && b != null)return false;
 		if(OreDictionary.itemMatches(a, b, true))return true;
-
+		if(b.getItemDamage() == OreDictionary.WILDCARD_VALUE)
+			if(OreDictionary.itemMatches(a, b, false))return true;
+		
 		//restrictive mode
 		if(!restrictMode){
 			if(OreDictionary.getOreIDs(a).length != 0 && OreDictionary.getOreIDs(b).length != 0){
@@ -171,19 +177,32 @@ public class CrafterEntity extends SyncTile implements IInventory,IRedstoneContr
 					for(int j : OreDictionary.getOreIDs(b))if(i == j)return true;
 				}
 			}
-			InventoryCrafter c = new InventoryCrafter(this, 3, 3);
-			for(int r = 0;r<9;r++){
-				c.setInventorySlotContents(r, craft.getStackInSlot(r));
-			}
-			c.setInventorySlotContents(slot, a);
-			ItemStack g = CraftingManager.getInstance().findMatchingRecipe(c, worldObj);
-			ItemStack h = CraftingManager.getInstance().findMatchingRecipe(craft, worldObj);
-			if(g == null)return false;
-			if(h == null)return false;
-			if(OreDictionary.itemMatches(g, h, true))return true;
 		}
 		return false;
 	}
+	
+//	public boolean remplace(int slot, ItemStack a){
+//		IRecipe recipe = null;
+//		for (int j = 0; j < CraftingManager.getInstance().getRecipeList().size(); ++j){
+//			IRecipe irecipe = (IRecipe)CraftingManager.getInstance().getRecipeList().get(j);
+//			if (irecipe.matches(craft, worldObj)){
+//				recipe = irecipe;
+//			}
+//		}
+//		if(recipe == null)return false;
+//		ItemStack result = recipe.getCraftingResult(craft);
+//		if(result == null)return false;
+//		//fake craft grid
+//		InventoryCrafter c = new InventoryCrafter(this, 3, 3);
+//		for(int r = 0;r<9;r++){
+//			c.setInventorySlotContents(r, craft.getStackInSlot(r));
+//		}
+//		c.setInventorySlotContents(slot, a);
+//		//remplace
+//		
+//		if(recipe.matches(c, worldObj))return true;
+//		return false;
+//	}
 
 	public void craft() {
 		if(allFound() && addItemStack(result)){
@@ -192,7 +211,7 @@ public class CrafterEntity extends SyncTile implements IInventory,IRedstoneContr
 				if(craft.getStackInSlot(c)!= null){
 					boolean used = false;
 					for(int i = 0; i < this.getSizeInventory();i++){
-						if(equal(this.getStackInSlot(i),craft.getStackInSlot(c),c)){
+						if(equal(this.getStackInSlot(i),craft.getStackInSlot(c))){
 							useItemToCraft(this, i);
 							used = true;
 							break;
@@ -204,7 +223,7 @@ public class CrafterEntity extends SyncTile implements IInventory,IRedstoneContr
 					for(TileEntity tile : t)if(tile instanceof IInventory)in.add((IInventory) tile);
 					for(IInventory inv : in){
 						for(int i = 0; i < inv.getSizeInventory();i++){
-							if(equal(inv.getStackInSlot(i),craft.getStackInSlot(c),c)){
+							if(equal(inv.getStackInSlot(i),craft.getStackInSlot(c))){
 								useItemToCraft(inv, i);
 								used = true;
 								break;

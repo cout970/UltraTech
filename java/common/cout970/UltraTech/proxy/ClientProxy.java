@@ -2,11 +2,13 @@ package common.cout970.UltraTech.proxy;
 
 import net.minecraft.item.Item;
 import net.minecraftforge.client.MinecraftForgeClient;
+
 import common.cout970.UltraTech.TileEntities.electric.PumpEntity;
 import common.cout970.UltraTech.TileEntities.electric.SteamTurbineEntity;
 import common.cout970.UltraTech.TileEntities.electric.StorageTier1;
 import common.cout970.UltraTech.TileEntities.electric.StorageTier2;
 import common.cout970.UltraTech.TileEntities.electric.StorageTier3;
+import common.cout970.UltraTech.TileEntities.electric.StorageTier4;
 import common.cout970.UltraTech.TileEntities.electric.WindMillEntity;
 import common.cout970.UltraTech.TileEntities.electric.tiers.SolarPanelEntity_T1;
 import common.cout970.UltraTech.TileEntities.electric.tiers.Tesseract_Entity;
@@ -51,6 +53,7 @@ import common.cout970.UltraTech.microparts.Cable_Entity;
 import common.cout970.UltraTech.microparts.RenderCableWithoutMP;
 import common.cout970.UltraTech.multiblocks.refinery.RefineryCore;
 import common.cout970.UltraTech.multiblocks.refinery.RenderRefinery;
+
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 
@@ -86,6 +89,7 @@ public class ClientProxy extends CommonProxy{
 		ClientRegistry.bindTileEntitySpecialRenderer(StorageTier1.class, new RenderBattery());
 		ClientRegistry.bindTileEntitySpecialRenderer(StorageTier2.class, new RenderBattery());
 		ClientRegistry.bindTileEntitySpecialRenderer(StorageTier3.class, new RenderBattery());
+		ClientRegistry.bindTileEntitySpecialRenderer(StorageTier4.class, new RenderBattery());
 		ClientRegistry.bindTileEntitySpecialRenderer(DynamoEntity.class, new RenderDynamo());
 		ClientRegistry.bindTileEntitySpecialRenderer(PumpEntity.class, new RenderPump());
 		ClientRegistry.bindTileEntitySpecialRenderer(Cable_Entity.class, new RenderCableWithoutMP());
@@ -137,6 +141,6 @@ public class ClientProxy extends CommonProxy{
 		  //Items
 		  
 		  //sword
-		  MinecraftForgeClient.registerItemRenderer(ItemManager.ItemName.get("LasserSword"), new RenderSwordItem());
+		  MinecraftForgeClient.registerItemRenderer(ItemManager.ItemName.get("LaserSword"), new RenderSwordItem());
       }
 }

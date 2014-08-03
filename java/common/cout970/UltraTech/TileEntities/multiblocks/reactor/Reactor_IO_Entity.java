@@ -26,7 +26,6 @@ import net.minecraftforge.fluids.IFluidHandler;
 public class Reactor_IO_Entity extends Reactor_Entity_Base implements IFluidHandler,IInventory,ISidedInventory{
 
 	public UT_Tank tank;
-	public int mode = 1;//0 water in, 1 steam out, 2 material in,3 material out
 	
 	public Reactor_IO_Entity(){
 		super();
@@ -34,9 +33,9 @@ public class Reactor_IO_Entity extends Reactor_Entity_Base implements IFluidHand
 	
 	public void updateEntity(){
 		super.updateEntity();
-		if(mode == 1 && getCore() != null){
+		if(getCore() != null){
 			if(getCore().getTank(1).getFluidAmount() > 0){
-				int toDrain = Math.min(getCore().getTank(1).getFluidAmount(), 500);
+				int toDrain = Math.min(getCore().getTank(1).getFluidAmount(), 1000);
 				for(TankConection tc : FluidUtils.getTankConections(this)){
 					int tr = tc.tank.fill(tc.side, new FluidStack(FluidRegistry.getFluid("steam"), toDrain), false);
 					if(tr > 0){
@@ -46,16 +45,6 @@ public class Reactor_IO_Entity extends Reactor_Entity_Base implements IFluidHand
 					}
 				}
 			}
-		}
-	}
-	
-	@Override
-	public void onNeigUpdate() {
-		super.onNeigUpdate();
-		if(worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord)){
-			mode = 0;
-		}else{
-			mode = 1;
 		}
 	}
 	

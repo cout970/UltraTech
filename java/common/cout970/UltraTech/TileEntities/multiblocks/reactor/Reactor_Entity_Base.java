@@ -15,6 +15,7 @@ public class Reactor_Entity_Base extends SyncTile implements IReactorComponent,I
 	@Override
 	public void updateEntity(){
 		super.updateEntity();
+		if(worldObj.isRemote)return;
 		if(core == null)refreshCore();
 	}
 	

@@ -8,6 +8,7 @@ import ultratech.api.power.StorageInterface;
 import common.cout970.UltraTech.TileEntities.electric.StorageTier1;
 import common.cout970.UltraTech.TileEntities.electric.StorageTier2;
 import common.cout970.UltraTech.TileEntities.electric.StorageTier3;
+import common.cout970.UltraTech.TileEntities.electric.StorageTier4;
 import common.cout970.UltraTech.client.textures.Block_Textures;
 import common.cout970.UltraTech.managers.UT_Tabs;
 import common.cout970.UltraTech.managers.UltraTech;
@@ -29,7 +30,7 @@ import net.minecraft.world.World;
 
 public class StorageBlock extends BlockConductor{
 
-	public int n = 3;
+	public int n = 4;
 	private IIcon blockIcon1;
 	private IIcon blockIcon2;
 	
@@ -40,6 +41,7 @@ public class StorageBlock extends BlockConductor{
 		setHardness(2.5f);
 		setBlockName("StorageBlock");
 	}
+	
 	@SideOnly(Side.CLIENT)
 	@Override
 	public IIcon getIcon(int side, int meta)
@@ -53,6 +55,7 @@ public class StorageBlock extends BlockConductor{
 		case 0: return new StorageTier1();
 		case 1: return new StorageTier2();
 		case 2: return new StorageTier3();
+		case 3: return new StorageTier4();
 		}
 		return new StorageTier1();
 	}

@@ -27,7 +27,7 @@ public class CoalGeneratorEntityT2_Entity extends CoalGeneratorEntityT1_Entity i
 				updated = true;
 			}
 			double extract = production();
-			if(Progres - extract < 0){
+			if(Progres - extract*2 < 0){
 				addCharge(pe.FTtoMev(Progres));
 				Progres = 0;
 			}else{

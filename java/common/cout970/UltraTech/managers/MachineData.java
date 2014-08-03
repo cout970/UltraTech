@@ -6,9 +6,8 @@ public enum MachineData {
 	/**
 	 * 2 burning tick = 1MeV
 	 */
-	Generator_T1	( 3200d	,1	,1d			,1),//1coal => 800Mev
-	Generator_T2	( 3200d	,1	,1d			,1),
-	Solar_Panel	(   10d	,1	,0.2d		,1),//1Mev => 5 ticks
+	Generator		( 3200d	,1	,1d			,1),//1coal => 800Mev
+	Solar_Panel		(   10d	,1	,0.2d		,1),//1Mev => 5 ticks
 	Fluid_Generator (  800d	,2	,1d			,1),//Wip
 	Turbine			(  800d	,2	,0.1d		,1),//per mb
 	LavaGenerator   (  800d	,2	,10d	   		,1),//MeV per 1mb
@@ -23,7 +22,7 @@ public enum MachineData {
 	Miner    		(32000d	,3	,100d		,0),//per block
 	MAssembly		( 1600d ,3	,100d		,0),
 	Charge_Station	( 3200d	,1	,200d		,2),//per tick
-	Climate_Station(200000d	,3	,200000d	,0),
+	Climate_Station	(200000d	,3	,200000d	,0),
 	Fermenter		(  800d	,1	,10d		,0),//Mev per mb
 	Tesseract		(20000d ,3	,0d			,0),
 	ChemicalPlant	( 1000d ,2	,100d		,0),//per item
@@ -31,10 +30,11 @@ public enum MachineData {
 	Pump			( 2000d ,2  ,150d		,0),//per 1000mb
 	
 	Dynamo     		( 1600d	,2	,1d			,0),
-	
-	Battery_T1		(    64000d	,1	,0			,2),
-	Battery_T2		(   500000d	,2	,0			,2),
-	Battery_T3		(  8000000d	,3	,0			,2);
+	Kinetic_Generator( 1600d	,2	,1d			,0),
+	Battery_T1		(    64000d	,1	,0			,2),//3 cells
+	Battery_T2		(   500000d	,2	,0			,2),//18 cells
+	Battery_T3		(  8000000d	,3	,0			,2),//162 cells
+	Battery_T4		(100000000d	,3	,0			,2) ;//729 cells
 	
 	public double cap,use;
 	public int tier;

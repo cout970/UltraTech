@@ -58,7 +58,6 @@ public class Block_Textures {
 	public static final String CRAFTER 						= MOD_FOLDER+"crafter";
 	public static final String FERMENTER 					= MOD_FOLDER+"fermenter";
 	public static final String HEATER 						= MOD_FOLDER+"heater";
-	public static final String LAVA_GENERATOR 				= MOD_FOLDER+"lavagen";
 	public static final String PAINTER 						= MOD_FOLDER+"painter";
 	public static final String REFINERY_STRUCTURE 			= MOD_FOLDER+"refinery/struc";
 	public static final String REFINERY_BASE 				= MOD_FOLDER+"refinery/base";
@@ -68,8 +67,12 @@ public class Block_Textures {
 	public static final String REFINERY_OUTPUT_3 			= MOD_FOLDER+"refinery/out3";
 	public static final String PARTICLE_COPPER 				= MOD_FOLDER+"chasis0";
 	public static final String REACTOR_PREFIX 				= MOD_FOLDER+"reactor/";
-	//models
-	public static final String SOLAR_PANEL_UP_T1 			= MOD_FOLDER+"machines/solar_up";
+	public static final String LAVA_GENERATOR_T1 			= MOD_FOLDER+"machines/lavagenerator_off";
+	public static final String LAVA_GENERATOR_T2 			= MOD_FOLDER+"machines/lavagenerator_off_2";
+	public static final String CHEMICAL_PLANT_T1 			= MOD_FOLDER+"machines/chemicalplant_off";
+	public static final String CHEMICAL_PLANT_T2 			= MOD_FOLDER+"machines/chemicalplant_off_2";
+	public static final String KINETIC_GENERATOR 			= MOD_FOLDER+"machines/kineticgenerator";
+	
 
 }
 

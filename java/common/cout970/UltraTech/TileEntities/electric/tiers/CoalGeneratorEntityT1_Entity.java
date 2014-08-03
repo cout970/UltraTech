@@ -20,7 +20,7 @@ public class CoalGeneratorEntityT1_Entity extends ConfigurableMachineWithInvento
 	public boolean updated;//metadata true == working
 
 	public CoalGeneratorEntityT1_Entity(){
-		super(1,"Generator",MachineData.Generator_T1);
+		super(1,"Generator",MachineData.Generator);
 	}
 	
 	public double production(){
@@ -41,7 +41,7 @@ public class CoalGeneratorEntityT1_Entity extends ConfigurableMachineWithInvento
 				updated = true;
 			}
 			double extract = production();
-			if(Progres - extract < 0){
+			if(Progres - extract*2 < 0){
 				addCharge(pe.FTtoMev(Progres));
 				Progres = 0;
 			}else{

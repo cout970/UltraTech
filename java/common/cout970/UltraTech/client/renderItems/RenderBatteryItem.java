@@ -35,6 +35,8 @@ public class RenderBatteryItem implements IItemRenderer {
 		if(item.getItemDamage() == 0)texture = new ResourceLocation("ultratech:textures/misc/battery/battery0.png");
 		if(item.getItemDamage() == 1)texture = new ResourceLocation("ultratech:textures/misc/battery/battery1.png");
 		if(item.getItemDamage() == 2)texture = new ResourceLocation("ultratech:textures/misc/battery/battery2.png");
+		if(item.getItemDamage() == 3)texture = new ResourceLocation("ultratech:textures/misc/battery/battery3.png");
+		
 		switch (type) {
             case ENTITY: {
                 render(0.0F, -0.5F, 0.0F, 1.0F,false);

@@ -1,4 +1,4 @@
-package common.cout970.UltraTech.TileEntities.electric;
+package common.cout970.UltraTech.TileEntities.electric.tiers;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -16,29 +16,29 @@ import common.cout970.UltraTech.util.power.Machine;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class LavaGeneratorEntity extends Machine implements IFluidHandler,IUpdatedEntity{
+public class LavaGeneratorT1_Entity extends Machine implements IFluidHandler,IUpdatedEntity{
 
 	public UT_Tank lava;
 	private int Proces;
 	public float coolant = 0;//kelvin degrees
 	public int heat = 295;
 	
-	public LavaGeneratorEntity() {
+	public LavaGeneratorT1_Entity() {
 		super(MachineData.LavaGenerator);
 	}
 	
 	public void updateEntity(){
 		super.updateEntity();
 		if(worldObj.isRemote)return;
-		if(Proces <=0 && getTank().getFluidAmount() >= 100){
+		if(Proces <=0 && getTank().getFluidAmount() >= 20){
 			Proces = 20;
-			getTank().drain(100, true);
+			getTank().drain(20, true);
 		}
 		if(Proces > 0){
 			double space = getCapacity()-getCharge();
-			if(space >= MachineData.LavaGenerator.use*5){
+			if(space >= MachineData.LavaGenerator.use){
 				Proces--;
-				addCharge(MachineData.LavaGenerator.use*5);
+				addCharge(MachineData.LavaGenerator.use);
 			}
 		}
 		
@@ -47,8 +47,7 @@ public class LavaGeneratorEntity extends Machine implements IFluidHandler,IUpdat
 			float cal = heat-295;
 			float dif = cal*coolant;
 			product = dif/4000;
-//			LogHelper.log("dif: "+dif+" heat: "+heat+" coolant: "+coolant+" cal: "+cal+" product: "+product);
-			addCharge(MachineData.LavaGenerator.use*0.1f*product);
+			addCharge(MachineData.LavaGenerator.use*0.05f*product);
 		}
 	}
 	

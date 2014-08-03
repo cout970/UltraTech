@@ -1,25 +1,20 @@
 package common.cout970.UltraTech.client.gui;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.lwjgl.opengl.GL11;
-
-import ultratech.api.power.IPower;
-import common.cout970.UltraTech.TileEntities.electric.tiers.ChemicalPlant_Entity;
-import common.cout970.UltraTech.TileEntities.electric.tiers.Heater_Entity;
-import common.cout970.UltraTech.util.UT_Utils;
-import common.cout970.UltraTech.util.power.Machine;
-import common.cout970.UltraTech.util.render.RenderUtil;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.inventory.Container;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidStack;
+
+import org.lwjgl.opengl.GL11;
+
+import ultratech.api.power.IPower;
+
+import common.cout970.UltraTech.TileEntities.electric.tiers.ChemicalPlantT1_Entity;
+import common.cout970.UltraTech.util.UT_Utils;
+import common.cout970.UltraTech.util.power.Machine;
 
 public class Chemical_Gui extends MachineGuiBase{
 
@@ -36,13 +31,13 @@ public class Chemical_Gui extends MachineGuiBase{
 		yStart = (height - ySize) / 2;
 		this.drawTexturedModalRect(xStart, yStart, 0, 0, xSize, ySize);
 
-		ChemicalPlant_Entity e = (ChemicalPlant_Entity) entity;
-		int i1 = 0;
-		if(e.maxProgres != 0)i1 = (int) e.Progres*25/e.maxProgres;
-		this.drawTexturedModalRect(xStart + 120, yStart + 15, 177, 0, i1, 16);
-		this.drawTexturedModalRect(xStart + 120, yStart + 33, 177, 0, i1, 16);
-		this.drawTexturedModalRect(xStart + 120, yStart + 51, 177, 0, i1, 16);
-		
+		ChemicalPlantT1_Entity e = (ChemicalPlantT1_Entity) entity;
+		int i1 = (int) e.Progres*25/e.maxProgres;
+		if(i1 != 0){
+		this.drawTexturedModalRect(xStart + 120, yStart + 15, 177, 0, 25-i1, 16);
+		this.drawTexturedModalRect(xStart + 120, yStart + 33, 177, 0, 25-i1, 16);
+		this.drawTexturedModalRect(xStart + 120, yStart + 51, 177, 0, 25-i1, 16);
+		}
 		FluidStack output = e.getTank().getFluid();
 		if(output != null){
 			IIcon li = output.getFluid().getStillIcon();

@@ -1,4 +1,4 @@
-package common.cout970.UltraTech.blocks;
+package common.cout970.UltraTech.blocks.decoration;
 
 import java.util.List;
 import java.util.Random;

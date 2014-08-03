@@ -1,5 +1,6 @@
 package common.cout970.UltraTech.TileEntities.electric.tiers;
 
+import scala.sys.process.processInternal;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.item.ItemStack;
@@ -17,14 +18,14 @@ import common.cout970.UltraTech.util.MachineWithInventory;
 import common.cout970.UltraTech.util.fluids.UT_Tank;
 import common.cout970.UltraTech.util.power.Machine;
 
-public class ChemicalPlant_Entity extends ConfigurableMachineWithInventory implements IFluidHandler{
+public class ChemicalPlantT1_Entity extends ConfigurableMachineWithInventory implements IFluidHandler{
 
 	public UT_Tank tank;
 	public int Progres = 0;
 	public boolean fuel = false;
-	public int maxProgres = 100;
+	public int maxProgres = 500;
 	
-	public ChemicalPlant_Entity() {
+	public ChemicalPlantT1_Entity() {
 		super(3, "Chemical Plant", MachineData.ChemicalPlant);
 	}
 	
@@ -36,23 +37,25 @@ public class ChemicalPlant_Entity extends ConfigurableMachineWithInventory imple
 				if(getCharge() >= MachineData.ChemicalPlant.use && shouldWork())
 					if(getStackInSlot(0) == null || getStackInSlot(0).stackSize+2 <= 64)
 						if(getStackInSlot(1) == null || getStackInSlot(1).stackSize+2 <= 64)
-							if(getStackInSlot(2) == null || getStackInSlot(2).stackSize+1 <= 64)fuel = true;
+							if(getStackInSlot(2) == null || getStackInSlot(2).stackSize+1 <= 64){
+								fuel = true;
+								Progres = maxProgres;
+							}
 			}
 		}
 		if(fuel){
-			Progres +=1;
+			Progres -=1;
 			removeCharge(MachineData.ChemicalPlant.use/maxProgres);
-		}
-		if(Progres >= maxProgres){
-			Progres = 0;
-			fuel = false;
-			craft();
-			markDirty();
+			getTank().drain(1000/maxProgres, true);
+			if(Progres <= 0){
+				fuel = false;
+				craft();
+				markDirty();
+			}
 		}
 	}
 	
 	public void craft(){
-		getTank().drain(1000, true);
 		ItemStack a = getStackInSlot(0);
 		if(a == null)setInventorySlotContents(0, new ItemStack(ItemManager.ItemName.get("Sulfur"),2));
 		else{
@@ -119,7 +122,6 @@ public class ChemicalPlant_Entity extends ConfigurableMachineWithInventory imple
 		if(getTank().getFluid() != null)c.sendProgressBarUpdate(cont, 2, getTank().getFluid().fluidID);
 		c.sendProgressBarUpdate(cont, 3, getTank().getFluidAmount());
 		c.sendProgressBarUpdate(cont, 4, Progres);
-		
 	}
 
 	public void getGUINetworkData(int id, int value) {

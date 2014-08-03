@@ -9,6 +9,7 @@ import cofh.api.tileentity.IRedstoneControl.ControlMode;
 import common.cout970.UltraTech.misc.PowerExchange;
 import common.cout970.UltraTech.network.Net_Utils;
 import common.cout970.UltraTech.util.LogHelper;
+import common.cout970.UltraTech.util.UT_Utils;
 import common.cout970.UltraTech.util.fluids.UT_Tank;
 import ultratech.api.power.IPowerConductor;
 import ultratech.api.power.StorageInterface;
@@ -50,6 +51,7 @@ public class Reactor_Core_Entity extends Reactor_Entity_Base implements IReactor
 	}
 	
 	public void updateEntity(){
+		if(worldObj.isRemote)return;
 		if(!check){
 			check = true;
 			if(size == 0){
@@ -58,7 +60,6 @@ public class Reactor_Core_Entity extends Reactor_Entity_Base implements IReactor
 			}
 			updateComponents();
 		}
-		if(worldObj.isRemote)return;
 		boolean empty = true;
 		if(automation){
 			if(getTank(1).getCapacity()-getTank(1).getFluidAmount() < 100){
@@ -106,6 +107,7 @@ public class Reactor_Core_Entity extends Reactor_Entity_Base implements IReactor
 	@Override
 	public void RestaureBlock(){
 		worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 0, 2);
+		UT_Utils.dropItems(getWorldObj(), xCoord, yCoord, zCoord);
 		worldObj.removeTileEntity(xCoord, yCoord, zCoord);
 	}
 	
@@ -134,6 +136,9 @@ public class Reactor_Core_Entity extends Reactor_Entity_Base implements IReactor
 		getTank(0).writeToNBT(NBT, "water");
 		getTank(1).writeToNBT(NBT, "steam");
 		NBT.setFloat("Heat", heat);
+		NBT.setBoolean("auto", automation);
+		NBT.setInteger("redstone", Mode.ordinal());
+		NBT.setBoolean("state", state);
     }
 	
 	public void readFromNBT(NBTTagCompound NBT){
@@ -142,11 +147,14 @@ public class Reactor_Core_Entity extends Reactor_Entity_Base implements IReactor
 		getTank(0).readFromNBT(NBT, "water");
 		getTank(1).readFromNBT(NBT, "steam");
 		heat = NBT.getFloat("Heat");
+		automation = NBT.getBoolean("auto");
+		Mode = ControlMode.values()[NBT.getInteger("redstone")];
+		state = NBT.getBoolean("state");
     }
 	
 	public UT_Tank getTank(int tank){
 		if(water == null){
-			if(getNumTanks() == 0)updateComponents();
+			if(getNumTanks() == 0 && worldObj != null)updateComponents();
 			water = new UT_Tank(getNumTanks()*4000, this);
 		}
 		if(steam == null)steam = new UT_Tank(32000, this);

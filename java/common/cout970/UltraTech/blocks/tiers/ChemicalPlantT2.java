@@ -1,6 +1,6 @@
-package common.cout970.UltraTech.blocks.common;
+package common.cout970.UltraTech.blocks.tiers;
 
-import common.cout970.UltraTech.TileEntities.electric.tiers.ChemicalPlant_Entity;
+import common.cout970.UltraTech.TileEntities.electric.tiers.ChemicalPlantT2_Entity;
 import common.cout970.UltraTech.client.textures.Block_Textures;
 import common.cout970.UltraTech.managers.UT_Tabs;
 import common.cout970.UltraTech.managers.UltraTech;
@@ -14,26 +14,26 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
-public class ChemicalPlant extends BlockConductor {
+public class ChemicalPlantT2 extends BlockConductor {
 
 	private IIcon up;
 
-	public ChemicalPlant(Material m) {
+	public ChemicalPlantT2(Material m) {
 		super(m);
 		setCreativeTab(UT_Tabs.techTab);
 		setHardness(2.5f);
 		setStepSound(soundTypeMetal);
 		setResistance(20);
-		setBlockName("ChemicalPlant");
+		setBlockName("ChemicalPlantT2");
 	}
 
 	@Override
 	public TileEntity createNewTileEntity(World var1, int var2) {
-		return new ChemicalPlant_Entity();
+		return new ChemicalPlantT2_Entity();
 	}
 	
 	public void registerBlockIcons(IIconRegister iconRegister){
-		this.blockIcon = iconRegister.registerIcon(Block_Textures.CHEMICAL_PLANT);
+		this.blockIcon = iconRegister.registerIcon(Block_Textures.CHEMICAL_PLANT_T2);
 		up = iconRegister.registerIcon(Block_Textures.CHASIS_T2);
 	}
 	
