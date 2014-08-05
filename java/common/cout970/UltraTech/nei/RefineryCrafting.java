@@ -3,6 +3,8 @@ package common.cout970.UltraTech.nei;
 import java.util.ArrayList;
 import java.util.List;
 
+import ultratech.api.recipes.Chemical_Recipe;
+import ultratech.api.recipes.Cooling_Recipes;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureMap;
@@ -10,8 +12,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidRegistry;
-import common.cout970.UltraTech.recipes.Chemical_Recipe;
-import common.cout970.UltraTech.recipes.Cooling_Recipes;
 import common.cout970.UltraTech.util.UT_Utils;
 import common.cout970.UltraTech.util.render.RenderUtil;
 import codechicken.nei.PositionedStack;

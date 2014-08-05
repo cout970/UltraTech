@@ -1,5 +1,6 @@
 package common.cout970.UltraTech.TileEntities.electric.tiers;
 
+import ultratech.api.recipes.Cutter_Recipe;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.item.ItemStack;
@@ -7,7 +8,6 @@ import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import common.cout970.UltraTech.managers.MachineData;
 import common.cout970.UltraTech.misc.ISpeeded;
-import common.cout970.UltraTech.recipes.Cutter_Recipe;
 
 public class FurnaceT2_Entity extends FurnaceT1_Entity implements ISpeeded{
 

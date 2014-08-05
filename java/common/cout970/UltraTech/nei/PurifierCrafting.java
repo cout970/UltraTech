@@ -5,8 +5,9 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 
-import common.cout970.UltraTech.recipes.Cutter_Recipe;
-import common.cout970.UltraTech.recipes.Purifier_Recipe;
+import ultratech.api.recipes.Cutter_Recipe;
+import ultratech.api.recipes.Purifier_Recipe;
+import ultratech.api.recipes.RecipeRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -44,7 +45,7 @@ public class PurifierCrafting extends TemplateRecipeHandler {
     public void loadCraftingRecipes(String outputId, Object... results) {
     
         if (outputId.equals(getRecipesID())) {
-            for (Purifier_Recipe recipe : Purifier_Recipe.recipes)
+            for (Purifier_Recipe recipe : RecipeRegistry.purifier)
                 recipes.add(recipe);
         }  else super.loadCraftingRecipes(outputId, results);
     }
@@ -52,26 +53,25 @@ public class PurifierCrafting extends TemplateRecipeHandler {
 	@Override
 	public void loadCraftingRecipes(ItemStack result)
 	{
-		for(int x = 0; x < Purifier_Recipe.recipes.size();x++ ){
-			if(NEIUltraTechConfig.matches(result, Purifier_Recipe.recipes.get(x).getOutput())){
-				recipes.add(Purifier_Recipe.recipes.get(x));
+		for(int x = 0; x < RecipeRegistry.purifier.size();x++ ){
+			if(NEIUltraTechConfig.matches(result, RecipeRegistry.purifier.get(x).getResult())){
+				recipes.add(RecipeRegistry.purifier.get(x));
 			}
 		}
 	}
 
-
 	@Override
 	public void loadUsageRecipes(ItemStack ingredient){
-		for(int x = 0; x < Purifier_Recipe.recipes.size();x++ ){
-			if(NEIUltraTechConfig.matches(ingredient, Purifier_Recipe.recipes.get(x).getInput())){
-				recipes.add(Purifier_Recipe.recipes.get(x));
+		for(int x = 0; x < RecipeRegistry.purifier.size();x++ ){
+			if(NEIUltraTechConfig.matches(ingredient, RecipeRegistry.purifier.get(x).getInput(0))){
+				recipes.add(RecipeRegistry.purifier.get(x));
 			}
 		}
 	}
 	@Override
 	public PositionedStack getResultStack(int recipe)
 	{
-		return new PositionedStack(recipes.get(recipe).getOutput(),112,21);
+		return new PositionedStack(recipes.get(recipe).getResult(),112,21);
 	}
 	@Override
 	public List<PositionedStack> getOtherStacks(int recipe)
@@ -82,7 +82,7 @@ public class PurifierCrafting extends TemplateRecipeHandler {
 	public List<PositionedStack> getIngredientStacks(int recipe)
 	{
 		List<PositionedStack> need = new ArrayList<PositionedStack>();
-		need.add(new PositionedStack(recipes.get(recipe).getInput(), 56,21));
+		need.add(new PositionedStack(recipes.get(recipe).getInput(0), 56,21));
 		return need;
 	}
 

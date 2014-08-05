@@ -4,14 +4,15 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 
+import ultratech.api.recipes.CVD_Recipe;
+import ultratech.api.recipes.Purifier_Recipe;
+import ultratech.api.recipes.RecipeRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.TemplateRecipeHandler;
 import codechicken.nei.recipe.TemplateRecipeHandler.RecipeTransferRect;
-import common.cout970.UltraTech.recipes.CVD_Recipe;
-import common.cout970.UltraTech.recipes.Purifier_Recipe;
 
 public class CVD_Crafting extends TemplateRecipeHandler {
 
@@ -39,9 +40,8 @@ public class CVD_Crafting extends TemplateRecipeHandler {
 	
 	@Override
     public void loadCraftingRecipes(String outputId, Object... results) {
-    
         if (outputId.equals(getRecipesID())) {
-            for (CVD_Recipe recipe : CVD_Recipe.recipes)
+            for (CVD_Recipe recipe : RecipeRegistry.cvd)
                 recipes.add(recipe);
         }  else super.loadCraftingRecipes(outputId, results);
     }
@@ -49,9 +49,9 @@ public class CVD_Crafting extends TemplateRecipeHandler {
 	@Override
 	public void loadCraftingRecipes(ItemStack result)
 	{
-		for(int x = 0; x < CVD_Recipe.recipes.size();x++ ){
-			if(NEIUltraTechConfig.matches(result, CVD_Recipe.recipes.get(x).getOutput())){
-				recipes.add(CVD_Recipe.recipes.get(x));
+		for(CVD_Recipe a : RecipeRegistry.cvd){
+			if(NEIUltraTechConfig.matches(result, a.getResult())){
+				recipes.add(a);
 			}
 		}
 	}
@@ -59,9 +59,9 @@ public class CVD_Crafting extends TemplateRecipeHandler {
 
 	@Override
 	public void loadUsageRecipes(ItemStack ingredient){
-		for(int x = 0; x < CVD_Recipe.recipes.size();x++ ){
-			if(NEIUltraTechConfig.matches(ingredient, CVD_Recipe.recipes.get(x).getImput1()) || NEIUltraTechConfig.matches(ingredient, CVD_Recipe.recipes.get(x).getImput2())){
-				recipes.add(CVD_Recipe.recipes.get(x));
+		for(CVD_Recipe a : RecipeRegistry.cvd){
+			if(NEIUltraTechConfig.matches(ingredient, a.getInput(0)) || NEIUltraTechConfig.matches(ingredient, a.getInput(1))){
+				recipes.add(a);
 			}
 		}
 	}
@@ -74,14 +74,14 @@ public class CVD_Crafting extends TemplateRecipeHandler {
 	public List<PositionedStack> getIngredientStacks(int recipe)
 	{
 		List<PositionedStack> need = new ArrayList<PositionedStack>();
-		need.add(new PositionedStack(recipes.get(recipe).getImput1(), 47, 22));
-		need.add(new PositionedStack(recipes.get(recipe).getImput2(), 83, 22));
+		need.add(new PositionedStack(recipes.get(recipe).getInput(0), 47, 22));
+		need.add(new PositionedStack(recipes.get(recipe).getInput(1), 83, 22));
 		return need;
 	}
 	@Override
 	public PositionedStack getResultStack(int recipe)
 	{
-		return new PositionedStack(recipes.get(recipe).getOutput(),137,22);
+		return new PositionedStack(recipes.get(recipe).getResult(),137,22);
 	}
 	@Override
 	public List<PositionedStack> getOtherStacks(int recipe)

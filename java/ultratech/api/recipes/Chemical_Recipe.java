@@ -1,4 +1,4 @@
-package common.cout970.UltraTech.recipes;
+package ultratech.api.recipes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +8,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
-public class Chemical_Recipe implements IRecipeHandler{
+public class Chemical_Recipe{
 
 	public static List<Chemical_Recipe> recipes = new ArrayList<Chemical_Recipe>();
 
@@ -26,8 +26,7 @@ public class Chemical_Recipe implements IRecipeHandler{
 		out_3 = c;
 	}
 	
-	@Override
-	public void addRecipe(IRecipeHandler r) {
+	public void addRecipe(Chemical_Recipe r) {
 		Chemical_Recipe a = (Chemical_Recipe) r;
 		if(a.out_1 != null && a.out_1.stackSize == 0)a.out_1.stackSize = 1;
 		if(a.out_2 != null && a.out_2.stackSize == 0)a.out_2.stackSize = 1;
@@ -36,17 +35,14 @@ public class Chemical_Recipe implements IRecipeHandler{
 			recipes.add(a);
 	}
 
-	@Override
 	public boolean matches(IInventory inv) {
 		return false;
 	}
 
-	@Override
 	public ItemStack getCraftingResult(IInventory inv) {
 		return null;
 	}
 
-	@Override
 	public ItemStack getResult(ItemStack itemstack) {
 		return null;
 	}

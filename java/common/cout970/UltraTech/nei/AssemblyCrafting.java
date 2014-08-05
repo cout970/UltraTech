@@ -3,10 +3,10 @@ package common.cout970.UltraTech.nei;
 import java.util.ArrayList;
 import java.util.List;
 
+import ultratech.api.recipes.Assembly_Recipes;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import common.cout970.UltraTech.recipes.Assembly_Recipes;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.TemplateRecipeHandler;
 

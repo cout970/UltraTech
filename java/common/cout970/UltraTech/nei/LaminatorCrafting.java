@@ -4,14 +4,15 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 
+import ultratech.api.recipes.Laminator_Recipe;
+import ultratech.api.recipes.Purifier_Recipe;
+import ultratech.api.recipes.RecipeRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.TemplateRecipeHandler;
 import codechicken.nei.recipe.TemplateRecipeHandler.RecipeTransferRect;
-import common.cout970.UltraTech.recipes.Laminator_Recipe;
-import common.cout970.UltraTech.recipes.Purifier_Recipe;
 
 public class LaminatorCrafting extends TemplateRecipeHandler{
 
@@ -40,7 +41,7 @@ public class LaminatorCrafting extends TemplateRecipeHandler{
     public void loadCraftingRecipes(String outputId, Object... results) {
     
         if (outputId.equals(getRecipesID())) {
-            for (Laminator_Recipe recipe : Laminator_Recipe.recipes)
+            for (Laminator_Recipe recipe : RecipeRegistry.laminator)
                 recipes.add(recipe);
         }  else super.loadCraftingRecipes(outputId, results);
     }
@@ -48,9 +49,9 @@ public class LaminatorCrafting extends TemplateRecipeHandler{
 	@Override
 	public void loadCraftingRecipes(ItemStack result)
 	{
-		for(int x = 0; x < Laminator_Recipe.recipes.size();x++ ){
-			if(NEIUltraTechConfig.matches(result, Laminator_Recipe.recipes.get(x).getOutput())){
-				recipes.add(Laminator_Recipe.recipes.get(x));
+		for(int x = 0; x < RecipeRegistry.laminator.size();x++ ){
+			if(NEIUltraTechConfig.matches(result, RecipeRegistry.laminator.get(x).getResult())){
+				recipes.add(RecipeRegistry.laminator.get(x));
 			}
 		}
 	}
@@ -58,16 +59,16 @@ public class LaminatorCrafting extends TemplateRecipeHandler{
 
 	@Override
 	public void loadUsageRecipes(ItemStack ingredient){
-		for(int x = 0; x < Laminator_Recipe.recipes.size();x++ ){
-			if(NEIUltraTechConfig.matches(ingredient, Laminator_Recipe.recipes.get(x).getInput())){
-				recipes.add(Laminator_Recipe.recipes.get(x));
+		for(int x = 0; x < RecipeRegistry.laminator.size();x++ ){
+			if(NEIUltraTechConfig.matches(ingredient, RecipeRegistry.laminator.get(x).getInput(0))){
+				recipes.add(RecipeRegistry.laminator.get(x));
 			}
 		}
 	}
 	@Override
 	public PositionedStack getResultStack(int recipe)
 	{
-		return new PositionedStack(recipes.get(recipe).getOutput(),137,22);
+		return new PositionedStack(recipes.get(recipe).getResult(),137,22);
 	}
 	@Override
 	public List<PositionedStack> getOtherStacks(int recipe)
@@ -78,7 +79,7 @@ public class LaminatorCrafting extends TemplateRecipeHandler{
 	public List<PositionedStack> getIngredientStacks(int recipe)
 	{
 		List<PositionedStack> need = new ArrayList<PositionedStack>();
-		need.add(new PositionedStack(recipes.get(recipe).getInput(), 47, 22));
+		need.add(new PositionedStack(recipes.get(recipe).getInput(0), 47, 22));
 		return need;
 	}
 

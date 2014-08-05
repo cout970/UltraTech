@@ -1,12 +1,12 @@
 package common.cout970.UltraTech.containers;
 
+import ultratech.api.recipes.CVD_Recipe;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import common.cout970.UltraTech.TileEntities.electric.tiers.ChemicalVaporDesintegrationT1_Entity;
-import common.cout970.UltraTech.recipes.CVD_Recipe;
 
 
 public class CVDcontainer extends UT_Container{
@@ -70,7 +70,7 @@ public class CVDcontainer extends UT_Container{
 				}
 				current.onSlotChange(itemstack, aux);
 			}else{
-				if(CVD_Recipe.INSTANCE.getResult(itemstack) != null){
+				if(CVD_Recipe.isIngredient(itemstack)){
 					if(!mergeItemStack(itemstack, 0, inv-1, false)){
 						return null;
 					}

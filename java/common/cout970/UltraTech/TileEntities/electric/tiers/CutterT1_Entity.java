@@ -1,15 +1,18 @@
 package common.cout970.UltraTech.TileEntities.electric.tiers;
 
+import java.util.Random;
+
+import ultratech.api.recipes.CVD_Recipe;
+import ultratech.api.recipes.Cutter_Recipe;
+import ultratech.api.recipes.Laminator_Recipe;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import common.cout970.UltraTech.managers.MachineData;
-import common.cout970.UltraTech.recipes.CVD_Recipe;
-import common.cout970.UltraTech.recipes.Cutter_Recipe;
-import common.cout970.UltraTech.recipes.Laminator_Recipe;
 import common.cout970.UltraTech.util.ConfigurableMachineWithInventory;
+import common.cout970.UltraTech.util.LogHelper;
 
 public class CutterT1_Entity extends ConfigurableMachineWithInventory implements ISidedInventory{
 
@@ -18,7 +21,7 @@ public class CutterT1_Entity extends ConfigurableMachineWithInventory implements
 	public boolean hasEnergy;
 
 	public CutterT1_Entity() {
-		super(2, "Cutter", MachineData.Cutter);
+		super(3, "Cutter", MachineData.Cutter);
 	}
 
 	@Override
@@ -35,7 +38,7 @@ public class CutterT1_Entity extends ConfigurableMachineWithInventory implements
 		if(!hasEnergy && shouldWork()){
 			hasEnergy = this.getCharge() >= MachineData.Cutter.use;
 		}
-		if(hasEnergy && Cutter_Recipe.INSTANCE.matches(this)){
+		if(hasEnergy && Cutter_Recipe.canCraft(this)){
 			Progres++;
 			if(Progres >= maxProgres){
 				Progres = 0;
@@ -53,17 +56,37 @@ public class CutterT1_Entity extends ConfigurableMachineWithInventory implements
 
 
 	protected void craft() {
-		if(Cutter_Recipe.INSTANCE.matches(this)){
-			ItemStack itemstack = Cutter_Recipe.INSTANCE.getCraftingResult(this);
-
+		if(Cutter_Recipe.canCraft(this)){
+			Cutter_Recipe recipe = Cutter_Recipe.getCraftingResult(this);
+			ItemStack itemstack = recipe.getResult(0);
+			ItemStack extra = recipe.getResult(1);
+			
+			--this.inventory[0].stackSize;
+			if (this.inventory[0].stackSize <= 0){
+				this.inventory[0] = null;
+			}
+			
 			if (this.inventory[1] == null){
 				this.inventory[1] = itemstack.copy();
 			}else if (this.inventory[1].isItemEqual(itemstack)){
 				inventory[1].stackSize += itemstack.stackSize;
 			}
-			--this.inventory[0].stackSize;
-			if (this.inventory[0].stackSize <= 0){
-				this.inventory[0] = null;
+			
+			Random r = new Random();
+			if(extra != null){
+				int intents = ((int)(recipe.prob/100))+1;
+				for(int x = 0; x < intents;x++){
+					int p = r.nextInt(100);
+//					LogHelper.log(p);
+					if(p <= recipe.prob){
+						
+						if (this.inventory[2] == null){
+							this.inventory[2] = extra.copy();
+						}else if (this.inventory[2].isItemEqual(extra)){
+							inventory[2].stackSize += extra.stackSize;
+						}
+					}
+				}
 			}
 		}
 	}

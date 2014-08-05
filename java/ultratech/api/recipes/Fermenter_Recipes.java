@@ -1,4 +1,4 @@
-package common.cout970.UltraTech.recipes;
+package ultratech.api.recipes;
 
 import java.util.HashMap;
 import java.util.Map;

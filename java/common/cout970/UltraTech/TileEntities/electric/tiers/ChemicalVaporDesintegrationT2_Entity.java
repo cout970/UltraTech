@@ -1,10 +1,9 @@
 package common.cout970.UltraTech.TileEntities.electric.tiers;
 
+import ultratech.api.recipes.CVD_Recipe;
 import net.minecraft.nbt.NBTTagCompound;
-
 import common.cout970.UltraTech.managers.MachineData;
 import common.cout970.UltraTech.misc.ISpeeded;
-import common.cout970.UltraTech.recipes.CVD_Recipe;
 
 public class ChemicalVaporDesintegrationT2_Entity extends ChemicalVaporDesintegrationT1_Entity implements ISpeeded{
 
@@ -29,7 +28,7 @@ public class ChemicalVaporDesintegrationT2_Entity extends ChemicalVaporDesintegr
 		if(!hasEnergy && shouldWork()){
 			hasEnergy = this.getCharge() >= MachineData.CVD.use;
 		}
-		if(hasEnergy && CVD_Recipe.INSTANCE.matches(this)){
+		if(hasEnergy && CVD_Recipe.canCraft(this)){
 			Progres++;
 			if(Progres >= maxProgres){
 				Progres = 0;

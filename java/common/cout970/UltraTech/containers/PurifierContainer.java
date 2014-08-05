@@ -1,5 +1,6 @@
 package common.cout970.UltraTech.containers;
 
+import ultratech.api.recipes.Purifier_Recipe;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -7,7 +8,6 @@ import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import common.cout970.UltraTech.TileEntities.electric.tiers.PurifierT1_Entity;
-import common.cout970.UltraTech.recipes.Purifier_Recipe;
 
 public class PurifierContainer extends Container{
 
@@ -87,7 +87,7 @@ public class PurifierContainer extends Container{
 				}
 				current.onSlotChange(itemstack, aux);
 			}else{
-				if (Purifier_Recipe.INSTANCE.getResult(itemstack) != null)
+				if (Purifier_Recipe.isIngredient(itemstack))
                 {
                     if (!this.mergeItemStack(itemstack, 0, 1, false))
                     {

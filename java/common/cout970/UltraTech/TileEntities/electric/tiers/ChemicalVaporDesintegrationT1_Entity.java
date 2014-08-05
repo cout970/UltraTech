@@ -1,13 +1,12 @@
 package common.cout970.UltraTech.TileEntities.electric.tiers;
 
+import ultratech.api.recipes.CVD_Recipe;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-
 import common.cout970.UltraTech.managers.MachineData;
-import common.cout970.UltraTech.recipes.CVD_Recipe;
 import common.cout970.UltraTech.util.ConfigurableMachineWithInventory;
 
 public class ChemicalVaporDesintegrationT1_Entity extends ConfigurableMachineWithInventory implements ISidedInventory{
@@ -33,7 +32,7 @@ public class ChemicalVaporDesintegrationT1_Entity extends ConfigurableMachineWit
 		if(!hasEnergy && shouldWork()){
 			hasEnergy = this.getCharge() >= MachineData.CVD.use;
 		}
-		if(hasEnergy && CVD_Recipe.INSTANCE.matches(this)){
+		if(hasEnergy && CVD_Recipe.canCraft(this)){
 			Progres++;
 			if(Progres >= maxProgres){
 				Progres = 0;
@@ -51,8 +50,8 @@ public class ChemicalVaporDesintegrationT1_Entity extends ConfigurableMachineWit
 
 
 	protected void craft() {
-		if(CVD_Recipe.INSTANCE.matches(this)){
-			ItemStack itemstack = CVD_Recipe.INSTANCE.getCraftingResult(this);
+		if(CVD_Recipe.canCraft(this)){
+			ItemStack itemstack = CVD_Recipe.getCraftingResult(this);
 
 			if (this.inventory[2] == null)
 			{

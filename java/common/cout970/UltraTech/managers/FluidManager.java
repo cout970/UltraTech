@@ -50,7 +50,7 @@ public class FluidManager{
 		Ethanol = new Fluid("bioEthanol");
 		Gas_Oil = new Fluid("gas_oil");
 		Gasoline = new Fluid("gasoline");
-		Oil = new Fluid("oil");
+		Oil = new Fluid("oil").setDensity(2000).setViscosity(2000);
 		Plastic = new Fluid("plastic");
 		Fuel = new Fluid("fuel");
 		Acid = new Fluid("sulfuric_acid");

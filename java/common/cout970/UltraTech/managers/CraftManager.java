@@ -3,6 +3,11 @@ package common.cout970.UltraTech.managers;
 import static common.cout970.UltraTech.managers.BlockManager.*;
 import static common.cout970.UltraTech.managers.ItemManager.ItemName;
 import ultratech.api.power.multipart.MultipartReference;
+import ultratech.api.recipes.Boiler_Recipes;
+import ultratech.api.recipes.Chemical_Recipe;
+import ultratech.api.recipes.Cooling_Recipes;
+import ultratech.api.recipes.Fermenter_Recipes;
+import ultratech.api.recipes.RecipeRegistry;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -11,14 +16,6 @@ import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 import common.cout970.UltraTech.TileEntities.electric.tiers.FluidGeneratorT1_Entity;
 import common.cout970.UltraTech.microparts.MicroRegistry;
-import common.cout970.UltraTech.recipes.Boiler_Recipes;
-import common.cout970.UltraTech.recipes.CVD_Recipe;
-import common.cout970.UltraTech.recipes.Chemical_Recipe;
-import common.cout970.UltraTech.recipes.Cooling_Recipes;
-import common.cout970.UltraTech.recipes.Cutter_Recipe;
-import common.cout970.UltraTech.recipes.Fermenter_Recipes;
-import common.cout970.UltraTech.recipes.Laminator_Recipe;
-import common.cout970.UltraTech.recipes.Purifier_Recipe;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 
@@ -26,7 +23,7 @@ public class CraftManager {
 
 	public static void registerCraft(){
 
-		//crafting recipes
+		//crafting laminator
 		//blocks
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Chasis,1,0),new Object[]{"aaa","a a","aaa",'a',"ingotAluminum"}));																							//chasis mk1
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Chasis,1,1),new Object[]{"aaa","aba","aaa",'a',"plateGrafeno",'b',"itemPlastic"}));																		//chasis mk2
@@ -188,46 +185,8 @@ public class CraftManager {
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(deco.get(14),9),new Object[]{"rir","iii","rir",'i',Blocks.stone,'r',new ItemStack(stoneblockwhite,1,0)}));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(deco.get(15),8),new Object[]{"iii","isi","iii",'s',Items.redstone,'i',new ItemStack(stoneblockwhite,1,0)}));
 
-		
-		Smelting();//furnace recipes
-		CVD();
-		Purifier();
-		Cutter();
-		Assembly();
-		Laminator();
 
-		//fermenter recipes
-		Fermenter_Recipes.recipes.put(Items.sugar, 75);
-		Fermenter_Recipes.recipes.put(Items.apple, 25);
-		Fermenter_Recipes.recipes.put(Items.wheat, 100);
-//		Fermenter_Recipes.recipes.put(Blocks.sapling, 10);
-
-		//liquid recipes
-		Boiler_Recipes.recipes.put("juice", "gas_ethanol");
-		Boiler_Recipes.recipes.put("oil", "gas_oil");
-		Boiler_Recipes.recipes.put("water", "steam");
-
-		Cooling_Recipes.recipes.add(new Cooling_Recipes(FluidRegistry.getFluidStack("gas_oil", 100), FluidRegistry.getFluidStack("plastic", 40), FluidRegistry.getFluidStack("fuel", 60), FluidRegistry.getFluidStack("gasoline", 10)));
-		Cooling_Recipes.recipes.add(new Cooling_Recipes(FluidRegistry.getFluidStack("gas_ethanol", 100), FluidRegistry.getFluidStack("bioethanol", 80), FluidRegistry.getFluidStack("water", 9), FluidRegistry.getFluidStack("water", 1)));
-
-//		FluidGeneratorEntity.fuels.put("fuel", 2);
-//		FluidGeneratorEntity.fuels.put("gasoline", 3);
-//		FluidGeneratorEntity.fuels.put("bioethanol", 1);
-		
-		Chemical_Recipe.INSTANCE.addRecipe(new Chemical_Recipe(FluidRegistry.getFluidStack("plastic", 1000), new ItemStack(ItemName.get("Sulfur")), new ItemStack(ItemName.get("Rubber")), new ItemStack(ItemName.get("Plastic"))));
-	}
-
-	public static void Laminator() {
-
-		Laminator_Recipe.addRecipe(new Laminator_Recipe(new ItemStack(ItemName.get("Dust"),1,7),new ItemStack(ItemName.get("MetalPlate"),1,6)));//gold plate
-		Laminator_Recipe.addRecipe(new Laminator_Recipe(new ItemStack(ItemName.get("Dust"),1,6),new ItemStack(ItemName.get("MetalPlate"),1,5)));//iron plate
-		for(int r = 0;r < 5;r++)//dust to plates
-			Laminator_Recipe.addRecipe(new Laminator_Recipe(new ItemStack(ItemName.get("Dust"),1,r),new ItemStack(ItemName.get("MetalPlate"),1,r)));
-		for(int r = 0;r < 5;r++)//ingot to plates
-			Laminator_Recipe.addRecipe(new Laminator_Recipe(new ItemStack(ItemName.get("Ingot"),1,r),new ItemStack(ItemName.get("MetalPlate"),1,r)));
-		Laminator_Recipe.addRecipe(new Laminator_Recipe(new ItemStack(Items.gold_ingot),new ItemStack(ItemName.get("MetalPlate"),1,6)));
-		Laminator_Recipe.addRecipe(new Laminator_Recipe(new ItemStack(Items.iron_ingot),new ItemStack(ItemName.get("MetalPlate"),1,5)));
-		Laminator_Recipe.addRecipe(new Laminator_Recipe(new ItemStack(ItemName.get("Dust"),1,5),new ItemStack(ItemName.get("MetalPlate"),1,7)));
+		Smelting();//furnace laminator
 	}
 
 	public static void Smelting(){
@@ -246,78 +205,6 @@ public class CraftManager {
 
 		//other
 		GameRegistry.addSmelting(ItemName.get("RawMeal"), new ItemStack(ItemName.get("ProcesedFood")), 0.35f);
-	}
-
-
-	public static void CVD(){
-		//cvd recipes
-		CVD_Recipe.addRecipe(new CVD_Recipe(new ItemStack(Items.coal), new ItemStack(Items.coal),new ItemStack(ItemName.get("UnorganicPlate"),2,1)));//grafeno
-		CVD_Recipe.addRecipe(new CVD_Recipe(new ItemStack(Items.coal,1,1), new ItemStack(Items.coal,1,1),new ItemStack(ItemName.get("UnorganicPlate"),2,1)));//grafeno
-		CVD_Recipe.addRecipe(new CVD_Recipe(new ItemStack(Items.iron_ingot), new ItemStack(Items.redstone),new ItemStack(ItemName.get("UnorganicPlate"),1,3)));//restone plate
-		CVD_Recipe.addRecipe(new CVD_Recipe(new ItemStack(ItemName.get("Radionite"),1), new ItemStack(ItemName.get("Radionite"),1),new ItemStack(ItemName.get("UnorganicPlate"),1,4)));//radionite plate
-		CVD_Recipe.addRecipe(new CVD_Recipe(new ItemStack(ItemName.get("GrafenoPlate")), new ItemStack(ItemName.get("GrafenoPlate")),new ItemStack(ItemName.get("Dust"),1,8)));//diamond dust
-		CVD_Recipe.addRecipe(new CVD_Recipe(new ItemStack(ItemName.get("Dust"),1,0), new ItemStack(stoneblockblack,1,0),new ItemStack(stoneblockwhite,1,0)));
-		CVD_Recipe.addRecipe(new CVD_Recipe(new ItemStack(ItemName.get("Sulfur"),1,0), new ItemStack(ItemName.get("Rubber"),1,0),new ItemStack(ItemName.get("Rubber_bulcanized"),1,0)));
-		CVD_Recipe.addRecipe(new CVD_Recipe(new ItemStack(Blocks.obsidian,1,0), new ItemStack(Blocks.obsidian,1,0),new ItemStack(ItemName.get("UnorganicPlate"),2,5)));
-		CVD_Recipe.addRecipe(new CVD_Recipe(new ItemStack(ItemName.get("Dust"),1,9), new ItemStack(ItemName.get("Dust"),1,9),new ItemStack(ItemName.get("UnorganicPlate"),2,5)));
-	}
-
-	public static void Purifier(){
-		//purifier recipes
-		Purifier_Recipe.addRecipe(new Purifier_Recipe(new ItemStack(Blocks.sand), new ItemStack(ItemName.get("RawSilicon"),1)));
-		Purifier_Recipe.addRecipe(new Purifier_Recipe(new ItemStack(Blocks.gravel), new ItemStack(Items.flint,1)));
-		Purifier_Recipe.addRecipe(new Purifier_Recipe(new ItemStack(Blocks.sandstone), new ItemStack(Blocks.sand,4)));
-		Purifier_Recipe.addRecipe(new Purifier_Recipe(new ItemStack(Blocks.stone), new ItemStack(stoneblockblack,1,0)));
-		Purifier_Recipe.addRecipe(new Purifier_Recipe(new ItemStack(Blocks.cobblestone), new ItemStack(stoneblockblack,1,0)));
-		Purifier_Recipe.addRecipe(new Purifier_Recipe(new ItemStack(Items.quartz), new ItemStack(stoneblockwhite,1,0)));
-		for(int r = 0;r <5;r++)//chunk to dust
-			Purifier_Recipe.addRecipe(new Purifier_Recipe(new ItemStack(ItemName.get("Chunk"),1,r),new ItemStack(ItemName.get("Dust"),1,r)));
-		Purifier_Recipe.addRecipe(new Purifier_Recipe(new ItemStack(ItemName.get("Chunk"),1,5),new ItemStack(ItemName.get("Dust"),1,6)));
-		Purifier_Recipe.addRecipe(new Purifier_Recipe(new ItemStack(ItemName.get("Chunk"),1,6),new ItemStack(ItemName.get("Dust"),1,7)));
-		Purifier_Recipe.addRecipe(new Purifier_Recipe(new ItemStack(ItemName.get("Chunk"),1,7),new ItemStack(ItemName.get("Radionite"),1)));
-	}
-
-
-	public static void Cutter(){
-		//cuter recipes
-		Cutter_Recipe.addRecipe(new Cutter_Recipe(new ItemStack(Items.reeds), new ItemStack(Items.sugar,2)));
-		Cutter_Recipe.addRecipe(new Cutter_Recipe(new ItemStack(Blocks.wool), new ItemStack(Items.string,4)));
-		Cutter_Recipe.addRecipe(new Cutter_Recipe(new ItemStack(Blocks.cobblestone), new ItemStack(Blocks.sand,1)));
-		Cutter_Recipe.addRecipe(new Cutter_Recipe(new ItemStack(Items.bone), new ItemStack(Items.dye,6,15)));
-		Cutter_Recipe.addRecipe(new Cutter_Recipe(new ItemStack(Items.diamond), new ItemStack(ItemName.get("UnorganicPlate"),8,0)));
-		Cutter_Recipe.addRecipe(new Cutter_Recipe(new ItemStack(Items.cookie), new ItemStack(ItemName.get("RawMeal"), 1)));
-		Cutter_Recipe.addRecipe(new Cutter_Recipe(new ItemStack(Items.rotten_flesh), new ItemStack(ItemName.get("RawMeal"), 2)));
-		Cutter_Recipe.addRecipe(new Cutter_Recipe(new ItemStack(Items.porkchop), new ItemStack(ItemName.get("RawMeal"), 2)));
-		Cutter_Recipe.addRecipe(new Cutter_Recipe(new ItemStack(Items.beef), new ItemStack(ItemName.get("RawMeal"), 2)));
-		Cutter_Recipe.addRecipe(new Cutter_Recipe(new ItemStack(Items.potato), new ItemStack(ItemName.get("RawMeal"), 1)));
-		Cutter_Recipe.addRecipe(new Cutter_Recipe(new ItemStack(Items.chicken), new ItemStack(ItemName.get("RawMeal"), 1)));
-		Cutter_Recipe.addRecipe(new Cutter_Recipe(new ItemStack(Items.spider_eye), new ItemStack(ItemName.get("RawMeal"), 1)));
-		Cutter_Recipe.addRecipe(new Cutter_Recipe(new ItemStack(Items.fish), new ItemStack(ItemName.get("RawMeal"), 1)));
-		Cutter_Recipe.addRecipe(new Cutter_Recipe(new ItemStack(Items.carrot), new ItemStack(ItemName.get("RawMeal"), 2)));
-		Cutter_Recipe.addRecipe(new Cutter_Recipe(new ItemStack(ItemName.get("RawSilicon")),new ItemStack(ItemName.get("UnorganicPlate"),1,2)));
-		for(int r = 1;r <6;r++)//ores to chunk
-			Cutter_Recipe.addRecipe(new Cutter_Recipe(new ItemStack(Ores,1,r),new ItemStack(ItemName.get("Chunk"),3,r-1)));
-		Cutter_Recipe.addRecipe(new Cutter_Recipe(new ItemStack(Ores,1,0),new ItemStack(ItemName.get("Chunk"),1,7)));
-		Cutter_Recipe.addRecipe(new Cutter_Recipe(new ItemStack(Blocks.iron_ore,1),new ItemStack(ItemName.get("Chunk"),3,5)));
-		Cutter_Recipe.addRecipe(new Cutter_Recipe(new ItemStack(Blocks.gold_ore,1),new ItemStack(ItemName.get("Chunk"),3,6)));
-		Cutter_Recipe.addRecipe(new Cutter_Recipe(new ItemStack(ItemName.get("MetalPlate"),1,4),new ItemStack(ItemName.get("SilverCable"),3)));
-		Cutter_Recipe.addRecipe(new Cutter_Recipe(new ItemStack(Blocks.coal_ore,1),new ItemStack(Items.coal,3)));
-		Cutter_Recipe.addRecipe(new Cutter_Recipe(new ItemStack(Blocks.lapis_ore,1),new ItemStack(Items.dye,3,4)));
-		Cutter_Recipe.addRecipe(new Cutter_Recipe(new ItemStack(Blocks.redstone_ore,1),new ItemStack(Items.redstone,8)));
-		Cutter_Recipe.addRecipe(new Cutter_Recipe(new ItemStack(Blocks.emerald_ore,1),new ItemStack(Items.emerald,3)));
-		Cutter_Recipe.addRecipe(new Cutter_Recipe(new ItemStack(Blocks.quartz_ore,1),new ItemStack(Items.quartz,3)));
-		Cutter_Recipe.addRecipe(new Cutter_Recipe(new ItemStack(Blocks.diamond_ore,1),new ItemStack(Items.diamond,3)));
-		Cutter_Recipe.addRecipe(new Cutter_Recipe(new ItemStack(Blocks.obsidian,1),new ItemStack(ItemName.get("Dust"),1,9)));
-	}
-	public static void Assembly(){
-		//assembly recipes
-		//		Assembly_Recipes.addRecipe(new Assembly_Recipes(new ItemStack(ItemName.get("Motor"),1), new Object[]{"rc ","iii","rc ",'c',ItemName.get("Coil"),'r', new ItemStack(ItemManager.ItemName.get("Plate"),1,4),'i',new ItemStack(ItemName.get("Plate"),1,6)}));
-		//		Assembly_Recipes.addRecipe(new Assembly_Recipes(new ItemStack(ItemName.get("Battery"),1), new Object[]{"hah","hah","hah",'h',new ItemStack(ItemName.get("Plate"),1,0),'a',new ItemStack(ItemName.get("Plate"),1,5)}));
-		//		Assembly_Recipes.addRecipe(new Assembly_Recipes(new ItemStack(SolarPanel_T1,1), new Object[]{"hhh","aaa","bbb",'h',new ItemStack(ItemName.get("Plate"),1,10),'a',new ItemStack(ItemName.get("Plate"),1,5),'b', new ItemStack(ItemManager.ItemName.get("Plate"),1,4)}));
-		//		Assembly_Recipes.addRecipe(new Assembly_Recipes(new ItemStack(ItemName.get("AdvCircuit"),1), new Object[]{"hph","hah","hph",'h',new ItemStack(MicroRegistry.PlaneCable,1),'a',new ItemStack(ItemName.get("Plate"),1,10),'p',new ItemStack(ItemManager.ItemName.get("Plate"),1,8)}));
-		//		Assembly_Recipes.addRecipe(new Assembly_Recipes(new ItemStack(ItemName.get("Fan"),1), new Object[]{"opo","ppp","opo",'p',new ItemStack(ItemManager.ItemName.get("Plate"),1,9)}));
-		//		Assembly_Recipes.addRecipe(new Assembly_Recipes(new ItemStack(ItemName.get("Coil"),2), new Object[]{"rrr","ppp","rrr",'p',new ItemStack(ItemManager.ItemName.get("Plate"),1,6),'r',new ItemStack(ItemManager.ItemName.get("Plate"),1,11)}));
-		//		Assembly_Recipes.addRecipe(new Assembly_Recipes(new ItemStack(ItemName.get("HeatCoil"),1), new Object[]{"pp ","pp ","   ",'p',new ItemStack(ItemManager.ItemName.get("Plate"),1,5)}));
 	}
 
 }

@@ -30,6 +30,7 @@ public class ConfigManager {
 		config.load();
 		
 		OreGeneration.readConfigOre(config);
+		OreGeneration.readConfigOil(config);
 		
 		if(config.hasChanged()){
 			config.save();

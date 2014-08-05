@@ -9,11 +9,10 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 import ultratech.api.power.CableType;
-
+import ultratech.api.recipes.Boiler_Recipes;
 import common.cout970.UltraTech.misc.IUpdatedEntity;
 import common.cout970.UltraTech.misc.PowerExchange;
 import common.cout970.UltraTech.network.SyncTile;
-import common.cout970.UltraTech.recipes.Boiler_Recipes;
 import common.cout970.UltraTech.util.fluids.UT_Tank;
 
 public class BoilerEntity extends SyncTile implements IFluidHandler,IUpdatedEntity{

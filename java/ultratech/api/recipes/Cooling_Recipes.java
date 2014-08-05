@@ -1,4 +1,4 @@
-package common.cout970.UltraTech.recipes;
+package ultratech.api.recipes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,26 +41,26 @@ public class Cooling_Recipes {
 	}
 //	
 //	public static boolean isResult(FluidStack a){
-//		for(Cooling_Recipes b : recipes)
+//		for(Cooling_Recipes b : cutter)
 //		for(FluidStack f : b.product)if(isEqual(a, f))return true;
 //		return false;
 //	}
 //	
 //	public static boolean hasRecipe(FluidStack a){
-//		for(Cooling_Recipes b : recipes)
+//		for(Cooling_Recipes b : cutter)
 //		if(isEqual(a, b.input))return true;
 //		return false;
 //	}
 //
 //	public static FluidStack[] getResult(FluidStack c) {
-//		for(Cooling_Recipes b : recipes)
+//		for(Cooling_Recipes b : cutter)
 //			if(isEqual(c, b.input))return b.product;
 //		return null;
 //	}
 //
 //	public static int getInit(FluidStack fluid) {
 //		if(fluid == null)return 0;
-//		for(Cooling_Recipes b : recipes)
+//		for(Cooling_Recipes b : cutter)
 //			if(isEqual(fluid, b.input))return b.input.amount;
 //		return 0;
 //	}

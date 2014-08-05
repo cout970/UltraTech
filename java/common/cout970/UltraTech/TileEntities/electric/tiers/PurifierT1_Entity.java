@@ -1,14 +1,14 @@
 package common.cout970.UltraTech.TileEntities.electric.tiers;
 
+import ultratech.api.recipes.CVD_Recipe;
+import ultratech.api.recipes.Laminator_Recipe;
+import ultratech.api.recipes.Purifier_Recipe;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import common.cout970.UltraTech.managers.MachineData;
-import common.cout970.UltraTech.recipes.CVD_Recipe;
-import common.cout970.UltraTech.recipes.Laminator_Recipe;
-import common.cout970.UltraTech.recipes.Purifier_Recipe;
 import common.cout970.UltraTech.util.ConfigurableMachineWithInventory;
 
 public class PurifierT1_Entity extends ConfigurableMachineWithInventory implements ISidedInventory{
@@ -35,7 +35,7 @@ public class PurifierT1_Entity extends ConfigurableMachineWithInventory implemen
 		if(!hasEnergy && shouldWork()){
 			hasEnergy = this.getCharge() >= MachineData.Purifier.use;
 		}
-		if(hasEnergy && Purifier_Recipe.INSTANCE.matches(this)){
+		if(hasEnergy && Purifier_Recipe.canCraft(this)){
 			Progres++;
 			if(Progres >= maxProgres){
 				Progres = 0;
@@ -53,8 +53,8 @@ public class PurifierT1_Entity extends ConfigurableMachineWithInventory implemen
 
 
 	protected void craft() {
-		if(Purifier_Recipe.INSTANCE.matches(this)){
-			ItemStack itemstack = Purifier_Recipe.INSTANCE.getCraftingResult(this);
+		if(Purifier_Recipe.canCraft(this)){
+			ItemStack itemstack = Purifier_Recipe.getCraftingResult(this);
 
 			if (this.inventory[1] == null){
 				this.inventory[1] = itemstack.copy();

@@ -2,6 +2,7 @@ package common.cout970.UltraTech.managers;
 
 
 import ultratech.api.power.multipart.MultipartReference;
+import ultratech.api.recipes.RecipeRegistry;
 import common.cout970.UltraTech.handlers.FuelHandler;
 import common.cout970.UltraTech.handlers.GuiHandler;
 import common.cout970.UltraTech.handlers.WorldGen;
@@ -62,13 +63,14 @@ public class UltraTech {
 		LogHelper.log("Starting Init");
 		Net_Utils.initMessages();
 		
-		NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
-		if(MultipartReference.isMicroPartActived) new MicroRegistry().load();
-		CompatibilityManager.initCompatibilitys();
-		GameRegistry.registerFuelHandler(new FuelHandler());
-		CraftManager.registerCraft();
-		GameRegistry.registerWorldGenerator(new WorldGen(), 10);
-		proxy.registerRenders();
+		NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());	//gui
+		if(MultipartReference.isMicroPartActived) new MicroRegistry().load();		//microblocks
+		CompatibilityManager.initCompatibilitys();									//oredict and buildcraft engine fuel
+		GameRegistry.registerFuelHandler(new FuelHandler());						//fuel
+		CraftManager.registerCraft();												//craft and smelting
+		RecipeRegistry.initRecipes();												//cutter for machines
+		GameRegistry.registerWorldGenerator(new WorldGen(), 10);					//world generation
+		proxy.registerRenders();													//renders
 		LogHelper.log("Finishing Init");
 	}
 

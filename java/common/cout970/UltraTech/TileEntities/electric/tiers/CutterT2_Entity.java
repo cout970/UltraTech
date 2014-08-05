@@ -1,14 +1,14 @@
 package common.cout970.UltraTech.TileEntities.electric.tiers;
 
+import ultratech.api.recipes.CVD_Recipe;
+import ultratech.api.recipes.Cutter_Recipe;
+import ultratech.api.recipes.Laminator_Recipe;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import common.cout970.UltraTech.managers.MachineData;
 import common.cout970.UltraTech.misc.ISpeeded;
-import common.cout970.UltraTech.recipes.CVD_Recipe;
-import common.cout970.UltraTech.recipes.Cutter_Recipe;
-import common.cout970.UltraTech.recipes.Laminator_Recipe;
 
 public class CutterT2_Entity extends CutterT1_Entity implements ISpeeded{
 
@@ -33,7 +33,7 @@ public class CutterT2_Entity extends CutterT1_Entity implements ISpeeded{
 		if(!hasEnergy && shouldWork()){
 			hasEnergy = this.getCharge() >= MachineData.Cutter.use;
 		}
-		if(hasEnergy && Cutter_Recipe.INSTANCE.matches(this)){
+		if(hasEnergy && Cutter_Recipe.canCraft(this)){
 			Progres++;
 			if(Progres >= maxProgres){
 				Progres = 0;

@@ -1,15 +1,14 @@
 package common.cout970.UltraTech.TileEntities.electric;
 
 
+import ultratech.api.recipes.Assembly_Recipes;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.oredict.OreDictionary;
-
 import common.cout970.UltraTech.managers.MachineData;
-import common.cout970.UltraTech.recipes.Assembly_Recipes;
 import common.cout970.UltraTech.util.MachineWithInventory;
 
 public class MolecularAssemblyEntity extends MachineWithInventory implements IInventory{

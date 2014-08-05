@@ -28,10 +28,11 @@ public class WorldGen implements IWorldGenerator{
 		    break;
 		default:{
 			generateSurface(world, random, chunkX * 16, chunkZ * 16);
-			int prob = 1200;
-			if(world.getBiomeGenForCoords(chunkX * 16, chunkZ * 16).biomeName.equalsIgnoreCase("Desert"))prob = 150;
-			else if(world.getBiomeGenForCoords(chunkX * 16, chunkZ * 16).biomeName.equalsIgnoreCase("Deep Ocean"))prob = 150;
-			if(random.nextInt(1200) == 0){
+			int prob = OreGeneration.OilBase;
+			if(world.getBiomeGenForCoords(chunkX * 16, chunkZ * 16).biomeName.equalsIgnoreCase("Desert"))prob = OreGeneration.OilDesert;
+			else if(world.getBiomeGenForCoords(chunkX * 16, chunkZ * 16).biomeName.equalsIgnoreCase("Deep Ocean"))prob = OreGeneration.OilDeepOcean;
+			else if(world.getBiomeGenForCoords(chunkX * 16, chunkZ * 16).biomeName.equalsIgnoreCase("Ocean"))prob = OreGeneration.OilOcean;
+			if(random.nextInt(prob) == 0){
 				generateOil(random, chunkX * 16, chunkZ * 16, world);
 			}
 		}
@@ -39,22 +40,26 @@ public class WorldGen implements IWorldGenerator{
 	}
 
 	private void generateNether(World world, Random random, int i, int j) {
-		for(int k = 0; k < 8; k++) {
+		if(OreGeneration.Radionite){
+			for(int k = 0; k < 8; k++) {
+				int firstBlockXCoord = i + random.nextInt(16);
+				int firstBlockYCoord = random.nextInt(100);
+				int firstBlockZCoord = j + random.nextInt(16);
+				(new WorldGenMinable(BlockManager.Ores,0,4,Blocks.netherrack)).generate(world, random, firstBlockXCoord, firstBlockYCoord, firstBlockZCoord);
+			}
+		}
+		if(OreGeneration.Sulfur){
+			for(int k = 0; k < 5; k++) {
+				int firstBlockXCoord = i + random.nextInt(16);
+				int firstBlockYCoord = random.nextInt(10)+30;
+				int firstBlockZCoord = j + random.nextInt(16);
+				(new WorldGenMinable(BlockManager.Ores,6,12,Blocks.netherrack)).generate(world, random, firstBlockXCoord, firstBlockYCoord, firstBlockZCoord);
+			}
 			int firstBlockXCoord = i + random.nextInt(16);
 			int firstBlockYCoord = random.nextInt(100);
 			int firstBlockZCoord = j + random.nextInt(16);
-			(new WorldGenMinable(BlockManager.Ores,0,4,Blocks.netherrack)).generate(world, random, firstBlockXCoord, firstBlockYCoord, firstBlockZCoord);
+			(new WorldGenMinable(BlockManager.Ores,6,20,Blocks.netherrack)).generate(world, random, firstBlockXCoord, firstBlockYCoord, firstBlockZCoord);
 		}
-		for(int k = 0; k < 5; k++) {
-			int firstBlockXCoord = i + random.nextInt(16);
-			int firstBlockYCoord = random.nextInt(10)+30;
-			int firstBlockZCoord = j + random.nextInt(16);
-			(new WorldGenMinable(BlockManager.Ores,6,12,Blocks.netherrack)).generate(world, random, firstBlockXCoord, firstBlockYCoord, firstBlockZCoord);
-		}
-		int firstBlockXCoord = i + random.nextInt(16);
-		int firstBlockYCoord = random.nextInt(100);
-		int firstBlockZCoord = j + random.nextInt(16);
-		(new WorldGenMinable(BlockManager.Ores,6,20,Blocks.netherrack)).generate(world, random, firstBlockXCoord, firstBlockYCoord, firstBlockZCoord);
 	}
 
 	private void generateSurface(World world, Random random, int i, int j) {
@@ -121,7 +126,7 @@ public class WorldGen implements IWorldGenerator{
 					}
 				}
 		}
-		int max = w.getHeightValue(x, y)+10;
+		int max = w.getHeightValue(x, y)+6;
 		for(int h=j;h<max;h++){
 			w.setBlock(x, h, y,FluidRegistry.getFluid("oil").getBlock());
 		}

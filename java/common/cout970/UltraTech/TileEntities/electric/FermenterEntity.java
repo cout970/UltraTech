@@ -1,5 +1,6 @@
 package common.cout970.UltraTech.TileEntities.electric;
 
+import ultratech.api.recipes.Fermenter_Recipes;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.item.ItemStack;
@@ -12,7 +13,6 @@ import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 import common.cout970.UltraTech.managers.FluidManager;
 import common.cout970.UltraTech.managers.MachineData;
-import common.cout970.UltraTech.recipes.Fermenter_Recipes;
 import common.cout970.UltraTech.util.MachineWithInventory;
 import common.cout970.UltraTech.util.fluids.UT_Tank;
 

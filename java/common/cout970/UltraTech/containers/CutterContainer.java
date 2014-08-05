@@ -1,5 +1,6 @@
 package common.cout970.UltraTech.containers;
 
+import ultratech.api.recipes.Cutter_Recipe;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -7,7 +8,6 @@ import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import common.cout970.UltraTech.TileEntities.electric.tiers.CutterT1_Entity;
-import common.cout970.UltraTech.recipes.Cutter_Recipe;
 
 public class CutterContainer extends Container{
 
@@ -19,6 +19,13 @@ public class CutterContainer extends Container{
 		this.tileEntity = tileEntity;
 		addSlotToContainer(new Slot(tileEntity, 0, 61, 32));
 		addSlotToContainer(new Slot(tileEntity, 1, 117, 32){
+			@Override
+			public boolean isItemValid(ItemStack par1ItemStack)
+		    {
+		        return false;
+		    }
+		});
+		addSlotToContainer(new Slot(tileEntity, 2, 135, 32){
 			@Override
 			public boolean isItemValid(ItemStack par1ItemStack)
 		    {
@@ -90,7 +97,7 @@ public class CutterContainer extends Container{
 				}
 				current.onSlotChange(itemstack, aux);
 			}else{
-				if (Cutter_Recipe.INSTANCE.getResult(itemstack) != null)
+				if (Cutter_Recipe.isIngredient(itemstack))
                 {
                     if (!this.mergeItemStack(itemstack, 0, 1, false))
                     {
