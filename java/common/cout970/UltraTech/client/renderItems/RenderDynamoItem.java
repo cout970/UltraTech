@@ -1,20 +1,18 @@
 package common.cout970.UltraTech.client.renderItems;
 
-import org.lwjgl.opengl.GL11;
-
-import common.cout970.UltraTech.client.models.ModelDynamo;
-import common.cout970.UltraTech.client.models.NewEngine;
-import cpw.mods.fml.client.FMLClientHandler;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
-import net.minecraftforge.client.IItemRenderer.ItemRenderType;
-import net.minecraftforge.client.IItemRenderer.ItemRendererHelper;
+
+import org.lwjgl.opengl.GL11;
+
+import common.cout970.UltraTech.client.models.ModelDynamo;
+import common.cout970.UltraTech.client.textures.ResourcesLocations;
+import cpw.mods.fml.client.FMLClientHandler;
 
 public class RenderDynamoItem implements IItemRenderer{
 
 	private ModelDynamo model;
-	private ResourceLocation texture = new ResourceLocation("ultratech:textures/misc/dynamo.png");
 
 	public RenderDynamoItem() {
 		this.model = new ModelDynamo();
@@ -71,7 +69,7 @@ public class RenderDynamoItem implements IItemRenderer{
         }
         GL11.glRotatef(180F, 0, 0, 1);
         GL11.glTranslatef(0, -2f, 0);
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(texture );
+        FMLClientHandler.instance().getClient().renderEngine.bindTexture(ResourcesLocations.DYNAMO);
         model.render(null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
         GL11.glEnable(GL11.GL_LIGHTING);
         GL11.glPopMatrix();

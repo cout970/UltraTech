@@ -4,8 +4,10 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 
+import common.cout970.UltraTech.wiki.Page;
 import ultratech.api.recipes.Cutter_Recipe;
 import ultratech.api.recipes.RecipeRegistry;
+import ultratech.api.util.UT_Utils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -102,6 +104,10 @@ public class CutterCrafting extends TemplateRecipeHandler {
 		this.drawProgressBar(9, 4, 0, 0, 25, 50, 1f-(cycleticks % ticks2 / (float)ticks2), 3);
 		Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("nei:textures/gui/cuter.png"));
 		this.drawProgressBar(80, 20, 178, 14, 24, 16, 1f-(cycleticks % ticks / (float)ticks), 4);
+		if(recipes.get(recipe).output2 != null){
+			String p = recipes.get(recipe).prob+"%"; 
+			Page.drawString(p, 142, 48, UT_Utils.RGBtoInt(255, 255, 255));
+		}
     }
 
 }

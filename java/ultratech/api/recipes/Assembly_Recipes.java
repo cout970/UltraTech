@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import common.cout970.UltraTech.TileEntities.electric.MolecularAssemblyEntity;
-import common.cout970.UltraTech.util.UT_Utils;
+import ultratech.api.util.UT_Utils;
 import net.minecraft.block.Block;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
@@ -83,7 +83,7 @@ public class Assembly_Recipes {
 	}
 	
 
-	public static boolean matches(MolecularAssemblyEntity e){
+	public static boolean matches(IInventory e){
 		if(e == null)return false;
 		for(Assembly_Recipes a : recipes){
 			if(equals(e.getStackInSlot(0), a.imput[0])){
@@ -109,7 +109,7 @@ public class Assembly_Recipes {
 		return false;
 	}
 	
-	public static ItemStack getCraftingResult(MolecularAssemblyEntity e){
+	public static ItemStack getCraftingResult(IInventory e){
 		if(e == null)return null;
 			for(Assembly_Recipes a:recipes){
 				if(equals(e.getStackInSlot(0), a.imput[0])){

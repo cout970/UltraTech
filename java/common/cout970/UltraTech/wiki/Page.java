@@ -8,6 +8,7 @@ import org.lwjgl.opengl.GL11;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.util.IIcon;
 
 public abstract class Page implements IPage{
 
@@ -34,16 +35,28 @@ public abstract class Page implements IPage{
 	/**
      * Draws a textured rectangle at the stored z-value. Args: x, y, u, v, width, height
      */
-    public void drawTexturedModalRect(int par1, int par2, int par3, int par4, int par5, int par6)
+    public static void drawTexturedModalRect(int par1, int par2, int par3, int par4, int par5, int par6)
     {
         float f = 0.00390625F;
         float f1 = 0.00390625F;
         Tessellator tessellator = Tessellator.instance;
         tessellator.startDrawingQuads();
-        tessellator.addVertexWithUV((double)(par1 + 0), (double)(par2 + par6), (double)this.zLevel, (double)((float)(par3 + 0) * f), (double)((float)(par4 + par6) * f1));
-        tessellator.addVertexWithUV((double)(par1 + par5), (double)(par2 + par6), (double)this.zLevel, (double)((float)(par3 + par5) * f), (double)((float)(par4 + par6) * f1));
-        tessellator.addVertexWithUV((double)(par1 + par5), (double)(par2 + 0), (double)this.zLevel, (double)((float)(par3 + par5) * f), (double)((float)(par4 + 0) * f1));
-        tessellator.addVertexWithUV((double)(par1 + 0), (double)(par2 + 0), (double)this.zLevel, (double)((float)(par3 + 0) * f), (double)((float)(par4 + 0) * f1));
+        int zLevel = 0;
+        tessellator.addVertexWithUV((double)(par1 + 0), (double)(par2 + par6), (double)zLevel, (double)((float)(par3 + 0) * f), (double)((float)(par4 + par6) * f1));
+        tessellator.addVertexWithUV((double)(par1 + par5), (double)(par2 + par6), (double)zLevel, (double)((float)(par3 + par5) * f), (double)((float)(par4 + par6) * f1));
+        tessellator.addVertexWithUV((double)(par1 + par5), (double)(par2 + 0), (double)zLevel, (double)((float)(par3 + par5) * f), (double)((float)(par4 + 0) * f1));
+        tessellator.addVertexWithUV((double)(par1 + 0), (double)(par2 + 0), (double)zLevel, (double)((float)(par3 + 0) * f), (double)((float)(par4 + 0) * f1));
+        tessellator.draw();
+    }
+    
+    public static void drawTexturedModelRectFromIcon(int x, int y, IIcon icon, int w, int h){
+    	Tessellator tessellator = Tessellator.instance;
+        tessellator.startDrawingQuads();
+        int zLevel = 0;
+        tessellator.addVertexWithUV((double)(x + 0), (double)(y + h), (double)zLevel, (double)icon.getMinU(), (double)icon.getMaxV());
+        tessellator.addVertexWithUV((double)(x + w), (double)(y + h), (double)zLevel, (double)icon.getMaxU(), (double)icon.getMaxV());
+        tessellator.addVertexWithUV((double)(x + w), (double)(y + 0), (double)zLevel, (double)icon.getMaxU(), (double)icon.getMinV());
+        tessellator.addVertexWithUV((double)(x + 0), (double)(y + 0), (double)zLevel, (double)icon.getMinU(), (double)icon.getMinV());
         tessellator.draw();
     }
     

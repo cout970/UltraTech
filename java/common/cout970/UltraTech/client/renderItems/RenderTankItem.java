@@ -3,7 +3,9 @@ package common.cout970.UltraTech.client.renderItems;
 import org.lwjgl.opengl.GL11;
 
 import common.cout970.UltraTech.client.models.ModelFluidTank;
+import common.cout970.UltraTech.client.textures.ResourcesLocations;
 import cpw.mods.fml.client.FMLClientHandler;
+import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
@@ -11,7 +13,6 @@ import net.minecraftforge.client.IItemRenderer;
 public class RenderTankItem implements IItemRenderer {
 
 	private ModelFluidTank model;
-	private ResourceLocation texture = new ResourceLocation("ultratech:textures/misc/fluidtank.png");
 
 	public RenderTankItem() {
 		this.model = new ModelFluidTank();
@@ -57,6 +58,7 @@ public class RenderTankItem implements IItemRenderer {
 		GL11.glPushMatrix();
         GL11.glDisable(GL11.GL_LIGHTING);
         GL11.glScalef(scale, scale, scale);
+        GL11.glColor3f(1, 1, 1);
         GL11.glTranslatef(x, y, z);
         if(rotate90Deg){
             GL11.glRotatef(90F, 0, 1, 0);
@@ -65,7 +67,7 @@ public class RenderTankItem implements IItemRenderer {
         }
         GL11.glRotatef(180F, 0, 0, 1);
         GL11.glTranslatef(0, -1.5f, 0);
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(texture);
+        FMLClientHandler.instance().getClient().renderEngine.bindTexture(ResourcesLocations.TANK);
         model.render(null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
         GL11.glEnable(GL11.GL_LIGHTING);
         GL11.glPopMatrix();

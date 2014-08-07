@@ -10,8 +10,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.Vec3;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import org.lwjgl.opengl.GL11;
@@ -19,10 +17,8 @@ import org.lwjgl.opengl.GL11;
 import ultratech.api.power.CableType;
 import ultratech.api.power.IPowerConductor;
 import ultratech.api.power.PowerInterface;
-import ultratech.api.power.PowerUtils;
-import ultratech.api.power.multipart.MicroPartUtil;
+import ultratech.api.util.UT_Utils;
 import codechicken.lib.raytracer.IndexedCuboid6;
-import codechicken.lib.render.RenderUtils;
 import codechicken.lib.vec.Cuboid6;
 import codechicken.lib.vec.Vector3;
 import codechicken.multipart.JNormalOcclusion;
@@ -31,13 +27,10 @@ import codechicken.multipart.NormallyOccludedPart;
 import codechicken.multipart.PartMap;
 import codechicken.multipart.TFacePart;
 import codechicken.multipart.TMultiPart;
-import codechicken.multipart.TSlottedPart;
-import codechicken.multipart.TileMultipart;
+
 import common.cout970.UltraTech.misc.IUpdatedEntity;
 import common.cout970.UltraTech.network.Net_Utils;
 import common.cout970.UltraTech.network.messages.MessageMicroPartUpdate;
-import common.cout970.UltraTech.util.UT_Utils;
-import common.cout970.UltraTech.util.render.RenderUtil;
 
 public class MicroCablePlane extends TMultiPart implements IPowerConductor, JNormalOcclusion, TFacePart, IUpdatedEntity{
 
@@ -110,7 +103,7 @@ public class MicroCablePlane extends TMultiPart implements IPowerConductor, JNor
 			boolean a = tile().canAddPart(new NormallyOccludedPart(boundingBoxes[i]));
 			boolean b = false;
 			TileEntity tile = UT_Utils.getRelative(tile(), ForgeDirection.getOrientation(i));
-			if(MicroPartUtil.canConect(this,tile,ForgeDirection.getOrientation(i)))b = true;
+			if(MicroRegistry.canConect(this,tile,ForgeDirection.getOrientation(i)))b = true;
 			conn.put(ForgeDirection.getOrientation(i), a && b);
 		}
 	}

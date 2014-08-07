@@ -1,8 +1,9 @@
 package common.cout970.UltraTech.managers;
 
 
+import ultratech.api.power.PathFinderRegistry;
 import ultratech.api.power.multipart.MultipartReference;
-import ultratech.api.recipes.RecipeRegistry;
+import common.cout970.UltraTech.handlers.BottleHandler;
 import common.cout970.UltraTech.handlers.FuelHandler;
 import common.cout970.UltraTech.handlers.GuiHandler;
 import common.cout970.UltraTech.handlers.WorldGen;
@@ -64,16 +65,22 @@ public class UltraTech {
 		Net_Utils.initMessages();
 		
 		NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());	//gui
-		if(MultipartReference.isMicroPartActived) new MicroRegistry().load();		//microblocks
+		if(MultipartReference.isMicroPartActived){
+			new MicroRegistry().load();		//microblocks
+		}else{
+			PathFinderRegistry.loadDefaultPathFinder();
+		}
 		CompatibilityManager.initCompatibilitys();									//oredict and buildcraft engine fuel
 		GameRegistry.registerFuelHandler(new FuelHandler());						//fuel
 		CraftManager.registerCraft();												//craft and smelting
-		RecipeRegistry.initRecipes();												//cutter for machines
+		RecipeCreator.initRecipes();												//cutter for machines
 		GameRegistry.registerWorldGenerator(new WorldGen(), 10);					//world generation
 		proxy.registerRenders();													//renders
 		LogHelper.log("Finishing Init");
 	}
 
 	@EventHandler
-	public void postInit(FMLPostInitializationEvent event){}
+	public void postInit(FMLPostInitializationEvent event){
+		BottleHandler.RegisterBuckets();
+	}
 }

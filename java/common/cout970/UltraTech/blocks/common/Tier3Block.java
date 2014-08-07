@@ -159,6 +159,7 @@ public class Tier3Block extends BlockConductor{
 		if(t instanceof IInventory){	
 			dropItems(world, x, y, z);
 		}
+		Tesseract_Entity.tes.clear();
 		super.breakBlock(world, x, y, z, par5, par6);
 	}
 

@@ -8,6 +8,7 @@ import common.cout970.UltraTech.TileEntities.electric.StorageTier3;
 import common.cout970.UltraTech.TileEntities.electric.tiers.Tesseract_Entity;
 import common.cout970.UltraTech.client.models.ModelBattery;
 import common.cout970.UltraTech.client.models.ModelTesseract;
+import common.cout970.UltraTech.client.textures.ResourcesLocations;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
@@ -28,7 +29,7 @@ public class RenderTesseract extends TileEntitySpecialRenderer{
 		GL11.glPushMatrix();
 		GL11.glColor3f(1, 1, 1);
 		GL11.glDisable(GL11.GL_LIGHTING);
-		bindTexture(new ResourceLocation("ultratech:textures/misc/tesseract.png"));
+		bindTexture(ResourcesLocations.TESSERACT);
 		GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
 		GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
 		this.model.render((Entity)null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);

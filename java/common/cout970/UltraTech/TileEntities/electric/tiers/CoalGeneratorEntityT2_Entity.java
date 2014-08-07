@@ -1,11 +1,11 @@
 package common.cout970.UltraTech.TileEntities.electric.tiers;
 
 
+import ultratech.api.power.ISpeeded;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntityFurnace;
-
-import common.cout970.UltraTech.misc.ISpeeded;
 import common.cout970.UltraTech.misc.IUpdatedEntity;
+import common.cout970.UltraTech.util.power.PowerExchange;
 
 public class CoalGeneratorEntityT2_Entity extends CoalGeneratorEntityT1_Entity implements ISpeeded,IUpdatedEntity{
 
@@ -28,7 +28,7 @@ public class CoalGeneratorEntityT2_Entity extends CoalGeneratorEntityT1_Entity i
 			}
 			double extract = production();
 			if(Progres - extract*2 < 0){
-				addCharge(pe.FTtoMev(Progres));
+				addCharge(PowerExchange.FTtoQP(Progres));
 				Progres = 0;
 			}else{
 				Progres -= extract*2;
@@ -42,7 +42,7 @@ public class CoalGeneratorEntityT2_Entity extends CoalGeneratorEntityT1_Entity i
 		if(Progres <= 0){
 			if(inventory[0] != null && shouldWork()){
 				int fuel = TileEntityFurnace.getItemBurnTime(inventory[0]);
-				if(fuel > 0 && (getCharge()+pe.FTtoMev(fuel) <= getCapacity() || (pe.FTtoMev(fuel) > getCapacity()&& getCharge() < getCapacity()))){
+				if(fuel > 0 && (getCharge()+PowerExchange.FTtoQP(fuel) <= getCapacity() || (PowerExchange.FTtoQP(fuel) > getCapacity()&& getCharge() < getCapacity()))){
 					Progres = fuel;
 					maxProgres = fuel;
 					if(inventory[0] != null){

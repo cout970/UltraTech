@@ -1,6 +1,6 @@
 package common.cout970.UltraTech.wiki.pages;
 
-import common.cout970.UltraTech.util.UT_Utils;
+import ultratech.api.util.UT_Utils;
 import common.cout970.UltraTech.wiki.Page;
 import common.cout970.UltraTech.wiki.TabletButtom;
 import common.cout970.UltraTech.wiki.TabletGui;

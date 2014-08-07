@@ -6,16 +6,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cofh.api.tileentity.IRedstoneControl.ControlMode;
-import common.cout970.UltraTech.misc.PowerExchange;
 import common.cout970.UltraTech.network.Net_Utils;
 import common.cout970.UltraTech.util.LogHelper;
-import common.cout970.UltraTech.util.UT_Utils;
 import common.cout970.UltraTech.util.fluids.UT_Tank;
+import common.cout970.UltraTech.util.power.PowerExchange;
 import ultratech.api.power.IPowerConductor;
 import ultratech.api.power.StorageInterface;
 import ultratech.api.reactor.IReactorComponent;
 import ultratech.api.reactor.IReactorCoreEntity;
 import ultratech.api.reactor.IReactorFuel;
+import ultratech.api.util.UT_Utils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;

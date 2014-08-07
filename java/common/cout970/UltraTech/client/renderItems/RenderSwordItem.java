@@ -11,13 +11,12 @@ import org.lwjgl.opengl.GL11;
 import ultratech.api.power.IStorageItem;
 import common.cout970.UltraTech.client.models.ModelDynamo;
 import common.cout970.UltraTech.client.models.ModelSword;
+import common.cout970.UltraTech.client.textures.ResourcesLocations;
 import cpw.mods.fml.client.FMLClientHandler;
 
 public class RenderSwordItem implements IItemRenderer{
 
 	private ModelSword model;
-	private ResourceLocation texture = new ResourceLocation("ultratech:textures/misc/animations/sword.png");
-	private ResourceLocation texture2 = new ResourceLocation("ultratech:textures/misc/animations/sword_on.png");
 
 	public RenderSwordItem() {
 		this.model = new ModelSword();
@@ -80,9 +79,9 @@ public class RenderSwordItem implements IItemRenderer{
         GL11.glTranslatef(0, -2f, 0);
 
         if(item.getItem() instanceof IStorageItem &&((IStorageItem)item.getItem()).getPower(item) > 0){
-        	FMLClientHandler.instance().getClient().renderEngine.bindTexture(texture2);
+        	FMLClientHandler.instance().getClient().renderEngine.bindTexture(ResourcesLocations.SWORD_OFF);
         }else{
-        	FMLClientHandler.instance().getClient().renderEngine.bindTexture(texture);
+        	FMLClientHandler.instance().getClient().renderEngine.bindTexture(ResourcesLocations.SWORD_ON);
         }
 
         model.render(null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);

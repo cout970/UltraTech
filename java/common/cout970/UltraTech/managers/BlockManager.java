@@ -45,7 +45,6 @@ import common.cout970.UltraTech.TileEntities.fluid.BoilerEntity;
 import common.cout970.UltraTech.TileEntities.fluid.CopperPipeEntity;
 import common.cout970.UltraTech.TileEntities.fluid.TankEntity;
 import common.cout970.UltraTech.TileEntities.intermod.DynamoEntity;
-import common.cout970.UltraTech.TileEntities.intermod.EnergyTransformer;
 import common.cout970.UltraTech.TileEntities.intermod.EngineEntity;
 import common.cout970.UltraTech.TileEntities.multiblocks.reactor.Reactor_Chamber_Entity;
 import common.cout970.UltraTech.TileEntities.multiblocks.reactor.Reactor_Control_Entity;
@@ -382,7 +381,6 @@ public class BlockManager {
 		GameRegistry.registerTileEntity(HologramEmiterEntity.class, "HologramEmiter_UT");
 		GameRegistry.registerTileEntity(CrafterEntity.class, "Crafter_UT");
 		GameRegistry.registerTileEntity(EngineEntity.class, "Engine_UT");
-		GameRegistry.registerTileEntity(EnergyTransformer.class, "TransFormer_UT");
 		GameRegistry.registerTileEntity(Tesseract_Entity.class, "Tesseract_UT");
 		GameRegistry.registerTileEntity(FermenterEntity.class, "Fermenter_UT");
 		GameRegistry.registerTileEntity(ClimateEntity.class, "Climate_UT");

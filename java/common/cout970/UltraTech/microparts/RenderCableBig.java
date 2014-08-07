@@ -1,24 +1,19 @@
 package common.cout970.UltraTech.microparts;
 
-import java.util.Arrays;
-
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import org.lwjgl.opengl.GL11;
 
-import ultratech.api.power.PowerUtils;
-import ultratech.api.power.multipart.MicroPartUtil;
-import common.cout970.UltraTech.util.UT_Utils;
-import common.cout970.UltraTech.util.render.RenderUtil;
-import codechicken.lib.render.RenderUtils;
-import codechicken.lib.vec.Cuboid6;
+import ultratech.api.util.UT_Utils;
 import codechicken.lib.vec.Vector3;
 import codechicken.multipart.NormallyOccludedPart;
 import codechicken.multipart.TMultiPart;
+
+import common.cout970.UltraTech.util.render.ConectedTexture;
+import common.cout970.UltraTech.util.render.RenderUtil;
+
 import cpw.mods.fml.common.Optional;
 
 public class RenderCableBig{
@@ -41,7 +36,7 @@ public class RenderCableBig{
 			b[d.ordinal()] = canConnectTo(mc, d);
 		}
 		int i;
-		if((i = RenderUtil.getDir(b)) != -1){
+		if((i = ConectedTexture.getDir(b)) != -1){
 			RenderUtil.bindTexture(new ResourceLocation("ultratech:textures/misc/cable/bigcable_"+i+".png"));
 			
 		}else RenderUtil.bindTexture(tex);
@@ -53,7 +48,7 @@ public class RenderCableBig{
 		boolean a = f.tile().canAddPart(new NormallyOccludedPart(f.boundingBoxes[o.ordinal()]));
 		boolean b = false;
 		TileEntity tile = UT_Utils.getRelative(f.tile(), o);
-		if(MicroPartUtil.canConect(f,tile,o))b = true;
+		if(MicroRegistry.canConect(f,tile,o))b = true;
 		if(o == ForgeDirection.DOWN){
 			for(TMultiPart t : f.tile().jPartList())if(t instanceof MicroCablePlane){b = true; a = true;}
 		}

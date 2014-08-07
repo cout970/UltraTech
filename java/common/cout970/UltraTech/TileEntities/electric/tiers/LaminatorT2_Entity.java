@@ -1,5 +1,6 @@
 package common.cout970.UltraTech.TileEntities.electric.tiers;
 
+import ultratech.api.power.ISpeeded;
 import ultratech.api.recipes.CVD_Recipe;
 import ultratech.api.recipes.Laminator_Recipe;
 import net.minecraft.inventory.Container;
@@ -7,7 +8,6 @@ import net.minecraft.inventory.ICrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import common.cout970.UltraTech.managers.MachineData;
-import common.cout970.UltraTech.misc.ISpeeded;
 
 public class LaminatorT2_Entity extends LaminatorT1_Entity implements ISpeeded{
 

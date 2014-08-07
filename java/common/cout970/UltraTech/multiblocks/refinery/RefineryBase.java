@@ -3,7 +3,7 @@ package common.cout970.UltraTech.multiblocks.refinery;
 import java.util.ArrayList;
 import java.util.List;
 
-import ultratech.api.recipes.Cooling_Recipes;
+import ultratech.api.recipes.Refinery_Recipe;
 import common.cout970.UltraTech.managers.BlockManager;
 import common.cout970.UltraTech.util.fluids.UT_Tank;
 import net.minecraft.entity.player.EntityPlayer;

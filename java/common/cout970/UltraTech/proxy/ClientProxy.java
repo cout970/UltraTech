@@ -16,12 +16,12 @@ import common.cout970.UltraTech.TileEntities.fluid.BoilerEntity;
 import common.cout970.UltraTech.TileEntities.fluid.CopperPipeEntity;
 import common.cout970.UltraTech.TileEntities.fluid.TankEntity;
 import common.cout970.UltraTech.TileEntities.intermod.DynamoEntity;
-import common.cout970.UltraTech.TileEntities.intermod.EnergyTransformer;
 import common.cout970.UltraTech.TileEntities.intermod.EngineEntity;
 import common.cout970.UltraTech.TileEntities.multiblocks.reactor.Reactor_Tank_Entity;
 import common.cout970.UltraTech.TileEntities.utility.HologramEmiterEntity;
 import common.cout970.UltraTech.client.renderItems.RenderBatteryItem;
 import common.cout970.UltraTech.client.renderItems.RenderBoilerItem;
+import common.cout970.UltraTech.client.renderItems.RenderBottle;
 import common.cout970.UltraTech.client.renderItems.RenderDynamoItem;
 import common.cout970.UltraTech.client.renderItems.RenderEngineItem;
 import common.cout970.UltraTech.client.renderItems.RenderPipeItem;
@@ -44,7 +44,6 @@ import common.cout970.UltraTech.client.renders.RenderPump;
 import common.cout970.UltraTech.client.renders.RenderSolarPanel;
 import common.cout970.UltraTech.client.renders.RenderTank;
 import common.cout970.UltraTech.client.renders.RenderTesseract;
-import common.cout970.UltraTech.client.renders.RenderTransformer;
 import common.cout970.UltraTech.client.renders.RenderTurbine;
 import common.cout970.UltraTech.client.renders.RenderWindMill;
 import common.cout970.UltraTech.managers.BlockManager;
@@ -80,7 +79,6 @@ public class ClientProxy extends CommonProxy{
 		ClientRegistry.bindTileEntitySpecialRenderer(WindMillEntity.class, new RenderWindMill());
 		ClientRegistry.bindTileEntitySpecialRenderer(EngineEntity.class, new RenderEngine());
 		ClientRegistry.bindTileEntitySpecialRenderer(HologramEmiterEntity.class, new RenderHologram());
-		ClientRegistry.bindTileEntitySpecialRenderer(EnergyTransformer.class, new RenderTransformer());
 		ClientRegistry.bindTileEntitySpecialRenderer(CopperPipeEntity.class, new RenderPipe());
 		ClientRegistry.bindTileEntitySpecialRenderer(BoilerEntity.class, new RenderBoiler());
 		ClientRegistry.bindTileEntitySpecialRenderer(TankEntity.class, new RenderTank());
@@ -142,5 +140,7 @@ public class ClientProxy extends CommonProxy{
 		  
 		  //sword
 		  MinecraftForgeClient.registerItemRenderer(ItemManager.ItemName.get("LaserSword"), new RenderSwordItem());
+		  //bottle
+		  MinecraftForgeClient.registerItemRenderer(ItemManager.ItemName.get("Bottle"), new RenderBottle());
       }
 }

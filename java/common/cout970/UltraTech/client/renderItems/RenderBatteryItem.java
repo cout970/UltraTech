@@ -7,13 +7,12 @@ import net.minecraftforge.client.IItemRenderer;
 import org.lwjgl.opengl.GL11;
 
 import common.cout970.UltraTech.client.models.ModelBattery;
+import common.cout970.UltraTech.client.textures.ResourcesLocations;
 import cpw.mods.fml.client.FMLClientHandler;
 
 public class RenderBatteryItem implements IItemRenderer {
 	
 	private ModelBattery model;
-	private ResourceLocation texture = new ResourceLocation("ultratech:textures/misc/battery/battery0.png");
-	
 
 	public RenderBatteryItem() {
 		this.model = new ModelBattery();
@@ -32,11 +31,13 @@ public class RenderBatteryItem implements IItemRenderer {
 	
 	@Override
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
-		if(item.getItemDamage() == 0)texture = new ResourceLocation("ultratech:textures/misc/battery/battery0.png");
-		if(item.getItemDamage() == 1)texture = new ResourceLocation("ultratech:textures/misc/battery/battery1.png");
-		if(item.getItemDamage() == 2)texture = new ResourceLocation("ultratech:textures/misc/battery/battery2.png");
-		if(item.getItemDamage() == 3)texture = new ResourceLocation("ultratech:textures/misc/battery/battery3.png");
-		
+		ResourceLocation texture;
+		if(item.getItemDamage() == 0)texture = ResourcesLocations.BATTERY_T1;
+		else if(item.getItemDamage() == 1)texture = ResourcesLocations.BATTERY_T2;
+		else if(item.getItemDamage() == 2)texture = ResourcesLocations.BATTERY_T3;
+		else if(item.getItemDamage() == 3)texture = ResourcesLocations.BATTERY_T4;
+		else texture = ResourcesLocations.BATTERY_T1;
+		FMLClientHandler.instance().getClient().renderEngine.bindTexture(texture);
 		switch (type) {
             case ENTITY: {
                 render(0.0F, -0.5F, 0.0F, 1.0F,false);
@@ -72,7 +73,6 @@ public class RenderBatteryItem implements IItemRenderer {
         }
         GL11.glRotatef(180F, 0, 0, 1);
         GL11.glTranslatef(0, -1.5f, 0);
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(texture);
         model.render(null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
         GL11.glEnable(GL11.GL_LIGHTING);
         GL11.glPopMatrix();

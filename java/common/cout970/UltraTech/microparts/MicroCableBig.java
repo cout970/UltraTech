@@ -6,33 +6,27 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 
-import ultratech.api.power.CableType;
-import ultratech.api.power.IPowerConductor;
-import ultratech.api.power.PowerInterface;
-import ultratech.api.power.PowerUtils;
-import ultratech.api.power.multipart.MicroPartUtil;
-import common.cout970.UltraTech.misc.IUpdatedEntity;
-import common.cout970.UltraTech.network.Net_Utils;
-import common.cout970.UltraTech.network.messages.MessageMicroPartUpdate;
-import common.cout970.UltraTech.util.UT_Utils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraftforge.common.util.ForgeDirection;
+import ultratech.api.power.CableType;
+import ultratech.api.power.IPowerConductor;
+import ultratech.api.power.PowerInterface;
+import ultratech.api.util.UT_Utils;
 import codechicken.lib.raytracer.IndexedCuboid6;
 import codechicken.lib.vec.Cuboid6;
-import codechicken.lib.vec.Rotation;
 import codechicken.lib.vec.Vector3;
 import codechicken.microblock.ISidedHollowConnect;
 import codechicken.multipart.JNormalOcclusion;
 import codechicken.multipart.NormalOcclusionTest;
 import codechicken.multipart.NormallyOccludedPart;
-import codechicken.multipart.PartMap;
-import codechicken.multipart.TFacePart;
 import codechicken.multipart.TMultiPart;
-import codechicken.multipart.TSlottedPart;
-import codechicken.multipart.TileMultipart;
+
+import common.cout970.UltraTech.misc.IUpdatedEntity;
+import common.cout970.UltraTech.network.Net_Utils;
+import common.cout970.UltraTech.network.messages.MessageMicroPartUpdate;
 
 public class MicroCableBig extends TMultiPart implements IPowerConductor, JNormalOcclusion, ISidedHollowConnect, IUpdatedEntity{
 
@@ -141,7 +135,7 @@ public class MicroCableBig extends TMultiPart implements IPowerConductor, JNorma
 			boolean a = tile().canAddPart(new NormallyOccludedPart(boundingBoxes[o.ordinal()]));
 			boolean b = false;
 			TileEntity tile = UT_Utils.getRelative(tile(), o);
-			if(MicroPartUtil.canConect(this,tile,o))b = true;
+			if(MicroRegistry.canConect(this,tile,o))b = true;
 			if(o == ForgeDirection.DOWN){
 				for(TMultiPart t : tile().jPartList())if(t instanceof MicroCablePlane){b = true; a = true;}
 			}

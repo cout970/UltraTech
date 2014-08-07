@@ -1,7 +1,9 @@
 package common.cout970.UltraTech.blocks.models;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
@@ -17,6 +19,12 @@ public class TesseractT3 extends UT_TileBlock{
 	public TesseractT3(Material m) {
 		super(m, "Tesseract");
 		setLightLevel(1f);
+	}
+	
+	@Override
+	public void breakBlock(World world, int x, int y, int z, Block par5, int par6){
+		super.breakBlock(world, x, y, z, par5, par6);
+		Tesseract_Entity.tes.clear();
 	}
 
 	public void registerBlockIcons(IIconRegister IR){

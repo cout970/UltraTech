@@ -6,10 +6,12 @@ import java.util.List;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 import ultratech.api.power.IPowerConductor;
 import ultratech.api.power.StorageInterface;
-
 import common.cout970.UltraTech.util.ConfigurableTile;
+import common.cout970.UltraTech.util.LogHelper;
+import common.cout970.UltraTech.util.power.Machine;
 
 public class Tesseract_Entity extends ConfigurableTile{
 	
@@ -20,29 +22,28 @@ public class Tesseract_Entity extends ConfigurableTile{
 	public boolean animationUp;
 	public double animationTime;
 	public float rotation;
+	public Machine target;
 	
 	public Tesseract_Entity(){
 		super();
 	}
 	
 	public void updateEntity(){
-//		if(worldObj.isRemote)return;
-//		if(mode == T_Mode.RECEIVE){
-//			cond.tipe = StorageInterface.PowerIO.Output;
-//		}else if(mode == T_Mode.SEND){
-//			cond.tipe = StorageInterface.PowerIO.Nothing;
-//		}else{
-//			cond.tipe = StorageInterface.PowerIO.Storage;
-//		}
-//		if(!tes.contains(this))tes.add(this);
-//		if(mode == T_Mode.BOTH || mode == T_Mode.SEND)
-//			for(Tesseract_Entity t : tes){
-//				if(t.frequency == frequency && t!=this){
-//					if(t.mode == T_Mode.RECEIVE || t.mode == T_Mode.BOTH){
-//						this.MoveCharge(this, t);
-//					}
-//				}
-//			}
+		if(worldObj.isRemote)return;
+		if(!tes.contains(this))tes.add(this);
+		if(target != null){	
+			for(Tesseract_Entity t : tes){
+				if(t.frequency == frequency && t!=this && t.target != null){
+					float ownpercent = (float) (target.getCharge()*100/target.getCapacity());
+					float otherpercent = (float) (t.target.getCharge()*100/t.target.getCapacity());
+					if(otherpercent < ownpercent){
+						MoveCharge(target, t.target);
+					}
+				}
+			}
+		}else if(worldObj.getTotalWorldTime()% 20 == 1){
+			onNeigUpdate();
+		}
 		super.updateEntity();
 	}
 	
@@ -70,13 +71,22 @@ public class Tesseract_Entity extends ConfigurableTile{
 			}
 		}
 	}
+
+	@Override
+	public void onNeigUpdate() {
+		super.onNeigUpdate();
+		TileEntity t = worldObj.getTileEntity(xCoord, yCoord-1, zCoord);
+		if(t instanceof Machine){
+			target = (Machine) t;
+		}
+	}
 	
 	public void setFrequency(int f){
-//		if(worldObj != null && worldObj.isRemote){
-//			sendPacket();
-//		}
-//		if(!tes.contains(this) && worldObj != null && !worldObj.isRemote)tes.add(this);
-//		frequency = f;
+		if(worldObj != null && worldObj.isRemote){
+			sendNetworkUpdate();
+		}
+		if(!tes.contains(this) && worldObj != null && !worldObj.isRemote)tes.add(this);
+		frequency = f;
 	}
 
 

@@ -1,13 +1,9 @@
 package ultratech.api.recipes;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
-import common.cout970.UltraTech.TileEntities.electric.tiers.ChemicalVaporDesintegrationT1_Entity;
-import common.cout970.UltraTech.util.UT_Utils;
+import ultratech.api.util.UT_Utils;
 
 public class CVD_Recipe implements IRecipeHandler{
 
@@ -65,7 +61,7 @@ public class CVD_Recipe implements IRecipeHandler{
 		return false;
 	}
 
-	public static boolean canCraft(ChemicalVaporDesintegrationT1_Entity cvd){
+	public static boolean canCraft(IInventory cvd){
 		if(cvd == null)return false;
 		ItemStack result = getCraftingResult(cvd);
 		if(result == null)return false;

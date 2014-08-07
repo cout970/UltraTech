@@ -7,11 +7,11 @@ import org.lwjgl.opengl.GL11;
 
 import cofh.api.tileentity.IRedstoneControl.ControlMode;
 import ultratech.api.power.IPower;
+import ultratech.api.util.UT_Utils;
 import common.cout970.UltraTech.TileEntities.multiblocks.reactor.Reactor_Core_Entity;
 import common.cout970.UltraTech.network.Net_Utils;
 import common.cout970.UltraTech.network.messages.MessageReactorConfig;
 import common.cout970.UltraTech.util.LogHelper;
-import common.cout970.UltraTech.util.UT_Utils;
 import common.cout970.UltraTech.util.fluids.UT_Tank;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.texture.TextureManager;
@@ -135,7 +135,7 @@ public class Reactor_Gui extends MachineGuiBase{
 		}
 
 		this.drawString(fontRendererObj, line1, 10, 105, UT_Utils.RGBtoInt(255, 255, 255));	
-		String line2 = "Reactor Production: "+tile.production+" mb/t";
+		String line2 = "Reactor Production: "+tile.production+" mB/t";
 		this.drawString(fontRendererObj, line2, 10, 117, UT_Utils.RGBtoInt(255, 255, 255));	
 		
 		String line3 = "Redstone input: "+tile.redstoneSignal;

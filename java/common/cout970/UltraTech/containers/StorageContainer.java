@@ -18,6 +18,11 @@ public Machine tileEntity;
 	}
 	
 	@Override
+	public ItemStack transferStackInSlot(EntityPlayer entityPlayer, int slotIndex) {
+		return null;
+	}
+	
+	@Override
 	public boolean canInteractWith(EntityPlayer entityplayer) {
 		return true;
 	}

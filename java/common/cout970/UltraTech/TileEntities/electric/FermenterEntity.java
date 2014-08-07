@@ -1,6 +1,6 @@
 package common.cout970.UltraTech.TileEntities.electric;
 
-import ultratech.api.recipes.Fermenter_Recipes;
+import ultratech.api.recipes.Fermenter_Recipe;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.item.ItemStack;
@@ -33,9 +33,9 @@ public class FermenterEntity extends MachineWithInventory implements  IFluidHand
 		if(juice == null)juice = new UT_Tank(8000, worldObj, xCoord, yCoord, zCoord);
 		if(worldObj.isRemote)return;
 		if(progres <= 0){
-			if(getStackInSlot(0) != null && Fermenter_Recipes.hasRecipe(getStackInSlot(0))){
-				progres = Fermenter_Recipes.getTicks(getStackInSlot(0));
-				maxProgres = Fermenter_Recipes.getTicks(getStackInSlot(0));
+			if(getStackInSlot(0) != null && Fermenter_Recipe.isIngredient(getStackInSlot(0))){
+				progres = Fermenter_Recipe.getTicks(getStackInSlot(0));
+				maxProgres = Fermenter_Recipe.getTicks(getStackInSlot(0));
 				decrStackSize(0, 1);
 			}
 		}
@@ -102,7 +102,7 @@ public class FermenterEntity extends MachineWithInventory implements  IFluidHand
 	
 	@Override
 	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-		if(Fermenter_Recipes.hasRecipe(itemstack))return true;
+		if(Fermenter_Recipe.isIngredient(itemstack))return true;
 		return false;
 	}
 	

@@ -3,6 +3,7 @@ package common.cout970.UltraTech.client.renderItems;
 import org.lwjgl.opengl.GL11;
 
 import common.cout970.UltraTech.client.models.ModelWindMill;
+import common.cout970.UltraTech.client.textures.ResourcesLocations;
 import cpw.mods.fml.client.FMLClientHandler;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -11,7 +12,6 @@ import net.minecraftforge.client.IItemRenderer;
 public class RenderWindMillItem implements IItemRenderer{
 
 	private ModelWindMill model;
-	private ResourceLocation texture = new ResourceLocation("ultratech:textures/misc/windmill.png");
 
 	public RenderWindMillItem() {
 		this.model = new ModelWindMill();
@@ -65,7 +65,7 @@ public class RenderWindMillItem implements IItemRenderer{
         }
         GL11.glRotatef(180F, 0, 0, 1);
         GL11.glTranslatef(0, -1.5f, 0);
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(texture);
+        FMLClientHandler.instance().getClient().renderEngine.bindTexture(ResourcesLocations.WIND_MILL);
         model.render(null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
         GL11.glEnable(GL11.GL_LIGHTING);
         GL11.glPopMatrix();

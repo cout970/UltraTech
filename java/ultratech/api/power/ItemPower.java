@@ -36,9 +36,9 @@ public class ItemPower extends Item implements IStorageItem{
 		if( i.stackTagCompound == null )
 			i.setTagCompound( new NBTTagCompound());
 		if(i.stackTagCompound.hasKey("Energy")){
-		par3List.add(i.stackTagCompound.getInteger("Energy")+"/"+MaxPower+" "+IPower.POWER_NAME);
+		par3List.add(i.stackTagCompound.getInteger("Energy")+"/"+MaxPower+IPower.POWER_NAME);
 		}else{
-			par3List.add(0+"/"+MaxPower+" "+IPower.POWER_NAME);
+			par3List.add(0+"/"+MaxPower+IPower.POWER_NAME);
 		}
 	}
 	

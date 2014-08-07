@@ -1,8 +1,9 @@
 package common.cout970.UltraTech.misc;
 
+import ultratech.api.util.UT_Utils;
 import common.cout970.UltraTech.TileEntities.electric.tiers.Heater_Entity;
 import common.cout970.UltraTech.TileEntities.fluid.BoilerEntity;
-import common.cout970.UltraTech.util.UT_Utils;
+import common.cout970.UltraTech.util.power.PowerExchange;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.crafting.FurnaceRecipes;

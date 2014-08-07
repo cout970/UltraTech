@@ -6,9 +6,9 @@ import java.util.List;
 import org.lwjgl.opengl.GL11;
 
 import ultratech.api.power.IPower;
+import ultratech.api.util.UT_Utils;
 import common.cout970.UltraTech.TileEntities.electric.tiers.Heater_Entity;
 import common.cout970.UltraTech.util.ConfigurableMachineWithInventory;
-import common.cout970.UltraTech.util.UT_Utils;
 import common.cout970.UltraTech.util.power.Machine;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.RenderHelper;
@@ -60,7 +60,7 @@ public class Heater_Gui extends MachineGuiBase{
 		this.drawCenteredString(fontRendererObj, "Heater", 99, 6, UT_Utils.RGBtoInt(255, 255, 255));
 
         if(UT_Utils.isIn(x, y, xStart+137, yStart+15, 25, 50)){
-        	drawText(x,y,"Energy: "+(((Machine) entity).getCharge())+IPower.POWER_NAME);
+        	drawText(x,y,"Energy: "+UT_Utils.removeDecimals(((Machine) entity).getCharge())+IPower.POWER_NAME);
         }
 	}
 }

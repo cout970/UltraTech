@@ -3,6 +3,7 @@ package common.cout970.UltraTech.TileEntities.fluid;
 import java.util.ArrayList;
 import java.util.List;
 
+import ultratech.api.util.UT_Utils;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -11,7 +12,6 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 import common.cout970.UltraTech.util.LogHelper;
-import common.cout970.UltraTech.util.UT_Utils;
 import common.cout970.UltraTech.util.fluids.IFluidTransport;
 import common.cout970.UltraTech.util.fluids.Pipe;
 import common.cout970.UltraTech.util.fluids.TankConection;

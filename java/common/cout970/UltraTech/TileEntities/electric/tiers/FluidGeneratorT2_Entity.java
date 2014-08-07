@@ -13,10 +13,10 @@ public class FluidGeneratorT2_Entity extends FluidGeneratorT1_Entity{
 			if(getTank().getFluidAmount() >= 10){
 				Fuel f = IronEngineFuel.getFuelForFluid(getTank().getFluid().getFluid());
 				if(f != null){
-					double prod = pe.FTtoMev(f.powerPerCycle)*(f.totalBurningTime/100);
+					double prod = pe.FTtoQP(f.powerPerCycle)*(f.totalBurningTime/100);
 					if(spaceForCharge(prod) || getCapacity() < prod){
 						progres = f.totalBurningTime/100;
-						production = pe.FTtoMev(f.powerPerCycle);
+						production = pe.FTtoQP(f.powerPerCycle);
 						getTank().drain(10, true);
 					}
 				}

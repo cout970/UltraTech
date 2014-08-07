@@ -12,11 +12,10 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 import ultratech.api.power.IPower;
-
+import ultratech.api.util.UT_Utils;
 import common.cout970.UltraTech.TileEntities.electric.ClimateEntity;
 import common.cout970.UltraTech.network.Net_Utils;
 import common.cout970.UltraTech.network.messages.MessageClimateStation;
-import common.cout970.UltraTech.util.UT_Utils;
 
 public class ClimateStation_Gui extends GuiContainer{
 
@@ -54,7 +53,7 @@ public class ClimateStation_Gui extends GuiContainer{
 		
         if(UT_Utils.isIn(x, y, xStart+135, yStart+15, 25, 50)){
         	List<String> energy = new ArrayList<String>();
-        	energy.add("Energy: "+((int)entity.getCharge())+IPower.POWER_NAME);
+        	energy.add("Energy: "+UT_Utils.removeDecimals(entity.getCharge())+IPower.POWER_NAME);
         	this.drawHoveringText(energy, x-xStart, y-yStart, fontRendererObj);
         	RenderHelper.enableGUIStandardItemLighting();
         }

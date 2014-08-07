@@ -1,21 +1,21 @@
 package common.cout970.UltraTech.client.renderItems;
 
-import org.lwjgl.opengl.GL11;
-
-import common.cout970.UltraTech.client.models.ModelEngine_FT;
-import common.cout970.UltraTech.client.models.NewEngine;
-import cpw.mods.fml.client.FMLClientHandler;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
 
+import org.lwjgl.opengl.GL11;
+
+import common.cout970.UltraTech.client.models.ModelEngine;
+import common.cout970.UltraTech.client.textures.ResourcesLocations;
+import cpw.mods.fml.client.FMLClientHandler;
+
 public class RenderEngineItem implements IItemRenderer{
 
-	private ModelEngine_FT model;
-	private ResourceLocation texture = new ResourceLocation("ultratech:textures/misc/ftengine.png");
+	private ModelEngine model;
 
 	public RenderEngineItem() {
-		this.model = new ModelEngine_FT();
+		this.model = new ModelEngine();
 	}
 	
 	@Override
@@ -65,7 +65,7 @@ public class RenderEngineItem implements IItemRenderer{
         GL11.glRotatef(180F, 0, 0, 1);
         GL11.glTranslatef(0, -2f, 0);
 
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(texture );
+        FMLClientHandler.instance().getClient().renderEngine.bindTexture(ResourcesLocations.ENGINE);
         model.render(null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
         GL11.glTranslatef(0, 10*0.0625F, 0);
         model.renderMove(0.0625F);

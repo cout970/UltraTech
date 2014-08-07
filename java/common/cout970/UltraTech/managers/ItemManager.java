@@ -31,6 +31,7 @@ import common.cout970.UltraTech.items.UT_Plate;
 import common.cout970.UltraTech.items.UnorganicPlate;
 import common.cout970.UltraTech.misc.ItemInfo;
 import common.cout970.UltraTech.misc.ItemInfo.ItemTipe;
+import common.cout970.UltraTech.util.LogHelper;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
@@ -39,7 +40,7 @@ public class ItemManager {
 	public static List<ItemInfo> info = new ArrayList<ItemInfo>();
 	public static List<Item> UT_Items = new ArrayList<Item>();
 	public static Map<String,Item> ItemName = new HashMap<String,Item>();
-
+	
 	public static void InitItems(){
 
 		//ingot
@@ -83,7 +84,6 @@ public class ItemManager {
 		
 		
 		//added
-		
 		Reg("SilverCable", "Silver cable",true);
 		Reg("SilkTouchUpgrade", "Silk Touch Upgrade", false);
 		Reg("Sulfur", "Sulfur", true);
@@ -94,7 +94,7 @@ public class ItemManager {
 		Reg("Rubber","Rubber",true);
 		Reg("Bottle","Bottle",false);
 		Reg("Plastic","Plastic",true);
-		Reg("Rubber_bulcanized","Vulcanized Rubber",true);
+		Reg("Rubber_vulcanized","Vulcanized Rubber",true);
 		Reg("Dynamo","Dynamo",true);
 		Reg("AluminumGear","Aluminum Gear",true);
 	}
@@ -108,7 +108,7 @@ public class ItemManager {
 			}else{
 				it = Exception(i);
 			}
-			if(it == null)System.out.println(i.name);
+			if(it == null)LogHelper.log("Found exception with item "+i.name+" in mod Ultratech, please report this to the mod autor (cout970)");
 			GameRegistry.registerItem(it, i.name+"_UT");
 			LangException(it, i.GameName);
 			ItemName.put(i.name, it);
@@ -127,7 +127,7 @@ public class ItemManager {
 		}else if(a == "Dust"){
 			for(int meta = 0;meta < UT_Dust.names.length;meta++)Language.addName(new ItemStack(it,1,meta), UT_Dust.names[meta]);
 		}else if(a == "Bottle"){
-			for(int meta = 0;meta < Bottle.names.length;meta++)Language.addName(new ItemStack(it,1,meta), Bottle.names[meta]+" Bottle");
+			Language.addName(new ItemStack(it,1), "Bottle");
 		}else{ 
 			Language.addName(it, a);
 		}

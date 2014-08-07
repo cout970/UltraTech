@@ -5,7 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import ultratech.api.recipes.Fermenter_Recipes;
+import ultratech.api.recipes.Fermenter_Recipe;
+import ultratech.api.recipes.RecipeRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureMap;
@@ -21,8 +22,7 @@ import codechicken.nei.recipe.TemplateRecipeHandler;
 
 public class FermenterCrafting extends TemplateRecipeHandler{
 
-	public Map<Item,Integer> recipes = new HashMap<Item,Integer>();
-	public Map<Integer,Item> inverse = new HashMap<Integer,Item>();
+	public List<Fermenter_Recipe> recipes = new ArrayList<Fermenter_Recipe>();
 	private double zLevel;
 	@Override
 	public String getRecipeName() {
@@ -36,15 +36,18 @@ public class FermenterCrafting extends TemplateRecipeHandler{
 
 	@Override
 	public void loadCraftingRecipes(ItemStack result){}
-	
+
 	@Override
 	public void loadUsageRecipes(ItemStack ingredient){
-		if(ingredient != null && Fermenter_Recipes.recipes.containsKey(ingredient.getItem())){
-			recipes.put(ingredient.getItem(),Fermenter_Recipes.recipes.get(ingredient));
-			inverse.put(0, ingredient.getItem());
+		if(ingredient != null){
+			for(Fermenter_Recipe f : RecipeRegistry.fermenter){
+				if(f.maches(ingredient)){
+					recipes.add(f);
+				}
+			}
 		}
 	}
-	
+
 	@Override
 	public PositionedStack getResultStack(int recipe)
 	{
@@ -60,7 +63,7 @@ public class FermenterCrafting extends TemplateRecipeHandler{
 	public List<PositionedStack> getIngredientStacks(int recipe)
 	{
 		List<PositionedStack> need = new ArrayList<PositionedStack>();
-		need.add(new PositionedStack(new ItemStack(inverse.get(recipe),1), 77,22));
+		need.add(new PositionedStack(recipes.get(recipe).input, 77,22));
 		return need;
 	}
 

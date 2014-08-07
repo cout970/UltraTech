@@ -15,7 +15,7 @@ public class Reactor_Tank_Block extends ReactorPartBase{
 
 	public Reactor_Tank_Block(Material m) {
 		super(m, "tank");
-		
+		setLightOpacity(0);
 	}
 
 	@Override
@@ -33,11 +33,11 @@ public class Reactor_Tank_Block extends ReactorPartBase{
 		return 2;
 	}
 	
-	@SideOnly(Side.CLIENT)
-    public boolean shouldSideBeRendered(IBlockAccess p_149646_1_, int p_149646_2_, int p_149646_3_, int p_149646_4_, int p_149646_5_)
-    {
-        Block block = p_149646_1_.getBlock(p_149646_2_, p_149646_3_, p_149646_4_);
-
-        return true && block == this ? false : super.shouldSideBeRendered(p_149646_1_, p_149646_2_, p_149646_3_, p_149646_4_, p_149646_5_);
-    }
+//	@SideOnly(Side.CLIENT)
+//    public boolean shouldSideBeRendered(IBlockAccess p_149646_1_, int p_149646_2_, int p_149646_3_, int p_149646_4_, int p_149646_5_)
+//    {
+//        Block block = p_149646_1_.getBlock(p_149646_2_, p_149646_3_, p_149646_4_);
+//
+//        return true && block == this ? false : super.shouldSideBeRendered(p_149646_1_, p_149646_2_, p_149646_3_, p_149646_4_, p_149646_5_);
+//    }
 }

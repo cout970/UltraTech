@@ -4,6 +4,7 @@ import ultratech.api.power.CableType;
 import ultratech.api.power.IPowerConductor;
 import ultratech.api.power.PowerInterface;
 import ultratech.api.power.StorageInterface;
+import ultratech.api.util.UT_Utils;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.nbt.NBTTagCompound;
@@ -13,11 +14,10 @@ import cofh.api.energy.EnergyStorage;
 import cofh.api.energy.IEnergyHandler;
 import common.cout970.UltraTech.managers.MachineData;
 import common.cout970.UltraTech.misc.IUpdatedEntity;
-import common.cout970.UltraTech.misc.PowerExchange;
 import common.cout970.UltraTech.network.Net_Utils;
 import common.cout970.UltraTech.network.SyncTile;
-import common.cout970.UltraTech.util.UT_Utils;
 import common.cout970.UltraTech.util.power.Machine;
+import common.cout970.UltraTech.util.power.PowerExchange;
 import cpw.mods.fml.common.Mod.Instance;
 
 public class DynamoEntity extends SyncTile implements IPowerConductor, IEnergyHandler, IUpdatedEntity{
@@ -25,14 +25,13 @@ public class DynamoEntity extends SyncTile implements IPowerConductor, IEnergyHa
 	public ForgeDirection facing = ForgeDirection.UP;
 	protected EnergyStorage storage;//RF
 	protected StorageInterface inter;//Mev
-	public static PowerExchange pe = new PowerExchange();
 	public boolean on = false;
 	public IEnergyHandler recep = null;
 	public boolean redstone = false;
 
 	public DynamoEntity(){
 		super();
-		storage = new EnergyStorage((int) (pe.MeVtoRF(MachineData.Dynamo.cap)));
+		storage = new EnergyStorage((int) (PowerExchange.QPtoRF(MachineData.Dynamo.cap)));
 		inter = new StorageInterface(this,MachineData.Dynamo.cap,2);
 	}
 
@@ -41,13 +40,13 @@ public class DynamoEntity extends SyncTile implements IPowerConductor, IEnergyHa
 		if(worldObj.isRemote)return;
 		boolean work = false;
 		if(shouldWork()){
-			if(inter.getCharge() >= 4 && storage.getMaxEnergyStored()-storage.getEnergyStored() >= pe.MeVtoRF(4)){
+			if(inter.getCharge() >= 4 && storage.getMaxEnergyStored()-storage.getEnergyStored() >= PowerExchange.QPtoRF(4)){
 				inter.removeCharge(4d);
-				storage.receiveEnergy(pe.MeVtoRF(4), false);
+				storage.receiveEnergy(PowerExchange.QPtoRF(4), false);
 				work = true;
-			}else if(inter.getCharge() >= 1 && storage.getMaxEnergyStored()-storage.getEnergyStored() >= pe.MeVtoRF(1)){
+			}else if(inter.getCharge() >= 1 && storage.getMaxEnergyStored()-storage.getEnergyStored() >= PowerExchange.QPtoRF(1)){
 				inter.removeCharge(1d);
-				storage.receiveEnergy(pe.MeVtoRF(1), false);
+				storage.receiveEnergy(PowerExchange.QPtoRF(1), false);
 				work = true;
 			}
 		}

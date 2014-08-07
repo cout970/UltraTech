@@ -3,6 +3,7 @@ package common.cout970.UltraTech.TileEntities.electric.tiers;
 import java.util.ArrayList;
 import java.util.List;
 
+import ultratech.api.util.UT_Utils;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.nbt.NBTTagCompound;
@@ -14,9 +15,8 @@ import common.cout970.UltraTech.blocks.models.Boiler;
 import common.cout970.UltraTech.managers.MachineData;
 import common.cout970.UltraTech.misc.HeaterInteraction;
 import common.cout970.UltraTech.misc.HeaterInteraction.Interaction;
-import common.cout970.UltraTech.misc.PowerExchange;
 import common.cout970.UltraTech.util.ConfigurableMachineWithInventory;
-import common.cout970.UltraTech.util.UT_Utils;
+import common.cout970.UltraTech.util.power.PowerExchange;
 
 public class Heater_Entity extends ConfigurableMachineWithInventory{
 

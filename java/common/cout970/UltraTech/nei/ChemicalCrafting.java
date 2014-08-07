@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.Map;
 
 import ultratech.api.recipes.Chemical_Recipe;
-import ultratech.api.recipes.Fermenter_Recipes;
+import ultratech.api.recipes.Fermenter_Recipe;
+import ultratech.api.recipes.RecipeRegistry;
+import ultratech.api.util.UT_Utils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureMap;
@@ -15,7 +17,6 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidRegistry;
 import common.cout970.UltraTech.managers.FluidManager;
-import common.cout970.UltraTech.util.UT_Utils;
 import common.cout970.UltraTech.util.render.RenderUtil;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.TemplateRecipeHandler;
@@ -38,7 +39,7 @@ public class ChemicalCrafting extends TemplateRecipeHandler{
 	
 	@Override
 	public void loadCraftingRecipes(ItemStack result){
-		for(Chemical_Recipe c : Chemical_Recipe.recipes){
+		for(Chemical_Recipe c : RecipeRegistry.chemical){
 			if(UT_Utils.areEcuals(result, c.out_1, true)){recipes.add(c);}
 			if(UT_Utils.areEcuals(result, c.out_2, true)){recipes.add(c);}
 			if(UT_Utils.areEcuals(result, c.out_3, true)){recipes.add(c);}

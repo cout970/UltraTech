@@ -1,9 +1,9 @@
 package common.cout970.UltraTech.TileEntities.electric.tiers;
 
+import ultratech.api.power.ISpeeded;
 import ultratech.api.recipes.CVD_Recipe;
 import net.minecraft.nbt.NBTTagCompound;
 import common.cout970.UltraTech.managers.MachineData;
-import common.cout970.UltraTech.misc.ISpeeded;
 
 public class ChemicalVaporDesintegrationT2_Entity extends ChemicalVaporDesintegrationT1_Entity implements ISpeeded{
 

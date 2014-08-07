@@ -15,16 +15,20 @@ import common.cout970.UltraTech.util.power.Machine;
 
 public class SteamTurbineEntity extends Machine implements IFluidHandler{
 
-	public UT_Tank tank;
+	public UT_Tank steam;
 	public ForgeDirection facing = ForgeDirection.UP;
-	
+		private int maxProduction = 80;
+
 	//render
-	public boolean work = false;
+	public boolean on = false;
 	public float angle;
 	public long oldTime = -1;
-	public long updateTime = -1;
-	public float speed = 0;
 	
+	
+	public UT_Tank getTank(){
+		if(steam == null)steam = new UT_Tank(2000, this);
+		return steam;
+	}
 	
 	public SteamTurbineEntity(){
 		super(MachineData.Turbine,true);
@@ -37,24 +41,30 @@ public class SteamTurbineEntity extends Machine implements IFluidHandler{
 	
 	public void updateEntity(){
 		super.updateEntity();
-		
-		if(tank == null){
-			tank = new UT_Tank(16000, this);
-		}
 		if(!worldObj.isRemote){
 			double space = getCapacity()-getCharge();
-			int work = (int) Math.min(space/MachineData.Turbine.use, tank.getFluidAmount());
+			int work = (int) Math.min(space/MachineData.Turbine.use, getTank().getFluidAmount());
 			if(work > 0){
-				tank.drain(work, true);
-				this.addCharge(MachineData.Turbine.use*work);
+				int allow = Math.min(work, maxProduction);
+				getTank().drain(allow, true);
+				this.addCharge(MachineData.Turbine.use*allow);
+			}
+			if(worldObj.getTotalWorldTime()% 10 == 1){
+				if(!on && work > 0){
+					on = true;
+					sendNetworkUpdate();
+				}
+				if(on && work <= 0){
+					on = false;
+					sendNetworkUpdate();
+				}
 			}
 		}
 	}
 	@Override
 	public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
-		if(tank == null)return 0;
 		if(resource.fluidID != FluidRegistry.getFluidID("steam"))return 0;
-		return tank.fill(resource, doFill);
+		return getTank().fill(resource, doFill);
 	}
 
 	@Override
@@ -80,8 +90,7 @@ public class SteamTurbineEntity extends Machine implements IFluidHandler{
 
 	@Override
 	public FluidTankInfo[] getTankInfo(ForgeDirection from) {
-		if(tank == null)return new FluidTankInfo[]{};
-		return new FluidTankInfo[]{new FluidTankInfo(tank)};
+		return new FluidTankInfo[]{new FluidTankInfo(getTank())};
 	}
 
 	public void switchOrientation() {
@@ -93,18 +102,16 @@ public class SteamTurbineEntity extends Machine implements IFluidHandler{
 	public void readFromNBT(NBTTagCompound nbtTagCompound) {
 		super.readFromNBT(nbtTagCompound);
 		facing = ForgeDirection.getOrientation(nbtTagCompound.getInteger("direction"));
-		boolean aux = work;
-		work = nbtTagCompound.getBoolean("w");
-		if(work != aux && worldObj != null)updateTime = worldObj.getTotalWorldTime();
-		if(tank != null)tank.readFromNBT(nbtTagCompound, "Steam");
+		on = nbtTagCompound.getBoolean("w");
+		getTank().readFromNBT(nbtTagCompound, "Steam");
 	}
 	
 	@Override
 	public void writeToNBT(NBTTagCompound nbtTagCompound) {
 		super.writeToNBT(nbtTagCompound);
 		nbtTagCompound.setInteger("direction", facing.ordinal());
-		nbtTagCompound.setBoolean("w", work);
-		if(tank != null)tank.writeToNBT(nbtTagCompound, "Steam");
+		nbtTagCompound.setBoolean("w", on);
+		getTank().writeToNBT(nbtTagCompound, "Steam");
 	}
 
 }

@@ -20,7 +20,7 @@ public class CompatibilityManager {
 		IronEngineFuel.addFuel("gasoline", 10, 25000);
 		IronEngineFuel.addFuel("bioethanol", 4, 15000);
 		if(!Loader.isModLoaded("BuildCraft")){
-			LogHelper.log("Buildcraft not loaded");
+			LogHelper.log("Buildcraft not found, adding fuel and oil values to IronEngineFuel");
 			IronEngineFuel.addFuel("oil", 3, 5000);
 			IronEngineFuel.addFuel("fuel", 6, 25000);
 		}
@@ -75,7 +75,7 @@ public class CompatibilityManager {
 		OreDictionary.registerOre("dustSulfur", new ItemStack(ItemManager.ItemName.get("Sulfur")));
 		OreDictionary.registerOre("rawRubber", new ItemStack(ItemManager.ItemName.get("Rubber")));
 		OreDictionary.registerOre("itemPlastic", new ItemStack(ItemManager.ItemName.get("Plastic")));
-		OreDictionary.registerOre("itemRubber", new ItemStack(ItemManager.ItemName.get("Rubber_bulcanized")));
+		OreDictionary.registerOre("itemRubber", new ItemStack(ItemManager.ItemName.get("Rubber_vulcanized")));
 	}
 
 

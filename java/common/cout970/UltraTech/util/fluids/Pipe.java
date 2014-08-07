@@ -1,8 +1,8 @@
 package common.cout970.UltraTech.util.fluids;
 
+import ultratech.api.util.UT_Utils;
 import common.cout970.UltraTech.network.SyncTile;
 import common.cout970.UltraTech.util.LogHelper;
-import common.cout970.UltraTech.util.UT_Utils;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -41,7 +41,6 @@ public class Pipe extends SyncTile implements IFluidTransport{
 			}
 			te.getNetwork().refresh();
 		}
-//		LogHelper.log(getNetwork().getFluidAmount()+" / "+getNetwork().getCapacity());
 	}
 
 

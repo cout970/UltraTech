@@ -6,9 +6,9 @@ import java.util.List;
 import org.lwjgl.opengl.GL11;
 
 import ultratech.api.power.IPower;
+import ultratech.api.util.UT_Utils;
 import common.cout970.UltraTech.TileEntities.fluid.BoilerEntity;
 import common.cout970.UltraTech.TileEntities.intermod.DynamoEntity;
-import common.cout970.UltraTech.util.UT_Utils;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.inventory.Container;
@@ -54,7 +54,7 @@ public DynamoEntity entity;
 		int yStart = (height - ySize) / 2;
 		if(UT_Utils.isIn(i, j, xStart+14, yStart+15, 25, 50)){
 			List<String> energy = new ArrayList<String>();
-			energy.add("Energy: "+((int)entity.getPower().getCharge())+IPower.POWER_NAME);
+			energy.add("Energy: "+UT_Utils.removeDecimals(entity.getPower().getCharge())+IPower.POWER_NAME);
 			this.drawHoveringText(energy, i-xStart, j-yStart, fontRendererObj);
 		}
 

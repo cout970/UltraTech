@@ -1,13 +1,13 @@
 package common.cout970.UltraTech.TileEntities.electric;
 
+import ultratech.api.util.UT_Utils;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.common.util.ForgeDirection;
-
 import common.cout970.UltraTech.managers.MachineData;
 import common.cout970.UltraTech.network.Net_Utils;
+import common.cout970.UltraTech.util.LogHelper;
 import common.cout970.UltraTech.util.power.Machine;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -19,7 +19,6 @@ public class WindMillEntity extends Machine{
 	public int timer;
 	public boolean obs = false;
 	public long oldTime;
-	private float rand;
 	public ForgeDirection facing = ForgeDirection.NORTH;
 
 	public WindMillEntity(){
@@ -37,7 +36,7 @@ public class WindMillEntity extends Machine{
 		if(b == "Jungle")bioma = 0.8f;
 		if(b == "Forest")bioma = 1f;
 		if(b == "ExtremeHills")bioma = 1.4f;
-		wind = (float) ((((float)yCoord*bioma)/64f)*rand);
+		wind = (float) ((((float)yCoord*bioma)/64f));
 		if(worldObj.isRaining())wind += 1;
 		if(obs)wind = 0;
 		
@@ -50,12 +49,11 @@ public class WindMillEntity extends Machine{
 		
 		if(timer++ > 100){
 			timer = 0;
-			rand = (float) Math.random();
 			if(isObstruid()){obs = true;}else{obs = false;}
 		}
 		
 		if(worldObj.isRemote)return;
-		addCharge(speed*MachineData.WindMill.use);
+		addCharge(UT_Utils.removeDecimals(speed*MachineData.WindMill.use));
 		
 	}
 

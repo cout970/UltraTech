@@ -5,6 +5,7 @@ import org.lwjgl.opengl.GL11;
 import common.cout970.UltraTech.TileEntities.electric.PumpEntity;
 import common.cout970.UltraTech.client.models.ModelBoiler;
 import common.cout970.UltraTech.client.models.ModelPump;
+import common.cout970.UltraTech.client.textures.ResourcesLocations;
 import common.cout970.UltraTech.misc.IconFactory;
 import common.cout970.UltraTech.util.render.CubeRenderer_Util;
 import net.minecraft.client.model.ModelRenderer;
@@ -31,7 +32,7 @@ public class RenderPump extends TileEntitySpecialRenderer{
 			double z, float f) {
 		GL11.glPushMatrix();
 		
-		bindTexture(new ResourceLocation("ultratech:textures/misc/pump.png"));
+		bindTexture(ResourcesLocations.PUMP);
 		GL11.glTranslatef((float) x + 0.5F, (float) y - 0.5F, (float) z + 0.5F);
 		GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
 

@@ -11,9 +11,8 @@ import net.minecraftforge.fluids.FluidStack;
 import org.lwjgl.opengl.GL11;
 
 import ultratech.api.power.IPower;
-
+import ultratech.api.util.UT_Utils;
 import common.cout970.UltraTech.TileEntities.electric.tiers.ChemicalPlantT1_Entity;
-import common.cout970.UltraTech.util.UT_Utils;
 import common.cout970.UltraTech.util.power.Machine;
 
 public class Chemical_Gui extends MachineGuiBase{
@@ -66,7 +65,7 @@ public class Chemical_Gui extends MachineGuiBase{
 		this.drawCenteredString(fontRendererObj, "Chemical Plant", 99, 6, UT_Utils.RGBtoInt(255, 255, 255));
 		Machine tile = (Machine) entity;
 		if(UT_Utils.isIn(x, y, xStart+14, yStart+15, 25, 50)){
-        	drawText(x, y, "Energy: "+(tile.getCharge())+IPower.POWER_NAME);
+        	drawText(x, y, "Energy: "+UT_Utils.removeDecimals(tile.getCharge())+IPower.POWER_NAME);
         }
 	}
 }

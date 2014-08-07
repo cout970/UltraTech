@@ -8,10 +8,7 @@ import common.cout970.UltraTech.util.LogHelper;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 
 public class FluidManager{
@@ -151,11 +148,6 @@ public class FluidManager{
 	}
 
 	public static void RegisterFluids() {
-		
-		FluidContainerRegistry.registerFluidContainer(Acid, new ItemStack(ItemManager.ItemName.get("SulfuricAcid"),1), new ItemStack(Items.potionitem,1,0));
-		for(int x=0;x<fluids.length;x++){
-			FluidContainerRegistry.registerFluidContainer(fluids[x], new ItemStack(ItemManager.ItemName.get("Bottle"),1,x+1), new ItemStack(ItemManager.ItemName.get("Bottle"),1,0));
-		}
 		
 		Language.addName(Ethanol, "Ethanol");
 		Language.addName(Oil, "Oil");

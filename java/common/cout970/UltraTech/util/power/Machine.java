@@ -10,7 +10,6 @@ import ultratech.api.power.StorageInterface.PowerIO;
 import common.cout970.UltraTech.TileEntities.intermod.DynamoEntity;
 import common.cout970.UltraTech.blocks.models.Dynamo;
 import common.cout970.UltraTech.managers.MachineData;
-import common.cout970.UltraTech.misc.PowerExchange;
 import common.cout970.UltraTech.network.SyncTile;
 import cofh.api.energy.EnergyStorage;
 import cofh.api.energy.IEnergyHandler;
@@ -22,7 +21,6 @@ import net.minecraftforge.oredict.OreDictionary;
 public class Machine extends SyncTile implements IPowerConductor,IPower,IEnergyHandler{
 
 	public StorageInterface cond;
-	public static PowerExchange pe = new PowerExchange();
 	
 	public Machine(double capacity,int tier,PowerIO t){
 		super();
@@ -140,12 +138,12 @@ public class Machine extends SyncTile implements IPowerConductor,IPower,IEnergyH
 			boolean simulate) {
 		if(simulate){
 			double cap = getCapacity()-getCharge();
-			return (int) Math.min(maxReceive, pe.MeVtoRF(cap));
+			return (int) Math.min(maxReceive, PowerExchange.QPtoRF(cap));
 		}else{
 			double old = getCharge();
-			addCharge(pe.RFtoMev(maxReceive));
+			addCharge(PowerExchange.RFtoQP(maxReceive));
 			double spent = getCharge()-old;
-			return pe.MeVtoRF(spent);
+			return PowerExchange.QPtoRF(spent);
 		}	
 	}
 
@@ -157,11 +155,11 @@ public class Machine extends SyncTile implements IPowerConductor,IPower,IEnergyH
 
 	@Override
 	public int getEnergyStored(ForgeDirection from) {
-		return pe.MeVtoRF(getCharge());
+		return PowerExchange.QPtoRF(getCharge());
 	}
 
 	@Override
 	public int getMaxEnergyStored(ForgeDirection from) {
-		return pe.MeVtoRF(getCapacity());
+		return PowerExchange.QPtoRF(getCapacity());
 	}
 }

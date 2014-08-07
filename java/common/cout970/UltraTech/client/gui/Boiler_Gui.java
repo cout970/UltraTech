@@ -15,8 +15,8 @@ import net.minecraftforge.fluids.FluidStack;
 
 import org.lwjgl.opengl.GL11;
 
+import ultratech.api.util.UT_Utils;
 import common.cout970.UltraTech.TileEntities.fluid.BoilerEntity;
-import common.cout970.UltraTech.util.UT_Utils;
 
 public class Boiler_Gui extends GuiContainer{
 

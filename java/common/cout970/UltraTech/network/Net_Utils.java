@@ -34,7 +34,6 @@ public class Net_Utils {
 	
 	public static void sendUpdate(TileEntity t){
 		if(t == null)return;
-//		LogHelper.log(t);
 		MessageUpdate m = new MessageUpdate((SyncTile) t);
 		INSTANCE.sendToAll(m);
 	}	

@@ -7,8 +7,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntityFurnace;
 import common.cout970.UltraTech.managers.MachineData;
 import common.cout970.UltraTech.misc.IUpdatedEntity;
-import common.cout970.UltraTech.misc.PowerExchange;
 import common.cout970.UltraTech.util.ConfigurableMachineWithInventory;
+import common.cout970.UltraTech.util.power.PowerExchange;
 
 public class CoalGeneratorEntityT1_Entity extends ConfigurableMachineWithInventory implements IUpdatedEntity{
 
@@ -16,7 +16,6 @@ public class CoalGeneratorEntityT1_Entity extends ConfigurableMachineWithInvento
 	public int maxProgres;
 	public float heat = 25;
 	public float maxHeat = 400;
-	public PowerExchange pe = new PowerExchange();
 	public boolean updated;//metadata true == working
 
 	public CoalGeneratorEntityT1_Entity(){
@@ -42,7 +41,7 @@ public class CoalGeneratorEntityT1_Entity extends ConfigurableMachineWithInvento
 			}
 			double extract = production();
 			if(Progres - extract*2 < 0){
-				addCharge(pe.FTtoMev(Progres));
+				addCharge(PowerExchange.FTtoQP(Progres));
 				Progres = 0;
 			}else{
 				Progres -= extract*2;
@@ -55,7 +54,7 @@ public class CoalGeneratorEntityT1_Entity extends ConfigurableMachineWithInvento
 		if(Progres <= 0){
 			if(inventory[0] != null && shouldWork()){
 				int fuel = TileEntityFurnace.getItemBurnTime(inventory[0]);
-				if(fuel > 0 && ((int)(getCharge()+pe.FTtoMev(fuel)) <= getCapacity() || (pe.FTtoMev(fuel) > getCapacity()&& getCharge() < getCapacity()))){
+				if(fuel > 0 && ((int)(getCharge()+PowerExchange.FTtoQP(fuel)) <= getCapacity() || (PowerExchange.FTtoQP(fuel) > getCapacity()&& getCharge() < getCapacity()))){
 					Progres = fuel;
 					maxProgres = fuel;
 					if(inventory[0] != null){

@@ -3,7 +3,7 @@ package common.cout970.UltraTech.multiblocks.refinery;
 import java.util.ArrayList;
 import java.util.List;
 
-import ultratech.api.recipes.Cooling_Recipes;
+import ultratech.api.recipes.Refinery_Recipe;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -21,7 +21,7 @@ public class RefineryCore extends TileGag{
 	public UT_Tank out1;
 	public UT_Tank out2;
 	public UT_Tank out3;
-	public Cooling_Recipes recipe;
+	public Refinery_Recipe recipe;
 
 	public void restaureBlock(){
 		worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 1, 2);
@@ -65,7 +65,7 @@ public class RefineryCore extends TileGag{
 				out3 = b.getTank();
 			}
 		}
-		if(in != null)recipe = Cooling_Recipes.getResult(in);
+		if(in != null)recipe = Refinery_Recipe.getResult(in);
 	}
 
 

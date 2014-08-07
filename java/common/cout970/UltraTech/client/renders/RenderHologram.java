@@ -3,6 +3,7 @@ package common.cout970.UltraTech.client.renders;
 import org.lwjgl.opengl.GL11;
 
 import common.cout970.UltraTech.TileEntities.utility.HologramEmiterEntity;
+import common.cout970.UltraTech.client.textures.ResourcesLocations;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
@@ -19,7 +20,7 @@ public class RenderHologram extends TileEntitySpecialRenderer{
 		GL11.glPushMatrix();
 		GL11.glTranslatef((float) x, (float) y, (float) z);
 		GL11.glTranslatef(0, 2.0F, 0);
-		this.bindTexture(new ResourceLocation("ultratech:textures/misc/tex.png"));
+		this.bindTexture(ResourcesLocations.HOLOGRAM);
 //		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glDepthMask(true);
 //		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);

@@ -77,7 +77,6 @@ public class CutterT1_Entity extends ConfigurableMachineWithInventory implements
 				int intents = ((int)(recipe.prob/100))+1;
 				for(int x = 0; x < intents;x++){
 					int p = r.nextInt(100);
-//					LogHelper.log(p);
 					if(p <= recipe.prob){
 						
 						if (this.inventory[2] == null){

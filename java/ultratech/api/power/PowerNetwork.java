@@ -3,11 +3,9 @@ package ultratech.api.power;
 import java.util.ArrayList;
 import java.util.List;
 
-import ultratech.api.power.multipart.MicroPartUtil;
-import ultratech.api.power.multipart.MultipartReference;
-import common.cout970.UltraTech.managers.UltraTech;
-import common.cout970.UltraTech.util.UT_Utils;
 import net.minecraft.tileentity.TileEntity;
+import ultratech.api.power.multipart.MultipartReference;
+import ultratech.api.util.UT_Utils;
 /**
  * 
  * @author Cout970
@@ -48,7 +46,7 @@ public class PowerNetwork {
 
 		if(base != null){
 			List<IPowerConductor> things = new ArrayList<IPowerConductor>();
-			things.addAll(new PowerPathfinder(base, null).getFinding());
+			things.addAll(PathFinderRegistry.search(base, null).getFinding());
 			List<PowerInterface> inters = new ArrayList<PowerInterface>();
 			for(IPowerConductor p : things) inters.add(p.getPower());
 			interfaces = inters;
@@ -77,7 +75,7 @@ public class PowerNetwork {
 		for(PowerPath p:rutes){
 			if(p.contains(from,to))return true;
 		}
-		if((new PowerPathfinder(from, to)).canGoToTheEnd()){
+		if(PathFinderRegistry.search(from, to).canGoToTheEnd()){
 			rutes.add(new PowerPath(from,to));
 			return true;
 		}else return false;
@@ -85,15 +83,7 @@ public class PowerNetwork {
 
 	public void excludeAndRecalculate(IPowerConductor p) {
 		try{
-			if(MultipartReference.isMicroPartActived){
-				MicroPartUtil.excludeAndRecalculate(p);
-			}else{
-				for(TileEntity t : UT_Utils.getTiles(p.getPower().getParent())){
-					if(t instanceof IPowerConductor){
-						((IPowerConductor) t).getPower().getNetwork().refresh();
-					}
-				}
-			}
+			PathFinderRegistry.excludeAndRecalculate(p);
 		}catch(Exception e){}
 
 	}

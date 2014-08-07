@@ -6,7 +6,7 @@ package ultratech.api.power;
  */
 public interface IPower {
 	
-	public static final String POWER_NAME = " MeV";
+	public static final String POWER_NAME = " QP";
 	
 	double addCharge(double amount);
 	

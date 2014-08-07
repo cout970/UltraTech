@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ultratech.api.recipes.Chemical_Recipe;
-import ultratech.api.recipes.Cooling_Recipes;
+import ultratech.api.recipes.RecipeRegistry;
+import ultratech.api.recipes.Refinery_Recipe;
+import ultratech.api.util.UT_Utils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureMap;
@@ -12,14 +14,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidRegistry;
-import common.cout970.UltraTech.util.UT_Utils;
 import common.cout970.UltraTech.util.render.RenderUtil;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.TemplateRecipeHandler;
 
 public class RefineryCrafting extends TemplateRecipeHandler{
 
-	private List<Cooling_Recipes> recipes = new ArrayList<Cooling_Recipes>();
+	private List<Refinery_Recipe> recipes = new ArrayList<Refinery_Recipe>();
 	private double zLevel;
 
 	@Override
@@ -34,7 +35,7 @@ public class RefineryCrafting extends TemplateRecipeHandler{
 
 	@Override
 	public void loadCraftingRecipes(ItemStack result){
-		for(Cooling_Recipes c : Cooling_Recipes.recipes){
+		for(Refinery_Recipe c : RecipeRegistry.refinery){
 			for(int g=0;g<3;g++){
 				if(c.product[g] != null && c.product[g].getFluid() != null && c.product[g].getFluid().getBlock() != null){
 					if(UT_Utils.areEcuals(new ItemStack(c.product[g].getFluid().getBlock()),result,false)){
@@ -47,7 +48,7 @@ public class RefineryCrafting extends TemplateRecipeHandler{
 	
 	@Override
 	public void loadUsageRecipes(ItemStack ingredient){
-		for(Cooling_Recipes c : Cooling_Recipes.recipes){
+		for(Refinery_Recipe c : RecipeRegistry.refinery){
 			if(c.input != null && c.input.getFluid() != null && c.input.getFluid().getBlock() != null){
 				if(UT_Utils.areEcuals(new ItemStack(c.input.getFluid().getBlock()),ingredient,false)){
 					recipes.add(c);
@@ -88,7 +89,7 @@ public class RefineryCrafting extends TemplateRecipeHandler{
 		Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("nei:textures/gui/refinery.png"));
 		this.drawProgressBar(57, 22, 177, 0, 25, 16, 1f-(cycleticks % ticks / (float)ticks), 4);
 		
-		Cooling_Recipes r = recipes.get(recipe);
+		Refinery_Recipe r = recipes.get(recipe);
 		
 		//fluids
 		Minecraft.getMinecraft().renderEngine.bindTexture(TextureMap.locationBlocksTexture);
@@ -103,9 +104,7 @@ public class RefineryCrafting extends TemplateRecipeHandler{
 			IIcon ic = r.product[f].getFluid().getStillIcon();
 			if(ic == null)continue;
 			int amount = r.product[f].amount;
-			amount = 100-amount;
-			amount *= 5;
-			int a = (int) (40f*((cycleticks % amount / (float)amount)));
+			int a = (int) (40f*amount / 100);
 			this.drawTexturedModelRectFromIcon(84+25*f, 50-a, ic, 18, a);
 		}
 		RenderUtil.bindTexture(new ResourceLocation("ultratech:textures/gui/refinery.png"));

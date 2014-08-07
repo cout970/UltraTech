@@ -2,7 +2,7 @@ package common.cout970.UltraTech.wiki.pages;
 
 import org.lwjgl.opengl.GL11;
 
-import common.cout970.UltraTech.util.UT_Utils;
+import ultratech.api.util.UT_Utils;
 import common.cout970.UltraTech.wiki.Page;
 import common.cout970.UltraTech.wiki.TabletButtom;
 import common.cout970.UltraTech.wiki.TabletGui;
@@ -104,7 +104,7 @@ public class IndexPage extends Page {
 
 			@Override
 			public void doSomething() {
-				cont.loadPage("energy");
+				cont.loadPage("e-main");
 			}
 		};
 	}

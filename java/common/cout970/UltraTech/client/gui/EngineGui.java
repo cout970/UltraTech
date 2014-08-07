@@ -7,8 +7,8 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
+import ultratech.api.util.UT_Utils;
 import common.cout970.UltraTech.TileEntities.intermod.EngineEntity;
-import common.cout970.UltraTech.util.UT_Utils;
 
 public class EngineGui extends GuiContainer{
 
@@ -32,7 +32,7 @@ public class EngineGui extends GuiContainer{
 		//energy MJ
 		GL11.glColor4f(1.0F, 0.0F, 0.0F, 1.0F);
 		this.mc.renderEngine.bindTexture(new ResourceLocation("ultratech:textures/misc/mj.png"));
-		int m = (int) (entity.power.getEnergyStored()*50/entity.power.getMaxEnergyStored());
+		int m = (int) (entity.MJ*50/800);
 		this.drawTexturedModalRect(xStart+135, yStart+15+(50-m), 0, 0, 25, m);
 		
 		//energy
@@ -42,8 +42,8 @@ public class EngineGui extends GuiContainer{
 		this.drawTexturedModalRect(xStart+14, yStart+15+(50-p), 0, 0, 25, p);
 		
 		//info
-		this.drawCenteredString(fontRendererObj, "Energy "+(int)entity.getCharge(), xStart+85, yStart+25, 16777215);
-		this.drawCenteredString(fontRendererObj, "BC MJ "+(int)entity.power.getEnergyStored(), xStart+87, yStart+37, 16777215);
+		this.drawCenteredString(fontRendererObj, "Energy "+UT_Utils.removeDecimals(entity.getCharge()), xStart+85, yStart+25, 16777215);
+		this.drawCenteredString(fontRendererObj, "BC MJ "+(int)entity.MJ, xStart+87, yStart+37, 16777215);
 
 		this.drawCenteredString(fontRendererObj, "Engine", xStart+85, yStart+6, UT_Utils.RGBtoInt(255, 255, 255));
 

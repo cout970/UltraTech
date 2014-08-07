@@ -1,19 +1,17 @@
 package common.cout970.UltraTech.wiki;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.lwjgl.opengl.GL11;
-
-import common.cout970.UltraTech.util.LogHelper;
-import common.cout970.UltraTech.util.UT_Utils;
-import common.cout970.UltraTech.wiki.pages.DecoPage;
-import common.cout970.UltraTech.wiki.pages.EnergyPage;
-import common.cout970.UltraTech.wiki.pages.IndexPage;
-import common.cout970.UltraTech.wiki.pages.MainPage;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
+
+import org.lwjgl.opengl.GL11;
+
+import ultratech.api.util.UT_Utils;
+import common.cout970.UltraTech.wiki.pages.DecoPage;
+import common.cout970.UltraTech.wiki.pages.EnergyCapacityPage;
+import common.cout970.UltraTech.wiki.pages.EnergyMainPage;
+import common.cout970.UltraTech.wiki.pages.IndexPage;
+import common.cout970.UltraTech.wiki.pages.MainPage;
 
 public class TabletGui extends GuiContainer{
 
@@ -62,7 +60,8 @@ public class TabletGui extends GuiContainer{
 	public void loadPage(String s) {
 		maxpages = 1;
 		if(s == "index")curr = new IndexPage(this);
-		if(s == "energy")curr = new EnergyPage(this);
+		if(s == "e-main")curr = new EnergyMainPage(this);
+		if(s == "e-cap")curr = new EnergyCapacityPage(this);
 		if(s == "deco")curr = new DecoPage(this);
 	}
 }

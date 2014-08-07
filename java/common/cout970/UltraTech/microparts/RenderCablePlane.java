@@ -1,19 +1,19 @@
 package common.cout970.UltraTech.microparts;
 
-import org.lwjgl.opengl.GL11;
-
-import ultratech.api.power.multipart.MicroPartUtil;
-import codechicken.lib.vec.Vector3;
-import codechicken.multipart.NormallyOccludedPart;
-import common.cout970.UltraTech.client.models.ModelPlaneCable;
-import common.cout970.UltraTech.client.models.ModelPlaneCableBase;
-import common.cout970.UltraTech.util.UT_Utils;
-import common.cout970.UltraTech.util.render.RenderUtil;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.util.ForgeDirection;
+
+import org.lwjgl.opengl.GL11;
+
+import ultratech.api.util.UT_Utils;
+import codechicken.lib.vec.Vector3;
+import codechicken.multipart.NormallyOccludedPart;
+
+import common.cout970.UltraTech.client.models.ModelPlaneCable;
+import common.cout970.UltraTech.client.models.ModelPlaneCableBase;
+import common.cout970.UltraTech.util.render.ConectedTexture;
+import common.cout970.UltraTech.util.render.RenderUtil;
 
 public class RenderCablePlane{
 
@@ -34,7 +34,7 @@ public class RenderCablePlane{
 			a[d-2] = canConect(mc, ForgeDirection.getOrientation(d));
 		}
 		model.render(0.0625F,a);
-		int i = RenderUtil.getDir(a);
+		int i = ConectedTexture.getDir(a);
 		if(i == -1)i = 0;
 		RenderUtil.bindTexture(new ResourceLocation("ultratech:textures/misc/cable/planecablebase_"+i+".png"));
 		base.render(0.0625f);
@@ -44,7 +44,7 @@ public class RenderCablePlane{
 		boolean a = c.tile().canAddPart(new NormallyOccludedPart(c.boundingBoxes[i.ordinal()]));
 		boolean b = false;
 		TileEntity tile = UT_Utils.getRelative(c.tile(), i);
-		if(MicroPartUtil.canConect(c,tile,i))b = true;
+		if(MicroRegistry.canConect(c,tile,i))b = true;
 		return a && b;
 	}
 

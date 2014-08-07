@@ -2,8 +2,10 @@ package common.cout970.UltraTech.blocks.decoration;
 
 import java.util.Random;
 
+import common.cout970.UltraTech.client.textures.Block_ConectedTextures;
+import common.cout970.UltraTech.client.textures.Block_Textures;
 import common.cout970.UltraTech.managers.UT_Tabs;
-import common.cout970.UltraTech.util.render.RenderUtil;
+import common.cout970.UltraTech.util.render.ConectedTexture;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.BlockBreakable;
@@ -29,34 +31,17 @@ public class DiamondGlass extends BlockBreakable{
 	@SideOnly(Side.CLIENT)
     public IIcon getIcon(IBlockAccess BA, int x, int y, int z, int side)
     {
-    	return i[RenderUtil.getConectedTexturesIcon(BA,x,y,z,side)];
+    	return i[ConectedTexture.getConectedTexturesIcon(BA,x,y,z,side)];
     }
 	
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister iconRegister){
-		String d = "dglass/base";
 		i = new IIcon[21];
-		i[0] = iconRegister.registerIcon("ultratech:"+d);
-		i[1] = iconRegister.registerIcon("ultratech:void");
-		i[2] = iconRegister.registerIcon("ultratech:"+d+2);
-		i[3] = iconRegister.registerIcon("ultratech:"+d+3);
-		i[4] = iconRegister.registerIcon("ultratech:"+d+4);
-		i[5] = iconRegister.registerIcon("ultratech:"+d+5);
-		i[6] = iconRegister.registerIcon("ultratech:"+d+6);
-		i[7] = iconRegister.registerIcon("ultratech:"+d+7);
-		i[8] = iconRegister.registerIcon("ultratech:"+d+8);
-		i[9] = iconRegister.registerIcon("ultratech:"+d+9);
-		i[10] = iconRegister.registerIcon("ultratech:"+d+10);
-		i[11] = iconRegister.registerIcon("ultratech:"+d+11);
-		i[12] = iconRegister.registerIcon("ultratech:"+d+12);
-		i[13] = iconRegister.registerIcon("ultratech:"+d+13);
-		i[14] = iconRegister.registerIcon("ultratech:"+d+14);
-		i[15] = iconRegister.registerIcon("ultratech:"+d+15);
-		i[16] = iconRegister.registerIcon("ultratech:"+d+16);
-		i[17] = iconRegister.registerIcon("ultratech:"+d+17);
-		i[18] = iconRegister.registerIcon("ultratech:"+d+18);
-		i[19] = iconRegister.registerIcon("ultratech:"+d+19);
-		i[20] = iconRegister.registerIcon("ultratech:"+d+20);
+		i[0] = iconRegister.registerIcon(Block_ConectedTextures.DIAMOND_PREFIX+"base");
+		i[1] = iconRegister.registerIcon(Block_Textures.VOID);
+		for(int u = 2;u< 21;u++){
+		i[u] = iconRegister.registerIcon(Block_ConectedTextures.DIAMOND_PREFIX+Block_ConectedTextures.BASE[u]);
+		}
 		this.blockIcon = i[0];
 	}
 	

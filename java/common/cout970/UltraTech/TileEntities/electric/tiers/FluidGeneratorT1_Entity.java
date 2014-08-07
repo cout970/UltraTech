@@ -14,12 +14,12 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 import common.cout970.UltraTech.managers.MachineData;
-import common.cout970.UltraTech.misc.PowerExchange;
 import common.cout970.UltraTech.network.Net_Utils;
 import common.cout970.UltraTech.util.ConfigurableMachine;
 import common.cout970.UltraTech.util.LogHelper;
 import common.cout970.UltraTech.util.fluids.UT_Tank;
 import common.cout970.UltraTech.util.power.Machine;
+import common.cout970.UltraTech.util.power.PowerExchange;
 
 public class FluidGeneratorT1_Entity extends ConfigurableMachine implements IFluidHandler{
 
@@ -40,10 +40,10 @@ public class FluidGeneratorT1_Entity extends ConfigurableMachine implements IFlu
 			if(getTank().getFluidAmount() >= 10){
 				Fuel f = IronEngineFuel.getFuelForFluid(getTank().getFluid().getFluid());
 				if(f != null){
-					double prod = pe.FTtoMev(f.powerPerCycle)*(f.totalBurningTime/100);
+					double prod = pe.FTtoQP(f.powerPerCycle)*(f.totalBurningTime/100);
 					if(spaceForCharge(prod) || getCapacity() < prod){
 						progres = f.totalBurningTime/100;
-						production = pe.FTtoMev(f.powerPerCycle);
+						production = pe.FTtoQP(f.powerPerCycle);
 						getTank().drain(10, true);
 					}
 				}

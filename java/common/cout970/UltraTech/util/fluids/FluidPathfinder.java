@@ -3,8 +3,7 @@ package common.cout970.UltraTech.util.fluids;
 import java.util.ArrayList;
 import java.util.List;
 
-import common.cout970.UltraTech.util.UT_Utils;
-
+import ultratech.api.util.UT_Utils;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.IFluidHandler;

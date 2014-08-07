@@ -8,6 +8,7 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 import ultratech.api.power.IPower;
+import ultratech.api.util.UT_Utils;
 import common.cout970.UltraTech.TileEntities.electric.StorageTier1;
 import common.cout970.UltraTech.TileEntities.electric.StorageTier2;
 import common.cout970.UltraTech.TileEntities.electric.StorageTier3;
@@ -15,7 +16,6 @@ import common.cout970.UltraTech.network.Net_Utils;
 import common.cout970.UltraTech.network.SyncTile;
 import common.cout970.UltraTech.network.messages.MessageMachineMode;
 import common.cout970.UltraTech.util.LogHelper;
-import common.cout970.UltraTech.util.UT_Utils;
 import common.cout970.UltraTech.util.power.Machine;
 
 public class Storage_Gui extends MachineGuiBase{

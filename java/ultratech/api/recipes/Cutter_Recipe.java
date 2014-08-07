@@ -1,11 +1,9 @@
 package ultratech.api.recipes;
 
+import ultratech.api.util.UT_Utils;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
-import common.cout970.UltraTech.TileEntities.electric.tiers.ChemicalVaporDesintegrationT1_Entity;
-import common.cout970.UltraTech.TileEntities.electric.tiers.CutterT1_Entity;
-import common.cout970.UltraTech.util.UT_Utils;
 
 public class Cutter_Recipe implements IRecipeHandler{
 	
@@ -65,7 +63,7 @@ public class Cutter_Recipe implements IRecipeHandler{
 		return input;
 	}
 	
-	public static boolean canCraft(CutterT1_Entity cvd){
+	public static boolean canCraft(IInventory cvd){
 		if(cvd == null)return false;
 		Cutter_Recipe a = getCraftingResult(cvd);
 		if(a == null)return false;

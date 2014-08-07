@@ -1,20 +1,21 @@
 package common.cout970.UltraTech.client.renderItems;
 
-import org.lwjgl.opengl.GL11;
-
-import common.cout970.UltraTech.client.models.ModelTurbine;
-import cpw.mods.fml.client.FMLClientHandler;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
 
+import org.lwjgl.opengl.GL11;
+
+import common.cout970.UltraTech.client.models.ModelSteamTurbine;
+import common.cout970.UltraTech.client.textures.ResourcesLocations;
+import cpw.mods.fml.client.FMLClientHandler;
+
 public class RenderTurbineItem implements IItemRenderer{
 
-	private ModelTurbine model;
-	private ResourceLocation texture = new ResourceLocation("ultratech:textures/misc/turbine.png");
+	private ModelSteamTurbine model;
 	
 	public RenderTurbineItem() {
-		this.model = new ModelTurbine();
+		this.model = new ModelSteamTurbine();
 	}
 	
 	@Override
@@ -64,8 +65,9 @@ public class RenderTurbineItem implements IItemRenderer{
         }
         GL11.glRotatef(180F, 0, 0, 1);
         GL11.glTranslatef(0, -1.5f, 0);
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(texture);
-        model.render(null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
+        FMLClientHandler.instance().getClient().renderEngine.bindTexture(ResourcesLocations.STEAM_TURBINE);
+        model.render(0.0625F);
+        model.renderRotor(0.0625F);
         GL11.glEnable(GL11.GL_LIGHTING);
         GL11.glPopMatrix();
 	}

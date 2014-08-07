@@ -2,8 +2,8 @@ package common.cout970.UltraTech.client.gui;
 
 import org.lwjgl.opengl.GL11;
 
+import ultratech.api.util.UT_Utils;
 import common.cout970.UltraTech.TileEntities.utility.HologramEmiterEntity;
-import common.cout970.UltraTech.util.UT_Utils;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.inventory.Container;
 import net.minecraft.tileentity.TileEntity;

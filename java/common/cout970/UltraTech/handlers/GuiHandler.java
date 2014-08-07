@@ -42,9 +42,9 @@ import common.cout970.UltraTech.client.gui.Cutter_Gui;
 import common.cout970.UltraTech.client.gui.Dynamo_Gui;
 import common.cout970.UltraTech.client.gui.EngineGui;
 import common.cout970.UltraTech.client.gui.Fermenter_Gui;
-import common.cout970.UltraTech.client.gui.FluidGenGui;
+import common.cout970.UltraTech.client.gui.FluidGeneratorGui;
 import common.cout970.UltraTech.client.gui.Furnace_Gui;
-import common.cout970.UltraTech.client.gui.Generator_Gui;
+import common.cout970.UltraTech.client.gui.CoalGenerator_Gui;
 import common.cout970.UltraTech.client.gui.Heater_Gui;
 import common.cout970.UltraTech.client.gui.HologramEmiterGui;
 import common.cout970.UltraTech.client.gui.Laminator_Gui;
@@ -66,7 +66,7 @@ import common.cout970.UltraTech.containers.CutterContainer;
 import common.cout970.UltraTech.containers.Dynamo_Container;
 import common.cout970.UltraTech.containers.EngineContainer;
 import common.cout970.UltraTech.containers.FermenterContainer;
-import common.cout970.UltraTech.containers.FluidGenContainer;
+import common.cout970.UltraTech.containers.FluidGeneratorContainer;
 import common.cout970.UltraTech.containers.FurnaceContainer;
 import common.cout970.UltraTech.containers.GeneratorContainer;
 import common.cout970.UltraTech.containers.Heater_Container;
@@ -74,7 +74,7 @@ import common.cout970.UltraTech.containers.HologramEmiterContainer;
 import common.cout970.UltraTech.containers.LaminatorContainer;
 import common.cout970.UltraTech.containers.MAssemblyContainer;
 import common.cout970.UltraTech.containers.MinerContainer;
-import common.cout970.UltraTech.containers.Printer3DContainer;
+import common.cout970.UltraTech.containers.Painter3DContainer;
 import common.cout970.UltraTech.containers.PurifierContainer;
 import common.cout970.UltraTech.containers.Reactor_Container;
 import common.cout970.UltraTech.containers.RefineryContainer;
@@ -138,7 +138,7 @@ public class GuiHandler implements IGuiHandler{
 		}
 		//Printer3D
 		if(tileEntity instanceof Painter3DEntity){
-			return new Printer3DContainer(player.inventory, (Painter3DEntity) tileEntity);
+			return new Painter3DContainer(player.inventory, (Painter3DEntity) tileEntity);
 		}
 		//Engine
 		if(tileEntity instanceof EngineEntity){
@@ -170,7 +170,7 @@ public class GuiHandler implements IGuiHandler{
 		}
 		//FluidGenerator
 		if(tileEntity instanceof FluidGeneratorT1_Entity){
-			return new FluidGenContainer(player.inventory, tileEntity);
+			return new FluidGeneratorContainer(player.inventory, tileEntity);
 		}
 		//Refinery
 		if(tileEntity instanceof RefineryBase){
@@ -224,7 +224,7 @@ public class GuiHandler implements IGuiHandler{
 		}
 		//generator
 		if(tileEntity instanceof CoalGeneratorEntityT1_Entity){
-			return new Generator_Gui(new GeneratorContainer(player.inventory, (CoalGeneratorEntityT1_Entity) tileEntity), player.inventory, (CoalGeneratorEntityT1_Entity) tileEntity);
+			return new CoalGenerator_Gui(new GeneratorContainer(player.inventory, (CoalGeneratorEntityT1_Entity) tileEntity), player.inventory, (CoalGeneratorEntityT1_Entity) tileEntity);
 		}
 		//Miner
 		if(tileEntity instanceof MinerEntity){
@@ -244,7 +244,7 @@ public class GuiHandler implements IGuiHandler{
 		}
 		//Printer3D
 		if(tileEntity instanceof Painter3DEntity){
-			return new Printer3D_Gui(new Printer3DContainer(player.inventory, (Painter3DEntity) tileEntity), player.inventory, (Painter3DEntity) tileEntity);
+			return new Printer3D_Gui(new Painter3DContainer(player.inventory, (Painter3DEntity) tileEntity), player.inventory, (Painter3DEntity) tileEntity);
 		}
 		//Engine
 		if(tileEntity instanceof EngineEntity){
@@ -276,7 +276,7 @@ public class GuiHandler implements IGuiHandler{
 		}
 		//FluidGenerator
 		if(tileEntity instanceof FluidGeneratorT1_Entity){
-			return new FluidGenGui(new FluidGenContainer(player.inventory, tileEntity), (FluidGeneratorT1_Entity) tileEntity);
+			return new FluidGeneratorGui(new FluidGeneratorContainer(player.inventory, tileEntity), (FluidGeneratorT1_Entity) tileEntity);
 		}
 		//Refinery
 		if(tileEntity instanceof RefineryBase){

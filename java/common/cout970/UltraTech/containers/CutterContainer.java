@@ -46,15 +46,7 @@ public class CutterContainer extends Container{
 			addSlotToContainer(new Slot(inventoryPlayer, i, 8 + i * 18, 142));
 		}
 	}
-	
-//	public void addCraftingToCrafters(ICrafting par1ICrafting)
-//    {
-//        super.addCraftingToCrafters(par1ICrafting);
-//        par1ICrafting.sendProgressBarUpdate(this, 0, tileEntity.progres);
-//        par1ICrafting.sendProgressBarUpdate(this, 1, (int)tileEntity.getEnergy());
-//        par1ICrafting.sendProgressBarUpdate(this, 2, tileEntity.speed);
-//    }
-	
+
 	@Override
 	public void detectAndSendChanges() {
 		super.detectAndSendChanges();
@@ -86,13 +78,13 @@ public class CutterContainer extends Container{
 			aux = itemstack.copy();
 			
 			if(slot == 0){//slot 0 smelt
-				if(!mergeItemStack(itemstack, 2, 38, false)){
+				if(!mergeItemStack(itemstack, 3, 39, false)){
 					return null;
 				}
 				current.onSlotChange(itemstack, aux);
 				
-			}else if(slot == 1){//slot 1 result
-				if(!mergeItemStack(itemstack, 2, 38, false)){
+			}else if(slot == 1 || slot == 2){//slot 1,2 result
+				if(!mergeItemStack(itemstack, 3, 39, false)){
 					return null;
 				}
 				current.onSlotChange(itemstack, aux);
@@ -103,15 +95,15 @@ public class CutterContainer extends Container{
                     {
                         return null;
                     }
-                }else if (slot >= 2 && slot < 29)
+                }else if (slot > 2 && slot < 30)
                 {
-                    if (!this.mergeItemStack(itemstack, 29, 38, false))
+                    if (!this.mergeItemStack(itemstack, 30, 39, false))
                     {
                         return null;
                     }
                 }
-                else if (slot >= 29 && slot < 38){
-                	if(!this.mergeItemStack(itemstack, 2, 29, false))
+                else if (slot >= 30 && slot < 39){
+                	if(!this.mergeItemStack(itemstack, 3, 30, false))
                 	{
                 		return null;
                 	}

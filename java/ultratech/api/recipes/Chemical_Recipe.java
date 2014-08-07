@@ -1,18 +1,10 @@
 package ultratech.api.recipes;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import common.cout970.UltraTech.util.UT_Utils;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
 public class Chemical_Recipe{
-
-	public static List<Chemical_Recipe> recipes = new ArrayList<Chemical_Recipe>();
-
-	public static Chemical_Recipe INSTANCE = new Chemical_Recipe(null,null,null,null);
 	
 	public FluidStack input;
 	public ItemStack out_1;
@@ -31,25 +23,18 @@ public class Chemical_Recipe{
 		if(a.out_1 != null && a.out_1.stackSize == 0)a.out_1.stackSize = 1;
 		if(a.out_2 != null && a.out_2.stackSize == 0)a.out_2.stackSize = 1;
 		if(a.out_3 != null && a.out_3.stackSize == 0)a.out_3.stackSize = 1;
-		if(!recipes.contains(a))
-			recipes.add(a);
+		if(!RecipeRegistry.chemical.contains(a))
+			RecipeRegistry.chemical.add(a);
 	}
 
-	public boolean matches(IInventory inv) {
+	public boolean matches(FluidStack f) {
+		if(f.fluidID == input.fluidID)return true;
 		return false;
-	}
-
-	public ItemStack getCraftingResult(IInventory inv) {
-		return null;
-	}
-
-	public ItemStack getResult(ItemStack itemstack) {
-		return null;
 	}
 	
 	public ItemStack getResult(FluidStack f, int n) {
 		if(f == null)return null;
-		for(Chemical_Recipe r : recipes){
+		for(Chemical_Recipe r : RecipeRegistry.chemical){
 			if(f.fluidID == r.input.fluidID){
 				if(n == 0)return r.out_1;
 				if(n == 1)return r.out_2;

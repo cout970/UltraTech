@@ -1,6 +1,6 @@
 package common.cout970.UltraTech.items;
 
-import common.cout970.UltraTech.misc.ISpeeded;
+import ultratech.api.power.ISpeeded;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;

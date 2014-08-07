@@ -4,9 +4,9 @@ import java.util.Arrays;
 import java.util.Random;
 
 import ultratech.api.power.IPowerConductor;
+import ultratech.api.power.ISpeeded;
 import ultratech.api.power.PowerConductorBlock;
 import common.cout970.UltraTech.managers.ItemManager;
-import common.cout970.UltraTech.misc.ISpeeded;
 import buildcraft.api.power.IPowerReceptor;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
