@@ -1,19 +1,14 @@
 thinks to do:
 finish {
-animation engine,
 pump, - (still need add pipes but for now is good)
 multitank,
-turbine,
 tesseract gui
 redstone control for machines -*
 steam turbine tiers
 multiblock pipes
 new cable like the 1.6.4 version
-lava generator lava + water = energy + cobble or obsidian
-change turbine -*
-fluid generator **
-make wiki! 
+
 wind mill remake
 }
 
-important wiki,miner,tuneler,tesseract,reactor
+important wiki,tuneler

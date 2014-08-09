@@ -109,6 +109,7 @@ public class WindMillEntity extends Machine{
     public AxisAlignedBB getRenderBoundingBox()
     {
         AxisAlignedBB bb = INFINITE_EXTENT_AABB;
+        bb = AxisAlignedBB.getBoundingBox(xCoord-1, yCoord, zCoord-1, xCoord+2, yCoord+6, zCoord+2);
         return bb;
     }
 }

@@ -17,6 +17,7 @@ public class NEIUltraTechConfig implements IConfigureNEI{
 		API.registerRecipeHandler(new LaminatorCrafting());
 		API.registerRecipeHandler(new ChemicalCrafting());
 		API.registerRecipeHandler(new RefineryCrafting());
+		API.registerRecipeHandler(new BoilerCrafting());
 		
 		API.registerUsageHandler(new PurifierCrafting());
 		API.registerUsageHandler(new CutterCrafting());
@@ -25,6 +26,8 @@ public class NEIUltraTechConfig implements IConfigureNEI{
 		API.registerUsageHandler(new FermenterCrafting());
 		API.registerUsageHandler(new LaminatorCrafting());
 		API.registerUsageHandler(new RefineryCrafting());
+		API.registerUsageHandler(new BoilerCrafting());
+		
 		API.registerGuiOverlayHandler(Crafter_Gui.class, new CrafterOverlayHandler(), "crafting");
 	}
 
@@ -35,7 +38,7 @@ public class NEIUltraTechConfig implements IConfigureNEI{
 
 	@Override
 	public String getVersion() {
-		return "0.7";
+		return "0.9.1";
 	}
 	
 	public static boolean matches(ItemStack a,ItemStack b){

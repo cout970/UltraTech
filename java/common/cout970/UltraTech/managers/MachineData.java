@@ -19,7 +19,7 @@ public enum MachineData {
 	CVD				(  800d	,1	,100d		,0),
 	Laminator		(  800d ,1	,100d		,0),
 	
-	Miner    		(16000d	,3	,100d		,0),//per block
+	Miner    		(16000d	,3	,50d		,0),//per block
 	MAssembly		(  800d ,3	,100d		,0),
 	Charge_Station	( 3200d	,1	,200d		,2),//per tick
 	Climate_Station	(100000d,3	,100000d	,0),
@@ -28,7 +28,7 @@ public enum MachineData {
 	ChemicalPlant	(  800d ,2	,100d		,0),//per item
 	Heater			( 1600d	,2	,100d		,0),//per 200proces
 	Pump			(  600d ,2  ,150d		,0),//per 1000mB
-	Engine    		(  800d ,2  ,2			,0),//1QP => 2MJ
+	Engine    		(  800d ,2  ,8			,0),//1QP => 2MJ
 	Dynamo     		( 1600d	,2	,1d			,0),
 	Kinetic_Generator(1600d ,2	,1d			,0),
 	

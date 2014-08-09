@@ -79,9 +79,9 @@ public class RenderSwordItem implements IItemRenderer{
         GL11.glTranslatef(0, -2f, 0);
 
         if(item.getItem() instanceof IStorageItem &&((IStorageItem)item.getItem()).getPower(item) > 0){
-        	FMLClientHandler.instance().getClient().renderEngine.bindTexture(ResourcesLocations.SWORD_OFF);
-        }else{
         	FMLClientHandler.instance().getClient().renderEngine.bindTexture(ResourcesLocations.SWORD_ON);
+        }else{
+        	FMLClientHandler.instance().getClient().renderEngine.bindTexture(ResourcesLocations.SWORD_OFF);
         }
 
         model.render(null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);

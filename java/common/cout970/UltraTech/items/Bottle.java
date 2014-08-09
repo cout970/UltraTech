@@ -56,6 +56,7 @@ public class Bottle extends UT_Item{
 			if(f != null){
 				MovingObjectPosition mop = this.getMovingObjectPositionFromPlayer(w, p, false);
 				if(mop == null)return i;
+				if(f.getFluid() == null || f.getFluid().getBlock() == null)return i;
 				Block b = f.getFluid().getBlock();
 				if(mop.sideHit == 0)mop.blockY--;
 				if(mop.sideHit == 1)mop.blockY++;

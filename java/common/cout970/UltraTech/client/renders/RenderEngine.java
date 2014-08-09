@@ -47,9 +47,10 @@ public class RenderEngine extends TileEntitySpecialRenderer{
 
 			
 		}else{
-			if(e.animation > 0)
-			e.animation -= 0.1*k;
+			if(e.animation < k*10)
+			e.animation += 0.1*k;
 			if(e.animation < 0)e.animation = 0;
+			if(e.animation > k*10)e.animation = k*10;
 		}
 		GL11.glTranslatef(0f, e.animation, 0f);
 		model.renderMove(k);

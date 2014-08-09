@@ -13,6 +13,7 @@ import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 import common.cout970.UltraTech.util.render.RenderUtil;
 import codechicken.nei.PositionedStack;
@@ -39,6 +40,8 @@ public class RefineryCrafting extends TemplateRecipeHandler{
 			for(int g=0;g<3;g++){
 				if(c.product[g] != null && c.product[g].getFluid() != null && c.product[g].getFluid().getBlock() != null){
 					if(UT_Utils.areEcuals(new ItemStack(c.product[g].getFluid().getBlock()),result,false)){
+						recipes.add(c);
+					}else if(FluidContainerRegistry.containsFluid(result, c.product[g])){
 						recipes.add(c);
 					}
 				}

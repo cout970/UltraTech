@@ -25,7 +25,7 @@ public class EngineEntity extends Machine implements IPowerEmitter{
 
 	//render
 	public ForgeDirection direction = ForgeDirection.UP;
-	public float animation = 0;
+	public float animation = 0.625f;
 	public boolean animationUp;
 	public boolean engOn;	
 	public long oldTime;
@@ -41,7 +41,7 @@ public class EngineEntity extends Machine implements IPowerEmitter{
 		if(worldObj.isRemote)return;
 
 		int powerSpace = (int) (800-MJ);
-		int toChange = (int) Math.min(8.0, Math.min(PowerExchange.QPtoMJ(getCharge()), powerSpace));
+		int toChange = (int) Math.min(MachineData.Engine.use, Math.min(PowerExchange.QPtoMJ(getCharge()), powerSpace));
 		if(toChange > 0){
 			this.removeCharge(PowerExchange.MJtoQP(toChange));
 			MJ += toChange;

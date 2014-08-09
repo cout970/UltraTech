@@ -10,6 +10,7 @@ import buildcraft.api.fuels.IronEngineFuel.Fuel;
 import ultratech.api.power.IPower;
 import ultratech.api.util.UT_Utils;
 import common.cout970.UltraTech.TileEntities.electric.tiers.FluidGeneratorT1_Entity;
+import common.cout970.UltraTech.TileEntities.electric.tiers.FluidGeneratorT2_Entity;
 import common.cout970.UltraTech.util.power.PowerExchange;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.RenderHelper;
@@ -61,7 +62,9 @@ public class FluidGeneratorGui extends GuiContainer{
 			this.drawCenteredString(fontRendererObj, amount, xStart+90, yStart+37, UT_Utils.RGBtoInt(255, 255, 255));
 			Fuel fu = IronEngineFuel.getFuelForFluid(input.getFluid());
 			if(fu != null){
-				String prod = "Production: "+PowerExchange.FTtoQP(fu.powerPerCycle);
+				int m = 1;
+				if(entity instanceof FluidGeneratorT2_Entity)m = 2;
+				String prod = "Production: "+PowerExchange.FTtoQP(fu.powerPerCycle)*m;
 				this.drawCenteredString(fontRendererObj, prod, xStart+90, yStart+48, UT_Utils.RGBtoInt(255, 255, 255));
 			}
 		}
