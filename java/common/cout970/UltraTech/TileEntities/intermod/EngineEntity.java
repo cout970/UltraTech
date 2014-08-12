@@ -65,6 +65,8 @@ public class EngineEntity extends Machine implements IPowerEmitter{
 		}
 		if(MJ >= 50){
 			sendPower();
+		}else if(!engOn && MJ > 0){
+			sendPower();
 		}
 	}
 	

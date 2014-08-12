@@ -40,11 +40,15 @@ public class FermenterEntity extends MachineWithInventory implements  IFluidHand
 			}
 		}
 		if(progres > 0){
-			if(juice.getFluidAmount() + 5 <= juice.getCapacity() && water.getFluidAmount() >= 10 && getCharge() >= MachineData.Fermenter.use){
-				progres--;
-				juice.fill(new FluidStack(FluidManager.Juice, 5), true);
-				water.drain(10, true);
-				removeCharge(MachineData.Fermenter.use*5);
+			int space = juice.getCapacity()-juice.getFluidAmount();
+			int charge = (int) (getCharge()/MachineData.Fermenter.use);
+			int avaliable = Math.min(charge, space);
+			int proces = Math.min(avaliable, 5);
+			if(proces > 0 && water.getFluidAmount() >= 2*proces){
+				progres -= proces;
+				juice.fill(new FluidStack(FluidManager.Juice, proces), true);
+				water.drain(proces*2, true);
+				removeCharge(MachineData.Fermenter.use*proces);
 			}
 		}
 	}

@@ -17,7 +17,7 @@ public class SteamTurbineEntity extends Machine implements IFluidHandler{
 
 	public UT_Tank steam;
 	public ForgeDirection facing = ForgeDirection.UP;
-		private int maxProduction = 80;
+	private int maxProduction = 80;
 
 	//render
 	public boolean on = false;

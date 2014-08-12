@@ -25,7 +25,6 @@ public class FluidGeneratorT1_Entity extends ConfigurableMachine implements IFlu
 
 	public UT_Tank storage;
 	public float progres = 0;
-	public PowerExchange pe = new PowerExchange();
 	public double production;
 	public boolean updated;
 	
@@ -37,14 +36,16 @@ public class FluidGeneratorT1_Entity extends ConfigurableMachine implements IFlu
 		super.updateEntity();
 		if(worldObj.isRemote)return;
 		if(progres <= 0){
-			if(getTank().getFluidAmount() >= 10){
+			int amount = Math.min(getTank().getFluidAmount(), 10);
+			if(amount > 0){
 				Fuel f = IronEngineFuel.getFuelForFluid(getTank().getFluid().getFluid());
 				if(f != null){
-					double prod = pe.FTtoQP(f.powerPerCycle)*(f.totalBurningTime/100);
+					double ft = (f.powerPerCycle)*(f.totalBurningTime/1000)*amount;
+					double prod = PowerExchange.FTtoQP((float) ft);
 					if(spaceForCharge(prod) || getCapacity() < prod){
-						progres = f.totalBurningTime/100;
-						production = pe.FTtoQP(f.powerPerCycle);
-						getTank().drain(10, true);
+						progres = (f.totalBurningTime/1000)*amount;
+						production = PowerExchange.FTtoQP(f.powerPerCycle);
+						getTank().drain(amount, true);
 					}
 				}
 			}

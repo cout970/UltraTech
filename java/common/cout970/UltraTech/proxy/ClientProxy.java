@@ -18,6 +18,7 @@ import common.cout970.UltraTech.TileEntities.fluid.TankEntity;
 import common.cout970.UltraTech.TileEntities.intermod.DynamoEntity;
 import common.cout970.UltraTech.TileEntities.intermod.EngineEntity;
 import common.cout970.UltraTech.TileEntities.multiblocks.reactor.Reactor_Tank_Entity;
+import common.cout970.UltraTech.TileEntities.multiblocks.refinery.Refinery_Core_Entity;
 import common.cout970.UltraTech.TileEntities.utility.HologramEmiterEntity;
 import common.cout970.UltraTech.client.renderItems.RenderBatteryItem;
 import common.cout970.UltraTech.client.renderItems.RenderBoilerItem;
@@ -41,6 +42,7 @@ import common.cout970.UltraTech.client.renders.RenderEngine;
 import common.cout970.UltraTech.client.renders.RenderHologram;
 import common.cout970.UltraTech.client.renders.RenderPipe;
 import common.cout970.UltraTech.client.renders.RenderPump;
+import common.cout970.UltraTech.client.renders.RenderRefinery;
 import common.cout970.UltraTech.client.renders.RenderSolarPanel;
 import common.cout970.UltraTech.client.renders.RenderTank;
 import common.cout970.UltraTech.client.renders.RenderTesseract;
@@ -50,8 +52,6 @@ import common.cout970.UltraTech.managers.BlockManager;
 import common.cout970.UltraTech.managers.ItemManager;
 import common.cout970.UltraTech.microparts.Cable_Entity;
 import common.cout970.UltraTech.microparts.RenderCableWithoutMP;
-import common.cout970.UltraTech.multiblocks.refinery.RefineryCore;
-import common.cout970.UltraTech.multiblocks.refinery.RenderRefinery;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
@@ -64,7 +64,6 @@ public class ClientProxy extends CommonProxy{
 	public static int solarRenderPass;
 	public static int windmillRenderPass;
 	public static int boilerRenderPass;
-	public static int tankRenderPass;
 	public static int turbineRenderPass;
 	public static int batteryRenderPass;
 	public static int dynamoRenderPass;
@@ -83,7 +82,7 @@ public class ClientProxy extends CommonProxy{
 		ClientRegistry.bindTileEntitySpecialRenderer(BoilerEntity.class, new RenderBoiler());
 		ClientRegistry.bindTileEntitySpecialRenderer(TankEntity.class, new RenderTank());
 		ClientRegistry.bindTileEntitySpecialRenderer(SteamTurbineEntity.class, new RenderTurbine());
-		ClientRegistry.bindTileEntitySpecialRenderer(RefineryCore.class, new RenderRefinery());
+		ClientRegistry.bindTileEntitySpecialRenderer(Refinery_Core_Entity.class, new RenderRefinery());
 		ClientRegistry.bindTileEntitySpecialRenderer(StorageTier1.class, new RenderBattery());
 		ClientRegistry.bindTileEntitySpecialRenderer(StorageTier2.class, new RenderBattery());
 		ClientRegistry.bindTileEntitySpecialRenderer(StorageTier3.class, new RenderBattery());
@@ -114,9 +113,6 @@ public class ClientProxy extends CommonProxy{
 		  //windmill
 		  boilerRenderPass = RenderingRegistry.getNextAvailableRenderId();
 		  MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockManager.Boiler), new RenderBoilerItem());
-		  //tank
-		  tankRenderPass = RenderingRegistry.getNextAvailableRenderId();
-		  MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockManager.Tank), new RenderTankItem());
 		  //turbine
 		  turbineRenderPass = RenderingRegistry.getNextAvailableRenderId();
 		  MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockManager.Turbine), new RenderTurbineItem());

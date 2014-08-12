@@ -17,7 +17,7 @@ import net.minecraft.util.ResourceLocation;
 public class RenderTank  extends TileEntitySpecialRenderer{
 
 	private ModelFluidTank model;
-	public float k = 0.063f;
+	public float k = 0.002f;
 
 	public RenderTank() {
 		this.model = new ModelFluidTank();
@@ -34,8 +34,6 @@ public class RenderTank  extends TileEntitySpecialRenderer{
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
 		GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
-		bindTexture(ResourcesLocations.TANK);
-		this.model.render((Entity)null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
 		renderFluid((TankEntity)te);
 		GL11.glPopAttrib();
 		GL11.glPopMatrix();
@@ -49,11 +47,12 @@ public class RenderTank  extends TileEntitySpecialRenderer{
 		IIcon i = te.getTank().getFluid().getFluid().getIcon();
 		if(i == null)return;
 		float h = ((float) te.getTank().getFluidAmount())/((float) te.getTank().getCapacity());
-		if(h<0.01)h = 0;
 		if(h > 0){
+			if(h <= 0.01f)h = 0.02f;
+			if(h >= 1)h = 0.99f;
 		GL11.glTranslatef(-0.5F, -1.5F, -0.5F);
 		GL11.glTranslatef(k, 0.01f, k);
-		te.FR.renderBox(i, 1f-k*2, h-0.02f, 1f-k*2);
+		te.FR.renderBox(i, 1f-k*2, h-0.01f, 1f-k*2);
 		}
 	}
 

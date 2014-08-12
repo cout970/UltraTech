@@ -1,12 +1,13 @@
 package common.cout970.UltraTech.managers;
 
 
+import net.minecraftforge.oredict.OreDictionary;
 import ultratech.api.power.PathFinderRegistry;
 import ultratech.api.power.multipart.MultipartReference;
 import common.cout970.UltraTech.handlers.BottleHandler;
 import common.cout970.UltraTech.handlers.FuelHandler;
 import common.cout970.UltraTech.handlers.GuiHandler;
-import common.cout970.UltraTech.handlers.WorldGen;
+import common.cout970.UltraTech.handlers.UltratechWorldGenerator;
 import common.cout970.UltraTech.microparts.MicroRegistry;
 import common.cout970.UltraTech.network.Net_Utils;
 import common.cout970.UltraTech.proxy.CommonProxy;
@@ -25,7 +26,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 
 
-@Mod(modid = InformationManager.MOD_ID, name = InformationManager.MOD_ID,version = "1.7.10-0.9.1",guiFactory = InformationManager.GUI_FACTORY)
+@Mod(modid = InformationManager.MOD_ID, name = InformationManager.MOD_ID,version = "1.7.10-0.9.2",guiFactory = InformationManager.GUI_FACTORY)
 
 
 public class UltraTech {
@@ -74,7 +75,7 @@ public class UltraTech {
 		GameRegistry.registerFuelHandler(new FuelHandler());						//fuel
 		CraftManager.registerCraft();												//craft and smelting
 		RecipeCreator.initRecipes();												//cutter for machines
-		GameRegistry.registerWorldGenerator(new WorldGen(), 10);					//world generation
+		GameRegistry.registerWorldGenerator(new UltratechWorldGenerator(), 10);					//world generation
 		proxy.registerRenders();													//renders
 		LogHelper.log("Finishing Init");
 	}

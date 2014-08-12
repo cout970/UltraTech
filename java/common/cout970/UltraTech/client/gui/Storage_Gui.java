@@ -9,13 +9,14 @@ import org.lwjgl.opengl.GL11;
 
 import ultratech.api.power.IPower;
 import ultratech.api.util.UT_Utils;
+
 import common.cout970.UltraTech.TileEntities.electric.StorageTier1;
 import common.cout970.UltraTech.TileEntities.electric.StorageTier2;
 import common.cout970.UltraTech.TileEntities.electric.StorageTier3;
+import common.cout970.UltraTech.TileEntities.electric.StorageTier4;
 import common.cout970.UltraTech.network.Net_Utils;
 import common.cout970.UltraTech.network.SyncTile;
 import common.cout970.UltraTech.network.messages.MessageMachineMode;
-import common.cout970.UltraTech.util.LogHelper;
 import common.cout970.UltraTech.util.power.Machine;
 
 public class Storage_Gui extends MachineGuiBase{
@@ -64,6 +65,7 @@ public class Storage_Gui extends MachineGuiBase{
 		if(entity instanceof StorageTier1)c = UT_Utils.RGBtoInt(0, 120, 0);
 		if(entity instanceof StorageTier2)c = UT_Utils.RGBtoInt(255, 0, 0);
 		if(entity instanceof StorageTier3)c = UT_Utils.RGBtoInt(0, 0, 255);
+		if(entity instanceof StorageTier4)c = UT_Utils.RGBtoInt(115, 0, 230);
 		this.fontRendererObj.drawString(f, this.xSize - 130, 5, c);
 
 		if(isIn(x, y, xStart+138, yStart+29, 19, 19)){

@@ -22,6 +22,7 @@ import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
@@ -77,8 +78,9 @@ public class Reactor_Core_Entity extends Reactor_Entity_Base implements IReactor
 						if(heat < maxheat)heat +=0.1;
 						if(heat >= 100 ){
 							FluidStack f = new FluidStack(FluidRegistry.getFluid("steam"),((IReactorFuel) inv[p].getItem()).getSteamPerTick());
-							int toD =Math.min(1, f.amount/10);
+							int toD = Math.max(1, f.amount/10);
 							if(getTank(0).getFluidAmount() >= toD){
+								
 								getTank(1).fill(f, true);
 								getTank(0).drain(toD, true);
 								production += f.amount;
@@ -139,6 +141,17 @@ public class Reactor_Core_Entity extends Reactor_Entity_Base implements IReactor
 		NBT.setBoolean("auto", automation);
 		NBT.setInteger("redstone", Mode.ordinal());
 		NBT.setBoolean("state", state);
+		NBT.setInteger("water", getTank(0).getCapacity());
+		NBTTagList list = new NBTTagList();
+		for (int currentIndex = 0; currentIndex < inv.length; ++currentIndex) {
+			if (inv[currentIndex] != null) {
+				NBTTagCompound nbt = new NBTTagCompound();
+				nbt.setByte("Slot", (byte) currentIndex);
+				inv[currentIndex].writeToNBT(nbt);
+				list.appendTag(nbt);
+			}
+		}
+		NBT.setTag("Inventory", list);
     }
 	
 	public void readFromNBT(NBTTagCompound NBT){
@@ -150,12 +163,22 @@ public class Reactor_Core_Entity extends Reactor_Entity_Base implements IReactor
 		automation = NBT.getBoolean("auto");
 		Mode = ControlMode.values()[NBT.getInteger("redstone")];
 		state = NBT.getBoolean("state");
+		getTank(0).setCapacity(NBT.getInteger("water"));
+		NBTTagList tagList = NBT.getTagList("Inventory", 10);
+		inv = new ItemStack[this.getSizeInventory()];
+		for (int i = 0; i < tagList.tagCount(); ++i) {
+			NBTTagCompound tagCompound = (NBTTagCompound) tagList.getCompoundTagAt(i);
+			byte slot = tagCompound.getByte("Slot");
+			if (slot >= 0 && slot < inv.length) {
+				inv[slot] = ItemStack.loadItemStackFromNBT(tagCompound);
+			}
+		}
     }
 	
 	public UT_Tank getTank(int tank){
 		if(water == null){
-			if(getNumTanks() == 0 && worldObj != null)updateComponents();
-			water = new UT_Tank(getNumTanks()*4000, this);
+			if(getNumTanks() == 0 && worldObj != null)updateComponents();			
+			water = new UT_Tank(getNumTanks()*2000, this);
 		}
 		if(steam == null)steam = new UT_Tank(32000, this);
 		if(tank == 0)return water;

@@ -12,6 +12,7 @@ import ultratech.api.power.CableType;
 import ultratech.api.recipes.Boiler_Recipes;
 import common.cout970.UltraTech.misc.IUpdatedEntity;
 import common.cout970.UltraTech.network.SyncTile;
+import common.cout970.UltraTech.util.LogHelper;
 import common.cout970.UltraTech.util.fluids.UT_Tank;
 import common.cout970.UltraTech.util.power.PowerExchange;
 
@@ -37,10 +38,10 @@ public class BoilerEntity extends SyncTile implements IFluidHandler,IUpdatedEnti
 				if(canBoil > 0){
 					Fluid s = Boiler_Recipes.getResult(storage.getFluid());
 					if(s != null){
-						storage.drain(toBoil, true);
-						FluidStack t = new FluidStack(s,toBoil*10);
+						storage.drain(canBoil, true);
+						FluidStack t = new FluidStack(s,canBoil*10);
 						result.fill(t, true);
-						heat -= PowerExchange.HeatPerFluid(toBoil)*10;
+						heat -= PowerExchange.HeatPerFluid(canBoil)*10;
 					}
 				}
 			}

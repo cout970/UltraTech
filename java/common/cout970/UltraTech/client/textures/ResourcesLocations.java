@@ -30,7 +30,8 @@ public class ResourcesLocations {
 	public static final ResourceLocation STEAM_TURBINE = new ResourceLocation(BASE,"textures/misc/steamturbine.png");
 	public static final ResourceLocation WIND_MILL = new ResourceLocation(BASE,"textures/misc/windmill.png");
 	public static final ResourceLocation HOLOGRAM = new ResourceLocation(BASE,"textures/misc/tex.png");
-	public static final ResourceLocation BOTTLE = new ResourceLocation(BASE,"textures/misc/bottle.png");;
+	public static final ResourceLocation BOTTLE = new ResourceLocation(BASE,"textures/misc/bottle.png");
+	public static final ResourceLocation REFINERY = new ResourceLocation(BASE,"textures/misc/refinery.png");
 
 
 }

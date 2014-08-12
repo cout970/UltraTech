@@ -47,7 +47,7 @@ public class ModelEngine extends ModelBase
       move.mirror = true;
       setRotation(move, 0F, 0F, 0F);
       bellows = new ModelRenderer(this, 0, 23);
-      bellows.addBox(-5F, 0F, -5F, 10, 10, 10);
+      bellows.addBox(-5F, 0F, -5F, 10, 6, 10);
       bellows.setRotationPoint(0F, 10F, 0F);
       bellows.setTextureSize(128, 64);
       bellows.mirror = true;
@@ -65,6 +65,11 @@ public class ModelEngine extends ModelBase
   public void renderMove(float f5){
 	  move.render(f5);
   }
+  
+  public void renderBellows(float f5){
+	  bellows.render(f5);
+  }
+  
   
   private void setRotation(ModelRenderer model, float x, float y, float z)
   {

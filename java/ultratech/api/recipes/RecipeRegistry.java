@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
 public class RecipeRegistry{
@@ -105,9 +106,9 @@ public class RecipeRegistry{
 		return false;
 	}
 
-	public static boolean addRecipeRefinery(FluidStack input, FluidStack a, FluidStack b, FluidStack c){
-		if(input == null || a == null || b == null || c == null)return false;
-		Refinery_Recipe d = new Refinery_Recipe(input,a,b,c);
+	public static boolean addRecipeRefinery(FluidStack input,Fluid out1,float amount1,Fluid out2,float amount2,Fluid out3,float amount3){
+		if(input == null || out1 == null || out2 == null || out3 == null)return false;
+		Refinery_Recipe d = new Refinery_Recipe(input,out1,amount1,out2,amount2,out3,amount3);
 		if(!refinery.contains(d)){
 			refinery.add(d);
 			return true;

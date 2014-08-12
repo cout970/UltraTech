@@ -3,6 +3,7 @@ package common.cout970.UltraTech.misc;
 import ultratech.api.util.UT_Utils;
 import common.cout970.UltraTech.TileEntities.electric.tiers.Heater_Entity;
 import common.cout970.UltraTech.TileEntities.fluid.BoilerEntity;
+import common.cout970.UltraTech.util.LogHelper;
 import common.cout970.UltraTech.util.power.PowerExchange;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
@@ -32,19 +33,22 @@ public class HeaterInteraction {
 	
 	public float apply(float heat){
 		if(type == Interaction.Block){
-			if(own > 900){
+			if(heat >= 1300){
 				if(target instanceof Block){
 					if(target == Blocks.cobblestone){
 						src.getWorldObj().setBlock(src.xCoord+side.offsetX, src.yCoord+side.offsetY, src.zCoord+side.offsetZ, Blocks.lava);
+						src.getWorldObj().notifyBlockOfNeighborChange(src.xCoord+side.offsetX, src.yCoord+side.offsetY, src.zCoord+side.offsetZ, Blocks.lava);
+						return 1000;
 					}else if(target == Blocks.sand){
 						src.getWorldObj().setBlock(src.xCoord+side.offsetX, src.yCoord+side.offsetY, src.zCoord+side.offsetZ, Blocks.glass);
+					}else if(target == Blocks.netherrack){
+						src.getWorldObj().setBlock(src.xCoord+side.offsetX, src.yCoord+side.offsetY, src.zCoord+side.offsetZ, Blocks.lava);
+						src.getWorldObj().notifyBlockOfNeighborChange(src.xCoord+side.offsetX, src.yCoord+side.offsetY, src.zCoord+side.offsetZ, Blocks.lava);
+						return 900;
 					}
 				}
 			}
-			float change = change(heat, own);
-			change = Math.min(change, heat-25);
-			own += change;
-			return change;
+			return 0;
 		}else if(type == Interaction.Fluid){
 			if(heat > 100){
 				if(target instanceof Block){
@@ -97,6 +101,7 @@ public class HeaterInteraction {
 		Block b = h.getWorldObj().getBlock(h.xCoord+d.offsetX, h.yCoord+d.offsetY, h.zCoord+d.offsetZ);
 		if(b == null)return Interaction.Nothing;
 		if(b == Blocks.cobblestone)return Interaction.Block;
+		if(b == Blocks.netherrack)return Interaction.Block;
 		if(b == Blocks.sand)return Interaction.Block;
 		if(b == Blocks.water)return Interaction.Fluid;
 		return Interaction.Nothing;

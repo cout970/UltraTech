@@ -33,7 +33,7 @@ public class Heater_Gui extends MachineGuiBase{
 
 		//heat			
 		Heater_Entity e = (Heater_Entity) entity;
-		int h = (int) ((e.Heat*58)/1000f);
+		int h = (int) ((e.Heat*58)/1350);
 		this.drawTexturedModalRect(xStart+14, yStart+14+(58-h), 176, 58-h, 5, h);
 
 		int i1 = 0;

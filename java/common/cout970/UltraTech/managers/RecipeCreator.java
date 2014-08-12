@@ -24,20 +24,20 @@ public class RecipeCreator {
 		RecipeCreator.initLaminator();//
 	
 		//fermenter 
-		RecipeRegistry.addRecipeFermenter(new ItemStack(Items.sugar), 75);
-		RecipeRegistry.addRecipeFermenter(new ItemStack(Items.apple), 25);
-		RecipeRegistry.addRecipeFermenter(new ItemStack(Items.wheat), 100);
-		RecipeRegistry.addRecipeFermenter(new ItemStack(Items.carrot), 100);
-		RecipeRegistry.addRecipeFermenter(new ItemStack(Items.potato), 100);
-		RecipeRegistry.addRecipeFermenter(new ItemStack(ItemName.get("RawMeal")), 100);
+		RecipeRegistry.addRecipeFermenter(new ItemStack(Items.sugar), 36);
+		RecipeRegistry.addRecipeFermenter(new ItemStack(Items.apple), 36);
+		RecipeRegistry.addRecipeFermenter(new ItemStack(Items.wheat), 72);
+		RecipeRegistry.addRecipeFermenter(new ItemStack(Items.carrot), 72);
+		RecipeRegistry.addRecipeFermenter(new ItemStack(Items.potato), 72);
+		RecipeRegistry.addRecipeFermenter(new ItemStack(ItemName.get("RawMeal")), 72);
 		
 		//liquid 
 		RecipeRegistry.addRecipeBoiler("juice", "gas_ethanol");
 		RecipeRegistry.addRecipeBoiler("oil", "gas_oil");
 		RecipeRegistry.addRecipeBoiler("water", "steam");
 	
-		RecipeRegistry.addRecipeRefinery(FluidRegistry.getFluidStack("gas_oil", 100), FluidRegistry.getFluidStack("plastic", 20), FluidRegistry.getFluidStack("fuel", 80), FluidRegistry.getFluidStack("gasoline", 10));
-		RecipeRegistry.addRecipeRefinery(FluidRegistry.getFluidStack("gas_ethanol", 100), FluidRegistry.getFluidStack("bioethanol", 80), FluidRegistry.getFluidStack("water", 5), FluidRegistry.getFluidStack("water", 5));
+		RecipeRegistry.addRecipeRefinery(FluidRegistry.getFluidStack("gas_oil", 100), FluidRegistry.getFluid("plastic"), 2, FluidRegistry.getFluid("fuel"), 8, FluidRegistry.getFluid("gasoline"), 1);
+		RecipeRegistry.addRecipeRefinery(FluidRegistry.getFluidStack("gas_ethanol", 100), FluidRegistry.getFluid("bioethanol"), 2, FluidRegistry.getFluid("water"), 4f, FluidRegistry.getFluid("water"), 4f);
 	
 		RecipeRegistry.addRecipeChemical(FluidRegistry.getFluidStack("plastic", 1000), new ItemStack(ItemName.get("Sulfur")), new ItemStack(ItemName.get("Rubber")), new ItemStack(ItemName.get("Plastic")));
 	

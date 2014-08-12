@@ -62,7 +62,7 @@ public class Boiler_Gui extends GuiContainer{
 		if(!g)this.drawTexturedModalRect(xStart+45, yStart+20, 224, 0, 20, 40);
 		if(!l)this.drawTexturedModalRect(xStart+138, yStart+21, 224, 0, 20, 40);
 		//heat			
-		int h = (int) ((entity.heat*58)/1000f);
+		int h = (int) ((entity.heat*58)/1350f);
 		this.drawTexturedModalRect(xStart+74, yStart+14+(58-h), 208, 58-h, 6, h);
 		
 		String s = ((int)this.entity.heat)+"C";

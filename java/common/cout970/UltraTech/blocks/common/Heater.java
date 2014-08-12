@@ -3,8 +3,10 @@ package common.cout970.UltraTech.blocks.common;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import common.cout970.UltraTech.TileEntities.electric.tiers.Heater_Entity;
@@ -12,6 +14,7 @@ import common.cout970.UltraTech.client.textures.Block_Textures;
 import common.cout970.UltraTech.managers.UT_Tabs;
 import common.cout970.UltraTech.managers.UltraTech;
 import common.cout970.UltraTech.misc.IUpdatedEntity;
+import common.cout970.UltraTech.util.LogHelper;
 import common.cout970.UltraTech.util.power.BlockConductor;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -31,6 +34,18 @@ public class Heater extends BlockConductor{
 	@Override
 	public TileEntity createNewTileEntity(World var1, int var2) {
 		return new Heater_Entity();
+	}
+	
+	public void onEntityCollidedWithBlock(World w, int x, int y, int z, Entity e)
+	{
+		if(e instanceof EntityPlayer){
+			TileEntity t = w.getTileEntity(x, y, z);
+			if(t instanceof Heater_Entity){
+				if(((Heater_Entity) t).Heat > 90){
+					e.attackEntityFrom(DamageSource.inFire, 1.0F);
+				}
+			}
+		}
 	}
 	
 	public void registerBlockIcons(IIconRegister iconRegister){

@@ -67,8 +67,9 @@ public class RenderEngineItem implements IItemRenderer{
 
         FMLClientHandler.instance().getClient().renderEngine.bindTexture(ResourcesLocations.ENGINE);
         model.render(null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
-        GL11.glTranslatef(0, 10*0.0625F, 0);
+        GL11.glTranslatef(0, 4*0.0625F, 0);
         model.renderMove(0.0625F);
+        model.renderBellows(0.0625F);
         GL11.glEnable(GL11.GL_LIGHTING);
         GL11.glPopMatrix();
 	}

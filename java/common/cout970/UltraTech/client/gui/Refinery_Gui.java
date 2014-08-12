@@ -11,15 +11,15 @@ import net.minecraftforge.fluids.FluidStack;
 
 import org.lwjgl.opengl.GL11;
 
-import common.cout970.UltraTech.multiblocks.refinery.RefineryBase;
+import common.cout970.UltraTech.TileEntities.multiblocks.refinery.Refinery_IO_Entity;
 
 public class Refinery_Gui extends GuiContainer{
 
-	public RefineryBase entity;
+	public Refinery_IO_Entity entity;
 	
-	public Refinery_Gui(Container par1Container, RefineryBase e) {
+	public Refinery_Gui(Container par1Container, Refinery_IO_Entity tileEntity) {
 		super(par1Container);
-		entity = e;
+		entity = tileEntity;
 	}
 
 	@Override

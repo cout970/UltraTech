@@ -135,7 +135,7 @@ public class Language {
 		
 		Language.addName(new ItemStack(Tier3,1,0), "Miner");
 		Language.addName(new ItemStack(Tier3,1,1), "Hologram Emiter");
-		Language.addName(new ItemStack(Tier3,1,2), "Precision Crafter");
+		Language.addName(new ItemStack(Tier3,1,2), "Molecular Assembly");
 		Language.addName(new ItemStack(Tier3,1,3), "Climate Station");
 		Language.addName(new ItemStack(Tesseract,1), "Energy Tesseract");
 		
@@ -144,12 +144,12 @@ public class Language {
 		Language.addName(new ItemStack(Storage,1,2), "Battery Tier3");
 		Language.addName(new ItemStack(Storage,1,3), "Battery Tier4");
 		
-		Language.addName(new ItemStack(Refinery,1,0), "Refinery Base");
-		Language.addName(new ItemStack(Refinery,1,1), "Refinery Structure Block");
-		Language.addName(new ItemStack(Refinery,1,2), "Refinery Core");
-		Language.addName(new ItemStack(Refinery,1,3), "Refinery Structure Block");
-		Language.addName(new ItemStack(Refinery,1,4), "Refinery Output");
-		Language.addName(new ItemStack(Refinery,1,5), "Refinery Base");
+		Language.addName(new ItemStack(Refinery_Base,1), "Refinery Base");
+		Language.addName(new ItemStack(Refinery_IO,1), "Refinery IO");
+		Language.addName(new ItemStack(Refinery_Core,1), "Refinery Core");
+		Language.addName(new ItemStack(Refinery_Structure,1), "Refinery Structural Block");
+		
+		Language.addName(new ItemStack(KineticGenerator,1), "Kinetic Generator");
 		
 		Language.addName(new ItemStack(Misc,1,0), "Radionite Block");
 		Language.addName(new ItemStack(Misc,1,1), "Grafeno Block");
@@ -162,7 +162,7 @@ public class Language {
 		Language.addName(SolarPanel_T1, "Solar Panel T1");
 		Language.addName(SolarPanel_T2, "Solar Panel T2");
 		Language.addName(WindMill, "Wind Mill");
-		Language.addName(Engine, "Engine");
+		Language.addName(Engine, "Electric Engine");
 
 		Language.addName(Boiler, "Boiler");
 		Language.addName(Tank, "Tank");

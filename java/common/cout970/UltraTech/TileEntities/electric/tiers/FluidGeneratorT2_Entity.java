@@ -1,5 +1,7 @@
 package common.cout970.UltraTech.TileEntities.electric.tiers;
 
+import common.cout970.UltraTech.util.power.PowerExchange;
+
 import buildcraft.api.fuels.IronEngineFuel;
 import buildcraft.api.fuels.IronEngineFuel.Fuel;
 
@@ -10,17 +12,18 @@ public class FluidGeneratorT2_Entity extends FluidGeneratorT1_Entity{
 		super.updateEntity();
 		if(worldObj.isRemote)return;
 		if(progres <= 0){
-			if(getTank().getFluidAmount() >= 10){
+			int amount = Math.min(getTank().getFluidAmount(), 10);
+			if(amount > 0){
 				Fuel f = IronEngineFuel.getFuelForFluid(getTank().getFluid().getFluid());
 				if(f != null){
-					double prod = pe.FTtoQP(f.powerPerCycle)*(f.totalBurningTime/100);
+					double ft = (f.powerPerCycle)*(f.totalBurningTime/1000)*amount;
+					double prod = PowerExchange.FTtoQP((float) ft);
 					if(spaceForCharge(prod) || getCapacity() < prod){
-						progres = f.totalBurningTime/100;
-						production = pe.FTtoQP(f.powerPerCycle);
-						getTank().drain(10, true);
+						progres = (f.totalBurningTime/1000)*amount;
+						production = PowerExchange.FTtoQP(f.powerPerCycle);
+						getTank().drain(amount, true);
 					}
 				}
-
 			}
 			if(progres <= 0 && updated){
 				worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 0, 2);

@@ -1,5 +1,7 @@
 package common.cout970.UltraTech.blocks.common;
 
+import ultratech.api.util.UT_Utils;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -22,6 +24,12 @@ public class FermenterBlock extends BlockContainer{
 		setHardness(2f);
 		setStepSound(soundTypeMetal);
 		setBlockName("Fermenter");
+	}
+	
+	public void breakBlock(World p_149749_1_, int p_149749_2_, int p_149749_3_, int p_149749_4_, Block p_149749_5_, int p_149749_6_)
+	{ 
+		UT_Utils.dropItems(p_149749_1_, p_149749_2_, p_149749_3_, p_149749_4_);
+		super.breakBlock(p_149749_1_, p_149749_2_, p_149749_3_, p_149749_4_, p_149749_5_, p_149749_6_); 
 	}
 
 	@Override

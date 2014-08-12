@@ -15,11 +15,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 import buildcraft.api.boards.RedstoneBoardRobot;
-import buildcraft.api.core.IBox;
+import buildcraft.api.core.IZone;
 
 public abstract class EntityRobotBase extends EntityLiving implements IInventory {
 
-	public static double MAX_ENERGY = 10000;
+	public static final double MAX_ENERGY = 10000;
+	public static final double SAFETY_ENERGY = MAX_ENERGY / 4;
 
 	public EntityRobotBase(World par1World) {
 		super(par1World);
@@ -53,7 +54,7 @@ public abstract class EntityRobotBase extends EntityLiving implements IInventory
 
 	public abstract boolean linkToStation(IDockingStation station);
 
-	public abstract IBox getAreaToWork();
+	public abstract IZone getZoneToWork();
 
 	public abstract boolean containsItems();
 

@@ -69,6 +69,7 @@ public class CraftManager {
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(SolarPanel_T2,1), new Object[]{"hhh","hah","hhh",'h',SolarPanel_T1,'a',"plateSilver"}));																	//solarPanel 2
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(WindMill,1),new Object[]{"dff","poo","coo",'d',ItemName.get("Dynamo"),'f',ItemName.get("Fan"),'p',"plateGrafeno",'c',new ItemStack(Chasis,1,1)}));			//windmil
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Engine,1),new Object[]{"sss","xlx","gpg",'p',Blocks.piston,'g',ItemName.get("AluminumGear"),'l',"blockGlass",'s',"plateSilver"}));							//engine
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(KineticGenerator,1),new Object[]{"gsg","sds","gsg",'d',ItemName.get("Dynamo"),'g',ItemName.get("AluminumGear"),'s',stoneblockblack}));						//kineticgenerator
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(CopperPipe,8),new Object[]{"aga",'a',"plateCopper",'g',Blocks.glass_pane}));																				//copper pipe
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Boiler,1),new Object[]{"ctc","cac","ccc",'c',"plateCopper",'t',CopperPipe}));																				//boiler
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Turbine,1),new Object[]{"xrx","iri","xdx",'x',"plateGrafeno",'i',Blocks.glass,'r',ItemName.get("Fan"),'d',ItemName.get("Dynamo")}));						//turbine
@@ -76,9 +77,11 @@ public class CraftManager {
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Pump,1),new Object[]{"gtg","gpg","gmg",'g',"plateGrafeno",'m',ItemName.get("Motor"),'p',CopperPipe,'t',Tank}));											//pump
 
 		//multiblocks
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Refinery,4), new Object[]{"cbc","ctc","cbc",'c',"plateGrafeno",'t',Tank}));																				//refinery base
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Refinery,18,1), new Object[]{"ccc","ctc","ccc",'c',"plateCopper",'t',CopperPipe}));																		//refinerystruc
-		
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Refinery_Base,9), new Object[]{"sss","sps","sss",'s',stoneblockblack,'p',CopperPipe}));																	//refinery base
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Refinery_IO,1), new Object[]{"sts","bpb","sbs",'t',Tank,'p',Refinery_Base,'s',stoneblockblack}));															//refinery IO
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Refinery_Structure,9), new Object[]{"sts","tpt","sts",'p',CopperPipe,'t',"plateCopper"}));																	//refinery structure
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Refinery_Core,1), new Object[]{"sss","sps","sss",'s',CopperPipe,'p',Refinery_Base}));																		//refinery core
+
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Reactor_Wall,8),new Object[]{"ooo","olo","ooo",'l',"plateLead",'o',"plateGrafeno"}));																		//reactor wall
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Reactor_Control,1),new Object[]{"ooo","rlr","ooo",'l',Reactor_Wall,'o',"plateGrafeno",'r',"plateRedstone"}));												//reactor control
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Reactor_IO,1),new Object[]{"oho","olo","oho",'l',Reactor_Wall,'o',"plateGrafeno",'h',Blocks.hopper}));														//reactor io
@@ -111,12 +114,15 @@ public class CraftManager {
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("Circuit"),1),new Object[]{"igi","iri","igi",'g',"plateGrafeno",'r',"plateRedstone",'i',Items.redstone}));									//Circuit
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("Linker"),1),new Object[]{"iio","iio","oox",'i',"plateIron",'x',"plateRedstone"}));															//Linker
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("RadioniteCell"),1),new Object[]{"ioi","ioi","ioi",'i',"plateIron",'o',"plateRadionite"}));													//Radionite Cell
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("UraniumCell"),1),new Object[]{"ioi","ioi","ioi",'i',"plateIron",'o',"ingotUranium"}));														//Uranium Cell
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("ThoriumCell"),1),new Object[]{"ioi","ioi","ioi",'i',"plateIron",'o',"ingotThorium"}));														//Thorium Cell
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("PlutoniumCell"),1),new Object[]{"ioi","ioi","ioi",'i',"plateIron",'o',"ingotPlutonium"}));													//Plutonium Cell
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("Ingot"),2,0),new Object[]{"ii",'i',"ingotAluminium"}));																						//aluminium change
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("GrafenoPlate"),1),new Object[]{"iii","iii","iii",'i',"plateGrafeno"}));																		//plate grafeno
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("LaserSword"),1),new Object[]{"c","c","i",'i',"plateObalti",'c',"plateDiamond"}));															//sword
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("HeatCoil"),1), new Object[]{"pp","pp",'p',"plateLead"}));																					//heat coil
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("Dust"),3,5), new Object[]{"abc",'a',"dustObsidian",'b',"dustAluminum",'c',"dustTin"}));														//obalti
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("Bottle"),8,0), new Object[]{"xcx","cxc","xcx",'c',"itemPlastic"}));																				//bottle
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("Bottle"),8,0), new Object[]{"xcx","cgc","xcx",'x',"itemPlastic",'g',Blocks.glass}));															//bottle
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ItemName.get("Radionite"),9), new ItemStack(Misc, 0)));																									//Radionite
 		
 		//upgrades

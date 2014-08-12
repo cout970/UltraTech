@@ -6,23 +6,24 @@ public class PowerExchange {
 	
 	public static final int QPtoRF = 20;//RF => QP
 	public static final int QPtoMJ = 2;//RF => QP
+	public static final int HeattoFT = 20;//RF => QP
+	public static final int HeattoFluid = 10;//RF => QP
 	
 	public static float FTtoHeat(float ft){
-		return ft/10;
+		return ft/HeattoFT;
 	}
 	
 	public static float HeattoFT(float h){
-		return h*10;
+		return h*HeattoFT;
 	}
 
 	public static float HeatPerFluid(int f) {
-		//1000mb <= 20C
-		return 0.02f*f;
+		return ((float)HeattoFluid*f)/1000;
 	}
 	
 	public static float FluidPerHeat(int h) {
-		//1000mb => 20C
-		return h*50;
+		//1000mb => 10C
+		return ((float)h*1000)/HeattoFluid;
 	}
 
 	public static int QPtoRF(double cap) {
@@ -37,11 +38,11 @@ public class PowerExchange {
 		return progres/2;
 	}
 	
-	public static int QPtoMJ(double cap) {
-		return (int) (cap*QPtoMJ);
+	public static double QPtoMJ(double cap) {
+		return (cap*QPtoMJ);
 	}
 
-	public static double MJtoQP(int i) {
+	public static double MJtoQP(double i) {
 		return i/QPtoMJ;
 	}
 	

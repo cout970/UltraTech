@@ -1,6 +1,8 @@
 package common.cout970.UltraTech.util.fluids;
 
 
+import common.cout970.UltraTech.util.LogHelper;
+
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
@@ -47,6 +49,7 @@ public class UT_Tank implements IFluidTank{
 
 	@Override
 	public int fill(FluidStack resource, boolean doFill) {
+		
 		if (resource == null)return 0;
 		if (!doFill){
 			if (fluid == null){
@@ -57,6 +60,7 @@ public class UT_Tank implements IFluidTank{
 			}
 			return Math.min(capacity - fluid.amount, resource.amount);
 		}
+		
 		if (fluid == null){
 			fluid = new FluidStack(resource, Math.min(capacity, resource.amount));
 			
@@ -65,6 +69,7 @@ public class UT_Tank implements IFluidTank{
 		if (!fluid.isFluidEqual(resource)){
 			return 0;
 		}
+		
 		int filled = capacity - fluid.amount;
 		if (resource.amount < filled)
 		{
@@ -117,6 +122,10 @@ public class UT_Tank implements IFluidTank{
 
 	public void setFluidAmount(int value) {
 		if(fluid != null)fluid.amount = value;
+	}
+
+	public void setCapacity(int integer) {
+		capacity = integer;
 	}
 
 }

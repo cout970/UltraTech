@@ -72,7 +72,8 @@ public class Block_Textures {
 	public static final String CHEMICAL_PLANT_T1 			= MOD_FOLDER+"machines/chemicalplant_off";
 	public static final String CHEMICAL_PLANT_T2 			= MOD_FOLDER+"machines/chemicalplant_off_2";
 	public static final String KINETIC_GENERATOR 			= MOD_FOLDER+"machines/kineticgenerator";
-	
+	public static final String REFINERY_PREFIX 				= MOD_FOLDER+"refinery/";
+	public static final String FLUIDTANK 					= MOD_FOLDER+"machines/tank";
 
 }
 

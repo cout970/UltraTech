@@ -15,7 +15,6 @@ import common.cout970.UltraTech.TileEntities.electric.StorageTier2;
 import common.cout970.UltraTech.TileEntities.electric.StorageTier3;
 import common.cout970.UltraTech.TileEntities.electric.StorageTier4;
 import common.cout970.UltraTech.TileEntities.electric.tiers.ChemicalPlantT1_Entity;
-import common.cout970.UltraTech.TileEntities.electric.tiers.ChemicalPlantT2_Entity;
 import common.cout970.UltraTech.TileEntities.electric.tiers.ChemicalVaporDesintegrationT1_Entity;
 import common.cout970.UltraTech.TileEntities.electric.tiers.CoalGeneratorEntityT1_Entity;
 import common.cout970.UltraTech.TileEntities.electric.tiers.CutterT1_Entity;
@@ -29,6 +28,7 @@ import common.cout970.UltraTech.TileEntities.fluid.BoilerEntity;
 import common.cout970.UltraTech.TileEntities.intermod.DynamoEntity;
 import common.cout970.UltraTech.TileEntities.intermod.EngineEntity;
 import common.cout970.UltraTech.TileEntities.multiblocks.reactor.Reactor_Core_Entity;
+import common.cout970.UltraTech.TileEntities.multiblocks.refinery.Refinery_IO_Entity;
 import common.cout970.UltraTech.TileEntities.utility.CrafterEntity;
 import common.cout970.UltraTech.TileEntities.utility.HologramEmiterEntity;
 import common.cout970.UltraTech.TileEntities.utility.Painter3DEntity;
@@ -37,6 +37,7 @@ import common.cout970.UltraTech.client.gui.CVD_Gui;
 import common.cout970.UltraTech.client.gui.ChargeStation_Gui;
 import common.cout970.UltraTech.client.gui.Chemical_Gui;
 import common.cout970.UltraTech.client.gui.ClimateStation_Gui;
+import common.cout970.UltraTech.client.gui.CoalGenerator_Gui;
 import common.cout970.UltraTech.client.gui.Crafter_Gui;
 import common.cout970.UltraTech.client.gui.Cutter_Gui;
 import common.cout970.UltraTech.client.gui.Dynamo_Gui;
@@ -44,7 +45,6 @@ import common.cout970.UltraTech.client.gui.EngineGui;
 import common.cout970.UltraTech.client.gui.Fermenter_Gui;
 import common.cout970.UltraTech.client.gui.FluidGeneratorGui;
 import common.cout970.UltraTech.client.gui.Furnace_Gui;
-import common.cout970.UltraTech.client.gui.CoalGenerator_Gui;
 import common.cout970.UltraTech.client.gui.Heater_Gui;
 import common.cout970.UltraTech.client.gui.HologramEmiterGui;
 import common.cout970.UltraTech.client.gui.Laminator_Gui;
@@ -81,7 +81,6 @@ import common.cout970.UltraTech.containers.RefineryContainer;
 import common.cout970.UltraTech.containers.StorageContainer;
 import common.cout970.UltraTech.containers.TabletContainer;
 import common.cout970.UltraTech.containers.TesseractContainer;
-import common.cout970.UltraTech.multiblocks.refinery.RefineryBase;
 import common.cout970.UltraTech.util.power.Machine;
 import common.cout970.UltraTech.wiki.TabletGui;
 
@@ -173,7 +172,7 @@ public class GuiHandler implements IGuiHandler{
 			return new FluidGeneratorContainer(player.inventory, tileEntity);
 		}
 		//Refinery
-		if(tileEntity instanceof RefineryBase){
+		if(tileEntity instanceof Refinery_IO_Entity){
 			return new RefineryContainer(player.inventory, tileEntity);
 		}
 		//Laminator
@@ -279,8 +278,8 @@ public class GuiHandler implements IGuiHandler{
 			return new FluidGeneratorGui(new FluidGeneratorContainer(player.inventory, tileEntity), (FluidGeneratorT1_Entity) tileEntity);
 		}
 		//Refinery
-		if(tileEntity instanceof RefineryBase){
-			return new Refinery_Gui(new RefineryContainer(player.inventory, tileEntity),(RefineryBase) tileEntity);
+		if(tileEntity instanceof Refinery_IO_Entity){
+			return new Refinery_Gui(new RefineryContainer(player.inventory, tileEntity),(Refinery_IO_Entity) tileEntity);
 		}
 		//Laminator
 		if(tileEntity instanceof LaminatorT1_Entity){

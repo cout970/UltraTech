@@ -1,20 +1,20 @@
 package common.cout970.UltraTech.containers;
 
-import common.cout970.UltraTech.multiblocks.refinery.RefineryBase;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 
+import common.cout970.UltraTech.TileEntities.multiblocks.refinery.Refinery_IO_Entity;
+
 public class RefineryContainer extends UT_Container{
 
-	RefineryBase entity;
+	Refinery_IO_Entity entity;
 	
 	public RefineryContainer(InventoryPlayer inventoryPlayer, TileEntity t) {
 		super(inventoryPlayer, t);
-		entity = (RefineryBase) t;
+		entity = (Refinery_IO_Entity) t;
 		this.bindPlayerInventory(inventoryPlayer);
 	}
 	

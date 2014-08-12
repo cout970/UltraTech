@@ -23,7 +23,7 @@ public class Heater_Entity extends ConfigurableMachineWithInventory{
 	public int Progres;
 	public int maxProgres;
 	public float Heat = 25;
-	private float maxHeat = 1000;
+	private float maxHeat = 1350;
 	private boolean change = true;
 	public List<HeaterInteraction> inter;
 

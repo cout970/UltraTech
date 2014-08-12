@@ -1,19 +1,28 @@
 package ultratech.api.recipes;
 
+import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidTank;
 
 public class Refinery_Recipe {
 
 	public FluidStack input;
-	public FluidStack[] product = new FluidStack[3];
+	public Fluid out1;
+	public float amount1;
+	public Fluid out2;
+	public float amount2;
+	public Fluid out3;
+	public float amount3;	
 	
-	
-	public Refinery_Recipe(FluidStack result,FluidStack res1,FluidStack res2,FluidStack res3){
+	public Refinery_Recipe(FluidStack result,Fluid out1,float amount1,Fluid out2,float amount2,Fluid out3,float amount3){
 		input = result;
-		product[0] = res1;
-		product[1] = res2;
-		product[2] = res3;
+		this.out1 = out1;
+		this.out2 = out2;
+		this.out3 = out3;
+		
+		this.amount1 = amount1;
+		this.amount2 = amount2;
+		this.amount3 = amount3;
 	}
 	
 	public boolean matches(FluidStack input){

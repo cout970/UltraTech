@@ -25,10 +25,11 @@ public class FluidTank extends BlockContainer{
 		setStepSound(soundTypeMetal);
 		setResistance(20);
 		setBlockName("FluidTank");
+		setLightOpacity(0);
 	}
 	
 	public void registerBlockIcons(IIconRegister iconRegister){
-		this.blockIcon = iconRegister.registerIcon(Block_Textures.PARTICLE_COPPER);
+		this.blockIcon = iconRegister.registerIcon(Block_Textures.FLUIDTANK);
 	}
 	
 	public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int par6, float par7, float par8, float par9)
@@ -99,6 +100,7 @@ public class FluidTank extends BlockContainer{
 	public TileEntity createNewTileEntity(World world,int a) {
 		return new TankEntity();
 	}
+
 	public boolean isOpaqueCube()
 	{
 		return false;
@@ -108,11 +110,4 @@ public class FluidTank extends BlockContainer{
 	{
 		return false;
 	}
-
-	@SideOnly(Side.CLIENT)
-	@Override
-	public int getRenderType() {
-		return ClientProxy.tankRenderPass;
-	}
-
 }

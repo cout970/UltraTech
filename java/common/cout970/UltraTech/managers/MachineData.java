@@ -23,14 +23,14 @@ public enum MachineData {
 	MAssembly		(  800d ,3	,100d		,0),
 	Charge_Station	( 3200d	,1	,200d		,2),//per tick
 	Climate_Station	(100000d,3	,100000d	,0),
-	Fermenter		(  800d	,1	,10d		,0),//QP per mB
+	Fermenter		(  800d	,1	,1d			,0),//QP per mB
 	Tesseract		(  800d ,3	,0d			,0),
 	ChemicalPlant	(  800d ,2	,100d		,0),//per item
 	Heater			( 1600d	,2	,100d		,0),//per 200proces
 	Pump			(  600d ,2  ,150d		,0),//per 1000mB
 	Engine    		(  800d ,2  ,8			,0),//1QP => 2MJ
 	Dynamo     		( 1600d	,2	,1d			,0),
-	Kinetic_Generator(1600d ,2	,1d			,0),
+	Kinetic_Generator(1600d ,2	,1d			,1),
 	
 	Battery_T1		(   120000d	,1	,0			,2),//3 cells
 	Battery_T2		(   720000d	,2	,0			,2),//18 cells
