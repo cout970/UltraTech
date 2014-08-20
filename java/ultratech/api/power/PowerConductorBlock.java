@@ -33,6 +33,6 @@ public abstract class PowerConductorBlock  extends BlockContainer{
 		TileEntity t = w.getTileEntity(x, y, z);
 		if(!(t instanceof IPowerConductor))return;
 		IPowerConductor te = (IPowerConductor) t;
-		te.getPower().iterate();
+		NetworkManagerRegistry.iterate(te.getPower());
 	}
 }

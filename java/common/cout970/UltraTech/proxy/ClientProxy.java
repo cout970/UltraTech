@@ -2,7 +2,6 @@ package common.cout970.UltraTech.proxy;
 
 import net.minecraft.item.Item;
 import net.minecraftforge.client.MinecraftForgeClient;
-
 import common.cout970.UltraTech.TileEntities.electric.PumpEntity;
 import common.cout970.UltraTech.TileEntities.electric.SteamTurbineEntity;
 import common.cout970.UltraTech.TileEntities.electric.StorageTier1;
@@ -37,6 +36,7 @@ import common.cout970.UltraTech.client.renders.DecoBlocksRender;
 import common.cout970.UltraTech.client.renders.ReactorTankRender;
 import common.cout970.UltraTech.client.renders.RenderBattery;
 import common.cout970.UltraTech.client.renders.RenderBoiler;
+import common.cout970.UltraTech.client.renders.RenderCableWithoutMP;
 import common.cout970.UltraTech.client.renders.RenderDynamo;
 import common.cout970.UltraTech.client.renders.RenderEngine;
 import common.cout970.UltraTech.client.renders.RenderHologram;
@@ -51,8 +51,6 @@ import common.cout970.UltraTech.client.renders.RenderWindMill;
 import common.cout970.UltraTech.managers.BlockManager;
 import common.cout970.UltraTech.managers.ItemManager;
 import common.cout970.UltraTech.microparts.Cable_Entity;
-import common.cout970.UltraTech.microparts.RenderCableWithoutMP;
-
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 

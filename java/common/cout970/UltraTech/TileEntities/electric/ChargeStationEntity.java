@@ -1,11 +1,13 @@
 package common.cout970.UltraTech.TileEntities.electric;
 
+import net.minecraft.item.ItemStack;
+import cofh.api.energy.IEnergyContainerItem;
 import ultratech.api.power.IPowerConductor;
 import ultratech.api.power.IStorageItem;
 import ultratech.api.power.PowerInterface;
-
 import common.cout970.UltraTech.managers.MachineData;
 import common.cout970.UltraTech.util.MachineWithInventory;
+import common.cout970.UltraTech.util.power.PowerExchange;
 
 public class ChargeStationEntity extends MachineWithInventory implements IPowerConductor{
 
@@ -26,6 +28,16 @@ public class ChargeStationEntity extends MachineWithInventory implements IPowerC
 						b.addPower(inventory[u], drain);
 						this.removeCharge(drain);
 					}
+				}else if(inventory[u].getItem() instanceof IEnergyContainerItem){
+					ItemStack s = inventory[u];
+					IEnergyContainerItem b = ((IEnergyContainerItem)s.getItem());
+					int space = (int) PowerExchange.RFtoQP(b.getMaxEnergyStored(s)-b.getEnergyStored(s));
+					int flow = (int) Math.min(MachineData.Charge_Station.use, space);
+					int drain = (int) Math.min(flow, getCharge());
+					if(drain >= 1){
+						b.receiveEnergy(s, PowerExchange.QPtoRF(drain), false);
+						this.removeCharge(drain);
+					}
 				}
 			}
 		}
@@ -40,6 +52,15 @@ public class ChargeStationEntity extends MachineWithInventory implements IPowerC
 					if(fill >= 1){
 						addCharge(fill);
 						b.removePower(inventory[u],fill);
+					}
+				}else if(inventory[u].getItem() instanceof IEnergyContainerItem){
+					IEnergyContainerItem b = ((IEnergyContainerItem)inventory[u].getItem());
+					double space = getCapacity() - getCharge();
+					int flow = (int) Math.min(MachineData.Charge_Station.use, space);
+					int fill = (int) Math.min(flow, PowerExchange.RFtoQP(b.getEnergyStored(inventory[u])));
+					if(fill >= 1){
+						addCharge(fill);
+						b.extractEnergy(inventory[u],PowerExchange.QPtoRF(fill),false);
 					}
 				}
 			}

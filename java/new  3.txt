@@ -1,0 +1,25 @@
+bugs
+quarry double upgrade drops. --
+battery durability bar not visible. --
+charge estition not compatible RF. --
+recetas procesed food. --
+machines work when not should work. --
+GUI names black and white. --
+laser sword. --
+tesseract craft. --
+sandstone. --
+cables to hardness and expensive. --
+batteries too op. --
+steam turbine not op. --
+silicon oredict. --
+sugerencias:
+baterias y tanques portables. **
+to do:
+finish microparts 
+add triturator
+add optic fiber
+waila compt.
+finish transformer.
+add flamethrower, chainsaw, etc.
+armor?
+

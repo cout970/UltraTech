@@ -40,15 +40,15 @@ public class LaserSword extends ItemPower{
 	{
 		Multimap multimap = super.getAttributeModifiers(a);
 		if(((IStorageItem)a.getItem()).getPower(a) > 0)
-			multimap.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(field_111210_e, "Weapon modifier", 20d, 0));
+			multimap.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(field_111210_e, "Weapon modifier", 25d, 0));
 		return multimap;
 	}
 
 
 	public boolean hitEntity(ItemStack i, EntityLivingBase par2EntityLivingBase, EntityLivingBase par3EntityLivingBase)
 	{
-		if(((IStorageItem)i.getItem()).getPower(i) >= 500){
-			((IStorageItem)i.getItem()).removePower(i, 500);
+		if(((IStorageItem)i.getItem()).getPower(i) >= 100){
+			((IStorageItem)i.getItem()).removePower(i, 100);
 		}else{
 			return false;
 		}
@@ -71,8 +71,8 @@ public class LaserSword extends ItemPower{
 	{
 		if ((double)par3.getBlockHardness(par2World, par4, par5, par6) != 0.0D)
 		{
-			if(((IStorageItem)par1ItemStack.getItem()).getPower(par1ItemStack) >= 100){
-				((IStorageItem)par1ItemStack.getItem()).removePower(par1ItemStack, 100);
+			if(((IStorageItem)par1ItemStack.getItem()).getPower(par1ItemStack) >= 50){
+				((IStorageItem)par1ItemStack.getItem()).removePower(par1ItemStack, 50);
 			}else{
 				return false;
 			}

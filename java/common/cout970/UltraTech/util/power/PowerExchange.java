@@ -8,6 +8,7 @@ public class PowerExchange {
 	public static final int QPtoMJ = 2;//RF => QP
 	public static final int HeattoFT = 20;//RF => QP
 	public static final int HeattoFluid = 10;//RF => QP
+	public static final int QPtoEU = 5;//QP => EU
 	
 	public static float FTtoHeat(float ft){
 		return ft/HeattoFT;
@@ -45,5 +46,12 @@ public class PowerExchange {
 	public static double MJtoQP(double i) {
 		return i/QPtoMJ;
 	}
+
+	public static double EUtoQP(double eu) {
+		return eu/QPtoEU;
+	}
 	
+	public static double QPtoEU(double eu) {
+		return eu*QPtoEU;
+	}
 }

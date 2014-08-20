@@ -49,6 +49,9 @@ public DynamoEntity entity;
 	@Override
 	protected void drawGuiContainerForegroundLayer(int i, int j) {
 
+		String s = "Electric Dynamo";
+		this.drawCenteredString(fontRendererObj, s, 90, 6, UT_Utils.RGBtoInt(255, 255, 255));
+		
 		//text
 		int xStart = (width - xSize) / 2;
 		int yStart = (height - ySize) / 2;

@@ -155,91 +155,77 @@ public class Tier3Block extends BlockConductor{
 
 	@Override
 	public void breakBlock(World world, int x, int y, int z, Block par5, int par6){
-		TileEntity t = world.getTileEntity(x, y, z);
-		if(t instanceof IInventory){	
-			dropItems(world, x, y, z);
-		}
 		Tesseract_Entity.tes.clear();
 		super.breakBlock(world, x, y, z, par5, par6);
 	}
 
 	@Override
 	public void dropItems(World world, int x, int y, int z){
+		super.dropItems(world, x, y, z);
 		Random rand = new Random();
 		TileEntity tileEntity = world.getTileEntity(x, y, z);
-		if(tileEntity instanceof IInventory){
-
-			IInventory inventory = (IInventory) tileEntity;
-			for (int i = 0; i < inventory.getSizeInventory(); i++) {
-				ItemStack item = inventory.getStackInSlot(i);
-				if (item != null && item.stackSize > 0) {
+		
+		if(tileEntity instanceof MinerEntity){
+			MinerEntity me = (MinerEntity) tileEntity;
+			if(me.eject){
+				float rx = rand.nextFloat() * 0.8F + 0.1F;
+				float ry = rand.nextFloat() * 0.8F + 0.1F;
+				float rz = rand.nextFloat() * 0.8F + 0.1F;
+				EntityItem entityItem = new EntityItem(world,
+						x + rx, y + ry, z + rz,
+						new ItemStack(ItemManager.ItemName.get("AutoEjectUpgrade"), 1, 0));
+				float factor = 0.05F;
+				entityItem.motionX = rand.nextGaussian() * factor;
+				entityItem.motionY = rand.nextGaussian() * factor + 0.2F;
+				entityItem.motionZ = rand.nextGaussian() * factor;
+				world.spawnEntityInWorld(entityItem);
+			}
+			if(me.hasSpeedUpgrades){
+				for(int d = me.speedUpgrades;d > 0;d--){
 					float rx = rand.nextFloat() * 0.8F + 0.1F;
 					float ry = rand.nextFloat() * 0.8F + 0.1F;
 					float rz = rand.nextFloat() * 0.8F + 0.1F;
-					EntityItem entityItem = new EntityItem(world,
-							x + rx, y + ry, z + rz,
-							new ItemStack(item.getItem(), item.stackSize, item.getItemDamage()));
-					if (item.hasTagCompound()) {
-						entityItem.getEntityItem().setTagCompound((NBTTagCompound) item.getTagCompound().copy());
-					}
+					EntityItem entityItem = new EntityItem(world, x + rx, y + ry, z + rz, new ItemStack(ItemManager.ItemName.get("MiningUpgrade"), 1, 0));
 					float factor = 0.05F;
 					entityItem.motionX = rand.nextGaussian() * factor;
 					entityItem.motionY = rand.nextGaussian() * factor + 0.2F;
 					entityItem.motionZ = rand.nextGaussian() * factor;
 					world.spawnEntityInWorld(entityItem);
-					item.stackSize = 0;
 				}
 			}
-		}
-		if (!(tileEntity instanceof MinerEntity)) {
-			return;
-		}
-		MinerEntity me = (MinerEntity) tileEntity;
-		if(me.eject){
-			float rx = rand.nextFloat() * 0.8F + 0.1F;
-			float ry = rand.nextFloat() * 0.8F + 0.1F;
-			float rz = rand.nextFloat() * 0.8F + 0.1F;
-			EntityItem entityItem = new EntityItem(world,
-					x + rx, y + ry, z + rz,
-					new ItemStack(ItemManager.ItemName.get("AutoEjectUpgrade"), 1, 0));
-			float factor = 0.05F;
-			entityItem.motionX = rand.nextGaussian() * factor;
-			entityItem.motionY = rand.nextGaussian() * factor + 0.2F;
-			entityItem.motionZ = rand.nextGaussian() * factor;
-			world.spawnEntityInWorld(entityItem);
-		}
-		if(me.hasSpeedUpgrades){
-			for(int d = me.speedUpgrades;d > 0;d--){
-				float rx = rand.nextFloat() * 0.8F + 0.1F;
-				float ry = rand.nextFloat() * 0.8F + 0.1F;
-				float rz = rand.nextFloat() * 0.8F + 0.1F;
-				EntityItem entityItem = new EntityItem(world, x + rx, y + ry, z + rz, new ItemStack(ItemManager.ItemName.get("MiningUpgrade"), 1, 0));
-				float factor = 0.05F;
-				entityItem.motionX = rand.nextGaussian() * factor;
-				entityItem.motionY = rand.nextGaussian() * factor + 0.2F;
-				entityItem.motionZ = rand.nextGaussian() * factor;
-				world.spawnEntityInWorld(entityItem);
+			if(me.hasRangeUpgrades){
+				for(int d = me.rangeUpgrades;d > 0;d--){
+					float rx = rand.nextFloat() * 0.8F + 0.1F;
+					float ry = rand.nextFloat() * 0.8F + 0.1F;
+					float rz = rand.nextFloat() * 0.8F + 0.1F;
+					EntityItem entityItem = new EntityItem(world, x + rx, y + ry, z + rz, new ItemStack(ItemManager.ItemName.get("RangeUpgrade"), 1, 0));
+					float factor = 0.05F;
+					entityItem.motionX = rand.nextGaussian() * factor;
+					entityItem.motionY = rand.nextGaussian() * factor + 0.2F;
+					entityItem.motionZ = rand.nextGaussian() * factor;
+					world.spawnEntityInWorld(entityItem);
+				}
 			}
-		}
-		if(me.hasRangeUpgrades){
-			for(int d = me.rangeUpgrades;d > 0;d--){
-				float rx = rand.nextFloat() * 0.8F + 0.1F;
-				float ry = rand.nextFloat() * 0.8F + 0.1F;
-				float rz = rand.nextFloat() * 0.8F + 0.1F;
-				EntityItem entityItem = new EntityItem(world, x + rx, y + ry, z + rz, new ItemStack(ItemManager.ItemName.get("RangeUpgrade"), 1, 0));
-				float factor = 0.05F;
-				entityItem.motionX = rand.nextGaussian() * factor;
-				entityItem.motionY = rand.nextGaussian() * factor + 0.2F;
-				entityItem.motionZ = rand.nextGaussian() * factor;
-				world.spawnEntityInWorld(entityItem);
+			if(me.hasFortuneUpgrades){
+				for(int d = me.fortuneUpgrades;d > 0;d--){
+					float rx = rand.nextFloat() * 0.8F + 0.1F;
+					float ry = rand.nextFloat() * 0.8F + 0.1F;
+					float rz = rand.nextFloat() * 0.8F + 0.1F;
+					EntityItem entityItem = new EntityItem(world, x + rx, y + ry, z + rz, new ItemStack(ItemManager.ItemName.get("FortuneUpgrade"), 1, 0));
+					float factor = 0.05F;
+					entityItem.motionX = rand.nextGaussian() * factor;
+					entityItem.motionY = rand.nextGaussian() * factor + 0.2F;
+					entityItem.motionZ = rand.nextGaussian() * factor;
+					world.spawnEntityInWorld(entityItem);
+				}
 			}
-		}
-		if(me.hasFortuneUpgrades){
-			for(int d = me.fortuneUpgrades;d > 0;d--){
+			if(me.hasSilkUpgrade){
 				float rx = rand.nextFloat() * 0.8F + 0.1F;
 				float ry = rand.nextFloat() * 0.8F + 0.1F;
 				float rz = rand.nextFloat() * 0.8F + 0.1F;
-				EntityItem entityItem = new EntityItem(world, x + rx, y + ry, z + rz, new ItemStack(ItemManager.ItemName.get("FortuneUpgrade"), 1, 0));
+				EntityItem entityItem = new EntityItem(world,
+						x + rx, y + ry, z + rz,
+						new ItemStack(ItemManager.ItemName.get("SilkTouchUpgrade"), 1, 0));
 				float factor = 0.05F;
 				entityItem.motionX = rand.nextGaussian() * factor;
 				entityItem.motionY = rand.nextGaussian() * factor + 0.2F;

@@ -64,10 +64,11 @@ public class CompatibilityManager {
 		OreDictionary.registerOre("plateIron", new ItemStack(ItemManager.ItemName.get("MetalPlate"),1,5));
 		OreDictionary.registerOre("plateGold", new ItemStack(ItemManager.ItemName.get("MetalPlate"),1,6));
 		OreDictionary.registerOre("plateObalti", new ItemStack(ItemManager.ItemName.get("MetalPlate"),1,7));
-		
+
 		OreDictionary.registerOre("plateDiamond", new ItemStack(ItemManager.ItemName.get("UnorganicPlate"),1,0));
 		OreDictionary.registerOre("plateGrafeno", new ItemStack(ItemManager.ItemName.get("UnorganicPlate"),1,1));
 		OreDictionary.registerOre("plateSilicon", new ItemStack(ItemManager.ItemName.get("UnorganicPlate"),1,2));
+		OreDictionary.registerOre("itemSilicon", new ItemStack(ItemManager.ItemName.get("UnorganicPlate"),1,2));
 		OreDictionary.registerOre("plateRedstone", new ItemStack(ItemManager.ItemName.get("UnorganicPlate"),1,3));
 		OreDictionary.registerOre("plateRadionite", new ItemStack(ItemManager.ItemName.get("UnorganicPlate"),1,4));
 		OreDictionary.registerOre("plateObsidian", new ItemStack(ItemManager.ItemName.get("UnorganicPlate"),1,5));

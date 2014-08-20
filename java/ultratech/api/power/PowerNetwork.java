@@ -46,7 +46,7 @@ public class PowerNetwork {
 
 		if(base != null){
 			List<IPowerConductor> things = new ArrayList<IPowerConductor>();
-			things.addAll(PathFinderRegistry.search(base, null).getFinding());
+			things.addAll(NetworkManagerRegistry.search(base, null).getFinding());
 			List<PowerInterface> inters = new ArrayList<PowerInterface>();
 			for(IPowerConductor p : things) inters.add(p.getPower());
 			interfaces = inters;
@@ -75,7 +75,7 @@ public class PowerNetwork {
 		for(PowerPath p:rutes){
 			if(p.contains(from,to))return true;
 		}
-		if(PathFinderRegistry.search(from, to).canGoToTheEnd()){
+		if(NetworkManagerRegistry.search(from, to).canGoToTheEnd()){
 			rutes.add(new PowerPath(from,to));
 			return true;
 		}else return false;
@@ -83,7 +83,7 @@ public class PowerNetwork {
 
 	public void excludeAndRecalculate(IPowerConductor p) {
 		try{
-			PathFinderRegistry.excludeAndRecalculate(p);
+			NetworkManagerRegistry.excludeAndRecalculate(p);
 		}catch(Exception e){}
 
 	}

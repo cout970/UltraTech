@@ -8,6 +8,8 @@ import net.minecraftforge.client.IItemRenderer.ItemRendererHelper;
 
 import org.lwjgl.opengl.GL11;
 
+import common.cout970.UltraTech.client.models.ModelBigCable;
+
 import cpw.mods.fml.client.FMLClientHandler;
 
 public class RenderCableBigItem implements IItemRenderer {

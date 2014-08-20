@@ -16,6 +16,7 @@ import org.lwjgl.opengl.GL11;
 
 import ultratech.api.power.CableType;
 import ultratech.api.power.IPowerConductor;
+import ultratech.api.power.NetworkManagerRegistry;
 import ultratech.api.power.PowerInterface;
 import ultratech.api.util.UT_Utils;
 import codechicken.lib.raytracer.IndexedCuboid6;
@@ -27,16 +28,17 @@ import codechicken.multipart.NormallyOccludedPart;
 import codechicken.multipart.PartMap;
 import codechicken.multipart.TFacePart;
 import codechicken.multipart.TMultiPart;
-
 import common.cout970.UltraTech.misc.IUpdatedEntity;
+import common.cout970.UltraTech.multipart.MultipartUtil;
 import common.cout970.UltraTech.network.Net_Utils;
 import common.cout970.UltraTech.network.messages.MessageMicroPartUpdate;
+import common.cout970.UltraTech.util.LogHelper;
 
 public class MicroCablePlane extends TMultiPart implements IPowerConductor, JNormalOcclusion, TFacePart, IUpdatedEntity{
 
 	public PowerInterface cond = null;
 	public Map<ForgeDirection,Boolean> conn = new HashMap<ForgeDirection,Boolean>();
-
+	
 	//boxes
 	public static Cuboid6[] boundingBoxes = new Cuboid6[6];
 
@@ -103,7 +105,7 @@ public class MicroCablePlane extends TMultiPart implements IPowerConductor, JNor
 			boolean a = tile().canAddPart(new NormallyOccludedPart(boundingBoxes[i]));
 			boolean b = false;
 			TileEntity tile = UT_Utils.getRelative(tile(), ForgeDirection.getOrientation(i));
-			if(MicroRegistry.canConect(this,tile,ForgeDirection.getOrientation(i)))b = true;
+			if(MultipartUtil.canConect(this,tile,ForgeDirection.getOrientation(i)))b = true;
 			conn.put(ForgeDirection.getOrientation(i), a && b);
 		}
 	}
@@ -153,7 +155,7 @@ public class MicroCablePlane extends TMultiPart implements IPowerConductor, JNor
 
 	@Override
 	public void onAdded() {
-		getPower().iterate();
+		NetworkManagerRegistry.iterate(getPower());
 		updateConnections();
 	}
 
@@ -187,7 +189,6 @@ public class MicroCablePlane extends TMultiPart implements IPowerConductor, JNor
 
 	@Override
 	public float getStrength(MovingObjectPosition hit, EntityPlayer player) {
-
 		return 1f;
 	}
 
@@ -199,7 +200,7 @@ public class MicroCablePlane extends TMultiPart implements IPowerConductor, JNor
 	public void renderDynamic(Vector3 pos, float frame, int pass) {
 		if (pass == 0) {
 			if (render == null) render = new RenderCablePlane();
-			render.render(this, pos);
+				render.render(this, pos);
 		}
 		GL11.glPushMatrix();
 		GL11.glTranslated(pos.x, pos.y, pos.z);

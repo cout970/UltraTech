@@ -2,7 +2,7 @@ package common.cout970.UltraTech.managers;
 
 
 import net.minecraftforge.oredict.OreDictionary;
-import ultratech.api.power.PathFinderRegistry;
+import ultratech.api.power.NetworkManagerRegistry;
 import ultratech.api.power.multipart.MultipartReference;
 import common.cout970.UltraTech.handlers.BottleHandler;
 import common.cout970.UltraTech.handlers.FuelHandler;
@@ -12,6 +12,7 @@ import common.cout970.UltraTech.microparts.MicroRegistry;
 import common.cout970.UltraTech.network.Net_Utils;
 import common.cout970.UltraTech.proxy.CommonProxy;
 import common.cout970.UltraTech.util.LogHelper;
+import common.cout970.UltraTech.waila.WailaRegister;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
@@ -47,6 +48,7 @@ public class UltraTech {
 			MultipartReference.isMicroPartActived = true;
 			LogHelper.log("Activating Forge Multipart Compatibility");
 		}
+		
 		ItemManager.InitItems();
 		ItemManager.RegisterItems();
 		
@@ -55,6 +57,11 @@ public class UltraTech {
 		
 		FluidManager.InitFluids();
 		FluidManager.RegisterFluids();
+		
+		if(Loader.isModLoaded("Waila")){
+			LogHelper.log("init waila compatibility");
+			WailaRegister.init();
+		}
 		
 		LogHelper.log("Finishing PreInit");
 		if(InformationManager.debug)Language.setupLangFile(); //for lag file only in debug
@@ -69,7 +76,7 @@ public class UltraTech {
 		if(MultipartReference.isMicroPartActived){
 			new MicroRegistry().load();		//microblocks
 		}else{
-			PathFinderRegistry.loadDefaultPathFinder();
+			NetworkManagerRegistry.loadDefaultPathFinder();
 		}
 		CompatibilityManager.initCompatibilitys();									//oredict and buildcraft engine fuel
 		GameRegistry.registerFuelHandler(new FuelHandler());						//fuel

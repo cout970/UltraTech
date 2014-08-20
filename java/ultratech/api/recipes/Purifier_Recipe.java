@@ -49,11 +49,11 @@ public class Purifier_Recipe implements IRecipeHandler{
 		if(lm == null)return false;
 		ItemStack result = getCraftingResult(lm);
 		if(result == null)return false;
-		if(lm.getStackInSlot(1) == null)	
+		if(lm.getStackInSlot(1) == null){	
 			return true;
-		if(OreDictionary.itemMatches(lm.getStackInSlot(1), result,true) && lm.getInventoryStackLimit() >= lm.getStackInSlot(1).stackSize + result.stackSize)
+		}else if(OreDictionary.itemMatches(lm.getStackInSlot(1), result, true) && lm.getInventoryStackLimit() >= lm.getStackInSlot(1).stackSize + result.stackSize)
 			return true;
-		return true;
+		return false;
 	}
 
 	public static boolean isIngredient(ItemStack itemstack) {

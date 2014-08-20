@@ -1,25 +1,20 @@
 package common.cout970.UltraTech.TileEntities.fluid;
 
-import common.cout970.UltraTech.network.Net_Utils;
-import common.cout970.UltraTech.network.SyncTile;
-import common.cout970.UltraTech.util.LogHelper;
-import common.cout970.UltraTech.util.fluids.UT_Tank;
-import common.cout970.UltraTech.util.render.CubeRenderer_Util;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 
+import common.cout970.UltraTech.network.SyncTile;
+import common.cout970.UltraTech.util.fluids.UT_Tank;
+import common.cout970.UltraTech.util.render.CubeRenderer_Util;
+
 public class TankEntity extends SyncTile implements IFluidHandler{
 
 	private UT_Tank storage;
 	private boolean FluidChange = true;
-	@SideOnly(Side.CLIENT)
 	public CubeRenderer_Util FR = new CubeRenderer_Util();
 
 	public UT_Tank getTank(){
@@ -84,6 +79,7 @@ public class TankEntity extends SyncTile implements IFluidHandler{
 	public void writeToNBT(NBTTagCompound nbtTagCompound) {
 		super.writeToNBT(nbtTagCompound);
 		getTank().writeToNBT(nbtTagCompound, "liquid");
+		nbtTagCompound.setBoolean("SavedData", true);
 	}
 
 }

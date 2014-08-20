@@ -56,7 +56,7 @@ public class Laminator_Gui extends GuiContainer{
     protected void drawGuiContainerForegroundLayer(int x, int y) {
 
 		String s = this.entity.getInventoryName();
-        this.fontRendererObj.drawString(s, this.xSize - 70, 6, 4210752);
+		this.drawCenteredString(fontRendererObj, s, this.xSize - 45, 6, UT_Utils.RGBtoInt(255, 255, 255));
        
         //text
         int xStart = (width - xSize) / 2;

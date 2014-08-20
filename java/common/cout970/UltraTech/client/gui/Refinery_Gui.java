@@ -11,6 +11,7 @@ import net.minecraftforge.fluids.FluidStack;
 
 import org.lwjgl.opengl.GL11;
 
+import ultratech.api.util.UT_Utils;
 import common.cout970.UltraTech.TileEntities.multiblocks.refinery.Refinery_IO_Entity;
 
 public class Refinery_Gui extends GuiContainer{
@@ -45,14 +46,15 @@ public class Refinery_Gui extends GuiContainer{
 			this.drawTexturedModalRect(xStart+45, yStart+20, 224, 0, 20, 40);
 		}
 		
-		String s = "Mode: "+entity.mode;
+		String s = "Mode: ";
 		if(entity.mode == 0)s += " Nothing";
 		if(entity.mode == 1)s += " Input";
 		if(entity.mode == 2)s += " Output 1";
 		if(entity.mode == 3)s += " Output 2";
 		if(entity.mode == 4)s += " Output 3";
-        this.fontRendererObj.drawString(s, xStart+155-fontRendererObj.getStringWidth(s), yStart+38, 4210752);
-
+		this.drawCenteredString(fontRendererObj, s, xStart+120, yStart+38, UT_Utils.RGBtoInt(255, 255, 255));
+		String li = "Amount: "+entity.getTank().getFluidAmount()+" / "+entity.getTank().getCapacity();
+		this.drawCenteredString(fontRendererObj, li, xStart+120, yStart+50, UT_Utils.RGBtoInt(255, 255, 255));
 	}
 
 }

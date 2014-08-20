@@ -2,6 +2,8 @@ package ultratech.api.power;
 
 import java.util.List;
 
+import common.cout970.UltraTech.util.LogHelper;
+
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -22,7 +24,7 @@ public class ItemPower extends Item implements IStorageItem{
 		MaxPower = maxPower;
 		setMaxStackSize(1);
 		this.setHasSubtypes(true);
-		this.setMaxDamage(MaxPower);
+		this.setMaxDamage(100);
 	}
 	
 	public void onCreated(ItemStack i, World par2World, EntityPlayer par3EntityPlayer) {
@@ -43,11 +45,11 @@ public class ItemPower extends Item implements IStorageItem{
 	}
 	
 	@Override
-	public int getDisplayDamage(ItemStack stack) {
+	public int getDamage(ItemStack stack) {
 		if(stack.getTagCompound() != null && stack.getTagCompound().hasKey("Energy"))
-			return  MaxPower - stack.getTagCompound().getInteger("Energy");
+			return  getMetadataByPercent(stack.getTagCompound().getInteger("Energy"),MaxPower);
 		else
-			return  MaxPower;
+			return  getMetadataByPercent(0,MaxPower);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -84,7 +86,7 @@ public class ItemPower extends Item implements IStorageItem{
 		}
 		
 		stack.getTagCompound().setInteger("Energy", buffer);
-		stack.setItemDamage(buffer);
+		stack.setItemDamage(getMetadataByPercent(buffer,MaxPower));
 		return aux;
 	}
 	
@@ -99,7 +101,11 @@ public class ItemPower extends Item implements IStorageItem{
 			buffer = 0;
 		
 		stack.getTagCompound().setInteger("Energy", buffer);
-		stack.setItemDamage(buffer);
+		stack.setItemDamage(getMetadataByPercent(buffer,MaxPower));
+	}
+	
+	public int getMetadataByPercent(int energy,int capacity){//inveted for the durability display 
+		return 100-(100*energy/capacity);
 	}
 
 	@Override

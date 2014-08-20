@@ -23,7 +23,7 @@ public class HelperNBT {
 		return null;
 	}
 
-	private static void refresh(ItemStack item) {
+	public static void refresh(ItemStack item) {
 		if(item.stackTagCompound == null){
 			item.stackTagCompound = new NBTTagCompound();
 		}
@@ -32,6 +32,11 @@ public class HelperNBT {
 
 	public static void clear(ItemStack i) {
 		i.stackTagCompound = new NBTTagCompound();
+	}
+
+	public static void setEnergy(ItemStack drop, double energy) {
+		refresh(drop);
+		drop.stackTagCompound.setDouble("Power", energy);
 	}
 
 }

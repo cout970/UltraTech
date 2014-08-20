@@ -46,6 +46,7 @@ import common.cout970.UltraTech.TileEntities.fluid.TankEntity;
 import common.cout970.UltraTech.TileEntities.intermod.DynamoEntity;
 import common.cout970.UltraTech.TileEntities.intermod.EngineEntity;
 import common.cout970.UltraTech.TileEntities.intermod.KineticGeneratorEntity;
+import common.cout970.UltraTech.TileEntities.intermod.TransformerEntity;
 import common.cout970.UltraTech.TileEntities.multiblocks.reactor.Reactor_Chamber_Entity;
 import common.cout970.UltraTech.TileEntities.multiblocks.reactor.Reactor_Control_Entity;
 import common.cout970.UltraTech.TileEntities.multiblocks.reactor.Reactor_Core_Entity;
@@ -87,6 +88,7 @@ import common.cout970.UltraTech.blocks.models.KineticGenerator;
 import common.cout970.UltraTech.blocks.models.PumpBlock;
 import common.cout970.UltraTech.blocks.models.SteamTurbine;
 import common.cout970.UltraTech.blocks.models.TesseractT3;
+import common.cout970.UltraTech.blocks.models.TransformerBlock;
 import common.cout970.UltraTech.blocks.models.WindMill;
 import common.cout970.UltraTech.blocks.reactor.Reactor_Chamber_Block;
 import common.cout970.UltraTech.blocks.reactor.Reactor_Control_Block;
@@ -199,6 +201,7 @@ public class BlockManager {
 	public static  Block LavaGenerator_T1;
 	public static  Block LavaGenerator_T2;
 	public static  Block KineticGenerator;
+	public static  Block Transformer;
 
 	public static  Block CableBlock;
 
@@ -255,6 +258,7 @@ public class BlockManager {
 		WindMill = new WindMill(m);
 		Engine = new Engine(Material.piston);
 		KineticGenerator = new KineticGenerator(m);
+		Transformer = new TransformerBlock(m);
 		
 		CopperPipe = new CopperPipe(m);
 		Boiler = new Boiler(m);
@@ -356,6 +360,7 @@ public class BlockManager {
 		GameRegistry.registerBlock(Pump, "Pump");
 		GameRegistry.registerBlock(Turbine, "SteamTurbine");
 		GameRegistry.registerBlock(Dynamo, "Dynamo");
+		GameRegistry.registerBlock(Transformer, "Transformer");
 		
 		GameRegistry.registerBlock(Misc, ItemBlock_Misc.class, "Misc_UT");//will be removed
 		
@@ -416,6 +421,7 @@ public class BlockManager {
 		GameRegistry.registerTileEntity(ChemicalPlantT2_Entity.class, "ChemicalPlant_T2_UT");
 		GameRegistry.registerTileEntity(Heater_Entity.class, "Heater_UT");
 		GameRegistry.registerTileEntity(KineticGeneratorEntity.class, "kineticGenerator_UT");
+		GameRegistry.registerTileEntity(TransformerEntity.class, "Transformer_UT");
 		
 		GameRegistry.registerTileEntity(Refinery_Core_Entity.class, "Refinery_Core_Entity_UT");
 		GameRegistry.registerTileEntity(Refinery_IO_Entity.class, "Refinery_IO_Entity_UT");

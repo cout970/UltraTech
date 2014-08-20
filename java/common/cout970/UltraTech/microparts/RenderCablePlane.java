@@ -9,9 +9,9 @@ import org.lwjgl.opengl.GL11;
 import ultratech.api.util.UT_Utils;
 import codechicken.lib.vec.Vector3;
 import codechicken.multipart.NormallyOccludedPart;
-
 import common.cout970.UltraTech.client.models.ModelPlaneCable;
 import common.cout970.UltraTech.client.models.ModelPlaneCableBase;
+import common.cout970.UltraTech.multipart.MultipartUtil;
 import common.cout970.UltraTech.util.render.ConectedTexture;
 import common.cout970.UltraTech.util.render.RenderUtil;
 
@@ -44,7 +44,7 @@ public class RenderCablePlane{
 		boolean a = c.tile().canAddPart(new NormallyOccludedPart(c.boundingBoxes[i.ordinal()]));
 		boolean b = false;
 		TileEntity tile = UT_Utils.getRelative(c.tile(), i);
-		if(MicroRegistry.canConect(c,tile,i))b = true;
+		if(MultipartUtil.canConect(c,tile,i))b = true;
 		return a && b;
 	}
 

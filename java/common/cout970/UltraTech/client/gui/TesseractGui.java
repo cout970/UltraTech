@@ -32,10 +32,7 @@ public class TesseractGui extends GuiContainer{
 			drawTexturedModalRect(xStart+18, yStart+20, 0, ySize, 101, 15);
 		}
 
-//		v = entity.mode.ordinal()*19;
-//		drawTexturedModalRect(x, y, 176, v, 19, 19);
 		drawCenteredString(fontRendererObj, "Freq: "+entity.frequency, xStart+65, yStart+24, UT_Utils.RGBtoInt(255, 255, 255));
-//		drawCenteredString(fontRendererObj, ""+((int)entity.getEnergy())+EnergyCosts.E, xStart+65, yStart+47, UT_Utils.RGBtoInt(255, 255, 255));
 		
 		this.drawCenteredString(fontRendererObj, "Tesseract", xStart+85, yStart+4, UT_Utils.RGBtoInt(255, 255, 255));
 	}

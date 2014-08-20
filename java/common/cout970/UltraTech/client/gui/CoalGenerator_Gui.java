@@ -59,7 +59,7 @@ public class CoalGenerator_Gui extends GuiContainer{
 	@Override
     protected void drawGuiContainerForegroundLayer(int x, int y) {
 		String s = this.entity.getInventoryName();
-        this.fontRendererObj.drawString(s, 65, 6, 4210752);
+        this.drawCenteredString(fontRendererObj, s, 90, 6, UT_Utils.RGBtoInt(255, 255, 255));
         String h = ((int)this.entity.heat)+"C";
         this.fontRendererObj.drawString(h, 137-fontRendererObj.getStringWidth(h), 29, 4210752);
         double e = entity.production();

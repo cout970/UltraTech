@@ -20,10 +20,6 @@ public class PowerInterface implements IPower{
     public TileEntity getParent(){
     	return Parent;
     }
-    
-	public boolean isConnectableSide(ForgeDirection side ,CableType conection){
-		return true;
-	}
 
     public PowerNetwork getNetwork() {
     	return net;
@@ -35,33 +31,9 @@ public class PowerInterface implements IPower{
     
 	public void MachineUpdate(){
 		if(net == null){
-			iterate();
+			NetworkManagerRegistry.iterate(this);
 		}
 	}
-
-    public void iterate(){
-    	boolean hasNetwork = false;
-    	for(ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS){
-    		TileEntity e = PowerUtils.getRelative(Parent, dir);
-    		if(e instanceof IPowerConductor){
-    			PowerInterface p = ((IPowerConductor) e).getPower();
-    			if(p.isConnectableSide(dir.getOpposite(), getConnectionType(dir))){
-    				if(p.getNetwork() != null){
-    					if(!hasNetwork){
-    						setNetwork(p.getNetwork());
-    						hasNetwork = true;
-    					}else{
-    						net.mergeWith(p.getNetwork());
-    					}
-    				}
-    			}
-    		}
-    	}
-    	if(!hasNetwork){
-    		setNetwork(PowerNetwork.create(this));
-    	}
-    	net.refresh();
-    }
 
     public void onNetworkUpdate() {
     	net.onNetworkUpdate();

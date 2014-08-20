@@ -42,7 +42,7 @@ public class MAssemblyGui extends GuiContainer{
 		int p = (int) (tile.getCharge()*50/tile.getCapacity());
 		this.drawTexturedModalRect(xStart+14, yStart+15+(50-p), 0, 0, 25, p);
 		
-		this.drawCenteredString(fontRendererObj, "Precision crafter", xStart+65, yStart+4, UT_Utils.RGBtoInt(255, 255, 255));
+		this.drawCenteredString(fontRendererObj, "Molecular Assembly", xStart+65, yStart+4, UT_Utils.RGBtoInt(255, 255, 255));
 	}
 	
 	@Override

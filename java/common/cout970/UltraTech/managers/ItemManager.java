@@ -81,7 +81,7 @@ public class ItemManager {
 		Reg("Linker", "Linker", false);
 		Reg("RadioniteCell", "Radionite Cell", false);
 		Reg("Battery", "Battery", false);
-		Reg("LaserSword", "Lasser Sword", false);
+		Reg("LaserSword", "Laser Sword", false);
 		Reg("ProcesedFood", "Procesed Food", false);
 		Reg("Tablet", "Tablet", false);
 		

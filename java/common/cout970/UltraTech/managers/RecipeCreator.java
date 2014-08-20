@@ -45,7 +45,7 @@ public class RecipeCreator {
 
 	public static void initPurifier(){
 		//purifier laminator
-		RecipeRegistry.addRecipePurifier(new ItemStack(ItemName.get("RawSilicon"),1), new ItemStack(Blocks.sandstone));
+		RecipeRegistry.addRecipePurifier(new ItemStack(ItemName.get("RawSilicon"),1), new ItemStack(Blocks.quartz_block));
 		RecipeRegistry.addRecipePurifier(new ItemStack(Items.flint,1), new ItemStack(Blocks.gravel));
 		RecipeRegistry.addRecipePurifier(new ItemStack(Blocks.sand,4), new ItemStack(Blocks.sandstone));
 		RecipeRegistry.addRecipePurifier(new ItemStack(stoneblockblack,1,0), new ItemStack(Blocks.stone));
@@ -92,15 +92,18 @@ public class RecipeCreator {
 		RecipeRegistry.addRecipeCutter(new ItemStack(Items.bone), new ItemStack(Items.dye,6,15));
 		RecipeRegistry.addRecipeCutter(new ItemStack(Items.diamond), new ItemStack(ItemName.get("UnorganicPlate"),8,0),new ItemStack(ItemName.get("Dust"),1,8),20);
 		RecipeRegistry.addRecipeCutter(new ItemStack(Items.cookie), new ItemStack(ItemName.get("RawMeal"), 1));
-		RecipeRegistry.addRecipeCutter(new ItemStack(Items.rotten_flesh), new ItemStack(ItemName.get("RawMeal"), 2));
+		RecipeRegistry.addRecipeCutter(new ItemStack(Items.rotten_flesh), new ItemStack(ItemName.get("RawMeal"), 1));
 		RecipeRegistry.addRecipeCutter(new ItemStack(Items.porkchop), new ItemStack(ItemName.get("RawMeal"), 2));
 		RecipeRegistry.addRecipeCutter(new ItemStack(Items.beef), new ItemStack(ItemName.get("RawMeal"), 2));
 		RecipeRegistry.addRecipeCutter(new ItemStack(Items.potato), new ItemStack(ItemName.get("RawMeal"), 1));
-		RecipeRegistry.addRecipeCutter(new ItemStack(Items.chicken), new ItemStack(ItemName.get("RawMeal"), 1));
+		RecipeRegistry.addRecipeCutter(new ItemStack(Items.chicken), new ItemStack(ItemName.get("RawMeal"), 2));
 		RecipeRegistry.addRecipeCutter(new ItemStack(Items.spider_eye), new ItemStack(ItemName.get("RawMeal"), 1));
-		RecipeRegistry.addRecipeCutter(new ItemStack(Items.fish), new ItemStack(ItemName.get("RawMeal"), 1));
-		RecipeRegistry.addRecipeCutter(new ItemStack(Items.carrot), new ItemStack(ItemName.get("RawMeal"), 2));
-		RecipeRegistry.addRecipeCutter(new ItemStack(ItemName.get("RawSilicon")),new ItemStack(ItemName.get("UnorganicPlate"),1,2));
+		RecipeRegistry.addRecipeCutter(new ItemStack(Items.fish), new ItemStack(ItemName.get("RawMeal"), 2));
+		RecipeRegistry.addRecipeCutter(new ItemStack(Items.carrot), new ItemStack(ItemName.get("RawMeal"), 1));
+		RecipeRegistry.addRecipeCutter(new ItemStack(Items.wheat), new ItemStack(ItemName.get("RawMeal"), 1));
+		RecipeRegistry.addRecipeCutter(new ItemStack(Items.apple), new ItemStack(ItemName.get("RawMeal"), 1));
+		RecipeRegistry.addRecipeCutter(new ItemStack(Items.baked_potato), new ItemStack(ItemName.get("RawMeal"), 2));
+		RecipeRegistry.addRecipeCutter(new ItemStack(ItemName.get("RawSilicon")),new ItemStack(ItemName.get("UnorganicPlate"),4,2));
 		for(int r = 1;r <6;r++)//ores to chunk
 			RecipeRegistry.addRecipeCutter(new ItemStack(Ores,1,r),new ItemStack(ItemName.get("Chunk"),3,r-1));
 		RecipeRegistry.addRecipeCutter(new ItemStack(Ores,1,0),new ItemStack(ItemName.get("Chunk"),1,7));

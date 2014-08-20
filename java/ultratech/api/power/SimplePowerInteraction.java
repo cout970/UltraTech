@@ -3,6 +3,7 @@ package ultratech.api.power;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 /**
+ * this is a basic demonstration how to implement QP energy in a machine
  * 
  * @author Cout970
  *
@@ -33,7 +34,7 @@ public class SimplePowerInteraction extends TileEntity implements IPowerConducto
 	}
 	
 	/**
-	 * save eenrgy
+	 * save energy
 	 */
 	public void readFromNBT(NBTTagCompound nbt){
 		super.readFromNBT(nbt);
