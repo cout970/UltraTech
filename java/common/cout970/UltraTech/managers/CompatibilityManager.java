@@ -77,6 +77,11 @@ public class CompatibilityManager {
 		OreDictionary.registerOre("rawRubber", new ItemStack(ItemManager.ItemName.get("Rubber")));
 		OreDictionary.registerOre("itemPlastic", new ItemStack(ItemManager.ItemName.get("Plastic")));
 		OreDictionary.registerOre("itemRubber", new ItemStack(ItemManager.ItemName.get("Rubber_vulcanized")));
+		OreDictionary.registerOre("circuitElectric", new ItemStack(ItemManager.ItemName.get("ElectricCircuit")));
+		OreDictionary.registerOre("circuitOptic", new ItemStack(ItemManager.ItemName.get("OpticCircuit")));
+		OreDictionary.registerOre("circuitLogic", new ItemStack(ItemManager.ItemName.get("LogicCircuit")));
+		OreDictionary.registerOre("circuitBasic", new ItemStack(ItemManager.ItemName.get("ElectricCircuit")));
+		OreDictionary.registerOre("circuitAdvanced", new ItemStack(ItemManager.ItemName.get("OpticCircuit")));
 	}
 
 

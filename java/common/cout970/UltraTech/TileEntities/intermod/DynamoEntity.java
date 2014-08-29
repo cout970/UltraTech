@@ -1,24 +1,22 @@
 package common.cout970.UltraTech.TileEntities.intermod;
 
-import ultratech.api.power.CableType;
-import ultratech.api.power.IPowerConductor;
-import ultratech.api.power.PowerInterface;
-import ultratech.api.power.StorageInterface;
-import ultratech.api.util.UT_Utils;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
+import ultratech.api.power.PowerInterface;
+import ultratech.api.power.StorageInterface;
+import ultratech.api.power.interfaces.IPowerConductor;
+import ultratech.api.power.prefab.CableInterfaceBlock;
+import ultratech.api.util.UT_Utils;
 import cofh.api.energy.EnergyStorage;
 import cofh.api.energy.IEnergyHandler;
+
 import common.cout970.UltraTech.managers.MachineData;
 import common.cout970.UltraTech.misc.IUpdatedEntity;
-import common.cout970.UltraTech.network.Net_Utils;
 import common.cout970.UltraTech.network.SyncTile;
-import common.cout970.UltraTech.util.power.Machine;
 import common.cout970.UltraTech.util.power.PowerExchange;
-import cpw.mods.fml.common.Mod.Instance;
 
 public class DynamoEntity extends SyncTile implements IPowerConductor, IEnergyHandler, IUpdatedEntity{
 
@@ -32,7 +30,7 @@ public class DynamoEntity extends SyncTile implements IPowerConductor, IEnergyHa
 	public DynamoEntity(){
 		super();
 		storage = new EnergyStorage((int) (PowerExchange.QPtoRF(MachineData.Dynamo.cap)));
-		inter = new StorageInterface(this,MachineData.Dynamo.cap,2);
+		inter = new StorageInterface(this, new CableInterfaceBlock(this), MachineData.Dynamo.cap,2);
 	}
 
 	public void updateEntity(){
@@ -40,13 +38,11 @@ public class DynamoEntity extends SyncTile implements IPowerConductor, IEnergyHa
 		if(worldObj.isRemote)return;
 		boolean work = false;
 		if(shouldWork()){
-			if(inter.getCharge() >= 4 && storage.getMaxEnergyStored()-storage.getEnergyStored() >= PowerExchange.QPtoRF(4)){
-				inter.removeCharge(4d);
-				storage.receiveEnergy(PowerExchange.QPtoRF(4), false);
-				work = true;
-			}else if(inter.getCharge() >= 1 && storage.getMaxEnergyStored()-storage.getEnergyStored() >= PowerExchange.QPtoRF(1)){
-				inter.removeCharge(1d);
-				storage.receiveEnergy(PowerExchange.QPtoRF(1), false);
+			int canB = Math.min(storage.getMaxEnergyStored()-storage.getEnergyStored(), PowerExchange.QPtoRF(inter.getCharge()));
+			if(canB > 0){
+				int limited = Math.min(canB, 160);
+				inter.removeCharge(PowerExchange.RFtoQP(limited));
+				storage.receiveEnergy(limited, false);
 				work = true;
 			}
 		}
@@ -66,6 +62,8 @@ public class DynamoEntity extends SyncTile implements IPowerConductor, IEnergyHa
 			if(b > 0){
 				int e = this.extractEnergy(facing, b, false);
 			}
+		}else if(worldObj.getTotalWorldTime()% 20 == 2){
+			onNeigUpdate();
 		}
 	}
 

@@ -2,34 +2,34 @@ package common.cout970.UltraTech.multipart;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.Map;
 
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 import ultratech.api.power.CableType;
-import ultratech.api.power.IPowerConductor;
 import ultratech.api.power.NetworkManagerRegistry;
 import ultratech.api.power.PowerInterface;
+import ultratech.api.power.interfaces.ICable;
+import ultratech.api.power.interfaces.IPowerConductor;
+import ultratech.api.power.prefab.CableInterfaceBlock;
 import ultratech.api.util.UT_Utils;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.util.ForgeDirection;
 import codechicken.lib.raytracer.IndexedCuboid6;
 import codechicken.lib.vec.Cuboid6;
 import codechicken.lib.vec.Vector3;
 import codechicken.microblock.ISidedHollowConnect;
 import codechicken.multipart.NormallyOccludedPart;
 import codechicken.multipart.TMultiPart;
-import common.cout970.UltraTech.microparts.MicroCablePlane;
-import common.cout970.UltraTech.microparts.MicroRegistry;
 import common.cout970.UltraTech.multipart.client.RenderCableBig;
 import common.cout970.UltraTech.network.Net_Utils;
-import common.cout970.UltraTech.network.messages.MessageMicroPartUpdate;
+import common.cout970.UltraTech.network.messages.MessageMultiPartUpdate;
 import common.cout970.UltraTech.util.LogHelper;
+import common.cout970.UltraTech.util.power.cables.CableInterfaceBigCable;
 
 public class MultiPartCable_Big extends BasicPartUT implements ISidedHollowConnect, IPowerConductor{
 
 	public MultiPartCable_Big() {
-		super(MicroRegistry.BigCable);
+		super(MultiPartRegistry_UT.BigCable);
 	}
 
 	@Override
@@ -96,11 +96,7 @@ public class MultiPartCable_Big extends BasicPartUT implements ISidedHollowConne
 	@Override
 	public PowerInterface getPower() {
 		if(cond == null){
-			cond = new PowerInterface(tile()){
-				public CableType getConnectionType(ForgeDirection side){
-					return CableType.BIG_CENTER;
-				}
-			};
+			cond = new PowerInterface(tile(),new CableInterfaceBigCable(this));
 		}
 		return cond;
 	}
@@ -108,22 +104,26 @@ public class MultiPartCable_Big extends BasicPartUT implements ISidedHollowConne
 	public void updateConnections(){
 		if(tile() == null)return;
 		connections = new boolean[6];
-		for(ForgeDirection d : ForgeDirection.VALID_DIRECTIONS){
-			
-			if(d == ForgeDirection.DOWN){
-				for(TMultiPart t : tile().jPartList())if(t instanceof MicroCablePlane){
-					connections[d.ordinal()] = true;
+		for(ICable c : NetworkManagerRegistry.getConnections(tile())){
+			if(c != this.getPower().getCable()){
+				ForgeDirection side = c.getInternalConection(CableType.Big, getPower().getCable());
+				if(side != ForgeDirection.UNKNOWN){
+					connections[side.getOpposite().ordinal()] = true;
 				}
 			}
+		}
+		for(ForgeDirection d : ForgeDirection.VALID_DIRECTIONS){
 			TileEntity tile = UT_Utils.getRelative(tile(), d);
-			if(MultipartUtil.canConect(this,tile,d)){
-				if(tile().canAddPart(new NormallyOccludedPart(boundingBoxes[d.ordinal()]))){
-					connections[d.ordinal()] = true;
+			for(ICable c : NetworkManagerRegistry.getConnections(tile)){
+				if(getPower().getCable().shouldConnectWithThis(c, d)){
+					if(c.shouldConnectWithThis(getPower().getCable(), d.getOpposite())){
+						connections[d.ordinal()] = true;
+					}
 				}
 			}
 		}
 	}
-	
+
 	@Override
 	public void update() {
 		super.update();
@@ -136,7 +136,7 @@ public class MultiPartCable_Big extends BasicPartUT implements ISidedHollowConne
 
 	@Override
 	public void onNeighborChanged() {
-		if(!world().isRemote)Net_Utils.INSTANCE.sendToAll(new MessageMicroPartUpdate(this));
+		if(!world().isRemote)Net_Utils.INSTANCE.sendToAll(new MessageMultiPartUpdate(this));
 		toUpdate = true;
 	}
 

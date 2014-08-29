@@ -136,4 +136,9 @@ public class UT_Utils {
 		long t = (long) (value*10);
 		return ((float)t)/10;
 	}
+
+	public static ForgeDirection getNextDirection(int old){
+		if(old == ForgeDirection.VALID_DIRECTIONS.length-1)return ForgeDirection.DOWN;
+		return ForgeDirection.getOrientation(old+1);
+	}
 }

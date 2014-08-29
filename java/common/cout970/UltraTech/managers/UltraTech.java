@@ -8,7 +8,7 @@ import common.cout970.UltraTech.handlers.BottleHandler;
 import common.cout970.UltraTech.handlers.FuelHandler;
 import common.cout970.UltraTech.handlers.GuiHandler;
 import common.cout970.UltraTech.handlers.UltratechWorldGenerator;
-import common.cout970.UltraTech.microparts.MicroRegistry;
+import common.cout970.UltraTech.multipart.MultiPartRegistry_UT;
 import common.cout970.UltraTech.network.Net_Utils;
 import common.cout970.UltraTech.proxy.CommonProxy;
 import common.cout970.UltraTech.util.LogHelper;
@@ -27,7 +27,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 
 
-@Mod(modid = InformationManager.MOD_ID, name = InformationManager.MOD_ID,version = "1.7.10-0.9.2",guiFactory = InformationManager.GUI_FACTORY)
+@Mod(modid = InformationManager.MOD_ID, name = InformationManager.MOD_ID,version = "1.7.10-0.9.5",guiFactory = InformationManager.GUI_FACTORY)
 
 
 public class UltraTech {
@@ -74,7 +74,7 @@ public class UltraTech {
 		
 		NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());	//gui
 		if(MultipartReference.isMicroPartActived){
-			new MicroRegistry().load();		//microblocks
+			new MultiPartRegistry_UT().load();		//microblocks
 		}else{
 			NetworkManagerRegistry.loadDefaultPathFinder();
 		}

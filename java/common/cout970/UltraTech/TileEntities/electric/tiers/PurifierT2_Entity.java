@@ -1,6 +1,6 @@
 package common.cout970.UltraTech.TileEntities.electric.tiers;
 
-import ultratech.api.power.ISpeeded;
+import ultratech.api.power.interfaces.ISpeeded;
 import ultratech.api.recipes.CVD_Recipe;
 import ultratech.api.recipes.Laminator_Recipe;
 import ultratech.api.recipes.Purifier_Recipe;

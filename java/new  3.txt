@@ -1,3 +1,7 @@
+-- = done
+** = discarded
+-* = wip
+
 bugs
 quarry double upgrade drops. --
 battery durability bar not visible. --
@@ -12,6 +16,29 @@ cables to hardness and expensive. --
 batteries too op. --
 steam turbine not op. --
 silicon oredict. --
+
+brick craft final. --
+sword too op. --
+stack of bottles disapear. ** problem of the tanks
+hologram 180 --
+batterys rf. --
+dynamo stability and no op. --
+miner new gui. --
+nei plugin. --
+fermenter recipes. --
+bottles with liquid == solid fuel. --
+
+reactor empty cell. --
+laminator not acepet iron. --
+block exchanger. --
+upgrade machines craft --
+chasis craft with circuit instead plastic(tier 3 not need tier 2 chasis). --
+new chips(logic(redstone), electric(plastic), optic(diamond)). --
+
+retrocompatibility and triturator.
+
+batteries to RF.
+
 sugerencias:
 baterias y tanques portables. **
 to do:

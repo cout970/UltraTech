@@ -1,0 +1,67 @@
+package common.cout970.UltraTech.util.power.cables;
+
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
+import ultratech.api.power.CableType;
+import ultratech.api.power.PowerInterface;
+import ultratech.api.power.interfaces.ICable;
+import ultratech.api.power.interfaces.IPowerConductor;
+
+import common.cout970.UltraTech.TileEntities.electric.tiers.SolarPanelEntity_T1;
+
+
+public class CableInterfaceSolarPanel implements ICable{
+		
+		public SolarPanelEntity_T1 source; 
+		
+		public CableInterfaceSolarPanel(SolarPanelEntity_T1 owner){
+			source = owner;
+		}
+		
+		@Override
+		public IPowerConductor getConductor() {
+			return source;
+		}
+
+		@Override
+		public PowerInterface getPower() {
+			return source.getPower();
+		}
+
+		@Override
+		public boolean isOpenSide(ForgeDirection dir) {
+			return dir != ForgeDirection.UP;
+		}
+
+		@Override
+		public World getWorldObj() {
+			return source.getPower().getParent().getWorldObj();
+		}
+
+		@Override
+		public int[] getCoords() {
+			TileEntity t = source.getPower().getParent();
+			return new int[]{t.xCoord,t.yCoord,t.zCoord};
+		}
+
+		@Override
+		public boolean shouldConnectWithThis(ICable c, ForgeDirection side) {
+			if(side != ForgeDirection.DOWN){
+				if(c.getType() == CableType.Ribbon || c.getType() == CableType.Block){
+					return true;
+				}else return false;
+			}
+			return true;
+		}
+
+		@Override
+		public CableType getType() {
+			return CableType.Ribbon;
+		}
+
+		@Override
+		public ForgeDirection getInternalConection(CableType big, ICable cable) {
+			return ForgeDirection.UNKNOWN;
+		}
+	}

@@ -20,6 +20,7 @@ import common.cout970.UltraTech.network.Net_Utils;
 import common.cout970.UltraTech.util.LogHelper;
 import common.cout970.UltraTech.util.power.Machine;
 import common.cout970.UltraTech.util.power.PowerExchange;
+import common.cout970.UltraTech.util.power.cables.CableInterfaceEngine;
 
 public class EngineEntity extends Machine implements IPowerEmitter{
 
@@ -36,8 +37,10 @@ public class EngineEntity extends Machine implements IPowerEmitter{
 
 	public EngineEntity(){
 		super(MachineData.Engine);
+		getPower().setCable(new CableInterfaceEngine(this));
 	}
 	public void updateEntity(){
+		super.updateEntity();
 		if(worldObj.isRemote)return;
 
 		int powerSpace = (int) (800-MJ);
@@ -77,15 +80,13 @@ public class EngineEntity extends Machine implements IPowerEmitter{
 		TileEntity tile = UT_Utils.getRelative(this, direction);
 		if (isPoweredTile(tile, direction)) {
 			double extracted = Math.min(100, MJ);
-
-			if (MjAPI.getMjBattery(tile, MjAPI.DEFAULT_POWER_FRAMEWORK, direction.getOpposite()) != null) {
-				IBatteryObject battery = MjAPI.getMjBattery(tile, MjAPI.DEFAULT_POWER_FRAMEWORK, direction.getOpposite());
-				double a = battery.addEnergy(extracted);
-				MJ -= a;
-			} 
-			if(tile instanceof IPowerReceptor){
-				PowerReceiver receptor = ((IPowerReceptor) tile).getPowerReceiver(direction.getOpposite());
-				if (extracted > 0) {
+			if (extracted > 0) {
+				if (MjAPI.getMjBattery(tile, MjAPI.DEFAULT_POWER_FRAMEWORK, direction.getOpposite()) != null) {
+					IBatteryObject battery = MjAPI.getMjBattery(tile, MjAPI.DEFAULT_POWER_FRAMEWORK, direction.getOpposite());
+					double a = battery.addEnergy(extracted);
+					MJ -= a;
+				}else if(tile instanceof IPowerReceptor){
+					PowerReceiver receptor = ((IPowerReceptor) tile).getPowerReceiver(direction.getOpposite());
 					double needed = receptor.receiveEnergy(PowerHandler.Type.ENGINE, extracted, direction.getOpposite());
 					MJ -= needed;
 				}
@@ -107,7 +108,7 @@ public class EngineEntity extends Machine implements IPowerEmitter{
 
 	public void switchOrientation() {
 		for(ForgeDirection d : ForgeDirection.VALID_DIRECTIONS){
-			if(isPoweredTile(getTile(d), d)){
+			if(!(getTile(d) instanceof EngineEntity) && isPoweredTile(getTile(d), d)){
 				direction = d;
 				Net_Utils.sendUpdate(this);
 				return;

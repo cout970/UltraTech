@@ -2,6 +2,7 @@ package common.cout970.UltraTech.TileEntities.electric.tiers;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -19,7 +20,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class LavaGeneratorT1_Entity extends Machine implements IFluidHandler,IUpdatedEntity{
 
 	public UT_Tank lava;
-	private int Proces;
+	public int Proces;
 	public float coolant = 0;//kelvin degrees
 	public int heat = 295;
 	
@@ -35,20 +36,26 @@ public class LavaGeneratorT1_Entity extends Machine implements IFluidHandler,IUp
 			getTank().drain(20, true);
 		}
 		if(Proces > 0){
-			double space = getCapacity()-getCharge();
-			if(space >= MachineData.LavaGenerator.use){
-				Proces--;
-				addCharge(MachineData.LavaGenerator.use);
-			}
+			applyProduction();
 		}
 		
 		if(heat > 0){
-			float product = 0;
-			float cal = heat-295;
-			float dif = cal*coolant;
-			product = dif/4000;
-			addCharge(MachineData.LavaGenerator.use*0.05f*product);
+			addCharge(MachineData.LavaGenerator.use*getProduction());
 		}
+	}
+	
+	public void applyProduction(){
+		double space = getCapacity()-getCharge();
+		if(space >= MachineData.LavaGenerator.use){
+			Proces--;
+			addCharge(MachineData.LavaGenerator.use);
+		}
+	}
+	
+	public float getProduction(){
+		float cal = heat-295;
+		float dif = cal*coolant;
+		return (dif/4000)*0.05f;
 	}
 	
 	public UT_Tank getTank(){
@@ -109,7 +116,24 @@ public class LavaGeneratorT1_Entity extends Machine implements IFluidHandler,IUp
 				}
 			}
 		}
-		
+	}
+	
+	@Override
+	public void readFromNBT(NBTTagCompound nbt) {
+		super.readFromNBT(nbt);
+		Proces = nbt.getInteger("Proces");
+		heat = nbt.getInteger("Heat");
+		coolant = nbt.getFloat("Coolant");
+		getTank().readFromNBT(nbt, "lava");
+	}
+
+	@Override
+	public void writeToNBT(NBTTagCompound nbt) {
+		super.writeToNBT(nbt);
+		nbt.setInteger("Proces", Proces);
+		nbt.setInteger("Heat", heat);
+		nbt.setFloat("Coolant", coolant);
+		getTank().writeToNBT(nbt, "lava");
 	}
 
 }

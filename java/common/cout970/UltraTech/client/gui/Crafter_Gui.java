@@ -37,26 +37,29 @@ public class Crafter_Gui extends GuiContainer{
 		//draw needs not haves
 		GL11.glEnable(GL11.GL_BLEND);
 		//craft grid
-		int h = 10;
-		if(!entity.found[0])this.drawTexturedModalRect(xStart+13, yStart+26, 177, h, 16, 16);
-		if(!entity.found[1])this.drawTexturedModalRect(xStart+31, yStart+26, 177, h, 16, 16);
-		if(!entity.found[2])this.drawTexturedModalRect(xStart+49, yStart+26, 177, h, 16, 16);
-		
-		if(!entity.found[3])this.drawTexturedModalRect(xStart+13, yStart+44, 177, h, 16, 16);
-		if(!entity.found[4])this.drawTexturedModalRect(xStart+31, yStart+44, 177, h, 16, 16);
-		if(!entity.found[5])this.drawTexturedModalRect(xStart+49, yStart+44, 177, h, 16, 16);
-		
-		if(!entity.found[6])this.drawTexturedModalRect(xStart+13, yStart+62, 177, h, 16, 16);
-		if(!entity.found[7])this.drawTexturedModalRect(xStart+31, yStart+62, 177, h, 16, 16);
-		if(!entity.found[8])this.drawTexturedModalRect(xStart+49, yStart+62, 177, h, 16, 16);
-		
-		//craft result
-		if(entity.getStackInSlot(-1) != null && !entity.allFound()){
-			this.drawTexturedModalRect(xStart+80, yStart+44, 177, h, 16, 16);
+
+		if(entity.isLoaded()){
+			int h = 10;
+			if(!entity.found[0])this.drawTexturedModalRect(xStart+13, yStart+26, 177, h, 16, 16);
+			if(!entity.found[1])this.drawTexturedModalRect(xStart+31, yStart+26, 177, h, 16, 16);
+			if(!entity.found[2])this.drawTexturedModalRect(xStart+49, yStart+26, 177, h, 16, 16);
+
+			if(!entity.found[3])this.drawTexturedModalRect(xStart+13, yStart+44, 177, h, 16, 16);
+			if(!entity.found[4])this.drawTexturedModalRect(xStart+31, yStart+44, 177, h, 16, 16);
+			if(!entity.found[5])this.drawTexturedModalRect(xStart+49, yStart+44, 177, h, 16, 16);
+
+			if(!entity.found[6])this.drawTexturedModalRect(xStart+13, yStart+62, 177, h, 16, 16);
+			if(!entity.found[7])this.drawTexturedModalRect(xStart+31, yStart+62, 177, h, 16, 16);
+			if(!entity.found[8])this.drawTexturedModalRect(xStart+49, yStart+62, 177, h, 16, 16);
+
+			//craft result
+			if(entity.getStackInSlot(-1) != null && !entity.allFound()){
+				this.drawTexturedModalRect(xStart+80, yStart+44, 177, h, 16, 16);
+			}
 		}
 		GL11.glDisable(GL11.GL_BLEND);
 	}
-	
+
 	@Override
 	public void mouseClicked(int mx, int my, int b)
 	{

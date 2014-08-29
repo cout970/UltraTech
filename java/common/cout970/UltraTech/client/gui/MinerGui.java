@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.lwjgl.opengl.GL11;
 
-import ultratech.api.power.IPower;
+import ultratech.api.power.interfaces.IPower;
 import ultratech.api.util.UT_Utils;
 import common.cout970.UltraTech.TileEntities.electric.MinerEntity;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -34,23 +34,38 @@ public class MinerGui extends GuiContainer{
 		int yStart = (height - ySize) / 2;
 		this.drawTexturedModalRect(xStart, yStart, 0, 0, xSize, ySize);
 
+		//silk touch
+		if(entity.hasSilkUpgrade){
+			this.drawTexturedModalRect(xStart+24, yStart+82, 0, ySize, 18, 18);
+		}			
+		if(entity.eject){
+			this.drawTexturedModalRect(xStart+4, yStart+82, 0, ySize, 18, 18);
+		}
+		
 		//energy bar  
 		this.mc.renderEngine.bindTexture(new ResourceLocation("ultratech:textures/misc/energy.png"));
 		int p = (int) (entity.getCharge()*50/entity.getCapacity());
 		this.drawTexturedModalRect(xStart+9, yStart+105+(50-p), 0, 0, 25, p);
 		
 		//speed
-		this.drawCenteredString(fontRendererObj, (entity.speedUpgrades)+"x", xStart+21, yStart+167, UT_Utils.RGBtoInt(255, 255, 255));
+		this.drawCenteredString(fontRendererObj, (entity.speedUpgrades)+"", xStart+15, yStart+167, UT_Utils.RGBtoInt(255, 255, 255));
 		
 		//range
-		this.drawCenteredString(fontRendererObj, (entity.height*2+1)+"x"+(entity.widht*2+1), xStart+225, yStart+167, UT_Utils.RGBtoInt(255, 255, 255));
+		this.drawCenteredString(fontRendererObj, ""+entity.rangeUpgrades, xStart+215, yStart+110, UT_Utils.RGBtoInt(255, 255, 255));
+		this.drawCenteredString(fontRendererObj, "Width", xStart+225, yStart+132, UT_Utils.RGBtoInt(255, 255, 255));
+		this.drawCenteredString(fontRendererObj, ""+(entity.height*2+1), xStart+225, yStart+144, UT_Utils.RGBtoInt(255, 255, 255));
+		this.drawCenteredString(fontRendererObj, "Dept", xStart+225, yStart+156, UT_Utils.RGBtoInt(255, 255, 255));
+		this.drawCenteredString(fontRendererObj, ""+(entity.widht*2+1), xStart+225, yStart+168, UT_Utils.RGBtoInt(255, 255, 255));
+		
+		//fortune
+		this.drawCenteredString(fontRendererObj, ""+entity.fortuneUpgrades, xStart+215, yStart+87, UT_Utils.RGBtoInt(255, 255, 255));
 		
 		//upgrades
-		String line1 = "Fortune Upgrades "+entity.fortuneUpgrades+"x"+"   "+"AutoEject "+entity.eject;
-		int to = (entity.MinigSize()-entity.current);
-		String line2 = "Blocks to Mine "+((to > 0)? to : 0)+" Mined "+entity.current;
-		this.drawCenteredString(fontRendererObj, line1, xStart+124, yStart+82, UT_Utils.RGBtoInt(255, 255, 255));
-		this.drawCenteredString(fontRendererObj, line2, xStart+124, yStart+92, UT_Utils.RGBtoInt(255, 255, 255));
+		String line1 = "Blocks mined in the last ";
+		String line2 = "5 seconds : "+entity.minedLastSec;
+		this.drawString(fontRendererObj, line1, xStart+48, yStart+82, UT_Utils.RGBtoInt(255, 255, 255));
+		this.drawString(fontRendererObj, line2, xStart+48, yStart+92, UT_Utils.RGBtoInt(255, 255, 255));
+
 	}
 	
 	@Override

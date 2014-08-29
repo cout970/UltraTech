@@ -1,22 +1,19 @@
 package common.cout970.UltraTech.util.power;
 
-import ultratech.api.power.CableType;
-import ultratech.api.power.IPower;
-import ultratech.api.power.IPowerConductor;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.common.util.ForgeDirection;
 import ultratech.api.power.PowerInterface;
 import ultratech.api.power.PowerNetwork;
 import ultratech.api.power.StorageInterface;
 import ultratech.api.power.StorageInterface.PowerIO;
-import common.cout970.UltraTech.TileEntities.intermod.DynamoEntity;
-import common.cout970.UltraTech.blocks.models.Dynamo;
+import ultratech.api.power.interfaces.ICable;
+import ultratech.api.power.interfaces.IPower;
+import ultratech.api.power.interfaces.IPowerConductor;
+import ultratech.api.power.prefab.CableInterfaceBlock;
+import cofh.api.energy.IEnergyHandler;
+
 import common.cout970.UltraTech.managers.MachineData;
 import common.cout970.UltraTech.network.SyncTile;
-import cofh.api.energy.EnergyStorage;
-import cofh.api.energy.IEnergyHandler;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.common.util.ForgeDirection;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.oredict.OreDictionary;
 
 public class Machine extends SyncTile implements IPowerConductor,IPower,IEnergyHandler{
 
@@ -24,44 +21,28 @@ public class Machine extends SyncTile implements IPowerConductor,IPower,IEnergyH
 	
 	public Machine(double capacity,int tier,PowerIO t){
 		super();
-		cond = new StorageInterface(this, capacity, tier);
+		cond = new StorageInterface(this, new CableInterfaceBlock(this), capacity, tier);
+		cond.configIO = t;
+	}
+	
+	public Machine(double capacity,int tier,PowerIO t, ICable c){
+		super();
+		cond = new StorageInterface(this, c, capacity, tier);
 		cond.configIO = t;
 	}
 	
 	public Machine(double capacity,int tier){
 		super();
-		cond = new StorageInterface(this, capacity, tier);
+		cond = new StorageInterface(this, new CableInterfaceBlock(this), capacity, tier);
 		cond.configIO = PowerIO.Nothing;
-	}
-	
-	public Machine(double capacity,int tier,PowerIO t,boolean a){
-		super();
-		cond = new StorageInterface(this, capacity, tier){
-			public CableType getConnectionType(ForgeDirection side){
-				return ((Machine) getParent()).getConection(side);
-			}
-			public boolean isConnectableSide(ForgeDirection side ,CableType conection){
-				return ((Machine) getParent()).isConnectableSide(side, conection);
-			}
-		};
-		cond.configIO = t;
 	}
 	
 	public Machine(MachineData a){
 		this(a.cap,a.tier,a.type);
 	}
-	
-	public Machine(MachineData a,boolean b){
-		this(a.cap,a.tier,a.type,true);
-	}
 
-	//only for special connection
-	public boolean isConnectableSide(ForgeDirection side, CableType conection) {
-		return true;
-	}
-	//only for special connection
-	public CableType getConection(ForgeDirection side) {
-		return CableType.BLOCK;
+	public Machine(MachineData a, ICable c) {
+		this(a.cap,a.tier,a.type,c);
 	}
 
 	@Override
@@ -72,6 +53,9 @@ public class Machine extends SyncTile implements IPowerConductor,IPower,IEnergyH
 	public void updateEntity(){
 		super.updateEntity();
 		cond.MachineUpdate();
+		if(worldObj.getTotalWorldTime() % 20 == 3){
+			sendNetworkUpdate();
+		}
 	}
 	
 	public void readFromNBT(NBTTagCompound nbt){
@@ -130,7 +114,7 @@ public class Machine extends SyncTile implements IPowerConductor,IPower,IEnergyH
 
 	@Override
 	public boolean canConnectEnergy(ForgeDirection from) {
-		return this.isConnectableSide(from, CableType.BLOCK);
+		return this.getPower().getCable().isOpenSide(from);
 	}
 
 	@Override

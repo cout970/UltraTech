@@ -57,9 +57,9 @@ public class ChemicalPlantT1_Entity extends ConfigurableMachineWithInventory imp
 	
 	public void craft(){
 		ItemStack a = getStackInSlot(0);
-		if(a == null)setInventorySlotContents(0, new ItemStack(ItemManager.ItemName.get("Sulfur"),2));
+		if(a == null)setInventorySlotContents(0, new ItemStack(ItemManager.ItemName.get("Sulfur"),1));
 		else{
-			int a1 = a.stackSize + 2;
+			int a1 = a.stackSize + 1;
 			setInventorySlotContents(0, new ItemStack(ItemManager.ItemName.get("Sulfur"),a1));
 		}
 		ItemStack b = getStackInSlot(1);

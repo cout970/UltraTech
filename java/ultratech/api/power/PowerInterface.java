@@ -1,5 +1,7 @@
 package ultratech.api.power;
 
+import ultratech.api.power.interfaces.ICable;
+import ultratech.api.power.interfaces.IPower;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 
@@ -10,11 +12,13 @@ import net.minecraftforge.common.util.ForgeDirection;
  */
 public class PowerInterface implements IPower{
 	
-    private TileEntity Parent; //machine
-    private PowerNetwork net; //conections
+    private TileEntity Parent; //owner of the interface
+    private PowerNetwork net; //machines connected
+    private ICable cond; //the interface for interaction with cables
     
-    public PowerInterface(TileEntity p){
+    public PowerInterface(TileEntity p,ICable c){
     	Parent = p;
+    	cond = c;
     }
 
     public TileEntity getParent(){
@@ -32,6 +36,9 @@ public class PowerInterface implements IPower{
 	public void MachineUpdate(){
 		if(net == null){
 			NetworkManagerRegistry.iterate(this);
+			if(!net.interfaces.contains(this)){
+				net.interfaces.add(this);
+			}
 		}
 	}
 
@@ -62,9 +69,13 @@ public class PowerInterface implements IPower{
 	public double getFlow() {
 		return 0;
 	}
+
+	public ICable getCable() {
+		return cond;
+	}
 	
-	public CableType getConnectionType(ForgeDirection side){
-		return CableType.BLOCK;
+	public void setCable(ICable c) {
+		cond = c;
 	}
 
 }

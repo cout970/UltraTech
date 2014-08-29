@@ -6,7 +6,7 @@ import common.cout970.UltraTech.network.messages.MessageClimateStation;
 import common.cout970.UltraTech.network.messages.MessageCrafter;
 import common.cout970.UltraTech.network.messages.MessageHologram;
 import common.cout970.UltraTech.network.messages.MessageMachineMode;
-import common.cout970.UltraTech.network.messages.MessageMicroPartUpdate;
+import common.cout970.UltraTech.network.messages.MessageMultiPartUpdate;
 import common.cout970.UltraTech.network.messages.MessagePainter;
 import common.cout970.UltraTech.network.messages.MessageReactorConfig;
 import common.cout970.UltraTech.network.messages.MessageTesseract;
@@ -27,7 +27,7 @@ public class Net_Utils {
 		INSTANCE.registerMessage(MessagePainter.class, MessagePainter.class, 4, Side.SERVER);
 		INSTANCE.registerMessage(MessageTesseract.class, MessageTesseract.class, 5, Side.SERVER);
 		if(MultipartReference.isMicroPartActived)
-		INSTANCE.registerMessage(MessageMicroPartUpdate.class, MessageMicroPartUpdate.class, 6, Side.CLIENT);
+		INSTANCE.registerMessage(MessageMultiPartUpdate.class, MessageMultiPartUpdate.class, 6, Side.CLIENT);
 		INSTANCE.registerMessage(MessageReactorConfig.class, MessageReactorConfig.class, 7, Side.SERVER);
 		INSTANCE.registerMessage(MessageHologram.class, MessageHologram.class, 8, Side.SERVER);
 	}

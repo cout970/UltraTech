@@ -8,11 +8,10 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
-import ultratech.api.power.CableType;
 import ultratech.api.recipes.Boiler_Recipes;
+
 import common.cout970.UltraTech.misc.IUpdatedEntity;
 import common.cout970.UltraTech.network.SyncTile;
-import common.cout970.UltraTech.util.LogHelper;
 import common.cout970.UltraTech.util.fluids.UT_Tank;
 import common.cout970.UltraTech.util.power.PowerExchange;
 
@@ -130,10 +129,6 @@ public class BoilerEntity extends SyncTile implements IFluidHandler,IUpdatedEnti
 		if(id == 4)heat = value;
 		if(id == 5)storage.setFluid(new FluidStack(value, 1));
 		if(id == 6)result.setFluid(new FluidStack(value, 1));
-	}
-
-	public CableType getConection(ForgeDirection side) {
-		return CableType.BIG_CENTER;
 	}
 
 	@Override

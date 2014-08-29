@@ -10,13 +10,11 @@ import ultratech.api.util.UT_Utils;
 import codechicken.lib.vec.Vector3;
 import codechicken.multipart.NormallyOccludedPart;
 import codechicken.multipart.TMultiPart;
+
 import common.cout970.UltraTech.client.models.ModelBigCable;
-import common.cout970.UltraTech.microparts.MicroCablePlane;
 import common.cout970.UltraTech.multipart.MultiPartCable_Big;
-import common.cout970.UltraTech.multipart.MultipartUtil;
 import common.cout970.UltraTech.util.render.ConectedTexture;
 import common.cout970.UltraTech.util.render.RenderUtil;
-import cpw.mods.fml.common.Optional;
 
 public class RenderCableBig{
 	
@@ -25,17 +23,6 @@ public class RenderCableBig{
 	
 	public RenderCableBig(){
 		model = new ModelBigCable();
-	}
-	
-	private boolean canConnectTo(MultiPartCable_Big f, ForgeDirection o) {
-		boolean a = f.tile().canAddPart(new NormallyOccludedPart(f.boundingBoxes[o.ordinal()]));
-		boolean b = false;
-		TileEntity tile = UT_Utils.getRelative(f.tile(), o);
-		if(MultipartUtil.canConect(f,tile,o))b = true;
-		if(o == ForgeDirection.DOWN){
-			for(TMultiPart t : f.tile().jPartList())if(t instanceof MicroCablePlane){b = true; a = true;}
-		}
-		return a && b;
 	}
 
 	public void render(MultiPartCable_Big mc, Vector3 pos) {

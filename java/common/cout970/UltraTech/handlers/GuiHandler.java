@@ -4,7 +4,6 @@ package common.cout970.UltraTech.handlers;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-
 import common.cout970.UltraTech.TileEntities.electric.ChargeStationEntity;
 import common.cout970.UltraTech.TileEntities.electric.ClimateEntity;
 import common.cout970.UltraTech.TileEntities.electric.FermenterEntity;
@@ -27,6 +26,7 @@ import common.cout970.UltraTech.TileEntities.electric.tiers.Tesseract_Entity;
 import common.cout970.UltraTech.TileEntities.fluid.BoilerEntity;
 import common.cout970.UltraTech.TileEntities.intermod.DynamoEntity;
 import common.cout970.UltraTech.TileEntities.intermod.EngineEntity;
+import common.cout970.UltraTech.TileEntities.logistics.InfiniteSupplyEntity;
 import common.cout970.UltraTech.TileEntities.multiblocks.reactor.Reactor_Core_Entity;
 import common.cout970.UltraTech.TileEntities.multiblocks.refinery.Refinery_IO_Entity;
 import common.cout970.UltraTech.TileEntities.utility.CrafterEntity;
@@ -47,6 +47,7 @@ import common.cout970.UltraTech.client.gui.FluidGeneratorGui;
 import common.cout970.UltraTech.client.gui.Furnace_Gui;
 import common.cout970.UltraTech.client.gui.Heater_Gui;
 import common.cout970.UltraTech.client.gui.HologramEmiterGui;
+import common.cout970.UltraTech.client.gui.InfiniteSupplyGui;
 import common.cout970.UltraTech.client.gui.Laminator_Gui;
 import common.cout970.UltraTech.client.gui.MAssemblyGui;
 import common.cout970.UltraTech.client.gui.MinerGui;
@@ -71,6 +72,7 @@ import common.cout970.UltraTech.containers.FurnaceContainer;
 import common.cout970.UltraTech.containers.GeneratorContainer;
 import common.cout970.UltraTech.containers.Heater_Container;
 import common.cout970.UltraTech.containers.HologramEmiterContainer;
+import common.cout970.UltraTech.containers.InfiniteSupplyContainer;
 import common.cout970.UltraTech.containers.LaminatorContainer;
 import common.cout970.UltraTech.containers.MAssemblyContainer;
 import common.cout970.UltraTech.containers.MinerContainer;
@@ -83,7 +85,6 @@ import common.cout970.UltraTech.containers.TabletContainer;
 import common.cout970.UltraTech.containers.TesseractContainer;
 import common.cout970.UltraTech.util.power.Machine;
 import common.cout970.UltraTech.wiki.TabletGui;
-
 import cpw.mods.fml.common.network.IGuiHandler;
 
 public class GuiHandler implements IGuiHandler{
@@ -191,6 +192,10 @@ public class GuiHandler implements IGuiHandler{
 		if(tileEntity instanceof DynamoEntity){
 			return new Dynamo_Container(player.inventory, (DynamoEntity) tileEntity);
 		}
+		//infinite supply
+		if(tileEntity instanceof InfiniteSupplyEntity){
+			return new InfiniteSupplyContainer(player.inventory, (InfiniteSupplyEntity) tileEntity);
+		}
 		return null;
 	}
 
@@ -296,6 +301,10 @@ public class GuiHandler implements IGuiHandler{
 		//Dynamo
 		if(tileEntity instanceof DynamoEntity){
 			return new Dynamo_Gui(new Dynamo_Container(player.inventory,tileEntity),(DynamoEntity) tileEntity);
+		}
+		//infinite supply
+		if(tileEntity instanceof InfiniteSupplyEntity){
+			return new InfiniteSupplyGui(new InfiniteSupplyContainer(player.inventory,tileEntity),(InfiniteSupplyEntity) tileEntity);
 		}
 		return null;
 	}

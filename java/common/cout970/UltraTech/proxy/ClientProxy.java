@@ -24,11 +24,11 @@ import common.cout970.UltraTech.client.renderItems.RenderBoilerItem;
 import common.cout970.UltraTech.client.renderItems.RenderBottle;
 import common.cout970.UltraTech.client.renderItems.RenderDynamoItem;
 import common.cout970.UltraTech.client.renderItems.RenderEngineItem;
+import common.cout970.UltraTech.client.renderItems.RenderFlamethrower;
 import common.cout970.UltraTech.client.renderItems.RenderPipeItem;
 import common.cout970.UltraTech.client.renderItems.RenderPumpItem;
 import common.cout970.UltraTech.client.renderItems.RenderSolarItem;
 import common.cout970.UltraTech.client.renderItems.RenderSwordItem;
-import common.cout970.UltraTech.client.renderItems.RenderTankItem;
 import common.cout970.UltraTech.client.renderItems.RenderTesseractItem;
 import common.cout970.UltraTech.client.renderItems.RenderTurbineItem;
 import common.cout970.UltraTech.client.renderItems.RenderWindMillItem;
@@ -50,7 +50,7 @@ import common.cout970.UltraTech.client.renders.RenderTurbine;
 import common.cout970.UltraTech.client.renders.RenderWindMill;
 import common.cout970.UltraTech.managers.BlockManager;
 import common.cout970.UltraTech.managers.ItemManager;
-import common.cout970.UltraTech.microparts.Cable_Entity;
+import common.cout970.UltraTech.multipart.remplace.Cable_Entity;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 
@@ -136,5 +136,7 @@ public class ClientProxy extends CommonProxy{
 		  MinecraftForgeClient.registerItemRenderer(ItemManager.ItemName.get("LaserSword"), new RenderSwordItem());
 		  //bottle
 		  MinecraftForgeClient.registerItemRenderer(ItemManager.ItemName.get("Bottle"), new RenderBottle());
+		  //Flamethrower
+		  MinecraftForgeClient.registerItemRenderer(ItemManager.ItemName.get("Flamethrower"), new RenderFlamethrower());
       }
 }

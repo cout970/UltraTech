@@ -29,7 +29,7 @@ public class Bottle extends UT_Item{
 		setHasSubtypes(true);
 		setContainerItem(this);
 	}
-	
+
 	@SideOnly(Side.CLIENT)
     public boolean requiresMultipleRenderPasses()
     {

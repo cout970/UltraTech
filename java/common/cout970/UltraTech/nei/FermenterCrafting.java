@@ -7,6 +7,7 @@ import java.util.Map;
 
 import ultratech.api.recipes.Fermenter_Recipe;
 import ultratech.api.recipes.RecipeRegistry;
+import ultratech.api.util.UT_Utils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureMap;
@@ -14,9 +15,12 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 import common.cout970.UltraTech.managers.FluidManager;
+import common.cout970.UltraTech.util.LogHelper;
 import common.cout970.UltraTech.util.render.RenderUtil;
+import common.cout970.UltraTech.wiki.Page;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.TemplateRecipeHandler;
 
@@ -35,7 +39,13 @@ public class FermenterCrafting extends TemplateRecipeHandler{
 	}
 
 	@Override
-	public void loadCraftingRecipes(ItemStack result){}
+	public void loadCraftingRecipes(ItemStack result){
+		if(FluidContainerRegistry.containsFluid(result, FluidRegistry.getFluidStack("juice", 1000))){
+			for(Fermenter_Recipe f : RecipeRegistry.fermenter){
+				recipes.add(f);
+			}
+		}
+	}
 
 	@Override
 	public void loadUsageRecipes(ItemStack ingredient){
@@ -95,6 +105,10 @@ public class FermenterCrafting extends TemplateRecipeHandler{
 		RenderUtil.bindTexture(new ResourceLocation("ultratech:textures/gui/fermenter.png"));
 		this.drawProgressBar(40, 9, 224, 0, 20, 42, 0f, 4);
 		this.drawProgressBar(133, 10, 224, 0, 20, 42, 0f, 4);
+		
+		Page.drawString("Water", 53, 2, UT_Utils.RGBtoInt(250, 250, 250));
+		Page.drawString("Juice", 143, 2, UT_Utils.RGBtoInt(250, 250, 250));
+		Page.drawString(recipes.get(recipe).amount+"mB", 110, 15, UT_Utils.RGBtoInt(250, 250, 250));
     }
 	
 	public void drawTexturedModelRectFromIcon(int par1, int par2, IIcon par3Icon, int par4, int par5)

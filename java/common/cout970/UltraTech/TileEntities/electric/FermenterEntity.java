@@ -29,6 +29,7 @@ public class FermenterEntity extends MachineWithInventory implements  IFluidHand
 	
 	
 	public void updateEntity(){
+		super.updateEntity();
 		if(water == null)water = new UT_Tank(8000, worldObj, xCoord, yCoord, zCoord);
 		if(juice == null)juice = new UT_Tank(8000, worldObj, xCoord, yCoord, zCoord);
 		if(worldObj.isRemote)return;

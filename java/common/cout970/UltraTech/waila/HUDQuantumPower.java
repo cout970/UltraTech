@@ -2,11 +2,11 @@ package common.cout970.UltraTech.waila;
 
 import java.util.List;
 
+import common.cout970.UltraTech.TileEntities.intermod.TransformerEntity;
 import common.cout970.UltraTech.util.LogHelper;
-
-import ultratech.api.power.IPowerConductor;
 import ultratech.api.power.PowerInterface;
 import ultratech.api.power.StorageInterface;
+import ultratech.api.power.interfaces.IPowerConductor;
 import ultratech.api.util.UT_Utils;
 import net.minecraft.item.ItemStack;
 import mcp.mobius.waila.api.IWailaConfigHandler;
@@ -33,6 +33,10 @@ public class HUDQuantumPower implements IWailaDataProvider{
 			if(p instanceof StorageInterface){
 				double charge = accessor.getNBTData().getDouble("Charge");
 				currenttip.add(UT_Utils.removeDecimals(charge)+"/"+p.getCapacity()+" QP");
+			}
+			if(accessor.getTileEntity() instanceof TransformerEntity){
+				TransformerEntity e = (TransformerEntity) accessor.getTileEntity();
+				currenttip.add(UT_Utils.removeDecimals(e.EU)+"/"+e.maxEU+" EU");
 			}
 		}
 		return currenttip;

@@ -2,8 +2,8 @@ package common.cout970.UltraTech.items;
 
 import java.util.List;
 
-import ultratech.api.power.IStorageItem;
 import ultratech.api.power.ItemPower;
+import ultratech.api.power.interfaces.IStorageItem;
 
 import com.google.common.collect.Multimap;
 
@@ -25,7 +25,7 @@ public class LaserSword extends ItemPower{
 	
 
 	public LaserSword(String name){
-		super(16000);
+		super(8000);
 		setCreativeTab(UT_Tabs.ResourceTab);
 		setUnlocalizedName("LaserSword");
 	}

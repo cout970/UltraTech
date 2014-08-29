@@ -108,10 +108,10 @@ public class ItemDisplay implements IHologram{
 		float s = 0.05f;
 		GL11.glScalef(s, s, s);
 		GL11.glRotated(180, 1, 0, 0);
-		GL11.glRotated(180, 0, 1, 0);
+		GL11.glTranslatef(0,0,10);
 		if(isCubic(itemStack)){//without block angle
-			GL11.glTranslatef(-4,0,0);
-			GL11.glRotated(-45f, 0, 1, 0);
+			GL11.glTranslatef(4,0,-10);
+			GL11.glRotated(90f+45f, 0, 1, 0);
 			GL11.glRotated(30f, 1, 0, 0);
 		}
 		GL11.glTranslatef(-7, -20, -56);

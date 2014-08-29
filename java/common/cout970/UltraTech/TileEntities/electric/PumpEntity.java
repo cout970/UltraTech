@@ -38,7 +38,7 @@ public class PumpEntity extends Machine implements IFluidHandler,IUpdatedEntity{
 	
 	
 	public PumpEntity(){
-		super(3200,2,PowerIO.Nothing,true);
+		super(3200,2,PowerIO.Nothing);
 		height = yCoord-3;
 	}
 	

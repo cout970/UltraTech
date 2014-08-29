@@ -18,30 +18,18 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class LavaGeneratorT2_Entity extends LavaGeneratorT1_Entity implements IFluidHandler,IUpdatedEntity{
 
-	private int Proces;
+	public void applyProduction(){
+		double space = getCapacity()-getCharge();
+		if(space >= MachineData.LavaGenerator.use*5){
+			Proces-= 5;
+			addCharge(MachineData.LavaGenerator.use*5);
+		}
+	}
 	
-	public void updateEntity(){
-		super.updateEntity();
-		if(worldObj.isRemote)return;
-		if(Proces <=0 && getTank().getFluidAmount() >= 100){
-			Proces = 20;
-			getTank().drain(100, true);
-		}
-		if(Proces > 0){
-			double space = getCapacity()-getCharge();
-			if(space >= MachineData.LavaGenerator.use*5){
-				Proces--;
-				addCharge(MachineData.LavaGenerator.use*5);
-			}
-		}
-		
-		if(heat > 0){
-			float product = 0;
-			float cal = heat-295;
-			float dif = cal*coolant;
-			product = dif/4000;
-			addCharge(MachineData.LavaGenerator.use*0.1f*product);
-		}
+	public float getProduction(){
+		float cal = heat-295;
+		float dif = cal*coolant;
+		return (dif/4000)*0.1f;
 	}
 
 }

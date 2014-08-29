@@ -11,7 +11,7 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-import ultratech.api.power.IPower;
+import ultratech.api.power.interfaces.IPower;
 import ultratech.api.util.UT_Utils;
 import common.cout970.UltraTech.TileEntities.electric.ClimateEntity;
 import common.cout970.UltraTech.network.Net_Utils;

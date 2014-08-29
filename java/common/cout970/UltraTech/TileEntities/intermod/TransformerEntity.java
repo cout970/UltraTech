@@ -1,5 +1,6 @@
 package common.cout970.UltraTech.TileEntities.intermod;
 
+import ultratech.api.power.StorageInterface.PowerIO;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.MinecraftForge;
@@ -10,6 +11,7 @@ import ic2.api.energy.tile.IEnergySink;
 import ic2.api.energy.tile.IEnergySource;
 import ic2.api.info.Info;
 import common.cout970.UltraTech.managers.MachineData;
+import common.cout970.UltraTech.util.LogHelper;
 import common.cout970.UltraTech.util.power.Machine;
 import common.cout970.UltraTech.util.power.PowerExchange;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -28,19 +30,21 @@ public class TransformerEntity extends Machine implements IEnergySource,IEnergyS
 	
 	@Override
 	public void updateEntity() {
+		super.updateEntity();
 		if (!addedToEnet) onLoaded();
-		double euCharge = PowerExchange.EUtoQP(EU);
+		if(worldObj.isRemote)return;
+		double euCharge = PowerExchange.EUtoQP(EU);//operations in QP
 		double qpCharge = getCharge();
 		if(euCharge > qpCharge){
 			double transfer = Math.min(euCharge-qpCharge, getCapacity()-getCharge());
 			if(transfer > 0){
-				EU -= transfer;
+				EU -= PowerExchange.QPtoEU(transfer);
 				addCharge(transfer);
 			}
 		}else if(qpCharge > euCharge){
 			double transfer = Math.min(qpCharge-euCharge, PowerExchange.EUtoQP(maxEU-EU));
 			if(transfer > 0){
-				EU += transfer;
+				EU += PowerExchange.QPtoEU(transfer);
 				removeCharge(transfer);
 			}
 		}

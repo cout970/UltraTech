@@ -8,7 +8,7 @@ import net.minecraftforge.client.IItemRenderer.ItemRendererHelper;
 
 import org.lwjgl.opengl.GL11;
 
-import ultratech.api.power.IStorageItem;
+import ultratech.api.power.interfaces.IStorageItem;
 import common.cout970.UltraTech.client.models.ModelDynamo;
 import common.cout970.UltraTech.client.models.ModelSword;
 import common.cout970.UltraTech.client.textures.ResourcesLocations;

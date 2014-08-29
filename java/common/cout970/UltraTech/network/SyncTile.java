@@ -1,8 +1,8 @@
 package common.cout970.UltraTech.network;
 
 import common.cout970.UltraTech.util.LogHelper;
-import ultratech.api.power.IPowerConductor;
 import ultratech.api.power.StorageInterface;
+import ultratech.api.power.interfaces.IPowerConductor;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.nbt.NBTTagCompound;

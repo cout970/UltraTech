@@ -67,6 +67,7 @@ public class FluidNetWorkManager implements IFluidHandler{
 		int amount = Math.min(maxDrain, net.getFluidAmount());
 		int temp = amount/pipes;//divided amount per tank
 		int drained = 0;
+		
 		if(temp > 0){
 			for(IFluidTransport t : net.getPipes()){
 				FluidStack d = t.getTank().drain(temp, doDrain);
@@ -77,7 +78,8 @@ public class FluidNetWorkManager implements IFluidHandler{
 			for(IFluidTransport t : net.getPipes()){
 				if(amount-drained > 0){
 					FluidStack d = t.getTank().drain(1, doDrain);
-					if(d != null)drained += d.amount;
+					if(d != null){drained += d.amount;
+					}
 				}
 			}
 		}

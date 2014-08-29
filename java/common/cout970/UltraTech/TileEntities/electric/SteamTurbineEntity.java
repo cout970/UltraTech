@@ -7,9 +7,8 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
-import ultratech.api.power.CableType;
+
 import common.cout970.UltraTech.managers.MachineData;
-import common.cout970.UltraTech.util.LogHelper;
 import common.cout970.UltraTech.util.fluids.UT_Tank;
 import common.cout970.UltraTech.util.power.Machine;
 
@@ -31,12 +30,7 @@ public class SteamTurbineEntity extends Machine implements IFluidHandler{
 	}
 	
 	public SteamTurbineEntity(){
-		super(MachineData.Turbine,true);
-	}
-	
-	public CableType getConection(ForgeDirection side) {
-		if(side == facing)return CableType.BLOCK;
-		return CableType.RIBBON_BOTTOM;
+		super(MachineData.Turbine);
 	}
 	
 	public void updateEntity(){

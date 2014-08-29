@@ -1,6 +1,6 @@
 package common.cout970.UltraTech.TileEntities.electric.tiers;
 
-import ultratech.api.power.ISpeeded;
+import ultratech.api.power.interfaces.ISpeeded;
 import ultratech.api.recipes.Cutter_Recipe;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;

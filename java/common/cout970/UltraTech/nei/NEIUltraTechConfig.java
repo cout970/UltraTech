@@ -18,6 +18,7 @@ public class NEIUltraTechConfig implements IConfigureNEI{
 		API.registerRecipeHandler(new ChemicalCrafting());
 		API.registerRecipeHandler(new RefineryCrafting());
 		API.registerRecipeHandler(new BoilerCrafting());
+		API.registerRecipeHandler(new FermenterCrafting());
 		
 		API.registerUsageHandler(new PurifierCrafting());
 		API.registerUsageHandler(new CutterCrafting());

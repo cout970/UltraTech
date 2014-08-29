@@ -9,7 +9,9 @@ public class ClimateEntity extends Machine{
 		super(MachineData.Climate_Station);
 	}
 
-	public void updateEntity(){}
+	public void updateEntity(){
+		super.updateEntity();
+	}
 	
 	public void setRain(){
 		if(!worldObj.isRaining())worldObj.getWorldInfo().setRaining(true);

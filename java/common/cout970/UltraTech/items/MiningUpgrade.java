@@ -22,7 +22,7 @@ public class MiningUpgrade extends UT_Item{
 			if(te.speedUpgrades < 5){	
 				te.hasSpeedUpgrades = true;
 				te.speedUpgrades += 1;
-				te.maxProgres = 10 - te.speedUpgrades*2;
+				te.maxProgres = 6 - te.speedUpgrades;
 				par1ItemStack.splitStack(1);
 				return true;
 			}

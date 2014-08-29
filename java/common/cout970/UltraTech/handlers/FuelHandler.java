@@ -1,13 +1,20 @@
 package common.cout970.UltraTech.handlers;
 
+import common.cout970.UltraTech.items.Bottle;
+
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidContainerRegistry;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
+import buildcraft.api.fuels.IronEngineFuel;
+import buildcraft.api.fuels.IronEngineFuel.Fuel;
 import cpw.mods.fml.common.IFuelHandler;
 
 public class FuelHandler implements IFuelHandler{
 
 	/**
 	 * only for the sulfur (2400)
+	 * and liquid fuels
 	 */
 	@Override
 	public int getBurnTime(ItemStack fuel) {
@@ -16,7 +23,15 @@ public class FuelHandler implements IFuelHandler{
 		for(int f : OreDictionary.getOreIDs(fuel)){
 			if(f == sulfur) return 800*3;
 		}
+		if(fuel.getItem() instanceof Bottle){
+			FluidStack f = FluidContainerRegistry.getFluidForFilledItem(fuel);
+			if(f != null){
+				Fuel fu = IronEngineFuel.getFuelForFluid(f.getFluid());
+				if(fu != null){
+					return (int) (fu.powerPerCycle*fu.totalBurningTime);
+				}
+			}
+		}
 		return 0;
 	}
-
 }

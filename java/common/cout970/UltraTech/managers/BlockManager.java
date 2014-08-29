@@ -47,6 +47,7 @@ import common.cout970.UltraTech.TileEntities.intermod.DynamoEntity;
 import common.cout970.UltraTech.TileEntities.intermod.EngineEntity;
 import common.cout970.UltraTech.TileEntities.intermod.KineticGeneratorEntity;
 import common.cout970.UltraTech.TileEntities.intermod.TransformerEntity;
+import common.cout970.UltraTech.TileEntities.logistics.InfiniteSupplyEntity;
 import common.cout970.UltraTech.TileEntities.multiblocks.reactor.Reactor_Chamber_Entity;
 import common.cout970.UltraTech.TileEntities.multiblocks.reactor.Reactor_Control_Entity;
 import common.cout970.UltraTech.TileEntities.multiblocks.reactor.Reactor_Core_Entity;
@@ -67,6 +68,7 @@ import common.cout970.UltraTech.blocks.common.ChargeStation;
 import common.cout970.UltraTech.blocks.common.CrafterBlock;
 import common.cout970.UltraTech.blocks.common.FermenterBlock;
 import common.cout970.UltraTech.blocks.common.Heater;
+import common.cout970.UltraTech.blocks.common.InfiniteSupplyBlock;
 import common.cout970.UltraTech.blocks.common.MultiTank;
 import common.cout970.UltraTech.blocks.common.Painter3D;
 import common.cout970.UltraTech.blocks.common.Tier3Block;
@@ -130,8 +132,8 @@ import common.cout970.UltraTech.itemBlock.ItemBlock_Ores;
 import common.cout970.UltraTech.itemBlock.ItemBlock_Stone;
 import common.cout970.UltraTech.itemBlock.ItemBlock_Storage;
 import common.cout970.UltraTech.itemBlock.ItemBlock_Tier3;
-import common.cout970.UltraTech.microparts.CableBlock;
-import common.cout970.UltraTech.microparts.Cable_Entity;
+import common.cout970.UltraTech.multipart.remplace.CableBlock;
+import common.cout970.UltraTech.multipart.remplace.Cable_Entity;
 import common.cout970.UltraTech.util.power.Machine;
 import cpw.mods.fml.common.registry.GameRegistry;
 
@@ -202,6 +204,8 @@ public class BlockManager {
 	public static  Block LavaGenerator_T2;
 	public static  Block KineticGenerator;
 	public static  Block Transformer;
+	
+	public static  Block InfiniteSupply; 
 
 	public static  Block CableBlock;
 
@@ -267,6 +271,7 @@ public class BlockManager {
 		Dynamo = new Dynamo(m);
 		MultiTank = new MultiTank(m);
 		Pump = new PumpBlock(m);
+		InfiniteSupply = new InfiniteSupplyBlock();
 		
 		
 		if(!MultipartReference.isMicroPartActived)CableBlock = new CableBlock(Material.iron);
@@ -373,7 +378,8 @@ public class BlockManager {
 		GameRegistry.registerBlock(CovedGlass, "Coved_Glass");
 		GameRegistry.registerBlock(MultiTank, "MultiTank");
 		GameRegistry.registerBlock(AlienBlock, "AlienBlock");
-
+		GameRegistry.registerBlock(InfiniteSupply, "InfiniteSupply");
+		
 		if(!MultipartReference.isMicroPartActived)GameRegistry.registerBlock(CableBlock, "UT_CableBlock");
 		//TileEntities
 
@@ -427,6 +433,7 @@ public class BlockManager {
 		GameRegistry.registerTileEntity(Refinery_IO_Entity.class, "Refinery_IO_Entity_UT");
 		GameRegistry.registerTileEntity(Refinery_Entity_Base.class, "Refinery_Entity_Base_UT");
 		GameRegistry.registerTileEntity(Refinery_Structure_Entity.class, "Refinery_Structure_Entity_UT");
+		GameRegistry.registerTileEntity(InfiniteSupplyEntity.class, "InfiniteSupplyEntity_UT");
 		//tiers
 		Class[] a = {ChemicalVaporDesintegrationT1_Entity.class,
 				ChemicalVaporDesintegrationT2_Entity.class,

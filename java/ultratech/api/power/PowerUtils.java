@@ -1,5 +1,7 @@
 package ultratech.api.power;
 
+import ultratech.api.power.interfaces.ICable;
+import ultratech.api.power.interfaces.IPowerConductor;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 
@@ -63,5 +65,13 @@ public class PowerUtils {
 			}
 		}
 		return false;
+	}
+
+	public static TileEntity getRelative(ICable t, ForgeDirection dir) {
+		if(t.getWorldObj() == null || t.getCoords() == null)return null;
+		int x = t.getCoords()[0];
+		int y = t.getCoords()[1];
+		int z = t.getCoords()[2];
+		return t.getWorldObj().getTileEntity(x+dir.offsetX, y+dir.offsetY, z+dir.offsetZ);
 	}
 }

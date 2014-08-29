@@ -10,8 +10,8 @@ import common.cout970.UltraTech.network.Net_Utils;
 import common.cout970.UltraTech.util.LogHelper;
 import common.cout970.UltraTech.util.fluids.UT_Tank;
 import common.cout970.UltraTech.util.power.PowerExchange;
-import ultratech.api.power.IPowerConductor;
 import ultratech.api.power.StorageInterface;
+import ultratech.api.power.interfaces.IPowerConductor;
 import ultratech.api.reactor.IReactorComponent;
 import ultratech.api.reactor.IReactorCoreEntity;
 import ultratech.api.reactor.IReactorFuel;
@@ -87,7 +87,7 @@ public class Reactor_Core_Entity extends Reactor_Entity_Base implements IReactor
 								if(worldObj.getTotalWorldTime()%20 == 0){
 									inv[p].setItemDamage(inv[p].getItemDamage()+1);
 									if(inv[p].getItemDamage() > inv[p].getMaxDamage()){
-										inv[p] = null;
+										inv[p] = inv[p].getItem().getContainerItem(inv[p]);
 									}
 								}
 							}

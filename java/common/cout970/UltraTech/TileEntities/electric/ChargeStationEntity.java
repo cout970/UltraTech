@@ -2,9 +2,9 @@ package common.cout970.UltraTech.TileEntities.electric;
 
 import net.minecraft.item.ItemStack;
 import cofh.api.energy.IEnergyContainerItem;
-import ultratech.api.power.IPowerConductor;
-import ultratech.api.power.IStorageItem;
 import ultratech.api.power.PowerInterface;
+import ultratech.api.power.interfaces.IPowerConductor;
+import ultratech.api.power.interfaces.IStorageItem;
 import common.cout970.UltraTech.managers.MachineData;
 import common.cout970.UltraTech.util.MachineWithInventory;
 import common.cout970.UltraTech.util.power.PowerExchange;

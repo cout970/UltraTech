@@ -66,6 +66,6 @@ public class CVD_Recipe implements IRecipeHandler{
 		ItemStack result = getCraftingResult(cvd);
 		if(result == null)return false;
 		if(cvd.getStackInSlot(2) == null || (OreDictionary.itemMatches(cvd.getStackInSlot(2),result,true) && (cvd.getStackInSlot(2).stackSize+result.stackSize) <= cvd.getInventoryStackLimit()))return true;
-		return true;
+		return false;
 	}
 }

@@ -27,6 +27,8 @@ private ModelDynamo model;
 
 		GL11.glPushMatrix();
 		GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
+//		float f = 0.9f;
+//		GL11.glColor4f(f, f, f, 1);
 		DynamoEntity d = (DynamoEntity) te;
 		if(d.isWorking())RenderUtil.bindTexture(ResourcesLocations.DYNAMO_ON);
 		else RenderUtil.bindTexture(ResourcesLocations.DYNAMO);

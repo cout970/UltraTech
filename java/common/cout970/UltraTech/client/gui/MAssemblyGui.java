@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.lwjgl.opengl.GL11;
 
-import ultratech.api.power.IPower;
+import ultratech.api.power.interfaces.IPower;
 import ultratech.api.util.UT_Utils;
 import common.cout970.UltraTech.TileEntities.electric.MolecularAssemblyEntity;
 import net.minecraft.client.gui.inventory.GuiContainer;

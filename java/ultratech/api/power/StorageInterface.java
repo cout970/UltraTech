@@ -1,6 +1,9 @@
 package ultratech.api.power;
 
 import ultratech.api.power.StorageInterface.PowerIO;
+import ultratech.api.power.interfaces.ICable;
+import ultratech.api.power.interfaces.IPowerConductor;
+import ultratech.api.power.prefab.CableInterfaceBlock;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
@@ -21,8 +24,8 @@ public class StorageInterface extends PowerInterface{
 	 * @param capacity 
 	 * @param tier see MachineTier for more
 	 */
-	public StorageInterface(TileEntity p,double capacity,int tier){
-		super(p);
+	public StorageInterface(TileEntity p, ICable c, double capacity, int tier){
+		super(p,c);
 		Capacity = capacity;
 		this.tier = PowerTier.getTier(tier);
 	}

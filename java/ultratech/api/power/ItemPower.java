@@ -2,8 +2,9 @@ package ultratech.api.power;
 
 import java.util.List;
 
+import ultratech.api.power.interfaces.IPower;
+import ultratech.api.power.interfaces.IStorageItem;
 import common.cout970.UltraTech.util.LogHelper;
-
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -11,7 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 /**
- * 
+ *if you want to make a item with QP energy, you only need extend this or create your item like this. 
  * @author Cout970
  *
  */

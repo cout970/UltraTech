@@ -1,23 +1,15 @@
 package common.cout970.UltraTech.TileEntities.electric.tiers;
 
-import net.minecraftforge.common.util.ForgeDirection;
-import ultratech.api.power.CableType;
-import ultratech.api.power.IPowerConductor;
-
 import common.cout970.UltraTech.managers.MachineData;
 import common.cout970.UltraTech.util.power.Machine;
+import common.cout970.UltraTech.util.power.cables.CableInterfaceSolarPanel;
 
 
-public class SolarPanelEntity_T1 extends Machine implements IPowerConductor{
+public class SolarPanelEntity_T1 extends Machine{
 
 	public SolarPanelEntity_T1(){
-		super(MachineData.Solar_Panel,true);
-	}
-	
-	public boolean isConnectableSide(ForgeDirection side, CableType conection) {
-		if(side == ForgeDirection.UP)return false;
-		if(side == ForgeDirection.DOWN)return true;
-		return CableType.isCompatible(CableType.RIBBON_BOTTOM, conection);
+		super(MachineData.Solar_Panel);
+		this.cond.setCable(new CableInterfaceSolarPanel(this));
 	}
 	
 	@Override
@@ -27,8 +19,13 @@ public class SolarPanelEntity_T1 extends Machine implements IPowerConductor{
 		if(worldObj.canBlockSeeTheSky(xCoord, yCoord + 1, zCoord)){
 			if(worldObj.provider.hasNoSky)return;
 			if(worldObj.isDaytime() && !(worldObj.getWorldChunkManager().getBiomeGenAt(xCoord, zCoord).getIntRainfall() > 0 && (worldObj.isRaining() || worldObj.isThundering()))){
-				cond.addCharge(MachineData.Solar_Panel.use);
+				addCharge(getProduction());
 			}
 		}
 	}
+	
+	public double getProduction(){
+		return MachineData.Solar_Panel.use;
+	}
+	
 }

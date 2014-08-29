@@ -31,7 +31,7 @@ public enum MachineData {
 	Engine    		(  800d ,2  ,8			,0),//1QP => 2MJ
 	Dynamo     		( 1600d	,2	,1d			,0),
 	Kinetic_Generator(1600d ,2	,1d			,1),
-	Transformer 	( 6400d ,2  ,0d         ,0),
+	Transformer 	( 6400d ,2  ,0d         ,2),
 	
 	Battery_T1		(    60000d	,1	,0			,2),//3 cells
 	Battery_T2		(   360000d	,2	,0			,2),//18 cells

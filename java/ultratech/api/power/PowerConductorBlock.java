@@ -1,5 +1,6 @@
 package ultratech.api.power;
 
+import ultratech.api.power.interfaces.IPowerConductor;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;

@@ -39,6 +39,7 @@ public class CrafterEntity extends SyncTile implements IInventory,IRedstoneContr
 	private boolean redstone;
 	private EntityPlayer player;
 	public boolean restrictMode = false;
+	private boolean loaded = true;
 
 	public CrafterEntity(){
 		inventory = new ItemStack[9];
@@ -55,7 +56,7 @@ public class CrafterEntity extends SyncTile implements IInventory,IRedstoneContr
 	}
 
 	public void canCraft(){
-		
+		loaded = false;
 		found = new boolean[9];
 		Map<Integer,Integer> already = new HashMap<Integer,Integer>();
 		for(int c = 0; c < 9;c++){//serach in own inv for crafting things
@@ -141,6 +142,7 @@ public class CrafterEntity extends SyncTile implements IInventory,IRedstoneContr
 				}
 			}
 		}
+		loaded  = true;
 	}
 
 	private boolean hasFluidInCraft() {
@@ -525,6 +527,10 @@ public class CrafterEntity extends SyncTile implements IInventory,IRedstoneContr
 	@Override
 	public boolean getSignal() {
 		return worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord);
+	}
+
+	public boolean isLoaded() {
+		return loaded;
 	}
 
 }

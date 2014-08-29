@@ -118,11 +118,13 @@ public class BoilerCrafting extends TemplateRecipeHandler{
 		this.drawProgressBar(40, 9, 224, 0, 20, 42, 0f, 4);
 		this.drawProgressBar(133, 10, 224, 0, 20, 42, 0f, 4);
 		
-		String in = "Input: "+input;
+		String in = "Input: "+input+" 10 mB";
 		Minecraft.getMinecraft().fontRenderer.drawString(in, 5, 65, UT_Utils.RGBtoInt(255, 255, 255), true);
 		
-		String out1 = "Output: "+output;
+		String out1 = "Output: "+output+" 100 mB";
 		Minecraft.getMinecraft().fontRenderer.drawString(out1, 5, 78, UT_Utils.RGBtoInt(255, 255, 255), true);
+		String info = "Uses a heater to heat.";
+		Minecraft.getMinecraft().fontRenderer.drawString(info, 5, 91, UT_Utils.RGBtoInt(255, 255, 255), true);
 
     }
 	

@@ -1,7 +1,7 @@
 package common.cout970.UltraTech.TileEntities.electric.tiers;
 
 
-import ultratech.api.power.ISpeeded;
+import ultratech.api.power.interfaces.ISpeeded;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntityFurnace;
 import common.cout970.UltraTech.misc.IUpdatedEntity;

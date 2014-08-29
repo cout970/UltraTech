@@ -3,9 +3,9 @@ package common.cout970.UltraTech.blocks.tiers;
 import java.util.ArrayList;
 import java.util.List;
 
-import ultratech.api.power.IPowerConductor;
-import ultratech.api.power.IStorageItem;
 import ultratech.api.power.StorageInterface;
+import ultratech.api.power.interfaces.IPowerConductor;
+import ultratech.api.power.interfaces.IStorageItem;
 import common.cout970.UltraTech.TileEntities.electric.StorageTier1;
 import common.cout970.UltraTech.TileEntities.electric.StorageTier2;
 import common.cout970.UltraTech.TileEntities.electric.StorageTier3;

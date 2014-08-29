@@ -7,10 +7,9 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import ultratech.api.power.ISpeeded;
 import ultratech.api.power.PowerConductorBlock;
+import ultratech.api.power.interfaces.ISpeeded;
 import ultratech.api.util.UT_Utils;
-
 import common.cout970.UltraTech.managers.ItemManager;
 /**
  * 

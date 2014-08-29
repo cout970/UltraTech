@@ -11,6 +11,8 @@ import net.minecraftforge.common.config.Configuration;
 //import net.minecraftforge.common.Configuration;
 import common.cout970.UltraTech.items.AutoEjectUpgrade;
 import common.cout970.UltraTech.items.Bottle;
+import common.cout970.UltraTech.items.Debugger;
+import common.cout970.UltraTech.items.Flamethrower;
 import common.cout970.UltraTech.items.FortuneUpgrade;
 import common.cout970.UltraTech.items.Battery;
 import common.cout970.UltraTech.items.LaserSword;
@@ -65,8 +67,6 @@ public class ItemManager {
 		Reg("RawMeal", "Raw Meal", true);
 		Reg("Fan", "Fan", true);
 		Reg("Coil", "Coil", true);
-		Reg("AdvCircuit", "Advanced Circuit", true);
-		Reg("Circuit", "Circuit", true);
 		Reg("Motor", "Motor", true);
 		
 		//upgrades
@@ -103,6 +103,13 @@ public class ItemManager {
 		Reg("UraniumCell", "Uranium Cell", false);
 		Reg("ThoriumCell", "Thorium Cell", false);
 		Reg("PlutoniumCell", "Plutonium Cell", false);
+		Reg("Flamethrower", "Flamethrower", false);
+		Reg("LogicCircuit", "Logic Circuit", true);
+		Reg("ElectricCircuit", "Electric Circuit", true);
+		Reg("OpticCircuit", "Optic Circuit", true);
+		Reg("OpticCable", "Optic Cable", true);
+		Reg("Cell", "Empty Cell", true);
+		Reg("Debugger", "Debugger", false);
 	}
 
 	public static void RegisterItems(){
@@ -141,7 +148,7 @@ public class ItemManager {
 
 	private static Item Exception(ItemInfo i) {
 		String a = i.name;
-		if(a == "Bottle")
+		if(a=="Bottle")
 			return new Bottle();
 		if(a=="Ingot")
 			return new UT_Ingot();
@@ -183,6 +190,10 @@ public class ItemManager {
 			return new SilkTouchUpgrade(i.name);
 		if(a=="Tablet")
 			return new Tablet(i.name);
+		if(a=="Flamethrower")
+			return new Flamethrower(i.name);
+		if(a=="Debugger")
+			return new Debugger("Debugger");
 		return null;
 	}
 

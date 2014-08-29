@@ -1,8 +1,12 @@
 package ultratech.api.power;
 
+import java.util.List;
+
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.util.ForgeDirection;
-import ultratech.api.util.UT_Utils;
+import ultratech.api.power.interfaces.ICable;
+import ultratech.api.power.interfaces.INetworkManager;
+import ultratech.api.power.interfaces.IPowerConductor;
+import ultratech.api.power.prefab.DefaultNetworkManager;
 
 /**
  * 
@@ -41,9 +45,9 @@ public class NetworkManagerRegistry {
 		if(actual == null)loadDefaultPathFinder();
 		actual.iterate(conn);
 	}
-	
-	public static boolean canConnectOnThisSide(PowerInterface p, ForgeDirection dir, PowerInterface cond){
+
+	public static List<ICable> getConnections(TileEntity tile) {
 		if(actual == null)loadDefaultPathFinder();
-		return actual.canConnectOnThisSide(p, dir, cond);
+		return actual.getConnections(tile);
 	}
 }

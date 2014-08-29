@@ -3,7 +3,11 @@ package ultratech.api.power;
 import java.util.ArrayList;
 import java.util.List;
 
+import common.cout970.UltraTech.util.LogHelper;
+
 import net.minecraft.tileentity.TileEntity;
+import ultratech.api.power.interfaces.ICable;
+import ultratech.api.power.interfaces.IPowerConductor;
 import ultratech.api.power.multipart.MultipartReference;
 import ultratech.api.util.UT_Utils;
 /**
@@ -13,11 +17,11 @@ import ultratech.api.util.UT_Utils;
  */
 public class PowerNetwork {
 
-	private List<PowerInterface> interfaces = new ArrayList<PowerInterface>();
-	private List<PowerInterface> excluded = new ArrayList<PowerInterface>();
+	public List<PowerInterface> interfaces = new ArrayList<PowerInterface>();
 	private List<PowerPath> rutes = new ArrayList<PowerPath>();
 
 	private PowerNetwork(){}
+	
 	public static PowerNetwork create(PowerInterface base){
 		PowerNetwork p = new PowerNetwork();
 		p.interfaces.add(base);
@@ -35,28 +39,23 @@ public class PowerNetwork {
 	}
 
 	public void refresh(){
-
 		IPowerConductor base = null;
 		for(PowerInterface e : interfaces){
-			TileEntity t = e.getParent();
-			if(t.getWorldObj().getTileEntity(t.xCoord, t.yCoord, t.zCoord) instanceof IPowerConductor){
-				base = (IPowerConductor) t;
+			for(ICable t : NetworkManagerRegistry.getConnections(e.getParent())){
+				base = t.getConductor();
 			}
 		}
-
-		if(base != null){
-			List<IPowerConductor> things = new ArrayList<IPowerConductor>();
-			things.addAll(NetworkManagerRegistry.search(base, null).getFinding());
-			List<PowerInterface> inters = new ArrayList<PowerInterface>();
-			for(IPowerConductor p : things) inters.add(p.getPower());
-			interfaces = inters;
-			excluded.clear();
-		}
+		try{
+			if(base != null){
+				interfaces.clear();
+				interfaces.addAll(NetworkManagerRegistry.search(base, null).getFinding());
+			}
+		}catch(Exception e){e.printStackTrace();};
 
 		for(PowerInterface e : interfaces){
 			e.setNetwork(this);
 			e.onNetworkUpdate();
-		}
+		}		
 	}
 
 	public void onNetworkUpdate(){

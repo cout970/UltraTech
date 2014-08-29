@@ -11,8 +11,8 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-import ultratech.api.power.IPower;
-import ultratech.api.power.ISpeeded;
+import ultratech.api.power.interfaces.IPower;
+import ultratech.api.power.interfaces.ISpeeded;
 import ultratech.api.util.UT_Utils;
 import common.cout970.UltraTech.TileEntities.electric.tiers.ChemicalVaporDesintegrationT1_Entity;
 

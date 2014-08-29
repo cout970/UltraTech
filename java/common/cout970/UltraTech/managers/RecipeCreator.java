@@ -29,7 +29,9 @@ public class RecipeCreator {
 		RecipeRegistry.addRecipeFermenter(new ItemStack(Items.wheat), 72);
 		RecipeRegistry.addRecipeFermenter(new ItemStack(Items.carrot), 72);
 		RecipeRegistry.addRecipeFermenter(new ItemStack(Items.potato), 72);
-		RecipeRegistry.addRecipeFermenter(new ItemStack(ItemName.get("RawMeal")), 72);
+		RecipeRegistry.addRecipeFermenter(new ItemStack(Items.melon), 36);
+		RecipeRegistry.addRecipeFermenter(new ItemStack(Items.spider_eye), 108);
+		RecipeRegistry.addRecipeFermenter(new ItemStack(Blocks.pumpkin), 90);
 		
 		//liquid 
 		RecipeRegistry.addRecipeBoiler("juice", "gas_ethanol");
@@ -39,7 +41,7 @@ public class RecipeCreator {
 		RecipeRegistry.addRecipeRefinery(FluidRegistry.getFluidStack("gas_oil", 100), FluidRegistry.getFluid("plastic"), 2, FluidRegistry.getFluid("fuel"), 8, FluidRegistry.getFluid("gasoline"), 1);
 		RecipeRegistry.addRecipeRefinery(FluidRegistry.getFluidStack("gas_ethanol", 100), FluidRegistry.getFluid("bioethanol"), 2, FluidRegistry.getFluid("water"), 4f, FluidRegistry.getFluid("water"), 4f);
 	
-		RecipeRegistry.addRecipeChemical(FluidRegistry.getFluidStack("plastic", 1000), new ItemStack(ItemName.get("Sulfur")), new ItemStack(ItemName.get("Rubber")), new ItemStack(ItemName.get("Plastic")));
+		RecipeRegistry.addRecipeChemical(FluidRegistry.getFluidStack("plastic", 1000), new ItemStack(ItemName.get("Sulfur"),1), new ItemStack(ItemName.get("Rubber"),2), new ItemStack(ItemName.get("Plastic"),1));
 	
 	}
 
@@ -79,13 +81,12 @@ public class RecipeCreator {
 		RecipeRegistry.addRecipeCVD(new ItemStack(ItemName.get("UnorganicPlate"),1,4), 	new ItemStack(ItemName.get("Radionite"),1), new ItemStack(ItemName.get("Radionite"),1));//radionite plate
 		RecipeRegistry.addRecipeCVD(new ItemStack(ItemName.get("Dust"),1,8), 				new ItemStack(ItemName.get("GrafenoPlate")),new ItemStack(ItemName.get("GrafenoPlate")));//diamond dust
 		RecipeRegistry.addRecipeCVD(new ItemStack(stoneblockwhite,1,0),					new ItemStack(ItemName.get("Dust"),1,0), 	new ItemStack(stoneblockblack,1,0));//white stone
-		RecipeRegistry.addRecipeCVD(new ItemStack(ItemName.get("Rubber_vulcanized"),1,0), 	new ItemStack(ItemName.get("Sulfur"),1,0), 	new ItemStack(ItemName.get("Rubber"),1,0));//rubber
 		RecipeRegistry.addRecipeCVD(new ItemStack(ItemName.get("UnorganicPlate"),2,5),		new ItemStack(Blocks.obsidian,1,0), 		new ItemStack(Blocks.obsidian,1,0));//obsidian plate
 		RecipeRegistry.addRecipeCVD(new ItemStack(ItemName.get("UnorganicPlate"),2,5),		new ItemStack(ItemName.get("Dust"),1,9),	new ItemStack(ItemName.get("Dust"),1,9));//obsidian plate
 	}
 
 	public static void initCutter(){
-		//cuter laminator
+		//cuter
 		RecipeRegistry.addRecipeCutter(new ItemStack(Items.reeds), new ItemStack(Items.sugar,2));
 		RecipeRegistry.addRecipeCutter(new ItemStack(Blocks.wool), new ItemStack(Items.string,4));
 		RecipeRegistry.addRecipeCutter(new ItemStack(Blocks.cobblestone), new ItemStack(Blocks.sand,1));
@@ -117,6 +118,7 @@ public class RecipeCreator {
 		RecipeRegistry.addRecipeCutter(new ItemStack(Blocks.quartz_ore,1),new ItemStack(Items.quartz,3));
 		RecipeRegistry.addRecipeCutter(new ItemStack(Blocks.diamond_ore,1),new ItemStack(Items.diamond,3));
 		RecipeRegistry.addRecipeCutter(new ItemStack(Blocks.obsidian,1),new ItemStack(ItemName.get("Dust"),1,9));
+		RecipeRegistry.addRecipeCutter(new ItemStack(ItemName.get("UnorganicPlate"),1,2),new ItemStack(ItemName.get("OpticCable"),2));
 	}
 
 	public static void initAssembly(){

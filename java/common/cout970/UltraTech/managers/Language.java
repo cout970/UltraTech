@@ -150,6 +150,7 @@ public class Language {
 		Language.addName(new ItemStack(Refinery_Structure,1), "Refinery Structural Block");
 		
 		Language.addName(new ItemStack(KineticGenerator,1), "Kinetic Generator");
+		Language.addName(new ItemStack(Transformer,1), "Electric Transformer");
 		
 		Language.addName(new ItemStack(Misc,1,0), "Radionite Block");
 		Language.addName(new ItemStack(Misc,1,1), "Grafeno Block");

@@ -7,7 +7,7 @@ import org.lwjgl.opengl.GL11;
 
 import buildcraft.api.fuels.IronEngineFuel;
 import buildcraft.api.fuels.IronEngineFuel.Fuel;
-import ultratech.api.power.IPower;
+import ultratech.api.power.interfaces.IPower;
 import ultratech.api.util.UT_Utils;
 import common.cout970.UltraTech.TileEntities.electric.tiers.FluidGeneratorT1_Entity;
 import common.cout970.UltraTech.TileEntities.electric.tiers.FluidGeneratorT2_Entity;

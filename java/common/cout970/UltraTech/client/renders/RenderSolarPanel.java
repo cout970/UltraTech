@@ -11,7 +11,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import org.lwjgl.opengl.GL11;
 
-import ultratech.api.power.IPowerConductor;
+import ultratech.api.power.interfaces.IPowerConductor;
 import common.cout970.UltraTech.TileEntities.electric.tiers.SolarPanelEntity_T2;
 import common.cout970.UltraTech.client.models.ModelSolarPanel;
 import common.cout970.UltraTech.client.textures.ResourcesLocations;

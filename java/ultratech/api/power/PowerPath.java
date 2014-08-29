@@ -1,5 +1,7 @@
 package ultratech.api.power;
 
+import ultratech.api.power.interfaces.IPowerConductor;
+
 
 /**
  * 

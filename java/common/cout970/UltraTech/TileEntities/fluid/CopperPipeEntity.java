@@ -30,10 +30,11 @@ public class CopperPipeEntity extends Pipe implements IFluidHandler{
 	public void updateEntity(){
 		super.updateEntity();
 		if(worldObj.isRemote)return;
+		if(worldObj.getTotalWorldTime()%20 == 3)sendNetworkUpdate();
 		if(!up){onNeighUpdate(); up = true;}
 		if(connections.size() == 0)return;
 		if(!mode){
-			int part = getNetwork().getFluidAmount()/connections.size();
+			int part = getNetwork().getFluidAmount();
 			int toD = Math.min(MAX_ACCEPT, part);
 			if(toD <= 0)return;
 			if(getNetwork().getFluid() == null)return;
