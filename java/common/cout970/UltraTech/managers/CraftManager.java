@@ -67,7 +67,7 @@ public class CraftManager {
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Laminator_T2,1,0),new Object[]{"aaa","aba","tpt",'t',"plateTin",'b',Laminator_T1,'a',"plateGrafeno",'p',"circuitElectric"}));								//laminator t2
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Generator_T2,1,0),new Object[]{"gag","cba","apa",'a',"plateIron",'b',Generator_T1,'c',ItemName.get("Dynamo"),'g',"plateGrafeno",'p',"circuitElectric"})); 	//generator t2
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(FluidGenerator_T2,1,0),new Object[]{"aga","abc","gpg",'a',"plateTin",'b',FluidGenerator_T1,'c',ItemName.get("Dynamo"),'g',"plateGrafeno",'p',"circuitElectric"}));//fluid generator t2
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(LavaGenerator_T2,1,0),new Object[]{"ggg","omo","gpg",'o',"plateObsidian",'m',LavaGenerator_T2,'p',"circuitElectric",'g',"plateGrafeno"}));					//lava generator T2
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(LavaGenerator_T2,1,0),new Object[]{"ggg","omo","gpg",'o',"plateObsidian",'m',LavaGenerator_T1,'p',"circuitElectric",'g',"plateGrafeno"}));					//lava generator T2
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChemicalPlant_T2,1,0),new Object[]{"ggg","gmg","gpg",'b',Items.glass_bottle,'g',"plateGrafeno",'m',ChemicalPlant_T1,'p',"circuitElectric"}));				//chemical plant t2
 
 		//tier 3

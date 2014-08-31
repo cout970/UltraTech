@@ -19,7 +19,7 @@ import cpw.mods.fml.common.FMLCommonHandler;
 public class TransformerEntity extends Machine implements IEnergySource,IEnergySink{
 
 	public double EU;//ic2 energy
-	public double maxEU = 32000;
+	public double maxEU = 4000;
 	public double limit = 32;//limit of energy output per tick
 	public int tier = 1;//1 = LV, 2 = MV, 3 = HV, 4 = EV etc.
 	private boolean addedToEnet;

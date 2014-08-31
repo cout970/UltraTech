@@ -27,7 +27,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 
 
-@Mod(modid = InformationManager.MOD_ID, name = InformationManager.MOD_ID,version = "1.7.10-0.9.5",guiFactory = InformationManager.GUI_FACTORY)
+@Mod(modid = InformationManager.MOD_ID, name = InformationManager.MOD_ID,version = "1.7.10-0.9.5.1",guiFactory = InformationManager.GUI_FACTORY)
 
 
 public class UltraTech {

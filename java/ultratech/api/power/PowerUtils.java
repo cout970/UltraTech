@@ -1,5 +1,7 @@
 package ultratech.api.power;
 
+import common.cout970.UltraTech.util.LogHelper;
+
 import ultratech.api.power.interfaces.ICable;
 import ultratech.api.power.interfaces.IPowerConductor;
 import net.minecraft.tileentity.TileEntity;

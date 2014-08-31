@@ -48,8 +48,10 @@ public class StorageInterface extends PowerInterface{
 	public void emptyMachine(){
 		if(getNetwork() == null)return;
 		for(StorageInterface b: getNetwork().getMachines()){
-			if(b.configIO != StorageInterface.PowerIO.Output)
+			if(b.configIO != PowerIO.Output){
+				if(b.configIO == PowerIO.Storage && this.configIO == PowerIO.Storage)continue;
 				PowerUtils.MoveCharge(((IPowerConductor)this.getParent()), ((IPowerConductor)b.getParent()));
+			}
 		}
 	}
 

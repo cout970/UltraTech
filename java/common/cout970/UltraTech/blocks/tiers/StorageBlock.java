@@ -3,6 +3,7 @@ package common.cout970.UltraTech.blocks.tiers;
 import java.util.ArrayList;
 import java.util.List;
 
+import buildcraft.api.tools.IToolWrench;
 import ultratech.api.power.StorageInterface;
 import ultratech.api.power.interfaces.IPowerConductor;
 import ultratech.api.power.interfaces.IStorageItem;
@@ -14,8 +15,10 @@ import common.cout970.UltraTech.client.textures.Block_Textures;
 import common.cout970.UltraTech.managers.UT_Tabs;
 import common.cout970.UltraTech.managers.UltraTech;
 import common.cout970.UltraTech.proxy.ClientProxy;
+import common.cout970.UltraTech.util.LogHelper;
 import common.cout970.UltraTech.util.fluids.HelperNBT;
 import common.cout970.UltraTech.util.power.BlockConductor;
+import common.cout970.UltraTech.util.power.IBatteryBlock;
 import common.cout970.UltraTech.util.power.Machine;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -29,6 +32,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class StorageBlock extends BlockConductor{
 
@@ -68,7 +72,6 @@ public class StorageBlock extends BlockConductor{
 	}
 	
 	@SuppressWarnings("unchecked")
-	@SideOnly(Side.CLIENT)
     public void getSubBlocks(Item unknown, CreativeTabs tab, List subItems)
     {	
 		for (int ix = 0; ix < n; ix++) {
@@ -76,7 +79,7 @@ public class StorageBlock extends BlockConductor{
 		}
 	}
 	
-	public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int par6, float par7, float par8, float par9) {
+	public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int side, float par7, float par8, float par9) {
 
 		if(entityplayer.isSneaking()){
 			return true;
@@ -84,11 +87,21 @@ public class StorageBlock extends BlockConductor{
 			TileEntity tile = world.getTileEntity(i, j, k);
 			if(tile != null){ 
 				ItemStack it = entityplayer.getCurrentEquippedItem();
-				if(it != null && it.getItem() instanceof IStorageItem){
-					return false;
+				if(it != null){
+					if(it.getItem() instanceof IStorageItem){
+						return false;
+					}else if(it.getItem() instanceof IToolWrench){
+						IBatteryBlock b = (IBatteryBlock) tile;
+						boolean var = !b.getSide(ForgeDirection.getOrientation(side));
+						b.setSide(ForgeDirection.getOrientation(side), var);
+						return false;
+					}else{
+						entityplayer.openGui(UltraTech.instance, 13, world, i, j, k);
+						return true;
+					}
 				}else{
 					entityplayer.openGui(UltraTech.instance, 13, world, i, j, k);
-				return true;
+					return true;
 				}
 			}
 		}

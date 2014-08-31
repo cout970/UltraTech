@@ -5,6 +5,7 @@ import org.lwjgl.opengl.GL11;
 import common.cout970.UltraTech.TileEntities.electric.PumpEntity;
 import common.cout970.UltraTech.client.models.ModelBoiler;
 import common.cout970.UltraTech.client.models.ModelPump;
+import common.cout970.UltraTech.client.models.ModelPumpJack;
 import common.cout970.UltraTech.client.textures.ResourcesLocations;
 import common.cout970.UltraTech.misc.IconFactory;
 import common.cout970.UltraTech.util.render.CubeRenderer_Util;
@@ -21,16 +22,31 @@ public class RenderPump extends TileEntitySpecialRenderer{
 
 	private ModelPump model;
 	private CubeRenderer_Util FR = new CubeRenderer_Util();
+//	public ModelPumpJack model;
 
 	public RenderPump(){
 		super();
 		model = new ModelPump();
+//		model = new ModelPumpJack();
 	}
 
 	@Override
 	public void renderTileEntityAt(TileEntity e, double x, double y,
 			double z, float f) {
 		GL11.glPushMatrix();
+//		PumpEntity te = (PumpEntity) e;		
+//		bindTexture(new ResourceLocation("ultratech:textures/misc/pumpjack.png"));
+//
+//		GL11.glTranslatef((float) x + 0.5F, (float) y + 1F, (float) z + 0.5F);
+//		GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
+//		GL11.glScalef(4, 4, 4);
+//		GL11.glDisable(GL11.GL_LIGHTING);
+//		model.render(0.0625f/2, te.p);
+//		te.p += 1.5f;
+//		if(te.p > 1000){
+//			te.p = 0;
+//		}
+//		GL11.glEnable(GL11.GL_LIGHTING);
 		
 		bindTexture(ResourcesLocations.PUMP);
 		GL11.glTranslatef((float) x + 0.5F, (float) y - 0.5F, (float) z + 0.5F);

@@ -9,6 +9,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import ultratech.api.power.StorageInterface;
 import ultratech.api.power.interfaces.IPowerConductor;
+import common.cout970.UltraTech.network.Net_Utils;
+import common.cout970.UltraTech.network.messages.MessageTesseract;
 import common.cout970.UltraTech.util.ConfigurableTile;
 import common.cout970.UltraTech.util.LogHelper;
 import common.cout970.UltraTech.util.power.Machine;
@@ -83,10 +85,11 @@ public class Tesseract_Entity extends ConfigurableTile{
 	
 	public void setFrequency(int f){
 		if(worldObj != null && worldObj.isRemote){
-			sendNetworkUpdate();
+			Net_Utils.INSTANCE.sendToServer(new MessageTesseract(this, frequency));
 		}
 		if(!tes.contains(this) && worldObj != null && !worldObj.isRemote)tes.add(this);
 		frequency = f;
+		this.markDirty();
 	}
 
 
@@ -95,13 +98,13 @@ public class Tesseract_Entity extends ConfigurableTile{
 	@Override
 	public void readFromNBT(NBTTagCompound nbtTagCompound) {
 		super.readFromNBT(nbtTagCompound);
-		setFrequency(nbtTagCompound.getInteger("Freq"));
+		frequency = nbtTagCompound.getInteger("code");
 	}
 
 	@Override
 	public void writeToNBT(NBTTagCompound nbtTagCompound) {
 		super.writeToNBT(nbtTagCompound);
-		nbtTagCompound.setInteger("Freq", frequency);
+		nbtTagCompound.setInteger("code", frequency);
 	}
 	
 	public void sendGUINetworkData(Container cont,

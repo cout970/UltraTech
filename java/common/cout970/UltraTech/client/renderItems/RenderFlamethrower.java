@@ -40,13 +40,13 @@ public class RenderFlamethrower implements IItemRenderer{
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
 		switch (type) {
             case ENTITY: {
-            	render(0.0F, -0.6F, 0.0F, 1F,false,item);
+            	render(0.2F, -0.8F, 0.0F, 1F,false,item);
                 return;
             }
             case EQUIPPED: {
             	GL11.glRotatef(-120, 0, 1, 0);
             	GL11.glRotatef(-5, 1, 0, 0);
-            	render(0.3F, -0.5F, -0.2F, 2.0F,item);
+            	render(0.3F, -0.5F, -0.2F, 1.5F,item);
                 return;
             }
             case INVENTORY: {

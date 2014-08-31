@@ -6,9 +6,9 @@ package ultratech.api.power;
  */
 public enum PowerTier {
 
-	Tier1(40),
-	Tier2(100),
-	Tier3(200),
+	Tier1(25),
+	Tier2(50),
+	Tier3(250),
 	Tier4(1000);
 
 	private static PowerTier[] t = {null,Tier1,Tier2,Tier3,Tier4};
