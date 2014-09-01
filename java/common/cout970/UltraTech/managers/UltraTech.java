@@ -1,9 +1,17 @@
 package common.cout970.UltraTech.managers;
 
 
-import net.minecraftforge.oredict.OreDictionary;
+import java.util.List;
+
+import net.minecraft.block.Block;
+import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeChunkManager;
+import net.minecraftforge.common.ForgeChunkManager.Ticket;
 import ultratech.api.power.NetworkManagerRegistry;
 import ultratech.api.power.multipart.MultipartReference;
+
+import com.google.common.collect.Lists;
+import common.cout970.UltraTech.TileEntities.electric.MinerEntity;
 import common.cout970.UltraTech.handlers.BottleHandler;
 import common.cout970.UltraTech.handlers.FuelHandler;
 import common.cout970.UltraTech.handlers.GuiHandler;
@@ -13,6 +21,7 @@ import common.cout970.UltraTech.network.Net_Utils;
 import common.cout970.UltraTech.proxy.CommonProxy;
 import common.cout970.UltraTech.util.LogHelper;
 import common.cout970.UltraTech.waila.WailaRegister;
+
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
@@ -27,7 +36,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 
 
-@Mod(modid = InformationManager.MOD_ID, name = InformationManager.MOD_ID,version = "1.7.10-0.9.5.1",guiFactory = InformationManager.GUI_FACTORY)
+@Mod(modid = InformationManager.MOD_ID, name = InformationManager.MOD_ID,version = "1.7.10-0.9.5.3",guiFactory = InformationManager.GUI_FACTORY)
 
 
 public class UltraTech {
@@ -90,5 +99,36 @@ public class UltraTech {
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event){
 		BottleHandler.RegisterBuckets();
+		ForgeChunkManager.setForcedChunkLoadingCallback(instance, new MinerChunkCallBack());
+	}
+
+	public class MinerChunkCallBack implements ForgeChunkManager.OrderedLoadingCallback {
+
+		@Override
+		public void ticketsLoaded(List<Ticket> tickets, World world) {
+			for (Ticket ticket : tickets) {
+				int x = ticket.getModData().getInteger("quarryX");
+				int y = ticket.getModData().getInteger("quarryY");
+				int z = ticket.getModData().getInteger("quarryZ");
+				MinerEntity tq = (MinerEntity) world.getTileEntity(x, y, z);
+				tq.forceChunkLoading(ticket);
+			}
+		}
+
+		@Override
+		public List<Ticket> ticketsLoaded(List<Ticket> tickets, World world, int maxTicketCount) {
+			List<Ticket> validTickets = Lists.newArrayList();
+			for (Ticket ticket : tickets) {
+				int x = ticket.getModData().getInteger("quarryX");
+				int y = ticket.getModData().getInteger("quarryY");
+				int z = ticket.getModData().getInteger("quarryZ");
+
+				Block block = world.getBlock(x, y, z);
+				if (block == BlockManager.Tier3) {
+					validTickets.add(ticket);
+				}
+			}
+			return validTickets;
+		}
 	}
 }

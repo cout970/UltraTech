@@ -57,7 +57,6 @@ import cpw.mods.fml.client.registry.RenderingRegistry;
 public class ClientProxy extends CommonProxy{
 	
 	public static int BlockRenderTipe;
-	public static int renderPass;
 	public static int engineRenderPass;
 	public static int solarRenderPass;
 	public static int windmillRenderPass;

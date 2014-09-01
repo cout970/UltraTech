@@ -2,15 +2,16 @@ package common.cout970.UltraTech.handlers;
 
 import java.util.Random;
 
-import common.cout970.UltraTech.managers.BlockManager;
-import common.cout970.UltraTech.managers.OreGeneration;
-import common.cout970.UltraTech.util.LogHelper;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraftforge.fluids.FluidRegistry;
+
+import common.cout970.UltraTech.managers.BlockManager;
+import common.cout970.UltraTech.managers.OreGeneration;
+
 import cpw.mods.fml.common.IWorldGenerator;
 
 public class UltratechWorldGenerator implements IWorldGenerator{
@@ -32,7 +33,7 @@ public class UltratechWorldGenerator implements IWorldGenerator{
 			if(world.getBiomeGenForCoords(chunkX * 16, chunkZ * 16).biomeName.equalsIgnoreCase("Desert"))prob = OreGeneration.OilDesert;
 			else if(world.getBiomeGenForCoords(chunkX * 16, chunkZ * 16).biomeName.equalsIgnoreCase("Deep Ocean"))prob = OreGeneration.OilDeepOcean;
 			else if(world.getBiomeGenForCoords(chunkX * 16, chunkZ * 16).biomeName.equalsIgnoreCase("Ocean"))prob = OreGeneration.OilOcean;
-			if(random.nextInt(prob) == 0){
+			if(OreGeneration.GenerateOil && random.nextInt(prob) == 0){
 				generateOil(random, chunkX * 16, chunkZ * 16, world);
 			}
 		}
@@ -113,22 +114,35 @@ public class UltratechWorldGenerator implements IWorldGenerator{
 	
 
 	private void generateOil(Random r, int x, int y, World w) {
-		int t = 7;
+		
 		int j = 10+ r.nextInt(20);
+		boolean gen = false;
+		for(int h = j-5;h<j+5;h++){
+			Block b = w.getBlock(x, h, y);
+			if(b == Blocks.stone){
+				gen = true;
+				break;
+			}
+		}
+		if(!gen)return;
+		int ran = r.nextInt(100);
+		int t = 7;
+		if(ran%2 == 0)t = 10;
+		if(ran%7 == 0)t = 18;
 		for(int l =-t/4-4;l<t/4+4;l++){
 			for(int s=-t;s<t+1;s++)
 				for(int d=-t*4;d<t*4+1;d++){
 					double b = Math.sqrt(s*s+d*d*0.25+l*l*4);
 					b = Math.abs(b);
-					if(b<t)w.setBlock(x+s, j+l, y+d,FluidRegistry.getFluid("oil").getBlock());
-					else if(b < t+2){
-						w.setBlock(x+s, j+l, y+d,Blocks.stone);
+					if(b<t)w.setBlock(x+s, j+l, y+d,FluidRegistry.getFluid("oil").getBlock(), 0, 6);
+						else if(b < t+5){
+						w.setBlock(x+s, j+l, y+d,Blocks.stone, 0, 6);
 					}
 				}
 		}
 		int max = w.getHeightValue(x, y)+6;
 		for(int h=j;h<max;h++){
-			w.setBlock(x, h, y,FluidRegistry.getFluid("oil").getBlock());
+			w.setBlock(x, h, y,FluidRegistry.getFluid("oil").getBlock(), 0, 6);
 		}
 	}
 }

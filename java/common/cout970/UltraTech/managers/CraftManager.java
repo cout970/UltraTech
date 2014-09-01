@@ -140,16 +140,16 @@ public class CraftManager {
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ItemName.get("Dust"),3,5), new Object[]{"dustObsidian","dustAluminum","dustTin",Items.glowstone_dust}));												//obalti
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("Bottle"),8,0), new Object[]{"xcx","cgc","xcx",'x',"itemPlastic",'g',Blocks.glass}));															//bottle
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ItemName.get("Radionite"),9), new ItemStack(Misc, 0)));																									//Radionite
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ItemName.get("Rubber_vulcanized"),2),"rawRubber","dustSulfur","rawRubber"));																									//rubber vulcaniced
+		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ItemName.get("Rubber_vulcanized"),2),"rawRubber","dustSulfur","rawRubber"));																			//rubber vulcaniced
 		
 		//upgrades
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("UpgradeBase"),4),new Object[]{"iii","ici","iii",'i',"plateIron",'c',"circuitElectric"}));													//upgrade base
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("SpeedUpgrade"),1),new Object[]{"iii","ici","iii",'i',"plateSilver",'c',ItemName.get("UpgradeBase")}));										//speed upgrade
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("MiningUpgrade"),1),new Object[]{"iii","ici","iii",'i',"plateGold",'c',ItemName.get("UpgradeBase")}));										//mining upgrade
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("RangeUpgrade"),4),new Object[]{"iii","ici","iii",'i',"plateRedstone",'c',ItemName.get("UpgradeBase")}));										//range upgrade
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("AutoEjectUpgrade"),1),new Object[]{"iii","ici","iii",'i',"plateTin",'c',ItemName.get("UpgradeBase")}));										//auto eject upgrade
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("FortuneUpgrade"),1),new Object[]{"iii","ici","iii",'i',"plateDiamond",'c',ItemName.get("UpgradeBase")}));									//fortune upgrade
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("SilkTouchUpgrade"),1),new Object[]{"iui","ucu","iui",'i',Items.diamond,'u',Items.emerald,'c',ItemName.get("UpgradeBase")}));					//silktouch upgrade
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("UpgradeBase"),4),new Object[]{"iii","ici","iii",'i',"plateIron",'c',"circuitElectric"}));																	//upgrade base
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("SpeedUpgrade"),1),new Object[]{"iii","ici","iii",'i',"plateSilver",'c',ItemName.get("UpgradeBase")}));														//speed upgrade
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("MiningUpgrade"),1),new Object[]{"iii","ici","iii",'i',"plateGold",'c',ItemName.get("UpgradeBase")}));														//mining upgrade
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("RangeUpgrade"),4),new Object[]{"iii","ici","iii",'i',"plateRedstone",'c',ItemName.get("UpgradeBase")}));														//range upgrade
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("AutoEjectUpgrade"),1),new Object[]{"iii","ici","iii",'i',"plateTin",'c',ItemName.get("UpgradeBase")}));										  				//auto eject upgrade
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("FortuneUpgrade"),1),new Object[]{"idi","ici","igi",'i',"circuitOptic",'d',Blocks.diamond_block,'g',Blocks.gold_block,'c',ItemName.get("UpgradeBase")}));     //fortune upgrade
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("SilkTouchUpgrade"),1),new Object[]{"idi","ici","igi",'i',"circuitOptic",'d',Blocks.diamond_block,'g',Blocks.emerald_block,'c',ItemName.get("UpgradeBase")}));//silktouch upgrade
 
 		if(!MultipartReference.isMicroPartActived){
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(CableBlock,6), new Object[]{"sss","lll","sss",'s',Items.string,'l',ItemName.get("SilverCable")}));
@@ -211,7 +211,6 @@ public class CraftManager {
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(deco.get(15),8),new Object[]{"iii","isi","iii",'s',Items.redstone,'i',new ItemStack(stoneblockwhite,1,0)}));
 
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(InfiniteSupply,1),new Object[]{"i",'i',ItemName.get("Debugger")}));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemName.get("Debugger")),new Object[]{"iii","  i"," ii",'i',new ItemStack(Items.dye,1,4)}));
 
 		Smelting();//furnace
 	}

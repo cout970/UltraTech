@@ -118,7 +118,7 @@ public class Tier3Block extends BlockConductor{
 		return true;
 	}
 
-	public void onNeighborBlockChange(World w, int x, int y, int z, int side){
+	public void onNeighborBlockChange(World w, int x, int y, int z, Block side){
 		TileEntity te = w.getTileEntity(x, y, z);
 		if(te instanceof Machine){
 			if(((Machine)te).getNetwork() != null)((Machine)te).getNetwork().refresh();

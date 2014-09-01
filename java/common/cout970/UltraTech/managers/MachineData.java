@@ -7,14 +7,14 @@ public enum MachineData {
 	 * 2 burning tick = 1MeV
 	 */
 	Generator		( 1600d	,1	,1d			,1),//1coal => 800Mev
-	Solar_Panel		(   10d	,1	,0.2d		,1),//1QP => 5 ticks
+	Solar_Panel		(   10d	,1	,0.5d		,1),//1QP => 2 ticks
 	Fluid_Generator (  800d	,2	,1d			,1),//Wip
 	Turbine			(  800d	,2	,0.1d		,1),//per mB
 	LavaGenerator   (  800d	,2	,10d	   	,1),//QP per 1mb
 	WindMill		(  400d ,2	,1.5d		,1),//idk (I don't know)
 
 	Furnace			(  800d	,2	,100d		,0),//1 items cost
-	Purifier		(  800d	,2	,150d		,0),
+	Purifier		(  800d	,2	,100d		,0),
 	Cutter			(  800d	,2	,200d		,0), 
 	CVD				(  800d	,1	,100d		,0),
 	Laminator		(  800d ,1	,100d		,0),

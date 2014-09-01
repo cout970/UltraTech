@@ -29,7 +29,7 @@ public class LavaGeneratorT2_Entity extends LavaGeneratorT1_Entity implements IF
 	public float getProduction(){
 		float cal = heat-295;
 		float dif = cal*coolant;
-		return (dif/4000)*0.1f;
+		return (dif/4000)*0.2f;
 	}
 
 }

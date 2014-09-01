@@ -27,8 +27,6 @@ public class RangeUpgrade extends UT_Item{
 				te.rangeUpgrades += 1;
 				par1ItemStack.splitStack(1);
 				return true;
-			}else{
-				System.out.println(te.height+" "+te.widht);
 			}
 		}
 		return false;

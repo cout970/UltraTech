@@ -55,7 +55,7 @@ public class LavaGeneratorT1_Entity extends Machine implements IFluidHandler,IUp
 	public float getProduction(){
 		float cal = heat-295;
 		float dif = cal*coolant;
-		return (dif/4000)*0.05f;
+		return (dif/4000)*0.1f;
 	}
 	
 	public UT_Tank getTank(){

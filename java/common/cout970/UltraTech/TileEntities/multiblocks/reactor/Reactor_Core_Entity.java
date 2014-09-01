@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cofh.api.tileentity.IRedstoneControl.ControlMode;
+import common.cout970.UltraTech.managers.ItemManager;
 import common.cout970.UltraTech.network.Net_Utils;
 import common.cout970.UltraTech.util.LogHelper;
 import common.cout970.UltraTech.util.fluids.UT_Tank;
@@ -92,6 +93,8 @@ public class Reactor_Core_Entity extends Reactor_Entity_Base implements IReactor
 								}
 							}
 						}
+					}else if(inv[p].getItem() == ItemManager.ItemName.get("LogicCircuit")){
+						inv[p] = new ItemStack(ItemManager.ItemName.get("Debugger"));
 					}
 				}
 			}

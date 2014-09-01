@@ -23,7 +23,7 @@ public class Deco_Block extends Block{
 
 	public static IIcon Base;
 	public boolean black = true;
-	public IIcon blockIconIn;
+//	public IIcon blockIconIn;
 	public int number;
 	
 	public Deco_Block(int number,boolean black) {
@@ -48,14 +48,14 @@ public class Deco_Block extends Block{
 		}else{
 			this.blockIcon = iconRegister.registerIcon(Block_Textures.DECO_PREFIX_WHITE+number);
 		}
-		this.blockIconIn = iconRegister.registerIcon(Block_Textures.DECO_BASE_IN+number);
+//		this.blockIconIn = iconRegister.registerIcon(Block_Textures.DECO_BASE_IN+number);
 	}
 	
 	@SideOnly(Side.CLIENT)
 	@Override
 	public IIcon getIcon(int par1, int par2)
     {		
-		if(par1 == -1)return this.blockIconIn;
+//		if(par1 == -1)return this.blockIconIn;
         return this.blockIcon;
     }
 	
@@ -91,8 +91,7 @@ public class Deco_Block extends Block{
 	@Override
 	public boolean canRenderInPass(int pass)
 	{
-		ClientProxy.renderPass = pass;
-		return true;
+		return pass == getRenderBlockPass();
 	}
 	
 	@Override

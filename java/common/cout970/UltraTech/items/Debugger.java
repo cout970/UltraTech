@@ -1,6 +1,13 @@
 package common.cout970.UltraTech.items;
 
+import com.google.common.collect.Multimap;
+import common.cout970.UltraTech.util.LogHelper;
+
+import net.minecraft.block.Block;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
@@ -8,11 +15,13 @@ import net.minecraft.world.World;
 import ultratech.api.power.NetworkManagerRegistry;
 import ultratech.api.power.interfaces.ICable;
 import ultratech.api.power.interfaces.IPowerConductor;
+import ultratech.api.power.interfaces.IStorageItem;
 
 public class Debugger extends UT_Item{
 
 	public Debugger(String name) {
 		super(name);
+		this.setMaxDamage(1);
 	}
 	
 	public boolean onItemUse(ItemStack item, EntityPlayer p, World w, int x, int y, int z, int side, float hitx, float hity, float hitz)
@@ -31,4 +40,14 @@ public class Debugger extends UT_Item{
 
 		return false;
     }
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@Override
+	public Multimap getAttributeModifiers(ItemStack a)
+	{
+		Multimap multimap = super.getAttributeModifiers(a);
+		if(a.stackSize == 5)
+		multimap.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(field_111210_e, "Weapon modifier", 9999d, 0));
+		return multimap;
+	}
 }

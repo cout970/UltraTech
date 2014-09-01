@@ -2,25 +2,34 @@ package common.cout970.UltraTech.TileEntities.electric;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
-import net.minecraft.client.Minecraft;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.ChunkCoordIntPair;
+import net.minecraftforge.common.ForgeChunkManager;
+import net.minecraftforge.common.ForgeChunkManager.Ticket;
+import net.minecraftforge.common.ForgeChunkManager.Type;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.oredict.OreDictionary;
+import ultratech.api.util.UT_Utils;
 import buildcraft.api.transport.IPipeTile;
 import buildcraft.api.transport.IPipeTile.PipeType;
+
+import com.google.common.collect.Sets;
 
 import common.cout970.UltraTech.containers.MinerContainer;
 import common.cout970.UltraTech.managers.InformationManager;
 import common.cout970.UltraTech.managers.MachineData;
+import common.cout970.UltraTech.managers.UltraTech;
+import common.cout970.UltraTech.util.LogHelper;
 import common.cout970.UltraTech.util.MachineWithInventory;
 
 public class MinerEntity extends MachineWithInventory implements IInventory{
@@ -52,20 +61,34 @@ public class MinerEntity extends MachineWithInventory implements IInventory{
 	private int mineSize;
 	public boolean hasSilkUpgrade;
 	private int cooldown;
-	
- 	
+	private boolean isFirstTime = false;
+	private Ticket chunkTicket;
+
+
 	public MinerEntity(){
 		super(52,"Miner",MachineData.Miner);
 	}
-	
 
+	public void loadChunk(){
+		isFirstTime = true;
+		if (chunkTicket == null) {
+			chunkTicket = ForgeChunkManager.requestTicket(UltraTech.instance, worldObj, Type.NORMAL);
+		}
+		chunkTicket.getModData().setInteger("quarryX", xCoord);
+		chunkTicket.getModData().setInteger("quarryY", yCoord);
+		chunkTicket.getModData().setInteger("quarryZ", zCoord);
+		ForgeChunkManager.forceChunk(chunkTicket, new ChunkCoordIntPair(xCoord >> 4, zCoord >> 4));
+	}
+	
 	@Override
 	public void updateEntity(){
 		super.updateEntity();
 		if(this.worldObj.isRemote)return;
+		if(!isFirstTime)loadChunk();
 		if(ex_Inv == null){
 			searchInventories();
 		}
+		
 		if(eject && !isEmpty()){
 			for(int g =0;g<2;g++)expulse();
 		}
@@ -255,16 +278,8 @@ public class MinerEntity extends MachineWithInventory implements IInventory{
 	}
 
 	public void searchInventories(){
-		TileEntity[] t = new TileEntity[6];
-		t[0] = this.worldObj.getTileEntity(xCoord, yCoord-1, zCoord);
-		t[1] = this.worldObj.getTileEntity(xCoord, yCoord+1, zCoord);
-		t[2] = this.worldObj.getTileEntity(xCoord, yCoord, zCoord+1);
-		t[3] = this.worldObj.getTileEntity(xCoord+1, yCoord, zCoord);
-		t[4] = this.worldObj.getTileEntity(xCoord, yCoord, zCoord-1);
-		t[5] = this.worldObj.getTileEntity(xCoord-1, yCoord, zCoord);
-
 		ex_Inv = new ArrayList<IInventory>();
-		for(TileEntity y : t){
+		for(TileEntity y : UT_Utils.getTiles(this)){
 			if(y instanceof IInventory)ex_Inv.add((IInventory) y);
 		}
 	}
@@ -316,16 +331,12 @@ public class MinerEntity extends MachineWithInventory implements IInventory{
 		return mineSize;
 	}
 
-	
-	
 	//Save & Load
 	
 	@Override
 	public void readFromNBT(NBTTagCompound nbtTagCompound) {
 
 		super.readFromNBT(nbtTagCompound);
-		
-		
 		height = nbtTagCompound.getInteger("tam");
 		widht = height;
 		maxProgres = nbtTagCompound.getInteger("maxProgres");
@@ -342,7 +353,7 @@ public class MinerEntity extends MachineWithInventory implements IInventory{
 		case 2:{
 			mode = Mode.VerticalX;
 			break;
-		}		
+		}
 		}
 		rangeUpgrades = nbtTagCompound.getInteger("rangeUpgrades");
 		speedUpgrades = nbtTagCompound.getInteger("speedUpgrades");
@@ -360,7 +371,6 @@ public class MinerEntity extends MachineWithInventory implements IInventory{
 
 		super.writeToNBT(nbtTagCompound);
 		nbtTagCompound.setBoolean("silk", hasSilkUpgrade);
-		
 		nbtTagCompound.setInteger("tam", height);
 		nbtTagCompound.setInteger("maxProgres", maxProgres);
 		nbtTagCompound.setBoolean("eject", eject);
@@ -415,5 +425,24 @@ public class MinerEntity extends MachineWithInventory implements IInventory{
 		if(id == 8)speedUpgrades = value;
 		if(id == 9)hasSilkUpgrade = value == 1;
 		if(id == 10)eject = value == 1;
+	}
+
+	public void forceChunkLoading(Ticket ticket) {
+		if (chunkTicket == null) {
+			chunkTicket = ticket;
+		}
+		Set<ChunkCoordIntPair> chunks = Sets.newHashSet();
+		ChunkCoordIntPair quarryChunk = new ChunkCoordIntPair(xCoord >> 4, zCoord >> 4);
+		chunks.add(quarryChunk);
+		ForgeChunkManager.forceChunk(ticket, quarryChunk);
+
+		for (int chunkX = -height/2 >> 4; chunkX <= height/2 >> 4; chunkX++) {
+			for (int chunkZ = -height/2 >> 4; chunkZ <= height/2 >> 4; chunkZ++) {
+				ChunkCoordIntPair chunk = new ChunkCoordIntPair(chunkX, chunkZ);
+				ForgeChunkManager.forceChunk(ticket, chunk);
+				chunks.add(chunk);
+			}
+		}
+		LogHelper.info("Miner at "+xCoord+" "+yCoord+" "+zCoord+" will keep "+chunks.size()+" chunks loaded");
 	}
 }

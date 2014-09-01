@@ -62,9 +62,11 @@ public class OreGeneration {
 	public static int OilDesert;
 	public static int OilOcean;
 	public static int OilDeepOcean;
+	public static boolean GenerateOil;
 
 	public static void readConfigOil(Configuration config){
 		String Oil = "Oil Generation";
+		GenerateOil = config.get(Oil, "Generation of Oil", true).getBoolean();
 		OilBase = config.get(Oil, "Probability of found oil in a normal biome, low values imply higher probability", 1200).getInt();
 		OilDesert = config.get(Oil, "Probability of found oil in a desert biome, low values imply higher probability", 200).getInt();
 		OilOcean = config.get(Oil, "Probability of found oil in a ocean biome, low values imply higher probability", 300).getInt();
