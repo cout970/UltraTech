@@ -48,7 +48,7 @@ public class CableInterfaceSolarPanel implements ICable{
 		@Override
 		public boolean shouldConnectWithThis(ICable c, ForgeDirection side) {
 			if(side != ForgeDirection.DOWN){
-				if(c.getType() == CableType.Ribbon || c.getType() == CableType.Block){
+				if(c.getType() == CableType.Ribbon_Down || c.getType() == CableType.Block){
 					return true;
 				}else return false;
 			}
@@ -57,7 +57,7 @@ public class CableInterfaceSolarPanel implements ICable{
 
 		@Override
 		public CableType getType() {
-			return CableType.Ribbon;
+			return CableType.Ribbon_Down;
 		}
 
 		@Override

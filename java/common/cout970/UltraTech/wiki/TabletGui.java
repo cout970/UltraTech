@@ -12,6 +12,8 @@ import common.cout970.UltraTech.wiki.pages.EnergyCapacityPage;
 import common.cout970.UltraTech.wiki.pages.EnergyMainPage;
 import common.cout970.UltraTech.wiki.pages.IndexPage;
 import common.cout970.UltraTech.wiki.pages.MainPage;
+import common.cout970.UltraTech.wiki.pages.MultiblockMainPage;
+import common.cout970.UltraTech.wiki.pages.PageMultiblockRefinery;
 
 public class TabletGui extends GuiContainer{
 
@@ -63,5 +65,7 @@ public class TabletGui extends GuiContainer{
 		if(s == "e-main")curr = new EnergyMainPage(this);
 		if(s == "e-cap")curr = new EnergyCapacityPage(this);
 		if(s == "deco")curr = new DecoPage(this);
+		if(s == "multi")curr = new MultiblockMainPage(this);
+		if(s == "multi-refinery")curr = new PageMultiblockRefinery(this);
 	}
 }

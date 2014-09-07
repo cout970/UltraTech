@@ -125,7 +125,7 @@ public class ItemDisplay implements IHologram{
 		GL11.glScalef(0.03f, 0.03f, 0.03f);
 		GL11.glRotated(180, 1, 0, 0);
 		GL11.glColor3f(1, 1, 1);
-		Page.drawString(""+itemStack.stackSize, 0, 0, UT_Utils.RGBtoInt(255, 255, 255));
+		Page.drawString(""+itemStack.stackSize, 0, 0, UT_Utils.RGBtoInt(255, 255, 255), true);
 		GL11.glEnable(GL11.GL_CULL_FACE);
 		GL11.glPopMatrix();
 	}

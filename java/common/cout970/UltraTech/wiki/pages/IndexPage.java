@@ -21,7 +21,7 @@ public class IndexPage extends Page {
 			@Override
 			public void drawButtom(TextureManager t, int x, int y) {
 				this.renderBack(t, x, y);
-				Page.drawString("Start", x+posX+Xsize/2, y+posY+Ysize/2, UT_Utils.RGBtoInt(0, 0, 0));
+				Page.drawString("Start", x+posX+Xsize/2, y+posY+Ysize/2, UT_Utils.RGBtoInt(0, 0, 0), true);
 			}
 
 			@Override
@@ -34,7 +34,7 @@ public class IndexPage extends Page {
 			@Override
 			public void drawButtom(TextureManager t, int x, int y) {
 				this.renderBack(t, x, y);
-				Page.drawString("Decorative", x+posX+Xsize/2, y+posY+Ysize/2, UT_Utils.RGBtoInt(0, 0, 0));
+				Page.drawString("Decorative", x+posX+Xsize/2, y+posY+Ysize/2, UT_Utils.RGBtoInt(0, 0, 0), true);
 			}
 
 			@Override
@@ -47,7 +47,7 @@ public class IndexPage extends Page {
 			@Override
 			public void drawButtom(TextureManager t, int x, int y) {
 				this.renderBack(t, x, y);
-				Page.drawString("Multiblocks", x+posX+Xsize/2, y+posY+Ysize/2, UT_Utils.RGBtoInt(0, 0, 0));
+				Page.drawString("Multiblocks", x+posX+Xsize/2, y+posY+Ysize/2, UT_Utils.RGBtoInt(0, 0, 0), true);
 			}
 
 			@Override
@@ -60,7 +60,7 @@ public class IndexPage extends Page {
 			@Override
 			public void drawButtom(TextureManager t, int x, int y) {
 				this.renderBack(t, x, y);
-				Page.drawString("Machines", x+posX+Xsize/2, y+posY+Ysize/2, UT_Utils.RGBtoInt(0, 0, 0));
+				Page.drawString("Machines", x+posX+Xsize/2, y+posY+Ysize/2, UT_Utils.RGBtoInt(0, 0, 0), true);
 			}
 
 			@Override
@@ -73,7 +73,7 @@ public class IndexPage extends Page {
 			@Override
 			public void drawButtom(TextureManager t, int x, int y) {
 				this.renderBack(t, x, y);
-				Page.drawString("Generation", x+posX+Xsize/2, y+posY+Ysize/2, UT_Utils.RGBtoInt(0, 0, 0));
+				Page.drawString("Generation", x+posX+Xsize/2, y+posY+Ysize/2, UT_Utils.RGBtoInt(0, 0, 0), true);
 			}
 
 			@Override
@@ -86,7 +86,7 @@ public class IndexPage extends Page {
 			@Override
 			public void drawButtom(TextureManager t, int x, int y) {
 				this.renderBack(t, x, y);
-				Page.drawString("Intermod", x+posX+Xsize/2, y+posY+Ysize/2, UT_Utils.RGBtoInt(0, 0, 0));
+				Page.drawString("Intermod", x+posX+Xsize/2, y+posY+Ysize/2, UT_Utils.RGBtoInt(0, 0, 0), true);
 			}
 
 			@Override
@@ -99,7 +99,7 @@ public class IndexPage extends Page {
 			@Override
 			public void drawButtom(TextureManager t, int x, int y) {
 				this.renderBack(t, x, y);
-				Page.drawString("Energy", x+posX+Xsize/2, y+posY+Ysize/2, UT_Utils.RGBtoInt(0, 0, 0));
+				Page.drawString("Energy", x+posX+Xsize/2, y+posY+Ysize/2, UT_Utils.RGBtoInt(0, 0, 0), true);
 			}
 
 			@Override

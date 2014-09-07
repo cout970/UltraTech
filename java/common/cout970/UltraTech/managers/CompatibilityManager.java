@@ -1,8 +1,9 @@
 package common.cout970.UltraTech.managers;
 
 
+import ultratech.api.power.multipart.MultipartReference;
+import common.cout970.UltraTech.multipart.MultiPartRegistry_UT;
 import common.cout970.UltraTech.util.LogHelper;
-
 import buildcraft.api.fuels.IronEngineFuel;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -20,7 +21,7 @@ public class CompatibilityManager {
 		IronEngineFuel.addFuel("gasoline", 10, 25000);
 		IronEngineFuel.addFuel("bioethanol", 4, 15000);
 		if(!Loader.isModLoaded("BuildCraft")){
-			LogHelper.log("Buildcraft not found, adding fuel and oil values to IronEngineFuel");
+			LogHelper.info("Buildcraft not found, adding fuel and oil values to IronEngineFuel");
 			IronEngineFuel.addFuel("oil", 3, 5000);
 			IronEngineFuel.addFuel("fuel", 6, 25000);
 		}
@@ -82,6 +83,12 @@ public class CompatibilityManager {
 		OreDictionary.registerOre("circuitLogic", new ItemStack(ItemManager.ItemName.get("LogicCircuit")));
 		OreDictionary.registerOre("circuitBasic", new ItemStack(ItemManager.ItemName.get("ElectricCircuit")));
 		OreDictionary.registerOre("circuitAdvanced", new ItemStack(ItemManager.ItemName.get("OpticCircuit")));
+
+		if(!MultipartReference.isMicroPartActived){
+			OreDictionary.registerOre("pipeCopper", new ItemStack(BlockManager.CopperPipe));
+		}else{
+			OreDictionary.registerOre("pipeCopper", new ItemStack(MultiPartRegistry_UT.CopperPipe));
+		}
 	}
 
 

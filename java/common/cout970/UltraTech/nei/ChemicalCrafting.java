@@ -98,7 +98,7 @@ public class ChemicalCrafting extends TemplateRecipeHandler{
 		RenderUtil.bindTexture(new ResourceLocation("ultratech:textures/gui/chemical.png"));
 		this.drawProgressBar(40, 9, 224, 0, 20, 42, 0f, 4);
 		//text
-		Minecraft.getMinecraft().fontRenderer.drawString("1000mb of Plastic", 45, 55, UT_Utils.RGBtoInt(255, 255, 255), true);
+		Minecraft.getMinecraft().fontRenderer.drawString("Uses 1000mb of liquid Plastic", 12, 60, UT_Utils.RGBtoInt(255, 255, 255), true);
 		
     }
 	

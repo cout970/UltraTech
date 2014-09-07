@@ -21,9 +21,9 @@ public enum MachineData {
 	
 	Miner    		(16000d	,3	,50d		,0),//per block
 	MAssembly		(  800d ,3	,100d		,0),
-	Charge_Station	( 3200d	,1	,200d		,2),//per tick
+	Charge_Station	( 3200d	,2	,200d		,2),//per tick
 	Climate_Station	(100000d,3	,100000d	,0),
-	Fermenter		(  800d	,1	,1d			,0),//QP per mB
+	Fermenter		(  800d	,1	,2d			,0),//QP per mB
 	Tesseract		(  800d ,3	,0d			,0),
 	ChemicalPlant	(  800d ,2	,100d		,0),//per item
 	Heater			( 1600d	,2	,100d		,0),//per 200proces

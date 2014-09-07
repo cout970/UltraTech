@@ -29,7 +29,7 @@ public class EnergyCapacityPage extends Page{
 				
 				for(int g = 0;g<10;g++) Page.drawTextureBox(x+posX, y+posY+24+g*12, Xsize, 10);
 				
-				Page.drawString("Machine          Capacity", x+75, y+14, 0);
+				Page.drawString("Machine          Capacity", x+75, y+14, 0, true);
 				FontRenderer f = Minecraft.getMinecraft().fontRenderer;
 				for(MachineData m : MachineData.values()){
 					int pos = m.ordinal();

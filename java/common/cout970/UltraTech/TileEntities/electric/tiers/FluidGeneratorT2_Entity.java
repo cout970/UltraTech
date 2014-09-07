@@ -35,8 +35,8 @@ public class FluidGeneratorT2_Entity extends FluidGeneratorT1_Entity{
 				worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 1, 2);
 				updated = true;
 			}
-			if(progres >= 2){
-				progres -= 2;
+			if(progres >= 4){
+				progres -= 4;
 				addCharge(production);
 			}else{
 				addCharge(production*progres);

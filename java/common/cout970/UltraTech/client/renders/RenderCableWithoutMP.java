@@ -10,7 +10,7 @@ import org.lwjgl.opengl.GL11;
 import ultratech.api.power.PowerUtils;
 import ultratech.api.util.UT_Utils;
 import common.cout970.UltraTech.client.models.ModelBigCable;
-import common.cout970.UltraTech.util.render.ConectedTexture;
+import common.cout970.UltraTech.multipart.client.RenderCablePlane;
 import common.cout970.UltraTech.util.render.RenderUtil;
 import cpw.mods.fml.common.Optional;
 
@@ -34,7 +34,7 @@ public class RenderCableWithoutMP extends TileEntitySpecialRenderer{
 			b[d.ordinal()] = PowerUtils.canConnectTo(t, PowerUtils.getRelative(t, d));
 		}
 		int i;
-		if((i = ConectedTexture.getDir(b)) != -1){
+		if((i = RenderCablePlane.getDir(b)) != -1){
 			RenderUtil.bindTexture(new ResourceLocation("ultratech:textures/misc/cable/bigcable_"+i+".png"));
 			
 		}else RenderUtil.bindTexture(tex);

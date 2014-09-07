@@ -22,7 +22,7 @@ public class MainPage extends Page{
 			@Override
 			public void drawButtom(TextureManager t, int x, int y) {
 				this.renderBack(t, x, y);
-				Page.drawString("Index", x+posX+Xsize/2, y+posY+Ysize/2, UT_Utils.RGBtoInt(0, 0, 0));
+				Page.drawString("Index", x+posX+Xsize/2, y+posY+Ysize/2, UT_Utils.RGBtoInt(0, 0, 0), true);
 			}};
 	}
 	

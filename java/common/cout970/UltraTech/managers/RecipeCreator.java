@@ -24,14 +24,14 @@ public class RecipeCreator {
 		RecipeCreator.initLaminator();//
 	
 		//fermenter 
-		RecipeRegistry.addRecipeFermenter(new ItemStack(Items.sugar), 36);
-		RecipeRegistry.addRecipeFermenter(new ItemStack(Items.apple), 36);
-		RecipeRegistry.addRecipeFermenter(new ItemStack(Items.wheat), 72);
-		RecipeRegistry.addRecipeFermenter(new ItemStack(Items.carrot), 72);
-		RecipeRegistry.addRecipeFermenter(new ItemStack(Items.potato), 72);
-		RecipeRegistry.addRecipeFermenter(new ItemStack(Items.melon), 36);
-		RecipeRegistry.addRecipeFermenter(new ItemStack(Items.spider_eye), 108);
-		RecipeRegistry.addRecipeFermenter(new ItemStack(Blocks.pumpkin), 90);
+		RecipeRegistry.addRecipeFermenter(new ItemStack(Items.sugar), 200);//36
+		RecipeRegistry.addRecipeFermenter(new ItemStack(Items.apple), 200);
+		RecipeRegistry.addRecipeFermenter(new ItemStack(Items.wheat), 400);
+		RecipeRegistry.addRecipeFermenter(new ItemStack(Items.carrot), 400);
+		RecipeRegistry.addRecipeFermenter(new ItemStack(Items.potato), 400);
+		RecipeRegistry.addRecipeFermenter(new ItemStack(Items.melon), 200);
+		RecipeRegistry.addRecipeFermenter(new ItemStack(Items.spider_eye), 1000);
+		RecipeRegistry.addRecipeFermenter(new ItemStack(Blocks.pumpkin), 500);
 		
 		//liquid 
 		RecipeRegistry.addRecipeBoiler("juice", "gas_ethanol");
@@ -39,7 +39,7 @@ public class RecipeCreator {
 		RecipeRegistry.addRecipeBoiler("water", "steam");
 	
 		RecipeRegistry.addRecipeRefinery(FluidRegistry.getFluidStack("gas_oil", 100), FluidRegistry.getFluid("plastic"), 2, FluidRegistry.getFluid("fuel"), 8, FluidRegistry.getFluid("gasoline"), 1);
-		RecipeRegistry.addRecipeRefinery(FluidRegistry.getFluidStack("gas_ethanol", 100), FluidRegistry.getFluid("bioethanol"), 2, FluidRegistry.getFluid("water"), 4f, FluidRegistry.getFluid("water"), 4f);
+		RecipeRegistry.addRecipeRefinery(FluidRegistry.getFluidStack("gas_ethanol", 100), FluidRegistry.getFluid("bioethanol"), 2.5f, FluidRegistry.getFluid("water"), 3.5f, FluidRegistry.getFluid("water"), 3f);
 	
 		RecipeRegistry.addRecipeChemical(FluidRegistry.getFluidStack("plastic", 1000), new ItemStack(ItemName.get("Sulfur"),1), new ItemStack(ItemName.get("Rubber"),2), new ItemStack(ItemName.get("Plastic"),1));
 	

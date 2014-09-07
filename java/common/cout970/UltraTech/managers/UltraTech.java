@@ -36,7 +36,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 
 
-@Mod(modid = InformationManager.MOD_ID, name = InformationManager.MOD_ID,version = "1.7.10-0.9.5.3",guiFactory = InformationManager.GUI_FACTORY)
+@Mod(modid = InformationManager.MOD_ID, name = InformationManager.MOD_ID,version = "1.7.10-0.9.6",guiFactory = InformationManager.GUI_FACTORY)
 
 
 public class UltraTech {
@@ -49,13 +49,13 @@ public class UltraTech {
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event){
-		LogHelper.log("Starting PreInit");
+		LogHelper.info("Starting PreInit");
 		ConfigManager.init(event.getSuggestedConfigurationFile());
 		FMLCommonHandler.instance().bus().register(new ConfigManager());
 		
 		if (Loader.isModLoaded("ForgeMultipart") && Loader.isModLoaded("CodeChickenCore")){
 			MultipartReference.isMicroPartActived = true;
-			LogHelper.log("Activating Forge Multipart Compatibility");
+			LogHelper.info("Activating Forge Multipart Compatibility");
 		}
 		
 		ItemManager.InitItems();
@@ -68,17 +68,17 @@ public class UltraTech {
 		FluidManager.RegisterFluids();
 		
 		if(Loader.isModLoaded("Waila")){
-			LogHelper.log("init waila compatibility");
+			LogHelper.info("init waila compatibility");
 			WailaRegister.init();
 		}
 		
-		LogHelper.log("Finishing PreInit");
+		LogHelper.info("Finishing PreInit");
 		if(InformationManager.debug)Language.setupLangFile(); //for lag file only in debug
 	}
 
 	@EventHandler
 	public void load(FMLInitializationEvent event){
-		LogHelper.log("Starting Init");
+		LogHelper.info("Starting Init");
 		Net_Utils.initMessages();
 		
 		NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());	//gui
@@ -93,7 +93,7 @@ public class UltraTech {
 		RecipeCreator.initRecipes();												//cutter for machines
 		GameRegistry.registerWorldGenerator(new UltratechWorldGenerator(), 10);					//world generation
 		proxy.registerRenders();													//renders
-		LogHelper.log("Finishing Init");
+		LogHelper.info("Finishing Init");
 	}
 
 	@EventHandler

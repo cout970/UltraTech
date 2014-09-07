@@ -106,9 +106,9 @@ public class FermenterCrafting extends TemplateRecipeHandler{
 		this.drawProgressBar(40, 9, 224, 0, 20, 42, 0f, 4);
 		this.drawProgressBar(133, 10, 224, 0, 20, 42, 0f, 4);
 		
-		Page.drawString("Water", 53, 2, UT_Utils.RGBtoInt(250, 250, 250));
-		Page.drawString("Juice", 143, 2, UT_Utils.RGBtoInt(250, 250, 250));
-		Page.drawString(recipes.get(recipe).amount+"mB", 110, 15, UT_Utils.RGBtoInt(250, 250, 250));
+		Page.drawString("Water", 53, 2, UT_Utils.RGBtoInt(250, 250, 250), true);
+		Page.drawString("Juice", 143, 2, UT_Utils.RGBtoInt(250, 250, 250), true);
+		Page.drawString(recipes.get(recipe).amount+"mB", 110, 15, UT_Utils.RGBtoInt(250, 250, 250), true);
     }
 	
 	public void drawTexturedModelRectFromIcon(int par1, int par2, IIcon par3Icon, int par4, int par5)

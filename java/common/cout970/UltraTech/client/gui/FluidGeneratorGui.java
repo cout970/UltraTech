@@ -62,8 +62,8 @@ public class FluidGeneratorGui extends GuiContainer{
 			this.drawCenteredString(fontRendererObj, amount, xStart+90, yStart+37, UT_Utils.RGBtoInt(255, 255, 255));
 			Fuel fu = IronEngineFuel.getFuelForFluid(input.getFluid());
 			if(fu != null){
-				int m = 1;
-				if(entity instanceof FluidGeneratorT2_Entity)m = 2;
+				int m = 2;
+				if(entity instanceof FluidGeneratorT2_Entity)m = 4;
 				String prod = "Production: "+PowerExchange.FTtoQP(fu.powerPerCycle)*m;
 				this.drawCenteredString(fontRendererObj, prod, xStart+90, yStart+48, UT_Utils.RGBtoInt(255, 255, 255));
 			}

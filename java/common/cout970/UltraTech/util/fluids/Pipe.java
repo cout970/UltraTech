@@ -83,4 +83,10 @@ public class Pipe extends SyncTile implements IFluidTransport{
 		return buffer;
 	}
 
+
+	@Override
+	public boolean canConectOnSide(ForgeDirection d) {
+		return true;
+	}
+
 }

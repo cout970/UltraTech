@@ -72,8 +72,13 @@ public abstract class Page implements IPage{
         tessellator.addVertexWithUV((double)(x + 0), (double)(y + 0), (double)Page.zLevel, 0, 0);
         tessellator.draw();
     }
-	public static void drawString(String string, int x, int y, int par4) {
-		FontRenderer f = Minecraft.getMinecraft().fontRenderer;
-		f.drawString(string, x-f.getStringWidth(string)/2, y-f.getStringWidth("1")/2, par4);
+    
+    public static void drawString(String string, int x, int y, int par4, boolean centered) {
+    	FontRenderer f = Minecraft.getMinecraft().fontRenderer;
+    	if(centered){
+    		f.drawString(string, x-f.getStringWidth(string)/2, y-f.getStringWidth("1")/2, par4);
+    	}else{
+    		f.drawString(string, x, y, par4);
+    	}
 	}
 }

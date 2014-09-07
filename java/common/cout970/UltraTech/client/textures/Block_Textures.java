@@ -10,30 +10,19 @@ public class Block_Textures {
 	public static final String DECO_BASE_IN					= MOD_FOLDER+"decoration/base/deco_in_";
 	public static final String DECO_PREFIX_BLACK			= MOD_FOLDER+"decoration/black/deco";
 	public static final String DECO_PREFIX_WHITE			= MOD_FOLDER+"decoration/white/deco";
+	public static final String DECO_PREFIX_DECO 			= MOD_FOLDER+"decoration/";
 	
-	public static final String STONEBLOCK_BLACK 			= MOD_FOLDER+"decoration/black/stoneblock";
-	public static final String STONEBLOCK_BLACK_BRICK		= MOD_FOLDER+"decoration/black/stoneblock_brick";
-	public static final String STONEBLOCK_BLACK_CARVER		= MOD_FOLDER+"decoration/black/stoneblock_carver";
-	public static final String STONEBLOCK_BLACK_CHISELED	= MOD_FOLDER+"decoration/black/stoneblock_chiseled";
-	public static final String STONEBLOCK_BLACK_CIRCLE		= MOD_FOLDER+"decoration/black/stoneblock_circle";
-	public static final String STONEBLOCK_BLACK_CLAYBRICK	= MOD_FOLDER+"decoration/black/stoneblock_claybrick";
-	public static final String STONEBLOCK_BLACK_PILAR		= MOD_FOLDER+"decoration/black/stoneblock_pilar";
-	public static final String STONEBLOCK_BLACK_SANDSTONE	= MOD_FOLDER+"decoration/black/stoneblock_sandstone";
-	public static final String STONEBLOCK_BLACK_SMOOTH		= MOD_FOLDER+"decoration/black/stoneblock_smooth";
-	public static final String STONEBLOCK_BLACK_PILAR_TOP 	= MOD_FOLDER+"decoration/black/stoneblock_pilar_top";
-	public static final String STONEBLOCK_BLACK_CHISELED_TOP= MOD_FOLDER+"decoration/black/stoneblock_chiseled_top";
-
-	public static final String STONEBLOCK_WHITE 			= MOD_FOLDER+"decoration/white/stoneblock";
-	public static final String STONEBLOCK_WHITE_BRICK		= MOD_FOLDER+"decoration/white/stoneblock_brick";
-	public static final String STONEBLOCK_WHITE_CARVER		= MOD_FOLDER+"decoration/white/stoneblock_carver";
-	public static final String STONEBLOCK_WHITE_CHISELED	= MOD_FOLDER+"decoration/white/stoneblock_chiseled";
-	public static final String STONEBLOCK_WHITE_CIRCLE		= MOD_FOLDER+"decoration/white/stoneblock_circle";
-	public static final String STONEBLOCK_WHITE_CLAYBRICK	= MOD_FOLDER+"decoration/white/stoneblock_claybrick";
-	public static final String STONEBLOCK_WHITE_PILAR		= MOD_FOLDER+"decoration/white/stoneblock_pilar";
-	public static final String STONEBLOCK_WHITE_SANDSTONE	= MOD_FOLDER+"decoration/white/stoneblock_sandstone";
-	public static final String STONEBLOCK_WHITE_SMOOTH		= MOD_FOLDER+"decoration/white/stoneblock_smooth";
-	public static final String STONEBLOCK_WHITE_PILAR_TOP 	= MOD_FOLDER+"decoration/white/stoneblock_pilar_top";
-	public static final String STONEBLOCK_WHITE_CHISELED_TOP= MOD_FOLDER+"decoration/white/stoneblock_chiseled_top";
+	public static final String STONEBLOCK					= "/stoneblock";
+	public static final String STONEBLOCK_BRICK				= "/stoneblock_brick";
+	public static final String STONEBLOCK_CARVER			= "/stoneblock_carver";
+	public static final String STONEBLOCK_CHISELED			= "/stoneblock_chiseled";
+	public static final String STONEBLOCK_CIRCLE			= "/stoneblock_circle";
+	public static final String STONEBLOCK_CLAYBRICK			= "/stoneblock_claybrick";
+	public static final String STONEBLOCK_PILAR				= "/stoneblock_pilar";
+	public static final String STONEBLOCK_SANDSTONE			= "/stoneblock_sandstone";
+	public static final String STONEBLOCK_SMOOTH			= "/stoneblock_smooth";
+	public static final String STONEBLOCK_PILAR_TOP 		= "/stoneblock_pilar_top";
+	public static final String STONEBLOCK_CHISELED_TOP		= "/stoneblock_chiseled_top";
 	//blocks
 	public static final String CHASIS_T1 					= MOD_FOLDER+"chasis";
 	public static final String CHASIS_T2 					= MOD_FOLDER+"chasis1";

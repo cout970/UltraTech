@@ -1,7 +1,7 @@
 package common.cout970.UltraTech.network;
 
 import net.minecraft.tileentity.TileEntity;
-import ultratech.api.power.multipart.MultipartReference;
+
 import common.cout970.UltraTech.network.messages.MessageClimateStation;
 import common.cout970.UltraTech.network.messages.MessageCrafter;
 import common.cout970.UltraTech.network.messages.MessageHologram;
@@ -11,6 +11,7 @@ import common.cout970.UltraTech.network.messages.MessagePainter;
 import common.cout970.UltraTech.network.messages.MessageReactorConfig;
 import common.cout970.UltraTech.network.messages.MessageTesseract;
 import common.cout970.UltraTech.network.messages.MessageUpdate;
+
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.relauncher.Side;
@@ -26,8 +27,6 @@ public class Net_Utils {
 		INSTANCE.registerMessage(MessageMachineMode.class, MessageMachineMode.class, 3, Side.SERVER);
 		INSTANCE.registerMessage(MessagePainter.class, MessagePainter.class, 4, Side.SERVER);
 		INSTANCE.registerMessage(MessageTesseract.class, MessageTesseract.class, 5, Side.SERVER);
-		if(MultipartReference.isMicroPartActived)
-		INSTANCE.registerMessage(MessageMultiPartUpdate.class, MessageMultiPartUpdate.class, 6, Side.CLIENT);
 		INSTANCE.registerMessage(MessageReactorConfig.class, MessageReactorConfig.class, 7, Side.SERVER);
 		INSTANCE.registerMessage(MessageHologram.class, MessageHologram.class, 8, Side.SERVER);
 	}
@@ -36,6 +35,10 @@ public class Net_Utils {
 		if(t == null)return;
 		MessageUpdate m = new MessageUpdate((SyncTile) t);
 		INSTANCE.sendToAll(m);
+	}
+
+	public static void initMessagesFMP() {
+		INSTANCE.registerMessage(MessageMultiPartUpdate.class, MessageMultiPartUpdate.class, 6, Side.CLIENT);
 	}	
 
 }

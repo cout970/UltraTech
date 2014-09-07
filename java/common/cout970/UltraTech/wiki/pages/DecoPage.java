@@ -25,7 +25,7 @@ public class DecoPage extends Page{
 				t.bindTexture(WikiResources.table);
 				Page.drawTextureBox(x+posX, y+posY, Xsize, 10);
 				String name = "Decoration Tipe "+(((cont.page-1) % 8)+1)+" "+((cont.page <= 8) ? "Black" : "White");
-				Page.drawString(name, x+75, y+14, 0);
+				Page.drawString(name, x+75, y+14, 0, true);
 			}
 			@Override
 			public void doSomething() {}

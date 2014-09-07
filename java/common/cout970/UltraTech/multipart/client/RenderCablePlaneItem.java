@@ -16,8 +16,8 @@ public class RenderCablePlaneItem implements IItemRenderer {
 
 	private ModelPlaneCable model;
 	private ModelPlaneCableBase base;
-	private ResourceLocation texture = new ResourceLocation("ultratech:textures/misc/cable/plane.png");
-	private ResourceLocation baseTex = new ResourceLocation("ultratech:textures/misc/cable/planecablebase_0.png");
+	private ResourceLocation texture = new ResourceLocation("ultratech:textures/misc/cable/planedown/plane.png");
+	private ResourceLocation baseTex = new ResourceLocation("ultratech:textures/misc/cable/planedown/planecablebase_0.png");
 
 	public RenderCablePlaneItem() {
 		this.model = new ModelPlaneCable();

@@ -3,7 +3,9 @@ package common.cout970.UltraTech.util.fluids;
 import java.util.ArrayList;
 import java.util.List;
 
+import ultratech.api.power.PowerInterface;
 import common.cout970.UltraTech.misc.IUpdatedEntity;
+import common.cout970.UltraTech.util.LogHelper;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
@@ -13,7 +15,6 @@ public class FluidNetwork{
 
 	private List<IFluidTransport> pipes = new ArrayList<IFluidTransport>();
 	private List<IFluidTransport> pipesExcluded = new ArrayList<IFluidTransport>();
-	private List<IFluidHandler> tanks = new ArrayList<IFluidHandler>();
 	public TileEntity tile;
 	public Fluid fluid;
 	public FluidNetWorkManager manager = new FluidNetWorkManager(this);
@@ -35,17 +36,18 @@ public class FluidNetwork{
 		return pipes;
 	}
 	
-	public List<IFluidHandler> getTanks(){
-		return tanks;
+	public void addPipe(IFluidTransport p){
+		pipes.add(p);
 	}
-	
 	public void refresh(){
 		IFluidTransport base = null;
 		for(IFluidTransport e : pipes){
-			TileEntity t = e.getTileEntity();
-			if(t.getWorldObj().getTileEntity(t.xCoord, t.yCoord, t.zCoord) != null){
-				if(!pipesExcluded.contains(e)){
-					base = e;
+			if(e != null){
+				TileEntity t = e.getTileEntity();
+				if(t != null && t.getWorldObj().getTileEntity(t.xCoord, t.yCoord, t.zCoord) != null){
+					if(!pipesExcluded.contains(e)){
+						base = e;
+					}
 				}
 			}
 		}
@@ -55,8 +57,10 @@ public class FluidNetwork{
 			FluidPathfinder found = new FluidPathfinder(base, null);
 			things.addAll(found.getPipes());
 			things.removeAll(pipesExcluded);
+			for(IFluidTransport ft : pipes){
+				if(!things.contains(ft))ft.setNetwork(null);
+			}
 			pipes = things;
-			tanks = found.getTanks();
 		}
 		
 		for(IFluidTransport e : pipes){
@@ -75,12 +79,14 @@ public class FluidNetwork{
 	}
 	
 	public void exclude(IFluidTransport te){
-		pipesExcluded.add(te);
-		try{
-			pipes.remove(te);
-		}catch(Exception e){
-			e.printStackTrace();
-		}
+		List<IFluidTransport> members = te.getNetwork().getPipes();
+		for(IFluidTransport i : members)i.setNetwork(null);
+//		pipesExcluded.add(te);
+//		try{
+//			pipes.remove(te);
+//		}catch(Exception e){
+//			e.printStackTrace();
+//		}
 	}
 	
 	public void excludeAndRecalculate(IFluidTransport te) {

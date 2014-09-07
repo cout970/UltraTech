@@ -2,14 +2,16 @@ package common.cout970.UltraTech.util.fluids;
 
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
-import ultratech.api.util.UT_Utils;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.IFluidHandler;
+import ultratech.api.power.multipart.MultipartReference;
+import ultratech.api.util.UT_Utils;
+
+import common.cout970.UltraTech.multipart.MultipartUtil;
 
 public class FluidUtils {
 
@@ -71,5 +73,16 @@ public class FluidUtils {
 			}
 		}
 		return t;
+	}
+
+	public static boolean isPipe(TileEntity g) {
+		if(MultipartReference.isMicroPartActived)return MultipartUtil.isMultiPartPipe(g);
+		return g instanceof IFluidTransport;
+	}
+
+	public static IFluidTransport getFluidTransport(TileEntity e) {
+		if(MultipartReference.isMicroPartActived)return MultipartUtil.getFluidTransport(e);
+		if(e instanceof IFluidTransport)return (IFluidTransport) e;
+		return null;
 	}
 }

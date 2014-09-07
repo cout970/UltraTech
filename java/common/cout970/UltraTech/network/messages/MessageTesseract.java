@@ -48,7 +48,6 @@ public class MessageTesseract implements IMessage, IMessageHandler<MessageTesser
 		TileEntity t = ctx.getServerHandler().playerEntity.worldObj.getTileEntity(message.x, message.y, message.z);
 		if(t instanceof Tesseract_Entity){
 			((Tesseract_Entity)t).setFrequency(message.freq);
-			LogHelper.log(message.freq);
 		}
 		return null;
 	}

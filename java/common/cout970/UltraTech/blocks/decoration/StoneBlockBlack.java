@@ -31,17 +31,18 @@ public class StoneBlockBlack extends Block{
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister iconRegister){
 		icons = new IIcon[11];
-		icons[0] = iconRegister.registerIcon(Block_Textures.STONEBLOCK_BLACK);
-		icons[1] = iconRegister.registerIcon(Block_Textures.STONEBLOCK_BLACK_BRICK);
-		icons[2] = iconRegister.registerIcon(Block_Textures.STONEBLOCK_BLACK_CARVER);
-		icons[3] = iconRegister.registerIcon(Block_Textures.STONEBLOCK_BLACK_CHISELED);
-		icons[4] = iconRegister.registerIcon(Block_Textures.STONEBLOCK_BLACK_CIRCLE);
-		icons[5] = iconRegister.registerIcon(Block_Textures.STONEBLOCK_BLACK_CLAYBRICK);
-		icons[6] = iconRegister.registerIcon(Block_Textures.STONEBLOCK_BLACK_PILAR);
-		icons[7] = iconRegister.registerIcon(Block_Textures.STONEBLOCK_BLACK_SANDSTONE);
-		icons[8] = iconRegister.registerIcon(Block_Textures.STONEBLOCK_BLACK_SMOOTH);
-		icons[9] = iconRegister.registerIcon(Block_Textures.STONEBLOCK_BLACK_PILAR_TOP);
-		icons[10] = iconRegister.registerIcon(Block_Textures.STONEBLOCK_BLACK_CHISELED_TOP);
+		String type = "black";
+		icons[0] = iconRegister.registerIcon(Block_Textures.DECO_PREFIX_DECO+type+Block_Textures.STONEBLOCK);
+		icons[1] = iconRegister.registerIcon(Block_Textures.DECO_PREFIX_DECO+type+Block_Textures.STONEBLOCK_BRICK);
+		icons[2] = iconRegister.registerIcon(Block_Textures.DECO_PREFIX_DECO+type+Block_Textures.STONEBLOCK_CARVER);
+		icons[3] = iconRegister.registerIcon(Block_Textures.DECO_PREFIX_DECO+type+Block_Textures.STONEBLOCK_CHISELED);
+		icons[4] = iconRegister.registerIcon(Block_Textures.DECO_PREFIX_DECO+type+Block_Textures.STONEBLOCK_CIRCLE);
+		icons[5] = iconRegister.registerIcon(Block_Textures.DECO_PREFIX_DECO+type+Block_Textures.STONEBLOCK_CLAYBRICK);
+		icons[6] = iconRegister.registerIcon(Block_Textures.DECO_PREFIX_DECO+type+Block_Textures.STONEBLOCK_PILAR);
+		icons[7] = iconRegister.registerIcon(Block_Textures.DECO_PREFIX_DECO+type+Block_Textures.STONEBLOCK_SANDSTONE);
+		icons[8] = iconRegister.registerIcon(Block_Textures.DECO_PREFIX_DECO+type+Block_Textures.STONEBLOCK_SMOOTH);
+		icons[9] = iconRegister.registerIcon(Block_Textures.DECO_PREFIX_DECO+type+Block_Textures.STONEBLOCK_PILAR_TOP);
+		icons[10] = iconRegister.registerIcon(Block_Textures.DECO_PREFIX_DECO+type+Block_Textures.STONEBLOCK_CHISELED_TOP);
 	}
 	
 	@SideOnly(Side.CLIENT)

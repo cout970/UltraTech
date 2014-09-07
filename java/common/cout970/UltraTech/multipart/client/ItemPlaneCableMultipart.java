@@ -7,7 +7,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import common.cout970.UltraTech.managers.UT_Tabs;
-import common.cout970.UltraTech.multipart.MultiPartCable_Ribbon_Down;
+import common.cout970.UltraTech.multipart.MultipartUtil;
+import common.cout970.UltraTech.multipart.ribbon.MultiPartCable_Ribbon_Down;
+import common.cout970.UltraTech.multipart.ribbon.MultiPartCable_Ribbon_East;
+import common.cout970.UltraTech.multipart.ribbon.MultiPartCable_Ribbon_North;
+import common.cout970.UltraTech.multipart.ribbon.MultiPartCable_Ribbon_South;
+import common.cout970.UltraTech.multipart.ribbon.MultiPartCable_Ribbon_Up;
+import common.cout970.UltraTech.multipart.ribbon.MultiPartCable_Ribbon_West;
 import common.cout970.UltraTech.util.LogHelper;
 import codechicken.lib.vec.BlockCoord;
 import codechicken.lib.vec.Vector3;
@@ -45,7 +51,13 @@ public class ItemPlaneCableMultipart extends JItemMultiPart {
     
 	@Override
 	public TMultiPart newPart(ItemStack item, EntityPlayer p, World w,
-			BlockCoord pos, int side, Vector3 hit) {
+			BlockCoord pos, int side, Vector3 hit){
+		if(!MultipartUtil.isSolid(w, pos.x, pos.y, pos.z, ForgeDirection.getOrientation(side).getOpposite()))return null;
+		if(side == ForgeDirection.UP.getOpposite().ordinal())return new MultiPartCable_Ribbon_Up();
+		if(side == ForgeDirection.NORTH.getOpposite().ordinal())return new MultiPartCable_Ribbon_North();
+		if(side == ForgeDirection.SOUTH.getOpposite().ordinal())return new MultiPartCable_Ribbon_South();
+		if(side == ForgeDirection.EAST.getOpposite().ordinal())return new MultiPartCable_Ribbon_East();
+		if(side == ForgeDirection.WEST.getOpposite().ordinal())return new MultiPartCable_Ribbon_West();
 		return new MultiPartCable_Ribbon_Down();
 	}
     

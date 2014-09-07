@@ -486,11 +486,15 @@ public class CrafterEntity extends SyncTile implements IInventory,IRedstoneContr
 		for(int g=0; g < 9; g++){
 			iCrafting.sendProgressBarUpdate(crafterContainer, g, (found[g])? 1 : 0);
 		}
+		iCrafting.sendProgressBarUpdate(crafterContainer, -2, 0);
 	}
 
 	public void getGUINetworkData(int i, int j) {
 		if(i == -1){
+			loaded = false;
 			found = new boolean[9];
+		}else if(i == -2){
+			loaded = true;
 		}else found[i] = j==1;
 	}
 

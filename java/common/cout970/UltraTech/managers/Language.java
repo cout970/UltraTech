@@ -184,6 +184,7 @@ public class Language {
 		
 		Language.put("tile.CableBlock", "Cable");
 		Language.put("item.UT_Plane_cable", "Ribbon Cable");
+		Language.put("item.UT_Pipe_Copper", "Copper Pipe");
 		Language.put("item.UT_Big_cable", "Big Cable");
 	}
 

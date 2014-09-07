@@ -10,10 +10,8 @@ import ultratech.api.util.UT_Utils;
 import codechicken.lib.vec.Vector3;
 import codechicken.multipart.NormallyOccludedPart;
 import codechicken.multipart.TMultiPart;
-
 import common.cout970.UltraTech.client.models.ModelBigCable;
 import common.cout970.UltraTech.multipart.MultiPartCable_Big;
-import common.cout970.UltraTech.util.render.ConectedTexture;
 import common.cout970.UltraTech.util.render.RenderUtil;
 
 public class RenderCableBig{
@@ -31,7 +29,7 @@ public class RenderCableBig{
 		GL11.glTranslated(0.5f,-0.5f,0.5);
 		boolean[] b = mc.connections; 
 		int i;
-		if((i = ConectedTexture.getDir(b)) != -1){
+		if((i = RenderCablePlane.getDir(b)) != -1){
 			RenderUtil.bindTexture(new ResourceLocation("ultratech:textures/misc/cable/bigcable_"+i+".png"));
 		}else RenderUtil.bindTexture(tex);
 		model.render(0.0625f,b);

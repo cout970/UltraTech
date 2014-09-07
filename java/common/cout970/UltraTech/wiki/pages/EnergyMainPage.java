@@ -22,7 +22,7 @@ public class EnergyMainPage extends Page{
 			public void drawButtom(TextureManager t, int x, int y) {
 				t.bindTexture(WikiResources.butt);
 				Page.drawTextureBox(x+posX, y+posY, Xsize, Ysize);
-				Page.drawString("Capacity of machines", x+75, y+15, 0);
+				Page.drawString("Capacity of machines", x+75, y+15, 0, true);
 			}
 			@Override
 			public void doSomething() {

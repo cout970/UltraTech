@@ -3,13 +3,13 @@ package common.cout970.UltraTech.client.renders;
 import org.lwjgl.opengl.GL11;
 
 import ultratech.api.util.UT_Utils;
-import common.cout970.UltraTech.TileEntities.fluid.CopperPipeEntity;
 import common.cout970.UltraTech.client.models.ModelCenterPipe;
 import common.cout970.UltraTech.client.models.ModelPipe;
 import common.cout970.UltraTech.client.models.ModelPipeBase;
 import common.cout970.UltraTech.client.models.ModelPipeIn;
 import common.cout970.UltraTech.client.models.ModelPump;
 import common.cout970.UltraTech.client.textures.ResourcesLocations;
+import common.cout970.UltraTech.multipart.remplace.CopperPipeEntity;
 import common.cout970.UltraTech.util.fluids.IFluidTransport;
 import common.cout970.UltraTech.util.fluids.TankConection;
 import common.cout970.UltraTech.util.fluids.UT_Tank;
@@ -29,7 +29,6 @@ public class RenderPipe extends TileEntitySpecialRenderer{
 	private ModelPipe model;
 	private ModelPipeIn in;
 	private ModelCenterPipe base;
-	private CubeRenderer_Util FR = new CubeRenderer_Util();
 
 	public RenderPipe(){
 		super();

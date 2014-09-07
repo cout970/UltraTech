@@ -60,7 +60,12 @@ public class CableInterfaceBigCable implements ICable{
 
 		@Override
 		public ForgeDirection getInternalConection(CableType big, ICable cable) {
-			if(big == CableType.Ribbon)return ForgeDirection.DOWN;
+			if(big == CableType.Ribbon_Down)return ForgeDirection.DOWN;
+			if(big == CableType.Ribbon_Up)return ForgeDirection.UP;
+			if(big == CableType.Ribbon_North)return ForgeDirection.NORTH;
+			if(big == CableType.Ribbon_South)return ForgeDirection.SOUTH;
+			if(big == CableType.Ribbon_East)return ForgeDirection.EAST;
+			if(big == CableType.Ribbon_West)return ForgeDirection.WEST;
 			return ForgeDirection.UNKNOWN;
 		}
 	}

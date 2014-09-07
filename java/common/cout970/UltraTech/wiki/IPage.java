@@ -9,5 +9,5 @@ public interface IPage {
 	TabletButtom[] getButtoms();
 	TabletLabel[] getLabels();
 	
-	void mouseClick(int i, int j);
+	void mouseClick(int x, int y);
 }

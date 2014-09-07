@@ -59,8 +59,8 @@ public class FluidGeneratorT1_Entity extends ConfigurableMachine implements IFlu
 				worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 1, 2);
 				updated = true;
 			}
-			if(progres >= 1){
-				progres -= 1;
+			if(progres >= 2){
+				progres -= 2;
 				addCharge(production);
 			}else{
 				addCharge(production*progres);

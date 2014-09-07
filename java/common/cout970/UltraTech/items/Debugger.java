@@ -1,8 +1,10 @@
 package common.cout970.UltraTech.items;
 
 import com.google.common.collect.Multimap;
-import common.cout970.UltraTech.util.LogHelper;
 
+import common.cout970.UltraTech.util.LogHelper;
+import common.cout970.UltraTech.util.fluids.FluidUtils;
+import common.cout970.UltraTech.util.fluids.IFluidTransport;
 import net.minecraft.block.Block;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -36,6 +38,18 @@ public class Debugger extends UT_Item{
 				}
 				p.addChatMessage(new ChatComponentText((w.isRemote ? "Client:  " : "Server:")+" "+s));
 			}
+			IFluidTransport ft = FluidUtils.getFluidTransport(t);
+			if(ft != null){
+				String s = "";
+				if(ft.getNetwork() != null){
+					s+=ft.getNetwork().getPipes().size();
+					s += " amount: "+ft.getTank().getFluidAmount();
+				}else{
+					s += "no Network";
+				}
+				p.addChatMessage(new ChatComponentText((w.isRemote ? "Client:  " : "Server:")+" "+s));
+			}
+			
 		}
 
 		return false;

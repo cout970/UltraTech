@@ -6,10 +6,10 @@ package ultratech.api.power;
  */
 public enum PowerTier {
 
-	Tier1(25),
-	Tier2(50),
-	Tier3(250),
-	Tier4(1000);
+	Tier1(25),// 500 RF/t
+	Tier2(50),// 1000 RF/t
+	Tier3(250),// 5000 RF/t
+	Tier4(1000);// 20000 RF/t
 
 	private static PowerTier[] t = {null,Tier1,Tier2,Tier3,Tier4};
 	private int flow;

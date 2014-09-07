@@ -106,7 +106,7 @@ public class CutterCrafting extends TemplateRecipeHandler {
 		this.drawProgressBar(80, 20, 178, 14, 24, 16, 1f-(cycleticks % ticks / (float)ticks), 4);
 		if(recipes.get(recipe).output2 != null){
 			String p = recipes.get(recipe).prob+"%"; 
-			Page.drawString(p, 142, 48, UT_Utils.RGBtoInt(255, 255, 255));
+			Page.drawString(p, 142, 48, UT_Utils.RGBtoInt(255, 255, 255), true);
 		}
     }
 

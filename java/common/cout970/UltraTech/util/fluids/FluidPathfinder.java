@@ -11,7 +11,6 @@ import net.minecraftforge.fluids.IFluidHandler;
 public class FluidPathfinder {
 
 	private List<IFluidTransport> visited = new ArrayList<IFluidTransport>();
-	private List<IFluidHandler> tanks = new ArrayList<IFluidHandler>();
 	
 	private IFluidTransport to;
 	
@@ -26,15 +25,15 @@ public class FluidPathfinder {
 		for(ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS){
 			TileEntity tile = UT_Utils.getRelative(from, dir);
 			if(tile != null){
-				if(tile instanceof IFluidTransport){
-					IFluidTransport e = (IFluidTransport) tile;
-					if(!visited.contains(e)){
-						visited.add(e);
-						list(e);
+				if(FluidUtils.isPipe(tile)){
+					IFluidTransport e = FluidUtils.getFluidTransport(tile);
+					if(e.canConectOnSide(dir.getOpposite()) && f.canConectOnSide(dir)){
+						if(!visited.contains(e)){
+							visited.add(e);
+							list(e);
+						}
 					}
-				}else if(tile instanceof IFluidHandler && !(tile instanceof IFluidTransport)){
-				tanks.add((IFluidHandler) tile);
-			}
+				}
 			}
 		}
 	}
@@ -47,9 +46,5 @@ public class FluidPathfinder {
 	
 	public List<IFluidTransport> getPipes(){
 		return visited;
-	}
-	
-	public List<IFluidHandler> getTanks(){
-		return tanks;
 	}
 }

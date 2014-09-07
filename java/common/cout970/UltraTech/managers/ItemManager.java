@@ -121,7 +121,7 @@ public class ItemManager {
 			}else{
 				it = Exception(i);
 			}
-			if(it == null)LogHelper.log("Found exception with item "+i.name+" in mod Ultratech, please report this to the mod autor (cout970)");
+			if(it == null)LogHelper.info("Found exception with item "+i.name+" in mod Ultratech, please report this to the mod autor (cout970)");
 			GameRegistry.registerItem(it, i.name+"_UT");
 			LangException(it, i);
 			ItemName.put(i.name, it);

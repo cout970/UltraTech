@@ -71,15 +71,6 @@ public class ConectedTexture {
 		return 0;
 	}
 
-	public static int getDir(boolean[] b) {
-		int count = 0;
-		int last;
-		for(boolean c : b)if(c){count++;}
-		if(count != 1)return -1;
-		if(b.length == 6)return b[0]? 0 : b[1]? 1 : b[2]? 5: b[3]? 3: b[4]?4: b[5]? 2  : -1;
-		return b[0]? 4 : b[1]? 2 : b[2]? 1: b[3]? 3: -1;
-	}
-
 	public static int getConectedTexturesIcon(IBlockAccess BA, int x, int y,
 			int z, int side) {
 		Block t = BA.getBlock(x, y, z);
