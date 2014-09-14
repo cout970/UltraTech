@@ -3,10 +3,22 @@ package common.cout970.UltraTech.blocks.tiers;
 import java.util.ArrayList;
 import java.util.List;
 
-import buildcraft.api.tools.IToolWrench;
-import ultratech.api.power.StorageInterface;
+import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.IIcon;
+import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 import ultratech.api.power.interfaces.IPowerConductor;
 import ultratech.api.power.interfaces.IStorageItem;
+import buildcraft.api.tools.IToolWrench;
+
 import common.cout970.UltraTech.TileEntities.electric.TileEntityBatteryTier1;
 import common.cout970.UltraTech.TileEntities.electric.TileEntityBatteryTier2;
 import common.cout970.UltraTech.TileEntities.electric.TileEntityBatteryTier3;
@@ -15,33 +27,11 @@ import common.cout970.UltraTech.client.textures.Block_Textures;
 import common.cout970.UltraTech.managers.UT_Tabs;
 import common.cout970.UltraTech.managers.UltraTech;
 import common.cout970.UltraTech.proxy.ClientProxy;
-import common.cout970.UltraTech.util.HelperNBT;
-import common.cout970.UltraTech.util.LogHelper;
 import common.cout970.UltraTech.util.power.BlockConductor;
 import common.cout970.UltraTech.util.power.IBatteryBlock;
-import common.cout970.UltraTech.util.power.Machine;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import crazypants.enderio.machine.AbstractMachineEntity;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockContainer;
-import net.minecraft.block.BlockSkull;
-import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemSkull;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.IIcon;
-import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
-import net.minecraftforge.event.ForgeEventFactory;
 
 public class BlocksBattery extends BlockConductor{
 
