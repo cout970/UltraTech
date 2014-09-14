@@ -54,6 +54,7 @@ public class CableInterfaceRibbonCable implements ICable{
 		@Override
 		public boolean shouldConnectWithThis(ICable c, ForgeDirection side) {
 			if(source.tile() == null)return false;
+			if(getSidePlaced() == side)return true;
 			if(source.boundingBoxes[source.getBox(side)] == null)return false;
 			if(source.tile().canAddPart(new NormallyOccludedPart(source.boundingBoxes[source.getBox(side)]))){
 				if(c.getType() == CableType.Block || c.getType() == getType())return true;

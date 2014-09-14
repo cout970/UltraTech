@@ -141,4 +141,9 @@ public class UT_Utils {
 		if(old == ForgeDirection.VALID_DIRECTIONS.length-1)return ForgeDirection.DOWN;
 		return ForgeDirection.getOrientation(old+1);
 	}
+
+	public static ItemStack getFirst(ItemStack[] items) {
+		if(items.length == 0)return null;
+		return items[0];
+	}
 }

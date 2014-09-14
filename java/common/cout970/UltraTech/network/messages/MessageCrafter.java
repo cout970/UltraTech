@@ -4,7 +4,7 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntity;
-import common.cout970.UltraTech.TileEntities.utility.CrafterEntity;
+import common.cout970.UltraTech.TileEntities.utility.TileEntityCrafter;
 import common.cout970.UltraTech.util.LogHelper;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
@@ -29,7 +29,7 @@ public class MessageCrafter implements IMessage, IMessageHandler<MessageCrafter,
 			else tipe = 1;
 		}
 
-		public MessageCrafter(CrafterEntity e, ItemStack i,int slot) {//slot change
+		public MessageCrafter(TileEntityCrafter e, ItemStack i,int slot) {//slot change
 			x = e.xCoord;
 			y = e.yCoord;
 			z = e.zCoord;
@@ -38,7 +38,7 @@ public class MessageCrafter implements IMessage, IMessageHandler<MessageCrafter,
 			this.slot = slot;
 		}
 
-		public MessageCrafter(CrafterEntity e, int i,int slot) {//save or load or dell crafting saves
+		public MessageCrafter(TileEntityCrafter e, int i,int slot) {//save or load or dell crafting saves
 			x = e.xCoord;
 			y = e.yCoord;
 			z = e.zCoord;
@@ -47,7 +47,7 @@ public class MessageCrafter implements IMessage, IMessageHandler<MessageCrafter,
 			this.slot = slot;
 		}
 
-		public MessageCrafter(CrafterEntity e, int i, boolean b) {
+		public MessageCrafter(TileEntityCrafter e, int i, boolean b) {
 			x = e.xCoord;
 			y = e.yCoord;
 			z = e.zCoord;
@@ -82,8 +82,8 @@ public class MessageCrafter implements IMessage, IMessageHandler<MessageCrafter,
 	@Override
 	public IMessage onMessage(MessageCrafter message, MessageContext ctx) {
 		TileEntity tileEntity = ctx.getServerHandler().playerEntity.worldObj.getTileEntity(message.x, message.y, message.z);
-		if(tileEntity instanceof CrafterEntity){
-			CrafterEntity ce = (CrafterEntity) tileEntity;
+		if(tileEntity instanceof TileEntityCrafter){
+			TileEntityCrafter ce = (TileEntityCrafter) tileEntity;
 			if(message.tipe == 0)ce.craft();
 			if(message.tipe == 1)ce.emptyCraft();
 			if(message.tipe == 2){ce.craft.setInventorySlotContents(message.slot, message.item);}

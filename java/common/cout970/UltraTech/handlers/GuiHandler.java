@@ -4,85 +4,85 @@ package common.cout970.UltraTech.handlers;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import common.cout970.UltraTech.TileEntities.electric.ChargeStationEntity;
-import common.cout970.UltraTech.TileEntities.electric.ClimateEntity;
-import common.cout970.UltraTech.TileEntities.electric.FermenterEntity;
-import common.cout970.UltraTech.TileEntities.electric.MinerEntity;
-import common.cout970.UltraTech.TileEntities.electric.MolecularAssemblyEntity;
-import common.cout970.UltraTech.TileEntities.electric.StorageTier1;
-import common.cout970.UltraTech.TileEntities.electric.StorageTier2;
-import common.cout970.UltraTech.TileEntities.electric.StorageTier3;
-import common.cout970.UltraTech.TileEntities.electric.StorageTier4;
-import common.cout970.UltraTech.TileEntities.electric.tiers.ChemicalPlantT1_Entity;
-import common.cout970.UltraTech.TileEntities.electric.tiers.ChemicalVaporDesintegrationT1_Entity;
-import common.cout970.UltraTech.TileEntities.electric.tiers.CoalGeneratorEntityT1_Entity;
-import common.cout970.UltraTech.TileEntities.electric.tiers.CutterT1_Entity;
-import common.cout970.UltraTech.TileEntities.electric.tiers.FluidGeneratorT1_Entity;
-import common.cout970.UltraTech.TileEntities.electric.tiers.FurnaceT1_Entity;
-import common.cout970.UltraTech.TileEntities.electric.tiers.Heater_Entity;
-import common.cout970.UltraTech.TileEntities.electric.tiers.LaminatorT1_Entity;
-import common.cout970.UltraTech.TileEntities.electric.tiers.PurifierT1_Entity;
-import common.cout970.UltraTech.TileEntities.electric.tiers.Tesseract_Entity;
-import common.cout970.UltraTech.TileEntities.fluid.BoilerEntity;
-import common.cout970.UltraTech.TileEntities.intermod.DynamoEntity;
-import common.cout970.UltraTech.TileEntities.intermod.EngineEntity;
-import common.cout970.UltraTech.TileEntities.logistics.InfiniteSupplyEntity;
+import common.cout970.UltraTech.TileEntities.electric.TileEntityChargeStation;
+import common.cout970.UltraTech.TileEntities.electric.TileEntityClimateStation;
+import common.cout970.UltraTech.TileEntities.electric.TileEntityFermenter;
+import common.cout970.UltraTech.TileEntities.electric.TileEntityMiner;
+import common.cout970.UltraTech.TileEntities.electric.TileEntityMolecularAssembly;
+import common.cout970.UltraTech.TileEntities.electric.TileEntityBatteryTier1;
+import common.cout970.UltraTech.TileEntities.electric.TileEntityBatteryTier2;
+import common.cout970.UltraTech.TileEntities.electric.TileEntityBatteryTier3;
+import common.cout970.UltraTech.TileEntities.electric.TileEntityBatteryTier4;
+import common.cout970.UltraTech.TileEntities.electric.tiers.TileEntityChemicalPlantT1;
+import common.cout970.UltraTech.TileEntities.electric.tiers.TileEntityChemicalVaporDesintegrationT1;
+import common.cout970.UltraTech.TileEntities.electric.tiers.TileEntityCoalGeneratorEntityT1;
+import common.cout970.UltraTech.TileEntities.electric.tiers.TileEntityCutterT1;
+import common.cout970.UltraTech.TileEntities.electric.tiers.TileEntityFluidGeneratorT1;
+import common.cout970.UltraTech.TileEntities.electric.tiers.TileEntityFurnaceT1;
+import common.cout970.UltraTech.TileEntities.electric.tiers.TileEntityHeater;
+import common.cout970.UltraTech.TileEntities.electric.tiers.TileEntityLaminatorT1;
+import common.cout970.UltraTech.TileEntities.electric.tiers.TileEntityPurifierT1;
+import common.cout970.UltraTech.TileEntities.electric.tiers.TileEntityTesseract;
+import common.cout970.UltraTech.TileEntities.fluid.TileEntityBoiler;
+import common.cout970.UltraTech.TileEntities.intermod.TileEntityDynamo;
+import common.cout970.UltraTech.TileEntities.intermod.TileEntityEngine;
+import common.cout970.UltraTech.TileEntities.logistics.TileEntityInfiniteSupply;
 import common.cout970.UltraTech.TileEntities.multiblocks.reactor.Reactor_Core_Entity;
 import common.cout970.UltraTech.TileEntities.multiblocks.refinery.Refinery_IO_Entity;
-import common.cout970.UltraTech.TileEntities.utility.CrafterEntity;
-import common.cout970.UltraTech.TileEntities.utility.HologramEmiterEntity;
-import common.cout970.UltraTech.TileEntities.utility.Painter3DEntity;
-import common.cout970.UltraTech.client.gui.Boiler_Gui;
-import common.cout970.UltraTech.client.gui.CVD_Gui;
-import common.cout970.UltraTech.client.gui.ChargeStation_Gui;
-import common.cout970.UltraTech.client.gui.Chemical_Gui;
-import common.cout970.UltraTech.client.gui.ClimateStation_Gui;
-import common.cout970.UltraTech.client.gui.CoalGenerator_Gui;
-import common.cout970.UltraTech.client.gui.Crafter_Gui;
-import common.cout970.UltraTech.client.gui.Cutter_Gui;
-import common.cout970.UltraTech.client.gui.Dynamo_Gui;
-import common.cout970.UltraTech.client.gui.EngineGui;
-import common.cout970.UltraTech.client.gui.Fermenter_Gui;
-import common.cout970.UltraTech.client.gui.FluidGeneratorGui;
-import common.cout970.UltraTech.client.gui.Furnace_Gui;
-import common.cout970.UltraTech.client.gui.Heater_Gui;
-import common.cout970.UltraTech.client.gui.HologramEmiterGui;
-import common.cout970.UltraTech.client.gui.InfiniteSupplyGui;
-import common.cout970.UltraTech.client.gui.Laminator_Gui;
-import common.cout970.UltraTech.client.gui.MAssemblyGui;
-import common.cout970.UltraTech.client.gui.MinerGui;
-import common.cout970.UltraTech.client.gui.Printer3D_Gui;
-import common.cout970.UltraTech.client.gui.Purifier_Gui;
-import common.cout970.UltraTech.client.gui.Reactor_Gui;
-import common.cout970.UltraTech.client.gui.Refinery_Gui;
-import common.cout970.UltraTech.client.gui.Storage_Gui;
-import common.cout970.UltraTech.client.gui.TesseractGui;
-import common.cout970.UltraTech.containers.BoilerContainer;
-import common.cout970.UltraTech.containers.CVDcontainer;
-import common.cout970.UltraTech.containers.ChargeStationContainer;
-import common.cout970.UltraTech.containers.Chemical_Container;
-import common.cout970.UltraTech.containers.ClimateStationContainer;
-import common.cout970.UltraTech.containers.CrafterContainer;
-import common.cout970.UltraTech.containers.CutterContainer;
-import common.cout970.UltraTech.containers.Dynamo_Container;
-import common.cout970.UltraTech.containers.EngineContainer;
-import common.cout970.UltraTech.containers.FermenterContainer;
-import common.cout970.UltraTech.containers.FluidGeneratorContainer;
-import common.cout970.UltraTech.containers.FurnaceContainer;
-import common.cout970.UltraTech.containers.GeneratorContainer;
-import common.cout970.UltraTech.containers.Heater_Container;
-import common.cout970.UltraTech.containers.HologramEmiterContainer;
-import common.cout970.UltraTech.containers.InfiniteSupplyContainer;
-import common.cout970.UltraTech.containers.LaminatorContainer;
-import common.cout970.UltraTech.containers.MAssemblyContainer;
-import common.cout970.UltraTech.containers.MinerContainer;
-import common.cout970.UltraTech.containers.Painter3DContainer;
-import common.cout970.UltraTech.containers.PurifierContainer;
-import common.cout970.UltraTech.containers.Reactor_Container;
-import common.cout970.UltraTech.containers.RefineryContainer;
-import common.cout970.UltraTech.containers.StorageContainer;
-import common.cout970.UltraTech.containers.TabletContainer;
-import common.cout970.UltraTech.containers.TesseractContainer;
+import common.cout970.UltraTech.TileEntities.utility.TileEntityCrafter;
+import common.cout970.UltraTech.TileEntities.utility.TileEntityHologramEmiter;
+import common.cout970.UltraTech.TileEntities.utility.TileEntityPainter3D;
+import common.cout970.UltraTech.client.gui.GuiBoiler;
+import common.cout970.UltraTech.client.gui.GuiCVD;
+import common.cout970.UltraTech.client.gui.GuiChargeStation;
+import common.cout970.UltraTech.client.gui.GuiChemical;
+import common.cout970.UltraTech.client.gui.GuiClimateStation;
+import common.cout970.UltraTech.client.gui.GuiCoalGenerator;
+import common.cout970.UltraTech.client.gui.GuiCrafter;
+import common.cout970.UltraTech.client.gui.GuiCutter;
+import common.cout970.UltraTech.client.gui.GuiDynamo;
+import common.cout970.UltraTech.client.gui.GuiEngine;
+import common.cout970.UltraTech.client.gui.GuiFermenter;
+import common.cout970.UltraTech.client.gui.GuiFluidGenerator;
+import common.cout970.UltraTech.client.gui.GuiFurnace;
+import common.cout970.UltraTech.client.gui.GuiHeater;
+import common.cout970.UltraTech.client.gui.GuiHologramEmiter;
+import common.cout970.UltraTech.client.gui.GuiInfiniteSupply;
+import common.cout970.UltraTech.client.gui.GuiLaminator;
+import common.cout970.UltraTech.client.gui.GuiMolecularAssembly;
+import common.cout970.UltraTech.client.gui.GuiMiner;
+import common.cout970.UltraTech.client.gui.GuiPainter3D;
+import common.cout970.UltraTech.client.gui.GuiPurifier;
+import common.cout970.UltraTech.client.gui.GuiReactor;
+import common.cout970.UltraTech.client.gui.GuiRefinery;
+import common.cout970.UltraTech.client.gui.GuiBattery;
+import common.cout970.UltraTech.client.gui.GuiTesseract;
+import common.cout970.UltraTech.containers.ContainerBoiler;
+import common.cout970.UltraTech.containers.ContainerCVD;
+import common.cout970.UltraTech.containers.ContainerChargeStation;
+import common.cout970.UltraTech.containers.ContainerChemical;
+import common.cout970.UltraTech.containers.ContainerClimateStation;
+import common.cout970.UltraTech.containers.ContainerCrafter;
+import common.cout970.UltraTech.containers.ContainerCutter;
+import common.cout970.UltraTech.containers.ContainerDynamo;
+import common.cout970.UltraTech.containers.ContainerEngine;
+import common.cout970.UltraTech.containers.ContainerFermenter;
+import common.cout970.UltraTech.containers.ContainerFluidGenerator;
+import common.cout970.UltraTech.containers.ContainerFurnace;
+import common.cout970.UltraTech.containers.ContainerGenerator;
+import common.cout970.UltraTech.containers.ContainerHeater;
+import common.cout970.UltraTech.containers.ContainerHologramEmiter;
+import common.cout970.UltraTech.containers.ContainerInfiniteSupply;
+import common.cout970.UltraTech.containers.ContainerLaminator;
+import common.cout970.UltraTech.containers.ContainerMolecularAssembly;
+import common.cout970.UltraTech.containers.ContainerMiner;
+import common.cout970.UltraTech.containers.ContainerPainter3D;
+import common.cout970.UltraTech.containers.ContainerPurifier;
+import common.cout970.UltraTech.containers.ContainerReactor;
+import common.cout970.UltraTech.containers.ContainerRefinery;
+import common.cout970.UltraTech.containers.ContainerBattery;
+import common.cout970.UltraTech.containers.ContainerTablet;
+import common.cout970.UltraTech.containers.ContainerTesseract;
 import common.cout970.UltraTech.util.power.Machine;
 import common.cout970.UltraTech.wiki.TabletGui;
 import cpw.mods.fml.common.network.IGuiHandler;
@@ -92,109 +92,109 @@ public class GuiHandler implements IGuiHandler{
 	@Override
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
 
-		if(ID == 20)return new TabletContainer(player.inventory);
+		if(ID == 20)return new ContainerTablet(player.inventory);
 		
 		TileEntity tileEntity = world.getTileEntity(x, y, z);
 
 		//CVDmachine
-		if(tileEntity instanceof ChemicalVaporDesintegrationT1_Entity){
-			return new CVDcontainer(player.inventory, (ChemicalVaporDesintegrationT1_Entity) tileEntity);
+		if(tileEntity instanceof TileEntityChemicalVaporDesintegrationT1){
+			return new ContainerCVD(player.inventory, (TileEntityChemicalVaporDesintegrationT1) tileEntity);
 		}
 		//furnace
-		if(tileEntity instanceof FurnaceT1_Entity){
-			return new FurnaceContainer(player.inventory, (FurnaceT1_Entity) tileEntity);
+		if(tileEntity instanceof TileEntityFurnaceT1){
+			return new ContainerFurnace(player.inventory, (TileEntityFurnaceT1) tileEntity);
 		}
 		//storage
-		if(tileEntity instanceof StorageTier1 || tileEntity instanceof StorageTier2 || tileEntity instanceof StorageTier3 || tileEntity instanceof StorageTier4){
-			return new StorageContainer(player.inventory, (Machine) tileEntity);
+		if(tileEntity instanceof TileEntityBatteryTier1 || tileEntity instanceof TileEntityBatteryTier2 || tileEntity instanceof TileEntityBatteryTier3 || tileEntity instanceof TileEntityBatteryTier4){
+			return new ContainerBattery(player.inventory, (Machine) tileEntity);
 		}
 		//cuter
-		if(tileEntity instanceof CutterT1_Entity){
-			return new CutterContainer(player.inventory, (CutterT1_Entity) tileEntity);
+		if(tileEntity instanceof TileEntityCutterT1){
+			return new ContainerCutter(player.inventory, (TileEntityCutterT1) tileEntity);
 		}
 		//purifier
-		if(tileEntity instanceof PurifierT1_Entity){
-			return new PurifierContainer(player.inventory, (PurifierT1_Entity) tileEntity);
+		if(tileEntity instanceof TileEntityPurifierT1){
+			return new ContainerPurifier(player.inventory, (TileEntityPurifierT1) tileEntity);
 		}
 		//Generator
-		if(tileEntity instanceof CoalGeneratorEntityT1_Entity){
-			return new GeneratorContainer(player.inventory, (CoalGeneratorEntityT1_Entity) tileEntity);
+		if(tileEntity instanceof TileEntityCoalGeneratorEntityT1){
+			return new ContainerGenerator(player.inventory, (TileEntityCoalGeneratorEntityT1) tileEntity);
 		}
 		//Miner
-		if(tileEntity instanceof MinerEntity){
-			return new MinerContainer(player.inventory, (MinerEntity) tileEntity);
+		if(tileEntity instanceof TileEntityMiner){
+			return new ContainerMiner(player.inventory, (TileEntityMiner) tileEntity);
 		}
 		//Reactor
 		if(tileEntity instanceof Reactor_Core_Entity){
-			return new Reactor_Container(player.inventory, tileEntity);
+			return new ContainerReactor(player.inventory, tileEntity);
 		}
 		//MAssembly
-		if(tileEntity instanceof MolecularAssemblyEntity){
-			return new MAssemblyContainer(player.inventory, (MolecularAssemblyEntity) tileEntity);
+		if(tileEntity instanceof TileEntityMolecularAssembly){
+			return new ContainerMolecularAssembly(player.inventory, (TileEntityMolecularAssembly) tileEntity);
 		}
 		//ChargeStation
-		if(tileEntity instanceof ChargeStationEntity){
-			return new ChargeStationContainer(player.inventory, (ChargeStationEntity) tileEntity);
+		if(tileEntity instanceof TileEntityChargeStation){
+			return new ContainerChargeStation(player.inventory, (TileEntityChargeStation) tileEntity);
 		}
 		//Printer3D
-		if(tileEntity instanceof Painter3DEntity){
-			return new Painter3DContainer(player.inventory, (Painter3DEntity) tileEntity);
+		if(tileEntity instanceof TileEntityPainter3D){
+			return new ContainerPainter3D(player.inventory, (TileEntityPainter3D) tileEntity);
 		}
 		//Engine
-		if(tileEntity instanceof EngineEntity){
-			return new EngineContainer(player.inventory, (EngineEntity) tileEntity);
+		if(tileEntity instanceof TileEntityEngine){
+			return new ContainerEngine(player.inventory, (TileEntityEngine) tileEntity);
 		}
 		//Crafter
-		if(tileEntity instanceof CrafterEntity){
-			return new CrafterContainer(player.inventory, (CrafterEntity) tileEntity);
+		if(tileEntity instanceof TileEntityCrafter){
+			return new ContainerCrafter(player.inventory, (TileEntityCrafter) tileEntity);
 		}
 		//Tesseract
-		if(tileEntity instanceof Tesseract_Entity){
-			return new TesseractContainer(player.inventory, (Tesseract_Entity) tileEntity);
+		if(tileEntity instanceof TileEntityTesseract){
+			return new ContainerTesseract(player.inventory, (TileEntityTesseract) tileEntity);
 		}
 		//Fermenter
-		if(tileEntity instanceof FermenterEntity){
-			return new FermenterContainer(player.inventory, (FermenterEntity) tileEntity);
+		if(tileEntity instanceof TileEntityFermenter){
+			return new ContainerFermenter(player.inventory, (TileEntityFermenter) tileEntity);
 		}
 		//HologramEmiter
-		if(tileEntity instanceof HologramEmiterEntity){
-			return new HologramEmiterContainer(player.inventory, (HologramEmiterEntity) tileEntity);
+		if(tileEntity instanceof TileEntityHologramEmiter){
+			return new ContainerHologramEmiter(player.inventory, (TileEntityHologramEmiter) tileEntity);
 		}
 		//Boiler
-		if(tileEntity instanceof BoilerEntity){
-			return new BoilerContainer(player.inventory, (BoilerEntity) tileEntity);
+		if(tileEntity instanceof TileEntityBoiler){
+			return new ContainerBoiler(player.inventory, (TileEntityBoiler) tileEntity);
 		}
 		//climate
-		if(tileEntity instanceof ClimateEntity){
-			return new ClimateStationContainer(player.inventory, (ClimateEntity) tileEntity);
+		if(tileEntity instanceof TileEntityClimateStation){
+			return new ContainerClimateStation(player.inventory, (TileEntityClimateStation) tileEntity);
 		}
 		//FluidGenerator
-		if(tileEntity instanceof FluidGeneratorT1_Entity){
-			return new FluidGeneratorContainer(player.inventory, tileEntity);
+		if(tileEntity instanceof TileEntityFluidGeneratorT1){
+			return new ContainerFluidGenerator(player.inventory, tileEntity);
 		}
 		//Refinery
 		if(tileEntity instanceof Refinery_IO_Entity){
-			return new RefineryContainer(player.inventory, tileEntity);
+			return new ContainerRefinery(player.inventory, tileEntity);
 		}
 		//Laminator
-		if(tileEntity instanceof LaminatorT1_Entity){
-			return new LaminatorContainer(player.inventory, (LaminatorT1_Entity) tileEntity);
+		if(tileEntity instanceof TileEntityLaminatorT1){
+			return new ContainerLaminator(player.inventory, (TileEntityLaminatorT1) tileEntity);
 		}
 		//Heater
-		if(tileEntity instanceof Heater_Entity){
-			return new Heater_Container(player.inventory, (Heater_Entity) tileEntity);
+		if(tileEntity instanceof TileEntityHeater){
+			return new ContainerHeater(player.inventory, (TileEntityHeater) tileEntity);
 		}
 		//Chemical
-		if(tileEntity instanceof ChemicalPlantT1_Entity){
-			return new Chemical_Container(player.inventory, (ChemicalPlantT1_Entity) tileEntity);
+		if(tileEntity instanceof TileEntityChemicalPlantT1){
+			return new ContainerChemical(player.inventory, (TileEntityChemicalPlantT1) tileEntity);
 		}
 		//Dynamo
-		if(tileEntity instanceof DynamoEntity){
-			return new Dynamo_Container(player.inventory, (DynamoEntity) tileEntity);
+		if(tileEntity instanceof TileEntityDynamo){
+			return new ContainerDynamo(player.inventory, (TileEntityDynamo) tileEntity);
 		}
 		//infinite supply
-		if(tileEntity instanceof InfiniteSupplyEntity){
-			return new InfiniteSupplyContainer(player.inventory, (InfiniteSupplyEntity) tileEntity);
+		if(tileEntity instanceof TileEntityInfiniteSupply){
+			return new ContainerInfiniteSupply(player.inventory, (TileEntityInfiniteSupply) tileEntity);
 		}
 		return null;
 	}
@@ -202,109 +202,109 @@ public class GuiHandler implements IGuiHandler{
 	@Override
 	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
 
-		if(ID == 20)return new TabletGui(new TabletContainer(player.inventory));
+		if(ID == 20)return new TabletGui(new ContainerTablet(player.inventory));
 		
 		TileEntity tileEntity = world.getTileEntity(x, y, z);
 
 		//CVDmachine
-		if(tileEntity instanceof ChemicalVaporDesintegrationT1_Entity){
-			return new CVD_Gui(new CVDcontainer(player.inventory, (ChemicalVaporDesintegrationT1_Entity) tileEntity),player.inventory, (ChemicalVaporDesintegrationT1_Entity) tileEntity);
+		if(tileEntity instanceof TileEntityChemicalVaporDesintegrationT1){
+			return new GuiCVD(new ContainerCVD(player.inventory, (TileEntityChemicalVaporDesintegrationT1) tileEntity),player.inventory, (TileEntityChemicalVaporDesintegrationT1) tileEntity);
 		}
 		//furnace
-		if(tileEntity instanceof FurnaceT1_Entity){
-			return new Furnace_Gui(new FurnaceContainer(player.inventory, (FurnaceT1_Entity) tileEntity),player.inventory, (FurnaceT1_Entity) tileEntity);
+		if(tileEntity instanceof TileEntityFurnaceT1){
+			return new GuiFurnace(new ContainerFurnace(player.inventory, (TileEntityFurnaceT1) tileEntity),player.inventory, (TileEntityFurnaceT1) tileEntity);
 		}
 		//storage
-		if(tileEntity instanceof StorageTier1 || tileEntity instanceof StorageTier2 || tileEntity instanceof StorageTier3 || tileEntity instanceof StorageTier4){
-			return new Storage_Gui(new StorageContainer(player.inventory, (Machine) tileEntity), player.inventory, (Machine) tileEntity);
+		if(tileEntity instanceof TileEntityBatteryTier1 || tileEntity instanceof TileEntityBatteryTier2 || tileEntity instanceof TileEntityBatteryTier3 || tileEntity instanceof TileEntityBatteryTier4){
+			return new GuiBattery(new ContainerBattery(player.inventory, (Machine) tileEntity), player.inventory, (Machine) tileEntity);
 		}
 		//cuter
-		if(tileEntity instanceof CutterT1_Entity){
-			return new Cutter_Gui(new CutterContainer(player.inventory, (CutterT1_Entity) tileEntity),player.inventory, (CutterT1_Entity) tileEntity);
+		if(tileEntity instanceof TileEntityCutterT1){
+			return new GuiCutter(new ContainerCutter(player.inventory, (TileEntityCutterT1) tileEntity),player.inventory, (TileEntityCutterT1) tileEntity);
 		}
 		//purifier
-		if(tileEntity instanceof PurifierT1_Entity){
-			return new Purifier_Gui(new PurifierContainer(player.inventory, (PurifierT1_Entity) tileEntity),player.inventory, (PurifierT1_Entity) tileEntity);
+		if(tileEntity instanceof TileEntityPurifierT1){
+			return new GuiPurifier(new ContainerPurifier(player.inventory, (TileEntityPurifierT1) tileEntity),player.inventory, (TileEntityPurifierT1) tileEntity);
 		}
 		//generator
-		if(tileEntity instanceof CoalGeneratorEntityT1_Entity){
-			return new CoalGenerator_Gui(new GeneratorContainer(player.inventory, (CoalGeneratorEntityT1_Entity) tileEntity), player.inventory, (CoalGeneratorEntityT1_Entity) tileEntity);
+		if(tileEntity instanceof TileEntityCoalGeneratorEntityT1){
+			return new GuiCoalGenerator(new ContainerGenerator(player.inventory, (TileEntityCoalGeneratorEntityT1) tileEntity), player.inventory, (TileEntityCoalGeneratorEntityT1) tileEntity);
 		}
 		//Miner
-		if(tileEntity instanceof MinerEntity){
-			return new MinerGui(new MinerContainer(player.inventory, (MinerEntity) tileEntity), player.inventory, (MinerEntity) tileEntity);
+		if(tileEntity instanceof TileEntityMiner){
+			return new GuiMiner(new ContainerMiner(player.inventory, (TileEntityMiner) tileEntity), player.inventory, (TileEntityMiner) tileEntity);
 		}
 		//Reactor
 		if(tileEntity instanceof Reactor_Core_Entity){
-			return new Reactor_Gui(new Reactor_Container(player.inventory, tileEntity), player.inventory, tileEntity);
+			return new GuiReactor(new ContainerReactor(player.inventory, tileEntity), player.inventory, tileEntity);
 		}
 		//MAssembly
-		if(tileEntity instanceof MolecularAssemblyEntity){
-			return new MAssemblyGui(new MAssemblyContainer(player.inventory, (MolecularAssemblyEntity) tileEntity), player.inventory, (MolecularAssemblyEntity) tileEntity);
+		if(tileEntity instanceof TileEntityMolecularAssembly){
+			return new GuiMolecularAssembly(new ContainerMolecularAssembly(player.inventory, (TileEntityMolecularAssembly) tileEntity), player.inventory, (TileEntityMolecularAssembly) tileEntity);
 		}
 		//ChargeStation
-		if(tileEntity instanceof ChargeStationEntity){
-			return new ChargeStation_Gui(new ChargeStationContainer(player.inventory, (ChargeStationEntity) tileEntity), player.inventory, (ChargeStationEntity) tileEntity);
+		if(tileEntity instanceof TileEntityChargeStation){
+			return new GuiChargeStation(new ContainerChargeStation(player.inventory, (TileEntityChargeStation) tileEntity), player.inventory, (TileEntityChargeStation) tileEntity);
 		}
 		//Printer3D
-		if(tileEntity instanceof Painter3DEntity){
-			return new Printer3D_Gui(new Painter3DContainer(player.inventory, (Painter3DEntity) tileEntity), player.inventory, (Painter3DEntity) tileEntity);
+		if(tileEntity instanceof TileEntityPainter3D){
+			return new GuiPainter3D(new ContainerPainter3D(player.inventory, (TileEntityPainter3D) tileEntity), player.inventory, (TileEntityPainter3D) tileEntity);
 		}
 		//Engine
-		if(tileEntity instanceof EngineEntity){
-			return new EngineGui(new EngineContainer(player.inventory, (EngineEntity) tileEntity), player.inventory, (EngineEntity) tileEntity);
+		if(tileEntity instanceof TileEntityEngine){
+			return new GuiEngine(new ContainerEngine(player.inventory, (TileEntityEngine) tileEntity), player.inventory, (TileEntityEngine) tileEntity);
 		}
 		//Crafter
-		if(tileEntity instanceof CrafterEntity){
-			return new Crafter_Gui(new CrafterContainer(player.inventory, (CrafterEntity) tileEntity), player.inventory, (CrafterEntity) tileEntity);
+		if(tileEntity instanceof TileEntityCrafter){
+			return new GuiCrafter(new ContainerCrafter(player.inventory, (TileEntityCrafter) tileEntity), player.inventory, (TileEntityCrafter) tileEntity);
 		}
 		//Tesseract
-		if(tileEntity instanceof Tesseract_Entity){
-			return new TesseractGui(new TesseractContainer(player.inventory, (Tesseract_Entity) tileEntity), player.inventory, (Tesseract_Entity) tileEntity);
+		if(tileEntity instanceof TileEntityTesseract){
+			return new GuiTesseract(new ContainerTesseract(player.inventory, (TileEntityTesseract) tileEntity), player.inventory, (TileEntityTesseract) tileEntity);
 		}
 		//Fermenter
-		if(tileEntity instanceof FermenterEntity){
-			return new Fermenter_Gui(new FermenterContainer(player.inventory, (FermenterEntity) tileEntity), (FermenterEntity) tileEntity);
+		if(tileEntity instanceof TileEntityFermenter){
+			return new GuiFermenter(new ContainerFermenter(player.inventory, (TileEntityFermenter) tileEntity), (TileEntityFermenter) tileEntity);
 		}
 		//HologramEmiter
-		if(tileEntity instanceof HologramEmiterEntity){
-			return new HologramEmiterGui(new HologramEmiterContainer(player.inventory, (HologramEmiterEntity) tileEntity), (HologramEmiterEntity) tileEntity);
+		if(tileEntity instanceof TileEntityHologramEmiter){
+			return new GuiHologramEmiter(new ContainerHologramEmiter(player.inventory, (TileEntityHologramEmiter) tileEntity), (TileEntityHologramEmiter) tileEntity);
 		}
 		//Boiler
-		if(tileEntity instanceof BoilerEntity){
-			return new Boiler_Gui(new BoilerContainer(player.inventory, (BoilerEntity) tileEntity), (BoilerEntity) tileEntity);
+		if(tileEntity instanceof TileEntityBoiler){
+			return new GuiBoiler(new ContainerBoiler(player.inventory, (TileEntityBoiler) tileEntity), (TileEntityBoiler) tileEntity);
 		}
 		//Climate
-		if(tileEntity instanceof ClimateEntity){
-			return new ClimateStation_Gui(new ClimateStationContainer(player.inventory, (ClimateEntity) tileEntity), (ClimateEntity) tileEntity);
+		if(tileEntity instanceof TileEntityClimateStation){
+			return new GuiClimateStation(new ContainerClimateStation(player.inventory, (TileEntityClimateStation) tileEntity), (TileEntityClimateStation) tileEntity);
 		}
 		//FluidGenerator
-		if(tileEntity instanceof FluidGeneratorT1_Entity){
-			return new FluidGeneratorGui(new FluidGeneratorContainer(player.inventory, tileEntity), (FluidGeneratorT1_Entity) tileEntity);
+		if(tileEntity instanceof TileEntityFluidGeneratorT1){
+			return new GuiFluidGenerator(new ContainerFluidGenerator(player.inventory, tileEntity), (TileEntityFluidGeneratorT1) tileEntity);
 		}
 		//Refinery
 		if(tileEntity instanceof Refinery_IO_Entity){
-			return new Refinery_Gui(new RefineryContainer(player.inventory, tileEntity),(Refinery_IO_Entity) tileEntity);
+			return new GuiRefinery(new ContainerRefinery(player.inventory, tileEntity),(Refinery_IO_Entity) tileEntity);
 		}
 		//Laminator
-		if(tileEntity instanceof LaminatorT1_Entity){
-			return new Laminator_Gui(new LaminatorContainer(player.inventory, (LaminatorT1_Entity) tileEntity),(LaminatorT1_Entity) tileEntity);
+		if(tileEntity instanceof TileEntityLaminatorT1){
+			return new GuiLaminator(new ContainerLaminator(player.inventory, (TileEntityLaminatorT1) tileEntity),(TileEntityLaminatorT1) tileEntity);
 		}
 		//Heater
-		if(tileEntity instanceof Heater_Entity){
-			return new Heater_Gui(new Heater_Container(player.inventory, (Heater_Entity) tileEntity),(Heater_Entity) tileEntity);
+		if(tileEntity instanceof TileEntityHeater){
+			return new GuiHeater(new ContainerHeater(player.inventory, (TileEntityHeater) tileEntity),(TileEntityHeater) tileEntity);
 		}
 		//Chemical
-		if(tileEntity instanceof ChemicalPlantT1_Entity){
-			return new Chemical_Gui(new Chemical_Container(player.inventory, (ChemicalPlantT1_Entity) tileEntity),(ChemicalPlantT1_Entity) tileEntity);
+		if(tileEntity instanceof TileEntityChemicalPlantT1){
+			return new GuiChemical(new ContainerChemical(player.inventory, (TileEntityChemicalPlantT1) tileEntity),(TileEntityChemicalPlantT1) tileEntity);
 		}
 		//Dynamo
-		if(tileEntity instanceof DynamoEntity){
-			return new Dynamo_Gui(new Dynamo_Container(player.inventory,tileEntity),(DynamoEntity) tileEntity);
+		if(tileEntity instanceof TileEntityDynamo){
+			return new GuiDynamo(new ContainerDynamo(player.inventory,tileEntity),(TileEntityDynamo) tileEntity);
 		}
 		//infinite supply
-		if(tileEntity instanceof InfiniteSupplyEntity){
-			return new InfiniteSupplyGui(new InfiniteSupplyContainer(player.inventory,tileEntity),(InfiniteSupplyEntity) tileEntity);
+		if(tileEntity instanceof TileEntityInfiniteSupply){
+			return new GuiInfiniteSupply(new ContainerInfiniteSupply(player.inventory,tileEntity),(TileEntityInfiniteSupply) tileEntity);
 		}
 		return null;
 	}

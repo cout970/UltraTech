@@ -1,18 +1,21 @@
 package common.cout970.UltraTech.TileEntities.multiblocks.refinery;
 
+import ultratech.api.refinery.IRefineryCoreEntity;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
-import common.cout970.UltraTech.util.fluids.UT_Tank;
+import common.cout970.UltraTech.util.LogHelper;
+import common.cout970.UltraTech.util.fluids.TankUT;
 
 public class Refinery_IO_Entity extends Refinery_Entity_Base implements IFluidHandler{
 
-	public UT_Tank tank;
+	public TankUT tank;
 	public int mode = 0;
 	public boolean update;
 	
@@ -25,9 +28,16 @@ public class Refinery_IO_Entity extends Refinery_Entity_Base implements IFluidHa
 	}
 	
 	@Override
+	public void refreshCore() {
+		TileEntity t = worldObj.getTileEntity(x, y, z);
+		if(t instanceof IRefineryCoreEntity){
+			setCore((IRefineryCoreEntity) t);
+		}
+	}
+	
+	@Override
 	public void RestaureBlock() {
 		worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 0, 2);
-		mode = 0;
 	}
 	
 	public void setMode(int m){
@@ -41,8 +51,8 @@ public class Refinery_IO_Entity extends Refinery_Entity_Base implements IFluidHa
 		return worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
 	}
 	
-	public UT_Tank getTank(){
-		if(tank == null)tank = new UT_Tank(4000, this);
+	public TankUT getTank(){
+		if(tank == null)tank = new TankUT(4000, this);
 		return tank;
 	}
 	
@@ -94,7 +104,6 @@ public class Refinery_IO_Entity extends Refinery_Entity_Base implements IFluidHa
 	}
 
 	public void onNeigUpdate() {
-		mode = getMode();
 		if(core != null){
 			core.updateComponents();
 		}

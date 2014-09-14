@@ -8,9 +8,9 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-import common.cout970.UltraTech.TileEntities.intermod.EngineEntity;
+import common.cout970.UltraTech.TileEntities.intermod.TileEntityEngine;
 import common.cout970.UltraTech.client.models.ModelEngine;
-import common.cout970.UltraTech.client.textures.ResourcesLocations;
+import common.cout970.UltraTech.client.textures.ModelResources;
 import common.cout970.UltraTech.misc.IconFactory;
 import common.cout970.UltraTech.util.render.CubeRenderer_Util;
 
@@ -26,10 +26,10 @@ public class RenderEngine extends TileEntitySpecialRenderer{
 	@Override
 	public void renderTileEntityAt(TileEntity te, double x, double y,
 			double z, float scale) {
-		EngineEntity e = (EngineEntity) te;
+		TileEntityEngine e = (TileEntityEngine) te;
 		GL11.glPushMatrix();
 		GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
-		this.bindTexture(ResourcesLocations.ENGINE);
+		this.bindTexture(ModelResources.ENGINE);
 		GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
 		setRotation(e);
 		this.model.render((Entity)null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
@@ -66,7 +66,7 @@ public class RenderEngine extends TileEntitySpecialRenderer{
 		GL11.glPopMatrix();
 	}
 
-	private void setRotation(EngineEntity e) {
+	private void setRotation(TileEntityEngine e) {
 		//rotation
 		switch(e.direction){
 		case NORTH:{
@@ -101,7 +101,7 @@ public class RenderEngine extends TileEntitySpecialRenderer{
 
 	}
 
-	public long getDelta(EngineEntity te){
+	public long getDelta(TileEntityEngine te){
 		long aux = System.currentTimeMillis();
 		long delta = System.currentTimeMillis()-te.oldTime;
 		te.oldTime = aux;

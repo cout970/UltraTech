@@ -3,7 +3,7 @@ package common.cout970.UltraTech.network.messages;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntity;
-import common.cout970.UltraTech.TileEntities.electric.ClimateEntity;
+import common.cout970.UltraTech.TileEntities.electric.TileEntityClimateStation;
 import common.cout970.UltraTech.TileEntities.multiblocks.reactor.Reactor_Core_Entity;
 import common.cout970.UltraTech.network.SyncTile;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;

@@ -1,6 +1,6 @@
 package common.cout970.UltraTech.util.power;
 
-import common.cout970.UltraTech.TileEntities.intermod.DynamoEntity;
+import common.cout970.UltraTech.TileEntities.intermod.TileEntityDynamo;
 
 public class PowerExchange {
 	

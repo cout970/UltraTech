@@ -1,6 +1,8 @@
 package common.cout970.UltraTech.client.renderItems;
 
 import net.minecraft.client.renderer.texture.TextureMap;
+import net.minecraft.item.EnumAction;
+import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraftforge.client.IItemRenderer;
@@ -9,11 +11,12 @@ import net.minecraftforge.client.IItemRenderer.ItemRendererHelper;
 import net.minecraftforge.fluids.FluidStack;
 
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL44;
 
 import common.cout970.UltraTech.client.models.ModelBottle;
 import common.cout970.UltraTech.client.models.ModelFlamethrower;
-import common.cout970.UltraTech.client.textures.ResourcesLocations;
-import common.cout970.UltraTech.util.fluids.HelperNBT;
+import common.cout970.UltraTech.client.textures.ModelResources;
+import common.cout970.UltraTech.util.HelperNBT;
 import common.cout970.UltraTech.util.render.CubeRenderer_Util;
 import cpw.mods.fml.client.FMLClientHandler;
 
@@ -44,9 +47,9 @@ public class RenderFlamethrower implements IItemRenderer{
                 return;
             }
             case EQUIPPED: {
-            	GL11.glRotatef(-120, 0, 1, 0);
-            	GL11.glRotatef(-5, 1, 0, 0);
-            	render(0.3F, -0.5F, -0.2F, 1.5F,item);
+            	GL11.glRotatef(-140, 0, 1, 0);
+            	GL11.glRotatef(75, 1, 0, 0);
+            	render(0.1F, -1.5F, -0.3F, 1.5F,item);
                 return;
             }
             case INVENTORY: {
@@ -54,9 +57,10 @@ public class RenderFlamethrower implements IItemRenderer{
                 return;
             }
             case EQUIPPED_FIRST_PERSON: {
-            	GL11.glRotatef(130, 0, 1, 0);
-            	GL11.glRotatef(-5, 1, 0, 0);
-                render(0F, 0.2F, -0.2F, 0.9F,item);
+            	GL11.glRotatef(150, 0, 1, 0);
+            	GL11.glRotatef(-20, 1, 0, 0);
+            	GL11.glRotatef(-5, 0, 0, 1);
+                render(-0.3F, -0.2F, -0.0F, 1.0F,item);
                 return;
             }
             default:
@@ -80,10 +84,15 @@ public class RenderFlamethrower implements IItemRenderer{
         }
         GL11.glRotatef(180F, 0, 0, 1);
         GL11.glTranslatef(0, -1f, 0);
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(ResourcesLocations.FLAMETHROWER);
+        FMLClientHandler.instance().getClient().renderEngine.bindTexture(ModelResources.FLAMETHROWER);
         model.render(null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
         GL11.glEnable(GL11.GL_LIGHTING);
         GL11.glPopMatrix();
 	}
+	
+	public EnumAction getItemUseAction(ItemStack p_77661_1_)
+    {
+        return EnumAction.bow;
+    }
 
 }

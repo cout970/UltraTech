@@ -7,7 +7,7 @@ import net.minecraftforge.client.IItemRenderer;
 import org.lwjgl.opengl.GL11;
 
 import common.cout970.UltraTech.client.models.ModelEngine;
-import common.cout970.UltraTech.client.textures.ResourcesLocations;
+import common.cout970.UltraTech.client.textures.ModelResources;
 import cpw.mods.fml.client.FMLClientHandler;
 
 public class RenderEngineItem implements IItemRenderer{
@@ -65,7 +65,7 @@ public class RenderEngineItem implements IItemRenderer{
         GL11.glRotatef(180F, 0, 0, 1);
         GL11.glTranslatef(0, -2f, 0);
 
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(ResourcesLocations.ENGINE);
+        FMLClientHandler.instance().getClient().renderEngine.bindTexture(ModelResources.ENGINE);
         model.render(null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
         GL11.glTranslatef(0, 4*0.0625F, 0);
         model.renderMove(0.0625F);

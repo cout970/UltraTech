@@ -12,7 +12,7 @@ import net.minecraftforge.fluids.IFluidTank;
 public class Pipe extends SyncTile implements IFluidTransport{
 
 	private FluidNetwork net;
-	public  UT_Tank      buffer;
+	public  TankUT      buffer;
 	
 	
 	public void updateEntity(){
@@ -65,7 +65,7 @@ public class Pipe extends SyncTile implements IFluidTransport{
 	public void readFromNBT(NBTTagCompound p_145839_1_)
 	{
 		super.readFromNBT(p_145839_1_);
-		((UT_Tank) getTank()).readFromNBT(p_145839_1_, "net");
+		((TankUT) getTank()).readFromNBT(p_145839_1_, "net");
 		if(net != null && net.fluid == null){
 			if(getTank().getFluid() != null)net.fluid = getTank().getFluid().getFluid();
 		}
@@ -74,12 +74,12 @@ public class Pipe extends SyncTile implements IFluidTransport{
     public void writeToNBT(NBTTagCompound p_145841_1_)
     {
     	super.writeToNBT(p_145841_1_);
-    	((UT_Tank) getTank()).writeToNBT(p_145841_1_, "net");
+    	((TankUT) getTank()).writeToNBT(p_145841_1_, "net");
     }
 
 
 	public IFluidTank getTank() {
-		if(buffer == null)buffer = new UT_Tank(100, this);
+		if(buffer == null)buffer = new TankUT(100, this);
 		return buffer;
 	}
 

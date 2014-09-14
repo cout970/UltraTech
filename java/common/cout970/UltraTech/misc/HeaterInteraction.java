@@ -1,8 +1,8 @@
 package common.cout970.UltraTech.misc;
 
 import ultratech.api.util.UT_Utils;
-import common.cout970.UltraTech.TileEntities.electric.tiers.Heater_Entity;
-import common.cout970.UltraTech.TileEntities.fluid.BoilerEntity;
+import common.cout970.UltraTech.TileEntities.electric.tiers.TileEntityHeater;
+import common.cout970.UltraTech.TileEntities.fluid.TileEntityBoiler;
 import common.cout970.UltraTech.util.LogHelper;
 import common.cout970.UltraTech.util.power.PowerExchange;
 import net.minecraft.block.Block;
@@ -16,13 +16,13 @@ import net.minecraftforge.fluids.FluidRegistry;
 
 public class HeaterInteraction {
 
-	public Heater_Entity src;
+	public TileEntityHeater src;
 	public ForgeDirection side;
 	public Object target;
 	public Interaction type;
 	public float own;
 	
-	public HeaterInteraction(Heater_Entity h,ForgeDirection s,Interaction t){
+	public HeaterInteraction(TileEntityHeater h,ForgeDirection s,Interaction t){
 		src = h;
 		side = s;
 		type = t;
@@ -61,8 +61,8 @@ public class HeaterInteraction {
 			return 0f;
 		}else if(type == Interaction.Boiler){
 			if(target == null)target = UT_Utils.getRelative(src, side);
-			if(target instanceof BoilerEntity){
-				BoilerEntity b = (BoilerEntity) target;
+			if(target instanceof TileEntityBoiler){
+				TileEntityBoiler b = (TileEntityBoiler) target;
 				float change = change(heat, b.heat);
 				change = Math.min(change, heat-25);
 				b.heat += change;
@@ -94,9 +94,9 @@ public class HeaterInteraction {
 		return change;
 	}
 
-	public static Interaction isInteresting(Heater_Entity h, ForgeDirection d) {
+	public static Interaction isInteresting(TileEntityHeater h, ForgeDirection d) {
 		TileEntity t = UT_Utils.getRelative(h, d);
-		if(t instanceof BoilerEntity)return Interaction.Boiler;
+		if(t instanceof TileEntityBoiler)return Interaction.Boiler;
 		if(t instanceof TileEntityFurnace)return Interaction.Furnace;
 		Block b = h.getWorldObj().getBlock(h.xCoord+d.offsetX, h.yCoord+d.offsetY, h.zCoord+d.offsetZ);
 		if(b == null)return Interaction.Nothing;

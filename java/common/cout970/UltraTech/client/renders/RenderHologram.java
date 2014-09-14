@@ -10,7 +10,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import org.lwjgl.opengl.GL11;
 
-import common.cout970.UltraTech.TileEntities.utility.HologramEmiterEntity;
+import common.cout970.UltraTech.TileEntities.utility.TileEntityHologramEmiter;
 
 public class RenderHologram extends TileEntitySpecialRenderer{
 
@@ -19,7 +19,7 @@ public class RenderHologram extends TileEntitySpecialRenderer{
 	public void renderTileEntityAt(TileEntity te, double x, double y,
 			double z, float f) {
 		
-		HologramEmiterEntity h = (HologramEmiterEntity) te;
+		TileEntityHologramEmiter h = (TileEntityHologramEmiter) te;
 		if(h.rend == null)return;
 		
 		GL11.glPushMatrix();

@@ -31,8 +31,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.common.util.ForgeDirection;
-import common.cout970.UltraTech.TileEntities.utility.HologramEmiterEntity;
-import common.cout970.UltraTech.client.textures.ResourcesLocations;
+import common.cout970.UltraTech.TileEntities.utility.TileEntityHologramEmiter;
+import common.cout970.UltraTech.client.textures.ModelResources;
 import common.cout970.UltraTech.managers.BlockManager;
 import common.cout970.UltraTech.util.LogHelper;
 import common.cout970.UltraTech.util.render.IHologram;
@@ -155,7 +155,7 @@ public class ItemDisplay implements IHologram{
 					}
 				}
 			}
-			((HologramEmiterEntity)w.getTileEntity(x, y, z)).sendNetworkUpdate();
+			((TileEntityHologramEmiter)w.getTileEntity(x, y, z)).sendNetworkUpdate();
 		}
 	}
 

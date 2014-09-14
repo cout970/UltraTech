@@ -3,6 +3,8 @@ package common.cout970.UltraTech.managers;
 import static common.cout970.UltraTech.managers.BlockManager.Ores;
 import static common.cout970.UltraTech.managers.BlockManager.stoneblockblack;
 import static common.cout970.UltraTech.managers.BlockManager.stoneblockwhite;
+import static common.cout970.UltraTech.managers.BlockManager.stoneblockclay;
+import static common.cout970.UltraTech.managers.BlockManager.stoneblocknormal;
 import static common.cout970.UltraTech.managers.ItemManager.ItemName;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -50,9 +52,11 @@ public class RecipeCreator {
 		RecipeRegistry.addRecipePurifier(new ItemStack(ItemName.get("RawSilicon"),1), new ItemStack(Blocks.quartz_block));
 		RecipeRegistry.addRecipePurifier(new ItemStack(Items.flint,1), new ItemStack(Blocks.gravel));
 		RecipeRegistry.addRecipePurifier(new ItemStack(Blocks.sand,4), new ItemStack(Blocks.sandstone));
-		RecipeRegistry.addRecipePurifier(new ItemStack(stoneblockblack,1,0), new ItemStack(Blocks.stone));
-		RecipeRegistry.addRecipePurifier(new ItemStack(stoneblockblack,1,0), new ItemStack(Blocks.cobblestone));
-		RecipeRegistry.addRecipePurifier(new ItemStack(stoneblockwhite,1,0), new ItemStack(Items.quartz));
+		RecipeRegistry.addRecipePurifier(new ItemStack(stoneblockblack,2,0), new ItemStack(Blocks.cobblestone));
+		RecipeRegistry.addRecipePurifier(new ItemStack(stoneblockwhite,2,0), new ItemStack(Items.quartz));
+		RecipeRegistry.addRecipePurifier(new ItemStack(stoneblockclay,2,0), new ItemStack(Items.clay_ball));
+		RecipeRegistry.addRecipePurifier(new ItemStack(stoneblocknormal,2,0), new ItemStack(Blocks.stone));
+
 		for(int r = 0;r <5;r++)//chunk to dust
 		RecipeRegistry.addRecipePurifier(new ItemStack(ItemName.get("Dust"),1,r), new ItemStack(ItemName.get("Chunk"),1,r));
 		RecipeRegistry.addRecipePurifier(new ItemStack(ItemName.get("Dust"),1,6), new ItemStack(ItemName.get("Chunk"),1,5));

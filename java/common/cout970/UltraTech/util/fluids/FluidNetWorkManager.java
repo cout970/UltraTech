@@ -30,27 +30,29 @@ public class FluidNetWorkManager implements IFluidHandler{
 		if(!this.canFill(from, resource.getFluid()))return 0;//check if can enter
 		int pipes = net.getPipes().size();//number of pipes
 		if(pipes <= 0)return 0;//error
-		int amount = Math.min(resource.amount,net.getCapacity()-net.getFluidAmount());
-		int initial = amount;
-		int temp = amount/pipes;//divided amount per tank
-
-		if(temp > 0){
+		int space = net.getCapacity()-net.getFluidAmount();
+		int toFill = Math.min(resource.amount, space);//min fluid, space
+		int aceptPerPipe = toFill/pipes;//divided amount per tank
+		int acepted = 0;
+		
+		if(aceptPerPipe > 0){
 			for(IFluidTransport t : net.getPipes()){
-				FluidStack f = new FluidStack(resource.fluidID, temp);
-				int acepted = t.getTank().fill(f, doFill);
-				amount -= acepted;
+				FluidStack f = new FluidStack(resource.fluidID, aceptPerPipe);
+				int lSpace = t.getTank().getFluidAmount();
+				int filled = t.getTank().fill(f, doFill);
+				acepted += filled;
 			}
 		}
-		if(amount > 0){//one by one until finish
+		if(aceptPerPipe*pipes != toFill){
 			for(IFluidTransport t : net.getPipes()){
-				if(amount > 0){
+				if(toFill - acepted > 0){
 					FluidStack f = new FluidStack(resource.fluidID, 1);
-					int acepted = t.getTank().fill(f, doFill);
-					amount -= acepted;
+					int filled = t.getTank().fill(f, doFill);
+					acepted += filled;
 				}
 			}
 		}
-		return initial-amount;
+		return acepted;
 	}
 
 	@Override
@@ -64,19 +66,21 @@ public class FluidNetWorkManager implements IFluidHandler{
 	public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain) {
 		int pipes = net.getPipes().size();//number of pipes
 		if(pipes <= 0)return null;//error
-		int amount = Math.min(maxDrain, net.getFluidAmount());
-		int temp = amount/pipes;//divided amount per tank
+		int output = Math.min(maxDrain, net.getFluidAmount());
+		if(output <= 0)return null;//empty
+		int outPerPipe = output/pipes;//divided amount per tank
 		int drained = 0;
-		
-		if(temp > 0){
+		if(outPerPipe > 0){
 			for(IFluidTransport t : net.getPipes()){
-				FluidStack d = t.getTank().drain(temp, doDrain);
-				if(d != null)drained += d.amount;
+				FluidStack d = t.getTank().drain(outPerPipe, doDrain);//outPerPipe
+				if(d != null){
+					drained += d.amount;				
+				}
 			}
 		}
-		if(amount-drained > 0){//one by one until finish
+		if(output-drained > 0){//one by one until finish
 			for(IFluidTransport t : net.getPipes()){
-				if(amount-drained > 0){
+				if(output-drained > 0){
 					FluidStack d = t.getTank().drain(1, doDrain);
 					if(d != null){drained += d.amount;
 					}

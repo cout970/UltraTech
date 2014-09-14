@@ -7,13 +7,13 @@ import ultratech.api.power.CableType;
 import ultratech.api.power.PowerInterface;
 import ultratech.api.power.interfaces.ICable;
 import ultratech.api.power.interfaces.IPowerConductor;
-import common.cout970.UltraTech.TileEntities.intermod.EngineEntity;
+import common.cout970.UltraTech.TileEntities.intermod.TileEntityEngine;
 
 public class CableInterfaceEngine implements ICable{
 
-	public EngineEntity source; 
+	public TileEntityEngine source; 
 	
-	public CableInterfaceEngine(EngineEntity owner){
+	public CableInterfaceEngine(TileEntityEngine owner){
 		source = owner;
 	}
 	

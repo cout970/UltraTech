@@ -19,7 +19,7 @@ import codechicken.lib.vec.Cuboid6;
 import codechicken.lib.vec.Vector3;
 import codechicken.multipart.NormallyOccludedPart;
 import codechicken.multipart.TMultiPart;
-import common.cout970.UltraTech.multipart.BasicPartUT;
+import common.cout970.UltraTech.multipart.MultiPartUT;
 import common.cout970.UltraTech.multipart.MultiPartRegistry_UT;
 import common.cout970.UltraTech.multipart.client.RenderCablePlane;
 import common.cout970.UltraTech.network.Net_Utils;
@@ -27,7 +27,7 @@ import common.cout970.UltraTech.network.messages.MessageMultiPartUpdate;
 import common.cout970.UltraTech.util.LogHelper;
 import common.cout970.UltraTech.util.power.cables.CableInterfaceRibbonCable;
 
-public abstract class MultiPartCable_Ribbon extends BasicPartUT implements IPowerConductor{
+public abstract class MultiPartCable_Ribbon extends MultiPartUT implements IPowerConductor{
 
 	public MultiPartCable_Ribbon() {
 		super(MultiPartRegistry_UT.PlaneCable);

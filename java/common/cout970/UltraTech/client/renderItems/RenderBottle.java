@@ -10,9 +10,9 @@ import net.minecraftforge.fluids.FluidStack;
 import org.lwjgl.opengl.GL11;
 
 import common.cout970.UltraTech.client.models.ModelBottle;
-import common.cout970.UltraTech.client.textures.ResourcesLocations;
+import common.cout970.UltraTech.client.textures.ModelResources;
+import common.cout970.UltraTech.util.HelperNBT;
 import common.cout970.UltraTech.util.LogHelper;
-import common.cout970.UltraTech.util.fluids.HelperNBT;
 import common.cout970.UltraTech.util.render.CubeRenderer_Util;
 import cpw.mods.fml.client.FMLClientHandler;
 
@@ -79,7 +79,7 @@ public class RenderBottle implements IItemRenderer{
         }
         GL11.glRotatef(180F, 0, 0, 1);
         GL11.glTranslatef(0, -1f, 0);
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(ResourcesLocations.BOTTLE);
+        FMLClientHandler.instance().getClient().renderEngine.bindTexture(ModelResources.BOTTLE);
         model.render(null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
         FluidStack f = HelperNBT.getFluid(item);
         if(f != null){

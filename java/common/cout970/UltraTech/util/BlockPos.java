@@ -1,5 +1,7 @@
 package common.cout970.UltraTech.util;
 
+import javax.vecmath.Vector3d;
+
 import net.minecraft.nbt.NBTTagCompound;
 
 public class BlockPos {

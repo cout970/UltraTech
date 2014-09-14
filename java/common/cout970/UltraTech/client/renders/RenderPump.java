@@ -2,11 +2,11 @@ package common.cout970.UltraTech.client.renders;
 
 import org.lwjgl.opengl.GL11;
 
-import common.cout970.UltraTech.TileEntities.electric.PumpEntity;
+import common.cout970.UltraTech.TileEntities.electric.TileEntityPump;
 import common.cout970.UltraTech.client.models.ModelBoiler;
 import common.cout970.UltraTech.client.models.ModelPump;
 import common.cout970.UltraTech.client.models.ModelPumpJack;
-import common.cout970.UltraTech.client.textures.ResourcesLocations;
+import common.cout970.UltraTech.client.textures.ModelResources;
 import common.cout970.UltraTech.misc.IconFactory;
 import common.cout970.UltraTech.util.render.CubeRenderer_Util;
 import net.minecraft.client.model.ModelRenderer;
@@ -48,7 +48,7 @@ public class RenderPump extends TileEntitySpecialRenderer{
 //		}
 //		GL11.glEnable(GL11.GL_LIGHTING);
 		
-		bindTexture(ResourcesLocations.PUMP);
+		bindTexture(ModelResources.PUMP);
 		GL11.glTranslatef((float) x + 0.5F, (float) y - 0.5F, (float) z + 0.5F);
 		GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
 
@@ -58,7 +58,7 @@ public class RenderPump extends TileEntitySpecialRenderer{
 		GL11.glDisable(GL11.GL_LIGHTING);
 		GL11.glDisable(GL11.GL_CULL_FACE);
 		//aninmation
-		PumpEntity te = (PumpEntity) e;
+		TileEntityPump te = (TileEntityPump) e;
 		double dif = System.currentTimeMillis()-te.animationTime;
 		te.animationTime = System.currentTimeMillis();
 		if(dif > 50)dif = 0;

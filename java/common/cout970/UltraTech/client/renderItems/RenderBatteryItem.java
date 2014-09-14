@@ -7,7 +7,7 @@ import net.minecraftforge.client.IItemRenderer;
 import org.lwjgl.opengl.GL11;
 
 import common.cout970.UltraTech.client.models.ModelBattery;
-import common.cout970.UltraTech.client.textures.ResourcesLocations;
+import common.cout970.UltraTech.client.textures.ModelResources;
 import cpw.mods.fml.client.FMLClientHandler;
 
 public class RenderBatteryItem implements IItemRenderer {
@@ -32,11 +32,11 @@ public class RenderBatteryItem implements IItemRenderer {
 	@Override
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
 		ResourceLocation texture;
-		if(item.getItemDamage() == 0)texture = ResourcesLocations.BATTERY_T1;
-		else if(item.getItemDamage() == 1)texture = ResourcesLocations.BATTERY_T2;
-		else if(item.getItemDamage() == 2)texture = ResourcesLocations.BATTERY_T3;
-		else if(item.getItemDamage() == 3)texture = ResourcesLocations.BATTERY_T4;
-		else texture = ResourcesLocations.BATTERY_T1;
+		if(item.getItemDamage() == 0)texture = ModelResources.BATTERY_T1;
+		else if(item.getItemDamage() == 1)texture = ModelResources.BATTERY_T2;
+		else if(item.getItemDamage() == 2)texture = ModelResources.BATTERY_T3;
+		else if(item.getItemDamage() == 3)texture = ModelResources.BATTERY_T4;
+		else texture = ModelResources.BATTERY_T1;
 		FMLClientHandler.instance().getClient().renderEngine.bindTexture(texture);
 		switch (type) {
             case ENTITY: {

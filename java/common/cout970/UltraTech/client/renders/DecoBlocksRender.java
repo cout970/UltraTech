@@ -2,7 +2,8 @@ package common.cout970.UltraTech.client.renders;
 
 import org.lwjgl.opengl.GL11;
 
-import common.cout970.UltraTech.blocks.decoration.Deco_Block;
+import common.cout970.UltraTech.blocks.decoration.BlockDeco;
+import common.cout970.UltraTech.managers.ConfigManager;
 import common.cout970.UltraTech.proxy.ClientProxy;
 import common.cout970.UltraTech.util.LogHelper;
 import net.minecraft.block.Block;
@@ -26,13 +27,14 @@ public class DecoBlocksRender implements ISimpleBlockRenderingHandler{
         
 		Tessellator t = Tessellator.instance;
 //		//texture
-		IIcon c = Deco_Block.Base;
+		IIcon c = BlockDeco.Base;
 		GL11.glPushMatrix();
 		int m = w.getBlockMetadata(x, y, z);
 		setColorT(m);
+		
 		block.setLightLevel(1f);
 		t.setBrightness(block.getMixedBrightnessForBlock(w, x, y, z));
-		block.setLightLevel(0f);
+		block.setLightLevel(ConfigManager.DECO_LIGHT);
 		
 		//in		
 		if(block.shouldSideBeRendered(w, x, y+1, z, 0))r.renderFaceYPos(block, x, y, z, c);
@@ -51,7 +53,7 @@ public class DecoBlocksRender implements ISimpleBlockRenderingHandler{
 	@Override
 	public void renderInventoryBlock(Block b, int m, int modelID, RenderBlocks r) {
 		Tessellator t = Tessellator.instance;
-		IIcon f = Deco_Block.Base;
+		IIcon f = BlockDeco.Base;
 		setColorGL(m);
 		
 		//interior

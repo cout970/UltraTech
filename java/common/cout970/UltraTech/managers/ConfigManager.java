@@ -11,6 +11,7 @@ import static common.cout970.UltraTech.managers.BlockManager.*;
 public class ConfigManager {
 
 	public static Configuration config;
+	public static float DECO_LIGHT = 1F;
 	
 	public static void init(File file) {
 		if(config == null){
@@ -31,7 +32,7 @@ public class ConfigManager {
 		
 		OreGeneration.readConfigOre(config);
 		OreGeneration.readConfigOil(config);
-		
+		DECO_LIGHT = config.getFloat("deco_light", "Health", 1f, 0f, 1f, "The light emited for the deco blocks, only if you want to save your eyes!");
 		if(config.hasChanged()){
 			config.save();
 		}

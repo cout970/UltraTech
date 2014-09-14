@@ -11,12 +11,12 @@ import common.cout970.UltraTech.util.LogHelper;
 import common.cout970.UltraTech.util.fluids.FluidNetwork;
 import common.cout970.UltraTech.util.fluids.FluidUtils;
 import common.cout970.UltraTech.util.fluids.IFluidTransport;
-import common.cout970.UltraTech.util.fluids.UT_Tank;
+import common.cout970.UltraTech.util.fluids.TankUT;
 
-public abstract class MultiPartPipe extends BasicPartUT implements IFluidTransport{
+public abstract class MultiPartPipe extends MultiPartUT implements IFluidTransport{
 
 	private FluidNetwork net;
-	public UT_Tank buffer;
+	public TankUT buffer;
 	
 	public MultiPartPipe(Item a) {
 		super(a);
@@ -57,13 +57,13 @@ public abstract class MultiPartPipe extends BasicPartUT implements IFluidTranspo
 	public void save(NBTTagCompound p_145839_1_)
     {
 		super.save(p_145839_1_);
-        ((UT_Tank) getTank()).writeToNBT(p_145839_1_, "net");
+        ((TankUT) getTank()).writeToNBT(p_145839_1_, "net");
     }
 
     public void load(NBTTagCompound p_145841_1_)
     {
     	super.load(p_145841_1_);
-    	((UT_Tank) getTank()).readFromNBT(p_145841_1_, "net");
+    	((TankUT) getTank()).readFromNBT(p_145841_1_, "net");
 		if(net != null && net.fluid == null){
 			if(getTank().getFluid() != null)net.fluid = getTank().getFluid().getFluid();
 		}
@@ -89,7 +89,7 @@ public abstract class MultiPartPipe extends BasicPartUT implements IFluidTranspo
 
 	@Override
 	public IFluidTank getTank() {
-		if(buffer == null)buffer = new UT_Tank(100, tile());
+		if(buffer == null)buffer = new TankUT(100, tile());
 		return buffer;
 	}
 }

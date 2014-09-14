@@ -5,7 +5,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import common.cout970.UltraTech.TileEntities.multiblocks.reactor.Reactor_IO_Entity;
 
-public class Reactor_IO_Block extends ReactorPartBase{
+public class Reactor_IO_Block extends ReactorPartBaseBlock{
 
 	public Reactor_IO_Block(Material m) {
 		super(m, "io");

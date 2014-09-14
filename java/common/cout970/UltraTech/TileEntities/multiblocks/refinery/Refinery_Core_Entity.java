@@ -9,17 +9,17 @@ import net.minecraftforge.fluids.FluidStack;
 import ultratech.api.recipes.Refinery_Recipe;
 import ultratech.api.refinery.IRefineryCoreEntity;
 import common.cout970.UltraTech.util.LogHelper;
-import common.cout970.UltraTech.util.fluids.UT_Tank;
+import common.cout970.UltraTech.util.fluids.TankUT;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class Refinery_Core_Entity extends Refinery_Entity_Base implements IRefineryCoreEntity{
 
 	public List<Refinery_IO_Entity> IO;
-	public UT_Tank in;
-	public UT_Tank out1;
-	public UT_Tank out2;
-	public UT_Tank out3;
+	public TankUT in;
+	public TankUT out1;
+	public TankUT out2;
+	public TankUT out3;
 	public Refinery_Recipe recipe;
 	public float progres1;
 	public float progres2;

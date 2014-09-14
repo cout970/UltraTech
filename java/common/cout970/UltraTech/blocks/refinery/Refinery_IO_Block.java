@@ -1,9 +1,6 @@
 package common.cout970.UltraTech.blocks.refinery;
 
-import common.cout970.UltraTech.TileEntities.multiblocks.refinery.RefineryMultiblockTweak;
-import common.cout970.UltraTech.TileEntities.multiblocks.refinery.Refinery_IO_Entity;
-import common.cout970.UltraTech.client.textures.Block_Textures;
-import common.cout970.UltraTech.managers.UltraTech;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,7 +8,13 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
-public class Refinery_IO_Block extends RefineryPartBase{
+import common.cout970.UltraTech.TileEntities.multiblocks.refinery.RefineryMultiblockTweak;
+import common.cout970.UltraTech.TileEntities.multiblocks.refinery.Refinery_IO_Entity;
+import common.cout970.UltraTech.client.textures.Block_Textures;
+import common.cout970.UltraTech.managers.UltraTech;
+import common.cout970.UltraTech.util.LogHelper;
+
+public class Refinery_IO_Block extends RefineryPartBaseBlock{
 
 	public Refinery_IO_Block(Material m) {
 		super(m, "refinery_io");
@@ -27,17 +30,24 @@ public class Refinery_IO_Block extends RefineryPartBase{
 		if(p.isSneaking()){
 			TileEntity t = w.getTileEntity(x, y, z);
 			if(t instanceof Refinery_IO_Entity){
-				int m = ((Refinery_IO_Entity) t).getMode();
+				int m = ((Refinery_IO_Entity) t).mode;
+				if(m == 0)((Refinery_IO_Entity) t).setMode(1);
 				if(m == 1)((Refinery_IO_Entity) t).setMode(2);
 				if(m == 2)((Refinery_IO_Entity) t).setMode(3);
 				if(m == 3)((Refinery_IO_Entity) t).setMode(4);
-				if(m == 4)((Refinery_IO_Entity) t).setMode(1);
+				if(m == 4)((Refinery_IO_Entity) t).setMode(0);
 			}
 		}else{
 			p.openGui(UltraTech.instance, 14, w, x, y, z);
 		}
-		return false;
+		return true;
 	}
+	
+	public void breakBlock(World w, int x, int y, int z, Block b, int meta)
+    {
+		RefineryMultiblockTweak.onStructureDesactivate(w,x,y,z,this);
+		w.removeTileEntity(x, y, z);
+    }
 	
 	public void registerBlockIcons(IIconRegister IR){
 		icons = new IIcon[5];

@@ -3,8 +3,8 @@ package common.cout970.UltraTech.network.messages;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntity;
-import common.cout970.UltraTech.TileEntities.electric.tiers.Tesseract_Entity;
-import common.cout970.UltraTech.TileEntities.utility.Painter3DEntity;
+import common.cout970.UltraTech.TileEntities.electric.tiers.TileEntityTesseract;
+import common.cout970.UltraTech.TileEntities.utility.TileEntityPainter3D;
 import common.cout970.UltraTech.network.SyncTile;
 import common.cout970.UltraTech.util.LogHelper;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
@@ -46,8 +46,8 @@ public class MessageTesseract implements IMessage, IMessageHandler<MessageTesser
 	@Override
 	public IMessage onMessage(MessageTesseract message, MessageContext ctx) {
 		TileEntity t = ctx.getServerHandler().playerEntity.worldObj.getTileEntity(message.x, message.y, message.z);
-		if(t instanceof Tesseract_Entity){
-			((Tesseract_Entity)t).setFrequency(message.freq);
+		if(t instanceof TileEntityTesseract){
+			((TileEntityTesseract)t).setFrequency(message.freq);
 		}
 		return null;
 	}

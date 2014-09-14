@@ -3,7 +3,7 @@ package common.cout970.UltraTech.network.messages;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntity;
-import common.cout970.UltraTech.TileEntities.electric.ClimateEntity;
+import common.cout970.UltraTech.TileEntities.electric.TileEntityClimateStation;
 import common.cout970.UltraTech.network.SyncTile;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
@@ -45,8 +45,8 @@ public class MessageClimateStation implements IMessage, IMessageHandler<MessageC
 	@Override
 	public IMessage onMessage(MessageClimateStation message, MessageContext ctx) {
 		TileEntity tileEntity = ctx.getServerHandler().playerEntity.worldObj.getTileEntity(message.x, message.y, message.z);
-		if(tileEntity instanceof ClimateEntity){
-			((ClimateEntity) tileEntity).setClimate(message.type);
+		if(tileEntity instanceof TileEntityClimateStation){
+			((TileEntityClimateStation) tileEntity).setClimate(message.type);
 		}
 		return null;
 	}

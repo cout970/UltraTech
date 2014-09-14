@@ -11,9 +11,9 @@ import ultratech.api.power.NetworkManagerRegistry;
 import ultratech.api.power.multipart.MultipartReference;
 
 import com.google.common.collect.Lists;
-import common.cout970.UltraTech.TileEntities.electric.MinerEntity;
-import common.cout970.UltraTech.handlers.BottleHandler;
-import common.cout970.UltraTech.handlers.FuelHandler;
+import common.cout970.UltraTech.TileEntities.electric.TileEntityMiner;
+import common.cout970.UltraTech.handlers.HandlerBottle;
+import common.cout970.UltraTech.handlers.HandlerFuel;
 import common.cout970.UltraTech.handlers.GuiHandler;
 import common.cout970.UltraTech.handlers.UltratechWorldGenerator;
 import common.cout970.UltraTech.multipart.MultiPartRegistry_UT;
@@ -36,7 +36,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 
 
-@Mod(modid = InformationManager.MOD_ID, name = InformationManager.MOD_ID,version = "1.7.10-0.9.6",guiFactory = InformationManager.GUI_FACTORY)
+@Mod(modid = InformationManager.MOD_ID, name = InformationManager.MOD_ID,version = "1.7.10-0.9.6.1",guiFactory = InformationManager.GUI_FACTORY)
 
 
 public class UltraTech {
@@ -88,7 +88,7 @@ public class UltraTech {
 			NetworkManagerRegistry.loadDefaultPathFinder();
 		}
 		CompatibilityManager.initCompatibilitys();									//oredict and buildcraft engine fuel
-		GameRegistry.registerFuelHandler(new FuelHandler());						//fuel
+		GameRegistry.registerFuelHandler(new HandlerFuel());						//fuel
 		CraftManager.registerCraft();												//craft and smelting
 		RecipeCreator.initRecipes();												//cutter for machines
 		GameRegistry.registerWorldGenerator(new UltratechWorldGenerator(), 10);					//world generation
@@ -98,7 +98,7 @@ public class UltraTech {
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event){
-		BottleHandler.RegisterBuckets();
+		HandlerBottle.RegisterBuckets();
 		ForgeChunkManager.setForcedChunkLoadingCallback(instance, new MinerChunkCallBack());
 	}
 
@@ -110,7 +110,7 @@ public class UltraTech {
 				int x = ticket.getModData().getInteger("quarryX");
 				int y = ticket.getModData().getInteger("quarryY");
 				int z = ticket.getModData().getInteger("quarryZ");
-				MinerEntity tq = (MinerEntity) world.getTileEntity(x, y, z);
+				TileEntityMiner tq = (TileEntityMiner) world.getTileEntity(x, y, z);
 				tq.forceChunkLoading(ticket);
 			}
 		}

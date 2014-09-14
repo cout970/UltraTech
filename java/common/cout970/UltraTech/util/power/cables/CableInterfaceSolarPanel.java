@@ -8,14 +8,14 @@ import ultratech.api.power.PowerInterface;
 import ultratech.api.power.interfaces.ICable;
 import ultratech.api.power.interfaces.IPowerConductor;
 
-import common.cout970.UltraTech.TileEntities.electric.tiers.SolarPanelEntity_T1;
+import common.cout970.UltraTech.TileEntities.electric.tiers.TileEntitySolarPanelT1;
 
 
 public class CableInterfaceSolarPanel implements ICable{
 		
-		public SolarPanelEntity_T1 source; 
+		public TileEntitySolarPanelT1 source; 
 		
-		public CableInterfaceSolarPanel(SolarPanelEntity_T1 owner){
+		public CableInterfaceSolarPanel(TileEntitySolarPanelT1 owner){
 			source = owner;
 		}
 		

@@ -7,7 +7,7 @@ import net.minecraftforge.client.IItemRenderer;
 import org.lwjgl.opengl.GL11;
 
 import common.cout970.UltraTech.client.models.ModelSteamTurbine;
-import common.cout970.UltraTech.client.textures.ResourcesLocations;
+import common.cout970.UltraTech.client.textures.ModelResources;
 import cpw.mods.fml.client.FMLClientHandler;
 
 public class RenderTurbineItem implements IItemRenderer{
@@ -65,7 +65,7 @@ public class RenderTurbineItem implements IItemRenderer{
         }
         GL11.glRotatef(180F, 0, 0, 1);
         GL11.glTranslatef(0, -1.5f, 0);
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(ResourcesLocations.STEAM_TURBINE);
+        FMLClientHandler.instance().getClient().renderEngine.bindTexture(ModelResources.STEAM_TURBINE);
         model.render(0.0625F);
         model.renderRotor(0.0625F);
         GL11.glEnable(GL11.GL_LIGHTING);

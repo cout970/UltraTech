@@ -7,9 +7,9 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import org.lwjgl.opengl.GL11;
 
-import common.cout970.UltraTech.TileEntities.electric.SteamTurbineEntity;
+import common.cout970.UltraTech.TileEntities.electric.TileEntitySteamTurbine;
 import common.cout970.UltraTech.client.models.ModelSteamTurbine;
-import common.cout970.UltraTech.client.textures.ResourcesLocations;
+import common.cout970.UltraTech.client.textures.ModelResources;
 import common.cout970.UltraTech.util.LogHelper;
 
 public class RenderTurbine extends TileEntitySpecialRenderer{
@@ -25,10 +25,10 @@ public class RenderTurbine extends TileEntitySpecialRenderer{
 			double z, float scale) {
 		GL11.glPushMatrix();
 		GL11.glTranslatef((float) x + 0.5F, (float) y + 0.5F, (float) z - 0.5F);
-		bindTexture(ResourcesLocations.STEAM_TURBINE);
+		bindTexture(ModelResources.STEAM_TURBINE);
 		GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
 		GL11.glRotatef(90F, 1.0F, 0.0F, 0.0F);
-		SteamTurbineEntity te = (SteamTurbineEntity) tile;
+		TileEntitySteamTurbine te = (TileEntitySteamTurbine) tile;
 		setRotation(te.facing);
 		model.render(0.0625F);
 		float delta = getDelta(te);
@@ -44,7 +44,7 @@ public class RenderTurbine extends TileEntitySpecialRenderer{
 
 
 	
-	public long getDelta(SteamTurbineEntity te){
+	public long getDelta(TileEntitySteamTurbine te){
 		long aux = System.currentTimeMillis();
 		long delta = System.currentTimeMillis()-te.oldTime;
 		te.oldTime = aux;

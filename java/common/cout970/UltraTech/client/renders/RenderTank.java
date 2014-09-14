@@ -2,9 +2,9 @@ package common.cout970.UltraTech.client.renders;
 
 import org.lwjgl.opengl.GL11;
 
-import common.cout970.UltraTech.TileEntities.fluid.TankEntity;
+import common.cout970.UltraTech.TileEntities.fluid.TileEntityFluidTank;
 import common.cout970.UltraTech.client.models.ModelFluidTank;
-import common.cout970.UltraTech.client.textures.ResourcesLocations;
+import common.cout970.UltraTech.client.textures.ModelResources;
 import common.cout970.UltraTech.util.render.CubeRenderer_Util;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureMap;
@@ -34,12 +34,12 @@ public class RenderTank  extends TileEntitySpecialRenderer{
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
 		GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
-		renderFluid((TankEntity)te);
+		renderFluid((TileEntityFluidTank)te);
 		GL11.glPopAttrib();
 		GL11.glPopMatrix();
 	}
 
-	private void renderFluid(TankEntity te) {
+	private void renderFluid(TileEntityFluidTank te) {
 		if(te.getTank() == null || te.getTank().getFluid() == null)return;
 		GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
 		bindTexture(TextureMap.locationBlocksTexture);

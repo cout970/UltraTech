@@ -143,27 +143,31 @@ public class MultiPartPipe_Copper extends MultiPartPipe implements ISidedHollowC
 		for(ForgeDirection d : ForgeDirection.VALID_DIRECTIONS){
 			if(connections[d.ordinal()]){
 				if(side[d.ordinal()] == ConnectionMode.OUTPUT){
-					int part = getNetwork().getFluidAmount();
-					int toD = Math.min(MAX_ACCEPT, part);
+					int total = getNetwork().getFluidAmount();//amount in total
+					int toD = Math.min(MAX_ACCEPT, total);//amount allowed to transfer
 					if(toD <= 0)continue;
 					if(getNetwork().getFluid() == null)continue;
-					FluidStack f = new FluidStack(getNetwork().getFluid(), toD);
-					TankConection t = tanks.get(d);
+					TankConection t = tanks.get(d);//get the tank
 					if(t != null){
-						int filled = t.tank.fill(t.side, f, true);
-						FluidStack df = drain(t.side.getOpposite(), filled, true);
+						toD = Math.min(toD, t.tank.fill(t.side, new FluidStack(getNetwork().fluid, toD), false));//min (this can transfer and tank can transfer)
+						if(toD > 0){
+							FluidStack df = drain(t.side.getOpposite(), toD, true);//drain from the network
+							if(df != null){
+								t.tank.fill(t.side, df, true);//fill the tank
+							}
+						}
 					}
 				}else if(side[d.ordinal()] == ConnectionMode.INPUT){
-					TankConection t = tanks.get(d);
+					TankConection t = tanks.get(d);//get tank
 					if(t != null){
-						FluidStack f = t.tank.drain(t.side, MAX_EXTRACT, false);
+						FluidStack f = t.tank.drain(t.side, MAX_EXTRACT, false);//simulated extraction 
 						if(f != null && (getNetwork().getFluid() == null || getNetwork().getFluid().getID() == f.fluidID)){
-							int space = getNetwork().getCapacity()-getNetwork().getFluidAmount();
-							int transfer = Math.min(f.amount, space);
-							int toD = Math.min(transfer, MAX_EXTRACT);
+							int space = getNetwork().getCapacity()-getNetwork().getFluidAmount();//space for fluid in the network
+							int toD = Math.min(f.amount, space);//min space, fluid
 							if(toD > 0){
-								FluidStack c = t.tank.drain(t.side, toD, true);
-								this.fill(null, c, true);
+								FluidStack c = t.tank.drain(t.side, toD, false);
+								int filled = fill(null, c, true);
+								t.tank.drain(t.side, filled, true);
 							}
 						}
 					}
@@ -284,6 +288,7 @@ public class MultiPartPipe_Copper extends MultiPartPipe implements ISidedHollowC
 					if(MultipartUtil.isHited(boundingBoxes[d.ordinal()], v)){
 						side[d.ordinal()] = ConnectionMode.getNext(side[d.ordinal()]);
 						locked[d.ordinal()] = true;
+						if(!world().isRemote)this.sendDescUpdate();
 					}
 				}
 			}

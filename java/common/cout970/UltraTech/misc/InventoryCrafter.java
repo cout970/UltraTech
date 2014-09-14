@@ -1,6 +1,6 @@
 package common.cout970.UltraTech.misc;
 
-import common.cout970.UltraTech.TileEntities.utility.CrafterEntity;
+import common.cout970.UltraTech.TileEntities.utility.TileEntityCrafter;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.InventoryCrafting;
@@ -8,9 +8,9 @@ import net.minecraft.item.ItemStack;
 
 public class InventoryCrafter extends InventoryCrafting{
 
-	public CrafterEntity entity;
+	public TileEntityCrafter entity;
 	
-	public InventoryCrafter(CrafterEntity e, int par2, int par3) {
+	public InventoryCrafter(TileEntityCrafter e, int par2, int par3) {
 		super(new Container(){
 			@Override
 			public boolean canInteractWith(EntityPlayer entityplayer) {

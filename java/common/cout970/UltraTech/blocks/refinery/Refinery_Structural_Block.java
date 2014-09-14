@@ -12,7 +12,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class Refinery_Structural_Block extends RefineryPartBase{
+public class Refinery_Structural_Block extends RefineryPartBaseBlock{
 
 	public Refinery_Structural_Block(Material m) {
 		super(m, "refinery_structure");

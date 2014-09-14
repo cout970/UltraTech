@@ -1,6 +1,6 @@
 package common.cout970.UltraTech.misc;
 
-import common.cout970.UltraTech.TileEntities.utility.CrafterEntity;
+import common.cout970.UltraTech.TileEntities.utility.TileEntityCrafter;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -24,7 +24,7 @@ public class Craft {
 		this.readFromNBT(tagCompound);
 	}
 
-	public InventoryCrafter getInventoryCrafter(CrafterEntity e) {
+	public InventoryCrafter getInventoryCrafter(TileEntityCrafter e) {
 		InventoryCrafter i = new InventoryCrafter(e, 3, 3);
 		for(int y =0;y<9;y++){
 			i.setInventorySlotContents(y, items[y]);

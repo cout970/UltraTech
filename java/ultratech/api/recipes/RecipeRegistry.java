@@ -19,6 +19,7 @@ public class RecipeRegistry{
 	public static Map<String,String> boiler = new HashMap<String,String>();
 	public static List<Refinery_Recipe> refinery = new ArrayList<Refinery_Recipe>();
 	public static List<Chemical_Recipe> chemical = new ArrayList<Chemical_Recipe>();
+	public static List<GrindingMill_Recipe> grinder = new ArrayList<GrindingMill_Recipe>();
 
 	
 	public static boolean addRecipeCVD(ItemStack output, ItemStack in1, ItemStack in2){
@@ -56,7 +57,7 @@ public class RecipeRegistry{
 	}
 	
 	public static boolean addRecipeCutter(ItemStack input, ItemStack output){
-		if(output == null && input == null)return false;
+		if(output == null || input == null)return false;
 		Cutter_Recipe a = new Cutter_Recipe(input, output, null, 100);
 		if(a.getInput(0).stackSize == 0)a.input.stackSize = 1;
 		if(a.getResult().stackSize == 0)a.output.stackSize = 1;
@@ -68,13 +69,27 @@ public class RecipeRegistry{
 	}
 
 	public static boolean addRecipeCutter(ItemStack input, ItemStack output, ItemStack output2, int prob){
-		if(output == null && input == null && output2 == null && prob > 0)return false;
+		if(output == null || input == null)return false;
 		Cutter_Recipe a = new Cutter_Recipe(input, output, output2, prob);
 		if(a.getInput(0).stackSize == 0)a.input.stackSize = 1;
 		if(a.getResult(0).stackSize == 0)a.getResult(0).stackSize = 1;
-		if(a.getResult(1).stackSize == 0)a.getResult(1).stackSize = 1;
+		if(a.getResult(1) != null && a.getResult(1).stackSize == 0)a.getResult(1).stackSize = 1;
 		if(!RecipeRegistry.cutter.contains(a)){
 			RecipeRegistry.cutter.add(a);
+			return true;
+		}
+		return false;
+	}
+	
+	public static boolean addRecipeGrinderMill(ItemStack input, ItemStack output, ItemStack output2, int prob2, ItemStack output3, int prob3){
+		if(output == null || input == null)return false;
+		GrindingMill_Recipe a = new GrindingMill_Recipe(input, output, output2, prob2, output3, prob3);
+		if(a.getInput(0).stackSize == 0)a.input.stackSize = 1;
+		if(a.getResult(0).stackSize == 0)a.getResult(0).stackSize = 1;
+		if(a.getResult(1) != null && a.getResult(1).stackSize == 0)a.getResult(1).stackSize = 1;
+		if(a.getResult(2) != null && a.getResult(2).stackSize == 0)a.getResult(2).stackSize = 1;
+		if(!RecipeRegistry.grinder.contains(a)){
+			RecipeRegistry.grinder.add(a);
 			return true;
 		}
 		return false;

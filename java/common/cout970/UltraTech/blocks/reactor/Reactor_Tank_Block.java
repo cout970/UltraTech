@@ -11,7 +11,7 @@ import common.cout970.UltraTech.TileEntities.multiblocks.reactor.Reactor_Tank_En
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class Reactor_Tank_Block extends ReactorPartBase{
+public class Reactor_Tank_Block extends ReactorPartBaseBlock{
 
 	public Reactor_Tank_Block(Material m) {
 		super(m, "tank");

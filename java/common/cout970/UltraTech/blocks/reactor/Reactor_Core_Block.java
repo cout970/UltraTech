@@ -13,7 +13,7 @@ import net.minecraft.world.World;
 import ultratech.api.reactor.IReactorCoreBlock;
 import common.cout970.UltraTech.TileEntities.multiblocks.reactor.Reactor_Core_Entity;
 
-public class Reactor_Core_Block extends ReactorPartBase implements IReactorCoreBlock{
+public class Reactor_Core_Block extends ReactorPartBaseBlock implements IReactorCoreBlock{
 
 	public Reactor_Core_Block(Material m) {
 		super(m, "core");

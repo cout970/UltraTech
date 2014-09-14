@@ -4,7 +4,7 @@ import org.lwjgl.opengl.GL11;
 
 import common.cout970.UltraTech.client.models.ModelFluidTank;
 import common.cout970.UltraTech.client.models.ModelTesseract;
-import common.cout970.UltraTech.client.textures.ResourcesLocations;
+import common.cout970.UltraTech.client.textures.ModelResources;
 import cpw.mods.fml.client.FMLClientHandler;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -68,7 +68,7 @@ public class RenderTesseractItem implements IItemRenderer{
         }
         GL11.glRotatef(180F, 0, 0, 1);
         GL11.glTranslatef(0, -1.5f, 0);
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(ResourcesLocations.TESSERACT);
+        FMLClientHandler.instance().getClient().renderEngine.bindTexture(ModelResources.TESSERACT);
         model.render(null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
         model.renderBall(0.0625F);
         GL11.glEnable(GL11.GL_LIGHTING);

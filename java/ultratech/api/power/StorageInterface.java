@@ -91,8 +91,8 @@ public class StorageInterface extends PowerInterface{
 		if(Charge < 0)Charge = 0;
 	}
 
-	public void setCharge(int value) {
-		Charge = value;
+	public void setCharge(double d) {
+		Charge = d;
 	}
 	/**
 	 * @return the machine charge

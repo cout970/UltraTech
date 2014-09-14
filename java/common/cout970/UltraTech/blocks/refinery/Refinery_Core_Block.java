@@ -7,7 +7,7 @@ import ultratech.api.refinery.IRefineryCoreBlock;
 
 import common.cout970.UltraTech.TileEntities.multiblocks.refinery.Refinery_Core_Entity;
 
-public class Refinery_Core_Block extends RefineryPartBase implements IRefineryCoreBlock{
+public class Refinery_Core_Block extends RefineryPartBaseBlock implements IRefineryCoreBlock{
 
 	public Refinery_Core_Block(Material m) {
 		super(m, "refinery_core");

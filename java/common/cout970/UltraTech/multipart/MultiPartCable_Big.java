@@ -26,7 +26,7 @@ import common.cout970.UltraTech.network.messages.MessageMultiPartUpdate;
 import common.cout970.UltraTech.util.LogHelper;
 import common.cout970.UltraTech.util.power.cables.CableInterfaceBigCable;
 
-public class MultiPartCable_Big extends BasicPartUT implements ISidedHollowConnect, IPowerConductor{
+public class MultiPartCable_Big extends MultiPartUT implements ISidedHollowConnect, IPowerConductor{
 
 	public MultiPartCable_Big() {
 		super(MultiPartRegistry_UT.BigCable);

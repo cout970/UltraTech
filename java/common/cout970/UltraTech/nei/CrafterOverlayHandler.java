@@ -1,12 +1,12 @@
 package common.cout970.UltraTech.nei;
 
+import ultratech.api.util.UT_Utils;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.item.ItemStack;
 import codechicken.nei.api.IOverlayHandler;
 import codechicken.nei.recipe.IRecipeHandler;
-
-import common.cout970.UltraTech.TileEntities.utility.CrafterEntity;
-import common.cout970.UltraTech.client.gui.Crafter_Gui;
+import common.cout970.UltraTech.TileEntities.utility.TileEntityCrafter;
+import common.cout970.UltraTech.client.gui.GuiCrafter;
 import common.cout970.UltraTech.network.Net_Utils;
 import common.cout970.UltraTech.network.messages.MessageCrafter;
 
@@ -16,10 +16,10 @@ public class CrafterOverlayHandler implements IOverlayHandler {
 	public void overlayRecipe(GuiContainer firstGui, IRecipeHandler recipe,
 			int recipeIndex, boolean shift) {
 
-		if(firstGui instanceof Crafter_Gui){
-			Crafter_Gui crafter = (Crafter_Gui) firstGui;
+		if(firstGui instanceof GuiCrafter){
+			GuiCrafter crafter = (GuiCrafter) firstGui;
 			
-			CrafterEntity entity = (CrafterEntity) crafter.entity.getWorldObj().getTileEntity(crafter.entity.xCoord, crafter.entity.yCoord, crafter.entity.zCoord);
+			TileEntityCrafter entity = (TileEntityCrafter) crafter.entity.getWorldObj().getTileEntity(crafter.entity.xCoord, crafter.entity.yCoord, crafter.entity.zCoord);
 			
 			
 			for(int z = 0; z < 9; z++){
@@ -67,7 +67,7 @@ public class CrafterOverlayHandler implements IOverlayHandler {
 						slot = 8;
 					}
 				}
-				ItemStack i = recipe.getIngredientStacks(recipeIndex).get(z).item;
+				ItemStack i = UT_Utils.getFirst(recipe.getIngredientStacks(recipeIndex).get(z).items);
 				Net_Utils.INSTANCE.sendToServer(new MessageCrafter(entity, i, slot));
 			}
 			entity.update();

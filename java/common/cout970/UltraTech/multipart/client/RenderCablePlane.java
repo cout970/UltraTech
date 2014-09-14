@@ -32,6 +32,7 @@ public class RenderCablePlane{
 		GL11.glPushMatrix();
 		GL11.glTranslatef((float) pos.x + 0.5F, (float) pos.y + 1.5F, (float) pos.z + 0.5F);
 		String s = "planedown";
+		if(c.world().getTotalWorldTime()% 20 == 0)c.updateConnections();
 		if(c instanceof MultiPartCable_Ribbon_Up)s = "planeup";
 		if(c instanceof MultiPartCable_Ribbon_South)s = "planeup";
 		if(c instanceof MultiPartCable_Ribbon_West)s = "planeup";

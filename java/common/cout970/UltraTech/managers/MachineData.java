@@ -6,8 +6,8 @@ public enum MachineData {
 	/**
 	 * 2 burning tick = 1MeV
 	 */
-	Generator		( 1600d	,1	,1d			,1),//1coal => 800Mev
-	Solar_Panel		(   10d	,1	,0.5d		,1),//1QP => 2 ticks
+	Generator		( 1600d	,2	,1d			,1),//1coal => 800Mev
+	Solar_Panel		(   10d	,2	,0.5d		,1),//1QP => 2 ticks
 	Fluid_Generator (  800d	,2	,1d			,1),//Wip
 	Turbine			(  800d	,2	,0.1d		,1),//per mB
 	LavaGenerator   (  800d	,2	,10d	   	,1),//QP per 1mb
@@ -15,15 +15,15 @@ public enum MachineData {
 
 	Furnace			(  800d	,2	,100d		,0),//1 items cost
 	Purifier		(  800d	,2	,100d		,0),
-	Cutter			(  800d	,2	,200d		,0), 
-	CVD				(  800d	,1	,100d		,0),
-	Laminator		(  800d ,1	,100d		,0),
+	Cutter			(  800d	,2	,100d		,0), 
+	CVD				(  800d	,2	,100d		,0),
+	Laminator		(  800d ,2	,100d		,0),
 	
 	Miner    		(16000d	,3	,50d		,0),//per block
 	MAssembly		(  800d ,3	,100d		,0),
 	Charge_Station	( 3200d	,2	,200d		,2),//per tick
 	Climate_Station	(100000d,3	,100000d	,0),
-	Fermenter		(  800d	,1	,2d			,0),//QP per mB
+	Fermenter		(  800d	,2	,2d			,0),//QP per mB
 	Tesseract		(  800d ,3	,0d			,0),
 	ChemicalPlant	(  800d ,2	,100d		,0),//per item
 	Heater			( 1600d	,2	,100d		,0),//per 200proces
@@ -32,6 +32,8 @@ public enum MachineData {
 	Dynamo     		( 1600d	,2	,1d			,0),
 	Kinetic_Generator(1600d ,2	,1d			,1),
 	Transformer 	(  800d ,2  ,0d         ,2),
+	Laser_Turret 	( 1600d ,2  ,100d       ,0),
+	Grinding_Mill	(  800d ,2  ,250d		,0),
 	
 	Battery_T1		(    60000d	,1	,0			,2),//3 cells
 	Battery_T2		(   360000d	,2	,0			,2),//18 cells

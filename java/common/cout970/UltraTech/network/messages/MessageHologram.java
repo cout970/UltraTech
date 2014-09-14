@@ -4,8 +4,8 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
-import common.cout970.UltraTech.TileEntities.electric.ClimateEntity;
-import common.cout970.UltraTech.TileEntities.utility.HologramEmiterEntity;
+import common.cout970.UltraTech.TileEntities.electric.TileEntityClimateStation;
+import common.cout970.UltraTech.TileEntities.utility.TileEntityHologramEmiter;
 import common.cout970.UltraTech.network.SyncTile;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
@@ -50,8 +50,8 @@ public class MessageHologram implements IMessage, IMessageHandler<MessageHologra
 	@Override
 	public IMessage onMessage(MessageHologram message, MessageContext ctx) {
 		TileEntity tileEntity = ctx.getServerHandler().playerEntity.worldObj.getTileEntity(message.x, message.y, message.z);
-		if(tileEntity instanceof HologramEmiterEntity){
-			HologramEmiterEntity h = (HologramEmiterEntity) tileEntity;
+		if(tileEntity instanceof TileEntityHologramEmiter){
+			TileEntityHologramEmiter h = (TileEntityHologramEmiter) tileEntity;
 			if(message.type == 0){
 				h.mX = message.amount;
 			}else if(message.type == 1){

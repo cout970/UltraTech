@@ -48,7 +48,8 @@ public class PowerNetwork {
 		try{
 			if(base != null){
 				interfaces.clear();
-				interfaces.addAll(NetworkManagerRegistry.search(base, null).getFinding());
+				List<PowerInterface> l = NetworkManagerRegistry.search(base, null).getFinding();
+				interfaces.addAll(l);
 			}
 		}catch(Exception e){e.printStackTrace();};
 

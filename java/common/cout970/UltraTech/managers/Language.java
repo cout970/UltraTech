@@ -20,8 +20,8 @@ import static common.cout970.UltraTech.managers.BlockManager.*;
 import org.apache.commons.io.output.WriterOutputStream;
 
 import ultratech.api.power.multipart.MultipartReference;
-import common.cout970.UltraTech.TileEntities.electric.tiers.Tesseract_Entity;
-import common.cout970.UltraTech.blocks.decoration.Deco_Block;
+import common.cout970.UltraTech.TileEntities.electric.tiers.TileEntityTesseract;
+import common.cout970.UltraTech.blocks.decoration.BlockDeco;
 import common.cout970.UltraTech.util.LogHelper;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -72,7 +72,7 @@ public class Language {
 	
 	public static void AddBlockNames(){
 		
-		for(Deco_Block b : deco){
+		for(BlockDeco b : deco){
 			for(int meta=0;meta<14;meta++)Language.addName(new ItemStack(b,1,meta), "Deco Block "+colors[meta]);
 		}
 		Language.addName(new ItemStack(stoneblockblack,1,0), "Black Stone Block");
@@ -94,6 +94,26 @@ public class Language {
 		Language.addName(new ItemStack(stoneblockwhite,1,6), "White Stone Pillar");
 		Language.addName(new ItemStack(stoneblockwhite,1,7), "White Stone Sandstone");
 		Language.addName(new ItemStack(stoneblockwhite,1,8), "White Stone Smooth");
+		
+		Language.addName(new ItemStack(stoneblocknormal,1,0), "Normal Stone Block");
+		Language.addName(new ItemStack(stoneblocknormal,1,1), "Normal Stone Bricks");
+		Language.addName(new ItemStack(stoneblocknormal,1,2), "Normal Stone Creeper Bricks");
+		Language.addName(new ItemStack(stoneblocknormal,1,3), "Normal Stone Chiseled Bricks");
+		Language.addName(new ItemStack(stoneblocknormal,1,4), "Normal Stone Circle");
+		Language.addName(new ItemStack(stoneblocknormal,1,5), "Normal Stone Clay Bricks");
+		Language.addName(new ItemStack(stoneblocknormal,1,6), "Normal Stone Pillar");
+		Language.addName(new ItemStack(stoneblocknormal,1,7), "Normal Stone Sandstone");
+		Language.addName(new ItemStack(stoneblocknormal,1,8), "Normal Stone Smooth");
+		
+		Language.addName(new ItemStack(stoneblockclay,1,0), "Clay Stone Block");
+		Language.addName(new ItemStack(stoneblockclay,1,1), "Clay Stone Bricks");
+		Language.addName(new ItemStack(stoneblockclay,1,2), "Clay Stone Creeper Bricks");
+		Language.addName(new ItemStack(stoneblockclay,1,3), "Clay Stone Chiseled Bricks");
+		Language.addName(new ItemStack(stoneblockclay,1,4), "Clay Stone Circle");
+		Language.addName(new ItemStack(stoneblockclay,1,5), "Clay Stone Clay Bricks");
+		Language.addName(new ItemStack(stoneblockclay,1,6), "Clay Stone Pillar");
+		Language.addName(new ItemStack(stoneblockclay,1,7), "Clay Stone Sandstone");
+		Language.addName(new ItemStack(stoneblockclay,1,8), "Clay Stone Smooth");
 		
 		Language.addName(new ItemStack(Reactor_Core,1,0), "Reactor Core");
 		Language.addName(new ItemStack(Reactor_Wall,1,0), "Reactor Wall");
@@ -174,11 +194,11 @@ public class Language {
 		Language.addName(ChemicalPlant_T1, "Chemical Plant");
 		Language.addName(Crafter, "Crafter");
 		Language.addName(Heater, "Heater");
-		Language.addName(AlienBlock, "Alien Block");
+		Language.addName(obaltiBlock, "Obalti Block");
 		Language.addName(ChemicalPlant_T1, "Chemical Plant T1");
 		Language.addName(ChemicalPlant_T2, "Chemical Plant T2");
-		Language.addName(LavaGenerator_T1, "Lava Generator T1");
-		Language.addName(LavaGenerator_T2, "Lava Generator T2");
+		Language.addName(ThermoelectricGenerator_T1, "Thermoelectric Generator T1");
+		Language.addName(ThermoelectricGenerator_T2, "Thermoelectric Generator T2");
 		Language.addName(FluidGenerator_T1, "Fluid Generator T1");
 		Language.addName(FluidGenerator_T2, "Fluid Generator T2");
 		

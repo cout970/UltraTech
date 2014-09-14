@@ -93,6 +93,9 @@ public class RefineryMultiblockTweak {
 					if(t instanceof IRefineryComponent){
 						((IRefineryComponent) t).setCoreCoords(x, y, z);
 						((IRefineryComponent) t).setCore(core);
+						if(t instanceof Refinery_IO_Entity){
+							w.setBlockMetadataWithNotify(x+i-1, y+j-1, z+k-1, ((Refinery_IO_Entity) t).mode, 2);
+						}
 					}
 				}
 			}

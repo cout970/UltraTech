@@ -9,7 +9,7 @@ import common.cout970.UltraTech.TileEntities.multiblocks.reactor.Reactor_Control
 import common.cout970.UltraTech.TileEntities.multiblocks.reactor.Reactor_Core_Entity;
 import common.cout970.UltraTech.managers.UltraTech;
 
-public class Reactor_Control_Block extends ReactorPartBase{
+public class Reactor_Control_Block extends ReactorPartBaseBlock{
 
 	public Reactor_Control_Block(Material m) {
 		super(m, "control");

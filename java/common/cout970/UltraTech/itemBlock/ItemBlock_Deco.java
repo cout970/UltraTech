@@ -11,7 +11,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
-public class ItemBlock_Deco extends UT_ItemBlock{
+public class ItemBlock_Deco extends ItemBlockUT{
 
 	public final static String[] subNames = {
 		"White","Black","Blue","Steal Blue","Cyan","Sea Green","Green","Light Green","Yellow","Orange","Red","Purple","Pink","Blue Violet"

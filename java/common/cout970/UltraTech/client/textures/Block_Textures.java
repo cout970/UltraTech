@@ -64,6 +64,8 @@ public class Block_Textures {
 	public static final String REFINERY_PREFIX 				= MOD_FOLDER+"refinery/";
 	public static final String FLUIDTANK 					= MOD_FOLDER+"machines/tank";
 	public static final String TRANSFORMER 					= MOD_FOLDER+"machines/transformer";
+	public static final String GRINDING_MILL_T1 			= MOD_FOLDER+"machines/grindingmill";
+	public static final String GRINDING_MILL_T2 			= MOD_FOLDER+"machines/grindingmill_2";
 
 }
 

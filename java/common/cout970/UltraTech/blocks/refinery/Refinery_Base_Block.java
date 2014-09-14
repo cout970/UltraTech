@@ -6,7 +6,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-public class Refinery_Base_Block extends RefineryPartBase{
+public class Refinery_Base_Block extends RefineryPartBaseBlock{
 
 	public Refinery_Base_Block(Material m) {
 		super(m, "refinery_base");

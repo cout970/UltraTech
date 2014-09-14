@@ -5,7 +5,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-public class Reactor_Chamber_Block extends ReactorPartBase{
+public class Reactor_Chamber_Block extends ReactorPartBaseBlock{
 
 	public Reactor_Chamber_Block(Material m) {
 		super(m, "chamber");

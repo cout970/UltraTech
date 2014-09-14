@@ -10,8 +10,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
-import common.cout970.UltraTech.TileEntities.electric.tiers.LavaGeneratorT1_Entity;
-import common.cout970.UltraTech.TileEntities.electric.tiers.LavaGeneratorT2_Entity;
+import common.cout970.UltraTech.TileEntities.electric.tiers.TileEntityThermoelectricGeneratorT1;
+import common.cout970.UltraTech.TileEntities.electric.tiers.TileEntityThermoelectricGeneratorT2;
 import common.cout970.UltraTech.managers.MachineData;
 
 public class HUDFluids implements IWailaDataProvider{
@@ -32,6 +32,7 @@ public class HUDFluids implements IWailaDataProvider{
 		if(accessor.getTileEntity() instanceof IFluidHandler){
 			IFluidHandler p = ((IFluidHandler) accessor.getTileEntity());
 			FluidTankInfo[] info = p.getTankInfo(accessor.getSide());
+			if(info == null) return currenttip;
 			for(FluidTankInfo f : info){
 				FluidStack fl = f.fluid;
 				if(fl == null){
@@ -41,8 +42,8 @@ public class HUDFluids implements IWailaDataProvider{
 				}
 			}
 		}
-		if(accessor.getTileEntity() instanceof LavaGeneratorT1_Entity){
-			LavaGeneratorT1_Entity l = (LavaGeneratorT1_Entity) accessor.getTileEntity();
+		if(accessor.getTileEntity() instanceof TileEntityThermoelectricGeneratorT1){
+			TileEntityThermoelectricGeneratorT1 l = (TileEntityThermoelectricGeneratorT1) accessor.getTileEntity();
 			currenttip.add("Heat: "+(l.heat-273)+" Coolant multiplier: "+l.coolant+" Production: "+UT_Utils.removeDecimals(l.getProduction()*MachineData.LavaGenerator.use)+" QP/t");
 		}
 		return currenttip;

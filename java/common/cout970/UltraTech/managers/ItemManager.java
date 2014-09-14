@@ -9,31 +9,31 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Configuration;
 //import net.minecraftforge.common.Configuration;
-import common.cout970.UltraTech.items.AutoEjectUpgrade;
-import common.cout970.UltraTech.items.Bottle;
-import common.cout970.UltraTech.items.Debugger;
-import common.cout970.UltraTech.items.Flamethrower;
-import common.cout970.UltraTech.items.FortuneUpgrade;
-import common.cout970.UltraTech.items.Battery;
-import common.cout970.UltraTech.items.LaserSword;
-import common.cout970.UltraTech.items.Linker;
-import common.cout970.UltraTech.items.MetalPlate;
-import common.cout970.UltraTech.items.MiningUpgrade;
-import common.cout970.UltraTech.items.PlutoniumCell;
-import common.cout970.UltraTech.items.ProcesedFood;
-import common.cout970.UltraTech.items.RadioniteCell;
-import common.cout970.UltraTech.items.RangeUpgrade;
-import common.cout970.UltraTech.items.SilkTouchUpgrade;
-import common.cout970.UltraTech.items.SpeedUpgrade;
-import common.cout970.UltraTech.items.Tablet;
-import common.cout970.UltraTech.items.ThoriumCell;
-import common.cout970.UltraTech.items.UT_Chunk;
-import common.cout970.UltraTech.items.UT_Dust;
-import common.cout970.UltraTech.items.UT_Ingot;
-import common.cout970.UltraTech.items.UT_Item;
-import common.cout970.UltraTech.items.UT_Plate;
-import common.cout970.UltraTech.items.UnorganicPlate;
-import common.cout970.UltraTech.items.UraniumCell;
+import common.cout970.UltraTech.items.ItemAutoEjectUpgrade;
+import common.cout970.UltraTech.items.ItemBottle;
+import common.cout970.UltraTech.items.ItemDebugger;
+import common.cout970.UltraTech.items.ItemFlamethrower;
+import common.cout970.UltraTech.items.ItemFortuneUpgrade;
+import common.cout970.UltraTech.items.ItemBattery;
+import common.cout970.UltraTech.items.ItemLaserSword;
+import common.cout970.UltraTech.items.ItemLinker;
+import common.cout970.UltraTech.items.ItemMetalPlate;
+import common.cout970.UltraTech.items.ItemMiningUpgrade;
+import common.cout970.UltraTech.items.ItemPlutoniumCell;
+import common.cout970.UltraTech.items.ItemProcesedFood;
+import common.cout970.UltraTech.items.ItemRadioniteCell;
+import common.cout970.UltraTech.items.ItemRangeUpgrade;
+import common.cout970.UltraTech.items.ItemSilkTouchUpgrade;
+import common.cout970.UltraTech.items.ItemSpeedUpgrade;
+import common.cout970.UltraTech.items.ItemTablet;
+import common.cout970.UltraTech.items.ItemThoriumCell;
+import common.cout970.UltraTech.items.ItemChunkUT;
+import common.cout970.UltraTech.items.ItemDustUT;
+import common.cout970.UltraTech.items.ItemIngotUT;
+import common.cout970.UltraTech.items.ItemUT;
+import common.cout970.UltraTech.items.ItemPlateUT;
+import common.cout970.UltraTech.items.ItemUnorganicPlate;
+import common.cout970.UltraTech.items.ItemUraniumCell;
 import common.cout970.UltraTech.misc.ItemInfo;
 import common.cout970.UltraTech.misc.ItemInfo.ItemTipe;
 import common.cout970.UltraTech.util.LogHelper;
@@ -117,7 +117,7 @@ public class ItemManager {
 		for(ItemInfo i:info){
 			Item it;
 			if(i.tipe == ItemTipe.DEFAULT){
-				it = new UT_Item(i.name);
+				it = new ItemUT(i.name);
 			}else{
 				it = Exception(i);
 			}
@@ -130,15 +130,15 @@ public class ItemManager {
 
 	private static void LangException(Item it, ItemInfo i) {
 		if(i.name == "Chunk"){
-			for(int meta = 0;meta < UT_Chunk.names.length;meta++)Language.addName(new ItemStack(it,1,meta), "Dirty "+UT_Chunk.names[meta]);
+			for(int meta = 0;meta < ItemChunkUT.names.length;meta++)Language.addName(new ItemStack(it,1,meta), "Dirty "+ItemChunkUT.names[meta]);
 		}else if(i.name == "MetalPlate"){
-			for(int meta = 0;meta < MetalPlate.names.length;meta++)Language.addName(new ItemStack(it,1,meta), MetalPlate.names[meta]+" Plate");
+			for(int meta = 0;meta < ItemMetalPlate.names.length;meta++)Language.addName(new ItemStack(it,1,meta), ItemMetalPlate.names[meta]+" Plate");
 		}else if(i.name == "UnorganicPlate")
-			for(int meta = 0;meta < UnorganicPlate.names.length;meta++){Language.addName(new ItemStack(it,1,meta), UnorganicPlate.names[meta]+" Plate");
+			for(int meta = 0;meta < ItemUnorganicPlate.names.length;meta++){Language.addName(new ItemStack(it,1,meta), ItemUnorganicPlate.names[meta]+" Plate");
 		}else if(i.name == "Ingot"){
-			for(int meta = 0;meta < UT_Ingot.names.length;meta++)Language.addName(new ItemStack(it,1,meta), UT_Ingot.names[meta]);
+			for(int meta = 0;meta < ItemIngotUT.names.length;meta++)Language.addName(new ItemStack(it,1,meta), ItemIngotUT.names[meta]);
 		}else if(i.name == "Dust"){
-			for(int meta = 0;meta < UT_Dust.names.length;meta++)Language.addName(new ItemStack(it,1,meta), UT_Dust.names[meta]);
+			for(int meta = 0;meta < ItemDustUT.names.length;meta++)Language.addName(new ItemStack(it,1,meta), ItemDustUT.names[meta]);
 		}else if(i.name == "Bottle"){
 			Language.addName(new ItemStack(it,1), "Bottle");
 		}else{ 
@@ -149,51 +149,51 @@ public class ItemManager {
 	private static Item Exception(ItemInfo i) {
 		String a = i.name;
 		if(a=="Bottle")
-			return new Bottle();
+			return new ItemBottle();
 		if(a=="Ingot")
-			return new UT_Ingot();
+			return new ItemIngotUT();
 		if(a=="Chunk")
-			return new UT_Chunk();
+			return new ItemChunkUT();
 		if(a=="Dust")
-			return new UT_Dust();
+			return new ItemDustUT();
 		if(a=="MetalPlate")
-			return new MetalPlate();
+			return new ItemMetalPlate();
 		if(a=="UnorganicPlate")
-			return new UnorganicPlate();
+			return new ItemUnorganicPlate();
 		if(a=="SpeedUpgrade")
-			return new SpeedUpgrade(i.name);
+			return new ItemSpeedUpgrade(i.name);
 		if(a=="MiningUpgrade")
-			return new MiningUpgrade(i.name);
+			return new ItemMiningUpgrade(i.name);
 		if(a=="RangeUpgrade")
-			return new RangeUpgrade(i.name);
+			return new ItemRangeUpgrade(i.name);
 		if(a=="AutoEjectUpgrade")
-			return new AutoEjectUpgrade(i.name);
+			return new ItemAutoEjectUpgrade(i.name);
 		if(a=="Linker")
-			return new Linker(i.name);
+			return new ItemLinker(i.name);
 		if(a=="RadioniteCell")
-			return new RadioniteCell(i.name);
+			return new ItemRadioniteCell(i.name);
 		if(a=="UraniumCell")
-			return new UraniumCell(i.name);
+			return new ItemUraniumCell(i.name);
 		if(a=="ThoriumCell")
-			return new ThoriumCell(i.name);
+			return new ItemThoriumCell(i.name);
 		if(a=="PlutoniumCell")
-			return new PlutoniumCell(i.name);
+			return new ItemPlutoniumCell(i.name);
 		if(a=="Battery")
-			return new Battery(i.name);
+			return new ItemBattery(i.name);
 		if(a=="LaserSword")
-			return new LaserSword(i.name);
+			return new ItemLaserSword(i.name);
 		if(a=="FortuneUpgrade")
-			return new FortuneUpgrade(i.name);
+			return new ItemFortuneUpgrade(i.name);
 		if(a=="ProcesedFood")
-			return new ProcesedFood();
+			return new ItemProcesedFood();
 		if(a=="SilkTouchUpgrade")
-			return new SilkTouchUpgrade(i.name);
+			return new ItemSilkTouchUpgrade(i.name);
 		if(a=="Tablet")
-			return new Tablet(i.name);
+			return new ItemTablet(i.name);
 		if(a=="Flamethrower")
-			return new Flamethrower(i.name);
+			return new ItemFlamethrower();
 		if(a=="Debugger")
-			return new Debugger("Debugger");
+			return new ItemDebugger("Debugger");
 		return null;
 	}
 

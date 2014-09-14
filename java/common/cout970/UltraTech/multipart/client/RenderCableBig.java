@@ -27,6 +27,7 @@ public class RenderCableBig{
 		GL11.glPushMatrix();
 		GL11.glTranslated(pos.x, pos.y, pos.z);
 		GL11.glTranslated(0.5f,-0.5f,0.5);
+		if(mc.world().getTotalWorldTime()% 20 == 0)mc.updateConnections();
 		boolean[] b = mc.connections; 
 		int i;
 		if((i = RenderCablePlane.getDir(b)) != -1){

@@ -103,10 +103,10 @@ public class UltratechWorldGenerator implements IWorldGenerator{
 		int j = 150;//+ r.nextInt(20);
 		for(int l = -2;l<3;l++){
 			if(l == -2 || l == 2){
-				for(int i=0;i<5;i++)for(int k=0;k<5;k++)w.setBlock(x+i, j+l, y+k,BlockManager.AlienBlock);
+				for(int i=0;i<5;i++)for(int k=0;k<5;k++)w.setBlock(x+i, j+l, y+k,BlockManager.obaltiBlock);
 			}else{
 				for(int i=0;i<5;i++)for(int k=0;k<5;k++){
-					if(i==0 || i==4 || k==0 || k==4)w.setBlock(x+i, j+l, y+k,BlockManager.AlienBlock);
+					if(i==0 || i==4 || k==0 || k==4)w.setBlock(x+i, j+l, y+k,BlockManager.obaltiBlock);
 				}
 			}
 		}

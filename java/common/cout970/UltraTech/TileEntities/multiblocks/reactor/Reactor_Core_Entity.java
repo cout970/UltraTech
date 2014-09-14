@@ -9,7 +9,7 @@ import cofh.api.tileentity.IRedstoneControl.ControlMode;
 import common.cout970.UltraTech.managers.ItemManager;
 import common.cout970.UltraTech.network.Net_Utils;
 import common.cout970.UltraTech.util.LogHelper;
-import common.cout970.UltraTech.util.fluids.UT_Tank;
+import common.cout970.UltraTech.util.fluids.TankUT;
 import common.cout970.UltraTech.util.power.PowerExchange;
 import ultratech.api.power.StorageInterface;
 import ultratech.api.power.interfaces.IPowerConductor;
@@ -36,8 +36,8 @@ public class Reactor_Core_Entity extends Reactor_Entity_Base implements IReactor
 
 	public byte size;
 	public boolean check;
-	public UT_Tank steam;
-	public UT_Tank water;
+	public TankUT steam;
+	public TankUT water;
 	public List<IReactorComponent> components = new ArrayList<IReactorComponent>();
 	public ItemStack[] inv;
 	public float heat = 25;
@@ -78,7 +78,8 @@ public class Reactor_Core_Entity extends Reactor_Entity_Base implements IReactor
 						empty = false;
 						if(heat < maxheat)heat +=0.1;
 						if(heat >= 100 ){
-							FluidStack f = new FluidStack(FluidRegistry.getFluid("steam"),((IReactorFuel) inv[p].getItem()).getSteamPerTick());
+							FluidStack f = new FluidStack(FluidRegistry.getFluid("steam"),
+									((IReactorFuel) inv[p].getItem()).getSteamPerTick());
 							int toD = Math.max(1, f.amount/10);
 							if(getTank(0).getFluidAmount() >= toD){
 								
@@ -178,12 +179,12 @@ public class Reactor_Core_Entity extends Reactor_Entity_Base implements IReactor
 		}
     }
 	
-	public UT_Tank getTank(int tank){
+	public TankUT getTank(int tank){
 		if(water == null){
 			if(getNumTanks() == 0 && worldObj != null)updateComponents();			
-			water = new UT_Tank(getNumTanks()*2000, this);
+			water = new TankUT(getNumTanks()*2000, this);
 		}
-		if(steam == null)steam = new UT_Tank(32000, this);
+		if(steam == null)steam = new TankUT(32000, this);
 		if(tank == 0)return water;
 		if(tank == 1)return steam;
 		return null;

@@ -8,7 +8,7 @@ import common.cout970.UltraTech.network.Net_Utils;
 import common.cout970.UltraTech.util.LogHelper;
 import common.cout970.UltraTech.util.fluids.FluidUtils;
 import common.cout970.UltraTech.util.fluids.TankConection;
-import common.cout970.UltraTech.util.fluids.UT_Tank;
+import common.cout970.UltraTech.util.fluids.TankUT;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
@@ -25,7 +25,7 @@ import net.minecraftforge.fluids.IFluidHandler;
 
 public class Reactor_IO_Entity extends Reactor_Entity_Base implements IFluidHandler,IInventory,ISidedInventory{
 
-	public UT_Tank tank;
+	public TankUT tank;
 	
 	public Reactor_IO_Entity(){
 		super();
@@ -33,6 +33,7 @@ public class Reactor_IO_Entity extends Reactor_Entity_Base implements IFluidHand
 	
 	public void updateEntity(){
 		super.updateEntity();
+		if(worldObj.isRemote)return;
 		if(getCore() != null){
 			if(getCore().getTank(1).getFluidAmount() > 0){
 				int toDrain = Math.min(getCore().getTank(1).getFluidAmount(), 1000);

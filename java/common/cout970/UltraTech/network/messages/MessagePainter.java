@@ -4,7 +4,7 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntity;
 import ultratech.api.power.StorageInterface.PowerIO;
-import common.cout970.UltraTech.TileEntities.utility.Painter3DEntity;
+import common.cout970.UltraTech.TileEntities.utility.TileEntityPainter3D;
 import common.cout970.UltraTech.network.SyncTile;
 import common.cout970.UltraTech.util.power.Machine;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
@@ -46,9 +46,9 @@ public class MessagePainter implements IMessage, IMessageHandler<MessagePainter,
 	@Override
 	public IMessage onMessage(MessagePainter message, MessageContext ctx) {
 		TileEntity t = ctx.getServerHandler().playerEntity.worldObj.getTileEntity(message.x, message.y, message.z);
-		if(t instanceof Painter3DEntity){
-			((Painter3DEntity)t).color = message.color;
-			((Painter3DEntity)t).update = true;
+		if(t instanceof TileEntityPainter3D){
+			((TileEntityPainter3D)t).color = message.color;
+			((TileEntityPainter3D)t).update = true;
 		}
 		return null;
 	}

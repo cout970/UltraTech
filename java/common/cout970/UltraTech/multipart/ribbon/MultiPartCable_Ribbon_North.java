@@ -17,7 +17,7 @@ import codechicken.lib.render.RenderUtils;
 import codechicken.lib.vec.Cuboid6;
 import codechicken.lib.vec.Vector3;
 import common.cout970.UltraTech.client.textures.Block_Textures;
-import common.cout970.UltraTech.client.textures.ResourcesLocations;
+import common.cout970.UltraTech.client.textures.ModelResources;
 import common.cout970.UltraTech.multipart.MultipartUtil;
 import common.cout970.UltraTech.multipart.client.RenderCablePlane;
 import common.cout970.UltraTech.util.render.RenderUtil;

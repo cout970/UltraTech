@@ -7,7 +7,7 @@ import net.minecraftforge.client.IItemRenderer;
 import org.lwjgl.opengl.GL11;
 
 import common.cout970.UltraTech.client.models.ModelDynamo;
-import common.cout970.UltraTech.client.textures.ResourcesLocations;
+import common.cout970.UltraTech.client.textures.ModelResources;
 import cpw.mods.fml.client.FMLClientHandler;
 
 public class RenderDynamoItem implements IItemRenderer{
@@ -69,7 +69,7 @@ public class RenderDynamoItem implements IItemRenderer{
         }
         GL11.glRotatef(180F, 0, 0, 1);
         GL11.glTranslatef(0, -2f, 0);
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(ResourcesLocations.DYNAMO);
+        FMLClientHandler.instance().getClient().renderEngine.bindTexture(ModelResources.DYNAMO);
         model.render(null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
         GL11.glEnable(GL11.GL_LIGHTING);
         GL11.glPopMatrix();
