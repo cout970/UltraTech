@@ -12,4 +12,3 @@ public interface IPowerConductor {
 
 	public PowerInterface getPower();
 }
-
